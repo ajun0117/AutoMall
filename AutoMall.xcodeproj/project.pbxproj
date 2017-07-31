@@ -1,0 +1,322 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
+		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
+		04AE98181F2ED46500C2D158 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98171F2ED46500C2D158 /* FirstViewController.m */; };
+		04AE981B1F2ED46500C2D158 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE981A1F2ED46500C2D158 /* SecondViewController.m */; };
+		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
+		04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981F1F2ED46500C2D158 /* Assets.xcassets */; };
+		04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		04AE98141F2ED46500C2D158 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		04AE98161F2ED46500C2D158 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		04AE98171F2ED46500C2D158 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		04AE98191F2ED46500C2D158 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		04AE981A1F2ED46500C2D158 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		04AE981D1F2ED46500C2D158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04AE981F1F2ED46500C2D158 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04AE98221F2ED46500C2D158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04AE98241F2ED46500C2D158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04AE980A1F2ED46500C2D158 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04AE98041F2ED46500C2D158 = {
+			isa = PBXGroup;
+			children = (
+				04AE980F1F2ED46500C2D158 /* AutoMall */,
+				04AE980E1F2ED46500C2D158 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04AE980E1F2ED46500C2D158 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04AE980D1F2ED46500C2D158 /* AutoMall.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04AE980F1F2ED46500C2D158 /* AutoMall */ = {
+			isa = PBXGroup;
+			children = (
+				04AE98131F2ED46500C2D158 /* AppDelegate.h */,
+				04AE98141F2ED46500C2D158 /* AppDelegate.m */,
+				04AE98161F2ED46500C2D158 /* FirstViewController.h */,
+				04AE98171F2ED46500C2D158 /* FirstViewController.m */,
+				04AE98191F2ED46500C2D158 /* SecondViewController.h */,
+				04AE981A1F2ED46500C2D158 /* SecondViewController.m */,
+				04AE981C1F2ED46500C2D158 /* Main.storyboard */,
+				04AE981F1F2ED46500C2D158 /* Assets.xcassets */,
+				04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */,
+				04AE98241F2ED46500C2D158 /* Info.plist */,
+				04AE98101F2ED46500C2D158 /* Supporting Files */,
+			);
+			path = AutoMall;
+			sourceTree = "<group>";
+		};
+		04AE98101F2ED46500C2D158 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04AE98111F2ED46500C2D158 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04AE980C1F2ED46500C2D158 /* AutoMall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AE98271F2ED46500C2D158 /* Build configuration list for PBXNativeTarget "AutoMall" */;
+			buildPhases = (
+				04AE98091F2ED46500C2D158 /* Sources */,
+				04AE980A1F2ED46500C2D158 /* Frameworks */,
+				04AE980B1F2ED46500C2D158 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AutoMall;
+			productName = AutoMall;
+			productReference = 04AE980D1F2ED46500C2D158 /* AutoMall.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04AE98051F2ED46500C2D158 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = redRay;
+				TargetAttributes = {
+					04AE980C1F2ED46500C2D158 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 04AE98081F2ED46500C2D158 /* Build configuration list for PBXProject "AutoMall" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04AE98041F2ED46500C2D158;
+			productRefGroup = 04AE980E1F2ED46500C2D158 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04AE980C1F2ED46500C2D158 /* AutoMall */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04AE980B1F2ED46500C2D158 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
+				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
+				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04AE98091F2ED46500C2D158 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AE981B1F2ED46500C2D158 /* SecondViewController.m in Sources */,
+				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
+				04AE98181F2ED46500C2D158 /* FirstViewController.m in Sources */,
+				04AE98121F2ED46500C2D158 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		04AE981C1F2ED46500C2D158 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04AE981D1F2ED46500C2D158 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04AE98221F2ED46500C2D158 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04AE98251F2ED46500C2D158 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04AE98261F2ED46500C2D158 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04AE98281F2ED46500C2D158 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = AutoMall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = redRaycom.AutoMall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		04AE98291F2ED46500C2D158 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = AutoMall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = redRaycom.AutoMall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04AE98081F2ED46500C2D158 /* Build configuration list for PBXProject "AutoMall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AE98251F2ED46500C2D158 /* Debug */,
+				04AE98261F2ED46500C2D158 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AE98271F2ED46500C2D158 /* Build configuration list for PBXNativeTarget "AutoMall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AE98281F2ED46500C2D158 /* Debug */,
+				04AE98291F2ED46500C2D158 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04AE98051F2ED46500C2D158 /* Project object */;
+}
