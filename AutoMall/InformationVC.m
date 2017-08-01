@@ -1,18 +1,18 @@
 //
-//  FirstViewController.m
+//  SecondViewController.m
 //  AutoMall
 //
 //  Created by LYD on 2017/7/31.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "InformationVC.h"
 
-@interface FirstViewController ()
+@interface InformationVC ()
 
 @end
 
-@implementation FirstViewController
+@implementation InformationVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -7,28 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04686C751F308C81001A3A42 /* MallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04686C741F308C81001A3A42 /* MallVC.m */; };
+		04686C781F308C9C001A3A42 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04686C771F308C9C001A3A42 /* PersonalCenterVC.m */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
-		04AE98181F2ED46500C2D158 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98171F2ED46500C2D158 /* FirstViewController.m */; };
-		04AE981B1F2ED46500C2D158 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE981A1F2ED46500C2D158 /* SecondViewController.m */; };
+		04AE98181F2ED46500C2D158 /* UpkeepVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98171F2ED46500C2D158 /* UpkeepVC.m */; };
+		04AE981B1F2ED46500C2D158 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE981A1F2ED46500C2D158 /* InformationVC.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
 		04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981F1F2ED46500C2D158 /* Assets.xcassets */; };
 		04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */; };
+		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04686C731F308C81001A3A42 /* MallVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallVC.h; sourceTree = "<group>"; };
+		04686C741F308C81001A3A42 /* MallVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallVC.m; sourceTree = "<group>"; };
+		04686C761F308C9C001A3A42 /* PersonalCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterVC.h; sourceTree = "<group>"; };
+		04686C771F308C9C001A3A42 /* PersonalCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterVC.m; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		04AE98141F2ED46500C2D158 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		04AE98161F2ED46500C2D158 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		04AE98171F2ED46500C2D158 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		04AE98191F2ED46500C2D158 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		04AE981A1F2ED46500C2D158 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		04AE98161F2ED46500C2D158 /* UpkeepVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpkeepVC.h; sourceTree = "<group>"; };
+		04AE98171F2ED46500C2D158 /* UpkeepVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpkeepVC.m; sourceTree = "<group>"; };
+		04AE98191F2ED46500C2D158 /* InformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
+		04AE981A1F2ED46500C2D158 /* InformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
 		04AE981D1F2ED46500C2D158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04AE981F1F2ED46500C2D158 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04AE98221F2ED46500C2D158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04AE98241F2ED46500C2D158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.release.xcconfig"; sourceTree = "<group>"; };
+		282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.debug.xcconfig"; sourceTree = "<group>"; };
+		6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +58,8 @@
 			children = (
 				04AE980F1F2ED46500C2D158 /* AutoMall */,
 				04AE980E1F2ED46500C2D158 /* Products */,
+				A704AE9662A3F528E09990AD /* Pods */,
+				8AF780E2B32464023F472B06 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,10 +76,14 @@
 			children = (
 				04AE98131F2ED46500C2D158 /* AppDelegate.h */,
 				04AE98141F2ED46500C2D158 /* AppDelegate.m */,
-				04AE98161F2ED46500C2D158 /* FirstViewController.h */,
-				04AE98171F2ED46500C2D158 /* FirstViewController.m */,
-				04AE98191F2ED46500C2D158 /* SecondViewController.h */,
-				04AE981A1F2ED46500C2D158 /* SecondViewController.m */,
+				04AE98161F2ED46500C2D158 /* UpkeepVC.h */,
+				04AE98171F2ED46500C2D158 /* UpkeepVC.m */,
+				04AE98191F2ED46500C2D158 /* InformationVC.h */,
+				04AE981A1F2ED46500C2D158 /* InformationVC.m */,
+				04686C731F308C81001A3A42 /* MallVC.h */,
+				04686C741F308C81001A3A42 /* MallVC.m */,
+				04686C761F308C9C001A3A42 /* PersonalCenterVC.h */,
+				04686C771F308C9C001A3A42 /* PersonalCenterVC.m */,
 				04AE981C1F2ED46500C2D158 /* Main.storyboard */,
 				04AE981F1F2ED46500C2D158 /* Assets.xcassets */,
 				04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */,
@@ -84,6 +101,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8AF780E2B32464023F472B06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A704AE9662A3F528E09990AD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */,
+				23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,9 +125,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04AE98271F2ED46500C2D158 /* Build configuration list for PBXNativeTarget "AutoMall" */;
 			buildPhases = (
+				9E97FE6A5DECDA9D62356D6B /* [CP] Check Pods Manifest.lock */,
 				04AE98091F2ED46500C2D158 /* Sources */,
 				04AE980A1F2ED46500C2D158 /* Frameworks */,
 				04AE980B1F2ED46500C2D158 /* Resources */,
+				D09B43336C375C73E1E06C48 /* [CP] Embed Pods Frameworks */,
+				4EDAF869C6DAAD647EAB8F14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -150,14 +187,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4EDAF869C6DAAD647EAB8F14 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E97FE6A5DECDA9D62356D6B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D09B43336C375C73E1E06C48 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04AE98091F2ED46500C2D158 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AE981B1F2ED46500C2D158 /* SecondViewController.m in Sources */,
+				04AE981B1F2ED46500C2D158 /* InformationVC.m in Sources */,
+				04686C781F308C9C001A3A42 /* PersonalCenterVC.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
-				04AE98181F2ED46500C2D158 /* FirstViewController.m in Sources */,
+				04AE98181F2ED46500C2D158 /* UpkeepVC.m in Sources */,
+				04686C751F308C81001A3A42 /* MallVC.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +363,7 @@
 		};
 		04AE98281F2ED46500C2D158 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AutoMall/Info.plist;
@@ -287,6 +375,7 @@
 		};
 		04AE98291F2ED46500C2D158 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AutoMall/Info.plist;
@@ -315,6 +404,7 @@
 				04AE98291F2ED46500C2D158 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
