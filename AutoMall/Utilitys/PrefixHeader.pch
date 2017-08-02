@@ -1,0 +1,39 @@
+//
+//  PrefixHeader.pch
+//  YMYL
+//
+//  Created by 李俊阳 on 15/10/17.
+//  Copyright (c) 2015年 李俊阳. All rights reserved.
+//
+
+#ifndef YMYL_PrefixHeader_pch
+#define YMYL_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//#import <SystemConfiguration/SystemConfiguration.h>
+//#import <MobileCoreServices/MobileCoreServices.h>
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+
+#import "Definition.h"
+#import "DataRequest.h"
+#import "MBProgressHUD.h"
+#import "GlobalSetting.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "UIButton+WebCache.h"
+
+//#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+//#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+//#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
+
+#endif
+
+
+
+
+#endif
