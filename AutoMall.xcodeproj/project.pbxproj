@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
+		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
@@ -106,6 +108,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
+		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
+		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -310,6 +315,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044A24141F3326CF009720DE /* 汽车检查页 */ = {
+			isa = PBXGroup;
+			children = (
+				044A24151F3326F9009720DE /* AutoCheckVC.h */,
+				044A24161F3326F9009720DE /* AutoCheckVC.m */,
+				044A24171F3326F9009720DE /* AutoCheckVC.xib */,
+			);
+			name = "汽车检查页";
+			sourceTree = "<group>";
+		};
 		04AE98041F2ED46500C2D158 = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +412,7 @@
 		04DC7CF81F31C24000AA20A7 /* Upkeep */ = {
 			isa = PBXGroup;
 			children = (
+				044A24141F3326CF009720DE /* 汽车检查页 */,
 				04DC7CF91F31C24000AA20A7 /* UpkeepVC.h */,
 				04DC7CFA1F31C24000AA20A7 /* UpkeepVC.m */,
 			);
@@ -799,6 +815,7 @@
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
+				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
 				04DC7DDB1F31C28300AA20A7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
@@ -867,6 +884,7 @@
 				04DC7DAF1F31C28300AA20A7 /* CustomTextField.m in Sources */,
 				04DC7DD11F31C28300AA20A7 /* MJRefreshHeaderView.m in Sources */,
 				04DC7D1E1F31C26500AA20A7 /* CityDistrictsCoreObject+CoreDataProperties.m in Sources */,
+				044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */,
 				04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */,
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,

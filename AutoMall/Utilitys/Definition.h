@@ -31,7 +31,7 @@
 
 #define Red_BtnColor           RGBCOLOR(229, 24, 35)
 #define Gray_Color              RGBCOLOR(170, 170, 170)
-#define Orange_Color           RGBCOLOR(227, 163, 44)
+#define Orange_Color           RGBCOLOR(234, 33, 45)
 #define Cell_sepLineColor       RGBCOLOR(200, 199, 204)     //tablecell间隔线颜色
 #define Cell_SelectedColor      RGBCOLOR(234, 234, 234)      //cell点击背景色
 

@@ -7,6 +7,7 @@
 //
 
 #import "UpkeepVC.h"
+#import "AutoCheckVC.h"
 
 @interface UpkeepVC ()
 
@@ -19,6 +20,11 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (IBAction)toCheckAutoAction:(id)sender {
+    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+    checkVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:checkVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -18,17 +18,17 @@
     
     UIColor *yellowColor = Orange_Color;//主题橘色
     
-    NSDictionary *normalDict = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],NSForegroundColorAttributeName, nil];
+    NSDictionary *normalDict = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:70/255.0f green:70/255.0f blue:70/255.0f alpha:1],NSForegroundColorAttributeName, nil];
     NSDictionary *selectedDict = [NSDictionary dictionaryWithObjectsAndKeys:yellowColor,NSForegroundColorAttributeName, nil];
     
-    UIImage *selectedImage0 = [UIImage imageNamed:@"bottomTabHomeHi"];
-    UIImage *unselectedImage0 = [UIImage imageNamed:@"bottomTabHome"];
-    UIImage *selectedImage1 = [UIImage imageNamed:@"bottomTabPointsHi"];
-    UIImage *unselectedImage1 = [UIImage imageNamed:@"bottomTabPoints"];
-    UIImage *selectedImage2 = [UIImage imageNamed:@"bottomTabFavHi"];
-    UIImage *unselectedImage2 = [UIImage imageNamed:@"bottomTabFav"];
-    UIImage *selectedImage3 = [UIImage imageNamed:@"bottomTabMeHi"];
-    UIImage *unselectedImage3 = [UIImage imageNamed:@"bottomTabMe"];
+    UIImage *selectedImage0 = [UIImage imageNamed:@"upkeep_pressed"];
+    UIImage *unselectedImage0 = [UIImage imageNamed:@"upkeep"];
+    UIImage *selectedImage1 = [UIImage imageNamed:@"information_pressed"];
+    UIImage *unselectedImage1 = [UIImage imageNamed:@"information"];
+    UIImage *selectedImage2 = [UIImage imageNamed:@"mail_pressed"];
+    UIImage *unselectedImage2 = [UIImage imageNamed:@"mail"];
+    UIImage *selectedImage3 = [UIImage imageNamed:@"personalCenter_pressed"];
+    UIImage *unselectedImage3 = [UIImage imageNamed:@"personalCenter"];
     
     UITabBar *tabBar = self.tabBar;
     UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
