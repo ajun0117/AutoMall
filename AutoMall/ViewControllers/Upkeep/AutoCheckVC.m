@@ -7,8 +7,10 @@
 //
 
 #import "AutoCheckVC.h"
+#import "SingleCheckCell.h"
+#import "MultiCheckCell.h"
 
-@interface AutoCheckVC ()
+@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -24,20 +26,26 @@
     self.mainScrollView.pagingEnabled = YES;
     [self.view addSubview:self.mainScrollView];
     
-    self.carBodyTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStylePlain];
+    self.carBodyTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carBodyTV];
+    self.carBodyTV.delegate = self;
+    self.carBodyTV.dataSource = self;
+    [self.carBodyTV registerNib:[UINib nibWithNibName:@"SingleCheckCell" bundle:nil] forCellReuseIdentifier:@"SingleCell"];
     
-    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStylePlain];
+    
+    
+    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carInsideTV];
     
-    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStylePlain];
+    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.engineRoomTV];
     
-    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStylePlain];
+    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.chassisTV];
     
-    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStylePlain];
+    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.trunkTV];
+    
 }
 
 - (IBAction)carBodyAction:(id)sender {
@@ -105,6 +113,140 @@
     btn.selected = bo;
     view.backgroundColor = color;
 }
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if (section == 0) {
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 60)];
+//
+//        UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn1.frame = CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
+//        btn1.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [btn1 setTitle:@"性别" forState:UIControlStateNormal];
+//        [btn1 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
+//        [btn1 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
+//        [btn1 addTarget:self action:@selector(sexAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:btn1];
+//
+//        UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn2.frame = CGRectMake(CGRectGetWidth(self.myTableView.bounds)/4, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
+//        btn2.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [btn2 setTitle:@"年龄" forState:UIControlStateNormal];
+//        [btn2 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
+//        [btn2 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
+//        [btn2 addTarget:self action:@selector(ageAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:btn2];
+//
+//        UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn3.frame = CGRectMake(CGRectGetWidth(self.myTableView.bounds)/2, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
+//        btn3.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [btn3 setTitle:@"距离" forState:UIControlStateNormal];
+//        [btn3 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
+//        [btn3 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
+//        [btn3 addTarget:self action:@selector(distanceAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:btn3];
+//
+//        UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn4.frame = CGRectMake(CGRectGetWidth(self.myTableView.bounds)/4*3, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
+//        btn4.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [btn4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [btn4 setTitle:@"星级" forState:UIControlStateNormal];
+//        [btn4 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
+//        [btn4 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
+//        [btn4 addTarget:self action:@selector(xingjiAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:btn4];
+//
+//        return view;
+//    }
+//    return nil;
+//}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+        SingleCheckCell *cell = (SingleCheckCell *)[tableView dequeueReusableCellWithIdentifier:@"SingleCell"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+//    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
+//    detailVC.userID = userArray[indexPath.section][@"id"];
+//    detailVC.isDrink = self.isDrink;
+//    detailVC.slidePlaceDetail = self.slidePlaceDetail;
+//    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark - GroupedCell
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([cell respondsToSelector:@selector(tintColor)]) {
+//            CGFloat cornerRadius = 5.f;
+//            cell.backgroundColor = UIColor.clearColor;
+//            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+//            CGMutablePathRef pathRef = CGPathCreateMutable();
+//            CGRect bounds = CGRectInset(cell.bounds, 0, 0);
+//            BOOL addLine = NO;
+//            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+//                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+//            } else if (indexPath.row == 0) {
+//                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+//                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+//                addLine = YES;
+//            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+//                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+//                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+//            } else {
+//                CGPathAddRect(pathRef, nil, bounds);
+//                addLine = YES;
+//            }
+//            layer.path = pathRef;
+//            CFRelease(pathRef);
+//            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+//            
+//            if (addLine == YES) {
+//                CALayer *lineLayer = [[CALayer alloc] init];
+//                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+//                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+//                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+//                [layer addSublayer:lineLayer];
+//            }
+//            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+//            [testView.layer insertSublayer:layer atIndex:0];
+//            testView.backgroundColor = UIColor.clearColor;
+//            cell.backgroundView = testView;
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

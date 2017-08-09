@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042FA3051F3AA29F0095BCFD /* SingleCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA3031F3AA29F0095BCFD /* SingleCheckCell.m */; };
+		042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042FA3041F3AA29F0095BCFD /* SingleCheckCell.xib */; };
+		042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA3081F3AA3040095BCFD /* MultiCheckCell.m */; };
+		042FA30B1F3AA3040095BCFD /* MultiCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042FA3091F3AA3040095BCFD /* MultiCheckCell.xib */; };
+		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
@@ -108,6 +113,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042FA3021F3AA29F0095BCFD /* SingleCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleCheckCell.h; sourceTree = "<group>"; };
+		042FA3031F3AA29F0095BCFD /* SingleCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleCheckCell.m; sourceTree = "<group>"; };
+		042FA3041F3AA29F0095BCFD /* SingleCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleCheckCell.xib; sourceTree = "<group>"; };
+		042FA3071F3AA3040095BCFD /* MultiCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCheckCell.h; sourceTree = "<group>"; };
+		042FA3081F3AA3040095BCFD /* MultiCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiCheckCell.m; sourceTree = "<group>"; };
+		042FA3091F3AA3040095BCFD /* MultiCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiCheckCell.xib; sourceTree = "<group>"; };
+		042FA30D1F3AB10E0095BCFD /* DVSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVSwitch.h; sourceTree = "<group>"; };
+		042FA30E1F3AB10E0095BCFD /* DVSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVSwitch.m; sourceTree = "<group>"; };
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
 		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
 		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
@@ -315,6 +328,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042FA3011F3AA2780095BCFD /* AutoCheckCell */ = {
+			isa = PBXGroup;
+			children = (
+				042FA3021F3AA29F0095BCFD /* SingleCheckCell.h */,
+				042FA3031F3AA29F0095BCFD /* SingleCheckCell.m */,
+				042FA3041F3AA29F0095BCFD /* SingleCheckCell.xib */,
+				042FA3071F3AA3040095BCFD /* MultiCheckCell.h */,
+				042FA3081F3AA3040095BCFD /* MultiCheckCell.m */,
+				042FA3091F3AA3040095BCFD /* MultiCheckCell.xib */,
+			);
+			name = AutoCheckCell;
+			sourceTree = "<group>";
+		};
+		042FA30C1F3AB10E0095BCFD /* DVSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				042FA30D1F3AB10E0095BCFD /* DVSwitch.h */,
+				042FA30E1F3AB10E0095BCFD /* DVSwitch.m */,
+			);
+			path = DVSwitch;
+			sourceTree = "<group>";
+		};
 		044A24141F3326CF009720DE /* 汽车检查页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +457,7 @@
 		04DC7CFF1F31C25000AA20A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				042FA3011F3AA2780095BCFD /* AutoCheckCell */,
 				04DC7D001F31C25000AA20A7 /* Home */,
 				04DC7D071F31C25000AA20A7 /* Other */,
 			);
@@ -471,6 +507,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				042FA30C1F3AB10E0095BCFD /* DVSwitch */,
 				04DC7D251F31C28300AA20A7 /* AdView */,
 				04DC7D281F31C28300AA20A7 /* custom */,
 				04DC7D371F31C28300AA20A7 /* DataRequest.h */,
@@ -816,8 +853,10 @@
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
+				042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */,
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
 				04DC7DDB1F31C28300AA20A7 /* UMShareEditViewControlleriPad.xib in Resources */,
+				042FA30B1F3AA3040095BCFD /* MultiCheckCell.xib in Resources */,
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
 				04DC7DDF1F31C28300AA20A7 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				04DC7DBA1F31C28300AA20A7 /* whiteplaceholder.png in Resources */,
@@ -886,6 +925,7 @@
 				04DC7D1E1F31C26500AA20A7 /* CityDistrictsCoreObject+CoreDataProperties.m in Sources */,
 				044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */,
 				04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */,
+				042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */,
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
@@ -911,6 +951,7 @@
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
+				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
@@ -933,6 +974,7 @@
 				04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */,
 				04DC7DB71F31C28300AA20A7 /* HZIndicatorView.m in Sources */,
 				04DC7DCA1F31C28300AA20A7 /* AJMessageView.m in Sources */,
+				042FA3051F3AA29F0095BCFD /* SingleCheckCell.m in Sources */,
 				04DC7DAE1F31C28300AA20A7 /* CustomLabel.m in Sources */,
 				04DC7DBD1F31C28300AA20A7 /* ImageCollectionViewCell.m in Sources */,
 				04DC7DE61F31C28300AA20A7 /* UITabBarItem+Universal.m in Sources */,
