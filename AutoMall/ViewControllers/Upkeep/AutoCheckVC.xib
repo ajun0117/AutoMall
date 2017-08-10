@@ -173,14 +173,29 @@
                         <constraint firstItem="WOq-6V-3kR" firstAttribute="width" secondItem="7FG-vy-3gN" secondAttribute="width" id="yg5-P3-tTH"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcv-AE-mP7">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <color key="backgroundColor" red="0.98431372549019602" green="0.26666666666666666" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="WHx-NV-hwV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="生成检查单"/>
+                    <connections>
+                        <action selector="creatChecklistAction:" destination="-1" eventType="touchUpInside" id="raP-ld-vw0"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Mcv-AE-mP7" secondAttribute="bottom" id="4fu-FR-gG9"/>
                 <constraint firstItem="vqQ-kS-4au" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JA6-Wr-k2M"/>
+                <constraint firstAttribute="trailing" secondItem="Mcv-AE-mP7" secondAttribute="trailing" id="Tc2-1S-LWg"/>
                 <constraint firstItem="vqQ-kS-4au" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Udr-Mh-kS5"/>
+                <constraint firstItem="Mcv-AE-mP7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o5F-vh-Gn1"/>
                 <constraint firstAttribute="trailing" secondItem="vqQ-kS-4au" secondAttribute="trailing" id="pot-o2-8W3"/>
             </constraints>
-            <point key="canvasLocation" x="-742" y="-45"/>
+            <point key="canvasLocation" x="-401" y="-159"/>
         </view>
     </objects>
 </document>

@@ -14,5 +14,4 @@
 
 @property (strong, nonatomic) DVSwitch *switcher;
 
-@property (strong, nonatomic) IBOutlet UIButton *checkResultBtn;
 @end

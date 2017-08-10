@@ -10,7 +10,7 @@
 #import "SingleCheckCell.h"
 #import "MultiCheckCell.h"
 
-@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource>
+@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @end
 
@@ -21,8 +21,27 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"汽车检查页";
     
-    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44)];
-    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, SCREEN_HEIGHT - 64 - 44);
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+////    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    backButton.frame = CGRectMake(0, 0, 24, 24);
+//    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+//    self.navigationItem.leftBarButtonItem = backButnItem;
+    
+    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
+//    //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 24, 24);
+    searchBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
+//    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44)];
+    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, SCREEN_HEIGHT - 64 - 44 - 44);
     self.mainScrollView.pagingEnabled = YES;
     [self.view addSubview:self.mainScrollView];
     
@@ -31,8 +50,6 @@
     self.carBodyTV.delegate = self;
     self.carBodyTV.dataSource = self;
     [self.carBodyTV registerNib:[UINib nibWithNibName:@"SingleCheckCell" bundle:nil] forCellReuseIdentifier:@"SingleCell"];
-    
-    
     
     self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carInsideTV];
@@ -108,11 +125,189 @@
     [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * 4, 0) animated:NO];
 }
 
+- (IBAction)creatChecklistAction:(id)sender {
+}
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
     btn.selected = bo;
     view.backgroundColor = color;
 }
+
+//点击拍照按钮，通过按钮的父视图判断出项目
+-(void) toTakePhoto:(UIButton *)btn {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选取照片方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"相机" otherButtonTitles:@"图库", nil];
+    //    sheet.tag = 3000;
+    [sheet showInView:self.view];
+}
+
+#pragma mark -
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        NSLog(@"取消");
+    }
+    switch (buttonIndex) {
+        case 0:{
+            //打开照相机
+            [self takePhoto];
+            break;
+        }
+        case 1:{
+            //打开本地图库
+            [self localPhoto];
+            break;
+        }
+    }
+}
+
+/**
+ *  打开照相机
+ */
+-(void)takePhoto
+{
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    }
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentViewController:picker animated:YES completion:nil];
+        
+    }else
+    {
+        NSLog(@"模拟器中无法使用照相机，请在真机中使用");
+    }
+}
+
+#pragma mark -
+#pragma UIImagePickerControllerDelegate
+//照相机选择的图片
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    NSString *type=[info objectForKey:UIImagePickerControllerMediaType];
+    if ([type isEqualToString:@"public.image"]) {
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        //__block NSString * imageURL = nil;
+//        ALAssetsLibraryWriteImageCompletionBlock completeBlock = ^(NSURL *assetURL, NSError *error){
+//            if (!error) {
+//#pragma mark get image url from camera capture.
+//                //imageURL = [NSString stringWithFormat:@"%@",assetURL];
+//                
+//                //总是覆盖第一个
+//                ImageObject *obj = [[ImageObject alloc] init];
+//                obj.imageUrl = assetURL;
+//                obj.imageStorePath = nil;
+//                obj.uploadStatus = ImageUploadingStatusDefault;
+//                if (self.imageDataArr.count >= UpLoafImagesCount) {
+//                    [self.imageDataArr removeObjectAtIndex:0];
+//                    //[self.myCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:0]]];
+//                }
+//                [self.imageDataArr addObject:obj];
+//                //                [self.myCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:self.imageDataArr.count - 1 inSection:0]]];
+//                [self.myCollectionView reloadData];
+//            } else {
+//                NSLog(@"%@",error.description);
+//            }
+//        };
+        if(image){
+//            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+//            [library writeImageToSavedPhotosAlbum:[image CGImage]
+//                                      orientation:(ALAssetOrientation)[image imageOrientation]
+//                                  completionBlock:completeBlock];
+        }
+        
+    }
+    
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    picker.delegate = nil;
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    picker.delegate = nil;
+}
+
+/**
+ *  打开本地图库
+ */
+-(void)localPhoto
+{
+        NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    //来源:相册
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        else {
+            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    
+//    NSMutableOrderedSet *orderedSet = [[NSMutableOrderedSet alloc] init];
+//    for (ImageObject *obj in self.imageDataArr) {
+//        [orderedSet addObject:obj.imageUrl];
+//    }
+//    
+//    QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
+//    imagePickerController.selectedAssetURLs = orderedSet;
+//    imagePickerController.delegate = self;
+//    imagePickerController.allowsMultipleSelection = 1;
+//    imagePickerController.maximumNumberOfSelection = UpLoafImagesCount;
+//    imagePickerController.minimumNumberOfSelection = 0;
+//    
+//    self.imagePickerNavC = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
+//    self.imagePickerNavC.delegate = self;
+//    [self presentViewController:self.imagePickerNavC animated:YES completion:NULL];
+}
+
+//#pragma mark -
+//#pragma QBImagePickerControllerDelegate
+//////把选中的图片放到这里
+//- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAssets:(NSArray *)assets
+//{
+//    [self dismissImagePickerController];
+//    imagePickerController.delegate = nil;
+//    
+//    NSMutableArray *imageUrlArr = [[NSMutableArray alloc] init];
+//    for (ImageObject *obj in self.imageDataArr) {
+//        [imageUrlArr addObject:obj.imageUrl];
+//    }
+//    
+//    NSArray *newImageDataArr = [[NSArray alloc] initWithArray:self.imageDataArr];
+//    
+//    [self.imageDataArr removeAllObjects];
+//    
+//    for (int i=0; i<assets.count; i++) {
+//        ALAsset *asset = assets[i];
+//        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+//        ImageObject *imageObj = [[ImageObject alloc] init];
+//        imageObj.imageUrl = url;
+//        if ([imageUrlArr containsObject:url]) {
+//            NSPredicate * predicate = [NSPredicate predicateWithFormat:@"imageUrl = %@",url];
+//            ImageObject *obj = [[newImageDataArr filteredArrayUsingPredicate:predicate] firstObject];
+//            imageObj.imageStorePath = obj.imageStorePath;
+//            imageObj.uploadStatus = obj.uploadStatus;
+//        } else {
+//            imageObj.uploadStatus = ImageUploadingStatusDefault;
+//            imageObj.imageStorePath = nil;
+//        }
+//        [self.imageDataArr addObject:imageObj];
+//    }
+//    
+//    [self.myCollectionView reloadData];
+//}
 
 #pragma mark - UITableViewDataSource
 
@@ -125,11 +320,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    return 144;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    return 10;
 }
 
 
@@ -138,59 +333,60 @@
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 60)];
-//
-//        UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn1.frame = CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
-//        btn1.titleLabel.font = [UIFont systemFontOfSize:15];
-//        [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [btn1 setTitle:@"性别" forState:UIControlStateNormal];
-//        [btn1 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
-//        [btn1 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
-//        [btn1 addTarget:self action:@selector(sexAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:btn1];
-//
-//        UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn2.frame = CGRectMake(CGRectGetWidth(self.myTableView.bounds)/4, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
-//        btn2.titleLabel.font = [UIFont systemFontOfSize:15];
-//        [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [btn2 setTitle:@"年龄" forState:UIControlStateNormal];
-//        [btn2 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
-//        [btn2 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
-//        [btn2 addTarget:self action:@selector(ageAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:btn2];
-//
-//        UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn3.frame = CGRectMake(CGRectGetWidth(self.myTableView.bounds)/2, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
-//        btn3.titleLabel.font = [UIFont systemFontOfSize:15];
-//        [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [btn3 setTitle:@"距离" forState:UIControlStateNormal];
-//        [btn3 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
-//        [btn3 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
-//        [btn3 addTarget:self action:@selector(distanceAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:btn3];
-//
-//        UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn4.frame = CGRectMake(CGRectGetWidth(self.myTableView.bounds)/4*3, 10, CGRectGetWidth(self.myTableView.bounds)/4, 40);
-//        btn4.titleLabel.font = [UIFont systemFontOfSize:15];
-//        [btn4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [btn4 setTitle:@"星级" forState:UIControlStateNormal];
-//        [btn4 setBackgroundImage:IMG(@"bottomTabBg") forState:UIControlStateNormal];
-//        [btn4 setBackgroundImage:IMG(@"") forState:UIControlStateSelected];
-//        [btn4 addTarget:self action:@selector(xingjiAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:btn4];
-//
-//        return view;
-//    }
-//    return nil;
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.carBodyTV.bounds), 60)];
+//    view.backgroundColor = RGBCOLOR(249, 250, 251);
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
+//    label.font = [UIFont systemFontOfSize:17];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.text = @"水箱水";
+//    [view addSubview:label];
+//    
+//    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    photoBtn.frame = CGRectMake(CGRectGetWidth(self.carBodyTV.bounds) - 8 - 20, 12, 20, 20);
+//    [photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
+//    [photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+//    [view addSubview:photoBtn];
+//    return view;
 //}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-        SingleCheckCell *cell = (SingleCheckCell *)[tableView dequeueReusableCellWithIdentifier:@"SingleCell"];
+    SingleCheckCell *cell = (SingleCheckCell *)[tableView dequeueReusableCellWithIdentifier:@"SingleCell"];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        return cell;
+
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.carBodyTV.bounds), 44)];
+    view.backgroundColor = [UIColor whiteColor];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
+    label.font = [UIFont boldSystemFontOfSize:17];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = @"水箱水";
+    [view addSubview:label];
+    
+    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    photoBtn.frame = CGRectMake(CGRectGetWidth(self.carBodyTV.bounds) - 8 - 20, 12, 20, 20);
+    [photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
+    [photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:photoBtn];
+    [cell.contentView addSubview:view];
+
+    UIView *viewContentV = [[UIView alloc] initWithFrame:CGRectMake(8, 44, CGRectGetWidth(self.carBodyTV.bounds) - 16, 44)];
+    viewContentV.backgroundColor = RGBCOLOR(244, 245, 246);
+    UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
+    noticeL.font = [UIFont systemFontOfSize:15];
+    noticeL.backgroundColor = [UIColor clearColor];
+    noticeL.textColor = RGBCOLOR(156, 157, 158);
+    noticeL.text = @"检查内容：";
+    [viewContentV addSubview:noticeL];
+    
+    UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(108, 12, viewContentV.frame.size.width - 8 - 100, 20)];
+    contentL.font = [UIFont systemFontOfSize:16];
+    contentL.backgroundColor = [UIColor clearColor];
+    contentL.tag = 1000;
+    contentL.text = @"冰点";
+    contentL.textAlignment = NSTextAlignmentLeft;
+    [viewContentV addSubview:contentL];
+    [cell.contentView addSubview:viewContentV];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

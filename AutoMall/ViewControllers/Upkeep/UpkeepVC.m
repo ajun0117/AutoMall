@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.title = @"保养服务";
 }
 
 - (IBAction)toCheckAutoAction:(id)sender {
