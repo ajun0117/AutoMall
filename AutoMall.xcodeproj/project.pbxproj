@@ -14,6 +14,12 @@
 		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
+		04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A09B0E1F3D967B00053A98 /* CarInfoListCell.m */; };
+		04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B0F1F3D967B00053A98 /* CarInfoListCell.xib */; };
+		04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A09B131F3D969600053A98 /* CarInfoListVC.m */; };
+		04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B141F3D969600053A98 /* CarInfoListVC.xib */; };
+		04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */; };
+		04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
@@ -124,6 +130,15 @@
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
 		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
 		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
+		04A09B0D1F3D967B00053A98 /* CarInfoListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoListCell.h; sourceTree = "<group>"; };
+		04A09B0E1F3D967B00053A98 /* CarInfoListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoListCell.m; sourceTree = "<group>"; };
+		04A09B0F1F3D967B00053A98 /* CarInfoListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoListCell.xib; sourceTree = "<group>"; };
+		04A09B121F3D969600053A98 /* CarInfoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoListVC.h; sourceTree = "<group>"; };
+		04A09B131F3D969600053A98 /* CarInfoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoListVC.m; sourceTree = "<group>"; };
+		04A09B141F3D969600053A98 /* CarInfoListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoListVC.xib; sourceTree = "<group>"; };
+		04A09B171F3DAFBE00053A98 /* CarInfoSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoSearchVC.h; sourceTree = "<group>"; };
+		04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoSearchVC.m; sourceTree = "<group>"; };
+		04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoSearchVC.xib; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -360,6 +375,22 @@
 			name = "汽车检查页";
 			sourceTree = "<group>";
 		};
+		04A09B021F3D955900053A98 /* 车辆信息页 */ = {
+			isa = PBXGroup;
+			children = (
+				04A09B121F3D969600053A98 /* CarInfoListVC.h */,
+				04A09B131F3D969600053A98 /* CarInfoListVC.m */,
+				04A09B141F3D969600053A98 /* CarInfoListVC.xib */,
+				04A09B0D1F3D967B00053A98 /* CarInfoListCell.h */,
+				04A09B0E1F3D967B00053A98 /* CarInfoListCell.m */,
+				04A09B0F1F3D967B00053A98 /* CarInfoListCell.xib */,
+				04A09B171F3DAFBE00053A98 /* CarInfoSearchVC.h */,
+				04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */,
+				04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */,
+			);
+			name = "车辆信息页";
+			sourceTree = "<group>";
+		};
 		04AE98041F2ED46500C2D158 = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +478,7 @@
 		04DC7CF81F31C24000AA20A7 /* Upkeep */ = {
 			isa = PBXGroup;
 			children = (
+				04A09B021F3D955900053A98 /* 车辆信息页 */,
 				044A24141F3326CF009720DE /* 汽车检查页 */,
 				04DC7CF91F31C24000AA20A7 /* UpkeepVC.h */,
 				04DC7CFA1F31C24000AA20A7 /* UpkeepVC.m */,
@@ -836,6 +868,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
@@ -845,6 +878,7 @@
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
+				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
@@ -862,6 +896,7 @@
 				04DC7DBA1F31C28300AA20A7 /* whiteplaceholder.png in Resources */,
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
+				04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,11 +983,14 @@
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
+				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
+				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
+				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
