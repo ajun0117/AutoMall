@@ -9,6 +9,7 @@
 #import "AutoCheckVC.h"
 #import "SingleCheckCell.h"
 #import "MultiCheckCell.h"
+#import "UpkeepPlanVC.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -126,6 +127,9 @@
 }
 
 - (IBAction)creatChecklistAction:(id)sender {
+    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+    planVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:planVC animated:YES];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {

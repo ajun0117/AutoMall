@@ -1,42 +1,29 @@
 //
-//  CarInfoListVC.m
+//  BaoyangHistoryVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/8/11.
+//  Created by LYD on 2017/8/14.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "CarInfoListVC.h"
-#import "CarInfoListCell.h"
-#import "CarInfoSearchVC.h"
+#import "BaoyangHistoryVC.h"
+#import "BaoyangHistoryCell.h"
 
-@interface CarInfoListVC ()
-@property (strong, nonatomic) IBOutlet UITableView *infoTableView;
+@interface BaoyangHistoryVC ()
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
-@implementation CarInfoListVC
+@implementation BaoyangHistoryVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"车辆信息";
-    [self.infoTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
-    self.infoTableView.tableFooterView = [UIView new];
+    self.title = @"粤A55555";
     
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    searchBtn.contentMode = UIViewContentModeRight;
-    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
-}
+    [self.myTableView registerNib:[UINib nibWithNibName:@"BaoyangHistoryCell" bundle:nil] forCellReuseIdentifier:@"historyCell"];
+    self.myTableView.tableFooterView = [UIView new];
 
--(void) toSearch {  //搜索车辆保养记录
-    CarInfoSearchVC *searchVC = [[CarInfoSearchVC alloc] init];
-    searchVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -62,7 +49,7 @@
 //}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
+    BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -78,10 +65,10 @@
     //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
 }
 
 /*

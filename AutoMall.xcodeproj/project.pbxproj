@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D081F4195C700F5F324 /* BaoyangHistoryCell.m */; };
+		042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D091F4195C700F5F324 /* BaoyangHistoryCell.xib */; };
+		042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D0D1F4195ED00F5F324 /* BaoyangHistoryVC.m */; };
+		042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D0E1F4195ED00F5F324 /* BaoyangHistoryVC.xib */; };
+		042E5D1D1F419C3500F5F324 /* UpkeepPlanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D1B1F419C3500F5F324 /* UpkeepPlanVC.m */; };
+		042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D1C1F419C3500F5F324 /* UpkeepPlanVC.xib */; };
+		042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D201F41A09D00F5F324 /* UpkeepPlanInfoCell.m */; };
+		042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D211F41A09D00F5F324 /* UpkeepPlanInfoCell.xib */; };
+		042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D251F41A0CA00F5F324 /* UpkeepPlanNormalCell.m */; };
+		042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D261F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib */; };
 		042FA3051F3AA29F0095BCFD /* SingleCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA3031F3AA29F0095BCFD /* SingleCheckCell.m */; };
 		042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042FA3041F3AA29F0095BCFD /* SingleCheckCell.xib */; };
 		042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA3081F3AA3040095BCFD /* MultiCheckCell.m */; };
@@ -20,6 +30,10 @@
 		04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B141F3D969600053A98 /* CarInfoListVC.xib */; };
 		04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */; };
 		04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */; };
+		04A0E2801F414940008FE8AF /* AddCarInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E27E1F414940008FE8AF /* AddCarInfoVC.m */; };
+		04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */; };
+		04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */; };
+		04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
@@ -119,6 +133,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042E5D071F4195C700F5F324 /* BaoyangHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaoyangHistoryCell.h; sourceTree = "<group>"; };
+		042E5D081F4195C700F5F324 /* BaoyangHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaoyangHistoryCell.m; sourceTree = "<group>"; };
+		042E5D091F4195C700F5F324 /* BaoyangHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaoyangHistoryCell.xib; sourceTree = "<group>"; };
+		042E5D0C1F4195ED00F5F324 /* BaoyangHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaoyangHistoryVC.h; sourceTree = "<group>"; };
+		042E5D0D1F4195ED00F5F324 /* BaoyangHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaoyangHistoryVC.m; sourceTree = "<group>"; };
+		042E5D0E1F4195ED00F5F324 /* BaoyangHistoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaoyangHistoryVC.xib; sourceTree = "<group>"; };
+		042E5D1A1F419C3500F5F324 /* UpkeepPlanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanVC.h; sourceTree = "<group>"; };
+		042E5D1B1F419C3500F5F324 /* UpkeepPlanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanVC.m; sourceTree = "<group>"; };
+		042E5D1C1F419C3500F5F324 /* UpkeepPlanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepPlanVC.xib; sourceTree = "<group>"; };
+		042E5D1F1F41A09D00F5F324 /* UpkeepPlanInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanInfoCell.h; sourceTree = "<group>"; };
+		042E5D201F41A09D00F5F324 /* UpkeepPlanInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanInfoCell.m; sourceTree = "<group>"; };
+		042E5D211F41A09D00F5F324 /* UpkeepPlanInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepPlanInfoCell.xib; sourceTree = "<group>"; };
+		042E5D241F41A0CA00F5F324 /* UpkeepPlanNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanNormalCell.h; sourceTree = "<group>"; };
+		042E5D251F41A0CA00F5F324 /* UpkeepPlanNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanNormalCell.m; sourceTree = "<group>"; };
+		042E5D261F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepPlanNormalCell.xib; sourceTree = "<group>"; };
 		042FA3021F3AA29F0095BCFD /* SingleCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleCheckCell.h; sourceTree = "<group>"; };
 		042FA3031F3AA29F0095BCFD /* SingleCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleCheckCell.m; sourceTree = "<group>"; };
 		042FA3041F3AA29F0095BCFD /* SingleCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleCheckCell.xib; sourceTree = "<group>"; };
@@ -139,6 +168,12 @@
 		04A09B171F3DAFBE00053A98 /* CarInfoSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoSearchVC.h; sourceTree = "<group>"; };
 		04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoSearchVC.m; sourceTree = "<group>"; };
 		04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoSearchVC.xib; sourceTree = "<group>"; };
+		04A0E27D1F414940008FE8AF /* AddCarInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoVC.h; sourceTree = "<group>"; };
+		04A0E27E1F414940008FE8AF /* AddCarInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoVC.m; sourceTree = "<group>"; };
+		04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCarInfoVC.xib; sourceTree = "<group>"; };
+		04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoCell.h; sourceTree = "<group>"; };
+		04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoCell.m; sourceTree = "<group>"; };
+		04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCarInfoCell.xib; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -343,6 +378,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042E5D111F419B4F00F5F324 /* 车辆信息添加 */ = {
+			isa = PBXGroup;
+			children = (
+				04A0E27D1F414940008FE8AF /* AddCarInfoVC.h */,
+				04A0E27E1F414940008FE8AF /* AddCarInfoVC.m */,
+				04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */,
+				04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */,
+				04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */,
+				04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */,
+			);
+			name = "车辆信息添加";
+			sourceTree = "<group>";
+		};
+		042E5D121F419B6B00F5F324 /* 车辆保养记录 */ = {
+			isa = PBXGroup;
+			children = (
+				042E5D0C1F4195ED00F5F324 /* BaoyangHistoryVC.h */,
+				042E5D0D1F4195ED00F5F324 /* BaoyangHistoryVC.m */,
+				042E5D0E1F4195ED00F5F324 /* BaoyangHistoryVC.xib */,
+				042E5D071F4195C700F5F324 /* BaoyangHistoryCell.h */,
+				042E5D081F4195C700F5F324 /* BaoyangHistoryCell.m */,
+				042E5D091F4195C700F5F324 /* BaoyangHistoryCell.xib */,
+			);
+			name = "车辆保养记录";
+			sourceTree = "<group>";
+		};
+		042E5D141F419B8B00F5F324 /* 保养方案 */ = {
+			isa = PBXGroup;
+			children = (
+				042E5D1A1F419C3500F5F324 /* UpkeepPlanVC.h */,
+				042E5D1B1F419C3500F5F324 /* UpkeepPlanVC.m */,
+				042E5D1C1F419C3500F5F324 /* UpkeepPlanVC.xib */,
+				042E5D1F1F41A09D00F5F324 /* UpkeepPlanInfoCell.h */,
+				042E5D201F41A09D00F5F324 /* UpkeepPlanInfoCell.m */,
+				042E5D211F41A09D00F5F324 /* UpkeepPlanInfoCell.xib */,
+				042E5D241F41A0CA00F5F324 /* UpkeepPlanNormalCell.h */,
+				042E5D251F41A0CA00F5F324 /* UpkeepPlanNormalCell.m */,
+				042E5D261F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib */,
+			);
+			name = "保养方案";
+			sourceTree = "<group>";
+		};
 		042FA3011F3AA2780095BCFD /* AutoCheckCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +455,8 @@
 		04A09B021F3D955900053A98 /* 车辆信息页 */ = {
 			isa = PBXGroup;
 			children = (
+				042E5D121F419B6B00F5F324 /* 车辆保养记录 */,
+				042E5D111F419B4F00F5F324 /* 车辆信息添加 */,
 				04A09B121F3D969600053A98 /* CarInfoListVC.h */,
 				04A09B131F3D969600053A98 /* CarInfoListVC.m */,
 				04A09B141F3D969600053A98 /* CarInfoListVC.xib */,
@@ -480,6 +559,7 @@
 			children = (
 				04A09B021F3D955900053A98 /* 车辆信息页 */,
 				044A24141F3326CF009720DE /* 汽车检查页 */,
+				042E5D141F419B8B00F5F324 /* 保养方案 */,
 				04DC7CF91F31C24000AA20A7 /* UpkeepVC.h */,
 				04DC7CFA1F31C24000AA20A7 /* UpkeepVC.m */,
 			);
@@ -872,20 +952,27 @@
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
+				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
+				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
+				04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */,
+				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
+				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
+				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
+				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
 				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
 				042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */,
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
@@ -980,17 +1067,22 @@
 				04DC7DE81F31C28300AA20A7 /* DJQStartView.m in Sources */,
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
 				04DC7DBC1F31C28300AA20A7 /* ExtendCollectionView.m in Sources */,
+				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
+				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
+				042E5D1D1F419C3500F5F324 /* UpkeepPlanVC.m in Sources */,
 				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
+				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
+				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
@@ -1002,8 +1094,10 @@
 				04DC7DD01F31C28300AA20A7 /* MJRefreshFooterView.m in Sources */,
 				04DC7DB01F31C28300AA20A7 /* CustomTextView.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
+				04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */,
 				04DC7DC11F31C28300AA20A7 /* QBAssetsCollectionOverlayView.m in Sources */,
 				04DC7DB51F31C28300AA20A7 /* DataRequest.m in Sources */,
+				04A0E2801F414940008FE8AF /* AddCarInfoVC.m in Sources */,
 				04DC7DC61F31C28300AA20A7 /* QBImagePickerController.m in Sources */,
 				04DC7DD41F31C28300AA20A7 /* UIView+MJExtension.m in Sources */,
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,

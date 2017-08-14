@@ -8,6 +8,7 @@
 
 #import "CarInfoSearchVC.h"
 #import "CarInfoListCell.h"
+#import "AddCarInfoVC.h"
 
 @interface CarInfoSearchVC ()
 @property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
@@ -25,17 +26,57 @@
     self.searchTableView.tableFooterView = [UIView new];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 24);
-    searchBtn.contentMode = UIViewContentModeScaleAspectFit;
-    [searchBtn setTitle:@"新车登记" forState:UIControlStateNormal];
-    searchBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    [searchBtn addTarget:self action:@selector(toRegister) forControlEvents:UIControlEventTouchUpInside];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    searchBtn.contentMode = UIViewContentModeRight;
+    [searchBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+    [searchBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
 }
 
 -(void) toRegisterNewCarInfo {
+    AddCarInfoVC *addVC = [[AddCarInfoVC alloc] init];
+    addVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:addVC animated:YES];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 90;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 10;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 1;
+//}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
+    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
+    //    detailVC.userID = userArray[indexPath.section][@"id"];
+    //    detailVC.isDrink = self.isDrink;
+    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
+    //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
