@@ -9,6 +9,8 @@
 #import "UpkeepPlanVC.h"
 #import "UpkeepPlanInfoCell.h"
 #import "UpkeepPlanNormalCell.h"
+#import "ServicePackageVC.h"
+#import "BaoyangDiscountsVC.h"
 
 @interface UpkeepPlanVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -22,15 +24,34 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"服务方案";
     
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+//    searchBtn.contentMode = UIViewContentModeRight;
+    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [searchBtn setTitle:@"套餐" forState:UIControlStateNormal];
+    [searchBtn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanInfoCell" bundle:nil] forCellReuseIdentifier:@"planInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     self.myTableView.tableFooterView = [UIView new];
 }
 
+- (void) toPackage {
+    ServicePackageVC *serviceVC = [[ServicePackageVC alloc] init];
+    serviceVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:serviceVC animated:YES];
+}
+
+- (IBAction)confirmAction:(id)sender {
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -40,7 +61,23 @@
             break;
             
         case 1:
-            return 5;
+            return 3;
+            break;
+            
+        case 2:
+            return 2;
+            break;
+            
+        case 3:
+            return 1;
+            break;
+            
+        case 4:
+            return 2;
+            break;
+            
+        case 5:
+            return 1;
             break;
             
         default:
@@ -52,19 +89,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-            return 125;
-            break;
-        }
-            
-        case 1: {
-            return 44;
+            switch (indexPath.row) {
+                case 0:
+                    return 44;
+                    break;
+                    
+                default:
+                    return 125;
+                    break;
+            }
             break;
         }
             
         default:
+            return 44;
             break;
     }
-    return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -77,10 +117,14 @@
             return 44;
             break;
             
+        case 4:
+            return 44;
+            break;
+            
         default:
+            return 1;
             break;
     }
-    return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -92,8 +136,8 @@
         case 0:{
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:17];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+            label.font = [UIFont systemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
             label.text = @"车辆信息";
             [view addSubview:label];
@@ -104,8 +148,8 @@
         case 1: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:17];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+            label.font = [UIFont systemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
             label.text = @"方案明细";
             [view addSubview:label];
@@ -113,40 +157,105 @@
             break;
         }
             
+        case 4: {
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+            view.backgroundColor = RGBCOLOR(249, 250, 251);
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+            label.font = [UIFont systemFontOfSize:15];
+            label.backgroundColor = [UIColor clearColor];
+            label.text = @"优惠";
+            [view addSubview:label];
+            return view;
+            break;
+        }
+            
         default:
+            return nil;
             break;
     }
-    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0: {
-            UpkeepPlanInfoCell *cell = (UpkeepPlanInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"planInfoCell"];
-            return cell;
+            switch (indexPath.row) {
+                case 0: {
+                    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                    cell.textLabel.text = @"粤A88888";
+                    return cell;
+                    break;
+                }
+                    
+                default: {
+                    UpkeepPlanInfoCell *cell = (UpkeepPlanInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"planInfoCell"];
+                    return cell;
+                    break;
+                }
+            }
             break;
         }
             
         case 1: {
             UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
+            break;
+        }
+            
+        case 2: {
+            UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.declareL.text = @"套餐A";
+            cell.contentL.text = @"￥3000";
+            return cell;
+            break;
+        }
+            
+        case 3: {
+            UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+            cell.declareL.text = @"总价";
+            cell.contentL.text = @"￥6000";
+            return cell;
+            break;
+        }
+            
+        case 4: {
+            UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+            cell.declareL.text = @"火花塞更换";
+            cell.contentL.text = @"-￥100";
+            return cell;
+            break;
+        }
+            
+        case 5: {
+            UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+            cell.declareL.text = @"折后价";
+            cell.contentL.text = @"￥5500";
+            return cell;
+            break;
+        }
+            
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.section) {
+        case 4: {
+            BaoyangDiscountsVC *discountsVC = [[BaoyangDiscountsVC alloc] init];
+            discountsVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:discountsVC animated:YES];
             break;
         }
             
         default:
             break;
     }
-    return nil;
-}
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

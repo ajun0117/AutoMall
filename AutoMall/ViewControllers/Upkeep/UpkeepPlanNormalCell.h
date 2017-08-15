@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UpkeepPlanNormalCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *declareL;
+@property (strong, nonatomic) IBOutlet UILabel *contentL;
 
 @end

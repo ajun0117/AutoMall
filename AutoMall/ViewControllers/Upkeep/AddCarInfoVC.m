@@ -29,7 +29,8 @@
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    searchBtn.contentMode = UIViewContentModeRight;
+//    searchBtn.contentMode = UIViewContentModeRight;
+    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [searchBtn setImage:[UIImage imageNamed:@"baoyang_history"] forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toHistoryList) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
@@ -115,8 +116,8 @@
         case 1: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:17];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+            label.font = [UIFont systemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
             label.text = @"车主信息";
             [view addSubview:label];
@@ -127,8 +128,8 @@
         case 2: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:17];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+            label.font = [UIFont systemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
             label.text = @"车辆信息";
             [view addSubview:label];
