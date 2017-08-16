@@ -34,6 +34,12 @@
 		04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */; };
 		04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */; };
 		04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */; };
+		04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FDB1F43EEFB00247819 /* InformationCell.m */; };
+		04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FDC1F43EEFB00247819 /* InformationCell.xib */; };
+		04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FE71F44417A00247819 /* LoginViewController.m */; };
+		04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FE81F44417A00247819 /* LoginViewController.xib */; };
+		04AD1FEE1F44417A00247819 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FEA1F44417A00247819 /* RegisterViewController.m */; };
+		04AD1FEF1F44417A00247819 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FEB1F44417A00247819 /* RegisterViewController.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
@@ -180,6 +186,15 @@
 		04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoCell.h; sourceTree = "<group>"; };
 		04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoCell.m; sourceTree = "<group>"; };
 		04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCarInfoCell.xib; sourceTree = "<group>"; };
+		04AD1FDA1F43EEFB00247819 /* InformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
+		04AD1FDB1F43EEFB00247819 /* InformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCell.m; sourceTree = "<group>"; };
+		04AD1FDC1F43EEFB00247819 /* InformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationCell.xib; sourceTree = "<group>"; };
+		04AD1FE61F44417A00247819 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		04AD1FE71F44417A00247819 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		04AD1FE81F44417A00247819 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		04AD1FE91F44417A00247819 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		04AD1FEA1F44417A00247819 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		04AD1FEB1F44417A00247819 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -422,6 +437,7 @@
 		042E5D141F419B8B00F5F324 /* 保养方案 */ = {
 			isa = PBXGroup;
 			children = (
+				04AD1FD91F43ECD400247819 /* 订单页 */,
 				04EB16271F42F90D00974972 /* 优惠项目 */,
 				04EB16211F42F04200974972 /* 服务套餐 */,
 				042E5D1A1F419C3500F5F324 /* UpkeepPlanVC.h */,
@@ -487,6 +503,26 @@
 			name = "车辆信息页";
 			sourceTree = "<group>";
 		};
+		04AD1FD91F43ECD400247819 /* 订单页 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "订单页";
+			sourceTree = "<group>";
+		};
+		04AD1FE51F44417A00247819 /* Login_Register */ = {
+			isa = PBXGroup;
+			children = (
+				04AD1FE61F44417A00247819 /* LoginViewController.h */,
+				04AD1FE71F44417A00247819 /* LoginViewController.m */,
+				04AD1FE81F44417A00247819 /* LoginViewController.xib */,
+				04AD1FE91F44417A00247819 /* RegisterViewController.h */,
+				04AD1FEA1F44417A00247819 /* RegisterViewController.m */,
+				04AD1FEB1F44417A00247819 /* RegisterViewController.xib */,
+			);
+			path = Login_Register;
+			sourceTree = "<group>";
+		};
 		04AE98041F2ED46500C2D158 = {
 			isa = PBXGroup;
 			children = (
@@ -536,6 +572,7 @@
 		04DC7CEE1F31C24000AA20A7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				04AD1FE51F44417A00247819 /* Login_Register */,
 				04DC7CF81F31C24000AA20A7 /* Upkeep */,
 				04DC7CEF1F31C24000AA20A7 /* Information */,
 				04DC7CF21F31C24000AA20A7 /* Mall */,
@@ -549,6 +586,9 @@
 			children = (
 				04DC7CF01F31C24000AA20A7 /* InformationVC.h */,
 				04DC7CF11F31C24000AA20A7 /* InformationVC.m */,
+				04AD1FDA1F43EEFB00247819 /* InformationCell.h */,
+				04AD1FDB1F43EEFB00247819 /* InformationCell.m */,
+				04AD1FDC1F43EEFB00247819 /* InformationCell.xib */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -991,9 +1031,11 @@
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
+				04AD1FEF1F44417A00247819 /* RegisterViewController.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
+				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
@@ -1012,6 +1054,7 @@
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
+				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
@@ -1088,6 +1131,7 @@
 				04DC7DAF1F31C28300AA20A7 /* CustomTextField.m in Sources */,
 				04DC7DD11F31C28300AA20A7 /* MJRefreshHeaderView.m in Sources */,
 				04DC7D1E1F31C26500AA20A7 /* CityDistrictsCoreObject+CoreDataProperties.m in Sources */,
+				04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */,
 				044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */,
 				04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */,
 				042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */,
@@ -1123,10 +1167,12 @@
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
+				04AD1FEE1F44417A00247819 /* RegisterViewController.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
+				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,

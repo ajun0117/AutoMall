@@ -9,6 +9,8 @@
 #import "UpkeepVC.h"
 #import "AutoCheckVC.h"
 #import "CarInfoListVC.h"
+#import "LoginViewController.h"
+
 
 @interface UpkeepVC ()
 @property (strong, nonatomic) IBOutlet UIButton *carOwnerBtn;
@@ -46,6 +48,13 @@
     checkVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
+
+- (IBAction)toLoginAction:(id)sender {
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    loginVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
 
 - (IBAction)carInfoListAction:(id)sender {
     CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
