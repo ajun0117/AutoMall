@@ -7,6 +7,7 @@
 //
 
 #import "MallVC.h"
+#import "MailSearchVC.h"
 
 @interface MallVC ()
 
@@ -17,7 +18,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
+    self.title = @"汽车商城";
+    
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    //    searchBtn.contentMode = UIViewContentModeRight;
+    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
+    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
 }
+
+-(void) toSearch {  //搜索车辆保养记录
+    MailSearchVC *searchVC = [[MailSearchVC alloc] init];
+    searchVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

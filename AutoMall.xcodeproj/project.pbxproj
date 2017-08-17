@@ -141,6 +141,12 @@
 		04EB162C1F42F95200974972 /* BaoyangDiscountsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB162A1F42F95200974972 /* BaoyangDiscountsVC.xib */; };
 		04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB162E1F43005F00974972 /* AddDiscountsVC.m */; };
 		04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB162F1F43005F00974972 /* AddDiscountsVC.xib */; };
+		04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B6911F45477A00052658 /* YZMLoginViewController.m */; };
+		04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B6921F45477A00052658 /* YZMLoginViewController.xib */; };
+		04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B6961F459D6600052658 /* FindPWDViewController.m */; };
+		04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B6971F459D6600052658 /* FindPWDViewController.xib */; };
+		04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B69C1F45A64000052658 /* MailSearchVC.m */; };
+		04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B69D1F45A64000052658 /* MailSearchVC.xib */; };
 		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
 /* End PBXBuildFile section */
 
@@ -374,6 +380,15 @@
 		04EB162D1F43005F00974972 /* AddDiscountsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDiscountsVC.h; sourceTree = "<group>"; };
 		04EB162E1F43005F00974972 /* AddDiscountsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDiscountsVC.m; sourceTree = "<group>"; };
 		04EB162F1F43005F00974972 /* AddDiscountsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddDiscountsVC.xib; sourceTree = "<group>"; };
+		04F6B6901F45477A00052658 /* YZMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZMLoginViewController.h; sourceTree = "<group>"; };
+		04F6B6911F45477A00052658 /* YZMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZMLoginViewController.m; sourceTree = "<group>"; };
+		04F6B6921F45477A00052658 /* YZMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZMLoginViewController.xib; sourceTree = "<group>"; };
+		04F6B6951F459D6600052658 /* FindPWDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPWDViewController.h; sourceTree = "<group>"; };
+		04F6B6961F459D6600052658 /* FindPWDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPWDViewController.m; sourceTree = "<group>"; };
+		04F6B6971F459D6600052658 /* FindPWDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPWDViewController.xib; sourceTree = "<group>"; };
+		04F6B69B1F45A64000052658 /* MailSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailSearchVC.h; sourceTree = "<group>"; };
+		04F6B69C1F45A64000052658 /* MailSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailSearchVC.m; sourceTree = "<group>"; };
+		04F6B69D1F45A64000052658 /* MailSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailSearchVC.xib; sourceTree = "<group>"; };
 		23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.release.xcconfig"; sourceTree = "<group>"; };
 		282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.debug.xcconfig"; sourceTree = "<group>"; };
 		6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,6 +534,12 @@
 				04AD1FE91F44417A00247819 /* RegisterViewController.h */,
 				04AD1FEA1F44417A00247819 /* RegisterViewController.m */,
 				04AD1FEB1F44417A00247819 /* RegisterViewController.xib */,
+				04F6B6901F45477A00052658 /* YZMLoginViewController.h */,
+				04F6B6911F45477A00052658 /* YZMLoginViewController.m */,
+				04F6B6921F45477A00052658 /* YZMLoginViewController.xib */,
+				04F6B6951F459D6600052658 /* FindPWDViewController.h */,
+				04F6B6961F459D6600052658 /* FindPWDViewController.m */,
+				04F6B6971F459D6600052658 /* FindPWDViewController.xib */,
 			);
 			path = Login_Register;
 			sourceTree = "<group>";
@@ -596,6 +617,7 @@
 		04DC7CF21F31C24000AA20A7 /* Mall */ = {
 			isa = PBXGroup;
 			children = (
+				04F6B69A1F45A5F500052658 /* 搜索 */,
 				04DC7CF31F31C24000AA20A7 /* MallVC.h */,
 				04DC7CF41F31C24000AA20A7 /* MallVC.m */,
 			);
@@ -936,6 +958,16 @@
 			name = "优惠项目";
 			sourceTree = "<group>";
 		};
+		04F6B69A1F45A5F500052658 /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				04F6B69B1F45A64000052658 /* MailSearchVC.h */,
+				04F6B69C1F45A64000052658 /* MailSearchVC.m */,
+				04F6B69D1F45A64000052658 /* MailSearchVC.xib */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
 		8AF780E2B32464023F472B06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,6 +1070,7 @@
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
+				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
@@ -1047,9 +1080,11 @@
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */,
+				04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */,
 				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
 				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
+				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
@@ -1153,6 +1188,7 @@
 				04DC7DCF1F31C28300AA20A7 /* MJRefreshConst.m in Sources */,
 				04DC7DE81F31C28300AA20A7 /* DJQStartView.m in Sources */,
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
+				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
 				04DC7DBC1F31C28300AA20A7 /* ExtendCollectionView.m in Sources */,
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
@@ -1172,6 +1208,8 @@
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
+				04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */,
+				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,
 				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,

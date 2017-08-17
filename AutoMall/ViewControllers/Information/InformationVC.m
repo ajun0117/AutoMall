@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     self.title = @"资讯";
     [self.myTableView registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
     self.myTableView.tableFooterView = [UIView new];

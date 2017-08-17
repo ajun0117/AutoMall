@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
+#import "FindPWDViewController.h"
 
 @interface LoginViewController ()
 {
@@ -35,9 +36,7 @@
     
     self.loginBtn.layer.cornerRadius = 5;
     self.loginBtn.layer.masksToBounds = YES;
-    
-    [self.phoneTF setLeftView:@"login_user" placeholder:@"昵称"];
-    [self.passwordTF setLeftView:@"login_key" placeholder:@"密码"];
+
     
     [mimaEyeBtn setImage:[UIImage imageNamed:@"mimaEye_close"] forState:UIControlStateSelected | UIControlStateHighlighted];
 }
@@ -81,6 +80,11 @@
     [self.phoneTF resignFirstResponder];
     [self.passwordTF resignFirstResponder];
     [self requestMemberLogin];
+}
+- (IBAction)forgetAction:(id)sender {
+    FindPWDViewController *findVC = [[FindPWDViewController alloc] init];
+    findVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:findVC animated:YES];
 }
 
 - (IBAction)registerAction:(id)sender {
