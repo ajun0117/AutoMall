@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFEC1F469B860065FED8 /* CommodityListVC.m */; };
+		042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042DEFED1F469B860065FED8 /* CommodityListVC.xib */; };
+		042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFF11F46E8560065FED8 /* CommodityListCell.m */; };
+		042DEFF41F46E8560065FED8 /* CommodityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042DEFF21F46E8560065FED8 /* CommodityListCell.xib */; };
+		042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFF71F46F0C20065FED8 /* StrikeThroughLabel.m */; };
 		042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D081F4195C700F5F324 /* BaoyangHistoryCell.m */; };
 		042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D091F4195C700F5F324 /* BaoyangHistoryCell.xib */; };
 		042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D0D1F4195ED00F5F324 /* BaoyangHistoryVC.m */; };
@@ -151,6 +156,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042DEFEB1F469B860065FED8 /* CommodityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityListVC.h; sourceTree = "<group>"; };
+		042DEFEC1F469B860065FED8 /* CommodityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityListVC.m; sourceTree = "<group>"; };
+		042DEFED1F469B860065FED8 /* CommodityListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityListVC.xib; sourceTree = "<group>"; };
+		042DEFF01F46E8560065FED8 /* CommodityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityListCell.h; sourceTree = "<group>"; };
+		042DEFF11F46E8560065FED8 /* CommodityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityListCell.m; sourceTree = "<group>"; };
+		042DEFF21F46E8560065FED8 /* CommodityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityListCell.xib; sourceTree = "<group>"; };
+		042DEFF61F46F0C20065FED8 /* StrikeThroughLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrikeThroughLabel.h; sourceTree = "<group>"; };
+		042DEFF71F46F0C20065FED8 /* StrikeThroughLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrikeThroughLabel.m; sourceTree = "<group>"; };
 		042E5D071F4195C700F5F324 /* BaoyangHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaoyangHistoryCell.h; sourceTree = "<group>"; };
 		042E5D081F4195C700F5F324 /* BaoyangHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaoyangHistoryCell.m; sourceTree = "<group>"; };
 		042E5D091F4195C700F5F324 /* BaoyangHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaoyangHistoryCell.xib; sourceTree = "<group>"; };
@@ -423,6 +436,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042DEFEA1F469B4A0065FED8 /* 商品列表 */ = {
+			isa = PBXGroup;
+			children = (
+				042DEFEB1F469B860065FED8 /* CommodityListVC.h */,
+				042DEFEC1F469B860065FED8 /* CommodityListVC.m */,
+				042DEFED1F469B860065FED8 /* CommodityListVC.xib */,
+				042DEFF01F46E8560065FED8 /* CommodityListCell.h */,
+				042DEFF11F46E8560065FED8 /* CommodityListCell.m */,
+				042DEFF21F46E8560065FED8 /* CommodityListCell.xib */,
+			);
+			name = "商品列表";
+			sourceTree = "<group>";
+		};
+		042DEFF51F46F0C20065FED8 /* StrikeThroughLabel */ = {
+			isa = PBXGroup;
+			children = (
+				042DEFF61F46F0C20065FED8 /* StrikeThroughLabel.h */,
+				042DEFF71F46F0C20065FED8 /* StrikeThroughLabel.m */,
+			);
+			path = StrikeThroughLabel;
+			sourceTree = "<group>";
+		};
 		042E5D111F419B4F00F5F324 /* 车辆信息添加 */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,6 +652,7 @@
 		04DC7CF21F31C24000AA20A7 /* Mall */ = {
 			isa = PBXGroup;
 			children = (
+				042DEFEA1F469B4A0065FED8 /* 商品列表 */,
 				04F6B69A1F45A5F500052658 /* 搜索 */,
 				04DC7CF31F31C24000AA20A7 /* MallVC.h */,
 				04DC7CF41F31C24000AA20A7 /* MallVC.m */,
@@ -698,6 +734,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				042DEFF51F46F0C20065FED8 /* StrikeThroughLabel */,
 				042FA30C1F3AB10E0095BCFD /* DVSwitch */,
 				04DC7D251F31C28300AA20A7 /* AdView */,
 				04DC7D281F31C28300AA20A7 /* custom */,
@@ -1087,6 +1124,7 @@
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
+				042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
@@ -1097,6 +1135,7 @@
 				042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */,
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
 				04DC7DDB1F31C28300AA20A7 /* UMShareEditViewControlleriPad.xib in Resources */,
+				042DEFF41F46E8560065FED8 /* CommodityListCell.xib in Resources */,
 				042FA30B1F3AA3040095BCFD /* MultiCheckCell.xib in Resources */,
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
 				04DC7DDF1F31C28300AA20A7 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -1197,6 +1236,7 @@
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
 				042E5D1D1F419C3500F5F324 /* UpkeepPlanVC.m in Sources */,
 				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
+				042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
@@ -1207,9 +1247,11 @@
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
+				042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
 				04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */,
 				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,
+				042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */,
 				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
