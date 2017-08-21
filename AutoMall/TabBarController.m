@@ -23,10 +23,10 @@
     
     UIImage *selectedImage0 = [UIImage imageNamed:@"upkeep_pressed"];
     UIImage *unselectedImage0 = [UIImage imageNamed:@"upkeep"];
-    UIImage *selectedImage1 = [UIImage imageNamed:@"information_pressed"];
-    UIImage *unselectedImage1 = [UIImage imageNamed:@"information"];
-    UIImage *selectedImage2 = [UIImage imageNamed:@"mail_pressed"];
-    UIImage *unselectedImage2 = [UIImage imageNamed:@"mail"];
+    UIImage *selectedImage1 = [UIImage imageNamed:@"mail_pressed"];
+    UIImage *unselectedImage1 = [UIImage imageNamed:@"mail"];
+    UIImage *selectedImage2 = [UIImage imageNamed:@"information_pressed"];
+    UIImage *unselectedImage2 = [UIImage imageNamed:@"information"];
     UIImage *selectedImage3 = [UIImage imageNamed:@"personalCenter_pressed"];
     UIImage *unselectedImage3 = [UIImage imageNamed:@"personalCenter"];
     
@@ -42,8 +42,8 @@
     [item3 itemWithImage:unselectedImage3 selectedImage:selectedImage3];
     
     [item0 setTitle:@"保养服务"];
-    [item1 setTitle:@"资讯"];
-    [item2 setTitle:@"商城"];
+    [item1 setTitle:@"商城"];
+    [item2 setTitle:@"资讯"];
     [item3 setTitle:@"个人中心"];
     
     [item0 setTitlePositionAdjustment:offset];

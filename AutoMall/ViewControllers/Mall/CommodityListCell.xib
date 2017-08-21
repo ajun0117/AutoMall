@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美丽动人小黄人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRa-QY-8GY">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="汽车全合成机油" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRa-QY-8GY">
                         <rect key="frame" x="96" y="8" width="135" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="1JP-xY-Eu4"/>
@@ -113,7 +113,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rdR-7Y-MpC">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personalCenter" translatesAutoresizingMaskIntoConstraints="NO" id="rdR-7Y-MpC">
                         <rect key="frame" x="8" y="17.5" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="Nhg-CQ-jqs"/>
@@ -163,4 +163,7 @@
             <point key="canvasLocation" x="-436" y="69.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="personalCenter" width="33" height="33"/>
+    </resources>
 </document>

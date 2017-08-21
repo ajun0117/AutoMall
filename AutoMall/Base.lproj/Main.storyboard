@@ -214,9 +214,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="FLK-OX-Pv4" kind="relationship" relationship="viewControllers" id="7f3-Sa-mU6"/>
-                        <segue destination="dUV-mP-trR" kind="relationship" relationship="viewControllers" id="dOD-mP-eCl"/>
-                        <segue destination="leZ-Jl-Ahm" kind="relationship" relationship="viewControllers" id="b1m-wF-ajy"/>
-                        <segue destination="bn1-fA-xYY" kind="relationship" relationship="viewControllers" id="bT0-cb-tq7"/>
+                        <segue destination="leZ-Jl-Ahm" kind="relationship" relationship="viewControllers" id="B6Q-OD-gvi"/>
+                        <segue destination="dUV-mP-trR" kind="relationship" relationship="viewControllers" id="X5p-iQ-mOD"/>
+                        <segue destination="bn1-fA-xYY" kind="relationship" relationship="viewControllers" id="OvZ-BR-KfS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

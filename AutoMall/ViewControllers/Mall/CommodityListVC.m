@@ -9,6 +9,7 @@
 #import "CommodityListVC.h"
 #import "MJRefresh.h"
 #import "CommodityListCell.h"
+#import "CommodityDetailVC.h"
 
 @interface CommodityListVC ()
 {
@@ -248,10 +249,11 @@
 //        [self requestGetShopList];
     }
     else {
-//        ShopDetailViewController *detailVC = [[ShopDetailViewController alloc] init];
+        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
 //        detailVC.shopID = shopArray[indexPath.section][@"id"];
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-//        [self.navigationController pushViewController:detailVC animated:YES];
+//        detailVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 
