@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */; };
+		042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */; };
+		042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2051F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m */; };
+		042AF2081F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2061F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib */; };
+		042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF20A1F4C3EA100EA5E5F /* CommodityDetailTapCell.m */; };
+		042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF20B1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib */; };
+		042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF20F1F4C408F00EA5E5F /* CommodityDetailContentCell.m */; };
+		042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2101F4C408F00EA5E5F /* CommodityDetailContentCell.xib */; };
+		042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2141F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m */; };
+		042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2151F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib */; };
 		042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFEC1F469B860065FED8 /* CommodityListVC.m */; };
 		042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042DEFED1F469B860065FED8 /* CommodityListVC.xib */; };
 		042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFF11F46E8560065FED8 /* CommodityListCell.m */; };
@@ -185,6 +195,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042AF1FF1F4C3C6500EA5E5F /* CommodityDetailStarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailStarCell.h; sourceTree = "<group>"; };
+		042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailStarCell.m; sourceTree = "<group>"; };
+		042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailStarCell.xib; sourceTree = "<group>"; };
+		042AF2041F4C3D0A00EA5E5F /* CommodityDetailPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailPriceCell.h; sourceTree = "<group>"; };
+		042AF2051F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailPriceCell.m; sourceTree = "<group>"; };
+		042AF2061F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailPriceCell.xib; sourceTree = "<group>"; };
+		042AF2091F4C3EA100EA5E5F /* CommodityDetailTapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailTapCell.h; sourceTree = "<group>"; };
+		042AF20A1F4C3EA100EA5E5F /* CommodityDetailTapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailTapCell.m; sourceTree = "<group>"; };
+		042AF20B1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailTapCell.xib; sourceTree = "<group>"; };
+		042AF20E1F4C408F00EA5E5F /* CommodityDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailContentCell.h; sourceTree = "<group>"; };
+		042AF20F1F4C408F00EA5E5F /* CommodityDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailContentCell.m; sourceTree = "<group>"; };
+		042AF2101F4C408F00EA5E5F /* CommodityDetailContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailContentCell.xib; sourceTree = "<group>"; };
+		042AF2131F4C40DD00EA5E5F /* CommodityDetailTuijianCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailTuijianCell.h; sourceTree = "<group>"; };
+		042AF2141F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailTuijianCell.m; sourceTree = "<group>"; };
+		042AF2151F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailTuijianCell.xib; sourceTree = "<group>"; };
 		042DEFEB1F469B860065FED8 /* CommodityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityListVC.h; sourceTree = "<group>"; };
 		042DEFEC1F469B860065FED8 /* CommodityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityListVC.m; sourceTree = "<group>"; };
 		042DEFED1F469B860065FED8 /* CommodityListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityListVC.xib; sourceTree = "<group>"; };
@@ -692,6 +717,21 @@
 				047AE0091F4A904400AEAE8E /* picture_1.png */,
 				047AE00A1F4A904400AEAE8E /* picture_2.png */,
 				047AE00B1F4A904400AEAE8E /* picture_3.png */,
+				042AF1FF1F4C3C6500EA5E5F /* CommodityDetailStarCell.h */,
+				042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */,
+				042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */,
+				042AF2041F4C3D0A00EA5E5F /* CommodityDetailPriceCell.h */,
+				042AF2051F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m */,
+				042AF2061F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib */,
+				042AF2091F4C3EA100EA5E5F /* CommodityDetailTapCell.h */,
+				042AF20A1F4C3EA100EA5E5F /* CommodityDetailTapCell.m */,
+				042AF20B1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib */,
+				042AF20E1F4C408F00EA5E5F /* CommodityDetailContentCell.h */,
+				042AF20F1F4C408F00EA5E5F /* CommodityDetailContentCell.m */,
+				042AF2101F4C408F00EA5E5F /* CommodityDetailContentCell.xib */,
+				042AF2131F4C40DD00EA5E5F /* CommodityDetailTuijianCell.h */,
+				042AF2141F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m */,
+				042AF2151F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib */,
 			);
 			name = "商品详情";
 			sourceTree = "<group>";
@@ -1282,14 +1322,17 @@
 				047AE0031F4A883A00AEAE8E /* CommodityDetailVC.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
+				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
 				04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */,
 				04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */,
 				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
 				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
+				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
+				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
@@ -1298,6 +1341,8 @@
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
+				042AF2081F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib in Resources */,
+				042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */,
 				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
 				042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */,
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
@@ -1385,10 +1430,12 @@
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
+				042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */,
 				047ADFEF1F4A86EF00AEAE8E /* MKAnnotationView+CMWebCache.m in Sources */,
 				04DC7D1F1F31C26500AA20A7 /* CityDistrictsCoreObject.m in Sources */,
 				047ADFF71F4A86EF00AEAE8E /* UIView+CMWebCacheOperation.m in Sources */,
 				04DC7DCE1F31C28300AA20A7 /* MJRefreshBaseView.m in Sources */,
+				042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */,
 				04DC7DB31F31C28300AA20A7 /* NSString+Check.m in Sources */,
 				04DC7DC41F31C28300AA20A7 /* QBAssetsCollectionViewController.m in Sources */,
 				04DC7DC51F31C28300AA20A7 /* QBAssetsCollectionViewLayout.m in Sources */,
@@ -1404,6 +1451,7 @@
 				04DC7DCF1F31C28300AA20A7 /* MJRefreshConst.m in Sources */,
 				04DC7DE81F31C28300AA20A7 /* DJQStartView.m in Sources */,
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
+				042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */,
 				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
 				047ADFEB1F4A86EF00AEAE8E /* CMSDWebImageDownloader.m in Sources */,
 				047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */,
@@ -1411,6 +1459,7 @@
 				047ADFFA1F4A86EF00AEAE8E /* MXPageControl.m in Sources */,
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
+				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
@@ -1434,6 +1483,7 @@
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */,
 				047ADFF61F4A86EF00AEAE8E /* UIImageView+CMWebCache.m in Sources */,
+				042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
 				04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */,
 				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,
