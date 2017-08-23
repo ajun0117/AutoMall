@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DJQRateView.h"
 
 @interface CommodityDetailStarCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet DJQRateView *pingxingRV;
 
 @end

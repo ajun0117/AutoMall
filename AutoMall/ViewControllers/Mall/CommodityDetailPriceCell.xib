@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CommodityDetailPriceCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commodityDetailPriceCell" id="KGk-i7-Jjw" customClass="CommodityDetailPriceCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -66,6 +66,11 @@
                     <constraint firstItem="T2u-6e-kXc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uT8-2Z-4Kf"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addBtn" destination="36i-6R-Clk" id="aJV-fx-uZE"/>
+                <outlet property="costPriceStrikeL" destination="jFN-Ff-uSI" id="vWz-Jt-gAR"/>
+            </connections>
+            <point key="canvasLocation" x="-294" y="27"/>
         </tableViewCell>
     </objects>
     <resources>

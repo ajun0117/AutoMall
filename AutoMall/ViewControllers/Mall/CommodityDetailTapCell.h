@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CommodityDetailTapCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIScrollView *hobbyScrollView;
 
 @end

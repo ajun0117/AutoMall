@@ -89,6 +89,21 @@
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
 		04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981F1F2ED46500C2D158 /* Assets.xcassets */; };
 		04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */; };
+		04BA1C641F4D162000704A9E /* SettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C5D1F4D162000704A9E /* SettlementView.m */; };
+		04BA1C661F4D162000704A9E /* ShoppingCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C601F4D162000704A9E /* ShoppingCartCell.m */; };
+		04BA1C671F4D162000704A9E /* ShoppingCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C611F4D162000704A9E /* ShoppingCartCell.xib */; };
+		04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C631F4D162000704A9E /* ShoppingCartView.m */; };
+		04BA1C6E1F4D8CE100704A9E /* SettlementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C6C1F4D8CE100704A9E /* SettlementVC.m */; };
+		04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C6D1F4D8CE100704A9E /* SettlementVC.xib */; };
+		04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C711F4D8D7C00704A9E /* SettlementCell.m */; };
+		04BA1C771F4D8D7C00704A9E /* SettlementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C721F4D8D7C00704A9E /* SettlementCell.xib */; };
+		04BA1C781F4D8D7C00704A9E /* SettlementFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C741F4D8D7C00704A9E /* SettlementFootView.m */; };
+		04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C751F4D8D7C00704A9E /* SettlementFootView.xib */; };
+		04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C7B1F4D8DBB00704A9E /* ConfirmOrderVC.m */; };
+		04BA1C7E1F4D8DBB00704A9E /* ConfirmOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C7C1F4D8DBB00704A9E /* ConfirmOrderVC.xib */; };
+		04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */; };
+		04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */; };
+		04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */; };
 		04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF11F31C24000AA20A7 /* InformationVC.m */; };
 		04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF41F31C24000AA20A7 /* MallVC.m */; };
 		04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF71F31C24000AA20A7 /* PersonalCenterVC.m */; };
@@ -331,6 +346,31 @@
 		04AE981F1F2ED46500C2D158 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04AE98221F2ED46500C2D158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04AE98241F2ED46500C2D158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04BA1C5C1F4D162000704A9E /* SettlementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementView.h; sourceTree = "<group>"; };
+		04BA1C5D1F4D162000704A9E /* SettlementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementView.m; sourceTree = "<group>"; };
+		04BA1C5F1F4D162000704A9E /* ShoppingCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartCell.h; sourceTree = "<group>"; };
+		04BA1C601F4D162000704A9E /* ShoppingCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartCell.m; sourceTree = "<group>"; };
+		04BA1C611F4D162000704A9E /* ShoppingCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCartCell.xib; sourceTree = "<group>"; };
+		04BA1C621F4D162000704A9E /* ShoppingCartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartView.h; sourceTree = "<group>"; };
+		04BA1C631F4D162000704A9E /* ShoppingCartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartView.m; sourceTree = "<group>"; };
+		04BA1C691F4D289600704A9E /* KSHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSHeader.h; sourceTree = "<group>"; };
+		04BA1C6B1F4D8CE100704A9E /* SettlementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementVC.h; sourceTree = "<group>"; };
+		04BA1C6C1F4D8CE100704A9E /* SettlementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementVC.m; sourceTree = "<group>"; };
+		04BA1C6D1F4D8CE100704A9E /* SettlementVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementVC.xib; sourceTree = "<group>"; };
+		04BA1C701F4D8D7C00704A9E /* SettlementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementCell.h; sourceTree = "<group>"; };
+		04BA1C711F4D8D7C00704A9E /* SettlementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementCell.m; sourceTree = "<group>"; };
+		04BA1C721F4D8D7C00704A9E /* SettlementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementCell.xib; sourceTree = "<group>"; };
+		04BA1C731F4D8D7C00704A9E /* SettlementFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementFootView.h; sourceTree = "<group>"; };
+		04BA1C741F4D8D7C00704A9E /* SettlementFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementFootView.m; sourceTree = "<group>"; };
+		04BA1C751F4D8D7C00704A9E /* SettlementFootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementFootView.xib; sourceTree = "<group>"; };
+		04BA1C7A1F4D8DBB00704A9E /* ConfirmOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderVC.h; sourceTree = "<group>"; };
+		04BA1C7B1F4D8DBB00704A9E /* ConfirmOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderVC.m; sourceTree = "<group>"; };
+		04BA1C7C1F4D8DBB00704A9E /* ConfirmOrderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmOrderVC.xib; sourceTree = "<group>"; };
+		04BA1C7F1F4D8DE600704A9E /* MetodPaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetodPaymentVC.h; sourceTree = "<group>"; };
+		04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetodPaymentVC.m; sourceTree = "<group>"; };
+		04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetodPaymentVC.xib; sourceTree = "<group>"; };
+		04BA1C841F4D8E1D00704A9E /* ShoppingCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartModel.h; sourceTree = "<group>"; };
+		04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartModel.m; sourceTree = "<group>"; };
 		04DC7CF01F31C24000AA20A7 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
 		04DC7CF11F31C24000AA20A7 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
 		04DC7CF31F31C24000AA20A7 /* MallVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallVC.h; sourceTree = "<group>"; };
@@ -708,15 +748,17 @@
 		047ADFFE1F4A87FA00AEAE8E /* 商品详情 */ = {
 			isa = PBXGroup;
 			children = (
+				04BA1C6A1F4D8CD100704A9E /* 结算 */,
+				04BA1C5B1F4D160600704A9E /* 购物车 */,
+				047AE0091F4A904400AEAE8E /* picture_1.png */,
+				047AE00A1F4A904400AEAE8E /* picture_2.png */,
+				047AE00B1F4A904400AEAE8E /* picture_3.png */,
 				047ADFFF1F4A883A00AEAE8E /* CommodityDetailVC.h */,
 				047AE0001F4A883A00AEAE8E /* CommodityDetailVC.m */,
 				047AE0011F4A883A00AEAE8E /* CommodityDetailVC.xib */,
 				047AE0041F4A8D6200AEAE8E /* CommodityDetailNormalCell.h */,
 				047AE0051F4A8D6200AEAE8E /* CommodityDetailNormalCell.m */,
 				047AE0061F4A8D6200AEAE8E /* CommodityDetailNormalCell.xib */,
-				047AE0091F4A904400AEAE8E /* picture_1.png */,
-				047AE00A1F4A904400AEAE8E /* picture_2.png */,
-				047AE00B1F4A904400AEAE8E /* picture_3.png */,
 				042AF1FF1F4C3C6500EA5E5F /* CommodityDetailStarCell.h */,
 				042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */,
 				042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */,
@@ -824,6 +866,45 @@
 				04AE98111F2ED46500C2D158 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04BA1C5B1F4D160600704A9E /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				04BA1C691F4D289600704A9E /* KSHeader.h */,
+				04BA1C5C1F4D162000704A9E /* SettlementView.h */,
+				04BA1C5D1F4D162000704A9E /* SettlementView.m */,
+				04BA1C5F1F4D162000704A9E /* ShoppingCartCell.h */,
+				04BA1C601F4D162000704A9E /* ShoppingCartCell.m */,
+				04BA1C611F4D162000704A9E /* ShoppingCartCell.xib */,
+				04BA1C621F4D162000704A9E /* ShoppingCartView.h */,
+				04BA1C631F4D162000704A9E /* ShoppingCartView.m */,
+			);
+			name = "购物车";
+			sourceTree = "<group>";
+		};
+		04BA1C6A1F4D8CD100704A9E /* 结算 */ = {
+			isa = PBXGroup;
+			children = (
+				04BA1C6B1F4D8CE100704A9E /* SettlementVC.h */,
+				04BA1C6C1F4D8CE100704A9E /* SettlementVC.m */,
+				04BA1C6D1F4D8CE100704A9E /* SettlementVC.xib */,
+				04BA1C701F4D8D7C00704A9E /* SettlementCell.h */,
+				04BA1C711F4D8D7C00704A9E /* SettlementCell.m */,
+				04BA1C721F4D8D7C00704A9E /* SettlementCell.xib */,
+				04BA1C731F4D8D7C00704A9E /* SettlementFootView.h */,
+				04BA1C741F4D8D7C00704A9E /* SettlementFootView.m */,
+				04BA1C751F4D8D7C00704A9E /* SettlementFootView.xib */,
+				04BA1C7A1F4D8DBB00704A9E /* ConfirmOrderVC.h */,
+				04BA1C7B1F4D8DBB00704A9E /* ConfirmOrderVC.m */,
+				04BA1C7C1F4D8DBB00704A9E /* ConfirmOrderVC.xib */,
+				04BA1C7F1F4D8DE600704A9E /* MetodPaymentVC.h */,
+				04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */,
+				04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */,
+				04BA1C841F4D8E1D00704A9E /* ShoppingCartModel.h */,
+				04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */,
+			);
+			name = "结算";
 			sourceTree = "<group>";
 		};
 		04DC7CEE1F31C24000AA20A7 /* ViewControllers */ = {
@@ -1305,6 +1386,7 @@
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
 				047AE0081F4A8D6200AEAE8E /* CommodityDetailNormalCell.xib in Resources */,
+				04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */,
 				04AD1FEF1F44417A00247819 /* RegisterViewController.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
@@ -1331,15 +1413,18 @@
 				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
+				04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
+				04BA1C7E1F4D8DBB00704A9E /* ConfirmOrderVC.xib in Resources */,
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
+				04BA1C671F4D162000704A9E /* ShoppingCartCell.xib in Resources */,
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
 				042AF2081F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib in Resources */,
 				042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */,
@@ -1351,8 +1436,10 @@
 				042FA30B1F3AA3040095BCFD /* MultiCheckCell.xib in Resources */,
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
 				04DC7DDF1F31C28300AA20A7 /* UMSocialSDKResourcesNew.bundle in Resources */,
+				04BA1C771F4D8D7C00704A9E /* SettlementCell.xib in Resources */,
 				04DC7DBA1F31C28300AA20A7 /* whiteplaceholder.png in Resources */,
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
+				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
@@ -1419,16 +1506,20 @@
 				04DC7DAF1F31C28300AA20A7 /* CustomTextField.m in Sources */,
 				04DC7DD11F31C28300AA20A7 /* MJRefreshHeaderView.m in Sources */,
 				047ADFF81F4A86EF00AEAE8E /* MXImageScrollView.m in Sources */,
+				04BA1C781F4D8D7C00704A9E /* SettlementFootView.m in Sources */,
 				047ADFF31F4A86EF00AEAE8E /* UIImage+CMMultiFormat.m in Sources */,
 				04DC7D1E1F31C26500AA20A7 /* CityDistrictsCoreObject+CoreDataProperties.m in Sources */,
 				047ADFF91F4A86EF00AEAE8E /* MXImageView.m in Sources */,
 				04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */,
+				04BA1C6E1F4D8CE100704A9E /* SettlementVC.m in Sources */,
 				044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */,
 				04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */,
+				04BA1C661F4D162000704A9E /* ShoppingCartCell.m in Sources */,
 				042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */,
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
+				04BA1C641F4D162000704A9E /* SettlementView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
 				042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */,
 				047ADFEF1F4A86EF00AEAE8E /* MKAnnotationView+CMWebCache.m in Sources */,
@@ -1461,6 +1552,8 @@
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
+				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
+				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
 				042E5D1D1F419C3500F5F324 /* UpkeepPlanVC.m in Sources */,
@@ -1477,6 +1570,7 @@
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
 				04AD1FEE1F44417A00247819 /* RegisterViewController.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
+				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
@@ -1493,6 +1587,7 @@
 				047ADFF01F4A86EF00AEAE8E /* NSData+CMImageContentType.m in Sources */,
 				047AE0021F4A883A00AEAE8E /* CommodityDetailVC.m in Sources */,
 				047ADFEC1F4A86EF00AEAE8E /* CMSDWebImageDownloaderOperation.m in Sources */,
+				04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
@@ -1506,6 +1601,7 @@
 				04DC7DB01F31C28300AA20A7 /* CustomTextView.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
 				04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */,
+				04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */,
 				04DC7DC11F31C28300AA20A7 /* QBAssetsCollectionOverlayView.m in Sources */,
 				04DC7DB51F31C28300AA20A7 /* DataRequest.m in Sources */,
 				04A0E2801F414940008FE8AF /* AddCarInfoVC.m in Sources */,
