@@ -15,7 +15,7 @@
     self.number.text = @"0";
     self.name.font = FONT(12);
     self.money.font = FONT(12);
-    
+    [super awakeFromNib];
 }
 - (void)setData:(id)data{
    

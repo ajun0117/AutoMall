@@ -77,14 +77,14 @@
     if (tableView == selectTableView) {
         return 44;
     }
-    return 115;
+    return 95;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (tableView == selectTableView) {
         return 1;
     }
-    return 10;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

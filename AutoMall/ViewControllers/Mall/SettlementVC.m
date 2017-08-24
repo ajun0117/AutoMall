@@ -71,19 +71,19 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return KS_H(200);
+    return KS_H(55);
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     _footView = [SettlementFootView initFootView];
-    [_footView.confirmOrder addTarget:self action:@selector(confirmOrderClock) forControlEvents:UIControlEventTouchUpInside];
+//    [_footView.confirmOrder addTarget:self action:@selector(confirmOrderClock) forControlEvents:UIControlEventTouchUpInside];
     _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
     _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
     
     return _footView;
 }
 #pragma mark -- confirmOrderClock
-- (void)confirmOrderClock{
+- (IBAction)confirmOrderClock:(id)sender {
     
     ConfirmOrderVC *confirm = [ConfirmOrderVC new];
     
@@ -133,7 +133,7 @@
     
     _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
     _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-
+    _footView.yunfeiL.text = [NSString stringWithFormat:@"运费：￥%.2f",5.00];
     
 }
 - (void)didReceiveMemoryWarning {

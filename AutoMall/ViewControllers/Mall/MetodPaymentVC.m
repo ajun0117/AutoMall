@@ -23,14 +23,14 @@
     
     if (sender.tag == 0) {
         
-        self.wx.image = [UIImage imageNamed:@"select"]
+        self.wx.image = [UIImage imageNamed:@"checkbox_yes"]
         ;
-        self.ailpay.image = [UIImage imageNamed:@"select1"];
+        self.ailpay.image = [UIImage imageNamed:@"checkbox_no"];
     }
     else{
-        self.wx.image = [UIImage imageNamed:@"select1"]
+        self.wx.image = [UIImage imageNamed:@"checkbox_no"]
         ;
-        self.ailpay.image = [UIImage imageNamed:@"select"];
+        self.ailpay.image = [UIImage imageNamed:@"checkbox_yes"];
     }
 }
 - (void)didReceiveMemoryWarning {

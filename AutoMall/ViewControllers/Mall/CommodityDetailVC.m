@@ -86,7 +86,7 @@ static CGFloat const scrollViewHeight = 220;
 
 
 - (void)addFootView{
-    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 49, Screen_wide, 49)];
+    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 55, Screen_wide, 55)];
     self.settemntView.number.text = @"0";
     [self.settemntView.settlement addTarget:self action:@selector(settlementClock) forControlEvents:UIControlEventTouchUpInside];
     [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
@@ -98,6 +98,8 @@ static CGFloat const scrollViewHeight = 220;
     
     SettlementVC *settlement = [[SettlementVC alloc] init];
 //    settlement.datasArr = self.myTableView.orderArr;
+    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2"},@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}];
+    settlement.datasArr = [arr mutableCopy];
     settlement.GoBack = ^{
         
 //        [weakSelf updateShoppingCart:self.popTableView.orderArr];
@@ -112,6 +114,7 @@ static CGFloat const scrollViewHeight = 220;
     
     if (!_isShopping)
     {
+        self.settemntView.backgroundColor = RGBCOLOR(239, 239, 244);
         self.shoppingCartView =[[ShoppingCartView alloc]init];
         self.shoppingCartView.frame =CGRectMake(0, Screen_heigth, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame));
         
@@ -139,7 +142,7 @@ static CGFloat const scrollViewHeight = 220;
         
     }
     else{
-        
+        self.settemntView.backgroundColor = [UIColor clearColor];
         [self.shoppingCartView removeSubView:self];
     }
     _isShopping = !_isShopping;
@@ -247,7 +250,7 @@ static CGFloat const scrollViewHeight = 220;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return 44;
+        return 40;
     }
     return 1;
 }
@@ -348,9 +351,10 @@ static CGFloat const scrollViewHeight = 220;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
      if (section == 1) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-        view.backgroundColor = RGBCOLOR(249, 250, 251); 
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 40)];
+//        view.backgroundColor = RGBCOLOR(249, 250, 251);
+         view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, 100, 20)];
         label.font = [UIFont systemFontOfSize:15];
         label.backgroundColor = [UIColor clearColor];
         label.text = @"向您推荐";

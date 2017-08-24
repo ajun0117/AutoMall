@@ -17,11 +17,13 @@
 /**
  * 件数
  */
+@property (strong, nonatomic) IBOutlet UILabel *yunfeiL;
+//运费
 @property (weak, nonatomic) IBOutlet UILabel *numbers;
-/**
- * 确认
- */
-@property (weak, nonatomic) IBOutlet UIButton *confirmOrder;
+///**
+// * 确认
+// */
+//@property (weak, nonatomic) IBOutlet UIButton *confirmOrder;
 
 
 
