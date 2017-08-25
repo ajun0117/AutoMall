@@ -44,7 +44,7 @@
                                           CGRectGetHeight(frame))];
     if (self) {
         _rootTableView = rootTableView;
-        _rootTableView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(frame), 0, 0, 0);
+        _rootTableView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(frame) - 64, 0, 0, 0);
         [_rootTableView addSubview:self];
     }
     return self;

@@ -17,11 +17,14 @@
 #import "SettlementView.h"
 #import "ShoppingCartView.h"
 #import "SettlementVC.h"
+#import "WRNavigationBar.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
 #define Interval_Hobby  5   //标签之间的间隔
 #define Space_Hobby     12  //标签超出文本的宽度
+#define NAVBAR_COLORCHANGE_POINT (scrollViewHeight - NAV_HEIGHT)
+#define NAV_HEIGHT 64
 
 @interface CommodityDetailVC () <MXScrollViewDelegate>
 {
@@ -49,6 +52,15 @@ static CGFloat const scrollViewHeight = 220;
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品详情";
     
+    // 设置导航栏颜色
+    [self wr_setNavBarBarTintColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]];
+    
+    // 设置初始导航栏透明度
+    [self wr_setNavBarBackgroundAlpha:0];
+    
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:[UIColor darkGrayColor]];
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailNormalCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailStarCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailStarCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailPriceCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailPriceCell"];
@@ -57,15 +69,11 @@ static CGFloat const scrollViewHeight = 220;
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailTuijianCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailTuijianCell"];
     
     allCount = 3;
-    scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0,
-                                                                 0,
-                                                                 Screen_Width,
-                                                                 scrollViewHeight)
-                                        rootTableView:self.myTableView];
+    scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, scrollViewHeight) rootTableView:self.myTableView];
     scroll.delegate = self;
-    scroll.images = @[[UIImage imageNamed:@"picture_1"],
-                      [UIImage imageNamed:@"picture_2"],
-                      [UIImage imageNamed:@"picture_3"]];
+    scroll.images = @[[UIImage imageNamed:@"timg-1"],
+                      [UIImage imageNamed:@"timg-2"],
+                      [UIImage imageNamed:@"timg-1"]];
     
     [scroll setTapImageHandle:^(NSInteger index) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
@@ -83,7 +91,6 @@ static CGFloat const scrollViewHeight = 220;
     
     [self addFootView];
 }
-
 
 - (void)addFootView{
     self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 55, Screen_wide, 55)];
@@ -164,6 +171,28 @@ static CGFloat const scrollViewHeight = 220;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 #warning 想拉伸必须实现此方法
     [scroll stretchingSubviews];
+    
+    CGFloat offsetY = scrollView.contentOffset.y;
+    NSLog(@"offsetY: %f",offsetY);
+    if (offsetY + 220 >= 156)
+    {
+//        CGFloat alpha = (offsetY + 220 - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
+        CGFloat alpha = offsetY + 220 / 156;
+        [self wr_setNavBarBackgroundAlpha:alpha];
+        [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
+        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
+        [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
+        self.title = @"商品详情";
+    }
+    else
+    {
+        [self wr_setNavBarBackgroundAlpha:0];
+        [self wr_setNavBarTintColor:[UIColor whiteColor]];
+        [self wr_setNavBarTitleColor:[UIColor whiteColor]];
+        [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.title = @"";
+    }
+
 }
 
 #pragma mark - MXScrollView delegate
@@ -231,7 +260,7 @@ static CGFloat const scrollViewHeight = 220;
     if (section == 0) {
         return 5;
     }
-    return 3;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
