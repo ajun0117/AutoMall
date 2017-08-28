@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076EB1F54243B003CB740 /* HeadNameCell.m */; };
+		041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076EC1F54243B003CB740 /* HeadNameCell.xib */; };
+		041076F21F542463003CB740 /* CenterNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076F01F542463003CB740 /* CenterNormalCell.m */; };
+		041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076F11F542463003CB740 /* CenterNormalCell.xib */; };
+		041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076F51F54247B003CB740 /* CenterOrderCell.m */; };
+		041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076F61F54247B003CB740 /* CenterOrderCell.xib */; };
+		041076FC1F5424A0003CB740 /* CenterMailOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076FA1F5424A0003CB740 /* CenterMailOrderCell.m */; };
+		041076FD1F5424A0003CB740 /* CenterMailOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076FB1F5424A0003CB740 /* CenterMailOrderCell.xib */; };
 		042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */; };
 		042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */; };
 		042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2051F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m */; };
@@ -211,6 +219,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041076EA1F54243B003CB740 /* HeadNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadNameCell.h; sourceTree = "<group>"; };
+		041076EB1F54243B003CB740 /* HeadNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadNameCell.m; sourceTree = "<group>"; };
+		041076EC1F54243B003CB740 /* HeadNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeadNameCell.xib; sourceTree = "<group>"; };
+		041076EF1F542463003CB740 /* CenterNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterNormalCell.h; sourceTree = "<group>"; };
+		041076F01F542463003CB740 /* CenterNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterNormalCell.m; sourceTree = "<group>"; };
+		041076F11F542463003CB740 /* CenterNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterNormalCell.xib; sourceTree = "<group>"; };
+		041076F41F54247B003CB740 /* CenterOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterOrderCell.h; sourceTree = "<group>"; };
+		041076F51F54247B003CB740 /* CenterOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterOrderCell.m; sourceTree = "<group>"; };
+		041076F61F54247B003CB740 /* CenterOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterOrderCell.xib; sourceTree = "<group>"; };
+		041076F91F5424A0003CB740 /* CenterMailOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterMailOrderCell.h; sourceTree = "<group>"; };
+		041076FA1F5424A0003CB740 /* CenterMailOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterMailOrderCell.m; sourceTree = "<group>"; };
+		041076FB1F5424A0003CB740 /* CenterMailOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterMailOrderCell.xib; sourceTree = "<group>"; };
 		042AF1FF1F4C3C6500EA5E5F /* CommodityDetailStarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailStarCell.h; sourceTree = "<group>"; };
 		042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailStarCell.m; sourceTree = "<group>"; };
 		042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailStarCell.xib; sourceTree = "<group>"; };
@@ -588,6 +608,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041076E91F5423FB003CB740 /* 中心首页cell */ = {
+			isa = PBXGroup;
+			children = (
+				041076EA1F54243B003CB740 /* HeadNameCell.h */,
+				041076EB1F54243B003CB740 /* HeadNameCell.m */,
+				041076EC1F54243B003CB740 /* HeadNameCell.xib */,
+				041076EF1F542463003CB740 /* CenterNormalCell.h */,
+				041076F01F542463003CB740 /* CenterNormalCell.m */,
+				041076F11F542463003CB740 /* CenterNormalCell.xib */,
+				041076F41F54247B003CB740 /* CenterOrderCell.h */,
+				041076F51F54247B003CB740 /* CenterOrderCell.m */,
+				041076F61F54247B003CB740 /* CenterOrderCell.xib */,
+				041076F91F5424A0003CB740 /* CenterMailOrderCell.h */,
+				041076FA1F5424A0003CB740 /* CenterMailOrderCell.m */,
+				041076FB1F5424A0003CB740 /* CenterMailOrderCell.xib */,
+			);
+			name = "中心首页cell";
+			sourceTree = "<group>";
+		};
 		042DEFEA1F469B4A0065FED8 /* 商品列表 */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,6 +988,7 @@
 		04DC7CF51F31C24000AA20A7 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				041076E91F5423FB003CB740 /* 中心首页cell */,
 				04DC7CF61F31C24000AA20A7 /* PersonalCenterVC.h */,
 				04DC7CF71F31C24000AA20A7 /* PersonalCenterVC.m */,
 			);
@@ -1394,9 +1434,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				047ADFFC1F4A86EF00AEAE8E /* MXScrollView.bundle in Resources */,
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
+				041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */,
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
 				047AE0081F4A8D6200AEAE8E /* CommodityDetailNormalCell.xib in Resources */,
 				04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */,
@@ -1454,10 +1496,12 @@
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
+				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
 				047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */,
 				04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */,
+				041076FD1F5424A0003CB740 /* CenterMailOrderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1534,6 +1578,7 @@
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
 				04BA1C641F4D162000704A9E /* SettlementView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
+				041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */,
 				042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */,
 				047ADFEF1F4A86EF00AEAE8E /* MKAnnotationView+CMWebCache.m in Sources */,
 				04DC7D1F1F31C26500AA20A7 /* CityDistrictsCoreObject.m in Sources */,
@@ -1549,6 +1594,7 @@
 				04DC7D121F31C25000AA20A7 /* WebViewController.m in Sources */,
 				047ADFF51F4A86EF00AEAE8E /* UIImageView+CMHighlightedWebCache.m in Sources */,
 				047ADFF41F4A86EF00AEAE8E /* UIImage+CMWebP.m in Sources */,
+				041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */,
 				04DC7DBF1F31C28300AA20A7 /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
 				047ADFFB1F4A86EF00AEAE8E /* MXScrollConst.m in Sources */,
@@ -1602,6 +1648,7 @@
 				047AE0021F4A883A00AEAE8E /* CommodityDetailVC.m in Sources */,
 				047ADFEC1F4A86EF00AEAE8E /* CMSDWebImageDownloaderOperation.m in Sources */,
 				04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */,
+				041076F21F542463003CB740 /* CenterNormalCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
@@ -1615,6 +1662,7 @@
 				04DC7DB01F31C28300AA20A7 /* CustomTextView.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
 				04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */,
+				041076FC1F5424A0003CB740 /* CenterMailOrderCell.m in Sources */,
 				04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */,
 				04DC7DC11F31C28300AA20A7 /* QBAssetsCollectionOverlayView.m in Sources */,
 				04DC7DB51F31C28300AA20A7 /* DataRequest.m in Sources */,

@@ -53,7 +53,7 @@ static CGFloat const scrollViewHeight = 220;
     self.title = @"商品详情";
     
     // 设置导航栏颜色
-    [self wr_setNavBarBarTintColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]];
+    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
     
     // 设置初始导航栏透明度
     [self wr_setNavBarBackgroundAlpha:0];
@@ -174,10 +174,10 @@ static CGFloat const scrollViewHeight = 220;
     
     CGFloat offsetY = scrollView.contentOffset.y;
     NSLog(@"offsetY: %f",offsetY);
-    if (offsetY + 220 >= 156)
+    if ((offsetY + 220) >= 156)
     {
 //        CGFloat alpha = (offsetY + 220 - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
-        CGFloat alpha = offsetY + 220 / 156;
+        CGFloat alpha = (offsetY + 220) / 156;
         [self wr_setNavBarBackgroundAlpha:alpha];
         [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
         [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];

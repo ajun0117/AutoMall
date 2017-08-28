@@ -276,34 +276,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="PersonalCenter View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lin-5Y-WMB">
-                                <rect key="frame" x="19" y="313" width="338" height="41.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by SecondViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTM-uq-SKn">
-                                <rect key="frame" x="80" y="362.5" width="215" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0KY-pe-Th9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BMl-uz-4Cz" id="cSw-Tz-NXX"/>
+                                    <outlet property="delegate" destination="BMl-uz-4Cz" id="D6V-ij-re0"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="Lin-5Y-WMB" secondAttribute="centerY" id="B46-d5-o34"/>
-                            <constraint firstItem="zTM-uq-SKn" firstAttribute="top" secondItem="Lin-5Y-WMB" secondAttribute="bottom" constant="8" symbolic="YES" id="SUd-lG-7aY"/>
-                            <constraint firstItem="zTM-uq-SKn" firstAttribute="centerX" secondItem="Lin-5Y-WMB" secondAttribute="centerX" id="SiF-H8-fkg"/>
-                            <constraint firstAttribute="centerX" secondItem="Lin-5Y-WMB" secondAttribute="centerX" id="t2j-ak-4V1"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="3aM-iJ-j6T"/>
                     <navigationItem key="navigationItem" id="aH1-Kc-odM"/>
+                    <connections>
+                        <outlet property="myTableView" destination="0KY-pe-Th9" id="yGr-Uc-5K1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VeR-SE-RYI" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="638" y="1287"/>
+            <point key="canvasLocation" x="637.60000000000002" y="1286.8065967016494"/>
         </scene>
         <!--Item-->
         <scene sceneID="QOD-hP-ah4">
