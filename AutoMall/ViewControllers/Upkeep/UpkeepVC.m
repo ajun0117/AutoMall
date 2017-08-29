@@ -29,6 +29,9 @@
     self.title = @"保养服务";
     self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     
+    //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    
     [self makeLayerWithButton:self.carOwnerBtn];
     [self makeLayerWithButton:self.hairdressingBtn];
     [self makeLayerWithButton:self.customBtn];

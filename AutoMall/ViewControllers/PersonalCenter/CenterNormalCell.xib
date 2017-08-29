@@ -15,9 +15,38 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="information_pressed" translatesAutoresizingMaskIntoConstraints="NO" id="IZq-nJ-LZL">
+                        <rect key="frame" x="12" y="8" width="25" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="4xw-DZ-Ikx"/>
+                            <constraint firstAttribute="width" constant="25" id="HJj-Ry-tol"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn7-1y-RW6">
+                        <rect key="frame" x="45" y="12" width="65.5" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IZq-nJ-LZL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DGV-2H-foT"/>
+                    <constraint firstItem="IZq-nJ-LZL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="IbF-pZ-zqe"/>
+                    <constraint firstItem="kn7-1y-RW6" firstAttribute="centerY" secondItem="IZq-nJ-LZL" secondAttribute="centerY" id="ZbG-8w-3w9"/>
+                    <constraint firstItem="kn7-1y-RW6" firstAttribute="leading" secondItem="IZq-nJ-LZL" secondAttribute="trailing" constant="8" id="jo9-OY-drY"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="img" destination="IZq-nJ-LZL" id="Jg4-9N-wQr"/>
+                <outlet property="nameL" destination="kn7-1y-RW6" id="Mja-cR-dq1"/>
+            </connections>
+            <point key="canvasLocation" x="-331" y="54"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="information_pressed" width="33" height="33"/>
+    </resources>
 </document>

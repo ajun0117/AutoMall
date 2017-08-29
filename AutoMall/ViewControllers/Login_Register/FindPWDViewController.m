@@ -48,35 +48,42 @@
 }
 
 - (IBAction)sendCodeAction:(id)sender { //获取验证码，成功后显示下级操作界面
-    if ([[GlobalSetting shareGlobalSettingInstance] validatePhone:self.phoneTF.text]) {  //手机号码格式正确
-        [self requestVerifyMobile];
-    }
-    
+//    if ([[GlobalSetting shareGlobalSettingInstance] validatePhone:self.phoneTF.text]) {  //手机号码格式正确
+//        [self requestVerifyMobile];
+//    }
+                self.sendToPhoneL.text = self.phoneTF.text;
+                self.firstL.textColor = [UIColor blackColor];
+                self.secondL.textColor = Red_BtnColor;
+                self.firstView.hidden = YES;
+                self.secondView.hidden = NO;
+                self.reSendBtn.enabled = NO;
+                leftTime = LEFTTIME;
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeLeftTime:) userInfo:nil repeats:YES];
 }
 - (IBAction)reSendAction:(id)sender {
     [self requestSendSMSVerifyCode];
 }
 
 - (IBAction)checkAction:(id)sender {
-    if ([self.codeNumTF.text isEqualToString:certCode]) {
+//    if ([self.codeNumTF.text isEqualToString:certCode]) {
         self.secondL.textColor = [UIColor blackColor];
         self.thirdL.textColor = Red_BtnColor;
         
         self.thirdL.hidden = NO;
         self.secondView.hidden = YES;
-    }
-    else {
-        if (!_networkConditionHUD) {
-            _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
-            [self.view addSubview:_networkConditionHUD];
-        }
-        _networkConditionHUD.labelText = @"验证码输入不正确";
-        _networkConditionHUD.mode = MBProgressHUDModeText;
-        _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
-        _networkConditionHUD.margin = HUDMargin;
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-    }
+//    }
+//    else {
+//        if (!_networkConditionHUD) {
+//            _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//            [self.view addSubview:_networkConditionHUD];
+//        }
+//        _networkConditionHUD.labelText = @"验证码输入不正确";
+//        _networkConditionHUD.mode = MBProgressHUDModeText;
+//        _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+//        _networkConditionHUD.margin = HUDMargin;
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//    }
 }
 
 

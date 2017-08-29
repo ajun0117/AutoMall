@@ -11,13 +11,65 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headNameCell" id="KGk-i7-Jjw" customClass="HeadNameCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headNameCell" rowHeight="60" id="KGk-i7-Jjw" customClass="HeadNameCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg-2" translatesAutoresizingMaskIntoConstraints="NO" id="4EI-uQ-Kdu">
+                        <rect key="frame" x="12" y="8" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="STg-4W-IJp"/>
+                            <constraint firstAttribute="width" constant="44" id="p9k-GZ-4yH"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="门店名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9x-BM-heN">
+                        <rect key="frame" x="64" y="8" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户昵称 &gt; " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faI-qk-Xeb">
+                        <rect key="frame" x="64" y="34" width="79" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分：80分" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHE-Dm-wg9">
+                        <rect key="frame" x="252.5" y="8" width="59.5" height="17"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.0" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="9ZP-Pk-3tI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4EI-uQ-Kdu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="5p3-zT-2Z0"/>
+                    <constraint firstItem="vHE-Dm-wg9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8Wy-9t-TTj"/>
+                    <constraint firstItem="vHE-Dm-wg9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="q9x-BM-heN" secondAttribute="trailing" constant="8" id="IPj-Zp-zus"/>
+                    <constraint firstItem="q9x-BM-heN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="S6a-zf-RVD"/>
+                    <constraint firstItem="faI-qk-Xeb" firstAttribute="leading" secondItem="4EI-uQ-Kdu" secondAttribute="trailing" constant="8" id="SNH-el-WJ2"/>
+                    <constraint firstAttribute="bottom" secondItem="faI-qk-Xeb" secondAttribute="bottom" constant="8" id="aQb-mS-TKu"/>
+                    <constraint firstItem="4EI-uQ-Kdu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iYg-Gu-AQq"/>
+                    <constraint firstAttribute="trailing" secondItem="vHE-Dm-wg9" secondAttribute="trailing" constant="8" id="kz5-5j-VNa"/>
+                    <constraint firstItem="q9x-BM-heN" firstAttribute="leading" secondItem="4EI-uQ-Kdu" secondAttribute="trailing" constant="8" id="yPa-Ve-d4Z"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="headIMG" destination="4EI-uQ-Kdu" id="wQV-lr-qQl"/>
+                <outlet property="jifenL" destination="vHE-Dm-wg9" id="L7V-Ra-thx"/>
+                <outlet property="nameL" destination="q9x-BM-heN" id="mwB-4E-g22"/>
+                <outlet property="nickNameL" destination="faI-qk-Xeb" id="rRW-MG-Ig2"/>
+            </connections>
+            <point key="canvasLocation" x="-398" y="43"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="timg-2" width="691" height="667"/>
+    </resources>
 </document>

@@ -76,7 +76,7 @@
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYo-xU-Dou">
                             <rect key="frame" x="265" y="45" width="90" height="30"/>
-                            <color key="backgroundColor" red="0.99063891169999996" green="0.53013354540000002" blue="0.54338103530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="MBa-bZ-4O9">
                                     <variation key="widthClass=compact" constant="30"/>
@@ -205,7 +205,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-iM-Guh">
                     <rect key="frame" x="20" y="281" width="335" height="40"/>
-                    <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Hgo-wr-bWc"/>
                     </constraints>

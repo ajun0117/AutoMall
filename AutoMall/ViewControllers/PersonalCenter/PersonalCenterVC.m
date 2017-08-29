@@ -55,7 +55,7 @@
             break;
         }
         case 4: {
-            return 3;
+            return 2;
             break;
         }
             
@@ -68,7 +68,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-            return 80;
+            return 60;
             break;
         }
         case 1: {
@@ -111,53 +111,116 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-                    HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-//                    cell.nameL.text = @"壳牌灰喜力";
-                    return cell;
-                    break;
+            HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+            cell.nameL.text = @"壳牌授权店";
+            cell.nickNameL.text = @"店小二";
+            return cell;
+            break;
         }
             
         case 1:{
-            if (indexPath.row == 1) {
-                CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return cell;
-            }
-            else {
-                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return cell;
+            switch (indexPath.row) {
+                case 0: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"服务订单";
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    return cell;
+                    break;
+                }
+                case 1: {
+                    CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                    break;
+                }
+                case 2: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"统计报表";
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    return cell;
+                    break;
+                }
+                case 3: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"定制服务";
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    return cell;
+                    break;
+                }
+                case 4: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"员工管理";
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    return cell;
+                    break;
+                }
+                default:
+                    return nil;
+                    break;
             }
             break;
         }
             
         case 2:{
-            if (indexPath.row == 1) {
-                CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return cell;
-            }
-            else {
-                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return cell;
+            switch (indexPath.row) {
+                case 0: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"商城订单";
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    return cell;
+                    break;
+                }
+                case 1: {
+                    CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                    break;
+                }
+                case 2: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"商品收藏";
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    return cell;
+                    break;
+                }
+                default:
+                    return nil;
+                    break;
             }
             break;
         }
             
         case 3:{
-            CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
+            if (indexPath.row == 0) {
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"修改密码";
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                return cell;
+            }
+            else {
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"地址管理";
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                return cell;
+            }
             break;
         }
             
         case 4:{
-            CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
+            if (indexPath.row == 0) {
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"免责声明";
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                return cell;
+            }
+            else {
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"联系我们";
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                return cell;
+            }
             break;
         }
             
@@ -167,20 +230,20 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 40)];
-        //        view.backgroundColor = RGBCOLOR(249, 250, 251);
-        view.backgroundColor = [UIColor whiteColor];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, 100, 20)];
-        label.font = [UIFont systemFontOfSize:15];
-        label.backgroundColor = [UIColor clearColor];
-        label.text = @"向您推荐";
-        [view addSubview:label];
-        return view;
-    }
-    return nil;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if (section == 1) {
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 40)];
+//        //        view.backgroundColor = RGBCOLOR(249, 250, 251);
+//        view.backgroundColor = [UIColor whiteColor];
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, 100, 20)];
+//        label.font = [UIFont systemFontOfSize:15];
+//        label.backgroundColor = [UIColor clearColor];
+//        label.text = @"向您推荐";
+//        [view addSubview:label];
+//        return view;
+//    }
+//    return nil;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

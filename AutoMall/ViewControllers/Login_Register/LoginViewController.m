@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "FindPWDViewController.h"
+#import "YZMLoginViewController.h"
 
 @interface LoginViewController ()
 {
@@ -25,6 +26,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"登录";
+    
+    //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    
 //    UIButton *rightButn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    rightButn.frame = CGRectMake(0, 0, 60, 26);
 //    rightButn.contentMode = UIViewContentModeScaleAspectFit;
@@ -83,13 +88,16 @@
 }
 - (IBAction)forgetAction:(id)sender {
     FindPWDViewController *findVC = [[FindPWDViewController alloc] init];
-    findVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:findVC animated:YES];
 }
 
 - (IBAction)registerAction:(id)sender {
     RegisterViewController *registerVC = [[RegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+- (IBAction)yzmLoginAction:(id)sender {
+    YZMLoginViewController *yzmVC = [[YZMLoginViewController alloc] init];
+    [self.navigationController pushViewController:yzmVC animated:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

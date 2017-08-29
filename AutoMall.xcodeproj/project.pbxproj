@@ -90,8 +90,6 @@
 		04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FDC1F43EEFB00247819 /* InformationCell.xib */; };
 		04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FE71F44417A00247819 /* LoginViewController.m */; };
 		04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FE81F44417A00247819 /* LoginViewController.xib */; };
-		04AD1FEE1F44417A00247819 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FEA1F44417A00247819 /* RegisterViewController.m */; };
-		04AD1FEF1F44417A00247819 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FEB1F44417A00247819 /* RegisterViewController.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
@@ -215,6 +213,12 @@
 		04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B6971F459D6600052658 /* FindPWDViewController.xib */; };
 		04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B69C1F45A64000052658 /* MailSearchVC.m */; };
 		04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B69D1F45A64000052658 /* MailSearchVC.xib */; };
+		04FD55D31F552A8300104D6B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55D11F552A8300104D6B /* RegisterViewController.m */; };
+		04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55D21F552A8300104D6B /* RegisterViewController.xib */; };
+		04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55D61F552DB200104D6B /* RegisterYZMViewController.m */; };
+		04FD55D91F552DB200104D6B /* RegisterYZMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55D71F552DB200104D6B /* RegisterYZMViewController.xib */; };
+		04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55DB1F5549B800104D6B /* LoginSuccessViewController.m */; };
+		04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55DC1F5549B800104D6B /* LoginSuccessViewController.xib */; };
 		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
 /* End PBXBuildFile section */
 
@@ -356,9 +360,6 @@
 		04AD1FE61F44417A00247819 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		04AD1FE71F44417A00247819 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		04AD1FE81F44417A00247819 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		04AD1FE91F44417A00247819 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		04AD1FEA1F44417A00247819 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		04AD1FEB1F44417A00247819 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -574,6 +575,15 @@
 		04F6B69B1F45A64000052658 /* MailSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailSearchVC.h; sourceTree = "<group>"; };
 		04F6B69C1F45A64000052658 /* MailSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailSearchVC.m; sourceTree = "<group>"; };
 		04F6B69D1F45A64000052658 /* MailSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailSearchVC.xib; sourceTree = "<group>"; };
+		04FD55D01F552A8300104D6B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		04FD55D11F552A8300104D6B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		04FD55D21F552A8300104D6B /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		04FD55D51F552DB200104D6B /* RegisterYZMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterYZMViewController.h; sourceTree = "<group>"; };
+		04FD55D61F552DB200104D6B /* RegisterYZMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterYZMViewController.m; sourceTree = "<group>"; };
+		04FD55D71F552DB200104D6B /* RegisterYZMViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterYZMViewController.xib; sourceTree = "<group>"; };
+		04FD55DA1F5549B800104D6B /* LoginSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSuccessViewController.h; sourceTree = "<group>"; };
+		04FD55DB1F5549B800104D6B /* LoginSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSuccessViewController.m; sourceTree = "<group>"; };
+		04FD55DC1F5549B800104D6B /* LoginSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSuccessViewController.xib; sourceTree = "<group>"; };
 		23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.release.xcconfig"; sourceTree = "<group>"; };
 		282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.debug.xcconfig"; sourceTree = "<group>"; };
 		6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -851,15 +861,21 @@
 				04AD1FE61F44417A00247819 /* LoginViewController.h */,
 				04AD1FE71F44417A00247819 /* LoginViewController.m */,
 				04AD1FE81F44417A00247819 /* LoginViewController.xib */,
-				04AD1FE91F44417A00247819 /* RegisterViewController.h */,
-				04AD1FEA1F44417A00247819 /* RegisterViewController.m */,
-				04AD1FEB1F44417A00247819 /* RegisterViewController.xib */,
 				04F6B6901F45477A00052658 /* YZMLoginViewController.h */,
 				04F6B6911F45477A00052658 /* YZMLoginViewController.m */,
 				04F6B6921F45477A00052658 /* YZMLoginViewController.xib */,
 				04F6B6951F459D6600052658 /* FindPWDViewController.h */,
 				04F6B6961F459D6600052658 /* FindPWDViewController.m */,
 				04F6B6971F459D6600052658 /* FindPWDViewController.xib */,
+				04FD55D01F552A8300104D6B /* RegisterViewController.h */,
+				04FD55D11F552A8300104D6B /* RegisterViewController.m */,
+				04FD55D21F552A8300104D6B /* RegisterViewController.xib */,
+				04FD55D51F552DB200104D6B /* RegisterYZMViewController.h */,
+				04FD55D61F552DB200104D6B /* RegisterYZMViewController.m */,
+				04FD55D71F552DB200104D6B /* RegisterYZMViewController.xib */,
+				04FD55DA1F5549B800104D6B /* LoginSuccessViewController.h */,
+				04FD55DB1F5549B800104D6B /* LoginSuccessViewController.m */,
+				04FD55DC1F5549B800104D6B /* LoginSuccessViewController.xib */,
 			);
 			path = Login_Register;
 			sourceTree = "<group>";
@@ -1442,9 +1458,9 @@
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
 				047AE0081F4A8D6200AEAE8E /* CommodityDetailNormalCell.xib in Resources */,
 				04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */,
-				04AD1FEF1F44417A00247819 /* RegisterViewController.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
+				04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */,
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
@@ -1495,9 +1511,11 @@
 				04DC7DBA1F31C28300AA20A7 /* whiteplaceholder.png in Resources */,
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
+				04FD55D91F552DB200104D6B /* RegisterYZMViewController.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
+				04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */,
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
 				047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */,
 				04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */,
@@ -1610,6 +1628,7 @@
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
+				04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
 				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
@@ -1628,7 +1647,6 @@
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
-				04AD1FEE1F44417A00247819 /* RegisterViewController.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
 				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
@@ -1636,6 +1654,7 @@
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */,
+				04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */,
 				047ADFF61F4A86EF00AEAE8E /* UIImageView+CMWebCache.m in Sources */,
 				042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
@@ -1660,6 +1679,7 @@
 				04DC7DD01F31C28300AA20A7 /* MJRefreshFooterView.m in Sources */,
 				047ADFF21F4A86EF00AEAE8E /* UIImage+CMGIF.m in Sources */,
 				04DC7DB01F31C28300AA20A7 /* CustomTextView.m in Sources */,
+				04FD55D31F552A8300104D6B /* RegisterViewController.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
 				04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */,
 				041076FC1F5424A0003CB740 /* CenterMailOrderCell.m in Sources */,

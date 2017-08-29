@@ -61,7 +61,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9g7-Wu-B6y">
                     <rect key="frame" x="20" y="281" width="335" height="40"/>
-                    <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="8P4-hr-GMG"/>
                     </constraints>
@@ -231,12 +231,68 @@
                         </mask>
                     </variation>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还可以使用手机验证码登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wny-g0-RfX">
+                    <rect key="frame" x="101.5" y="371" width="172.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="2zk-m6-x8g"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2zk-m6-x8g"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="2zk-m6-x8g"/>
+                        </mask>
+                    </variation>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thV-Sd-xAK">
+                    <rect key="frame" x="157" y="412" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="J7p-HH-6tf"/>
+                        <constraint firstAttribute="height" constant="60" id="hb1-f7-iMw"/>
+                    </constraints>
+                    <state key="normal" image="phone_dl">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="J7p-HH-6tf"/>
+                            <exclude reference="hb1-f7-iMw"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="J7p-HH-6tf"/>
+                            <include reference="hb1-f7-iMw"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="yzmLoginAction:" destination="-1" eventType="touchUpInside" id="UJU-ey-Yo9"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xd-tX-1Q4">
+                    <rect key="frame" x="154" y="483" width="66.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="M5F-Ua-HfH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="HKd-GO-t5H" secondAttribute="trailing" constant="20" id="03z-i5-rvh"/>
+                <constraint firstItem="3Xd-tX-1Q4" firstAttribute="centerX" secondItem="thV-Sd-xAK" secondAttribute="centerX" id="0bh-4v-srN"/>
                 <constraint firstAttribute="trailing" secondItem="9g7-Wu-B6y" secondAttribute="trailing" constant="20" id="3Zo-I5-ulH"/>
                 <constraint firstItem="9g7-Wu-B6y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="7IM-pd-MHW"/>
+                <constraint firstItem="thV-Sd-xAK" firstAttribute="centerX" secondItem="wny-g0-RfX" secondAttribute="centerX" id="9fd-J4-aFC"/>
+                <constraint firstItem="3Xd-tX-1Q4" firstAttribute="top" secondItem="thV-Sd-xAK" secondAttribute="bottom" constant="11" id="DwW-cG-ji5"/>
                 <constraint firstItem="7eN-H0-nyt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Fsh-Rd-hQr"/>
                 <constraint firstItem="mpa-R4-nb0" firstAttribute="top" secondItem="DiF-83-uor" secondAttribute="bottom" constant="20" id="KB8-gF-pcD"/>
                 <constraint firstAttribute="trailing" secondItem="mpa-R4-nb0" secondAttribute="trailing" id="MjU-KO-kWo"/>
@@ -244,7 +300,10 @@
                 <constraint firstItem="mpa-R4-nb0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qcp-bZ-wN0"/>
                 <constraint firstItem="7eN-H0-nyt" firstAttribute="top" secondItem="9g7-Wu-B6y" secondAttribute="bottom" constant="10" id="RyM-B4-g86"/>
                 <constraint firstItem="DiF-83-uor" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1:3" id="Vdl-9d-vhR"/>
+                <constraint firstItem="wny-g0-RfX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WFq-Px-AJr"/>
+                <constraint firstItem="thV-Sd-xAK" firstAttribute="top" secondItem="wny-g0-RfX" secondAttribute="bottom" constant="20" id="dec-EO-NnK"/>
                 <constraint firstItem="9g7-Wu-B6y" firstAttribute="top" secondItem="mpa-R4-nb0" secondAttribute="bottom" constant="20" id="g8L-uy-RiJ"/>
+                <constraint firstItem="wny-g0-RfX" firstAttribute="top" secondItem="9g7-Wu-B6y" secondAttribute="bottom" constant="50" id="jks-7O-BQu"/>
                 <constraint firstItem="DiF-83-uor" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yEo-1s-u1E"/>
             </constraints>
             <variation key="default">
@@ -257,12 +316,13 @@
                     <include reference="HKd-GO-t5H"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-1238" y="111"/>
+            <point key="canvasLocation" x="-1602" y="117"/>
         </view>
     </objects>
     <resources>
         <image name="mimaEye_close" width="64" height="66"/>
         <image name="mimaEye_open" width="64" height="66"/>
         <image name="personalCenter" width="33" height="33"/>
+        <image name="phone_dl" width="82" height="82"/>
     </resources>
 </document>

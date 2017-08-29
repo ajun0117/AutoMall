@@ -52,14 +52,14 @@ static CGFloat const scrollViewHeight = 220;
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品详情";
     
-    // 设置导航栏颜色
-    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
-    
-    // 设置初始导航栏透明度
-    [self wr_setNavBarBackgroundAlpha:0];
-    
-    // 设置导航栏按钮和标题颜色
-    [self wr_setNavBarTintColor:[UIColor darkGrayColor]];
+//    // 设置导航栏颜色
+//    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
+//    
+//    // 设置初始导航栏透明度
+//    [self wr_setNavBarBackgroundAlpha:0];
+//    
+//    // 设置导航栏按钮和标题颜色
+//    [self wr_setNavBarTintColor:RGBCOLOR(129, 129, 129)];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailNormalCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailStarCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailStarCell"];
@@ -179,8 +179,8 @@ static CGFloat const scrollViewHeight = 220;
 //        CGFloat alpha = (offsetY + 220 - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
         CGFloat alpha = (offsetY + 220) / 156;
         [self wr_setNavBarBackgroundAlpha:alpha];
-        [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
-        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
+        [self wr_setNavBarTintColor:[RGBCOLOR(129, 129, 129) colorWithAlphaComponent:alpha]];
+        [self wr_setNavBarTitleColor:[RGBCOLOR(129, 129, 129) colorWithAlphaComponent:alpha]];
         [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
         self.title = @"商品详情";
     }
