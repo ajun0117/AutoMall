@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -195,7 +195,7 @@
                 <constraint firstItem="Mcv-AE-mP7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o5F-vh-Gn1"/>
                 <constraint firstAttribute="trailing" secondItem="vqQ-kS-4au" secondAttribute="trailing" id="pot-o2-8W3"/>
             </constraints>
-            <point key="canvasLocation" x="-401" y="-159"/>
+            <point key="canvasLocation" x="-237.5" y="-40.5"/>
         </view>
     </objects>
 </document>

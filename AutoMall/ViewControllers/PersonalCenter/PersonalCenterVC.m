@@ -10,7 +10,6 @@
 #import "HeadNameCell.h"
 #import "CenterNormalCell.h"
 #import "CenterOrderCell.h"
-#import "CenterMailOrderCell.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -24,17 +23,35 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     self.title = @"个人中心";
+    //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    
+    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    setBtn.frame = CGRectMake(0, 0, 44, 44);
+    setBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
+    //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
+    self.navigationItem.leftBarButtonItem = setBtnBarBtn;
+    
+    UIButton *msgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    msgBtn.frame = CGRectMake(0, 0, 44, 44);
+    msgBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [msgBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
+    //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *msgBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:msgBtn];
+    self.navigationItem.rightBarButtonItem = msgBtnBarBtn;
+    
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"HeadNameCell" bundle:nil] forCellReuseIdentifier:@"headNameCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterNormalCell" bundle:nil] forCellReuseIdentifier:@"centerNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
-    [self.myTableView registerNib:[UINib nibWithNibName:@"CenterMailOrderCell" bundle:nil] forCellReuseIdentifier:@"centerMailOrderCell"];
 }
 
 #pragma mark - tableVeiw delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 5;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
@@ -68,7 +85,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-            return 60;
+            return 80;
             break;
         }
         case 1: {
@@ -125,34 +142,46 @@
                 case 0: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"服务订单";
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
                 case 1: {
                     CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                    cell.firstL.text = @"检查完成";
+                    [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                    cell.secondL.text = @"订单确认";
+                    cell.thirdBtn.hidden = NO;
+                    cell.thirdL.hidden = NO;
+                    [cell.thirdBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                    cell.thirdL.text = @"施工完成";
+                    cell.fourthBtn.hidden = NO;
+                    cell.fourthL.hidden = NO;
+                    [cell.fourthBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                    cell.fourthL.text = @"已付款";
                     return cell;
                     break;
                 }
                 case 2: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"统计报表";
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
                 case 3: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"定制服务";
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
                 case 4: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"员工管理";
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
@@ -168,20 +197,24 @@
                 case 0: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"商城订单";
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
                 case 1: {
                     CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                    cell.firstL.text = @"待付款";
+                    [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                    cell.secondL.text = @"已付款";
                     return cell;
                     break;
                 }
                 case 2: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"商品收藏";
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
@@ -196,13 +229,13 @@
             if (indexPath.row == 0) {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                 cell.nameL.text = @"修改密码";
-                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
             else {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                 cell.nameL.text = @"地址管理";
-                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
             break;
@@ -212,13 +245,13 @@
             if (indexPath.row == 0) {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                 cell.nameL.text = @"免责声明";
-                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
             else {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                 cell.nameL.text = @"联系我们";
-                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
             break;

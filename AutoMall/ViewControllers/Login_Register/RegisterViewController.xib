@@ -31,7 +31,7 @@
                             <rect key="frame" x="20" y="39.5" width="335" height="1"/>
                             <color key="backgroundColor" red="0.91664922240000002" green="0.91662180419999995" blue="0.91663730139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="mH0-kt-wRY"/>
+                                <constraint firstAttribute="height" constant="0.5" id="mH0-kt-wRY"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -151,8 +151,8 @@
                         <mask key="constraints">
                             <exclude reference="XSy-b3-XkZ"/>
                             <exclude reference="9y7-cZ-5TY"/>
-                            <exclude reference="XTY-zI-bla"/>
                             <exclude reference="VgA-mY-fVp"/>
+                            <exclude reference="XTY-zI-bla"/>
                             <exclude reference="R5O-fP-vR0"/>
                         </mask>
                     </variation>
@@ -165,8 +165,8 @@
                         <mask key="constraints">
                             <include reference="XSy-b3-XkZ"/>
                             <include reference="9y7-cZ-5TY"/>
-                            <include reference="XTY-zI-bla"/>
                             <include reference="VgA-mY-fVp"/>
+                            <include reference="XTY-zI-bla"/>
                             <include reference="R5O-fP-vR0"/>
                         </mask>
                     </variation>
@@ -280,7 +280,7 @@
                 <constraint firstItem="ahM-zy-pf3" firstAttribute="leading" secondItem="SsV-ge-kZs" secondAttribute="trailing" constant="5" id="sfG-AG-RYP"/>
                 <constraint firstItem="IBE-qg-xAN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="y7J-GL-jDf"/>
             </constraints>
-            <point key="canvasLocation" x="-571" y="135"/>
+            <point key="canvasLocation" x="-395" y="139"/>
         </view>
     </objects>
     <resources>

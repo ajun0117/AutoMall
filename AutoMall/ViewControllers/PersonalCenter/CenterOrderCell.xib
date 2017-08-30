@@ -6,61 +6,110 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="centerOrderCell" rowHeight="80" id="KGk-i7-Jjw" customClass="CenterOrderCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNW-A2-61t">
-                        <rect key="frame" x="12" y="12.5" width="55" height="55"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNW-A2-61t">
+                        <rect key="frame" x="12" y="3.5" width="73" height="73"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="55" id="84p-E3-SqC"/>
-                            <constraint firstAttribute="width" constant="55" id="tSM-2T-XcQ"/>
+                            <constraint firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="height" id="wfc-Zz-gWq"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
+                        <state key="normal" image="information_pressed">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKC-Eb-3FB">
-                        <rect key="frame" x="91" y="12" width="55" height="55"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="55" id="bsc-Hk-VFs"/>
-                            <constraint firstAttribute="width" constant="55" id="zh0-xY-Xgh"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKC-Eb-3FB">
+                        <rect key="frame" x="105" y="3.5" width="72.5" height="73"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
+                        <state key="normal" image="information_pressed"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-aO-BSg">
-                        <rect key="frame" x="173" y="12" width="55" height="55"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="55" id="Nak-BG-qg8"/>
-                            <constraint firstAttribute="width" constant="55" id="PsC-fD-ktn"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-aO-BSg">
+                        <rect key="frame" x="197.5" y="3.5" width="73" height="73"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
+                        <state key="normal" image="information_pressed"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-IZ-ood">
-                        <rect key="frame" x="253" y="12" width="55" height="55"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="55" id="daO-89-AaY"/>
-                            <constraint firstAttribute="height" constant="55" id="zx5-Z4-ffa"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-IZ-ood">
+                        <rect key="frame" x="290.5" y="3.5" width="72.5" height="73"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
+                        <state key="normal" image="information_pressed"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检查完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-WV-12j">
+                        <rect key="frame" x="18" y="47" width="61.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单确认" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5c-bo-YnI">
+                        <rect key="frame" x="111" y="47" width="61.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="施工完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svu-RW-bzj">
+                        <rect key="frame" x="204" y="47" width="61.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnY-ev-2Ye">
+                        <rect key="frame" x="304" y="47" width="46" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="ERm-yk-rpW"/>
-                    <constraint firstItem="UNW-A2-61t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HF2-ko-Ffb"/>
-                    <constraint firstItem="J3B-IZ-ood" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="dIg-ck-S98"/>
-                    <constraint firstItem="UNW-A2-61t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="lee-Qn-0p6"/>
-                    <constraint firstAttribute="trailing" secondItem="J3B-IZ-ood" secondAttribute="trailing" constant="12" id="v7D-dy-Nyr"/>
-                    <constraint firstItem="9J8-aO-BSg" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="wrq-su-7JW"/>
+                    <constraint firstItem="LnY-ev-2Ye" firstAttribute="centerX" secondItem="J3B-IZ-ood" secondAttribute="centerX" id="1lx-Fl-uW6"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="2SF-xc-Tqm"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="2Wc-1x-OrO"/>
+                    <constraint firstItem="E5c-bo-YnI" firstAttribute="centerY" secondItem="YKC-Eb-3FB" secondAttribute="centerY" multiplier="7:5" id="3od-Ml-EHe"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="7Tq-OW-NBU"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="93D-vD-ABa"/>
+                    <constraint firstItem="Svu-RW-bzj" firstAttribute="centerX" secondItem="9J8-aO-BSg" secondAttribute="centerX" id="Bm9-vf-bb4"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="Cp8-Yy-gJg"/>
+                    <constraint firstItem="E5c-bo-YnI" firstAttribute="centerX" secondItem="YKC-Eb-3FB" secondAttribute="centerX" id="EKN-eY-8ZE"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="leading" secondItem="UNW-A2-61t" secondAttribute="trailing" constant="20" id="Fpg-Sr-t4P"/>
+                    <constraint firstItem="LnY-ev-2Ye" firstAttribute="centerY" secondItem="J3B-IZ-ood" secondAttribute="centerY" multiplier="7:5" id="NaH-9P-RCs"/>
+                    <constraint firstItem="eSp-WV-12j" firstAttribute="centerX" secondItem="UNW-A2-61t" secondAttribute="centerX" id="QZP-Tw-YBv"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="STu-Q3-1M5"/>
+                    <constraint firstItem="Svu-RW-bzj" firstAttribute="centerY" secondItem="9J8-aO-BSg" secondAttribute="centerY" multiplier="7:5" id="TuF-E5-cDk"/>
+                    <constraint firstItem="UNW-A2-61t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VzN-nP-2Uh"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="YoY-dt-edV"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="gl4-ee-cwH"/>
+                    <constraint firstItem="UNW-A2-61t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="lsm-VE-Zcb"/>
+                    <constraint firstAttribute="trailing" secondItem="J3B-IZ-ood" secondAttribute="trailing" constant="12" id="mBe-9Y-kH0"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="leading" secondItem="YKC-Eb-3FB" secondAttribute="trailing" constant="20" id="oNP-Lz-QMX"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="rkh-5e-Yk1"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="leading" secondItem="9J8-aO-BSg" secondAttribute="trailing" constant="20" id="s2P-61-AcL"/>
+                    <constraint firstItem="eSp-WV-12j" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" multiplier="7:5" id="wlh-TM-2Qa"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="26" y="70"/>
+            <connections>
+                <outlet property="firstBtn" destination="UNW-A2-61t" id="dQd-2Q-K6u"/>
+                <outlet property="firstL" destination="eSp-WV-12j" id="14r-8L-1lJ"/>
+                <outlet property="fourthBtn" destination="J3B-IZ-ood" id="98Y-Rx-Il2"/>
+                <outlet property="fourthL" destination="LnY-ev-2Ye" id="1t6-y6-Qzt"/>
+                <outlet property="secondBtn" destination="YKC-Eb-3FB" id="L1Y-NE-WEz"/>
+                <outlet property="secondL" destination="E5c-bo-YnI" id="2Y8-eB-5Gb"/>
+                <outlet property="thirdBtn" destination="9J8-aO-BSg" id="e0Q-le-9w7"/>
+                <outlet property="thirdL" destination="Svu-RW-bzj" id="Gn0-bM-s2L"/>
+            </connections>
+            <point key="canvasLocation" x="-405" y="113"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="information_pressed" width="33" height="33"/>
+    </resources>
 </document>
