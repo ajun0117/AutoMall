@@ -14,7 +14,6 @@
 #import "CommodityDetailTapCell.h"
 #import "CommodityDetailContentCell.h"
 #import "CommodityDetailTuijianCell.h"
-#import "SettlementView.h"
 #import "ShoppingCartView.h"
 #import "SettlementVC.h"
 #import "WRNavigationBar.h"
@@ -34,14 +33,11 @@ static CGFloat const scrollViewHeight = 220;
     NSInteger _cnt;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
-//底部菜单
-@property (strong, nonatomic) SettlementView *settemntView;
+
 //抛物线红点
 @property (strong, nonatomic) UIImageView *redView;
 //购物弹出来的视图
 @property (strong, nonatomic) ShoppingCartView *shoppingCartView;
-//购物车视图删除还是加载
-@property (assign, nonatomic) BOOL isShopping;
 
 @end
 
@@ -93,7 +89,7 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 - (void)addFootView{
-    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 55, Screen_wide, 55)];
+    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 55, Screen_wide, 55)];
     self.settemntView.number.text = @"0";
     [self.settemntView.settlement addTarget:self action:@selector(settlementClock) forControlEvents:UIControlEventTouchUpInside];
     [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
@@ -118,42 +114,41 @@ static CGFloat const scrollViewHeight = 220;
 - (void)shoppingCartClock{
     
     __weak typeof(self) weakSelf = self;
-    
-    if (!_isShopping)
+    if (!self.isShopping)
     {
-        self.settemntView.backgroundColor = RGBCOLOR(239, 239, 244);
+//        self.settemntView.backgroundColor = RGBCOLOR(239, 239, 244);
         self.shoppingCartView =[[ShoppingCartView alloc]init];
-        self.shoppingCartView.frame =CGRectMake(0, Screen_heigth, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame));
+        self.shoppingCartView.frame =CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15);
         
-        UIView *bgView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame))];
+        UIView *bgView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15)];
         bgView.alpha = .7;
         bgView.tag = 111;
         bgView.backgroundColor =[UIColor lightGrayColor];
-        [self.view addSubview:bgView];
+        [self.view insertSubview:bgView belowSubview:self.settemntView];
         self.shoppingCartView.block = ^(NSMutableArray *darasArr){
             
             [weakSelf updateShoppingCart:darasArr];
         };
         
         [self.shoppingCartView addShoppingCartView:self];
+        [self.view insertSubview:self.shoppingCartView belowSubview:self.settemntView];
+        
         [UIView animateWithDuration:.3 animations:^{
             
-            self.shoppingCartView.frame =CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame));
+            self.shoppingCartView.frame =CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame) + 15);
             NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2"},@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}];
             self.shoppingCartView.datasArr = [arr mutableCopy];
         } completion:^(BOOL finished)
          {
              
-             
          }];
         
     }
     else{
-        self.settemntView.backgroundColor = [UIColor clearColor];
+//        self.settemntView.backgroundColor = [UIColor clearColor];
         [self.shoppingCartView removeSubView:self];
     }
-    _isShopping = !_isShopping;
-    
+    self.isShopping = !self.isShopping;
 }
 
 #pragma mark -- 更新 数量 价钱

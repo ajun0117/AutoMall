@@ -7,6 +7,7 @@
 //
 
 #import "ShoppingCartView.h"
+#import "CommodityDetailVC.h"
 
 @implementation ShoppingCartView
 
@@ -101,7 +102,7 @@
 }
 - (void)addShoppingCartView:(UIViewController *)vc{
     _viewController = vc;
-    [vc.view addSubview:self];
+//    [vc.view addSubview:self];
 }
 - (void)removeSubView:(UIViewController *)vc{
     UIView * v = [vc.view viewWithTag:111];
@@ -111,6 +112,8 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FootView" object:nil];
     [self removeSubView:_viewController];
+    CommodityDetailVC *dvc = (CommodityDetailVC *)_viewController;
+    dvc.isShopping = NO;
 }
 #pragma markl -- 加加
 - (void)addBtn:(UIButton *)sender{

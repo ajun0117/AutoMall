@@ -10,6 +10,7 @@
 #import "HeadNameCell.h"
 #import "CenterNormalCell.h"
 #import "CenterOrderCell.h"
+#import "CustomServiceVC.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -280,6 +281,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section) {
+        case 1: {
+            
+            switch (indexPath.row) {
+                case 3: {
+                    CustomServiceVC *customVC = [[CustomServiceVC alloc] init];
+                    customVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:customVC animated:YES];
+                    break;
+                }
+                    
+                default:
+                    break;
+            }
+            
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 

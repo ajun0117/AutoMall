@@ -53,9 +53,9 @@
     _money.textColor = [UIColor blackColor];
     [bgView addSubview:_money];
     
-    _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(VIEW_BX(_money), 8, 60, 24)];
+    _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(VIEW_BX(_money), 8, 70, 24)];
     _peisongMoney.text = @"配送费￥5";
-    _peisongMoney.font = FONT(10);
+    _peisongMoney.font = FONT(9);
     _peisongMoney.textColor = [UIColor darkGrayColor];
     [bgView addSubview:_peisongMoney];
     

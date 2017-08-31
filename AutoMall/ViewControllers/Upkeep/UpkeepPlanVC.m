@@ -42,7 +42,6 @@
 
 - (void) toPackage {
     ServicePackageVC *serviceVC = [[ServicePackageVC alloc] init];
-    serviceVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:serviceVC animated:YES];
 }
 
@@ -128,7 +127,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 5;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

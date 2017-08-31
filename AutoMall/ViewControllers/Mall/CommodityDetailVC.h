@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettlementView.h"
 
 @interface CommodityDetailVC : UIViewController
+
+//底部菜单
+@property (strong, nonatomic) SettlementView *settemntView;
+//购物车视图删除还是加载
+@property (assign, nonatomic) BOOL isShopping;
 
 @end
