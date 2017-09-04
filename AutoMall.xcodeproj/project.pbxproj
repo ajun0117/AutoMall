@@ -207,6 +207,8 @@
 		04DC7E001F31C77A00AA20A7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DFF1F31C77A00AA20A7 /* CoreFoundation.framework */; };
 		04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7E021F31D1CD00AA20A7 /* TabBarController.m */; };
 		04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD8EE21F50169D00159776 /* WRNavigationBar.m */; };
+		04E410831F5D52750097E0A6 /* ApplyAuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E410811F5D52750097E0A6 /* ApplyAuthenticationVC.m */; };
+		04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E410821F5D52750097E0A6 /* ApplyAuthenticationVC.xib */; };
 		04EB16251F42F0CD00974972 /* ServicePackageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB16231F42F0CD00974972 /* ServicePackageVC.m */; };
 		04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB16241F42F0CD00974972 /* ServicePackageVC.xib */; };
 		04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB16291F42F95200974972 /* BaoyangDiscountsVC.m */; };
@@ -572,6 +574,9 @@
 		04DC7E021F31D1CD00AA20A7 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		04DD8EE11F50169D00159776 /* WRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRNavigationBar.h; sourceTree = "<group>"; };
 		04DD8EE21F50169D00159776 /* WRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRNavigationBar.m; sourceTree = "<group>"; };
+		04E410801F5D52750097E0A6 /* ApplyAuthenticationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyAuthenticationVC.h; sourceTree = "<group>"; };
+		04E410811F5D52750097E0A6 /* ApplyAuthenticationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyAuthenticationVC.m; sourceTree = "<group>"; };
+		04E410821F5D52750097E0A6 /* ApplyAuthenticationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyAuthenticationVC.xib; sourceTree = "<group>"; };
 		04EB16221F42F0CD00974972 /* ServicePackageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePackageVC.h; sourceTree = "<group>"; };
 		04EB16231F42F0CD00974972 /* ServicePackageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePackageVC.m; sourceTree = "<group>"; };
 		04EB16241F42F0CD00974972 /* ServicePackageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicePackageVC.xib; sourceTree = "<group>"; };
@@ -1035,6 +1040,7 @@
 		04DC7CF51F31C24000AA20A7 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				04E4107F1F5D52170097E0A6 /* 申请认证 */,
 				0490FBFB1F57F67100F77661 /* 定制服务 */,
 				041076E91F5423FB003CB740 /* 中心首页cell */,
 				04DC7CF61F31C24000AA20A7 /* PersonalCenterVC.h */,
@@ -1357,6 +1363,16 @@
 			path = WRNavigationBar;
 			sourceTree = "<group>";
 		};
+		04E4107F1F5D52170097E0A6 /* 申请认证 */ = {
+			isa = PBXGroup;
+			children = (
+				04E410801F5D52750097E0A6 /* ApplyAuthenticationVC.h */,
+				04E410811F5D52750097E0A6 /* ApplyAuthenticationVC.m */,
+				04E410821F5D52750097E0A6 /* ApplyAuthenticationVC.xib */,
+			);
+			name = "申请认证";
+			sourceTree = "<group>";
+		};
 		04EB16211F42F04200974972 /* 服务套餐 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1499,6 +1515,7 @@
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
+				04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
@@ -1631,6 +1648,7 @@
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
+				04E410831F5D52750097E0A6 /* ApplyAuthenticationVC.m in Sources */,
 				04BA1C641F4D162000704A9E /* SettlementView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
 				041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */,
