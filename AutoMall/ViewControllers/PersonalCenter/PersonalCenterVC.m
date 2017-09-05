@@ -11,6 +11,10 @@
 #import "CenterNormalCell.h"
 #import "CenterOrderCell.h"
 #import "CustomServiceVC.h"
+#import "ApplyAuthenticationVC.h"
+#import "EmployeeListVC.h"
+#import "ShopGradeVC.h"
+#import "MailOrderListVC.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -282,6 +286,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
+        case 0: {
+            ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+            applyVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:applyVC animated:YES];
+            break;
+        }
         case 1: {
             
             switch (indexPath.row) {
@@ -292,11 +302,25 @@
                     break;
                 }
                     
+                case 4: {
+                    EmployeeListVC *listVC = [[EmployeeListVC alloc] init];
+                    listVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:listVC animated:YES];
+                    break;
+                }
+                    
                 default:
                     break;
             }
             
             
+            break;
+        }
+            
+        case 2: {
+            MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
+            listVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:listVC animated:YES];
             break;
         }
             

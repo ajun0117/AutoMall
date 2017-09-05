@@ -1,23 +1,23 @@
 //
-//  ApplyAuthenticationVC.m
+//  ShopGradeVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/9/4.
+//  Created by LYD on 2017/9/5.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "ApplyAuthenticationVC.h"
+#import "ShopGradeVC.h"
 
-@interface ApplyAuthenticationVC ()
+@interface ShopGradeVC ()
 
 @end
 
-@implementation ApplyAuthenticationVC
+@implementation ShopGradeVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-     self.title = @"申请认证";
+    self.title = @"门店等级";
 }
 
 - (void)didReceiveMemoryWarning {

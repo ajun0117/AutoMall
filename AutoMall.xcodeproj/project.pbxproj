@@ -221,6 +221,22 @@
 		04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B6971F459D6600052658 /* FindPWDViewController.xib */; };
 		04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B69C1F45A64000052658 /* MailSearchVC.m */; };
 		04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B69D1F45A64000052658 /* MailSearchVC.xib */; };
+		04F7D85E1F5EA52E004945ED /* AddEmployeeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D85C1F5EA52E004945ED /* AddEmployeeVC.m */; };
+		04F7D85F1F5EA52E004945ED /* AddEmployeeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D85D1F5EA52E004945ED /* AddEmployeeVC.xib */; };
+		04F7D8631F5EA584004945ED /* EmployeeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D8611F5EA584004945ED /* EmployeeListVC.m */; };
+		04F7D8641F5EA584004945ED /* EmployeeListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D8621F5EA584004945ED /* EmployeeListVC.xib */; };
+		04F7D8681F5EA59F004945ED /* EmployeeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D8661F5EA59F004945ED /* EmployeeDetailVC.m */; };
+		04F7D8691F5EA59F004945ED /* EmployeeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D8671F5EA59F004945ED /* EmployeeDetailVC.xib */; };
+		04F7D86E1F5EA9C5004945ED /* ShopGradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D86C1F5EA9C5004945ED /* ShopGradeVC.m */; };
+		04F7D86F1F5EA9C5004945ED /* ShopGradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D86D1F5EA9C5004945ED /* ShopGradeVC.xib */; };
+		04F7D8741F5EACE7004945ED /* MailOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D8721F5EACE7004945ED /* MailOrderListVC.m */; };
+		04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D8731F5EACE7004945ED /* MailOrderListVC.xib */; };
+		04F7D8791F5EAD48004945ED /* MailOrderSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D8771F5EAD48004945ED /* MailOrderSingleCell.m */; };
+		04F7D87A1F5EAD48004945ED /* MailOrderSingleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D8781F5EAD48004945ED /* MailOrderSingleCell.xib */; };
+		04F7D87E1F5EAD79004945ED /* MailOrderMultiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D87C1F5EAD79004945ED /* MailOrderMultiCell.m */; };
+		04F7D87F1F5EAD79004945ED /* MailOrderMultiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D87D1F5EAD79004945ED /* MailOrderMultiCell.xib */; };
+		04F7D8851F5EBAA1004945ED /* MailOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D8831F5EBAA1004945ED /* MailOrderDetailVC.m */; };
+		04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D8841F5EBAA1004945ED /* MailOrderDetailVC.xib */; };
 		04FD55D31F552A8300104D6B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55D11F552A8300104D6B /* RegisterViewController.m */; };
 		04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55D21F552A8300104D6B /* RegisterViewController.xib */; };
 		04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55D61F552DB200104D6B /* RegisterYZMViewController.m */; };
@@ -595,6 +611,30 @@
 		04F6B69B1F45A64000052658 /* MailSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailSearchVC.h; sourceTree = "<group>"; };
 		04F6B69C1F45A64000052658 /* MailSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailSearchVC.m; sourceTree = "<group>"; };
 		04F6B69D1F45A64000052658 /* MailSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailSearchVC.xib; sourceTree = "<group>"; };
+		04F7D85B1F5EA52E004945ED /* AddEmployeeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEmployeeVC.h; sourceTree = "<group>"; };
+		04F7D85C1F5EA52E004945ED /* AddEmployeeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEmployeeVC.m; sourceTree = "<group>"; };
+		04F7D85D1F5EA52E004945ED /* AddEmployeeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddEmployeeVC.xib; sourceTree = "<group>"; };
+		04F7D8601F5EA584004945ED /* EmployeeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeListVC.h; sourceTree = "<group>"; };
+		04F7D8611F5EA584004945ED /* EmployeeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeListVC.m; sourceTree = "<group>"; };
+		04F7D8621F5EA584004945ED /* EmployeeListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeListVC.xib; sourceTree = "<group>"; };
+		04F7D8651F5EA59F004945ED /* EmployeeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailVC.h; sourceTree = "<group>"; };
+		04F7D8661F5EA59F004945ED /* EmployeeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailVC.m; sourceTree = "<group>"; };
+		04F7D8671F5EA59F004945ED /* EmployeeDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeDetailVC.xib; sourceTree = "<group>"; };
+		04F7D86B1F5EA9C5004945ED /* ShopGradeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopGradeVC.h; sourceTree = "<group>"; };
+		04F7D86C1F5EA9C5004945ED /* ShopGradeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopGradeVC.m; sourceTree = "<group>"; };
+		04F7D86D1F5EA9C5004945ED /* ShopGradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopGradeVC.xib; sourceTree = "<group>"; };
+		04F7D8711F5EACE7004945ED /* MailOrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderListVC.h; sourceTree = "<group>"; };
+		04F7D8721F5EACE7004945ED /* MailOrderListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderListVC.m; sourceTree = "<group>"; };
+		04F7D8731F5EACE7004945ED /* MailOrderListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderListVC.xib; sourceTree = "<group>"; };
+		04F7D8761F5EAD48004945ED /* MailOrderSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderSingleCell.h; sourceTree = "<group>"; };
+		04F7D8771F5EAD48004945ED /* MailOrderSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderSingleCell.m; sourceTree = "<group>"; };
+		04F7D8781F5EAD48004945ED /* MailOrderSingleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderSingleCell.xib; sourceTree = "<group>"; };
+		04F7D87B1F5EAD79004945ED /* MailOrderMultiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderMultiCell.h; sourceTree = "<group>"; };
+		04F7D87C1F5EAD79004945ED /* MailOrderMultiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderMultiCell.m; sourceTree = "<group>"; };
+		04F7D87D1F5EAD79004945ED /* MailOrderMultiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderMultiCell.xib; sourceTree = "<group>"; };
+		04F7D8821F5EBAA1004945ED /* MailOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailVC.h; sourceTree = "<group>"; };
+		04F7D8831F5EBAA1004945ED /* MailOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailVC.m; sourceTree = "<group>"; };
+		04F7D8841F5EBAA1004945ED /* MailOrderDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailVC.xib; sourceTree = "<group>"; };
 		04FD55D01F552A8300104D6B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		04FD55D11F552A8300104D6B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		04FD55D21F552A8300104D6B /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -1040,6 +1080,9 @@
 		04DC7CF51F31C24000AA20A7 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				04F7D8701F5EAC46004945ED /* 商城订单 */,
+				04F7D86A1F5EA969004945ED /* 门店等级 */,
+				04F7D85A1F5EA4E2004945ED /* 添加操作员 */,
 				04E4107F1F5D52170097E0A6 /* 申请认证 */,
 				0490FBFB1F57F67100F77661 /* 定制服务 */,
 				041076E91F5423FB003CB740 /* 中心首页cell */,
@@ -1406,6 +1449,59 @@
 			name = "搜索";
 			sourceTree = "<group>";
 		};
+		04F7D85A1F5EA4E2004945ED /* 添加操作员 */ = {
+			isa = PBXGroup;
+			children = (
+				04F7D8601F5EA584004945ED /* EmployeeListVC.h */,
+				04F7D8611F5EA584004945ED /* EmployeeListVC.m */,
+				04F7D8621F5EA584004945ED /* EmployeeListVC.xib */,
+				04F7D8651F5EA59F004945ED /* EmployeeDetailVC.h */,
+				04F7D8661F5EA59F004945ED /* EmployeeDetailVC.m */,
+				04F7D8671F5EA59F004945ED /* EmployeeDetailVC.xib */,
+				04F7D85B1F5EA52E004945ED /* AddEmployeeVC.h */,
+				04F7D85C1F5EA52E004945ED /* AddEmployeeVC.m */,
+				04F7D85D1F5EA52E004945ED /* AddEmployeeVC.xib */,
+			);
+			name = "添加操作员";
+			sourceTree = "<group>";
+		};
+		04F7D86A1F5EA969004945ED /* 门店等级 */ = {
+			isa = PBXGroup;
+			children = (
+				04F7D86B1F5EA9C5004945ED /* ShopGradeVC.h */,
+				04F7D86C1F5EA9C5004945ED /* ShopGradeVC.m */,
+				04F7D86D1F5EA9C5004945ED /* ShopGradeVC.xib */,
+			);
+			name = "门店等级";
+			sourceTree = "<group>";
+		};
+		04F7D8701F5EAC46004945ED /* 商城订单 */ = {
+			isa = PBXGroup;
+			children = (
+				04F7D8811F5EBA71004945ED /* 订单详情 */,
+				04F7D8711F5EACE7004945ED /* MailOrderListVC.h */,
+				04F7D8721F5EACE7004945ED /* MailOrderListVC.m */,
+				04F7D8731F5EACE7004945ED /* MailOrderListVC.xib */,
+				04F7D8761F5EAD48004945ED /* MailOrderSingleCell.h */,
+				04F7D8771F5EAD48004945ED /* MailOrderSingleCell.m */,
+				04F7D8781F5EAD48004945ED /* MailOrderSingleCell.xib */,
+				04F7D87B1F5EAD79004945ED /* MailOrderMultiCell.h */,
+				04F7D87C1F5EAD79004945ED /* MailOrderMultiCell.m */,
+				04F7D87D1F5EAD79004945ED /* MailOrderMultiCell.xib */,
+			);
+			name = "商城订单";
+			sourceTree = "<group>";
+		};
+		04F7D8811F5EBA71004945ED /* 订单详情 */ = {
+			isa = PBXGroup;
+			children = (
+				04F7D8821F5EBAA1004945ED /* MailOrderDetailVC.h */,
+				04F7D8831F5EBAA1004945ED /* MailOrderDetailVC.m */,
+				04F7D8841F5EBAA1004945ED /* MailOrderDetailVC.xib */,
+			);
+			name = "订单详情";
+			sourceTree = "<group>";
+		};
 		8AF780E2B32464023F472B06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1501,6 +1597,7 @@
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
+				04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */,
 				047ADFFC1F4A86EF00AEAE8E /* MXScrollView.bundle in Resources */,
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */,
@@ -1534,9 +1631,11 @@
 				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
 				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
+				04F7D85F1F5EA52E004945ED /* AddEmployeeVC.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
+				04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */,
@@ -1544,12 +1643,14 @@
 				04BA1C7E1F4D8DBB00704A9E /* ConfirmOrderVC.xib in Resources */,
 				0490FC0A1F58049600F77661 /* EditServicePackageVC.xib in Resources */,
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
+				04F7D86F1F5EA9C5004945ED /* ShopGradeVC.xib in Resources */,
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				04BA1C671F4D162000704A9E /* ShoppingCartCell.xib in Resources */,
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
 				042AF2081F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib in Resources */,
+				04F7D87F1F5EAD79004945ED /* MailOrderMultiCell.xib in Resources */,
 				042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */,
 				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
 				042FA3061F3AA29F0095BCFD /* SingleCheckCell.xib in Resources */,
@@ -1560,6 +1661,7 @@
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
 				04DC7DDF1F31C28300AA20A7 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				04BA1C771F4D8D7C00704A9E /* SettlementCell.xib in Resources */,
+				04F7D8641F5EA584004945ED /* EmployeeListVC.xib in Resources */,
 				04DC7DBA1F31C28300AA20A7 /* whiteplaceholder.png in Resources */,
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
@@ -1567,10 +1669,12 @@
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				0490FC051F57F97700F77661 /* CustomServiceCell.xib in Resources */,
+				04F7D87A1F5EAD48004945ED /* MailOrderSingleCell.xib in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
 				04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */,
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
 				047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */,
+				04F7D8691F5EA59F004945ED /* EmployeeDetailVC.xib in Resources */,
 				04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */,
 				0490FC0F1F580CB900F77661 /* UpkeepPlanNormalHeadCell.xib in Resources */,
 			);
@@ -1636,9 +1740,11 @@
 				04DC7DD11F31C28300AA20A7 /* MJRefreshHeaderView.m in Sources */,
 				047ADFF81F4A86EF00AEAE8E /* MXImageScrollView.m in Sources */,
 				04BA1C781F4D8D7C00704A9E /* SettlementFootView.m in Sources */,
+				04F7D8791F5EAD48004945ED /* MailOrderSingleCell.m in Sources */,
 				047ADFF31F4A86EF00AEAE8E /* UIImage+CMMultiFormat.m in Sources */,
 				04DC7D1E1F31C26500AA20A7 /* CityDistrictsCoreObject+CoreDataProperties.m in Sources */,
 				047ADFF91F4A86EF00AEAE8E /* MXImageView.m in Sources */,
+				04F7D8851F5EBAA1004945ED /* MailOrderDetailVC.m in Sources */,
 				04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */,
 				04BA1C6E1F4D8CE100704A9E /* SettlementVC.m in Sources */,
 				044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */,
@@ -1673,6 +1779,7 @@
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
 				047ADFFB1F4A86EF00AEAE8E /* MXScrollConst.m in Sources */,
 				04DC7DCF1F31C28300AA20A7 /* MJRefreshConst.m in Sources */,
+				04F7D86E1F5EA9C5004945ED /* ShopGradeVC.m in Sources */,
 				04DC7DE81F31C28300AA20A7 /* DJQStartView.m in Sources */,
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
 				042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */,
@@ -1685,6 +1792,7 @@
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
 				0490FC041F57F97700F77661 /* CustomServiceCell.m in Sources */,
+				04F7D8631F5EA584004945ED /* EmployeeListVC.m in Sources */,
 				04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
@@ -1695,6 +1803,7 @@
 				047AE0071F4A8D6200AEAE8E /* CommodityDetailNormalCell.m in Sources */,
 				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
 				047ADFE91F4A86EF00AEAE8E /* CMSDWebImageCompat.m in Sources */,
+				04F7D87E1F5EAD79004945ED /* MailOrderMultiCell.m in Sources */,
 				042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */,
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
@@ -1706,6 +1815,8 @@
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
 				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
+				04F7D85E1F5EA52E004945ED /* AddEmployeeVC.m in Sources */,
+				04F7D8741F5EACE7004945ED /* MailOrderListVC.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
@@ -1715,6 +1826,7 @@
 				04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */,
 				047ADFF61F4A86EF00AEAE8E /* UIImageView+CMWebCache.m in Sources */,
 				042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */,
+				04F7D8681F5EA59F004945ED /* EmployeeDetailVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
 				04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */,
 				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,

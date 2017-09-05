@@ -53,7 +53,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
-    cell.zixunIMG.image = IMG(@"personalCenter");
+//    cell.zixunIMG.image = IMG(@"personalCenter");
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

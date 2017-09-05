@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg-2" translatesAutoresizingMaskIntoConstraints="NO" id="4EI-uQ-Kdu">
@@ -38,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分：80分" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHE-Dm-wg9">
-                        <rect key="frame" x="248.5" y="16" width="59.5" height="17"/>
+                        <rect key="frame" x="244.5" y="16" width="59.5" height="17"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.0" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="9ZP-Pk-3tI"/>
@@ -56,7 +56,7 @@
                     <constraint firstItem="faI-qk-Xeb" firstAttribute="leading" secondItem="4EI-uQ-Kdu" secondAttribute="trailing" constant="8" id="SNH-el-WJ2"/>
                     <constraint firstAttribute="bottom" secondItem="faI-qk-Xeb" secondAttribute="bottom" constant="16" id="aQb-mS-TKu"/>
                     <constraint firstItem="4EI-uQ-Kdu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iYg-Gu-AQq"/>
-                    <constraint firstAttribute="trailing" secondItem="vHE-Dm-wg9" secondAttribute="trailing" constant="12" id="kz5-5j-VNa"/>
+                    <constraint firstAttribute="trailing" secondItem="vHE-Dm-wg9" secondAttribute="trailing" constant="16" id="kz5-5j-VNa"/>
                     <constraint firstItem="q9x-BM-heN" firstAttribute="leading" secondItem="4EI-uQ-Kdu" secondAttribute="trailing" constant="8" id="yPa-Ve-d4Z"/>
                 </constraints>
             </tableViewCellContentView>

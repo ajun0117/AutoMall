@@ -1,23 +1,22 @@
 //
-//  ApplyAuthenticationVC.m
+//  EmployeeDetailVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/9/4.
+//  Created by LYD on 2017/9/5.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "ApplyAuthenticationVC.h"
+#import "EmployeeDetailVC.h"
 
-@interface ApplyAuthenticationVC ()
+@interface EmployeeDetailVC ()
 
 @end
 
-@implementation ApplyAuthenticationVC
+@implementation EmployeeDetailVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-     self.title = @"申请认证";
 }
 
 - (void)didReceiveMemoryWarning {
