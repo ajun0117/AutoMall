@@ -9,6 +9,7 @@
 #import "MailOrderListVC.h"
 #import "MailOrderSingleCell.h"
 #import "MailOrderMultiCell.h"
+#import "MailOrderDetailVC.h"
 
 @interface MailOrderListVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -24,6 +25,29 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailOrderSingleCell" bundle:nil] forCellReuseIdentifier:@"mailOrderSingleCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailOrderMultiCell" bundle:nil] forCellReuseIdentifier:@"mailOrderMultiCell"];
     self.myTableView.tableFooterView = [UIView new];
+}
+
+- (IBAction)daifuAction:(id)sender {
+    [self setButton:self.daifuBtn withBool:YES andView:self.daifuView withColor:Red_BtnColor];
+    [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
+    [self setButton:self.allBtn withBool:NO andView:self.allView withColor:[UIColor clearColor]];
+}
+
+- (IBAction)yifuAction:(id)sender {
+        [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
+        [self setButton:self.yifuBtn withBool:YES andView:self.yifuView withColor:Red_BtnColor];
+        [self setButton:self.allBtn withBool:NO andView:self.allView withColor:[UIColor clearColor]];
+}
+
+- (IBAction)allAction:(id)sender {
+        [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
+        [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
+        [self setButton:self.allBtn withBool:YES andView:self.allView withColor:Red_BtnColor];
+}
+
+-(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
+        btn.selected = bo;
+        view.backgroundColor = color;
 }
 
 #pragma mark - UITableViewDataSource
@@ -80,11 +104,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+        MailOrderDetailVC *detailVC = [[MailOrderDetailVC alloc] init];
+//        detailVC.userID = userArray[indexPath.section][@"id"];
+//        detailVC.isDrink = self.isDrink;
+//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
+        [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

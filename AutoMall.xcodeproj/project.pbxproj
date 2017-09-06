@@ -96,6 +96,10 @@
 		04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FDC1F43EEFB00247819 /* InformationCell.xib */; };
 		04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FE71F44417A00247819 /* LoginViewController.m */; };
 		04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FE81F44417A00247819 /* LoginViewController.xib */; };
+		04ADD6E81F5F96A900075FE9 /* MailOrderDetailTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADD6E61F5F96A900075FE9 /* MailOrderDetailTopCell.m */; };
+		04ADD6E91F5F96A900075FE9 /* MailOrderDetailTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADD6E71F5F96A900075FE9 /* MailOrderDetailTopCell.xib */; };
+		04ADD6ED1F5F979400075FE9 /* MailOrderDetailSendStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ADD6EB1F5F979400075FE9 /* MailOrderDetailSendStyleCell.m */; };
+		04ADD6EE1F5F979400075FE9 /* MailOrderDetailSendStyleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ADD6EC1F5F979400075FE9 /* MailOrderDetailSendStyleCell.xib */; };
 		04AE98121F2ED46500C2D158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98111F2ED46500C2D158 /* main.m */; };
 		04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AE98141F2ED46500C2D158 /* AppDelegate.m */; };
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
@@ -215,6 +219,24 @@
 		04EB162C1F42F95200974972 /* BaoyangDiscountsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB162A1F42F95200974972 /* BaoyangDiscountsVC.xib */; };
 		04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB162E1F43005F00974972 /* AddDiscountsVC.m */; };
 		04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB162F1F43005F00974972 /* AddDiscountsVC.xib */; };
+		04EFEC631F5FA188004D9188 /* MailOrderDetailWaybillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC611F5FA188004D9188 /* MailOrderDetailWaybillCell.m */; };
+		04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC621F5FA188004D9188 /* MailOrderDetailWaybillCell.xib */; };
+		04EFEC681F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC661F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m */; };
+		04EFEC691F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC671F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib */; };
+		04EFEC6D1F5FA446004D9188 /* MailOrderDetailGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC6B1F5FA446004D9188 /* MailOrderDetailGoodsCell.m */; };
+		04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC6C1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib */; };
+		04EFEC721F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC701F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m */; };
+		04EFEC731F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC711F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib */; };
+		04EFEC781F5FE9FD004D9188 /* MailCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC761F5FE9FD004D9188 /* MailCollectionCell.m */; };
+		04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC771F5FE9FD004D9188 /* MailCollectionCell.xib */; };
+		04EFEC7D1F5FEA16004D9188 /* MailCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC7B1F5FEA16004D9188 /* MailCollectionVC.m */; };
+		04EFEC7E1F5FEA16004D9188 /* MailCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC7C1F5FEA16004D9188 /* MailCollectionVC.xib */; };
+		04EFEC831F5FF737004D9188 /* ReceiverInfoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC811F5FF737004D9188 /* ReceiverInfoEditViewController.m */; };
+		04EFEC841F5FF737004D9188 /* ReceiverInfoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC821F5FF737004D9188 /* ReceiverInfoEditViewController.xib */; };
+		04EFEC8C1F5FF75C004D9188 /* ReceiveAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC871F5FF75C004D9188 /* ReceiveAddressViewController.m */; };
+		04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC881F5FF75C004D9188 /* ReceiveAddressViewController.xib */; };
+		04EFEC8E1F5FF75C004D9188 /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC8A1F5FF75C004D9188 /* AddressTableViewCell.m */; };
+		04EFEC8F1F5FF75C004D9188 /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC8B1F5FF75C004D9188 /* AddressTableViewCell.xib */; };
 		04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B6911F45477A00052658 /* YZMLoginViewController.m */; };
 		04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B6921F45477A00052658 /* YZMLoginViewController.xib */; };
 		04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B6961F459D6600052658 /* FindPWDViewController.m */; };
@@ -393,6 +415,12 @@
 		04AD1FE61F44417A00247819 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		04AD1FE71F44417A00247819 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		04AD1FE81F44417A00247819 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		04ADD6E51F5F96A900075FE9 /* MailOrderDetailTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailTopCell.h; sourceTree = "<group>"; };
+		04ADD6E61F5F96A900075FE9 /* MailOrderDetailTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailTopCell.m; sourceTree = "<group>"; };
+		04ADD6E71F5F96A900075FE9 /* MailOrderDetailTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailTopCell.xib; sourceTree = "<group>"; };
+		04ADD6EA1F5F979400075FE9 /* MailOrderDetailSendStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailSendStyleCell.h; sourceTree = "<group>"; };
+		04ADD6EB1F5F979400075FE9 /* MailOrderDetailSendStyleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailSendStyleCell.m; sourceTree = "<group>"; };
+		04ADD6EC1F5F979400075FE9 /* MailOrderDetailSendStyleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailSendStyleCell.xib; sourceTree = "<group>"; };
 		04AE980D1F2ED46500C2D158 /* AutoMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE98111F2ED46500C2D158 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AE98131F2ED46500C2D158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -602,6 +630,33 @@
 		04EB162D1F43005F00974972 /* AddDiscountsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDiscountsVC.h; sourceTree = "<group>"; };
 		04EB162E1F43005F00974972 /* AddDiscountsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDiscountsVC.m; sourceTree = "<group>"; };
 		04EB162F1F43005F00974972 /* AddDiscountsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddDiscountsVC.xib; sourceTree = "<group>"; };
+		04EFEC601F5FA188004D9188 /* MailOrderDetailWaybillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailWaybillCell.h; sourceTree = "<group>"; };
+		04EFEC611F5FA188004D9188 /* MailOrderDetailWaybillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailWaybillCell.m; sourceTree = "<group>"; };
+		04EFEC621F5FA188004D9188 /* MailOrderDetailWaybillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailWaybillCell.xib; sourceTree = "<group>"; };
+		04EFEC651F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailReceiverInfoCell.h; sourceTree = "<group>"; };
+		04EFEC661F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailReceiverInfoCell.m; sourceTree = "<group>"; };
+		04EFEC671F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailReceiverInfoCell.xib; sourceTree = "<group>"; };
+		04EFEC6A1F5FA446004D9188 /* MailOrderDetailGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailGoodsCell.h; sourceTree = "<group>"; };
+		04EFEC6B1F5FA446004D9188 /* MailOrderDetailGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailGoodsCell.m; sourceTree = "<group>"; };
+		04EFEC6C1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailGoodsCell.xib; sourceTree = "<group>"; };
+		04EFEC6F1F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailTotalMoneyCell.h; sourceTree = "<group>"; };
+		04EFEC701F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailTotalMoneyCell.m; sourceTree = "<group>"; };
+		04EFEC711F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailTotalMoneyCell.xib; sourceTree = "<group>"; };
+		04EFEC751F5FE9FD004D9188 /* MailCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCollectionCell.h; sourceTree = "<group>"; };
+		04EFEC761F5FE9FD004D9188 /* MailCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailCollectionCell.m; sourceTree = "<group>"; };
+		04EFEC771F5FE9FD004D9188 /* MailCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailCollectionCell.xib; sourceTree = "<group>"; };
+		04EFEC7A1F5FEA16004D9188 /* MailCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCollectionVC.h; sourceTree = "<group>"; };
+		04EFEC7B1F5FEA16004D9188 /* MailCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailCollectionVC.m; sourceTree = "<group>"; };
+		04EFEC7C1F5FEA16004D9188 /* MailCollectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailCollectionVC.xib; sourceTree = "<group>"; };
+		04EFEC801F5FF737004D9188 /* ReceiverInfoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverInfoEditViewController.h; sourceTree = "<group>"; };
+		04EFEC811F5FF737004D9188 /* ReceiverInfoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverInfoEditViewController.m; sourceTree = "<group>"; };
+		04EFEC821F5FF737004D9188 /* ReceiverInfoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiverInfoEditViewController.xib; sourceTree = "<group>"; };
+		04EFEC861F5FF75C004D9188 /* ReceiveAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveAddressViewController.h; sourceTree = "<group>"; };
+		04EFEC871F5FF75C004D9188 /* ReceiveAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressViewController.m; sourceTree = "<group>"; };
+		04EFEC881F5FF75C004D9188 /* ReceiveAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiveAddressViewController.xib; sourceTree = "<group>"; };
+		04EFEC891F5FF75C004D9188 /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
+		04EFEC8A1F5FF75C004D9188 /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		04EFEC8B1F5FF75C004D9188 /* AddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
 		04F6B6901F45477A00052658 /* YZMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZMLoginViewController.h; sourceTree = "<group>"; };
 		04F6B6911F45477A00052658 /* YZMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZMLoginViewController.m; sourceTree = "<group>"; };
 		04F6B6921F45477A00052658 /* YZMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZMLoginViewController.xib; sourceTree = "<group>"; };
@@ -956,6 +1011,31 @@
 			path = Login_Register;
 			sourceTree = "<group>";
 		};
+		04ADD6E41F5F965A00075FE9 /* 详情页cell */ = {
+			isa = PBXGroup;
+			children = (
+				04ADD6E51F5F96A900075FE9 /* MailOrderDetailTopCell.h */,
+				04ADD6E61F5F96A900075FE9 /* MailOrderDetailTopCell.m */,
+				04ADD6E71F5F96A900075FE9 /* MailOrderDetailTopCell.xib */,
+				04ADD6EA1F5F979400075FE9 /* MailOrderDetailSendStyleCell.h */,
+				04ADD6EB1F5F979400075FE9 /* MailOrderDetailSendStyleCell.m */,
+				04ADD6EC1F5F979400075FE9 /* MailOrderDetailSendStyleCell.xib */,
+				04EFEC601F5FA188004D9188 /* MailOrderDetailWaybillCell.h */,
+				04EFEC611F5FA188004D9188 /* MailOrderDetailWaybillCell.m */,
+				04EFEC621F5FA188004D9188 /* MailOrderDetailWaybillCell.xib */,
+				04EFEC651F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.h */,
+				04EFEC661F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m */,
+				04EFEC671F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib */,
+				04EFEC6A1F5FA446004D9188 /* MailOrderDetailGoodsCell.h */,
+				04EFEC6B1F5FA446004D9188 /* MailOrderDetailGoodsCell.m */,
+				04EFEC6C1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib */,
+				04EFEC6F1F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.h */,
+				04EFEC701F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m */,
+				04EFEC711F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib */,
+			);
+			name = "详情页cell";
+			sourceTree = "<group>";
+		};
 		04AE98041F2ED46500C2D158 = {
 			isa = PBXGroup;
 			children = (
@@ -1080,6 +1160,7 @@
 		04DC7CF51F31C24000AA20A7 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				04EFEC7F1F5FF717004D9188 /* 收货地址管理 */,
 				04F7D8701F5EAC46004945ED /* 商城订单 */,
 				04F7D86A1F5EA969004945ED /* 门店等级 */,
 				04F7D85A1F5EA4E2004945ED /* 添加操作员 */,
@@ -1439,6 +1520,43 @@
 			name = "优惠项目";
 			sourceTree = "<group>";
 		};
+		04EFEC741F5FE977004D9188 /* 商品收藏 */ = {
+			isa = PBXGroup;
+			children = (
+				04EFEC7A1F5FEA16004D9188 /* MailCollectionVC.h */,
+				04EFEC7B1F5FEA16004D9188 /* MailCollectionVC.m */,
+				04EFEC7C1F5FEA16004D9188 /* MailCollectionVC.xib */,
+				04EFEC751F5FE9FD004D9188 /* MailCollectionCell.h */,
+				04EFEC761F5FE9FD004D9188 /* MailCollectionCell.m */,
+				04EFEC771F5FE9FD004D9188 /* MailCollectionCell.xib */,
+			);
+			name = "商品收藏";
+			sourceTree = "<group>";
+		};
+		04EFEC7F1F5FF717004D9188 /* 收货地址管理 */ = {
+			isa = PBXGroup;
+			children = (
+				04EFEC861F5FF75C004D9188 /* ReceiveAddressViewController.h */,
+				04EFEC871F5FF75C004D9188 /* ReceiveAddressViewController.m */,
+				04EFEC881F5FF75C004D9188 /* ReceiveAddressViewController.xib */,
+				04EFEC891F5FF75C004D9188 /* AddressTableViewCell.h */,
+				04EFEC8A1F5FF75C004D9188 /* AddressTableViewCell.m */,
+				04EFEC8B1F5FF75C004D9188 /* AddressTableViewCell.xib */,
+				04EFEC851F5FF744004D9188 /* 编辑地址信息 */,
+			);
+			name = "收货地址管理";
+			sourceTree = "<group>";
+		};
+		04EFEC851F5FF744004D9188 /* 编辑地址信息 */ = {
+			isa = PBXGroup;
+			children = (
+				04EFEC801F5FF737004D9188 /* ReceiverInfoEditViewController.h */,
+				04EFEC811F5FF737004D9188 /* ReceiverInfoEditViewController.m */,
+				04EFEC821F5FF737004D9188 /* ReceiverInfoEditViewController.xib */,
+			);
+			name = "编辑地址信息";
+			sourceTree = "<group>";
+		};
 		04F6B69A1F45A5F500052658 /* 搜索 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1478,6 +1596,7 @@
 		04F7D8701F5EAC46004945ED /* 商城订单 */ = {
 			isa = PBXGroup;
 			children = (
+				04EFEC741F5FE977004D9188 /* 商品收藏 */,
 				04F7D8811F5EBA71004945ED /* 订单详情 */,
 				04F7D8711F5EACE7004945ED /* MailOrderListVC.h */,
 				04F7D8721F5EACE7004945ED /* MailOrderListVC.m */,
@@ -1498,6 +1617,7 @@
 				04F7D8821F5EBAA1004945ED /* MailOrderDetailVC.h */,
 				04F7D8831F5EBAA1004945ED /* MailOrderDetailVC.m */,
 				04F7D8841F5EBAA1004945ED /* MailOrderDetailVC.xib */,
+				04ADD6E41F5F965A00075FE9 /* 详情页cell */,
 			);
 			name = "订单详情";
 			sourceTree = "<group>";
@@ -1598,6 +1718,7 @@
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */,
+				04EFEC8F1F5FF75C004D9188 /* AddressTableViewCell.xib in Resources */,
 				047ADFFC1F4A86EF00AEAE8E /* MXScrollView.bundle in Resources */,
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */,
@@ -1609,11 +1730,14 @@
 				04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */,
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
+				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
 				04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */,
+				04EFEC691F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
+				04ADD6E91F5F96A900075FE9 /* MailOrderDetailTopCell.xib in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1621,22 +1745,29 @@
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
 				047AE0031F4A883A00AEAE8E /* CommodityDetailVC.xib in Resources */,
 				0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */,
+				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
 				04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */,
+				04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */,
 				04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */,
 				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
 				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
 				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
+				04EFEC841F5FF737004D9188 /* ReceiverInfoEditViewController.xib in Resources */,
+				04EFEC7E1F5FEA16004D9188 /* MailCollectionVC.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
 				04F7D85F1F5EA52E004945ED /* AddEmployeeVC.xib in Resources */,
+				04ADD6EE1F5F979400075FE9 /* MailOrderDetailSendStyleCell.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
+				04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */,
 				04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
+				04EFEC731F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
@@ -1735,6 +1866,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EFEC781F5FE9FD004D9188 /* MailCollectionCell.m in Sources */,
 				04DC7DAF1F31C28300AA20A7 /* CustomTextField.m in Sources */,
 				0490FBFF1F57F6CA00F77661 /* CustomServiceVC.m in Sources */,
 				04DC7DD11F31C28300AA20A7 /* MJRefreshHeaderView.m in Sources */,
@@ -1765,15 +1897,18 @@
 				04DC7DCE1F31C28300AA20A7 /* MJRefreshBaseView.m in Sources */,
 				042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */,
 				04DC7DB31F31C28300AA20A7 /* NSString+Check.m in Sources */,
+				04ADD6ED1F5F979400075FE9 /* MailOrderDetailSendStyleCell.m in Sources */,
 				04DC7DC41F31C28300AA20A7 /* QBAssetsCollectionViewController.m in Sources */,
 				04DC7DC51F31C28300AA20A7 /* QBAssetsCollectionViewLayout.m in Sources */,
 				04DC7DC21F31C28300AA20A7 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
+				04EFEC721F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m in Sources */,
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
 				04DC7DE71F31C28300AA20A7 /* DJQRateView.m in Sources */,
 				04DC7D121F31C25000AA20A7 /* WebViewController.m in Sources */,
 				047ADFF51F4A86EF00AEAE8E /* UIImageView+CMHighlightedWebCache.m in Sources */,
 				047ADFF41F4A86EF00AEAE8E /* UIImage+CMWebP.m in Sources */,
 				041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */,
+				04EFEC6D1F5FA446004D9188 /* MailOrderDetailGoodsCell.m in Sources */,
 				04DC7DBF1F31C28300AA20A7 /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
@@ -1807,11 +1942,14 @@
 				042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */,
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
+				04EFEC681F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m in Sources */,
 				047ADFEE1F4A86EF00AEAE8E /* CMSDWebImagePrefetcher.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
+				04EFEC631F5FA188004D9188 /* MailOrderDetailWaybillCell.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
+				04EFEC831F5FF737004D9188 /* ReceiverInfoEditViewController.m in Sources */,
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
 				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
@@ -1842,9 +1980,11 @@
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
 				04DC7DB81F31C28300AA20A7 /* HZPhotoBrowser.m in Sources */,
+				04ADD6E81F5F96A900075FE9 /* MailOrderDetailTopCell.m in Sources */,
 				04DC7DB11F31C28300AA20A7 /* DashedBoxView.m in Sources */,
 				04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */,
 				04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */,
+				04EFEC7D1F5FEA16004D9188 /* MailCollectionVC.m in Sources */,
 				04DC7DC01F31C28300AA20A7 /* QBAssetsCollectionFooterView.m in Sources */,
 				04DC7DD01F31C28300AA20A7 /* MJRefreshFooterView.m in Sources */,
 				047ADFF21F4A86EF00AEAE8E /* UIImage+CMGIF.m in Sources */,
@@ -1861,8 +2001,10 @@
 				04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */,
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,
 				04DC7DBE1F31C28300AA20A7 /* ImageObject.m in Sources */,
+				04EFEC8C1F5FF75C004D9188 /* ReceiveAddressViewController.m in Sources */,
 				04DC7DB41F31C28300AA20A7 /* UIColor+RGBTransform.m in Sources */,
 				04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */,
+				04EFEC8E1F5FF75C004D9188 /* AddressTableViewCell.m in Sources */,
 				04DC7DB71F31C28300AA20A7 /* HZIndicatorView.m in Sources */,
 				04DC7DCA1F31C28300AA20A7 /* AJMessageView.m in Sources */,
 				042FA3051F3AA29F0095BCFD /* SingleCheckCell.m in Sources */,

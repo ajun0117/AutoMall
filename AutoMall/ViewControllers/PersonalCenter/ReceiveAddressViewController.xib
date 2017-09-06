@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiveAddressViewController">
+            <connections>
+                <outlet property="myTableView" destination="u4z-Kd-YHe" id="Rbp-et-EyL"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="u4z-Kd-YHe">
+                    <rect key="frame" x="0.0" y="63" width="375" height="604"/>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="8Jn-Dx-wAb"/>
+                        <outlet property="delegate" destination="-1" id="tp1-X7-6ee"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="u4z-Kd-YHe" secondAttribute="trailing" id="0PL-QH-jqE"/>
+                <constraint firstAttribute="bottom" secondItem="u4z-Kd-YHe" secondAttribute="bottom" id="1c9-Gt-9bC"/>
+                <constraint firstItem="u4z-Kd-YHe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="63" id="uam-Wj-21m">
+                    <variation key="widthClass=compact" constant="63"/>
+                </constraint>
+                <constraint firstItem="u4z-Kd-YHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yBg-Ds-7gn"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="u4z-Kd-YHe"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="0PL-QH-jqE"/>
+                    <exclude reference="1c9-Gt-9bC"/>
+                    <exclude reference="uam-Wj-21m"/>
+                    <exclude reference="yBg-Ds-7gn"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="u4z-Kd-YHe"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="0PL-QH-jqE"/>
+                    <include reference="1c9-Gt-9bC"/>
+                    <include reference="uam-Wj-21m"/>
+                    <include reference="yBg-Ds-7gn"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="52" y="69"/>
+        </view>
+    </objects>
+</document>

@@ -15,6 +15,9 @@
 #import "EmployeeListVC.h"
 #import "ShopGradeVC.h"
 #import "MailOrderListVC.h"
+#import "MailCollectionVC.h"
+#import "FindPWDViewController.h"
+#import "ReceiveAddressViewController.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -318,9 +321,30 @@
         }
             
         case 2: {
-            MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
-            listVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:listVC animated:YES];
+            if (indexPath.row == 0) {
+                MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
+                listVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:listVC animated:YES];
+            }
+            else if (indexPath.row == 2) {
+                MailCollectionVC *collectionVC = [[MailCollectionVC alloc] init];
+                collectionVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:collectionVC animated:YES];
+            }
+            break;
+        }
+            
+        case 3: {
+            if (indexPath.row == 0) {
+                FindPWDViewController *changeVC = [[FindPWDViewController alloc] init];
+                changeVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:changeVC animated:YES];
+            }
+            else if (indexPath.row == 1) {
+                ReceiveAddressViewController *addressVC = [[ReceiveAddressViewController alloc] init];
+                addressVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:addressVC animated:YES];
+            }
             break;
         }
             

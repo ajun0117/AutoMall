@@ -175,7 +175,7 @@ static CGFloat const scrollViewHeight = 220;
         CGFloat alpha = (offsetY + 220) / 156;
         [self wr_setNavBarBackgroundAlpha:alpha];
         [self wr_setNavBarTintColor:[RGBCOLOR(129, 129, 129) colorWithAlphaComponent:alpha]];
-        [self wr_setNavBarTitleColor:[RGBCOLOR(129, 129, 129) colorWithAlphaComponent:alpha]];
+        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
         [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
         self.title = @"商品详情";
     }

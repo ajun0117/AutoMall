@@ -26,6 +26,7 @@
 #import "GlobalSetting.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIButton+WebCache.h"
+#import "MJRefresh.h"
 
 //商城购物车
 #import "KSHeader.h"

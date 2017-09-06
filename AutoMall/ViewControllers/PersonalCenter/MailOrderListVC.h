@@ -10,4 +10,13 @@
 
 @interface MailOrderListVC : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *daifuBtn;
+@property (strong, nonatomic) IBOutlet UIButton *yifuBtn;
+@property (strong, nonatomic) IBOutlet UIButton *allBtn;
+
+@property (strong, nonatomic) IBOutlet UIView *daifuView;
+@property (strong, nonatomic) IBOutlet UIView *yifuView;
+@property (strong, nonatomic) IBOutlet UIView *allView;
+
+
 @end
