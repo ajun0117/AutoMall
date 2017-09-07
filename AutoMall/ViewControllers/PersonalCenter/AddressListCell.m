@@ -1,16 +1,17 @@
 //
-//  AddressTableViewCell.m
-//  mobilely
+//  AddressListCell.m
+//  AutoMall
 //
-//  Created by LYD on 15/8/10.
-//  Copyright (c) 2015年 ylx. All rights reserved.
+//  Created by LYD on 2017/9/7.
+//  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "AddressTableViewCell.h"
+#import "AddressListCell.h"
 
-@implementation AddressTableViewCell
+@implementation AddressListCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
 }
 

@@ -45,6 +45,25 @@
 		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
+		0459C6871F61392E0040501E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF11F31C72900AA20A7 /* libsqlite3.0.tbd */; };
+		0459C68D1F6148900040501E /* AddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C68B1F6148900040501E /* AddressListCell.m */; };
+		0459C68E1F6148900040501E /* AddressListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0459C68C1F6148900040501E /* AddressListCell.xib */; };
+		0459C6B01F614C870040501E /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6921F614C870040501E /* UIView+Frame.m */; };
+		0459C6B11F614C870040501E /* AddressItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6961F614C870040501E /* AddressItem.m */; };
+		0459C6B21F614C870040501E /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6991F614C870040501E /* AddressTableViewCell.m */; };
+		0459C6B31F614C870040501E /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0459C69A1F614C870040501E /* AddressTableViewCell.xib */; };
+		0459C6B41F614C870040501E /* AddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C69C1F614C870040501E /* AddressView.m */; };
+		0459C6B51F614C870040501E /* ChooseLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C69E1F614C870040501E /* ChooseLocationView.m */; };
+		0459C6B61F614C870040501E /* Cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 0459C69F1F614C870040501E /* Cities.json */; };
+		0459C6B71F614C870040501E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6A21F614C870040501E /* FMDatabase.m */; };
+		0459C6B81F614C870040501E /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6A41F614C870040501E /* FMDatabaseAdditions.m */; };
+		0459C6B91F614C870040501E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6A61F614C870040501E /* FMDatabasePool.m */; };
+		0459C6BA1F614C870040501E /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6A81F614C870040501E /* FMDatabaseQueue.m */; };
+		0459C6BB1F614C870040501E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6AB1F614C870040501E /* FMResultSet.m */; };
+		0459C6BC1F614C870040501E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0459C6AC1F614C870040501E /* Info.plist */; };
+		0459C6BD1F614C870040501E /* CitiesDataTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6AF1F614C870040501E /* CitiesDataTool.m */; };
+		0459C6C11F614CCA0040501E /* AddressInfoEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6BF1F614CCA0040501E /* AddressInfoEditVC.m */; };
+		0459C6C21F614CCA0040501E /* AddressInfoEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0459C6C01F614CCA0040501E /* AddressInfoEditVC.xib */; };
 		047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ADFBB1F4A86EF00AEAE8E /* CMSDImageCache.m */; };
 		047ADFE91F4A86EF00AEAE8E /* CMSDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ADFBD1F4A86EF00AEAE8E /* CMSDWebImageCompat.m */; };
 		047ADFEA1F4A86EF00AEAE8E /* CMSDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ADFBF1F4A86EF00AEAE8E /* CMSDWebImageDecoder.m */; };
@@ -201,7 +220,6 @@
 		04DC7DEC1F31C70700AA20A7 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DEB1F31C70700AA20A7 /* libiconv.tbd */; };
 		04DC7DEE1F31C71500AA20A7 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DED1F31C71500AA20A7 /* libstdc++.6.0.9.tbd */; };
 		04DC7DF01F31C71E00AA20A7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DEF1F31C71E00AA20A7 /* CoreTelephony.framework */; };
-		04DC7DF21F31C72900AA20A7 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF11F31C72900AA20A7 /* libsqlite3.0.tbd */; };
 		04DC7DF41F31C73300AA20A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF31F31C73300AA20A7 /* Security.framework */; };
 		04DC7DF61F31C74000AA20A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF51F31C74000AA20A7 /* CoreGraphics.framework */; };
 		04DC7DF81F31C74F00AA20A7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF71F31C74F00AA20A7 /* SystemConfiguration.framework */; };
@@ -231,12 +249,8 @@
 		04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC771F5FE9FD004D9188 /* MailCollectionCell.xib */; };
 		04EFEC7D1F5FEA16004D9188 /* MailCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC7B1F5FEA16004D9188 /* MailCollectionVC.m */; };
 		04EFEC7E1F5FEA16004D9188 /* MailCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC7C1F5FEA16004D9188 /* MailCollectionVC.xib */; };
-		04EFEC831F5FF737004D9188 /* ReceiverInfoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC811F5FF737004D9188 /* ReceiverInfoEditViewController.m */; };
-		04EFEC841F5FF737004D9188 /* ReceiverInfoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC821F5FF737004D9188 /* ReceiverInfoEditViewController.xib */; };
 		04EFEC8C1F5FF75C004D9188 /* ReceiveAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC871F5FF75C004D9188 /* ReceiveAddressViewController.m */; };
 		04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC881F5FF75C004D9188 /* ReceiveAddressViewController.xib */; };
-		04EFEC8E1F5FF75C004D9188 /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFEC8A1F5FF75C004D9188 /* AddressTableViewCell.m */; };
-		04EFEC8F1F5FF75C004D9188 /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFEC8B1F5FF75C004D9188 /* AddressTableViewCell.xib */; };
 		04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B6911F45477A00052658 /* YZMLoginViewController.m */; };
 		04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F6B6921F45477A00052658 /* YZMLoginViewController.xib */; };
 		04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6B6961F459D6600052658 /* FindPWDViewController.m */; };
@@ -327,6 +341,38 @@
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
 		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
 		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
+		0459C68A1F6148900040501E /* AddressListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListCell.h; sourceTree = "<group>"; };
+		0459C68B1F6148900040501E /* AddressListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListCell.m; sourceTree = "<group>"; };
+		0459C68C1F6148900040501E /* AddressListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressListCell.xib; sourceTree = "<group>"; };
+		0459C6911F614C870040501E /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		0459C6921F614C870040501E /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		0459C6951F614C870040501E /* AddressItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressItem.h; sourceTree = "<group>"; };
+		0459C6961F614C870040501E /* AddressItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressItem.m; sourceTree = "<group>"; };
+		0459C6981F614C870040501E /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
+		0459C6991F614C870040501E /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		0459C69A1F614C870040501E /* AddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
+		0459C69B1F614C870040501E /* AddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressView.h; sourceTree = "<group>"; };
+		0459C69C1F614C870040501E /* AddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressView.m; sourceTree = "<group>"; };
+		0459C69D1F614C870040501E /* ChooseLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseLocationView.h; sourceTree = "<group>"; };
+		0459C69E1F614C870040501E /* ChooseLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseLocationView.m; sourceTree = "<group>"; };
+		0459C69F1F614C870040501E /* Cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cities.json; sourceTree = "<group>"; };
+		0459C6A11F614C870040501E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		0459C6A21F614C870040501E /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		0459C6A31F614C870040501E /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		0459C6A41F614C870040501E /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		0459C6A51F614C870040501E /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		0459C6A61F614C870040501E /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		0459C6A71F614C870040501E /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		0459C6A81F614C870040501E /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		0459C6A91F614C870040501E /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		0459C6AA1F614C870040501E /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		0459C6AB1F614C870040501E /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		0459C6AC1F614C870040501E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0459C6AE1F614C870040501E /* CitiesDataTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesDataTool.h; sourceTree = "<group>"; };
+		0459C6AF1F614C870040501E /* CitiesDataTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesDataTool.m; sourceTree = "<group>"; };
+		0459C6BE1F614CCA0040501E /* AddressInfoEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoEditVC.h; sourceTree = "<group>"; };
+		0459C6BF1F614CCA0040501E /* AddressInfoEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoEditVC.m; sourceTree = "<group>"; };
+		0459C6C01F614CCA0040501E /* AddressInfoEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressInfoEditVC.xib; sourceTree = "<group>"; };
 		047ADFBA1F4A86EF00AEAE8E /* CMSDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMSDImageCache.h; sourceTree = "<group>"; };
 		047ADFBB1F4A86EF00AEAE8E /* CMSDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMSDImageCache.m; sourceTree = "<group>"; };
 		047ADFBC1F4A86EF00AEAE8E /* CMSDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMSDWebImageCompat.h; sourceTree = "<group>"; };
@@ -648,15 +694,9 @@
 		04EFEC7A1F5FEA16004D9188 /* MailCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCollectionVC.h; sourceTree = "<group>"; };
 		04EFEC7B1F5FEA16004D9188 /* MailCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailCollectionVC.m; sourceTree = "<group>"; };
 		04EFEC7C1F5FEA16004D9188 /* MailCollectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailCollectionVC.xib; sourceTree = "<group>"; };
-		04EFEC801F5FF737004D9188 /* ReceiverInfoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverInfoEditViewController.h; sourceTree = "<group>"; };
-		04EFEC811F5FF737004D9188 /* ReceiverInfoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverInfoEditViewController.m; sourceTree = "<group>"; };
-		04EFEC821F5FF737004D9188 /* ReceiverInfoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiverInfoEditViewController.xib; sourceTree = "<group>"; };
 		04EFEC861F5FF75C004D9188 /* ReceiveAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveAddressViewController.h; sourceTree = "<group>"; };
 		04EFEC871F5FF75C004D9188 /* ReceiveAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressViewController.m; sourceTree = "<group>"; };
 		04EFEC881F5FF75C004D9188 /* ReceiveAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiveAddressViewController.xib; sourceTree = "<group>"; };
-		04EFEC891F5FF75C004D9188 /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
-		04EFEC8A1F5FF75C004D9188 /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
-		04EFEC8B1F5FF75C004D9188 /* AddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
 		04F6B6901F45477A00052658 /* YZMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZMLoginViewController.h; sourceTree = "<group>"; };
 		04F6B6911F45477A00052658 /* YZMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZMLoginViewController.m; sourceTree = "<group>"; };
 		04F6B6921F45477A00052658 /* YZMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZMLoginViewController.xib; sourceTree = "<group>"; };
@@ -709,6 +749,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0459C6871F61392E0040501E /* libsqlite3.0.tbd in Frameworks */,
 				04DC7E001F31C77A00AA20A7 /* CoreFoundation.framework in Frameworks */,
 				04DC7DFE1F31C77000AA20A7 /* CoreLocation.framework in Frameworks */,
 				04DC7DFC1F31C76700AA20A7 /* QuartzCore.framework in Frameworks */,
@@ -716,7 +757,6 @@
 				04DC7DF81F31C74F00AA20A7 /* SystemConfiguration.framework in Frameworks */,
 				04DC7DF61F31C74000AA20A7 /* CoreGraphics.framework in Frameworks */,
 				04DC7DF41F31C73300AA20A7 /* Security.framework in Frameworks */,
-				04DC7DF21F31C72900AA20A7 /* libsqlite3.0.tbd in Frameworks */,
 				04DC7DF01F31C71E00AA20A7 /* CoreTelephony.framework in Frameworks */,
 				04DC7DEE1F31C71500AA20A7 /* libstdc++.6.0.9.tbd in Frameworks */,
 				04DC7DEC1F31C70700AA20A7 /* libiconv.tbd in Frameworks */,
@@ -849,6 +889,87 @@
 				044A24171F3326F9009720DE /* AutoCheckVC.xib */,
 			);
 			name = "汽车检查页";
+			sourceTree = "<group>";
+		};
+		0459C68F1F614C870040501E /* AddressPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6901F614C870040501E /* Category */,
+				0459C6931F614C870040501E /* ChooseLocation */,
+				0459C69F1F614C870040501E /* Cities.json */,
+				0459C6A01F614C870040501E /* fmdb */,
+				0459C6AD1F614C870040501E /* Tool */,
+			);
+			path = AddressPicker;
+			sourceTree = "<group>";
+		};
+		0459C6901F614C870040501E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6911F614C870040501E /* UIView+Frame.h */,
+				0459C6921F614C870040501E /* UIView+Frame.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		0459C6931F614C870040501E /* ChooseLocation */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6941F614C870040501E /* Model */,
+				0459C6971F614C870040501E /* View */,
+			);
+			path = ChooseLocation;
+			sourceTree = "<group>";
+		};
+		0459C6941F614C870040501E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6951F614C870040501E /* AddressItem.h */,
+				0459C6961F614C870040501E /* AddressItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0459C6971F614C870040501E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6981F614C870040501E /* AddressTableViewCell.h */,
+				0459C6991F614C870040501E /* AddressTableViewCell.m */,
+				0459C69A1F614C870040501E /* AddressTableViewCell.xib */,
+				0459C69B1F614C870040501E /* AddressView.h */,
+				0459C69C1F614C870040501E /* AddressView.m */,
+				0459C69D1F614C870040501E /* ChooseLocationView.h */,
+				0459C69E1F614C870040501E /* ChooseLocationView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0459C6A01F614C870040501E /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6A11F614C870040501E /* FMDatabase.h */,
+				0459C6A21F614C870040501E /* FMDatabase.m */,
+				0459C6A31F614C870040501E /* FMDatabaseAdditions.h */,
+				0459C6A41F614C870040501E /* FMDatabaseAdditions.m */,
+				0459C6A51F614C870040501E /* FMDatabasePool.h */,
+				0459C6A61F614C870040501E /* FMDatabasePool.m */,
+				0459C6A71F614C870040501E /* FMDatabaseQueue.h */,
+				0459C6A81F614C870040501E /* FMDatabaseQueue.m */,
+				0459C6A91F614C870040501E /* FMDB.h */,
+				0459C6AA1F614C870040501E /* FMResultSet.h */,
+				0459C6AB1F614C870040501E /* FMResultSet.m */,
+				0459C6AC1F614C870040501E /* Info.plist */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
+		0459C6AD1F614C870040501E /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				0459C6AE1F614C870040501E /* CitiesDataTool.h */,
+				0459C6AF1F614C870040501E /* CitiesDataTool.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		047ADFB81F4A86EF00AEAE8E /* MXScrollView */ = {
@@ -1238,6 +1359,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				0459C68F1F614C870040501E /* AddressPicker */,
 				04DD8EE01F50169D00159776 /* WRNavigationBar */,
 				047ADFB81F4A86EF00AEAE8E /* MXScrollView */,
 				042DEFF51F46F0C20065FED8 /* StrikeThroughLabel */,
@@ -1539,9 +1661,9 @@
 				04EFEC861F5FF75C004D9188 /* ReceiveAddressViewController.h */,
 				04EFEC871F5FF75C004D9188 /* ReceiveAddressViewController.m */,
 				04EFEC881F5FF75C004D9188 /* ReceiveAddressViewController.xib */,
-				04EFEC891F5FF75C004D9188 /* AddressTableViewCell.h */,
-				04EFEC8A1F5FF75C004D9188 /* AddressTableViewCell.m */,
-				04EFEC8B1F5FF75C004D9188 /* AddressTableViewCell.xib */,
+				0459C68A1F6148900040501E /* AddressListCell.h */,
+				0459C68B1F6148900040501E /* AddressListCell.m */,
+				0459C68C1F6148900040501E /* AddressListCell.xib */,
 				04EFEC851F5FF744004D9188 /* 编辑地址信息 */,
 			);
 			name = "收货地址管理";
@@ -1550,9 +1672,9 @@
 		04EFEC851F5FF744004D9188 /* 编辑地址信息 */ = {
 			isa = PBXGroup;
 			children = (
-				04EFEC801F5FF737004D9188 /* ReceiverInfoEditViewController.h */,
-				04EFEC811F5FF737004D9188 /* ReceiverInfoEditViewController.m */,
-				04EFEC821F5FF737004D9188 /* ReceiverInfoEditViewController.xib */,
+				0459C6BE1F614CCA0040501E /* AddressInfoEditVC.h */,
+				0459C6BF1F614CCA0040501E /* AddressInfoEditVC.m */,
+				0459C6C01F614CCA0040501E /* AddressInfoEditVC.xib */,
 			);
 			name = "编辑地址信息";
 			sourceTree = "<group>";
@@ -1718,7 +1840,6 @@
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */,
-				04EFEC8F1F5FF75C004D9188 /* AddressTableViewCell.xib in Resources */,
 				047ADFFC1F4A86EF00AEAE8E /* MXScrollView.bundle in Resources */,
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */,
@@ -1726,11 +1847,13 @@
 				047AE0081F4A8D6200AEAE8E /* CommodityDetailNormalCell.xib in Resources */,
 				04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
+				0459C6C21F614CCA0040501E /* AddressInfoEditVC.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
 				04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */,
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
 				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
+				0459C6B31F614C870040501E /* AddressTableViewCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
@@ -1738,6 +1861,7 @@
 				04EFEC691F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
 				04ADD6E91F5F96A900075FE9 /* MailOrderDetailTopCell.xib in Resources */,
+				0459C6BC1F614C870040501E /* Info.plist in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1756,7 +1880,6 @@
 				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
 				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
 				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
-				04EFEC841F5FF737004D9188 /* ReceiverInfoEditViewController.xib in Resources */,
 				04EFEC7E1F5FEA16004D9188 /* MailCollectionVC.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
 				04F7D85F1F5EA52E004945ED /* AddEmployeeVC.xib in Resources */,
@@ -1788,6 +1911,7 @@
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
 				04DC7DDB1F31C28300AA20A7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				042DEFF41F46E8560065FED8 /* CommodityListCell.xib in Resources */,
+				0459C68E1F6148900040501E /* AddressListCell.xib in Resources */,
 				042FA30B1F3AA3040095BCFD /* MultiCheckCell.xib in Resources */,
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
 				04DC7DDF1F31C28300AA20A7 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -1797,6 +1921,7 @@
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
 				04FD55D91F552DB200104D6B /* RegisterYZMViewController.xib in Resources */,
+				0459C6B61F614C870040501E /* Cities.json in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				0490FC051F57F97700F77661 /* CustomServiceCell.xib in Resources */,
@@ -1883,9 +2008,12 @@
 				04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */,
 				04BA1C661F4D162000704A9E /* ShoppingCartCell.m in Sources */,
 				042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */,
+				0459C6BA1F614C870040501E /* FMDatabaseQueue.m in Sources */,
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
+				0459C6B21F614C870040501E /* AddressTableViewCell.m in Sources */,
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
+				0459C6B71F614C870040501E /* FMDatabase.m in Sources */,
 				04E410831F5D52750097E0A6 /* ApplyAuthenticationVC.m in Sources */,
 				04BA1C641F4D162000704A9E /* SettlementView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
@@ -1921,8 +2049,10 @@
 				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
 				047ADFEB1F4A86EF00AEAE8E /* CMSDWebImageDownloader.m in Sources */,
 				047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */,
+				0459C6B11F614C870040501E /* AddressItem.m in Sources */,
 				04DC7DBC1F31C28300AA20A7 /* ExtendCollectionView.m in Sources */,
 				047ADFFA1F4A86EF00AEAE8E /* MXPageControl.m in Sources */,
+				0459C6B41F614C870040501E /* AddressView.m in Sources */,
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
@@ -1934,6 +2064,7 @@
 				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
+				0459C6C11F614CCA0040501E /* AddressInfoEditVC.m in Sources */,
 				042E5D1D1F419C3500F5F324 /* UpkeepPlanVC.m in Sources */,
 				047AE0071F4A8D6200AEAE8E /* CommodityDetailNormalCell.m in Sources */,
 				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
@@ -1949,14 +2080,16 @@
 				04EFEC631F5FA188004D9188 /* MailOrderDetailWaybillCell.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
-				04EFEC831F5FF737004D9188 /* ReceiverInfoEditViewController.m in Sources */,
+				0459C6B01F614C870040501E /* UIView+Frame.m in Sources */,
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
 				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
 				04F7D85E1F5EA52E004945ED /* AddEmployeeVC.m in Sources */,
+				0459C68D1F6148900040501E /* AddressListCell.m in Sources */,
 				04F7D8741F5EACE7004945ED /* MailOrderListVC.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
+				0459C6BB1F614C870040501E /* FMResultSet.m in Sources */,
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
 				0490FC0E1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
@@ -1967,6 +2100,7 @@
 				04F7D8681F5EA59F004945ED /* EmployeeDetailVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
 				04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */,
+				0459C6B91F614C870040501E /* FMDatabasePool.m in Sources */,
 				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,
 				047ADFFD1F4A86EF00AEAE8E /* MXTransaction.m in Sources */,
 				042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */,
@@ -1977,6 +2111,7 @@
 				04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */,
 				041076F21F542463003CB740 /* CenterNormalCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
+				0459C6B81F614C870040501E /* FMDatabaseAdditions.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
 				04DC7DB81F31C28300AA20A7 /* HZPhotoBrowser.m in Sources */,
@@ -1998,13 +2133,14 @@
 				04A0E2801F414940008FE8AF /* AddCarInfoVC.m in Sources */,
 				04DC7DC61F31C28300AA20A7 /* QBImagePickerController.m in Sources */,
 				04DC7DD41F31C28300AA20A7 /* UIView+MJExtension.m in Sources */,
+				0459C6BD1F614C870040501E /* CitiesDataTool.m in Sources */,
 				04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */,
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,
 				04DC7DBE1F31C28300AA20A7 /* ImageObject.m in Sources */,
+				0459C6B51F614C870040501E /* ChooseLocationView.m in Sources */,
 				04EFEC8C1F5FF75C004D9188 /* ReceiveAddressViewController.m in Sources */,
 				04DC7DB41F31C28300AA20A7 /* UIColor+RGBTransform.m in Sources */,
 				04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */,
-				04EFEC8E1F5FF75C004D9188 /* AddressTableViewCell.m in Sources */,
 				04DC7DB71F31C28300AA20A7 /* HZIndicatorView.m in Sources */,
 				04DC7DCA1F31C28300AA20A7 /* AJMessageView.m in Sources */,
 				042FA3051F3AA29F0095BCFD /* SingleCheckCell.m in Sources */,
@@ -2151,6 +2287,7 @@
 				);
 				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				INFOPLIST_FILE = AutoMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2179,6 +2316,7 @@
 				);
 				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				INFOPLIST_FILE = AutoMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

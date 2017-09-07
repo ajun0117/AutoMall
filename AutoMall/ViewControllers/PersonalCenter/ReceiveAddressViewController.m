@@ -7,13 +7,13 @@
 //
 
 
-static NSString *const AddressCellIdentify = @"AddressListCell";
+static NSString *const AddressCellIdentify = @"addressListCell";
 
 #import "ReceiveAddressViewController.h"
-#import "AddressTableViewCell.h"
-#import "ReceiverInfoEditViewController.h"
+#import "AddressListCell.h"
+//#import "ReceiverInfoEditViewController.h"
+#import "AddressInfoEditVC.h"
 //#import "PocketLYProvinceAndCityCoreObject.h"
-#import "ReceiverInfoEditViewController.h"
 
 @interface ReceiveAddressViewController ()
 {
@@ -37,7 +37,7 @@ static NSString *const AddressCellIdentify = @"AddressListCell";
     //导航条左右按钮-请根据具体情况自行设置，左右两侧的按钮也可以是文字，是文字的话自行重写self.navigationItem.rightBarButtonItem
     [self setNavitationItemWithLeftImageName:nil rightImageName:nil];
     
-    UINib *nib = [UINib nibWithNibName:@"AddressTableViewCell" bundle:nil];
+    UINib *nib = [UINib nibWithNibName:@"AddressListCell" bundle:nil];
     [self.myTableView registerNib:nib forCellReuseIdentifier:AddressCellIdentify];
     
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
@@ -82,17 +82,17 @@ static NSString *const AddressCellIdentify = @"AddressListCell";
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        NSDictionary *dic = _addressArray [indexPath.row];
-        ReceiverInfoEditViewController *editVC = [[ReceiverInfoEditViewController alloc] init];
-        editVC.isEdit = YES;
-        editVC.addressDic = dic;
-        [self.navigationController pushViewController:editVC animated:YES];
-    }
-    else {
-        ReceiverInfoEditViewController *addVC = [[ReceiverInfoEditViewController alloc] init];
+//    if (indexPath.section == 0) {
+//        NSDictionary *dic = _addressArray [indexPath.row];
+//        AddressInfoEditVC *editVC = [[AddressInfoEditVC alloc] init];
+////        editVC.isEdit = YES;
+////        editVC.addressDic = dic;
+//        [self.navigationController pushViewController:editVC animated:YES];
+//    }
+//    else {
+        AddressInfoEditVC *addVC = [[AddressInfoEditVC alloc] init];
         [self.navigationController pushViewController:addVC animated:YES];
-    }
+//    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -126,7 +126,7 @@ static NSString *const AddressCellIdentify = @"AddressListCell";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-        AddressTableViewCell *cell = (AddressTableViewCell *)[tableView dequeueReusableCellWithIdentifier:AddressCellIdentify forIndexPath:indexPath];
+        AddressListCell *cell = (AddressListCell *)[tableView dequeueReusableCellWithIdentifier:AddressCellIdentify forIndexPath:indexPath];
 //        cell.backgroundColor = [UIColor grayColor];
 //        unameL;
 //        phoneL
