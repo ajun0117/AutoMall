@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"添加/编辑地址";
+    
     [[CitiesDataTool sharedManager] requestGetData];
     [self.view addSubview:self.cover];
     self.chooseLocationView.address = @"广东省 广州市 白云区";

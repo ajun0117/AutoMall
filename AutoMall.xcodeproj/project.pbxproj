@@ -139,6 +139,41 @@
 		04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */; };
 		04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */; };
 		04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */; };
+		04D1071A1F6296A1007D9F57 /* UpkeepStatementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */; };
+		04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */; };
+		04D107731F62998D007D9F57 /* NSNumber+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107231F62998C007D9F57 /* NSNumber+Zirkfied.m */; };
+		04D107741F62998D007D9F57 /* NSString+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107251F62998C007D9F57 /* NSString+Zirkfied.m */; };
+		04D107751F62998D007D9F57 /* UIBezierPath+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107271F62998C007D9F57 /* UIBezierPath+Zirkfied.m */; };
+		04D107761F62998D007D9F57 /* UIColor+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107291F62998C007D9F57 /* UIColor+Zirkfied.m */; };
+		04D107771F62998D007D9F57 /* UIView+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1072B1F62998C007D9F57 /* UIView+Zirkfied.m */; };
+		04D107781F62998D007D9F57 /* ZFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1072E1F62998C007D9F57 /* ZFLabel.m */; };
+		04D107791F62998D007D9F57 /* ZFPopoverLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107301F62998C007D9F57 /* ZFPopoverLabel.m */; };
+		04D1077A1F62998D007D9F57 /* ZFXAxisLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107321F62998C007D9F57 /* ZFXAxisLine.m */; };
+		04D1077B1F62998D007D9F57 /* ZFYAxisLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107341F62998C007D9F57 /* ZFYAxisLine.m */; };
+		04D1077C1F62998D007D9F57 /* ZFCurveAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107371F62998C007D9F57 /* ZFCurveAttribute.m */; };
+		04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107391F62998C007D9F57 /* ZFGradientAttribute.m */; };
+		04D1077E1F62998D007D9F57 /* ZFConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1073E1F62998C007D9F57 /* ZFConst.m */; };
+		04D1077F1F62998D007D9F57 /* ZFMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107401F62998C007D9F57 /* ZFMethod.m */; };
+		04D107801F62998D007D9F57 /* ZFBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107431F62998C007D9F57 /* ZFBar.m */; };
+		04D107811F62998D007D9F57 /* ZFBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107451F62998C007D9F57 /* ZFBarChart.m */; };
+		04D107821F62998D007D9F57 /* ZFCirque.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107481F62998C007D9F57 /* ZFCirque.m */; };
+		04D107831F62998D007D9F57 /* ZFCirqueChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1074A1F62998C007D9F57 /* ZFCirqueChart.m */; };
+		04D107841F62998D007D9F57 /* ZFGenericAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1074D1F62998C007D9F57 /* ZFGenericAxis.m */; };
+		04D107851F62998D007D9F57 /* ZFGenericChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107501F62998C007D9F57 /* ZFGenericChart.m */; };
+		04D107861F62998D007D9F57 /* ZFHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107531F62998C007D9F57 /* ZFHorizontalAxis.m */; };
+		04D107871F62998D007D9F57 /* ZFHorizontalBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107561F62998C007D9F57 /* ZFHorizontalBar.m */; };
+		04D107881F62998D007D9F57 /* ZFHorizontalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107581F62998C007D9F57 /* ZFHorizontalBarChart.m */; };
+		04D107891F62998D007D9F57 /* ZFCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1075B1F62998C007D9F57 /* ZFCircle.m */; };
+		04D1078A1F62998D007D9F57 /* ZFLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1075D1F62998C007D9F57 /* ZFLine.m */; };
+		04D1078B1F62998D007D9F57 /* ZFLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1075F1F62998C007D9F57 /* ZFLineChart.m */; };
+		04D1078C1F62998D007D9F57 /* ZFPie.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107621F62998D007D9F57 /* ZFPie.m */; };
+		04D1078D1F62998D007D9F57 /* ZFPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107641F62998D007D9F57 /* ZFPieChart.m */; };
+		04D1078E1F62998D007D9F57 /* ZFTranslucencePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107661F62998D007D9F57 /* ZFTranslucencePath.m */; };
+		04D1078F1F62998D007D9F57 /* ZFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107691F62998D007D9F57 /* ZFPolygon.m */; };
+		04D107901F62998D007D9F57 /* ZFRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1076B1F62998D007D9F57 /* ZFRadar.m */; };
+		04D107911F62998D007D9F57 /* ZFRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1076D1F62998D007D9F57 /* ZFRadarChart.m */; };
+		04D107921F62998D007D9F57 /* ZFWave.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107701F62998D007D9F57 /* ZFWave.m */; };
+		04D107931F62998D007D9F57 /* ZFWaveChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107721F62998D007D9F57 /* ZFWaveChart.m */; };
 		04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF11F31C24000AA20A7 /* InformationVC.m */; };
 		04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF41F31C24000AA20A7 /* MallVC.m */; };
 		04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF71F31C24000AA20A7 /* PersonalCenterVC.m */; };
@@ -500,6 +535,77 @@
 		04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetodPaymentVC.xib; sourceTree = "<group>"; };
 		04BA1C841F4D8E1D00704A9E /* ShoppingCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartModel.h; sourceTree = "<group>"; };
 		04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartModel.m; sourceTree = "<group>"; };
+		04D107171F6296A1007D9F57 /* UpkeepStatementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepStatementVC.h; sourceTree = "<group>"; };
+		04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepStatementVC.m; sourceTree = "<group>"; };
+		04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepStatementVC.xib; sourceTree = "<group>"; };
+		04D107221F62998C007D9F57 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
+		04D107231F62998C007D9F57 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
+		04D107241F62998C007D9F57 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
+		04D107251F62998C007D9F57 /* NSString+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Zirkfied.m"; sourceTree = "<group>"; };
+		04D107261F62998C007D9F57 /* UIBezierPath+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Zirkfied.h"; sourceTree = "<group>"; };
+		04D107271F62998C007D9F57 /* UIBezierPath+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Zirkfied.m"; sourceTree = "<group>"; };
+		04D107281F62998C007D9F57 /* UIColor+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Zirkfied.h"; sourceTree = "<group>"; };
+		04D107291F62998C007D9F57 /* UIColor+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Zirkfied.m"; sourceTree = "<group>"; };
+		04D1072A1F62998C007D9F57 /* UIView+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Zirkfied.h"; sourceTree = "<group>"; };
+		04D1072B1F62998C007D9F57 /* UIView+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Zirkfied.m"; sourceTree = "<group>"; };
+		04D1072D1F62998C007D9F57 /* ZFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLabel.h; sourceTree = "<group>"; };
+		04D1072E1F62998C007D9F57 /* ZFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLabel.m; sourceTree = "<group>"; };
+		04D1072F1F62998C007D9F57 /* ZFPopoverLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPopoverLabel.h; sourceTree = "<group>"; };
+		04D107301F62998C007D9F57 /* ZFPopoverLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPopoverLabel.m; sourceTree = "<group>"; };
+		04D107311F62998C007D9F57 /* ZFXAxisLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFXAxisLine.h; sourceTree = "<group>"; };
+		04D107321F62998C007D9F57 /* ZFXAxisLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFXAxisLine.m; sourceTree = "<group>"; };
+		04D107331F62998C007D9F57 /* ZFYAxisLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFYAxisLine.h; sourceTree = "<group>"; };
+		04D107341F62998C007D9F57 /* ZFYAxisLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFYAxisLine.m; sourceTree = "<group>"; };
+		04D107361F62998C007D9F57 /* ZFCurveAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCurveAttribute.h; sourceTree = "<group>"; };
+		04D107371F62998C007D9F57 /* ZFCurveAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCurveAttribute.m; sourceTree = "<group>"; };
+		04D107381F62998C007D9F57 /* ZFGradientAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFGradientAttribute.h; sourceTree = "<group>"; };
+		04D107391F62998C007D9F57 /* ZFGradientAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFGradientAttribute.m; sourceTree = "<group>"; };
+		04D1073B1F62998C007D9F57 /* ZFChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFChart.h; sourceTree = "<group>"; };
+		04D1073C1F62998C007D9F57 /* ZFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFColor.h; sourceTree = "<group>"; };
+		04D1073D1F62998C007D9F57 /* ZFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFConst.h; sourceTree = "<group>"; };
+		04D1073E1F62998C007D9F57 /* ZFConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFConst.m; sourceTree = "<group>"; };
+		04D1073F1F62998C007D9F57 /* ZFMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFMethod.h; sourceTree = "<group>"; };
+		04D107401F62998C007D9F57 /* ZFMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFMethod.m; sourceTree = "<group>"; };
+		04D107421F62998C007D9F57 /* ZFBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBar.h; sourceTree = "<group>"; };
+		04D107431F62998C007D9F57 /* ZFBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBar.m; sourceTree = "<group>"; };
+		04D107441F62998C007D9F57 /* ZFBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBarChart.h; sourceTree = "<group>"; };
+		04D107451F62998C007D9F57 /* ZFBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBarChart.m; sourceTree = "<group>"; };
+		04D107471F62998C007D9F57 /* ZFCirque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCirque.h; sourceTree = "<group>"; };
+		04D107481F62998C007D9F57 /* ZFCirque.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCirque.m; sourceTree = "<group>"; };
+		04D107491F62998C007D9F57 /* ZFCirqueChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCirqueChart.h; sourceTree = "<group>"; };
+		04D1074A1F62998C007D9F57 /* ZFCirqueChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCirqueChart.m; sourceTree = "<group>"; };
+		04D1074C1F62998C007D9F57 /* ZFGenericAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFGenericAxis.h; sourceTree = "<group>"; };
+		04D1074D1F62998C007D9F57 /* ZFGenericAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFGenericAxis.m; sourceTree = "<group>"; };
+		04D1074F1F62998C007D9F57 /* ZFGenericChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFGenericChart.h; sourceTree = "<group>"; };
+		04D107501F62998C007D9F57 /* ZFGenericChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFGenericChart.m; sourceTree = "<group>"; };
+		04D107521F62998C007D9F57 /* ZFHorizontalAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalAxis.h; sourceTree = "<group>"; };
+		04D107531F62998C007D9F57 /* ZFHorizontalAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalAxis.m; sourceTree = "<group>"; };
+		04D107551F62998C007D9F57 /* ZFHorizontalBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalBar.h; sourceTree = "<group>"; };
+		04D107561F62998C007D9F57 /* ZFHorizontalBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalBar.m; sourceTree = "<group>"; };
+		04D107571F62998C007D9F57 /* ZFHorizontalBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalBarChart.h; sourceTree = "<group>"; };
+		04D107581F62998C007D9F57 /* ZFHorizontalBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalBarChart.m; sourceTree = "<group>"; };
+		04D1075A1F62998C007D9F57 /* ZFCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCircle.h; sourceTree = "<group>"; };
+		04D1075B1F62998C007D9F57 /* ZFCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCircle.m; sourceTree = "<group>"; };
+		04D1075C1F62998C007D9F57 /* ZFLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLine.h; sourceTree = "<group>"; };
+		04D1075D1F62998C007D9F57 /* ZFLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLine.m; sourceTree = "<group>"; };
+		04D1075E1F62998C007D9F57 /* ZFLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLineChart.h; sourceTree = "<group>"; };
+		04D1075F1F62998C007D9F57 /* ZFLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLineChart.m; sourceTree = "<group>"; };
+		04D107611F62998D007D9F57 /* ZFPie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPie.h; sourceTree = "<group>"; };
+		04D107621F62998D007D9F57 /* ZFPie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPie.m; sourceTree = "<group>"; };
+		04D107631F62998D007D9F57 /* ZFPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPieChart.h; sourceTree = "<group>"; };
+		04D107641F62998D007D9F57 /* ZFPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPieChart.m; sourceTree = "<group>"; };
+		04D107651F62998D007D9F57 /* ZFTranslucencePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTranslucencePath.h; sourceTree = "<group>"; };
+		04D107661F62998D007D9F57 /* ZFTranslucencePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTranslucencePath.m; sourceTree = "<group>"; };
+		04D107681F62998D007D9F57 /* ZFPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPolygon.h; sourceTree = "<group>"; };
+		04D107691F62998D007D9F57 /* ZFPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPolygon.m; sourceTree = "<group>"; };
+		04D1076A1F62998D007D9F57 /* ZFRadar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFRadar.h; sourceTree = "<group>"; };
+		04D1076B1F62998D007D9F57 /* ZFRadar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFRadar.m; sourceTree = "<group>"; };
+		04D1076C1F62998D007D9F57 /* ZFRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFRadarChart.h; sourceTree = "<group>"; };
+		04D1076D1F62998D007D9F57 /* ZFRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFRadarChart.m; sourceTree = "<group>"; };
+		04D1076F1F62998D007D9F57 /* ZFWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFWave.h; sourceTree = "<group>"; };
+		04D107701F62998D007D9F57 /* ZFWave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFWave.m; sourceTree = "<group>"; };
+		04D107711F62998D007D9F57 /* ZFWaveChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFWaveChart.h; sourceTree = "<group>"; };
+		04D107721F62998D007D9F57 /* ZFWaveChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFWaveChart.m; sourceTree = "<group>"; };
 		04DC7CF01F31C24000AA20A7 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
 		04DC7CF11F31C24000AA20A7 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
 		04DC7CF31F31C24000AA20A7 /* MallVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallVC.h; sourceTree = "<group>"; };
@@ -1242,6 +1348,203 @@
 			name = "结算";
 			sourceTree = "<group>";
 		};
+		04D107161F629653007D9F57 /* 统计报表 */ = {
+			isa = PBXGroup;
+			children = (
+				04D107171F6296A1007D9F57 /* UpkeepStatementVC.h */,
+				04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */,
+				04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */,
+			);
+			name = "统计报表";
+			sourceTree = "<group>";
+		};
+		04D107201F62998C007D9F57 /* ZFChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D107211F62998C007D9F57 /* Category */,
+				04D1072C1F62998C007D9F57 /* Component */,
+				04D107351F62998C007D9F57 /* Model */,
+				04D1073A1F62998C007D9F57 /* Other */,
+				04D107411F62998C007D9F57 /* ZFBarChart */,
+				04D107461F62998C007D9F57 /* ZFCirqueChart */,
+				04D1074B1F62998C007D9F57 /* ZFGenericAxis */,
+				04D1074E1F62998C007D9F57 /* ZFGenericChart */,
+				04D107511F62998C007D9F57 /* ZFHorizontalAxis */,
+				04D107541F62998C007D9F57 /* ZFHorizontalBarChart */,
+				04D107591F62998C007D9F57 /* ZFLineChart */,
+				04D107601F62998D007D9F57 /* ZFPieChart */,
+				04D107671F62998D007D9F57 /* ZFRadarChart */,
+				04D1076E1F62998D007D9F57 /* ZFWaveChart */,
+			);
+			path = ZFChart;
+			sourceTree = "<group>";
+		};
+		04D107211F62998C007D9F57 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				04D107221F62998C007D9F57 /* NSNumber+Zirkfied.h */,
+				04D107231F62998C007D9F57 /* NSNumber+Zirkfied.m */,
+				04D107241F62998C007D9F57 /* NSString+Zirkfied.h */,
+				04D107251F62998C007D9F57 /* NSString+Zirkfied.m */,
+				04D107261F62998C007D9F57 /* UIBezierPath+Zirkfied.h */,
+				04D107271F62998C007D9F57 /* UIBezierPath+Zirkfied.m */,
+				04D107281F62998C007D9F57 /* UIColor+Zirkfied.h */,
+				04D107291F62998C007D9F57 /* UIColor+Zirkfied.m */,
+				04D1072A1F62998C007D9F57 /* UIView+Zirkfied.h */,
+				04D1072B1F62998C007D9F57 /* UIView+Zirkfied.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		04D1072C1F62998C007D9F57 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				04D1072D1F62998C007D9F57 /* ZFLabel.h */,
+				04D1072E1F62998C007D9F57 /* ZFLabel.m */,
+				04D1072F1F62998C007D9F57 /* ZFPopoverLabel.h */,
+				04D107301F62998C007D9F57 /* ZFPopoverLabel.m */,
+				04D107311F62998C007D9F57 /* ZFXAxisLine.h */,
+				04D107321F62998C007D9F57 /* ZFXAxisLine.m */,
+				04D107331F62998C007D9F57 /* ZFYAxisLine.h */,
+				04D107341F62998C007D9F57 /* ZFYAxisLine.m */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		04D107351F62998C007D9F57 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04D107361F62998C007D9F57 /* ZFCurveAttribute.h */,
+				04D107371F62998C007D9F57 /* ZFCurveAttribute.m */,
+				04D107381F62998C007D9F57 /* ZFGradientAttribute.h */,
+				04D107391F62998C007D9F57 /* ZFGradientAttribute.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04D1073A1F62998C007D9F57 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				04D1073B1F62998C007D9F57 /* ZFChart.h */,
+				04D1073C1F62998C007D9F57 /* ZFColor.h */,
+				04D1073D1F62998C007D9F57 /* ZFConst.h */,
+				04D1073E1F62998C007D9F57 /* ZFConst.m */,
+				04D1073F1F62998C007D9F57 /* ZFMethod.h */,
+				04D107401F62998C007D9F57 /* ZFMethod.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		04D107411F62998C007D9F57 /* ZFBarChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D107421F62998C007D9F57 /* ZFBar.h */,
+				04D107431F62998C007D9F57 /* ZFBar.m */,
+				04D107441F62998C007D9F57 /* ZFBarChart.h */,
+				04D107451F62998C007D9F57 /* ZFBarChart.m */,
+			);
+			path = ZFBarChart;
+			sourceTree = "<group>";
+		};
+		04D107461F62998C007D9F57 /* ZFCirqueChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D107471F62998C007D9F57 /* ZFCirque.h */,
+				04D107481F62998C007D9F57 /* ZFCirque.m */,
+				04D107491F62998C007D9F57 /* ZFCirqueChart.h */,
+				04D1074A1F62998C007D9F57 /* ZFCirqueChart.m */,
+			);
+			path = ZFCirqueChart;
+			sourceTree = "<group>";
+		};
+		04D1074B1F62998C007D9F57 /* ZFGenericAxis */ = {
+			isa = PBXGroup;
+			children = (
+				04D1074C1F62998C007D9F57 /* ZFGenericAxis.h */,
+				04D1074D1F62998C007D9F57 /* ZFGenericAxis.m */,
+			);
+			path = ZFGenericAxis;
+			sourceTree = "<group>";
+		};
+		04D1074E1F62998C007D9F57 /* ZFGenericChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D1074F1F62998C007D9F57 /* ZFGenericChart.h */,
+				04D107501F62998C007D9F57 /* ZFGenericChart.m */,
+			);
+			path = ZFGenericChart;
+			sourceTree = "<group>";
+		};
+		04D107511F62998C007D9F57 /* ZFHorizontalAxis */ = {
+			isa = PBXGroup;
+			children = (
+				04D107521F62998C007D9F57 /* ZFHorizontalAxis.h */,
+				04D107531F62998C007D9F57 /* ZFHorizontalAxis.m */,
+			);
+			path = ZFHorizontalAxis;
+			sourceTree = "<group>";
+		};
+		04D107541F62998C007D9F57 /* ZFHorizontalBarChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D107551F62998C007D9F57 /* ZFHorizontalBar.h */,
+				04D107561F62998C007D9F57 /* ZFHorizontalBar.m */,
+				04D107571F62998C007D9F57 /* ZFHorizontalBarChart.h */,
+				04D107581F62998C007D9F57 /* ZFHorizontalBarChart.m */,
+			);
+			path = ZFHorizontalBarChart;
+			sourceTree = "<group>";
+		};
+		04D107591F62998C007D9F57 /* ZFLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D1075A1F62998C007D9F57 /* ZFCircle.h */,
+				04D1075B1F62998C007D9F57 /* ZFCircle.m */,
+				04D1075C1F62998C007D9F57 /* ZFLine.h */,
+				04D1075D1F62998C007D9F57 /* ZFLine.m */,
+				04D1075E1F62998C007D9F57 /* ZFLineChart.h */,
+				04D1075F1F62998C007D9F57 /* ZFLineChart.m */,
+			);
+			path = ZFLineChart;
+			sourceTree = "<group>";
+		};
+		04D107601F62998D007D9F57 /* ZFPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D107611F62998D007D9F57 /* ZFPie.h */,
+				04D107621F62998D007D9F57 /* ZFPie.m */,
+				04D107631F62998D007D9F57 /* ZFPieChart.h */,
+				04D107641F62998D007D9F57 /* ZFPieChart.m */,
+				04D107651F62998D007D9F57 /* ZFTranslucencePath.h */,
+				04D107661F62998D007D9F57 /* ZFTranslucencePath.m */,
+			);
+			path = ZFPieChart;
+			sourceTree = "<group>";
+		};
+		04D107671F62998D007D9F57 /* ZFRadarChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D107681F62998D007D9F57 /* ZFPolygon.h */,
+				04D107691F62998D007D9F57 /* ZFPolygon.m */,
+				04D1076A1F62998D007D9F57 /* ZFRadar.h */,
+				04D1076B1F62998D007D9F57 /* ZFRadar.m */,
+				04D1076C1F62998D007D9F57 /* ZFRadarChart.h */,
+				04D1076D1F62998D007D9F57 /* ZFRadarChart.m */,
+			);
+			path = ZFRadarChart;
+			sourceTree = "<group>";
+		};
+		04D1076E1F62998D007D9F57 /* ZFWaveChart */ = {
+			isa = PBXGroup;
+			children = (
+				04D1076F1F62998D007D9F57 /* ZFWave.h */,
+				04D107701F62998D007D9F57 /* ZFWave.m */,
+				04D107711F62998D007D9F57 /* ZFWaveChart.h */,
+				04D107721F62998D007D9F57 /* ZFWaveChart.m */,
+			);
+			path = ZFWaveChart;
+			sourceTree = "<group>";
+		};
 		04DC7CEE1F31C24000AA20A7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1281,6 +1584,7 @@
 		04DC7CF51F31C24000AA20A7 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				04D107161F629653007D9F57 /* 统计报表 */,
 				04EFEC7F1F5FF717004D9188 /* 收货地址管理 */,
 				04F7D8701F5EAC46004945ED /* 商城订单 */,
 				04F7D86A1F5EA969004945ED /* 门店等级 */,
@@ -1359,6 +1663,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				04D107201F62998C007D9F57 /* ZFChart */,
 				0459C68F1F614C870040501E /* AddressPicker */,
 				04DD8EE01F50169D00159776 /* WRNavigationBar */,
 				047ADFB81F4A86EF00AEAE8E /* MXScrollView */,
@@ -1870,6 +2175,7 @@
 				047AE0031F4A883A00AEAE8E /* CommodityDetailVC.xib in Resources */,
 				0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */,
 				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
+				04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
@@ -1991,6 +2297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D107781F62998D007D9F57 /* ZFLabel.m in Sources */,
 				04EFEC781F5FE9FD004D9188 /* MailCollectionCell.m in Sources */,
 				04DC7DAF1F31C28300AA20A7 /* CustomTextField.m in Sources */,
 				0490FBFF1F57F6CA00F77661 /* CustomServiceVC.m in Sources */,
@@ -2002,30 +2309,39 @@
 				04DC7D1E1F31C26500AA20A7 /* CityDistrictsCoreObject+CoreDataProperties.m in Sources */,
 				047ADFF91F4A86EF00AEAE8E /* MXImageView.m in Sources */,
 				04F7D8851F5EBAA1004945ED /* MailOrderDetailVC.m in Sources */,
+				04D107901F62998D007D9F57 /* ZFRadar.m in Sources */,
+				04D1077E1F62998D007D9F57 /* ZFConst.m in Sources */,
 				04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */,
 				04BA1C6E1F4D8CE100704A9E /* SettlementVC.m in Sources */,
 				044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */,
 				04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */,
 				04BA1C661F4D162000704A9E /* ShoppingCartCell.m in Sources */,
+				04D1078E1F62998D007D9F57 /* ZFTranslucencePath.m in Sources */,
 				042FA30A1F3AA3040095BCFD /* MultiCheckCell.m in Sources */,
 				0459C6BA1F614C870040501E /* FMDatabaseQueue.m in Sources */,
+				04D107801F62998D007D9F57 /* ZFBar.m in Sources */,
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
 				0459C6B21F614C870040501E /* AddressTableViewCell.m in Sources */,
+				04D107861F62998D007D9F57 /* ZFHorizontalAxis.m in Sources */,
 				04DC7DD31F31C28300AA20A7 /* UIScrollView+MJRefresh.m in Sources */,
 				04DC7DB91F31C28300AA20A7 /* HZPhotoBrowserView.m in Sources */,
 				0459C6B71F614C870040501E /* FMDatabase.m in Sources */,
 				04E410831F5D52750097E0A6 /* ApplyAuthenticationVC.m in Sources */,
 				04BA1C641F4D162000704A9E /* SettlementView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
+				04D107841F62998D007D9F57 /* ZFGenericAxis.m in Sources */,
 				041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */,
 				042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */,
 				047ADFEF1F4A86EF00AEAE8E /* MKAnnotationView+CMWebCache.m in Sources */,
 				04DC7D1F1F31C26500AA20A7 /* CityDistrictsCoreObject.m in Sources */,
 				047ADFF71F4A86EF00AEAE8E /* UIView+CMWebCacheOperation.m in Sources */,
+				04D107811F62998D007D9F57 /* ZFBarChart.m in Sources */,
 				04DC7DCE1F31C28300AA20A7 /* MJRefreshBaseView.m in Sources */,
 				042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */,
 				04DC7DB31F31C28300AA20A7 /* NSString+Check.m in Sources */,
+				04D107741F62998D007D9F57 /* NSString+Zirkfied.m in Sources */,
 				04ADD6ED1F5F979400075FE9 /* MailOrderDetailSendStyleCell.m in Sources */,
+				04D107771F62998D007D9F57 /* UIView+Zirkfied.m in Sources */,
 				04DC7DC41F31C28300AA20A7 /* QBAssetsCollectionViewController.m in Sources */,
 				04DC7DC51F31C28300AA20A7 /* QBAssetsCollectionViewLayout.m in Sources */,
 				04DC7DC21F31C28300AA20A7 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
@@ -2038,14 +2354,18 @@
 				041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */,
 				04EFEC6D1F5FA446004D9188 /* MailOrderDetailGoodsCell.m in Sources */,
 				04DC7DBF1F31C28300AA20A7 /* QBAssetsCollectionCheckmarkView.m in Sources */,
+				04D107891F62998D007D9F57 /* ZFCircle.m in Sources */,
+				04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
 				047ADFFB1F4A86EF00AEAE8E /* MXScrollConst.m in Sources */,
 				04DC7DCF1F31C28300AA20A7 /* MJRefreshConst.m in Sources */,
+				04D1077B1F62998D007D9F57 /* ZFYAxisLine.m in Sources */,
 				04F7D86E1F5EA9C5004945ED /* ShopGradeVC.m in Sources */,
 				04DC7DE81F31C28300AA20A7 /* DJQStartView.m in Sources */,
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
 				042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */,
+				04D1078B1F62998D007D9F57 /* ZFLineChart.m in Sources */,
 				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
 				047ADFEB1F4A86EF00AEAE8E /* CMSDWebImageDownloader.m in Sources */,
 				047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */,
@@ -2053,11 +2373,14 @@
 				04DC7DBC1F31C28300AA20A7 /* ExtendCollectionView.m in Sources */,
 				047ADFFA1F4A86EF00AEAE8E /* MXPageControl.m in Sources */,
 				0459C6B41F614C870040501E /* AddressView.m in Sources */,
+				04D107821F62998D007D9F57 /* ZFCirque.m in Sources */,
+				04D1078D1F62998D007D9F57 /* ZFPieChart.m in Sources */,
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
 				0490FC041F57F97700F77661 /* CustomServiceCell.m in Sources */,
 				04F7D8631F5EA584004945ED /* EmployeeListVC.m in Sources */,
+				04D1077A1F62998D007D9F57 /* ZFXAxisLine.m in Sources */,
 				04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
@@ -2074,37 +2397,48 @@
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
 				04EFEC681F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m in Sources */,
+				04D1077F1F62998D007D9F57 /* ZFMethod.m in Sources */,
 				047ADFEE1F4A86EF00AEAE8E /* CMSDWebImagePrefetcher.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
 				04EFEC631F5FA188004D9188 /* MailOrderDetailWaybillCell.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
+				04D1078F1F62998D007D9F57 /* ZFPolygon.m in Sources */,
 				0459C6B01F614C870040501E /* UIView+Frame.m in Sources */,
+				04D107881F62998D007D9F57 /* ZFHorizontalBarChart.m in Sources */,
+				04D1071A1F6296A1007D9F57 /* UpkeepStatementVC.m in Sources */,
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
+				04D107751F62998D007D9F57 /* UIBezierPath+Zirkfied.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
 				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
 				04F7D85E1F5EA52E004945ED /* AddEmployeeVC.m in Sources */,
+				04D107761F62998D007D9F57 /* UIColor+Zirkfied.m in Sources */,
 				0459C68D1F6148900040501E /* AddressListCell.m in Sources */,
 				04F7D8741F5EACE7004945ED /* MailOrderListVC.m in Sources */,
+				04D1078C1F62998D007D9F57 /* ZFPie.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				0459C6BB1F614C870040501E /* FMResultSet.m in Sources */,
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
+				04D107791F62998D007D9F57 /* ZFPopoverLabel.m in Sources */,
 				0490FC0E1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */,
 				04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */,
 				047ADFF61F4A86EF00AEAE8E /* UIImageView+CMWebCache.m in Sources */,
 				042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */,
+				04D107851F62998D007D9F57 /* ZFGenericChart.m in Sources */,
 				04F7D8681F5EA59F004945ED /* EmployeeDetailVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,
 				04F6B69E1F45A64000052658 /* MailSearchVC.m in Sources */,
 				0459C6B91F614C870040501E /* FMDatabasePool.m in Sources */,
 				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,
 				047ADFFD1F4A86EF00AEAE8E /* MXTransaction.m in Sources */,
+				04D107921F62998D007D9F57 /* ZFWave.m in Sources */,
 				042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */,
 				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,
+				04D107931F62998D007D9F57 /* ZFWaveChart.m in Sources */,
 				047ADFF01F4A86EF00AEAE8E /* NSData+CMImageContentType.m in Sources */,
 				047AE0021F4A883A00AEAE8E /* CommodityDetailVC.m in Sources */,
 				047ADFEC1F4A86EF00AEAE8E /* CMSDWebImageDownloaderOperation.m in Sources */,
@@ -2118,6 +2452,7 @@
 				04ADD6E81F5F96A900075FE9 /* MailOrderDetailTopCell.m in Sources */,
 				04DC7DB11F31C28300AA20A7 /* DashedBoxView.m in Sources */,
 				04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */,
+				04D107911F62998D007D9F57 /* ZFRadarChart.m in Sources */,
 				04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */,
 				04EFEC7D1F5FEA16004D9188 /* MailCollectionVC.m in Sources */,
 				04DC7DC01F31C28300AA20A7 /* QBAssetsCollectionFooterView.m in Sources */,
@@ -2125,6 +2460,7 @@
 				047ADFF21F4A86EF00AEAE8E /* UIImage+CMGIF.m in Sources */,
 				04DC7DB01F31C28300AA20A7 /* CustomTextView.m in Sources */,
 				04FD55D31F552A8300104D6B /* RegisterViewController.m in Sources */,
+				04D107831F62998D007D9F57 /* ZFCirqueChart.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
 				04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */,
 				04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */,
@@ -2134,17 +2470,21 @@
 				04DC7DC61F31C28300AA20A7 /* QBImagePickerController.m in Sources */,
 				04DC7DD41F31C28300AA20A7 /* UIView+MJExtension.m in Sources */,
 				0459C6BD1F614C870040501E /* CitiesDataTool.m in Sources */,
+				04D1078A1F62998D007D9F57 /* ZFLine.m in Sources */,
 				04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */,
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,
 				04DC7DBE1F31C28300AA20A7 /* ImageObject.m in Sources */,
 				0459C6B51F614C870040501E /* ChooseLocationView.m in Sources */,
+				04D1077C1F62998D007D9F57 /* ZFCurveAttribute.m in Sources */,
 				04EFEC8C1F5FF75C004D9188 /* ReceiveAddressViewController.m in Sources */,
 				04DC7DB41F31C28300AA20A7 /* UIColor+RGBTransform.m in Sources */,
 				04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */,
 				04DC7DB71F31C28300AA20A7 /* HZIndicatorView.m in Sources */,
+				04D107871F62998D007D9F57 /* ZFHorizontalBar.m in Sources */,
 				04DC7DCA1F31C28300AA20A7 /* AJMessageView.m in Sources */,
 				042FA3051F3AA29F0095BCFD /* SingleCheckCell.m in Sources */,
 				04DC7DAE1F31C28300AA20A7 /* CustomLabel.m in Sources */,
+				04D107731F62998D007D9F57 /* NSNumber+Zirkfied.m in Sources */,
 				04DC7DBD1F31C28300AA20A7 /* ImageCollectionViewCell.m in Sources */,
 				04DC7DE61F31C28300AA20A7 /* UITabBarItem+Universal.m in Sources */,
 				04EB16251F42F0CD00974972 /* ServicePackageVC.m in Sources */,

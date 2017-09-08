@@ -11,6 +11,6 @@
 @interface InformationCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *zixunIMG;
 @property (strong, nonatomic) IBOutlet UILabel *zixunTitle;
-@property (strong, nonatomic) IBOutlet UILabel *xixunContent;
+@property (strong, nonatomic) IBOutlet UILabel *zixunContent;
 
 @end

@@ -29,6 +29,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"收货地址";
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     

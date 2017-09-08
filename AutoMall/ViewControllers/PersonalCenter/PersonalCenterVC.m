@@ -18,6 +18,7 @@
 #import "MailCollectionVC.h"
 #import "FindPWDViewController.h"
 #import "ReceiveAddressViewController.h"
+#import "UpkeepStatementVC.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -38,6 +39,7 @@
     setBtn.frame = CGRectMake(0, 0, 44, 44);
     setBtn.contentMode = UIViewContentModeScaleAspectFit;
     [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
+    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
     self.navigationItem.leftBarButtonItem = setBtnBarBtn;
@@ -46,6 +48,7 @@
     msgBtn.frame = CGRectMake(0, 0, 44, 44);
     msgBtn.contentMode = UIViewContentModeScaleAspectFit;
     [msgBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
+    [msgBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *msgBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:msgBtn];
     self.navigationItem.rightBarButtonItem = msgBtnBarBtn;
@@ -296,8 +299,15 @@
             break;
         }
         case 1: {
-            
             switch (indexPath.row) {
+                case 2: {
+                    UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
+                    statementVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:statementVC animated:YES];
+                    break;
+                }
+
+                    
                 case 3: {
                     CustomServiceVC *customVC = [[CustomServiceVC alloc] init];
                     customVC.hidesBottomBarWhenPushed = YES;

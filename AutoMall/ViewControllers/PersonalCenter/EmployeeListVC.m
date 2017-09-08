@@ -23,7 +23,7 @@
     self.title = @"员工列表";
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 60, 44);
+    searchBtn.frame = CGRectMake(0, 0, 70, 44);
     //    searchBtn.contentMode = UIViewContentModeRight;
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];

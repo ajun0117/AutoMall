@@ -81,16 +81,16 @@ static DataRequest *dataRequest;
 //get方式访问网络
 -(void) getDataWithUrl:(NSString *)urlStr delegate:(id)delegate params:(NSDictionary *)params info:(NSDictionary *)infoDic{
     
-    NSMutableString *appendString = [NSMutableString stringWithFormat:@"%@?_fs=1/_vc=%@",urlStr,version];
-    if ([urlStr rangeOfString:@"?"].location != NSNotFound) {
-        appendString = [urlStr mutableCopy];
-    }
+//    NSMutableString *appendString = [NSMutableString stringWithFormat:@"%@?_fs=1/_vc=%@",urlStr,version];
+//    if ([urlStr rangeOfString:@"?"].location != NSNotFound) {
+//        appendString = [urlStr mutableCopy];
+//    }
     
 //    if ([DataRequest checkNetwork]) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
         manager.requestSerializer.timeoutInterval = 15;
-        [manager GET:[appendString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager GET:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet  URLQueryAllowedCharacterSet]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult",@"成功获取数据！",@"ContentResult", responseObject, @"RespData", [infoDic objectForKey:@"op"], @"op",nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:[infoDic objectForKey:@"op"] object:nil userInfo:userInfo];
@@ -137,7 +137,7 @@ static DataRequest *dataRequest;
 
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:[NSArray arrayWithObjects:@"text/plain", @"text/html",nil]];
         manager.requestSerializer.timeoutInterval = 300;
-        [manager POST:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet  URLQueryAllowedCharacterSet]] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
 //            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult",@"成功获取数据！",@"ContentResult", responseObject, @"RespData", [infoDic objectForKey:@"op"], @"op",nil];
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult",@"上传成功！",@"ContentResult", responseObject, @"RespData", [infoDic objectForKey:@"op"], @"op",[infoDic objectForKey:@"indexPath"], @"indexPath",nil];

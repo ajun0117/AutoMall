@@ -127,6 +127,22 @@
 
 #define UM_Appkey                   @"5659c02367e58ec432002ca4"   //壹米娱乐友盟key
 
+
+
+//汽车商城
+#define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+#define InformationList              @"http://119.23.227.246/carupkeep/app/info/list"    //资讯列表
+
+
+
+
+
+
+
+
+
+
+
 //QQ分享
 //#define kShare_QQ_AppID @"1104928111"
 //#define kShare_QQ_Appkey @"HbJUGVEa2YPVCpic"
