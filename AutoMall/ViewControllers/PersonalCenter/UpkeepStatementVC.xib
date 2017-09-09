@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpkeepStatementVC">
             <connections>
+                <outlet property="topView" destination="dTX-Id-pEs" id="ZSG-Bh-wyd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,7 +19,112 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTX-Id-pEs">
+                    <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQg-LA-PwL">
+                            <rect key="frame" x="16" y="7" width="60" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Q6k-b3-e4Y"/>
+                                <constraint firstAttribute="width" constant="60" id="hDf-wY-gDH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="周报表">
+                                <color key="titleColor" red="0.50196078431372548" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.74901960779999999" green="0.21960784310000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kg3-og-Ewn">
+                            <rect key="frame" x="16" y="42" width="60" height="2"/>
+                            <color key="backgroundColor" red="0.74901960779999999" green="0.21960784310000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="Ult-G9-dov"/>
+                                <constraint firstAttribute="height" constant="2" id="sUh-aO-smP"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-PY-TLA">
+                            <rect key="frame" x="299.5" y="7" width="59.5" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="年报表">
+                                <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.74901960779999999" green="0.21960784310000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7W9-ZE-3Qy">
+                            <rect key="frame" x="299.5" y="42" width="60" height="2"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="ji2-rh-0BJ"/>
+                                <constraint firstAttribute="height" constant="2" id="wjS-Bj-oI4"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYy-kg-JUU">
+                            <rect key="frame" x="157" y="42" width="60" height="2"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="eSd-Jl-UY1"/>
+                                <constraint firstAttribute="width" constant="60" id="oL7-Nx-hbr"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ja4-kt-CkK">
+                            <rect key="frame" x="157" y="7" width="60" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="月报表">
+                                <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.74901960779999999" green="0.21960784310000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIB-tm-Sz7">
+                            <rect key="frame" x="0.0" y="43.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="kkr-gl-g0x"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="kg3-og-Ewn" secondAttribute="bottom" id="5oT-or-o0T"/>
+                        <constraint firstItem="pPs-PY-TLA" firstAttribute="height" secondItem="HQg-LA-PwL" secondAttribute="height" id="8SM-dH-63q"/>
+                        <constraint firstItem="WYy-kg-JUU" firstAttribute="centerX" secondItem="ja4-kt-CkK" secondAttribute="centerX" id="9bE-YE-2eV"/>
+                        <constraint firstAttribute="trailing" secondItem="MIB-tm-Sz7" secondAttribute="trailing" id="EWK-5H-4CO"/>
+                        <constraint firstItem="ja4-kt-CkK" firstAttribute="centerX" secondItem="dTX-Id-pEs" secondAttribute="centerX" id="HOZ-fB-WnL"/>
+                        <constraint firstItem="pPs-PY-TLA" firstAttribute="top" secondItem="dTX-Id-pEs" secondAttribute="top" constant="7" id="ICN-ax-aOj"/>
+                        <constraint firstItem="ja4-kt-CkK" firstAttribute="centerY" secondItem="HQg-LA-PwL" secondAttribute="centerY" id="InC-uX-xdW"/>
+                        <constraint firstItem="pPs-PY-TLA" firstAttribute="width" secondItem="HQg-LA-PwL" secondAttribute="width" id="Qoj-rY-awa"/>
+                        <constraint firstAttribute="height" constant="44" id="Us9-VB-uUJ"/>
+                        <constraint firstItem="HQg-LA-PwL" firstAttribute="top" secondItem="dTX-Id-pEs" secondAttribute="top" constant="7" id="bvN-X0-zCP"/>
+                        <constraint firstAttribute="bottom" secondItem="WYy-kg-JUU" secondAttribute="bottom" id="gZs-7z-j93"/>
+                        <constraint firstItem="MIB-tm-Sz7" firstAttribute="leading" secondItem="dTX-Id-pEs" secondAttribute="leading" id="j5x-mS-JHH"/>
+                        <constraint firstItem="pPs-PY-TLA" firstAttribute="centerY" secondItem="HQg-LA-PwL" secondAttribute="centerY" id="mHT-4T-5Mp"/>
+                        <constraint firstItem="ja4-kt-CkK" firstAttribute="height" secondItem="HQg-LA-PwL" secondAttribute="height" id="oI7-q5-EN2"/>
+                        <constraint firstAttribute="trailing" secondItem="pPs-PY-TLA" secondAttribute="trailing" constant="16" id="oaQ-M8-q3C"/>
+                        <constraint firstItem="7W9-ZE-3Qy" firstAttribute="centerX" secondItem="pPs-PY-TLA" secondAttribute="centerX" id="qnl-7B-xLG"/>
+                        <constraint firstItem="HQg-LA-PwL" firstAttribute="leading" secondItem="dTX-Id-pEs" secondAttribute="leading" constant="16" id="r3A-lh-Z6L"/>
+                        <constraint firstAttribute="bottom" secondItem="MIB-tm-Sz7" secondAttribute="bottom" id="t4w-wJ-Tf4"/>
+                        <constraint firstItem="ja4-kt-CkK" firstAttribute="width" secondItem="HQg-LA-PwL" secondAttribute="width" id="tYd-gO-Tfh"/>
+                        <constraint firstAttribute="bottom" secondItem="7W9-ZE-3Qy" secondAttribute="bottom" id="tlO-yk-Y5R"/>
+                        <constraint firstItem="kg3-og-Ewn" firstAttribute="centerX" secondItem="HQg-LA-PwL" secondAttribute="centerX" id="wSu-dT-GXa"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dTX-Id-pEs" secondAttribute="trailing" id="9oS-wb-9JG"/>
+                <constraint firstItem="dTX-Id-pEs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Hej-GB-Hrb"/>
+                <constraint firstItem="dTX-Id-pEs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dwo-Gm-Ocj"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
     </objects>
 </document>

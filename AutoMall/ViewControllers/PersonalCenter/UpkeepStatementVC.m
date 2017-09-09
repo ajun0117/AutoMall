@@ -14,6 +14,7 @@
 @property (nonatomic, strong) ZFBarChart * barChart;
 
 @property (nonatomic, assign) CGFloat height;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @end
 
@@ -33,7 +34,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"统计报表";
+    self.title = @" 服务项目统计";
+    
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 80, 44);
+    //    searchBtn.contentMode = UIViewContentModeRight;
+    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+    searchBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [searchBtn setTitle:@"2017年9月9日" forState:UIControlStateNormal];
+//    [searchBtn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    
     [self setUp];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -41,8 +54,9 @@
     self.barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, _height)];
     self.barChart.dataSource = self;
     self.barChart.delegate = self;
-    self.barChart.topicLabel.text = @"xx汽修店美容保养项目报表";
-    self.barChart.unit = @"次";
+//    self.barChart.topicLabel.text = @"xx汽修店美容保养项目报表";
+    self.barChart.topicLabel.text = @"";
+    self.barChart.unit = @"台次";
     //    self.barChart.isAnimated = NO;
     //    self.barChart.isResetAxisLineMinValue = YES;
     self.barChart.isResetAxisLineMaxValue = YES;
@@ -61,7 +75,8 @@
     //    self.barChart.backgroundColor = ZFPurple;
     //    self.barChart.isShowAxisArrows = NO;
     
-    [self.view addSubview:self.barChart];
+//    [self.view addSubview:self.barChart];
+    [self.view insertSubview:self.barChart belowSubview:self.topView];
     [self.barChart strokePath];
 }
 
@@ -72,7 +87,7 @@
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"汽油燃烧喷射系统润滑清洁汽油燃烧喷射", @"机油更换", @"轮胎更换", @"四轮动平衡", @"冷却液更换", @"节气门清洗", @"电瓶更换", @"内饰清洗", @"车辆清洗", @"火花塞更换", @"钣金/喷漆", @"六年级", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗",];
+    return @[@"汽油燃烧喷射系统润滑清洁汽油燃烧喷射", @"机油更换", @"轮胎更换", @"四轮动平衡", @"冷却液更换", @"节气门清洗", @"电瓶更换", @"内饰清洗", @"车辆清洗", @"火花塞更换", @"钣金/喷漆", @"火花塞更换", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗",];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
@@ -115,7 +130,8 @@
 
 - (NSArray *)gradientColorArrayInBarChart:(ZFBarChart *)barChart{
     ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
-    gradientAttribute.colors = @[(id)ZFRed.CGColor, (id)ZFWhite.CGColor];
+//    gradientAttribute.colors = @[(id)ZFRed.CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute.colors = @[(id)ZFColor(90, 177, 239, 1).CGColor, (id)ZFColor(90, 177, 239, 1).CGColor];
     gradientAttribute.locations = @[@(0.5), @(0.99)];
     
     return [NSArray arrayWithObjects:gradientAttribute, nil];
