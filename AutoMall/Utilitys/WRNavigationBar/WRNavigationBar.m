@@ -667,9 +667,9 @@ static char kWRCustomNavBarKey;
     }
     else
     {
-        if ([self pushToCurrentVCFinished] == YES && [self pushToNextVCFinished] == NO) {
+//        if ([self pushToCurrentVCFinished] == YES && [self pushToNextVCFinished] == NO) {
             [self.navigationController setNeedsNavigationBarUpdateForBarBackgroundAlpha:alpha];
-        }
+//        }
     }
 }
 

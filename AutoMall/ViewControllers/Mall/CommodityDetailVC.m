@@ -306,7 +306,7 @@ static CGFloat const scrollViewHeight = 220;
                 case 2: {
                     CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailPriceCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.costPriceStrikeL.strikeThroughEnabled = YES;
+                    
                     return cell;
                     break;
                 }

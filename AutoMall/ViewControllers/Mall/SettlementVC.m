@@ -8,6 +8,11 @@
 
 #import "SettlementVC.h"
 #import "ShoppingCartModel.h"
+#import "SettlementAddressCell.h"
+#import "SettlementBeizhuCell.h"
+#import "ReceiveAddressViewController.h"
+#import "MetodPaymentVC.h"
+
 @interface SettlementVC ()
 {
     SettlementFootView *_footView;
@@ -36,29 +41,51 @@
     self.title = @"结算";
     [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementCell" bundle:nil] forCellReuseIdentifier:@"SettlementCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementFootView" bundle:nil] forCellReuseIdentifier:@"SettlementFootView"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementAddressCell" bundle:nil] forCellReuseIdentifier:@"settlementAddressCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementBeizhuCell" bundle:nil] forCellReuseIdentifier:@"settlementBeizhuCell"];
 }
 #pragma mark -- UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+    if (section == 0) {
+        return 1;
+    }
+    else if (section == 1) {
+        return 1;
+    }
     return self.datasArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    SettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettlementCell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell.addBtn addTarget:self action:@selector(addBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.deleteBtn addTarget:self action:@selector(deleteBtn:) forControlEvents:UIControlEventTouchUpInside];
-    cell.addBtn.tag = indexPath.row;
-    cell.deleteBtn.tag = indexPath.row;
-
-    cell.data = self.datasArr [indexPath.row];
-    
-    return cell;
+    if (indexPath.section == 0) {
+        SettlementAddressCell *cell = (SettlementAddressCell *)[tableView dequeueReusableCellWithIdentifier:@"settlementAddressCell"];
+        return cell;
+    }
+    else if (indexPath.section == 1) {
+        SettlementBeizhuCell *cell = (SettlementBeizhuCell *)[tableView dequeueReusableCellWithIdentifier:@"settlementBeizhuCell"];
+        return cell;
+    }
+    else {
+        SettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettlementCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [cell.addBtn addTarget:self action:@selector(addBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.deleteBtn addTarget:self action:@selector(deleteBtn:) forControlEvents:UIControlEventTouchUpInside];
+        cell.addBtn.tag = indexPath.row;
+        cell.deleteBtn.tag = indexPath.row;
+        cell.data = self.datasArr [indexPath.row];
+        return cell;
+    }
 }
 
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        ReceiveAddressViewController *addrVC = [[ReceiveAddressViewController alloc] init];
+        [self.navigationController pushViewController:addrVC animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -70,30 +97,35 @@
     return KS_H(44);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-    return KS_H(55);
+    if (section == 2) {
+        KS_H(55);
+    }
+    return 1;
 }
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    
-    _footView = [SettlementFootView initFootView];
-//    [_footView.confirmOrder addTarget:self action:@selector(confirmOrderClock) forControlEvents:UIControlEventTouchUpInside];
-    _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
-    _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-    
-    return _footView;
+     if (section == 2) {
+        _footView = [SettlementFootView initFootView];
+        _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
+        _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
+        
+        return _footView;
+     }
+    return nil;
 }
+
 #pragma mark -- confirmOrderClock
 - (IBAction)confirmOrderClock:(id)sender {
-    
-    ConfirmOrderVC *confirm = [ConfirmOrderVC new];
-    
-    [self.navigationController pushViewController:confirm animated:YES];
+    MetodPaymentVC *pay = [MetodPaymentVC new];
+    [self.navigationController pushViewController:pay animated:YES];
 }
+
 #pragma markl -- 加加
 - (void)addBtn:(UIButton *)sender{
     
     [self updatesContNumber:sender addAndDele:YES];
 }
+
 #pragma mark -- 减减
 - (void)deleteBtn:(UIButton *)sender{
     

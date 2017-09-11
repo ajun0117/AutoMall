@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SettlementCell.h"
 #import "SettlementFootView.h"
-#import "ConfirmOrderVC.h"
+//#import "ConfirmOrderVC.h"
 @interface SettlementVC : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 

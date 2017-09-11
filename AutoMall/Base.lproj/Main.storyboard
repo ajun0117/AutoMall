@@ -236,34 +236,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Mall View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="r9t-xA-3c0">
-                                <rect key="frame" x="111" y="313" width="153.5" height="41.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by SecondViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfz-DL-BUE">
-                                <rect key="frame" x="80" y="362.5" width="215" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LYa-Y2-vgQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="dz7-sI-hbo" id="xTh-t0-ac2"/>
+                                    <outlet property="delegate" destination="dz7-sI-hbo" id="BId-h1-r16"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Bfz-DL-BUE" firstAttribute="centerX" secondItem="r9t-xA-3c0" secondAttribute="centerX" id="DwQ-sB-gRS"/>
-                            <constraint firstAttribute="centerX" secondItem="r9t-xA-3c0" secondAttribute="centerX" id="dsZ-G9-bru"/>
-                            <constraint firstAttribute="centerY" secondItem="r9t-xA-3c0" secondAttribute="centerY" id="fR0-rD-bVm"/>
-                            <constraint firstItem="Bfz-DL-BUE" firstAttribute="top" secondItem="r9t-xA-3c0" secondAttribute="bottom" constant="8" symbolic="YES" id="wqg-cd-P3a"/>
+                            <constraint firstAttribute="bottom" secondItem="LYa-Y2-vgQ" secondAttribute="bottom" id="3k7-mh-bnJ"/>
+                            <constraint firstAttribute="trailing" secondItem="LYa-Y2-vgQ" secondAttribute="trailing" id="4oU-Uq-r8B"/>
+                            <constraint firstItem="LYa-Y2-vgQ" firstAttribute="top" secondItem="FFX-LW-SJd" secondAttribute="top" id="9kv-tQ-1N1"/>
+                            <constraint firstItem="LYa-Y2-vgQ" firstAttribute="leading" secondItem="FFX-LW-SJd" secondAttribute="leading" id="CNC-mz-Wfa"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="8hS-Zq-Mpx"/>
                     <navigationItem key="navigationItem" id="e47-lL-EBu"/>
+                    <connections>
+                        <outlet property="myTableView" destination="LYa-Y2-vgQ" id="cin-OP-urn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sC-xy-PK6" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="638" y="611"/>
+            <point key="canvasLocation" x="637.60000000000002" y="610.34482758620697"/>
         </scene>
         <!--Fourth-->
         <scene sceneID="8gO-Bh-oUf">
@@ -310,7 +308,7 @@
             <objects>
                 <navigationController id="leZ-Jl-Ahm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="jKQ-7u-8hm"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A6f-qy-k90">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="A6f-qy-k90">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

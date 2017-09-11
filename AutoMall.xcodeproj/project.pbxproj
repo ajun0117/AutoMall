@@ -174,6 +174,12 @@
 		04D107911F62998D007D9F57 /* ZFRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D1076D1F62998D007D9F57 /* ZFRadarChart.m */; };
 		04D107921F62998D007D9F57 /* ZFWave.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107701F62998D007D9F57 /* ZFWave.m */; };
 		04D107931F62998D007D9F57 /* ZFWaveChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107721F62998D007D9F57 /* ZFWaveChart.m */; };
+		04D396441F661F870077BFB3 /* SettlementAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D396421F661F870077BFB3 /* SettlementAddressCell.m */; };
+		04D396451F661F870077BFB3 /* SettlementAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D396431F661F870077BFB3 /* SettlementAddressCell.xib */; };
+		04D396491F6621110077BFB3 /* SettlementBeizhuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D396471F6621110077BFB3 /* SettlementBeizhuCell.m */; };
+		04D3964A1F6621110077BFB3 /* SettlementBeizhuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */; };
+		04D396541F6636CB0077BFB3 /* MailGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D396521F6636CB0077BFB3 /* MailGoodsCell.m */; };
+		04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D396531F6636CB0077BFB3 /* MailGoodsCell.xib */; };
 		04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF11F31C24000AA20A7 /* InformationVC.m */; };
 		04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF41F31C24000AA20A7 /* MallVC.m */; };
 		04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF71F31C24000AA20A7 /* PersonalCenterVC.m */; };
@@ -606,6 +612,15 @@
 		04D107701F62998D007D9F57 /* ZFWave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFWave.m; sourceTree = "<group>"; };
 		04D107711F62998D007D9F57 /* ZFWaveChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFWaveChart.h; sourceTree = "<group>"; };
 		04D107721F62998D007D9F57 /* ZFWaveChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFWaveChart.m; sourceTree = "<group>"; };
+		04D396411F661F870077BFB3 /* SettlementAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementAddressCell.h; sourceTree = "<group>"; };
+		04D396421F661F870077BFB3 /* SettlementAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementAddressCell.m; sourceTree = "<group>"; };
+		04D396431F661F870077BFB3 /* SettlementAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementAddressCell.xib; sourceTree = "<group>"; };
+		04D396461F6621110077BFB3 /* SettlementBeizhuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementBeizhuCell.h; sourceTree = "<group>"; };
+		04D396471F6621110077BFB3 /* SettlementBeizhuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementBeizhuCell.m; sourceTree = "<group>"; };
+		04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementBeizhuCell.xib; sourceTree = "<group>"; };
+		04D396511F6636CB0077BFB3 /* MailGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailGoodsCell.h; sourceTree = "<group>"; };
+		04D396521F6636CB0077BFB3 /* MailGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailGoodsCell.m; sourceTree = "<group>"; };
+		04D396531F6636CB0077BFB3 /* MailGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailGoodsCell.xib; sourceTree = "<group>"; };
 		04DC7CF01F31C24000AA20A7 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
 		04DC7CF11F31C24000AA20A7 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
 		04DC7CF31F31C24000AA20A7 /* MallVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallVC.h; sourceTree = "<group>"; };
@@ -1344,6 +1359,12 @@
 				04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */,
 				04BA1C841F4D8E1D00704A9E /* ShoppingCartModel.h */,
 				04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */,
+				04D396411F661F870077BFB3 /* SettlementAddressCell.h */,
+				04D396421F661F870077BFB3 /* SettlementAddressCell.m */,
+				04D396431F661F870077BFB3 /* SettlementAddressCell.xib */,
+				04D396461F6621110077BFB3 /* SettlementBeizhuCell.h */,
+				04D396471F6621110077BFB3 /* SettlementBeizhuCell.m */,
+				04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */,
 			);
 			name = "结算";
 			sourceTree = "<group>";
@@ -1545,6 +1566,16 @@
 			path = ZFWaveChart;
 			sourceTree = "<group>";
 		};
+		04D3964B1F6631EE0077BFB3 /* 商城首页Cell */ = {
+			isa = PBXGroup;
+			children = (
+				04D396511F6636CB0077BFB3 /* MailGoodsCell.h */,
+				04D396521F6636CB0077BFB3 /* MailGoodsCell.m */,
+				04D396531F6636CB0077BFB3 /* MailGoodsCell.xib */,
+			);
+			name = "商城首页Cell";
+			sourceTree = "<group>";
+		};
 		04DC7CEE1F31C24000AA20A7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1577,6 +1608,7 @@
 				04F6B69A1F45A5F500052658 /* 搜索 */,
 				04DC7CF31F31C24000AA20A7 /* MallVC.h */,
 				04DC7CF41F31C24000AA20A7 /* MallVC.m */,
+				04D3964B1F6631EE0077BFB3 /* 商城首页Cell */,
 			);
 			path = Mall;
 			sourceTree = "<group>";
@@ -2166,6 +2198,7 @@
 				04EFEC691F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
 				04ADD6E91F5F96A900075FE9 /* MailOrderDetailTopCell.xib in Resources */,
+				04D3964A1F6621110077BFB3 /* SettlementBeizhuCell.xib in Resources */,
 				0459C6BC1F614C870040501E /* Info.plist in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
@@ -2177,6 +2210,7 @@
 				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
 				04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
+				04D396451F661F870077BFB3 /* SettlementAddressCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
@@ -2207,6 +2241,7 @@
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
+				04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */,
 				04BA1C671F4D162000704A9E /* ShoppingCartCell.xib in Resources */,
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
 				042AF2081F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib in Resources */,
@@ -2345,6 +2380,7 @@
 				04DC7DC41F31C28300AA20A7 /* QBAssetsCollectionViewController.m in Sources */,
 				04DC7DC51F31C28300AA20A7 /* QBAssetsCollectionViewLayout.m in Sources */,
 				04DC7DC21F31C28300AA20A7 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
+				04D396541F6636CB0077BFB3 /* MailGoodsCell.m in Sources */,
 				04EFEC721F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m in Sources */,
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
 				04DC7DE71F31C28300AA20A7 /* DJQRateView.m in Sources */,
@@ -2366,6 +2402,7 @@
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
 				042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */,
 				04D1078B1F62998D007D9F57 /* ZFLineChart.m in Sources */,
+				04D396491F6621110077BFB3 /* SettlementBeizhuCell.m in Sources */,
 				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
 				047ADFEB1F4A86EF00AEAE8E /* CMSDWebImageDownloader.m in Sources */,
 				047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */,
@@ -2449,6 +2486,7 @@
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
 				04DC7DB81F31C28300AA20A7 /* HZPhotoBrowser.m in Sources */,
+				04D396441F661F870077BFB3 /* SettlementAddressCell.m in Sources */,
 				04ADD6E81F5F96A900075FE9 /* MailOrderDetailTopCell.m in Sources */,
 				04DC7DB11F31C28300AA20A7 /* DashedBoxView.m in Sources */,
 				04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */,

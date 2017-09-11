@@ -1,19 +1,18 @@
 //
-//  CommodityDetailPriceCell.m
+//  SettlementAddressCell.m
 //  AutoMall
 //
-//  Created by LYD on 2017/8/22.
+//  Created by LYD on 2017/9/11.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "CommodityDetailPriceCell.h"
+#import "SettlementAddressCell.h"
 
-@implementation CommodityDetailPriceCell
+@implementation SettlementAddressCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.costPriceStrikeL.strikeThroughEnabled = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

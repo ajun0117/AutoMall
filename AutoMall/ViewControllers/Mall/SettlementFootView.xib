@@ -67,7 +67,7 @@
                 <outlet property="numbers" destination="vYw-kX-DMc" id="aQ3-bh-nfS"/>
                 <outlet property="yunfeiL" destination="vck-2i-DDp" id="CMr-Ki-wkA"/>
             </connections>
-            <point key="canvasLocation" x="-470" y="247"/>
+            <point key="canvasLocation" x="-38" y="214"/>
         </view>
     </objects>
 </document>

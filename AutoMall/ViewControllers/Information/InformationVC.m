@@ -101,7 +101,7 @@
     InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
     NSDictionary *dic = inforArray[indexPath.section];
     //    cell.zixunIMG.image = IMG(@"personalCenter");
-    [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"personalCenter")];
+    [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
     cell.zixunTitle.text = STRING(dic[@"title"]);
     cell.zixunContent.text = STRING(dic[@"content"]);
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -119,6 +119,13 @@
 }
 
 - (IBAction)changeChannel:(id)sender {
+    [inforArray removeAllObjects];
+    if (self.topSegment.selectedSegmentIndex == 0) {
+        [self requestGetMyMessage];
+    }
+    else {
+        [self requestGetCourseList];
+    }
 }
 
 #pragma mark - 网络请求
@@ -132,8 +139,22 @@
 //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"page",@"10",@"limit", nil];
 //    NSLog(@"pram: %@",pram);
 //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
-    [[DataRequest sharedDataRequest] getDataWithUrl:InformationList delegate:nil params:nil info:infoDic];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(InformationList) delegate:nil params:nil info:infoDic];
 }
+
+-(void)requestGetCourseList { //获取教程列表
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CourseList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CourseList, @"op", nil];
+    
+    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"page",@"10",@"limit", nil];
+    //    NSLog(@"pram: %@",pram);
+    //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(CourseList) delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -148,6 +169,21 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:InformationList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:InformationList object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [inforArray addObjectsFromArray:responseObject [@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        [self.myTableView reloadData];
+    }
+    if ([notification.name isEqualToString:CourseList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CourseList object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {

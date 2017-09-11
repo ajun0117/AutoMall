@@ -48,13 +48,13 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.myTableView headerBeginRefreshing];
+//    [self.myTableView headerBeginRefreshing];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.myTableView reloadData];
+//    [self.myTableView reloadData];
 }
 
 -(void)setNavitationItemWithLeftImageName:(NSString*)leftImageName rightImageName:(NSString*)rightImageName{
@@ -147,6 +147,9 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 //        else {
 //             cell.defaultIM.hidden = YES;
 //        }
+    if (indexPath.row == 0) {
+        cell.defaultIM.hidden = NO;
+    }
         return cell;
 }
 

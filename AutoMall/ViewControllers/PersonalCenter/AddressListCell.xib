@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18538120606" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsH-uC-0B9">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18538120000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsH-uC-0B9">
                         <rect key="frame" x="191" y="8" width="85" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Dwk-3B-MMC"/>
@@ -45,7 +45,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isFristAddress" translatesAutoresizingMaskIntoConstraints="NO" id="F8b-MY-DYc">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isFristAddress" translatesAutoresizingMaskIntoConstraints="NO" id="F8b-MY-DYc">
                         <rect key="frame" x="284" y="26" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="P7y-s0-S6f"/>
