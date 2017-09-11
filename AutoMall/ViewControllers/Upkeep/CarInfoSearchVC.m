@@ -25,15 +25,18 @@
     [self.searchTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
     self.searchTableView.tableFooterView = [UIView new];
     
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -16;
+    
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
-//    searchBtn.contentMode = UIViewContentModeRight;
-    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [searchBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
     [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [searchBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
 }
 
 -(void) toRegisterNewCarInfo {

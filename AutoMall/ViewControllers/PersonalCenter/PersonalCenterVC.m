@@ -35,23 +35,27 @@
     //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -16;
+    
     UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     setBtn.frame = CGRectMake(0, 0, 44, 44);
-    setBtn.contentMode = UIViewContentModeScaleAspectFit;
     [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
     [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
-    self.navigationItem.leftBarButtonItem = setBtnBarBtn;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, setBtnBarBtn, nil];
     
     UIButton *msgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     msgBtn.frame = CGRectMake(0, 0, 44, 44);
-    msgBtn.contentMode = UIViewContentModeScaleAspectFit;
     [msgBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
     [msgBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *msgBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:msgBtn];
-    self.navigationItem.rightBarButtonItem = msgBtnBarBtn;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, msgBtnBarBtn, nil];
     
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"HeadNameCell" bundle:nil] forCellReuseIdentifier:@"headNameCell"];
