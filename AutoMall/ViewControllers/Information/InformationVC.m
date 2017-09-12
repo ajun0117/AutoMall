@@ -9,15 +9,24 @@
 #import "InformationVC.h"
 #import "InformationCell.h"
 
-@interface InformationVC ()
+@interface InformationVC () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSMutableArray *inforArray;
-    int currentpage;
+    NSMutableArray *zixunArray;
+    NSMutableArray *jiaochengArray;
+    int zixunCurrentpage;
+    int jiaochengCurrentpage;
 }
-@property (strong, nonatomic) IBOutlet UISegmentedControl *topSegment;
-@property (strong, nonatomic) IBOutlet UITableView *myTableView;
+
+@property (strong, nonatomic) IBOutlet UIButton *zixunBtn;
+@property (strong, nonatomic) IBOutlet UIButton *jiaochengBtn;
+@property (strong, nonatomic) IBOutlet UIView *zixunView;
+@property (strong, nonatomic) IBOutlet UIView *jiaochengView;
+//@property (strong, nonatomic) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) UIScrollView *mainScrollView;
+@property (strong, nonatomic) UITableView *zixunTV;
+@property (strong, nonatomic) UITableView *jiaochengTV;
 
 @end
 
@@ -28,13 +37,43 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     self.title = @"资讯";
-    [self.myTableView registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
-    self.myTableView.tableFooterView = [UIView new];
-    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-//    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+//    [self.myTableView registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
+//    self.myTableView.tableFooterView = [UIView new];
+//    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+////    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
-    currentpage = 1; //默认首页
-    inforArray = [[NSMutableArray alloc] init];
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49)];
+    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 64 - 44 - 49);
+    self.mainScrollView.pagingEnabled = YES;
+    self.mainScrollView.showsHorizontalScrollIndicator = NO;
+    self.mainScrollView.delegate = self;
+    [self.view addSubview:self.mainScrollView];
+    
+    self.zixunTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49) style:UITableViewStyleGrouped];
+    [self.mainScrollView addSubview:self.zixunTV];
+    self.zixunTV.delegate = self;
+    self.zixunTV.dataSource = self;
+    self.zixunTV.allowsSelection = NO;
+    [self.zixunTV registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
+    self.zixunTV.tableFooterView = [UIView new];
+    [self.zixunTV addHeaderWithTarget:self action:@selector(zixunHeaderRefreshing)];
+    [self.zixunTV addFooterWithTarget:self action:@selector(zixunFooterLoadData)];
+    
+    self.jiaochengTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49) style:UITableViewStyleGrouped];
+    [self.mainScrollView addSubview:self.jiaochengTV];
+    self.jiaochengTV.delegate = self;
+    self.jiaochengTV.dataSource = self;
+    self.jiaochengTV.allowsSelection = NO;
+    [self.jiaochengTV registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
+    self.jiaochengTV.tableFooterView = [UIView new];
+    [self.jiaochengTV addHeaderWithTarget:self action:@selector(jiaochengHeaderRefreshing)];
+    [self.jiaochengTV addFooterWithTarget:self action:@selector(jiaochengFooterLoadData)];
+    
+    zixunCurrentpage = 0; //默认首页
+    zixunArray = [[NSMutableArray alloc] init];
+    
+    jiaochengCurrentpage = 0; //默认首页
+    jiaochengArray = [[NSMutableArray alloc] init];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -53,29 +92,81 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self.myTableView headerBeginRefreshing];
+    [self.zixunTV headerBeginRefreshing];
+}
+
+- (IBAction)zixunAction:(id)sender {
+    [self setButton:self.zixunBtn withBool:YES andView:self.zixunView withColor:Red_BtnColor];
+    [self setButton:self.jiaochengBtn withBool:NO andView:self.jiaochengView withColor:[UIColor clearColor]];
+    [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    if ([zixunArray count] == 0) {
+        zixunCurrentpage = 0;
+        [self requestGetMyMessage];
+    }
+}
+
+- (IBAction)jiaochengAction:(id)sender {
+    [self setButton:self.zixunBtn withBool:NO andView:self.zixunView withColor:[UIColor clearColor]];
+    [self setButton:self.jiaochengBtn withBool:YES andView:self.jiaochengView withColor:Red_BtnColor];
+    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:NO];
+    if ([jiaochengArray count] == 0) {
+        jiaochengCurrentpage = 0;
+        [self requestGetCourseList];
+    }
+}
+
+-(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
+    btn.selected = bo;
+    view.backgroundColor = color;
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.mainScrollView) {
+        CGFloat offsetX = scrollView.contentOffset.x;
+        NSLog(@"offsetX: %f",offsetX);
+        if (offsetX >= SCREEN_WIDTH) {
+            [self jiaochengAction:self.jiaochengBtn];
+        }
+        else {
+            [self zixunAction:self.zixunBtn];
+        }
+    }
 }
 
 #pragma mark - 下拉刷新,上拉加载
--(void)headerRefreshing {
+-(void)zixunHeaderRefreshing {
     NSLog(@"下拉刷新个人信息");
-//    currentpage = 1;
-    //    NSDictionary *locationDic = [[GlobalSetting shareGlobalSettingInstance] myLocation];
-    [inforArray removeAllObjects];
+    zixunCurrentpage = 0;
+    [zixunArray removeAllObjects];
     [self requestGetMyMessage];
 }
 
--(void)footerLoadData {
+-(void)zixunFooterLoadData {
     NSLog(@"上拉加载数据");
-//    currentpage ++;
-    //    NSDictionary *locationDic = [[GlobalSetting shareGlobalSettingInstance] myLocation];
+    zixunCurrentpage ++;
     [self requestGetMyMessage];
+}
+
+-(void)jiaochengHeaderRefreshing {
+    NSLog(@"下拉刷新个人信息");
+    jiaochengCurrentpage = 0;
+    [jiaochengArray removeAllObjects];
+    [self requestGetCourseList];
+}
+
+-(void)jiaochengFooterLoadData {
+    NSLog(@"上拉加载数据");
+    jiaochengCurrentpage ++;
+    [self requestGetCourseList];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [inforArray count];
+    if (tableView == self.zixunTV) {
+        return [zixunArray count];
+    }
+    return [jiaochengArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -90,22 +181,35 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 5;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
-    NSDictionary *dic = inforArray[indexPath.section];
-    //    cell.zixunIMG.image = IMG(@"personalCenter");
-    [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
-    cell.zixunTitle.text = STRING(dic[@"title"]);
-    cell.zixunContent.text = STRING(dic[@"content"]);
-    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    if (tableView == self.zixunTV) {
+        InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
+        NSDictionary *dic = zixunArray[indexPath.section];
+        //    cell.zixunIMG.image = IMG(@"personalCenter");
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
+        cell.zixunTitle.text = STRING(dic[@"title"]);
+        cell.zixunContent.text = STRING(dic[@"shortContent"]);
+        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    else {
+        InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
+        NSDictionary *dic = jiaochengArray[indexPath.section];
+        //    cell.zixunIMG.image = IMG(@"personalCenter");
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
+        cell.zixunTitle.text = STRING(dic[@"title"]);
+        cell.zixunContent.text = STRING(dic[@"shortContent"]);
+        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,16 +220,6 @@
     //    detailVC.isDrink = self.isDrink;
     //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
     //    [self.navigationController pushViewController:detailVC animated:YES];
-}
-
-- (IBAction)changeChannel:(id)sender {
-    [inforArray removeAllObjects];
-    if (self.topSegment.selectedSegmentIndex == 0) {
-        [self requestGetMyMessage];
-    }
-    else {
-        [self requestGetCourseList];
-    }
 }
 
 #pragma mark - 网络请求
@@ -139,7 +233,8 @@
 //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"page",@"10",@"limit", nil];
 //    NSLog(@"pram: %@",pram);
 //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
-    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(InformationList) delegate:nil params:nil info:infoDic];
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(InformationList),zixunCurrentpage];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 -(void)requestGetCourseList { //获取教程列表
@@ -148,18 +243,17 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CourseList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CourseList, @"op", nil];
-    
-    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"page",@"10",@"limit", nil];
-    //    NSLog(@"pram: %@",pram);
-    //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
-    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(CourseList) delegate:nil params:nil info:infoDic];
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CourseList),jiaochengCurrentpage];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
-    [self.myTableView headerEndRefreshing];
-    [self.myTableView footerEndRefreshing];
+    [self.zixunTV headerEndRefreshing];
+    [self.zixunTV footerEndRefreshing];
+    [self.jiaochengTV headerEndRefreshing];
+    [self.jiaochengTV footerEndRefreshing];
     if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
         _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
         [_networkConditionHUD show:YES];
@@ -172,30 +266,30 @@
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [inforArray addObjectsFromArray:responseObject [@"data"]];
-            [self.myTableView reloadData];
+            [zixunArray addObjectsFromArray:responseObject [@"data"]];
+            [self.zixunTV reloadData];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
-        [self.myTableView reloadData];
+//        [self.zixunTV reloadData];
     }
     if ([notification.name isEqualToString:CourseList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CourseList object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [inforArray addObjectsFromArray:responseObject [@"data"]];
-            [self.myTableView reloadData];
+            [jiaochengArray addObjectsFromArray:responseObject [@"data"]];
+            [self.jiaochengTV reloadData];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
-        [self.myTableView reloadData];
+//        [self.jiaochengTV reloadData];
     }
     
 }

@@ -50,23 +50,23 @@
     self.mainScrollView.pagingEnabled = YES;
     [self.view addSubview:self.mainScrollView];
     
-    self.carBodyTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
+    self.carBodyTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carBodyTV];
     self.carBodyTV.delegate = self;
     self.carBodyTV.dataSource = self;
     self.carBodyTV.allowsSelection = NO;
     [self.carBodyTV registerNib:[UINib nibWithNibName:@"SingleCheckCell" bundle:nil] forCellReuseIdentifier:@"SingleCell"];
     
-    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
+    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carInsideTV];
     
-    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
+    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.engineRoomTV];
     
-    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
+    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.chassisTV];
     
-    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) style:UITableViewStyleGrouped];
+    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.trunkTV];
     
 }
@@ -79,16 +79,6 @@
     [self setButton:self.trunkBtn withBool:NO andView:self.trunkView withColor:[UIColor clearColor]];
     
     [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-//    self.carBodyBtn.selected = YES;
-//    self.carBodyView.backgroundColor = Red_BtnColor;
-//    self.carInsideBtn.selected = NO;
-//    self.carInsideView.backgroundColor = [UIColor clearColor];
-//    self.engineRoomBtn.selected = NO;
-//    self.engineRoomView.backgroundColor = [UIColor clearColor];
-//    self.chassisBtn.selected = NO;
-//    self.chassisView.backgroundColor = [UIColor clearColor];
-//    self.trunkBtn.selected = NO;
-//    self.trunkView.backgroundColor = [UIColor clearColor];
 }
 
 - (IBAction)carInsideAction:(id)sender {

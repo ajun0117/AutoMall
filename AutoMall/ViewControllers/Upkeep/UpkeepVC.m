@@ -10,6 +10,7 @@
 #import "AutoCheckVC.h"
 #import "CarInfoListVC.h"
 #import "LoginViewController.h"
+#import "BaoyangHistoryVC.h"
 
 
 @interface UpkeepVC ()
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *customBtn;
 @property (strong, nonatomic) IBOutlet UIButton *quickBtn;
 @property (strong, nonatomic) IBOutlet UIButton *upkeepBtn;
+@property (strong, nonatomic) IBOutlet UIButton *synthesizeBtn;
 
 @end
 
@@ -47,9 +49,10 @@
     
     [self makeLayerWithButton:self.carOwnerBtn];
     [self makeLayerWithButton:self.hairdressingBtn];
-    [self makeLayerWithButton:self.customBtn];
     [self makeLayerWithButton:self.quickBtn];
     [self makeLayerWithButton:self.upkeepBtn];
+    [self makeLayerWithButton:self.synthesizeBtn];
+    [self makeLayerWithButton:self.customBtn];
 }
 
 -(void) makeLayerWithButton:(UIButton *)btn {
@@ -59,9 +62,9 @@
 }
 
 -(void)toCarOwner:(UIButton *)btn {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
+    BaoyangHistoryVC *historyVC = [[BaoyangHistoryVC alloc] init];
+    historyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:historyVC animated:YES];
 }
 
 - (IBAction)toCheckAutoAction:(id)sender {
@@ -76,11 +79,34 @@
     [self.navigationController pushViewController:loginVC animated:YES];
 }
 
-
 - (IBAction)carInfoListAction:(id)sender {
     CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
+}
+
+- (IBAction)quickAction:(id)sender {
+    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+    checkVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:checkVC animated:YES];
+}
+
+- (IBAction)upkeepAction:(id)sender {
+    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+    checkVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:checkVC animated:YES];
+}
+
+- (IBAction)synthesizeAction:(id)sender {
+    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+    checkVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:checkVC animated:YES];
+}
+
+- (IBAction)customAction:(id)sender {
+    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+    checkVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:checkVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

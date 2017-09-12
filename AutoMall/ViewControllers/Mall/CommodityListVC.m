@@ -19,6 +19,9 @@
     IBOutlet UIButton *tagBtn;
     UIView *selectBgView;
     UITableView *selectTableView;
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *commodityArray;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -37,8 +40,11 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityListCell" bundle:nil] forCellReuseIdentifier:@"commodityListCell"];
     
-    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+//    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+//    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    
+    commodityArray = [NSMutableArray array];
+    [self requestGetComCategoryList];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -62,8 +68,7 @@
     if (tableView == selectTableView) {
         return 1;
     }
-//    return [shopArray count];
-    return 6;
+    return [commodityArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -139,6 +144,30 @@
     }
     else {
         CommodityListCell *cell = (CommodityListCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityListCell"];
+        NSDictionary *dic = commodityArray [indexPath.section];
+        [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
+        cell.goodsNameL.text = dic [@"name"];
+//        cell.baokuanL.text =
+//        cell.tuijianL.text =
+//        cell.zhekouL.text =
+        cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
+        cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
+        cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
+        cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+        cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+        cell.yunfeiL.text = [NSString stringWithFormat:@"配送费￥%@",dic[@"shippingFee"]];
+        
+//        goodsIM
+//        goodsNameL;
+//        baokuanL;
+//        tuijianL;
+//        zhekouL;
+//        pingxingView
+//        xiaoliangL
+//        jifenL
+//        moneyL
+//        costPriceStrikeL
+//        yunfeiL
         
 //        cell.shopIM.layer.cornerRadius = 5;
 //        cell.shopIM.clipsToBounds = YES;
@@ -265,6 +294,63 @@
     //    float rate = btn.frame.size.width / size.width;
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, size.width+25, 0, 0)];
     [btn setTitle:str forState:UIControlStateNormal];
+}
+
+-(void)requestGetComCategoryList { //获取分类列表
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
+    
+    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"page",@"10",@"limit", nil];
+    //    NSLog(@"pram: %@",pram);
+    //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:CommodityList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CommodityList object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [commodityArray addObjectsFromArray:responseObject [@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    //    if ([notification.name isEqualToString:CourseList]) {
+    //        [[NSNotificationCenter defaultCenter] removeObserver:self name:CourseList object:nil];
+    //        NSLog(@"_responseObject: %@",responseObject);
+    //
+    //        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+    //            [inforArray addObjectsFromArray:responseObject [@"data"]];
+    //            [self.myTableView reloadData];
+    //        }
+    //        else {
+    //            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+    //            [_networkConditionHUD show:YES];
+    //            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    //        }
+    //        [self.myTableView reloadData];
+    //    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

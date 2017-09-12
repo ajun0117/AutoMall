@@ -19,6 +19,7 @@
 #import "FindPWDViewController.h"
 #import "ReceiveAddressViewController.h"
 #import "UpkeepStatementVC.h"
+#import "LoginViewController.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -45,7 +46,7 @@
     setBtn.frame = CGRectMake(0, 0, 44, 44);
     [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
     [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    [setBtn addTarget:self action:@selector(toSet) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, setBtnBarBtn, nil];
     
@@ -53,7 +54,7 @@
     msgBtn.frame = CGRectMake(0, 0, 44, 44);
     [msgBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
     [msgBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    //    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    [msgBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *msgBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:msgBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, msgBtnBarBtn, nil];
     
@@ -61,6 +62,18 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"HeadNameCell" bundle:nil] forCellReuseIdentifier:@"headNameCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterNormalCell" bundle:nil] forCellReuseIdentifier:@"centerNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
+}
+
+-(void) toSet {
+//    LoginViewController *loginVC = [[LoginViewController alloc] init];
+//    loginVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+-(void) toMessage {
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    loginVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 #pragma mark - tableVeiw delegate

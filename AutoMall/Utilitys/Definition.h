@@ -135,6 +135,7 @@
 #define InformationList              @"/info/list"    //资讯列表
 #define CourseList               @"/course/list"  //教程列表
 #define ComCategoryList                   @"/comCategory/list"    //商品分类
+#define CommodityList                      @"/commodity/list"  //商品列表
 
 
 

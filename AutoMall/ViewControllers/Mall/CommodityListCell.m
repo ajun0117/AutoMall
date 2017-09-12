@@ -14,7 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     self.costPriceStrikeL.strikeThroughEnabled = YES;
-    self.pingxingView.rate = 4.0;
+    self.pingxingView.rate = 4;
     self.pingxingView.maxRate = 5;
 }
 
