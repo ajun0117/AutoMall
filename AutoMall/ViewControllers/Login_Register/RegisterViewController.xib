@@ -280,7 +280,7 @@
                 <constraint firstItem="ahM-zy-pf3" firstAttribute="leading" secondItem="SsV-ge-kZs" secondAttribute="trailing" constant="5" id="sfG-AG-RYP"/>
                 <constraint firstItem="IBE-qg-xAN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="y7J-GL-jDf"/>
             </constraints>
-            <point key="canvasLocation" x="-395" y="139"/>
+            <point key="canvasLocation" x="-41" y="134"/>
         </view>
     </objects>
     <resources>

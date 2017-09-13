@@ -13,6 +13,8 @@
 {
      IBOutlet UIButton *mimaEyeBtn;
     IBOutlet UIButton *radioBtn;
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
 }
 
 @end
@@ -28,6 +30,23 @@
     
     
     [mimaEyeBtn setImage:[UIImage imageNamed:@"mimaEye_close"] forState:UIControlStateSelected | UIControlStateHighlighted];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
 }
 
 - (IBAction)pwdTextSwitch:(id)sender {
@@ -51,13 +70,44 @@
 - (IBAction)registerAction:(id)sender {
     [self.phoneTF resignFirstResponder];
     [self.passwordTF resignFirstResponder];
-    RegisterYZMViewController *yzmVC = [[RegisterYZMViewController alloc] init];
-    yzmVC.phoneStr = self.phoneTF.text;
-    [self.navigationController pushViewController:yzmVC animated:YES];
+    
+    if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
+        RegisterYZMViewController *yzmVC = [[RegisterYZMViewController alloc] init];
+        yzmVC.phoneStr = self.phoneTF.text;
+        [self.navigationController pushViewController:yzmVC animated:YES];
+    }
+    else {
+        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 - (IBAction)mianzeAction:(id)sender {
 }
+
+
+#pragma mark -
+#pragma mark 手机号码及验证码格式初步验证
+-(BOOL) checkPhoneNumWithPhone:(NSString *)phone {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:phone]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [phone length] == 11 && [phone hasPrefix:@"1"]) {
+        return YES;
+    }
+    return NO;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

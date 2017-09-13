@@ -30,7 +30,7 @@
     
     CGFloat height = self.bounds.size.height;
     
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 15, self.frame.size.width, self.frame.size.height-15)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 15, self.frame.size.width, height-15)];
     bgView.backgroundColor = GRGB;
     [self addSubview:bgView];
     
@@ -47,20 +47,20 @@
 //    _number.layer.cornerRadius = 8;
 //    [bgView addSubview:_number];
     
-    _money = [[UILabel alloc]initWithFrame:CGRectMake(66, 8, 100, 24)];
+    _money = [[UILabel alloc]initWithFrame:CGRectMake(66, 8, 100, 28)];
     _money.text = @"￥1160.00";
     _money.font = FONT(14);
     _money.textColor = [UIColor blackColor];
     [bgView addSubview:_money];
     
-    _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(VIEW_BX(_money), 8, 70, 24)];
+    _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(VIEW_BX(_money), 8, 70, 28)];
     _peisongMoney.text = @"配送费￥5";
     _peisongMoney.font = FONT(9);
     _peisongMoney.textColor = [UIColor darkGrayColor];
     [bgView addSubview:_peisongMoney];
     
     _settlement =[UIButton buttonWithType:UIButtonTypeCustom];
-    _settlement.frame =CGRectMake(SCREEN_WIDTH - 100, 0, 100, 40);
+    _settlement.frame =CGRectMake(SCREEN_WIDTH - 100, -0.5, 100, 45);
     _settlement.backgroundColor = RRGB;
     _settlement.titleLabel.font = FONT(15);
     [_settlement setTitle:@"结算" forState:UIControlStateNormal];

@@ -132,11 +132,12 @@
 //汽车商城
 #define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep/api%@",action])
 #define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
-#define InformationList              @"/info/list"    //资讯列表
-#define CourseList               @"/course/list"  //教程列表
-#define ComCategoryList                   @"/comCategory/list"    //商品分类
-#define CommodityList                      @"/commodity/list"  //商品列表
+#define InformationList                         @"/info/list"    //资讯列表
+#define CourseList                                  @"/course/list"  //教程列表
+#define ComCategoryList                        @"/comCategory/list"    //商品分类
+#define CommodityList                            @"/commodity/list"  //商品列表
 
+#define GetSMS                                     @"/sms/send"    //获取短信验证码
 
 
 

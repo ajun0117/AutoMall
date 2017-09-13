@@ -117,9 +117,20 @@
                                 </mask>
                             </variation>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="za6-i6-LOX">
+                            <rect key="frame" x="0.0" y="43.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="06d-e2-YU0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="za6-i6-LOX" secondAttribute="bottom" id="2Xr-0E-Iiw"/>
                         <constraint firstAttribute="centerX" secondItem="Bbr-ci-gHu" secondAttribute="centerX" multiplier="7:12" constant="-144.5" id="943-7X-OpC">
                             <variation key="widthClass=compact" constant="0.0"/>
                         </constraint>
@@ -136,11 +147,13 @@
                         <constraint firstAttribute="centerX" secondItem="ckZ-hZ-OGa" secondAttribute="centerX" multiplier="7:2" constant="144.5" id="aXZ-GM-D5A">
                             <variation key="widthClass=compact" constant="0.0"/>
                         </constraint>
+                        <constraint firstAttribute="trailing" secondItem="za6-i6-LOX" secondAttribute="trailing" id="b6h-Q2-Fcr"/>
                         <constraint firstAttribute="height" constant="44" id="cPt-HJ-tdT"/>
                         <constraint firstAttribute="centerY" secondItem="Bbr-ci-gHu" secondAttribute="centerY" constant="0.5" id="cg7-Am-Kf3"/>
                         <constraint firstAttribute="centerX" secondItem="wC2-bf-51V" secondAttribute="centerX" multiplier="8:11" constant="-74.5" id="fc6-oP-oZJ">
                             <variation key="widthClass=compact" constant="0.0"/>
                         </constraint>
+                        <constraint firstItem="za6-i6-LOX" firstAttribute="leading" secondItem="6wS-10-HuN" secondAttribute="leading" id="gXa-nu-03T"/>
                         <constraint firstAttribute="centerY" secondItem="QWE-co-BOh" secondAttribute="centerY" id="n7D-hh-GlS"/>
                     </constraints>
                     <variation key="default">
@@ -492,9 +505,9 @@
                             <exclude reference="7zk-As-d20"/>
                             <exclude reference="bF0-6E-qHN"/>
                             <exclude reference="jSI-c8-Tek"/>
+                            <exclude reference="D6J-tW-z24"/>
                             <exclude reference="JBo-JL-JbL"/>
                             <exclude reference="lLJ-S0-jaG"/>
-                            <exclude reference="D6J-tW-z24"/>
                             <exclude reference="Zvd-Hi-piQ"/>
                             <exclude reference="zDH-73-fQ1"/>
                         </mask>
@@ -510,9 +523,9 @@
                             <include reference="7zk-As-d20"/>
                             <include reference="bF0-6E-qHN"/>
                             <include reference="jSI-c8-Tek"/>
+                            <include reference="D6J-tW-z24"/>
                             <include reference="JBo-JL-JbL"/>
                             <include reference="lLJ-S0-jaG"/>
-                            <include reference="D6J-tW-z24"/>
                             <include reference="Zvd-Hi-piQ"/>
                             <include reference="zDH-73-fQ1"/>
                         </mask>
@@ -763,7 +776,7 @@
                     <include reference="l9O-58-qGO"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-461" y="95"/>
+            <point key="canvasLocation" x="-14.5" y="109.5"/>
         </view>
     </objects>
     <resources>

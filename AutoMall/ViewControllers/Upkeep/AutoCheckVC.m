@@ -7,9 +7,9 @@
 //
 
 #import "AutoCheckVC.h"
-#import "SingleCheckCell.h"
-#import "MultiCheckCell.h"
+#import "AutoCheckSingleCell.h"
 #import "UpkeepPlanVC.h"
+#import "DVSwitch.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -55,7 +55,7 @@
     self.carBodyTV.delegate = self;
     self.carBodyTV.dataSource = self;
     self.carBodyTV.allowsSelection = NO;
-    [self.carBodyTV registerNib:[UINib nibWithNibName:@"SingleCheckCell" bundle:nil] forCellReuseIdentifier:@"SingleCell"];
+    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
     
     self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carInsideTV];
@@ -319,7 +319,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 144;
+    return 141;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -331,59 +331,22 @@
     return 1;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.carBodyTV.bounds), 60)];
-//    view.backgroundColor = RGBCOLOR(249, 250, 251);
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-//    label.font = [UIFont systemFontOfSize:17];
-//    label.backgroundColor = [UIColor clearColor];
-//    label.text = @"水箱水";
-//    [view addSubview:label];
-//    
-//    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    photoBtn.frame = CGRectMake(CGRectGetWidth(self.carBodyTV.bounds) - 8 - 20, 12, 20, 20);
-//    [photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
-//    [photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
-//    [view addSubview:photoBtn];
-//    return view;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SingleCheckCell *cell = (SingleCheckCell *)[tableView dequeueReusableCellWithIdentifier:@"SingleCell"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.carBodyTV.bounds), 44)];
-    view.backgroundColor = [UIColor whiteColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-    label.font = [UIFont boldSystemFontOfSize:17];
-    label.backgroundColor = [UIColor clearColor];
-    label.text = @"水箱水";
-    [view addSubview:label];
+    AutoCheckSingleCell *cell = (AutoCheckSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckSingleCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell.photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
     
-    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    photoBtn.frame = CGRectMake(CGRectGetWidth(self.carBodyTV.bounds) - 8 - 20, 12, 20, 20);
-    [photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
-    [photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:photoBtn];
-    [cell.contentView addSubview:view];
-
-    UIView *viewContentV = [[UIView alloc] initWithFrame:CGRectMake(8, 44, CGRectGetWidth(self.carBodyTV.bounds) - 16, 44)];
-    viewContentV.backgroundColor = RGBCOLOR(244, 245, 246);
-    UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-    noticeL.font = [UIFont systemFontOfSize:15];
-    noticeL.backgroundColor = [UIColor clearColor];
-    noticeL.textColor = RGBCOLOR(156, 157, 158);
-    noticeL.text = @"检查内容：";
-    [viewContentV addSubview:noticeL];
-    
-    UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(108, 12, viewContentV.frame.size.width - 8 - 100, 20)];
-    contentL.font = [UIFont systemFontOfSize:16];
-    contentL.backgroundColor = [UIColor clearColor];
-    contentL.tag = 1000;
-    contentL.text = @"冰点";
-    contentL.textAlignment = NSTextAlignmentLeft;
-    [viewContentV addSubview:contentL];
-    [cell.contentView addSubview:viewContentV];
+    DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:@[@"严重", @"轻微",@"正常"]];
+    NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+    switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+    switcher.font = [UIFont systemFontOfSize:13];
+    [cell.segBgView addSubview:switcher];
+    switcher.cornerRadius = 18;
+    switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+    [switcher forceSelectedIndex:2 animated:NO];
+    [switcher setPressedHandler:^(NSUInteger index) {
+        NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+    }];
     
     return cell;
 }

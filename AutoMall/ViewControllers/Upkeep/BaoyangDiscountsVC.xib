@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-pX-bnP">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <color key="separatorColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
@@ -29,30 +29,15 @@
                         <outlet property="delegate" destination="-1" id="YCs-yy-Uzy"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfn-mo-w44">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="eEG-Sb-fvk"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="保存"/>
-                    <connections>
-                        <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="057-RW-E3I"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="cfn-mo-w44" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1mz-eB-J7K"/>
-                <constraint firstAttribute="trailing" secondItem="cfn-mo-w44" secondAttribute="trailing" id="AVg-YB-Cnz"/>
-                <constraint firstItem="cfn-mo-w44" firstAttribute="top" secondItem="Va1-pX-bnP" secondAttribute="bottom" id="Gt8-Mf-QcV"/>
-                <constraint firstAttribute="bottom" secondItem="cfn-mo-w44" secondAttribute="bottom" id="Ldu-BS-apD"/>
+                <constraint firstAttribute="bottom" secondItem="Va1-pX-bnP" secondAttribute="bottom" id="COC-QE-YG5"/>
                 <constraint firstItem="Va1-pX-bnP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XR7-pD-OAQ"/>
                 <constraint firstItem="Va1-pX-bnP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rS3-LA-7QD"/>
                 <constraint firstAttribute="trailing" secondItem="Va1-pX-bnP" secondAttribute="trailing" id="xOg-iu-RDv"/>
             </constraints>
-            <point key="canvasLocation" x="-344" y="66"/>
+            <point key="canvasLocation" x="-197" y="64"/>
         </view>
     </objects>
 </document>

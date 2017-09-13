@@ -7,10 +7,11 @@
 //
 
 #import "UpkeepPlanVC.h"
-#import "UpkeepPlanInfoCell.h"
+//#import "UpkeepPlanInfoCell.h"
 #import "UpkeepPlanNormalCell.h"
 #import "ServicePackageVC.h"
 #import "BaoyangDiscountsVC.h"
+#import "UpkeepCarInfoVC.h"
 
 @interface UpkeepPlanVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -56,7 +57,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 2;
+            return 5;
             break;
             
         case 1:
@@ -88,15 +89,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-            switch (indexPath.row) {
-                case 0:
-                    return 44;
-                    break;
-                    
-                default:
-                    return 125;
-                    break;
-            }
+            return 44;
             break;
         }
             
@@ -108,10 +101,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     switch (section) {
-        case 0:
-            return 44;
-            break;
-            
         case 1:
             return 44;
             break;
@@ -132,17 +121,17 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     switch (section) {
-        case 0:{
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-            view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:15];
-            label.backgroundColor = [UIColor clearColor];
-            label.text = @"车辆信息";
-            [view addSubview:label];
-            return view;
-            break;
-        }
+//        case 0:{
+//            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+//            view.backgroundColor = RGBCOLOR(249, 250, 251);
+//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+//            label.font = [UIFont systemFontOfSize:15];
+//            label.backgroundColor = [UIColor clearColor];
+//            label.text = @"车辆信息";
+//            [view addSubview:label];
+//            return view;
+//            break;
+//        }
             
         case 1: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
@@ -180,14 +169,45 @@
             switch (indexPath.row) {
                 case 0: {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = @"车辆信息";
+                    return cell;
+                    break;
+                }
+                case 1: {
+                    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.textLabel.text = @"粤A88888";
+                    return cell;
+                    break;
+                }
+                case 2: {
+                    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.declareL.text = @"车主";
+                    cell.contentL.text = @"孙先生";
+                    return cell;
+                    break;
+                }
+                case 3: {
+                    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.declareL.text = @"品牌";
+                    cell.contentL.text = @"奔驰";
+                    return cell;
+                    break;
+                }
+                case 4: {
+                    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.declareL.text = @"车型";
+                    cell.contentL.text = @"S300L";
                     return cell;
                     break;
                 }
                     
                 default: {
-                    UpkeepPlanInfoCell *cell = (UpkeepPlanInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"planInfoCell"];
-                    return cell;
+                    return nil;
                     break;
                 }
             }
@@ -244,6 +264,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch (indexPath.section) {
+        case 0: {
+            if (indexPath.row == 0) {
+                UpkeepCarInfoVC *infoVC = [[UpkeepCarInfoVC alloc] init];
+                infoVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:infoVC animated:YES];
+            }
+            break;
+        }
+            
         case 4: {
             BaoyangDiscountsVC *discountsVC = [[BaoyangDiscountsVC alloc] init];
             discountsVC.hidesBottomBarWhenPushed = YES;

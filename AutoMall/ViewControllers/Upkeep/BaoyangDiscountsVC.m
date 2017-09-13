@@ -22,16 +22,18 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"优惠";
     
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    //    searchBtn.contentMode = UIViewContentModeRight;
-    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
-    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(toAddDiscounts) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    if (self.canEdit) {
+        UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        searchBtn.frame = CGRectMake(0, 0, 44, 44);
+        //    searchBtn.contentMode = UIViewContentModeRight;
+        searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+        searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
+        [searchBtn addTarget:self action:@selector(toAddDiscounts) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+        self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    }
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     self.myTableView.tableFooterView = [UIView new];
@@ -43,9 +45,9 @@
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
-- (IBAction)saveAction:(id)sender {
-    
-}
+//- (IBAction)saveAction:(id)sender {
+//
+//}
 
 #pragma mark - UITableViewDataSource
 
@@ -71,7 +73,10 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+     if (self.canEdit) {
+            return YES;
+     }
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

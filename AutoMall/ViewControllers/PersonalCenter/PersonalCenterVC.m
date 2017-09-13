@@ -20,6 +20,7 @@
 #import "ReceiveAddressViewController.h"
 #import "UpkeepStatementVC.h"
 #import "LoginViewController.h"
+#import "BaoyangDiscountsVC.h"
 
 @interface PersonalCenterVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -88,7 +89,7 @@
             break;
         }
         case 1: {
-            return 5;
+            return 6;
             break;
         }
         case 2: {
@@ -208,11 +209,19 @@
                 }
                 case 4: {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"优惠管理";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                    break;
+                }
+                case 5: {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.nameL.text = @"员工管理";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
                 }
+                    
                 default:
                     return nil;
                     break;
@@ -324,7 +333,6 @@
                     break;
                 }
 
-                    
                 case 3: {
                     CustomServiceVC *customVC = [[CustomServiceVC alloc] init];
                     customVC.hidesBottomBarWhenPushed = YES;
@@ -333,6 +341,14 @@
                 }
                     
                 case 4: {
+                    BaoyangDiscountsVC *disVC = [[BaoyangDiscountsVC alloc] init];
+                    disVC.canEdit = YES;
+                    disVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:disVC animated:YES];
+                    break;
+                }
+                    
+                case 5: {
                     EmployeeListVC *listVC = [[EmployeeListVC alloc] init];
                     listVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:listVC animated:YES];

@@ -10,4 +10,6 @@
 
 @interface BaoyangDiscountsVC : UIViewController
 
+@property (assign, nonatomic) BOOL canEdit;
+
 @end

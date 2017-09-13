@@ -89,10 +89,13 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 - (void)addFootView{
-    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 55, Screen_wide, 55)];
+    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 59, Screen_wide, 59)];
     self.settemntView.number.text = @"0";
     [self.settemntView.settlement addTarget:self action:@selector(settlementClock) forControlEvents:UIControlEventTouchUpInside];
-    [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
+//    [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
+    self.settemntView.shoppingCart.userInteractionEnabled = NO;
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shoppingCartClock)];
+    [self.settemntView addGestureRecognizer:tap];
     [self.view addSubview:_settemntView];
 }
 
