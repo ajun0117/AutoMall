@@ -8,15 +8,22 @@
 
 #import "YZMLoginViewController.h"
 
+#define LEFTTIME    120   //120秒限制
+
 @interface YZMLoginViewController ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    
+    NSInteger leftTime;//重新发送后剩余的时间
+    NSTimer *_timer;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextF;
 @property (weak, nonatomic) IBOutlet UITextField *codeTextF;
 @property (weak, nonatomic) IBOutlet UIButton *sendMSMBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
-@property NSInteger leftTime;//重新发送后剩余的时间
-@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation YZMLoginViewController
@@ -28,6 +35,23 @@
     self.title = @"验证码登录";
     
     [self initViews];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
 }
 
 /**
@@ -62,16 +86,15 @@
  *
  */
 -(void) changeLeftTime:(NSTimer *)timer{
-    if (self.leftTime == 0) {
+    if (leftTime == 0) {
         self.sendMSMBtn.enabled = YES;
-        [self.timer invalidate];
+        [_timer invalidate];
         NSString *string = [NSString stringWithFormat:@"重新发送"];
-        [self.sendMSMBtn setBackgroundColor:[UIColor colorWithRed:1.000 green:0.643 blue:0.173 alpha:1.000]];
         [self.sendMSMBtn setTitle:string forState:UIControlStateNormal];
         return;
     }
-    self.leftTime --;
-    NSString *string = [NSString stringWithFormat:@"%ld秒",(long)self.leftTime];
+    leftTime --;
+    NSString *string = [NSString stringWithFormat:@"%ld秒",(long)leftTime];
     //    [self.sendMSMBtn.titleLabel setText:string];
     [self.sendMSMBtn setTitle:string forState:UIControlStateDisabled];
 }
@@ -82,15 +105,15 @@
  *
  */
 - (IBAction)sendMSMAction:(id)sender {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:REQUEST_GET_SENDPHONECODE object:nil];
-//    if ([self checkPhoneNumWithPhone:self.userNameTextF.text]) {
-//        //发送短信
-//        [[RequestManager sharedRequestManager] sendPhoneCodeWithPhoneNum:self.userNameTextF.text ipAddress:self.ipAddress];
-//    }
-//    else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号码格式不正确" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-//        [alert show];
-//    }
+    if ([self checkPhoneNumWithPhone:self.userNameTextF.text]) {
+        //发送短信
+        [self requestSendSMSVerifyCode];
+    }
+    else {
+        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 /**
@@ -100,31 +123,21 @@
 - (IBAction)loginAction:(id)sender {
     NSLog(@"登录");
     [self.view endEditing:YES];
-//    if ([self checkPhoneNumWithPhone:self.userNameTextF.text]) {
-//        if ([self checkCodeNumWithCode:self.codeTextF.text]) {
-//            if ([[GlobalSetting shareGlobalSettingInstance] csrfToken]) {
-//                [self.hud show:YES];
-//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:REQUEST_POST_PHONELOGIN object:nil];
-//                [[RequestManager sharedRequestManager] requestLoginWithUserName:self.userNameTextF.text password:self.codeTextF.text ip:self.ipAddress];
-//                [[GlobalSetting shareGlobalSettingInstance] setLoginName:self.userNameTextF.text];
-//            } else {
-//                //获取tooken
-//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:REQUEST_GET_CSRFTOKEN object:nil];
-//                [[RequestManager sharedRequestManager] getCsrfToken];
-//                
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"登录失败请重试！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//                [alert show];
-//            }
-//        }
-//        else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验证码格式不正确" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
-//    }
-//    else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号码格式不正确" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-//        [alert show];
-//    }
+    if ([self checkPhoneNumWithPhone:self.userNameTextF.text]) {
+        if ([self checkCodeNumWithCode:self.codeTextF.text]) {
+            [self requestMemberLogin];
+        }
+        else {
+            _networkConditionHUD.labelText = @"验证码输入不正确，请重新输入。";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    else {
+        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
     
 }
 
@@ -202,6 +215,96 @@
     }
     return NO;
 }
+
+#pragma mark - 发送请求
+-(void)requestSendSMSVerifyCode { //发送短信验证码
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetSMS object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetSMS, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?phone=%@",UrlPrefix(GetSMS),self.userNameTextF.text];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestMemberLogin { //登录
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserLogin object:nil];
+    
+    //    NSString *mixStr = [NSString stringWithFormat:@"%@%@",@"jw134#%pqNLVfn",self.passwordTF.text];
+    //    mixStr = [GlobalSetting md5HexDigest:mixStr];   //第一次加密
+    //    NSString *pwdMD5 = [GlobalSetting md5HexDigest:mixStr];     //第二次加密
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserLogin, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.userNameTextF.text,@"userName",self.codeTextF.text,@"code", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserLogin) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        if (!_networkConditionHUD) {
+            _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:_networkConditionHUD];
+        }
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        _networkConditionHUD.mode = MBProgressHUDModeText;
+        _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+        _networkConditionHUD.margin = HUDMargin;
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"_responseObject: %@",responseObject);
+    
+    if ([notification.name isEqualToString:GetSMS]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetSMS object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            //验证码发送成功，开始倒计时
+            self.sendMSMBtn.enabled = NO;
+            leftTime = LEFTTIME;
+            _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeLeftTime:) userInfo:nil repeats:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UserLogin]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogin object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            //            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = @"登录成功！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            //            NSDictionary *dic = responseObject[@"item"];
+            //            [[GlobalSetting shareGlobalSettingInstance] setLoginPWD:self.passwordTF.text]; //存储登录密码
+            //            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
+            //            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
+            //            [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"token"]];
+            //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES]; //返回首页面
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

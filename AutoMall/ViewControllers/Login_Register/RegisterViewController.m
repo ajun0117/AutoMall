@@ -74,6 +74,7 @@
     if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
         RegisterYZMViewController *yzmVC = [[RegisterYZMViewController alloc] init];
         yzmVC.phoneStr = self.phoneTF.text;
+        yzmVC.passwordStr = self.passwordTF.text;
         [self.navigationController pushViewController:yzmVC animated:YES];
     }
     else {

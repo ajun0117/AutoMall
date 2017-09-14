@@ -74,9 +74,9 @@
 //#define RequestURL(action)           ([NSString stringWithFormat:@"http://yimiyule.com:8080/yimiyule%@",action])
 #define RequestURL(action)           ([NSString stringWithFormat:@"http://yimiyule.com/yimiyule%@",action])
 
-#pragma mark - 商户商品相关接口及通知标识
-#define GetBanner                  @"GetBanner"     //获取广告图
-
+//#pragma mark - 商户商品相关接口及通知标识
+//#define GetBanner                  @"GetBanner"     //获取广告图
+//
 #pragma mark - 个人信息相关
 #define Register               @"/app/user/register"   //用户注册
 #define Login                    @"/app/user/login"  //用户登录
@@ -132,13 +132,16 @@
 //汽车商城
 #define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep/api%@",action])
 #define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
-#define InformationList                         @"/info/list"    //资讯列表
-#define CourseList                                  @"/course/list"  //教程列表
-#define ComCategoryList                        @"/comCategory/list"    //商品分类
-#define CommodityList                            @"/commodity/list"  //商品列表
+#define InformationList                        @"/info/list"    //资讯列表
+#define CourseList                                @"/course/list"  //教程列表
+#define ComCategoryList                       @"/comCategory/list"    //商品分类
+#define CommodityList                           @"/commodity/list"  //商品列表
 
 #define GetSMS                                     @"/sms/send"    //获取短信验证码
-
+#define UserRegister                              @"/user/register"   //用户注册
+#define UserForget                                 @"/user/forget"     //忘记密码
+#define CheckCode                                  @"/sms/checkCode"       //校验验证码
+#define UserLogin                                   @"/login"   //用户登录
 
 
 

@@ -51,14 +51,20 @@
 //    if ([[GlobalSetting shareGlobalSettingInstance] validatePhone:self.phoneTF.text]) {  //手机号码格式正确
 //        [self requestVerifyMobile];
 //    }
-                self.sendToPhoneL.text = self.phoneTF.text;
-                self.firstL.textColor = [UIColor blackColor];
-                self.secondL.textColor = Red_BtnColor;
-                self.firstView.hidden = YES;
-                self.secondView.hidden = NO;
-                self.reSendBtn.enabled = NO;
-                leftTime = LEFTTIME;
-                _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeLeftTime:) userInfo:nil repeats:YES];
+    
+    if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {  //手机号码格式正确
+        self.sendToPhoneL.text = self.phoneTF.text;
+//        self.firstL.textColor = [UIColor blackColor];
+//        self.secondL.textColor = Red_BtnColor;
+//        self.firstView.hidden = YES;
+//        self.secondView.hidden = NO;
+//        self.reSendBtn.enabled = NO;
+        
+        [self requestSendSMSVerifyCode];
+    }
+    else {
+        
+    }
 }
 - (IBAction)reSendAction:(id)sender {
     [self requestSendSMSVerifyCode];
@@ -94,7 +100,6 @@
 /**
  *  改变剩余时间
  *
- *  @param timer
  */
 -(void) changeLeftTime:(NSTimer *)timer{
     if (leftTime == 0) {
@@ -113,6 +118,27 @@
     if (alertView.tag == 1000) {
         [self.navigationController popViewControllerAnimated:YES]; //返回登录页面
     }
+}
+
+#pragma mark -
+#pragma mark 手机号码及验证码格式初步验证
+-(BOOL) checkPhoneNumWithPhone:(NSString *)phone {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:phone]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [phone length] == 11 && [phone hasPrefix:@"1"]) {
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -161,34 +187,43 @@
 
 
 #pragma mark - 发送请求
--(void)requestVerifyMobile { //验证是否已注册
-    [_hud show:YES];
-    //注册通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:VerifyMobile object:nil];
-//    
-//    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:VerifyMobile, @"op", nil];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"mobile", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(VerifyMobile) delegate:nil params:pram info:infoDic];
-}
+//-(void)requestVerifyMobile { //验证是否已注册
+//    [_hud show:YES];
+//    //注册通知
+////    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:VerifyMobile object:nil];
+////    
+////    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:VerifyMobile, @"op", nil];
+////    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"mobile", nil];
+////    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(VerifyMobile) delegate:nil params:pram info:infoDic];
+//}
 
 -(void)requestSendSMSVerifyCode { //发送短信验证码
     [_hud show:YES];
     //注册通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:SendSMSVerifyCode object:nil];
-//    
-//    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:SendSMSVerifyCode, @"op", nil];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"mobile", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(SendSMSVerifyCode) delegate:nil params:pram info:infoDic];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetSMS object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetSMS, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?phone=%@",UrlPrefix(GetSMS),self.phoneTF.text];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestVerifyCode { //校验验证码
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CheckCode object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CheckCode, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.codeNumTF.text,@"code", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CheckCode) delegate:nil params:pram info:infoDic];
 }
 
 -(void)requestForgotPwd { //重置密码
     [_hud show:YES];
     //注册通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ForgotPwd object:nil];
-//    
-//    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ForgotPwd, @"op", nil];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"mobile",self.passwordTF.text,@"new_pwd", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ForgotPwd) delegate:nil params:pram info:infoDic];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserForget object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserForget, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"phone",self.passwordTF.text,@"password",self.codeNumTF.text,@"code", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserForget) delegate:nil params:pram info:infoDic];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -199,47 +234,47 @@
 }
 
 
-//#pragma mark - 网络请求结果数据
-//-(void) didFinishedRequestData:(NSNotification *)notification{
-//    [_hud hide:YES];
-//    
-//    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
-//        
-//        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//        return;
-//    }
-//    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-//    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
-//    
-//    if ([notification.name isEqualToString:SendSMSVerifyCode]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:SendSMSVerifyCode object:nil];
-//        if ([responseObject[@"status"] boolValue]) {
-//            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-//            [_networkConditionHUD show:YES];
-//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//            
-//            certCode = responseObject[DATA] [@"certCode"];
-//            
-//            //发送成功
-//            self.sendToPhoneL.text = self.phoneTF.text;
-//            self.firstL.textColor = [UIColor blackColor];
-//            self.secondL.textColor = Red_BtnColor;
-//            
-//            self.firstView.hidden = YES;
-//            self.secondView.hidden = NO;
-//            
-//            self.reSendBtn.enabled = NO;
-//            leftTime = LEFTTIME;
-//            _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeLeftTime:) userInfo:nil repeats:YES];
-//        }
-//        else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
-//        
-//    }
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    
+    if ([notification.name isEqualToString:GetSMS]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetSMS object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            certCode = responseObject[DATA];
+            
+            //发送成功
+            self.sendToPhoneL.text = self.phoneTF.text;
+            self.firstL.textColor = [UIColor blackColor];
+            self.secondL.textColor = Red_BtnColor;
+            
+            self.firstView.hidden = YES;
+            self.secondView.hidden = NO;
+            
+            self.reSendBtn.enabled = NO;
+            leftTime = LEFTTIME;
+            _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeLeftTime:) userInfo:nil repeats:YES];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        
+    }
 //    if ([notification.name isEqualToString:VerifyMobile]) {
 //        [[NSNotificationCenter defaultCenter] removeObserver:self name:VerifyMobile object:nil];
 //        if ([responseObject[DATA][@"isExist"] boolValue]) {  //已注册
@@ -250,26 +285,37 @@
 //            [alert show];
 //        }
 //    }
-//    
-//    if ([notification.name isEqualToString:ForgotPwd]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ForgotPwd object:nil];
-//        if ([responseObject[@"status"] boolValue]) {
-////            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-////            [_networkConditionHUD show:YES];
-////            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    
+    if ([notification.name isEqualToString:CheckCode]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CheckCode object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+            [self requestForgotPwd];  //重置密码
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UserForget]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserForget object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+//            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+//            [_networkConditionHUD show:YES];
+//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
 //            alert.tag = 1000;
-//            [alert show];
-//    
-//        }
-//        else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
-//    }
-//    
-//}
+            [alert show];
+    
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

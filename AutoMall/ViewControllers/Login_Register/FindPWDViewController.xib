@@ -128,7 +128,6 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="za6-i6-LOX" secondAttribute="bottom" id="2Xr-0E-Iiw"/>
                         <constraint firstAttribute="centerX" secondItem="Bbr-ci-gHu" secondAttribute="centerX" multiplier="7:12" constant="-144.5" id="943-7X-OpC">
@@ -577,7 +576,7 @@
                                 </mask>
                             </variation>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系商城客服电话：400-6999-226" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Q5-SH-3v2">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系客服电话：400-6999-226" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Q5-SH-3v2">
                             <rect key="frame" x="8" y="185" width="359" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="UCY-lU-2pI"/>

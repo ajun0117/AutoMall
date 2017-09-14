@@ -84,8 +84,18 @@
 - (IBAction)loginAction:(id)sender {
     [self.phoneTF resignFirstResponder];
     [self.passwordTF resignFirstResponder];
-    [self requestMemberLogin];
+    
+    if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
+        [self requestMemberLogin];
+    }
+    else {
+        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
+
+
 - (IBAction)forgetAction:(id)sender {
     FindPWDViewController *findVC = [[FindPWDViewController alloc] init];
     [self.navigationController pushViewController:findVC animated:YES];
@@ -106,20 +116,55 @@
 }
 
 
+#pragma mark -
+#pragma mark 手机号码及验证码格式初步验证
+-(BOOL) checkPhoneNumWithPhone:(NSString *)phone {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:phone]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [phone length] == 11 && [phone hasPrefix:@"1"]) {
+        return YES;
+    }
+    return NO;
+}
+
+-(BOOL) checkCodeNumWithCode:(NSString *)code {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:code]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [code length] > 0) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - 发送请求
--(void)requestMemberLogin { //登录
+-(void)requestMemberLogin { //密码登录
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:Login object:nil];
-    
-    NSString *mixStr = [NSString stringWithFormat:@"%@%@",@"jw134#%pqNLVfn",self.passwordTF.text];
-    mixStr = [GlobalSetting md5HexDigest:mixStr];   //第一次加密
-    NSString *pwdMD5 = [GlobalSetting md5HexDigest:mixStr];     //第二次加密
-    
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:Login, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"nickName",pwdMD5,@"password", nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserLogin object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserLogin, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"userName",self.passwordTF.text,@"password", nil];
     NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(Login) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserLogin) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -141,24 +186,25 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     NSLog(@"_responseObject: %@",responseObject);
     
-    if ([notification.name isEqualToString:Login]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:Login object:nil];
-        if ([responseObject[@"result"] boolValue]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+    if ([notification.name isEqualToString:UserLogin]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogin object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = @"登录成功！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            NSDictionary *dic = responseObject[@"item"];
-            [[GlobalSetting shareGlobalSettingInstance] setLoginPWD:self.passwordTF.text]; //存储登录密码
-            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
-            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
-            [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"token"]];
-            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
+//            NSDictionary *dic = responseObject[@"item"];
+//            [[GlobalSetting shareGlobalSettingInstance] setLoginPWD:self.passwordTF.text]; //存储登录密码
+//            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
+//            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
+//            [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"token"]];
+//            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
 
-            [self.navigationController popViewControllerAnimated:YES]; //返回登录页面
+            [self.navigationController popViewControllerAnimated:YES]; //返回上级页面
         }
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
         }
     }

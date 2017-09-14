@@ -10,6 +10,7 @@
 
 @interface RegisterYZMViewController : UIViewController
 
-@property (weak, nonatomic) NSString *phoneStr;
+@property (strong, nonatomic) NSString *phoneStr;
+@property (strong, nonatomic) NSString *passwordStr;
 
 @end

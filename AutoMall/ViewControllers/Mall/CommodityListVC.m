@@ -22,6 +22,7 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *commodityArray;
+    int currentpage;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -40,26 +41,26 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityListCell" bundle:nil] forCellReuseIdentifier:@"commodityListCell"];
     
-//    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-//    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
     commodityArray = [NSMutableArray array];
+    currentpage = 0;
     [self requestGetComCategoryList];
 }
 
 #pragma mark - 下拉刷新,上拉加载
 -(void)headerRefreshing {
     NSLog(@"下拉刷新个人信息");
-//    currentpage = 1;
-//    //    NSDictionary *locationDic = [[GlobalSetting shareGlobalSettingInstance] myLocation];
-//    [self requestGetShopList];
+    currentpage = 0;
+    [commodityArray removeAllObjects];
+    [self requestGetComCategoryList];
 }
 
 -(void)footerLoadData {
     NSLog(@"上拉加载数据");
-//    currentpage ++;
-//    //    NSDictionary *locationDic = [[GlobalSetting shareGlobalSettingInstance] myLocation];
-//    [self requestGetShopList];
+    currentpage ++;
+    [self requestGetComCategoryList];
 }
 
 #pragma mark - UITableViewDataSource
@@ -157,18 +158,6 @@
         cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
         cell.yunfeiL.text = [NSString stringWithFormat:@"配送费￥%@",dic[@"shippingFee"]];
         
-//        goodsIM
-//        goodsNameL;
-//        baokuanL;
-//        tuijianL;
-//        zhekouL;
-//        pingxingView
-//        xiaoliangL
-//        jifenL
-//        moneyL
-//        costPriceStrikeL
-//        yunfeiL
-        
 //        cell.shopIM.layer.cornerRadius = 5;
 //        cell.shopIM.clipsToBounds = YES;
 //        
@@ -178,42 +167,8 @@
 //        cell.youhuiL.clipsToBounds = YES;
 //        cell.jifenL.layer.cornerRadius = 9;
 //        cell.jifenL.clipsToBounds = YES;
-//        
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//        NSDictionary *dic = shopArray [indexPath.section];
-//        
-//        [cell.shopIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"squareImageDefault")];
-//        cell.shopNameL.text = dic [@"name"];
-//        
-//        if ([dic [@"integral"] boolValue]) {  //返积分
-//            cell.jifenWidthCons.constant = 41;
-//        }
-//        else {
-//            cell.jifenWidthCons.constant = 0.0;
-//        }
-//        
-//        if (dic [@"coupons"] !=nil && [dic [@"coupons"] floatValue] > 0) {  //有优惠
-//            cell.youhuiWidthCons.constant = 41;
-//        }
-//        else {
-//            cell.youhuiWidthCons.constant = 0.0;
-//        }
-//        
-//        if (dic [@"recommendation"] !=nil && [dic [@"recommendation"] floatValue] > 0) {  //有推荐
-//            cell.tuijianWidthCons.constant = 41;
-//        }
-//        else {
-//            cell.tuijianWidthCons.constant = 0.0;
-//        }
-//        
-//        cell.scoreL.text = NSStringZeroWithNumber(dic[@"scorex"]);
-//        cell.consumptionL.text =  dic[@"consumption"]==nil?@"未知":[NSString stringWithFormat:@"￥%@",dic[@"consumption"]];
-//        cell.distanceL.text = dic[@"distance"]==nil?@"未知":[NSString stringWithFormat:@"距离%.1f公里",[dic[@"distance"] floatValue]];
-//        cell.addressL.text = dic [@"address"];
 //        //    cell.contactL.text = [NSString stringWithFormat:@"电话：%@ / 微信：%@ / QQ：%@ / QQ群：%@ / 经理：%@",dic[@"phone"],dic[@"wechat"],dic[@"qq"],dic[@"qqGroup"],dic[@"manager"]];
 //        //    电话：13838888888 / 微信：阿俊 / QQ：123456789 / QQ群：123456 / 经理：刘经理
-//        
 //        //        NSString *text = [NSString stringWithFormat:@"<font color=\"lightGray\">电话：<font color=\"black\">%@<font color=\"lightGray\"> / 微信：<font color=\"black\">%@<font color=\"lightGray\"> / QQ：<font color=\"black\">%@<font color=\"lightGray\"> / QQ群：<font color=\"black\">%@<font color=\"lightGray\"> / 经理：<font color=\"black\">%@",dic[@"phone"],dic[@"wechat"],dic[@"qq"],dic[@"qqGroup"],dic[@"manager"]];
 //        //        MarkupParser *p = [[MarkupParser alloc] init];
 //        //        NSAttributedString *attString = [p attrStringFromMarkup:text];
@@ -296,17 +251,16 @@
     [btn setTitle:str forState:UIControlStateNormal];
 }
 
+#pragma mark - 发送请求
 -(void)requestGetComCategoryList { //获取分类列表
     [_hud show:YES];
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CommodityList),currentpage];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
     
-    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"page",@"10",@"limit", nil];
-    //    NSLog(@"pram: %@",pram);
-    //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
-    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -335,21 +289,6 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
-    //    if ([notification.name isEqualToString:CourseList]) {
-    //        [[NSNotificationCenter defaultCenter] removeObserver:self name:CourseList object:nil];
-    //        NSLog(@"_responseObject: %@",responseObject);
-    //
-    //        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-    //            [inforArray addObjectsFromArray:responseObject [@"data"]];
-    //            [self.myTableView reloadData];
-    //        }
-    //        else {
-    //            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-    //            [_networkConditionHUD show:YES];
-    //            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-    //        }
-    //        [self.myTableView reloadData];
-    //    }
     
 }
 

@@ -8,12 +8,22 @@
 
 #import "RegisterYZMViewController.h"
 
+#define LEFTTIME    120   //120秒限制
+
 @interface RegisterYZMViewController ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
+    
+    NSString *certCode;
+    
+    NSInteger leftTime;
+    NSTimer *_timer;
 }
 @property (strong, nonatomic) IBOutlet UILabel *phoneL;
+@property (weak, nonatomic) IBOutlet UIButton *reSendBtn;
+@property (weak, nonatomic) IBOutlet UITextField *codeNumTF;
+@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 
 @end
 
@@ -22,11 +32,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.phoneL.text = self.phoneStr;
+    self.title = @"快速注册";
+    NSLog(@"phoneStr:   %@",self.phoneStr);
+    [self requestGetSMS];  //发送验证码
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    self.phoneL.text = self.phoneStr;
     
     if (! _hud) {
         _hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -42,21 +56,53 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+/**
+ *  改变剩余时间
+ *
+ */
+-(void) changeLeftTime:(NSTimer *)timer{
+    if (leftTime == 0) {
+        self.reSendBtn.enabled = YES;
+        [_timer invalidate];
+        NSString *string = [NSString stringWithFormat:@"重新发送"];
+        [self.reSendBtn setTitle:string forState:UIControlStateNormal];
+        return;
+    }
+    leftTime --;
+    NSString *string = [NSString stringWithFormat:@"(%ldS)重新发送",(long)leftTime];
+    [self.reSendBtn setTitle:string forState:UIControlStateDisabled];
+}
+
+
+- (IBAction)reSendAction:(id)sender {
+    [self requestGetSMS];
+}
+
+- (IBAction)nextAction:(id)sender {
+    [self requestRegister];
+}
+
 #pragma mark - 发送请求
--(void)requestGetSMS { //登录
+-(void)requestGetSMS { //发送验证码
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetSMS object:nil];
-    
 //    NSString *mixStr = [NSString stringWithFormat:@"%@%@",@"jw134#%pqNLVfn",self.passwordTF.text];
 //    mixStr = [GlobalSetting md5HexDigest:mixStr];   //第一次加密
 //    NSString *pwdMD5 = [GlobalSetting md5HexDigest:mixStr];     //第二次加密
-    
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetSMS, @"op", nil];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneTF.text,@"nickName",pwdMD5,@"password", nil];
-//    NSLog(@"pram: %@",pram);
-    NSString *urlString = [NSString stringWithFormat:@"%@?phone=%@",UrlPrefix(GetSMS),self.phoneL.text];
+    NSString *urlString = [NSString stringWithFormat:@"%@?phone=%@",UrlPrefix(GetSMS),self.phoneStr];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestRegister { //注册
+    [_hud show:YES];
+    //注册通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserRegister object:nil];
+    
+        NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserRegister, @"op", nil];
+        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.phoneStr,@"phone",self.passwordStr,@"password",self.codeNumTF.text,@"code", nil];
+        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserRegister) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -80,8 +126,28 @@
     
     if ([notification.name isEqualToString:GetSMS]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:GetSMS object:nil];
-        if ([responseObject[@"result"] boolValue]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            //验证码发送成功，开始倒计时
+            self.reSendBtn.enabled = NO;
+            leftTime = LEFTTIME;
+            _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeLeftTime:) userInfo:nil repeats:YES];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+    
+    if ([notification.name isEqualToString:UserRegister]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserRegister object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+//            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = @"注册成功！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
@@ -91,11 +157,11 @@
 //            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
 //            [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"token"]];
 //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
-//            
+//
 //            [self.navigationController popViewControllerAnimated:YES]; //返回登录页面
         }
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[responseObject objectForKey:MSG] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
         }
     }
