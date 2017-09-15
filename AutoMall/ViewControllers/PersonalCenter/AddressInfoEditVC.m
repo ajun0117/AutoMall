@@ -11,6 +11,11 @@
 #import "CitiesDataTool.h"
 
 @interface AddressInfoEditVC () <NSURLSessionDelegate,UIGestureRecognizerDelegate>
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+}
+@property (nonatomic, strong) MBProgressHUD *networkConditionHUD;
 @property (nonatomic,strong) ChooseLocationView *chooseLocationView;
 @property (nonatomic,strong) UIView  *cover;
 
@@ -29,6 +34,22 @@
     self.chooseLocationView.address = @"广东省 广州市 白云区";
     self.chooseLocationView.areaCode = @"440104";
     [self.addressBtn setTitle:@"广东省 广州市 白云区" forState:UIControlStateNormal];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
 }
 
 - (IBAction)selectAddressAction:(id)sender {
@@ -93,6 +114,74 @@
     return _cover;
 }
 
+#pragma mark - 发送请求
+-(void)addAddress {
+    //    [_addressArray removeAllObjects];
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeAdd object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeAdd, @"op", nil];
+    NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),@"1",self.uNameTF.text,self.phoneTF.text,addAry[1],addAry[2],addAry[3],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)editAddress:(NSString *)aid {
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeEdit object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeEdit, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@",UrlPrefix(ConsigneeEdit),@"1",aid];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+
+#pragma mark -
+#pragma mark 网络请求数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        if (!self.networkConditionHUD) {
+            self.networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:self.networkConditionHUD];
+        }
+        self.networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        self.networkConditionHUD.mode = MBProgressHUDModeText;
+        self.networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+        self.networkConditionHUD.margin = HUDMargin;
+        [self.networkConditionHUD show:YES];
+        [self.networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:ConsigneeAdd]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeAdd object:nil];
+        
+//        [_addressArray addObjectsFromArray:responseObject [@"data"]];
+//        
+//        if ([_addressArray count]) {
+//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 1)];
+//            self.myTableView.tableHeaderView = label;
+//            [self.myTableView reloadData];
+//        }
+//        else {
+//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 100)];
+//            label.text = @"暂无收货地址信息";
+//            label.textAlignment = NSTextAlignmentCenter;
+//            label.textColor = [UIColor lightGrayColor];
+//            self.myTableView.tableHeaderView = label;
+//        }
+    }
+    
+    if ([notification.name isEqualToString:ConsigneeEdit]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeEdit object:nil];
+        
+        //删除成功后刷新
+//        [self.myTableView headerBeginRefreshing];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

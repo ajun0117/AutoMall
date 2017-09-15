@@ -72,10 +72,7 @@
     [self.passwordTF resignFirstResponder];
     
     if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
-        RegisterYZMViewController *yzmVC = [[RegisterYZMViewController alloc] init];
-        yzmVC.phoneStr = self.phoneTF.text;
-        yzmVC.passwordStr = self.passwordTF.text;
-        [self.navigationController pushViewController:yzmVC animated:YES];
+        [self requestVerifyMobile];
     }
     else {
         _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
@@ -109,6 +106,49 @@
     return NO;
 }
 
+#pragma mark - 发送请求
+-(void)requestVerifyMobile { //验证是否已注册
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:PhoneCheckup object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:PhoneCheckup, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?phone=%@",UrlPrefix(PhoneCheckup),self.phoneTF.text];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    
+    if ([notification.name isEqualToString:PhoneCheckup]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:PhoneCheckup object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            RegisterYZMViewController *yzmVC = [[RegisterYZMViewController alloc] init];
+            yzmVC.phoneStr = self.phoneTF.text;
+            yzmVC.passwordStr = self.passwordTF.text;
+            [self.navigationController pushViewController:yzmVC animated:YES];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

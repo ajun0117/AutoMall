@@ -10,6 +10,10 @@
 
 @interface ChooseLocationView : UIView
 
+@property (nonatomic, copy) NSString * province;    //省
+@property (nonatomic, copy) NSString * city;           //市
+@property (nonatomic, copy) NSString * county;      //区
+
 @property (nonatomic, copy) NSString * address;
 
 @property (nonatomic, copy) void(^chooseFinish)();

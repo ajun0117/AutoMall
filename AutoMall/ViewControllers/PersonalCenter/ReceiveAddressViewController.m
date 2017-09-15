@@ -18,6 +18,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 @interface ReceiveAddressViewController ()
 {
     NSMutableArray *_addressArray;
+    MBProgressHUD *_hud;
 }
 
 @property (nonatomic, strong) MBProgressHUD *networkConditionHUD;
@@ -47,9 +48,22 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
     
 //    [self.myTableView headerBeginRefreshing];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -128,29 +142,21 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         AddressListCell *cell = (AddressListCell *)[tableView dequeueReusableCellWithIdentifier:AddressCellIdentify forIndexPath:indexPath];
-//        cell.backgroundColor = [UIColor grayColor];
-//        unameL;
-//        phoneL
-//        addressL;
-//        defaultIM
-//        NSDictionary *dic = _addressArray [indexPath.row];
-//        cell.unameL.text = dic [@"rname"];
-//        cell.phoneL.text = dic [@"mobile"];
-//        NSString *provStr = [PocketLYProvinceAndCityCoreObject selectDataWithPcid:dic [@"provId"]].name;
-//        NSString *cityStr = [PocketLYProvinceAndCityCoreObject selectDataWithPcid:dic [@"cityId"]].name;
-//        NSString *areaStr = [PocketLYProvinceAndCityCoreObject selectDataWithPcid:dic [@"areaId"]].name;
-//        cell.addressL.text = [NSString stringWithFormat:@"%@-%@-%@-%@",provStr,cityStr,areaStr,dic [@"areadesc"]];
-//        int ause = [dic [@"ause"] intValue];
-//        if (ause == 1) {
-//            cell.defaultIM.hidden = NO;
-//        }
-//        else {
-//             cell.defaultIM.hidden = YES;
-//        }
-    if (indexPath.row == 0) {
+    NSDictionary *dic = _addressArray [indexPath.row];
+    cell.unameL.text = dic [@"name"];
+    cell.phoneL.text = dic [@"phone"];
+    NSString *pro = dic [@"province"];
+    NSString *city = dic [@"city"];
+    NSString *country = dic [@"country"];
+    cell.addressL.text = [NSString stringWithFormat:@"%@-%@-%@-%@",pro,city,country,dic [@"address"]];
+    BOOL preferred = [dic [@"preferred"] boolValue];
+    if (preferred) {
         cell.defaultIM.hidden = NO;
     }
-        return cell;
+    else {
+         cell.defaultIM.hidden = YES;
+    }
+    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -164,7 +170,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     NSLog(@"row: %ld",(long)indexPath.row);
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //先删除相应的地址
-        [self deleteAddress:_addressArray [indexPath.row] [@"aid"]];
+        [self deleteAddress:_addressArray [indexPath.row] [@"id"]];
         [_addressArray removeObjectAtIndex:indexPath.row];//移除数据源的数据
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];//移除tableView中的数据
     }
@@ -174,63 +180,70 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 #pragma mark - 发送请求
 -(void)getMyAddress {
 //    [_addressArray removeAllObjects];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:Address_Getall object:nil];
-//    NSString *uid = [[GlobalSetting shareGlobalSettingInstance] userId];
-//    [[RequestManager sharedRequestManager] requestPostGetUserAddressUserID:uid];
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeList, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefix(ConsigneeList),@"1"];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 -(void)deleteAddress:(NSString *)aid {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:Address_del object:nil];
-//    NSString *uid = [[GlobalSetting shareGlobalSettingInstance] userId];
-//    [[RequestManager sharedRequestManager] requestPostDeleteAddressUserID:uid aid:aid];
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeDele object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeDele, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@",UrlPrefix(ConsigneeDele),@"1",aid];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 
 #pragma mark -
 #pragma mark 网络请求数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
     [self.myTableView headerEndRefreshing];
     
-//    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
-//        if (!self.networkConditionHUD) {
-//            self.networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//            [self.view addSubview:self.networkConditionHUD];
-//        }
-//        self.networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
-//        self.networkConditionHUD.mode = MBProgressHUDModeText;
-//        self.networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
-//        self.networkConditionHUD.margin = HUDMargin;
-//        [self.networkConditionHUD show:YES];
-//        [self.networkConditionHUD hide:YES afterDelay:HUDDelay];
-//        return;
-//    }
-//    
-//    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-//    if ([notification.name isEqualToString:Address_Getall]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:Address_Getall object:nil];
-//        
-//        [_addressArray addObjectsFromArray:responseObject [@"addr"]];
-//        
-//        if ([_addressArray count]) {
-//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 1)];
-//            self.myTableView.tableHeaderView = label;
-//            [self.myTableView reloadData];
-//        }
-//        else {
-//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 100)];
-//            label.text = @"暂无收货地址信息";
-//            label.textAlignment = NSTextAlignmentCenter;
-//            label.textColor = [UIColor lightGrayColor];
-//            self.myTableView.tableHeaderView = label;
-//        }
-//    }
-//    
-//    if ([notification.name isEqualToString:Address_del]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:Address_del object:nil];
-//        
-//        //删除成功后刷新
-//        [self.myTableView headerBeginRefreshing];
-//    }
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        if (!self.networkConditionHUD) {
+            self.networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:self.networkConditionHUD];
+        }
+        self.networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        self.networkConditionHUD.mode = MBProgressHUDModeText;
+        self.networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+        self.networkConditionHUD.margin = HUDMargin;
+        [self.networkConditionHUD show:YES];
+        [self.networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:ConsigneeList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeList object:nil];
+        
+        [_addressArray addObjectsFromArray:responseObject [@"data"]];
+        
+        if ([_addressArray count]) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 1)];
+            self.myTableView.tableHeaderView = label;
+            [self.myTableView reloadData];
+        }
+        else {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 100)];
+            label.text = @"暂无收货地址信息";
+            label.textAlignment = NSTextAlignmentCenter;
+            label.textColor = [UIColor lightGrayColor];
+            self.myTableView.tableHeaderView = label;
+        }
+    }
+    
+    if ([notification.name isEqualToString:ConsigneeDele]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeDele object:nil];
+        
+        //删除成功后刷新
+        [self.myTableView headerBeginRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -37,6 +37,7 @@ static CGFloat const scrollViewHeight = 220;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *categoryArray;
+    NSArray *adArray;   //广告数组
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic, strong) UIScrollView *typeScrollView; //分类
@@ -70,12 +71,15 @@ static CGFloat const scrollViewHeight = 220;
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailGoodsCell" bundle:nil] forCellReuseIdentifier:@"mailGoodsCell"];
     
-    allCount = 3;
     scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, scrollViewHeight) rootTableView:self.myTableView];
     scroll.delegate = self;
-    scroll.images = @[[UIImage imageNamed:@"timg-1"],
-                      [UIImage imageNamed:@"timg-2"],
-                      [UIImage imageNamed:@"timg-1"]];
+    
+    allCount = 3;
+////    UIImage *img = [self imageFromURLString:@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png"];
+    scroll.images = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
+                      @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
+                      @"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png"];
+    
     
     [scroll setTapImageHandle:^(NSInteger index) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
@@ -103,7 +107,14 @@ static CGFloat const scrollViewHeight = 220;
     
     categoryArray = [[NSMutableArray alloc] init];
     
+//    [self requsetAdvertList];   //请求广告列表
     [self requestGetComCategoryList];   //请求分类数据
+}
+
+- (UIImage *) imageFromURLString: (NSString *) urlstring
+{
+    return [UIImage imageWithData:[NSData  dataWithContentsOfURL:[NSURL URLWithString:urlstring]]];
+    
 }
 
 //-(void) viewDidAppear:(BOOL)animated {
@@ -361,6 +372,16 @@ static CGFloat const scrollViewHeight = 220;
     
 }
 
+#pragma mark - 网络请求
+-(void)requsetAdvertList {      //获取广告列表
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:AdvertList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:AdvertList, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(AdvertList) delegate:nil params:nil info:infoDic];
+}
+
 
 -(void)requestGetComCategoryList { //获取分类列表
     [_hud show:YES];
@@ -390,32 +411,34 @@ static CGFloat const scrollViewHeight = 220;
     if ([notification.name isEqualToString:ComCategoryList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ComCategoryList object:nil];
         NSLog(@"_responseObject: %@",responseObject);
-        
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [categoryArray addObjectsFromArray:responseObject [@"data"]];
             [self initHeadScrollViewWithArray:categoryArray];
         }
         else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
-//    if ([notification.name isEqualToString:CourseList]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:CourseList object:nil];
-//        NSLog(@"_responseObject: %@",responseObject);
-//        
-//        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-//            [inforArray addObjectsFromArray:responseObject [@"data"]];
-//            [self.myTableView reloadData];
-//        }
-//        else {
-//            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-//            [_networkConditionHUD show:YES];
-//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//        }
-//        [self.myTableView reloadData];
-//    }
+    if ([notification.name isEqualToString:AdvertList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AdvertList object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            adArray = responseObject[@"data"];
+            allCount = [adArray count];
+            NSMutableArray *urlAry = [NSMutableArray array];
+            for (NSDictionary *dic in adArray) {
+                [urlAry addObject:dic[@"image"]];
+            }
+            scroll.images = urlAry;
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
     
 }
 

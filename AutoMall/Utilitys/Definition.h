@@ -141,11 +141,13 @@
 #define UserRegister                              @"/user/register"   //用户注册
 #define UserForget                                 @"/user/forget"     //忘记密码
 #define CheckCode                                  @"/sms/checkCode"       //校验验证码
-#define UserLogin                                   @"/login"   //用户登录
-
-
-
-
+#define UserLogin                                   @"/login"                   //用户登录
+#define PhoneCheckup                             @"/user/checkup"       //验证手机号是否存在
+#define AdvertList                                  @"/advert/list"         //广告列表接口
+#define ConsigneeList                              @"/consignee/list"      //收货地址接口
+#define ConsigneeAdd                              @"/consignee/add"   //新增收货地址
+#define ConsigneeEdit                              @"/consignee/edit"      //编辑收货地址
+#define ConsigneeDele                              @"/consignee/del"       //删除收货地址
 
 
 

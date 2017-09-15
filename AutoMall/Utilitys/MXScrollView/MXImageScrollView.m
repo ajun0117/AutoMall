@@ -269,6 +269,7 @@
 
     MXImageView *scrollImage = [[MXImageView alloc] initWithFrame:viewFrame
                                                          hasTable:_rootTableView != nil];
+    scrollImage.clipsToBounds = YES;
     [scrollImage setImageWithSource:object
                    placeholderImage:_placeholderImage];
     [scrollImage setDidTapImageViewHandle:^{
