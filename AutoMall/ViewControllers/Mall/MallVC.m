@@ -13,6 +13,7 @@
 #import "MailGoodsCell.h"
 #import "WRNavigationBar.h"
 #import "CommodityListVC.h"
+#import "CommodityDetailVC.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -134,9 +135,12 @@ static CGFloat const scrollViewHeight = 220;
 //    searchVC.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:searchVC animated:YES];
     
-    CommodityListVC *listVC = [[CommodityListVC alloc] init];
-    listVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
+//    CommodityListVC *listVC = [[CommodityListVC alloc] init];
+//    listVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:listVC animated:YES];
+    CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - scrollView delegate

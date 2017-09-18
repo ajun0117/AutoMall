@@ -38,121 +38,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlm-tE-VgZ">
-                                <rect key="frame" x="8" y="72" width="359" height="44"/>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="b2k-YM-PP9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="331" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="车主车辆资料" image="arrows"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NJo-XH-TUQ">
+                                <rect key="frame" x="10" y="0.0" width="355" height="667"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RbZ-Z9-Vti">
+                                    <size key="itemSize" width="112" height="174"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="20"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="upkeepHomeCollectionCell" id="7Ty-62-hd2" customClass="UpkeepHomeCollectionCell">
+                                        <rect key="frame" x="0.0" y="10" width="112" height="174"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="174"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9jZ-UH-S3r">
+                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="133"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快速保养检查" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywp-Ou-Lhv">
+                                                    <rect key="frame" x="0.0" y="143" width="112" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="9jZ-UH-S3r" secondAttribute="trailing" id="FAf-Q2-Ta2"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ywp-Ou-Lhv" secondAttribute="bottom" constant="10" id="WSk-WB-i6z"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ywp-Ou-Lhv" secondAttribute="trailing" id="XmA-B7-wy6"/>
+                                            <constraint firstItem="Ywp-Ou-Lhv" firstAttribute="top" secondItem="9jZ-UH-S3r" secondAttribute="bottom" constant="10" id="aQw-OI-vf5"/>
+                                            <constraint firstItem="Ywp-Ou-Lhv" firstAttribute="leading" secondItem="7Ty-62-hd2" secondAttribute="leading" id="foH-0A-PKl"/>
+                                            <constraint firstItem="9jZ-UH-S3r" firstAttribute="top" secondItem="7Ty-62-hd2" secondAttribute="top" id="jb3-u2-6MV"/>
+                                            <constraint firstItem="9jZ-UH-S3r" firstAttribute="leading" secondItem="7Ty-62-hd2" secondAttribute="leading" id="pN1-GI-nH4"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="img" destination="9jZ-UH-S3r" id="hMS-wN-HEJ"/>
+                                            <outlet property="titleL" destination="Ywp-Ou-Lhv" id="eiV-Qb-3Ry"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <action selector="carInfoListAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="ACe-Df-irN"/>
+                                    <outlet property="dataSource" destination="9pv-A4-QxB" id="zhh-Ce-3li"/>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="mBa-K9-P0b"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jeq-1C-Kwu">
-                                <rect key="frame" x="16" y="196" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="jGd-MT-Kvh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="319" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="美容检查"/>
-                                <connections>
-                                    <action selector="toCheckAutoAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="lom-Dj-Wrd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmQ-fr-XPZ">
-                                <rect key="frame" x="16" y="324" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="T9X-L5-3GQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="319" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="保养检查"/>
-                                <connections>
-                                    <action selector="upkeepAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="1LW-4I-3qD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVd-Lm-cgO">
-                                <rect key="frame" x="16" y="452" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Enc-h1-5cX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="319" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="自定义检查"/>
-                                <connections>
-                                    <action selector="customAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="yJA-co-LBX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJy-hz-WfC">
-                                <rect key="frame" x="16" y="260" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="vih-Zo-vg1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="319" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="快速保养检查"/>
-                                <connections>
-                                    <action selector="quickAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="URj-th-rVb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmN-dg-3iV">
-                                <rect key="frame" x="16" y="388" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="eD1-gl-qJg"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="319" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="综合检查"/>
-                                <connections>
-                                    <action selector="synthesizeAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Oae-rm-Cdk"/>
-                                </connections>
-                            </button>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="LJy-hz-WfC" secondAttribute="trailing" constant="16" id="10m-BB-qHs"/>
-                            <constraint firstAttribute="trailing" secondItem="Jeq-1C-Kwu" secondAttribute="trailing" constant="16" id="2N1-Jr-yJC"/>
-                            <constraint firstItem="LJy-hz-WfC" firstAttribute="top" secondItem="Jeq-1C-Kwu" secondAttribute="bottom" constant="20" id="Cau-Zg-VZM"/>
-                            <constraint firstItem="Rlm-tE-VgZ" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="Cig-5k-fai"/>
-                            <constraint firstAttribute="trailing" secondItem="nmN-dg-3iV" secondAttribute="trailing" constant="16" id="DlG-vb-cBR"/>
-                            <constraint firstItem="LJy-hz-WfC" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="GrW-s2-GCh"/>
-                            <constraint firstItem="dmQ-fr-XPZ" firstAttribute="top" secondItem="LJy-hz-WfC" secondAttribute="bottom" constant="20" id="Njb-ax-PnQ"/>
-                            <constraint firstAttribute="trailing" secondItem="Rlm-tE-VgZ" secondAttribute="trailing" constant="8" id="S74-8D-HXg"/>
-                            <constraint firstItem="bVd-Lm-cgO" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="aBH-EQ-nXx"/>
-                            <constraint firstItem="nmN-dg-3iV" firstAttribute="top" secondItem="dmQ-fr-XPZ" secondAttribute="bottom" constant="20" id="j0m-N1-fCw"/>
-                            <constraint firstItem="Rlm-tE-VgZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="8" id="kK5-w0-FL6"/>
-                            <constraint firstItem="nmN-dg-3iV" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="lGJ-Po-xLN"/>
-                            <constraint firstItem="Jeq-1C-Kwu" firstAttribute="top" secondItem="Rlm-tE-VgZ" secondAttribute="bottom" constant="80" id="pPC-Bl-tfx"/>
-                            <constraint firstItem="bVd-Lm-cgO" firstAttribute="top" secondItem="nmN-dg-3iV" secondAttribute="bottom" constant="20" id="rax-lR-T8b"/>
-                            <constraint firstAttribute="trailing" secondItem="bVd-Lm-cgO" secondAttribute="trailing" constant="16" id="uti-UX-boG"/>
-                            <constraint firstAttribute="trailing" secondItem="dmQ-fr-XPZ" secondAttribute="trailing" constant="16" id="vww-Ex-Ffb"/>
-                            <constraint firstItem="Jeq-1C-Kwu" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="w4B-rz-Zpz"/>
-                            <constraint firstItem="dmQ-fr-XPZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="wgw-0S-hI7"/>
+                            <constraint firstItem="NJo-XH-TUQ" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="0UH-ni-F1J"/>
+                            <constraint firstAttribute="trailing" secondItem="NJo-XH-TUQ" secondAttribute="trailing" constant="10" id="ECq-Bw-aiJ"/>
+                            <constraint firstAttribute="bottom" secondItem="NJo-XH-TUQ" secondAttribute="bottom" id="oSg-4P-lQZ"/>
+                            <constraint firstItem="NJo-XH-TUQ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="10" id="rbN-BM-4WL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" id="LSw-DX-DDr"/>
-                    <connections>
-                        <outlet property="carOwnerBtn" destination="Rlm-tE-VgZ" id="atr-v8-YZJ"/>
-                        <outlet property="customBtn" destination="bVd-Lm-cgO" id="T0K-gU-Vif"/>
-                        <outlet property="hairdressingBtn" destination="Jeq-1C-Kwu" id="MYb-UO-g5j"/>
-                        <outlet property="quickBtn" destination="LJy-hz-WfC" id="6Ca-7L-0mu"/>
-                        <outlet property="synthesizeBtn" destination="nmN-dg-3iV" id="TAt-DG-RjF"/>
-                        <outlet property="upkeepBtn" destination="dmQ-fr-XPZ" id="OYY-GH-rsN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="615" y="-743"/>
+            <point key="canvasLocation" x="613.60000000000002" y="-743.47826086956525"/>
         </scene>
         <!--Item-->
         <scene sceneID="auC-ao-E0v">
@@ -419,7 +367,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrows" width="13" height="24"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>

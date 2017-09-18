@@ -13,6 +13,8 @@
 		041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076F11F542463003CB740 /* CenterNormalCell.xib */; };
 		041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076F51F54247B003CB740 /* CenterOrderCell.m */; };
 		041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076F61F54247B003CB740 /* CenterOrderCell.xib */; };
+		04254DCC1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254DCB1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m */; };
+		04254DD01F6FC21F0010D49F /* NSDate+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254DCF1F6FC21F0010D49F /* NSDate+Formatter.m */; };
 		042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */; };
 		042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */; };
 		042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2051F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m */; };
@@ -333,6 +335,10 @@
 		041076F41F54247B003CB740 /* CenterOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterOrderCell.h; sourceTree = "<group>"; };
 		041076F51F54247B003CB740 /* CenterOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterOrderCell.m; sourceTree = "<group>"; };
 		041076F61F54247B003CB740 /* CenterOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterOrderCell.xib; sourceTree = "<group>"; };
+		04254DCA1F6F6DC40010D49F /* UpkeepHomeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepHomeCollectionCell.h; sourceTree = "<group>"; };
+		04254DCB1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepHomeCollectionCell.m; sourceTree = "<group>"; };
+		04254DCE1F6FC21F0010D49F /* NSDate+Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Formatter.h"; sourceTree = "<group>"; };
+		04254DCF1F6FC21F0010D49F /* NSDate+Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Formatter.m"; sourceTree = "<group>"; };
 		042AF1FF1F4C3C6500EA5E5F /* CommodityDetailStarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailStarCell.h; sourceTree = "<group>"; };
 		042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailStarCell.m; sourceTree = "<group>"; };
 		042AF2011F4C3C6500EA5E5F /* CommodityDetailStarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailStarCell.xib; sourceTree = "<group>"; };
@@ -908,6 +914,15 @@
 				041076F61F54247B003CB740 /* CenterOrderCell.xib */,
 			);
 			name = "中心首页cell";
+			sourceTree = "<group>";
+		};
+		04254DCD1F6FC21F0010D49F /* 日历 */ = {
+			isa = PBXGroup;
+			children = (
+				04254DCE1F6FC21F0010D49F /* NSDate+Formatter.h */,
+				04254DCF1F6FC21F0010D49F /* NSDate+Formatter.m */,
+			);
+			path = "日历";
 			sourceTree = "<group>";
 		};
 		042DEFEA1F469B4A0065FED8 /* 商品列表 */ = {
@@ -1647,6 +1662,8 @@
 				042E5D141F419B8B00F5F324 /* 保养方案 */,
 				04DC7CF91F31C24000AA20A7 /* UpkeepVC.h */,
 				04DC7CFA1F31C24000AA20A7 /* UpkeepVC.m */,
+				04254DCA1F6F6DC40010D49F /* UpkeepHomeCollectionCell.h */,
+				04254DCB1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m */,
 			);
 			path = Upkeep;
 			sourceTree = "<group>";
@@ -1703,6 +1720,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				04254DCD1F6FC21F0010D49F /* 日历 */,
 				04D107201F62998C007D9F57 /* ZFChart */,
 				0459C68F1F614C870040501E /* AddressPicker */,
 				04DD8EE01F50169D00159776 /* WRNavigationBar */,
@@ -2392,6 +2410,7 @@
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
 				04DC7DE71F31C28300AA20A7 /* DJQRateView.m in Sources */,
 				04DC7D121F31C25000AA20A7 /* WebViewController.m in Sources */,
+				04254DCC1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m in Sources */,
 				047ADFF51F4A86EF00AEAE8E /* UIImageView+CMHighlightedWebCache.m in Sources */,
 				047ADFF41F4A86EF00AEAE8E /* UIImage+CMWebP.m in Sources */,
 				041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */,
@@ -2465,6 +2484,7 @@
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				0459C6BB1F614C870040501E /* FMResultSet.m in Sources */,
+				04254DD01F6FC21F0010D49F /* NSDate+Formatter.m in Sources */,
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
 				04D107791F62998D007D9F57 /* ZFPopoverLabel.m in Sources */,
 				0490FC0E1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m in Sources */,

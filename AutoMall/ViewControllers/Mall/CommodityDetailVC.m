@@ -25,7 +25,7 @@ static CGFloat const scrollViewHeight = 220;
 #define NAVBAR_COLORCHANGE_POINT (scrollViewHeight - NAV_HEIGHT)
 #define NAV_HEIGHT 64
 
-@interface CommodityDetailVC () <MXScrollViewDelegate>
+@interface CommodityDetailVC () <MXScrollViewDelegate,CAAnimationDelegate>
 {
     MXImageScrollView *scroll;
     NSInteger allCount; //轮播图总数
@@ -309,7 +309,7 @@ static CGFloat const scrollViewHeight = 220;
                 case 2: {
                     CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailPriceCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    
+                    [cell.addBtn addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
                     return cell;
                     break;
                 }
@@ -396,10 +396,21 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 
+-(void)addToCart:(UIButton *)btn {
+    CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)btn.superview.superview;
+    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
+    [self setNum:3 index:index];
+}
+
 // 添加动画以及数量
 - (void)setNum:(int)num index:(NSIndexPath *)index{
     CommodityDetailPriceCell *cell = [self.myTableView cellForRowAtIndexPath:index];
-    CGRect parentRectA = [cell convertRect:cell.addBtn.frame toView:self.settemntView];
+    NSLog(@"cell.addBtn.frame: %@",NSStringFromCGRect(cell.frame))
+//    CGRect parentRectA = [cell convertRect:cell.addBtn.frame toView:self.settemntView];
+    CGRect parentRectA = [cell convertRect:CGRectMake(362, 450, 44, 44) toView:self.settemntView];
+    CGRect rect = [self.myTableView rectForRowAtIndexPath:index];
+    NSLog(@"cell.addBtn.frame: %@",NSStringFromCGRect(cell.frame))
+//    CGRect parentRectA = [cell convertRect:rect toView:self.settemntView];
     [self startAnimationWithRect:parentRectA ImageView:self.redView];
 }
 
@@ -422,7 +433,7 @@ static CGFloat const scrollViewHeight = 220;
         UIBezierPath * path = [UIBezierPath bezierPath];
         [path moveToPoint:_layer.position];
         //        (SCREEN_WIDTH - 60), 0, -50, 50)
-        [path addQuadCurveToPoint:CGPointMake(38, Screen_heigth - 40) controlPoint:CGPointMake(Screen_wide/4,rect.origin.y-80)];
+        [path addQuadCurveToPoint:CGPointMake(38, Screen_heigth - 59) controlPoint:CGPointMake(Screen_wide/4,rect.origin.y-80)];
         //        [_path addLineToPoint:CGPointMake(SCREEN_WIDTH-40, 30)];
         [self groupAnimation:(path)];
     }
@@ -451,7 +462,7 @@ static CGFloat const scrollViewHeight = 220;
     groups.duration = 0.5f;
     groups.removedOnCompletion=NO;
     groups.fillMode=kCAFillModeForwards;
-    groups.delegate = self.myTableView;
+    groups.delegate = self;
     [_layer addAnimation:groups forKey:@"group"];
 }
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -469,15 +480,15 @@ static CGFloat const scrollViewHeight = 220;
         CATransition *animation = [CATransition animation];
         animation.duration = 0.25f;
         
-        //设置商品数量
-//        self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:self.orderArr]];
-        self.settemntView.number.text = [NSString stringWithFormat:@"%d",3];
-        [self.settemntView setNumber:self.settemntView.number];
-        [self.settemntView.number.layer addAnimation:animation forKey:nil];
-        //设置商品价格
-//        self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.orderArr]];
-        self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",4.0];
-        
+//        //设置商品数量
+////        self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:self.orderArr]];
+//        self.settemntView.number.text = [NSString stringWithFormat:@"%d",3];
+//        [self.settemntView setNumber:self.settemntView.number];
+//        [self.settemntView.number.layer addAnimation:animation forKey:nil];
+//        //设置商品价格
+////        self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.orderArr]];
+//        self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",4.0];
+//        
         CABasicAnimation *shakeAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.y"];
         shakeAnimation.duration = 0.25f;
         shakeAnimation.fromValue = [NSNumber numberWithFloat:-5];
