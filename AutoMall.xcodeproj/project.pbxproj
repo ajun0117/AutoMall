@@ -113,6 +113,8 @@
 		04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */; };
 		04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */; };
 		04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */; };
+		04A69F0E1F710D1300E966A0 /* UpkeepCarMarkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */; };
+		04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */; };
 		04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FDB1F43EEFB00247819 /* InformationCell.m */; };
 		04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FDC1F43EEFB00247819 /* InformationCell.xib */; };
 		04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FE71F44417A00247819 /* LoginViewController.m */; };
@@ -502,6 +504,9 @@
 		04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoCell.h; sourceTree = "<group>"; };
 		04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoCell.m; sourceTree = "<group>"; };
 		04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCarInfoCell.xib; sourceTree = "<group>"; };
+		04A69F0B1F710D1300E966A0 /* UpkeepCarMarkVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepCarMarkVC.h; sourceTree = "<group>"; };
+		04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepCarMarkVC.m; sourceTree = "<group>"; };
+		04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepCarMarkVC.xib; sourceTree = "<group>"; };
 		04AD1FDA1F43EEFB00247819 /* InformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
 		04AD1FDB1F43EEFB00247819 /* InformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCell.m; sourceTree = "<group>"; };
 		04AD1FDC1F43EEFB00247819 /* InformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationCell.xib; sourceTree = "<group>"; };
@@ -1008,6 +1013,7 @@
 		044A24141F3326CF009720DE /* 汽车检查页 */ = {
 			isa = PBXGroup;
 			children = (
+				04A69F0A1F710CCA00E966A0 /* 车图标记 */,
 				0453D3A61F692AB0004F79C8 /* 检查页Cell */,
 				044A24151F3326F9009720DE /* AutoCheckVC.h */,
 				044A24161F3326F9009720DE /* AutoCheckVC.m */,
@@ -1243,6 +1249,16 @@
 				04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */,
 			);
 			name = "车辆信息页";
+			sourceTree = "<group>";
+		};
+		04A69F0A1F710CCA00E966A0 /* 车图标记 */ = {
+			isa = PBXGroup;
+			children = (
+				04A69F0B1F710D1300E966A0 /* UpkeepCarMarkVC.h */,
+				04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */,
+				04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */,
+			);
+			name = "车图标记";
 			sourceTree = "<group>";
 		};
 		04AD1FD91F43ECD400247819 /* 订单页 */ = {
@@ -2239,6 +2255,7 @@
 				04D396451F661F870077BFB3 /* SettlementAddressCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
+				04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
 				04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */,
 				04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */,
@@ -2482,6 +2499,7 @@
 				04F7D8741F5EACE7004945ED /* MailOrderListVC.m in Sources */,
 				04D1078C1F62998D007D9F57 /* ZFPie.m in Sources */,
 				04DC7CFE1F31C24000AA20A7 /* UpkeepVC.m in Sources */,
+				04A69F0E1F710D1300E966A0 /* UpkeepCarMarkVC.m in Sources */,
 				04EB162B1F42F95200974972 /* BaoyangDiscountsVC.m in Sources */,
 				0459C6BB1F614C870040501E /* FMResultSet.m in Sources */,
 				04254DD01F6FC21F0010D49F /* NSDate+Formatter.m in Sources */,

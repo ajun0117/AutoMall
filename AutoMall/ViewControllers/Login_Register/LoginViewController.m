@@ -95,7 +95,6 @@
     }
 }
 
-
 - (IBAction)forgetAction:(id)sender {
     FindPWDViewController *findVC = [[FindPWDViewController alloc] init];
     [self.navigationController pushViewController:findVC animated:YES];

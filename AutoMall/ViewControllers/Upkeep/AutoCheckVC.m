@@ -10,6 +10,7 @@
 #import "AutoCheckSingleCell.h"
 #import "UpkeepPlanVC.h"
 #import "DVSwitch.h"
+#import "UpkeepCarMarkVC.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -41,7 +42,7 @@
     searchBtn.frame = CGRectMake(0, 0, 24, 24);
     searchBtn.contentMode = UIViewContentModeScaleAspectFit;
     [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
-//    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
@@ -69,6 +70,11 @@
     self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.trunkTV];
     
+}
+
+-(void)toMark {
+    UpkeepCarMarkVC *markVC = [[UpkeepCarMarkVC alloc] init];
+    [self.navigationController pushViewController:markVC animated:YES];
 }
 
 - (IBAction)carBodyAction:(id)sender {
