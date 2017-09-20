@@ -32,7 +32,6 @@ static CGFloat const scrollViewHeight = 220;
 @interface MallVC () <MXScrollViewDelegate,UIScrollViewDelegate>
 {
     MXImageScrollView *scroll;
-    NSInteger allCount; //轮播图总数
     CALayer *_layer;
     NSInteger _cnt;
     MBProgressHUD *_hud;
@@ -73,9 +72,10 @@ static CGFloat const scrollViewHeight = 220;
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailGoodsCell" bundle:nil] forCellReuseIdentifier:@"mailGoodsCell"];
     
     scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, scrollViewHeight) rootTableView:self.myTableView];
+    scroll.hasNavigationBar = NO;
+    scroll.showPageIndicator = NO;
     scroll.delegate = self;
     
-    allCount = 3;
 ////    UIImage *img = [self imageFromURLString:@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png"];
     scroll.images = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
                       @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
@@ -202,21 +202,22 @@ static CGFloat const scrollViewHeight = 220;
     //                                                                                30)];
     //    rightImageView.image = [UIImage imageNamed:@"island"];
     //    return rightImageView;
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(Screen_Width - 50, scrollViewHeight - 50, 30,50)];
-    bgView.backgroundColor = [UIColor clearColor];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30,30)];
-    view.backgroundColor = [UIColor blackColor];
-    view.alpha = 0.3;
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:15];
-    label.textAlignment = NSTextAlignmentCenter;
-    NSString *num = [NSString stringWithFormat:@"%ld/%ld",(long)index+1,allCount];
-    label.text = num;
-    [bgView addSubview:view];
-    [bgView addSubview:label];
-    return bgView;
+//    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(Screen_Width - 50, scrollViewHeight - 50, 30,50)];
+//    bgView.backgroundColor = [UIColor clearColor];
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30,30)];
+//    view.backgroundColor = [UIColor blackColor];
+//    view.alpha = 0.3;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textColor = [UIColor whiteColor];
+//    label.font = [UIFont systemFontOfSize:15];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    NSString *num = [NSString stringWithFormat:@"%ld/%ld",(long)index+1,allCount];
+//    label.text = num;
+//    [bgView addSubview:view];
+//    [bgView addSubview:label];
+//    return bgView;
+    return nil;
 }
 
 - (UIViewAutoresizing)MXScrollView:(MXImageScrollView *)mxScrollView leftAccessoryViewAutoresizingMaskAtIndex:(NSInteger)index {
@@ -430,7 +431,6 @@ static CGFloat const scrollViewHeight = 220;
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             adArray = responseObject[@"data"];
-            allCount = [adArray count];
             NSMutableArray *urlAry = [NSMutableArray array];
             for (NSDictionary *dic in adArray) {
                 [urlAry addObject:dic[@"image"]];

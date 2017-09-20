@@ -12,6 +12,9 @@
 #import "MXImageView.h"
 
 @interface MXImageScrollView () <UIScrollViewDelegate>
+{
+    UILabel *pageL;     //页码
+}
 
 @property (nonatomic, strong) dispatch_source_t timer;
 @property (nonatomic, strong) NSArray *originViews;
@@ -106,6 +109,7 @@
     
     _currentView = _loopScroll ? _contentViews[1] : _contentViews.firstObject;
     [self initPageControl];
+    [self makeCustomPageControl];
 }
 
 - (void)setScrollDirection:(kMXScrollViewDirection)scrollDirection {
@@ -134,7 +138,7 @@
 }
 
 -  (void)setShowPageIndicator:(BOOL)showPageIndicator {
-    _pageControl.hidden = showPageIndicator;
+    _pageControl.hidden = ! showPageIndicator;
 }
 
 - (void)setScrollIntervalTime:(float)scrollIntervalTime {
@@ -216,6 +220,10 @@
     _currentView = _contentViews[page];
     _rootTableView.scrollEnabled = YES;
     if (_didScrollImageViewAtIndexHandle) _didScrollImageViewAtIndexHandle(_pageControl.currentPage + 1);
+    
+    NSInteger pageCount = _loopScroll ? _contents.count - 2 : _contents.count;
+    NSString *num = [NSString stringWithFormat:@"%ld/%ld",(long)_pageControl.currentPage+1,pageCount];
+    pageL.text = num;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -303,7 +311,7 @@
                                         superViewHeight:_scrollViewHeight
                                                   pages:pageCount];
     [_pageControl setPosition:_pageControlPosition];
-    [self addSubview:_pageControl];
+//    [self addSubview:_pageControl];  //临时取消pageControl的显示
 }
 
 
@@ -443,5 +451,28 @@
         [view addSubview:rightAccessoryView];
     }
 }
+
+#pragma mark - 自定义pageControl
+-(void)makeCustomPageControl {
+    NSInteger pageCount = _loopScroll ? _contents.count - 2 : _contents.count;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(_scrollViewWidth - 50, _scrollViewHeight - 40, 35,25)];
+    bgView.backgroundColor = [UIColor clearColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35,25)];
+    view.backgroundColor = [UIColor blackColor];
+    view.alpha = 0.5;
+    view.layer.cornerRadius = 5;
+    pageL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 25)];
+    pageL.backgroundColor = [UIColor clearColor];
+    pageL.textColor = [UIColor whiteColor];
+    pageL.font = [UIFont systemFontOfSize:15];
+    pageL.textAlignment = NSTextAlignmentCenter;
+    NSString *num = [NSString stringWithFormat:@"%ld/%ld",(long)_pageControl.currentPage+1,pageCount];
+    pageL.text = num;
+    [bgView addSubview:view];
+    [bgView addSubview:pageL];
+    bgView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [self addSubview:bgView];
+}
+
 
 @end

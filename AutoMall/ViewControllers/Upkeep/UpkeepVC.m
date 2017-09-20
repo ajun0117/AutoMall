@@ -135,7 +135,8 @@
 {
     
     UpkeepHomeCollectionCell *collCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"upkeepHomeCollectionCell" forIndexPath:indexPath];
-    collCell.layer.borderColor = RGBCOLOR(234, 33, 45).CGColor;
+//    collCell.layer.borderColor = RGBCOLOR(234, 33, 45).CGColor;
+    collCell.layer.borderColor = [UIColor lightGrayColor].CGColor;
     collCell.layer.borderWidth = 1;
     collCell.layer.cornerRadius = 5;
     if (indexPath.item == [typeAry count]) {

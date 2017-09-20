@@ -10,12 +10,13 @@
 
 @interface UpkeepCarMarkVC ()
 {
-    UIScrollView *_scrollview;
-    UIImageView *_imageview;
+//    UIScrollView *_scrollview;
+//    UIImageView *_imageview;
     UIImage *chooseImg;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollV;
 @property (strong, nonatomic) IBOutlet UIImageView *imageV;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imageHight;
 @property (strong, nonatomic) IBOutlet UIButton *addBtn;
 @property (strong, nonatomic) IBOutlet UIButton *delBtn;
 @property (strong, nonatomic) IBOutlet UIButton *saveBtn;
@@ -33,7 +34,6 @@
     //设置 UIScrollView的位置与屏幕大小相同
 //     _scrollview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //     [self.view addSubview:_scrollview];
-//
 //     //2添加图片
 //     //有两种方式
 //     //(1)一般方式
@@ -48,59 +48,80 @@
 //    _imageview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
 //    _imageview.contentMode = UIViewContentModeScaleAspectFit;
 //    _imageview.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toMark:)];
-//    [_imageview addGestureRecognizer:tap];
-//     //调用initWithImage:方法，它创建出来的imageview的宽高和图片的宽高一样
-//     [_scrollview addSubview:_imageview];
-//
-//     //设置UIScrollView的滚动范围和图片的真实尺寸一致
-//     _scrollview.contentSize = image.size;
-//
-//     //设置实现缩放
-//     //设置代理scrollview的代理对象
-//     _scrollview.delegate = self;
-//     //设置最大伸缩比例
-//     _scrollview.maximumZoomScale = 2.0;
-//     //设置最小伸缩比例
-//     _scrollview.minimumZoomScale = 0.5;
-//    
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn.frame = CGRectMake(SCREEN_WIDTH/2, SCREEN_HEIGHT - 40, 30, 30);
-//    [btn setImage:IMG(@"timg-2") forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(toChoose:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
-//    
-//    UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    saveBtn.frame = CGRectMake(SCREEN_WIDTH/2 - 50, SCREEN_HEIGHT - 40, 40, 30);
-//    [saveBtn setTitle:@"保存" forState:UIControlStateNormal];
-//    [saveBtn addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:saveBtn];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toMark:)];
+    [self.imageV addGestureRecognizer:tap];
+     //调用initWithImage:方法，它创建出来的imageview的宽高和图片的宽高一样
+     //设置UIScrollView的滚动范围和图片的真实尺寸一致
+     self.scrollV.contentSize = self.imageV.image.size;
+     //设置实现缩放
+     //设置最大伸缩比例
+     self.scrollV.maximumZoomScale = 2.0;
+     //设置最小伸缩比例
+     self.scrollV.minimumZoomScale = 0.5;
+
+    self.imageHight.constant = SCREEN_HEIGHT - 64;
+    
+    [self.addBtn setImage:[UIImage imageNamed:@"goods_add"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.delBtn setImage:[UIImage imageNamed:@"goods_del"] forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 //告诉scrollview要缩放的是哪个子控件
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-         return _imageview;
+         return self.imageV;
 }
 
 -(void) toChoose:(UIButton *)btn {
     chooseImg = btn.currentImage;
 //    NSLog(@"theView.frame.size:  %@",NSStringFromCGSize(_imageview.frame.size));
 }
+
 - (IBAction)add:(id)sender {
+//    UIButton *btn = (UIButton *)sender;
+//    btn.selected = !btn.selected;
+//    chooseImg = btn.currentImage;
+    if (self.addBtn.selected) {
+        self.addBtn.selected = NO;
+        chooseImg = nil;
+    }
+    else {
+        self.addBtn.selected = YES;
+        self.delBtn.selected = NO;
+        chooseImg = self.addBtn.currentImage;
+    }
 }
+
 - (IBAction)del:(id)sender {
+    if (self.delBtn.selected) {
+        self.delBtn.selected = NO;
+        chooseImg = nil;
+    }
+    else {
+        self.delBtn.selected = YES;
+        self.addBtn.selected = NO;
+        chooseImg = self.delBtn.currentImage;
+    }
 }
+
 - (IBAction)save:(id)sender {
+    self.scrollV.zoomScale = 1.0;
+    UIImage *image = [self imageFromView:self.imageV];
+    
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
 -(void) toMark:(UITapGestureRecognizer *)tap {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(SCREEN_WIDTH/2, SCREEN_HEIGHT - 40, 30, 30);
-    btn.center = [tap locationInView:_imageview];
+    btn.center = [tap locationInView:self.imageV];
     [btn setImage:chooseImg forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(toSelect:) forControlEvents:UIControlEventTouchUpInside];
-    [_imageview addSubview:btn];
+    [btn addTarget:self action:@selector(toDel:) forControlEvents:UIControlEventTouchUpInside];
+    [self.imageV addSubview:btn];
+}
+
+-(void) toDel:(UIButton *)btn {
+    [btn removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,19 +146,19 @@
 }
 
 
-- (void)saveImage
-{
-    _scrollview.zoomScale = 1.0;
-    UIImage *image = [self imageFromView:_imageview];
-    
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-    
-//    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
-//    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-//    indicator.center = self.view.center;
-//    [[UIApplication sharedApplication].keyWindow addSubview:indicator];
-//    [indicator startAnimating];
-}
+//- (void)saveImage
+//{
+//    _scrollview.zoomScale = 1.0;
+//    UIImage *image = [self imageFromView:_imageview];
+//    
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+//    
+////    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
+////    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+////    indicator.center = self.view.center;
+////    [[UIApplication sharedApplication].keyWindow addSubview:indicator];
+////    [indicator startAnimating];
+//}
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
 {

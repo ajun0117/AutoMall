@@ -17,6 +17,7 @@
 #import "ShoppingCartView.h"
 #import "SettlementVC.h"
 #import "WRNavigationBar.h"
+#import "HZPhotoBrowser.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -25,12 +26,12 @@ static CGFloat const scrollViewHeight = 220;
 #define NAVBAR_COLORCHANGE_POINT (scrollViewHeight - NAV_HEIGHT)
 #define NAV_HEIGHT 64
 
-@interface CommodityDetailVC () <MXScrollViewDelegate,CAAnimationDelegate>
+@interface CommodityDetailVC () <MXScrollViewDelegate,CAAnimationDelegate,HZPhotoBrowserDelegate>
 {
     MXImageScrollView *scroll;
-    NSInteger allCount; //轮播图总数
     CALayer *_layer;
     NSInteger _cnt;
+    NSArray *imagesAry; //轮播图片数组
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -64,21 +65,25 @@ static CGFloat const scrollViewHeight = 220;
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailContentCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailContentCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailTuijianCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailTuijianCell"];
     
-    allCount = 3;
     scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, scrollViewHeight) rootTableView:self.myTableView];
+    scroll.hasNavigationBar = NO;
+    scroll.showPageIndicator = NO;
     scroll.delegate = self;
-    scroll.images = @[[UIImage imageNamed:@"timg-1"],
-                      [UIImage imageNamed:@"timg-2"],
-                      [UIImage imageNamed:@"timg-1"]];
+    imagesAry = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
+                  @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
+                  @"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png"];
+    scroll.images = imagesAry;
     
+    __block typeof(self) bself = self;
     [scroll setTapImageHandle:^(NSInteger index) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:[NSString
-                                                                     stringWithFormat:@"你点击了%ld张图片", index]
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"Ok", nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                            message:[NSString
+//                                                                     stringWithFormat:@"你点击了%ld张图片", index]
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:nil
+//                                                  otherButtonTitles:@"Ok", nil];
+//        [alertView show];
+        [bself clickImageWithIndex:index];
     }];
     
     [scroll setDidScrollImageViewAtIndexHandle:^(NSInteger index) {
@@ -86,6 +91,36 @@ static CGFloat const scrollViewHeight = 220;
     }];
     
     [self addFootView];
+}
+
+-(void)clickImageWithIndex:(NSInteger)index {
+    NSLog(@"%@",scroll.images);
+    //启动图片浏览器
+    HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
+    browserVC.sourceImagesContainerView = scroll; // 原图的父控件
+    browserVC.imageCount = imagesAry.count; // 图片总数
+    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageTitle = @"";
+    browserVC.delegate = self;
+    [browserVC show];
+}
+
+#pragma mark - photobrowser代理方法
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    return IMG(@"whiteplaceholder");
+}
+
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSString *urlStr = imagesAry[index];
+    return [NSURL URLWithString:urlStr];
+}
+
+- (NSString *)photoBrowser:(HZPhotoBrowser *)browser titleStringForIndex:(NSInteger)index {
+    //    NSDictionary *dic = _typeImgsArray [index];
+    //    NSString *titleStr = dic [@"content"];
+    return @"";
 }
 
 - (void)addFootView{
@@ -165,6 +200,7 @@ static CGFloat const scrollViewHeight = 220;
 //    [weakSelf.popTableView.rightTableView reloadData];
 }
 
+
 #pragma mark - scrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 #warning 想拉伸必须实现此方法
@@ -223,21 +259,22 @@ static CGFloat const scrollViewHeight = 220;
 //                                                                                30)];
 //    rightImageView.image = [UIImage imageNamed:@"island"];
 //    return rightImageView;
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(Screen_Width - 50, scrollViewHeight - 50, 30,50)];
-    bgView.backgroundColor = [UIColor clearColor];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30,30)];
-    view.backgroundColor = [UIColor blackColor];
-    view.alpha = 0.3;
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:15];
-    label.textAlignment = NSTextAlignmentCenter;
-    NSString *num = [NSString stringWithFormat:@"%ld/%ld",(long)index+1,allCount];
-    label.text = num;
-    [bgView addSubview:view];
-    [bgView addSubview:label];
-    return bgView;
+//    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(Screen_Width - 50, scrollViewHeight - 50, 30,50)];
+//    bgView.backgroundColor = [UIColor clearColor];
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30,30)];
+//    view.backgroundColor = [UIColor blackColor];
+//    view.alpha = 0.3;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textColor = [UIColor whiteColor];
+//    label.font = [UIFont systemFontOfSize:15];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    NSString *num = [NSString stringWithFormat:@"%ld/%ld",(long)index+1,allCount];
+//    label.text = num;
+//    [bgView addSubview:view];
+//    [bgView addSubview:label];
+//    return bgView;
+    return nil;
 }
 
 - (UIViewAutoresizing)MXScrollView:(MXImageScrollView *)mxScrollView leftAccessoryViewAutoresizingMaskAtIndex:(NSInteger)index {
