@@ -34,6 +34,20 @@
     self.chooseLocationView.address = @"广东省 广州市 白云区";
     self.chooseLocationView.areaCode = @"440104";
     [self.addressBtn setTitle:@"广东省 广州市 白云区" forState:UIControlStateNormal];
+    
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keybordDown)];
+//    [self.view addGestureRecognizer:tap];
+    
+    if (self.isEdit) {
+        self.uNameTF.text = self.addrDic [@"name"];
+        self.phoneTF.text = self.addrDic [@"phone"];
+        NSString *proStr = [NSString stringWithFormat:@"%@ %@ %@",self.addrDic [@"province"],self.addrDic [@"city"],self.addrDic [@"country"]];
+        [self.addressBtn setTitle:proStr forState:UIControlStateNormal];
+        self.addDetailTF.text = self.addrDic [@"address"];
+        BOOL preferred = [self.addrDic [@"preferred"] boolValue];
+        self.defaultSW.on = preferred;
+    }
+    
 }
 
 
@@ -52,6 +66,18 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void) keybordDown {
+    [self.uNameTF resignFirstResponder];
+    [self.phoneTF resignFirstResponder];
+    [self.addDetailTF resignFirstResponder];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.uNameTF resignFirstResponder];
+    [self.phoneTF resignFirstResponder];
+    [self.addDetailTF resignFirstResponder];
+}
+
 - (IBAction)selectAddressAction:(id)sender {
 //    [UIView animateWithDuration:0.25 animations:^{
 //        self.view.transform =CGAffineTransformMakeScale(0.95, 0.95);
@@ -61,9 +87,45 @@
 }
 
 - (IBAction)defaultAction:(id)sender {
+    UISwitch *sw = (UISwitch *)sender;
+    sw.on = !sw.on;
 }
 
 - (IBAction)saveAction:(id)sender {
+    if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
+        if (self.isEdit) {
+            [self editAddress];
+        }
+        else {
+            [self addAddress];
+        }
+    }
+    else {
+        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+}
+
+#pragma mark -
+#pragma mark 手机号码及验证码格式初步验证
+-(BOOL) checkPhoneNumWithPhone:(NSString *)phone {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:phone]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [phone length] == 11 && [phone hasPrefix:@"1"]) {
+        return YES;
+    }
+    return NO;
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
@@ -122,16 +184,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeAdd object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeAdd, @"op", nil];
     NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),@"1",self.uNameTF.text,self.phoneTF.text,addAry[1],addAry[2],addAry[3],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),@"1",self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
--(void)editAddress:(NSString *)aid {
+-(void)editAddress {
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeEdit object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeEdit, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@",UrlPrefix(ConsigneeEdit),@"1",aid];
+    NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeEdit),@"1",self.addrDic[@"id"],self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -158,28 +221,26 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:ConsigneeAdd]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeAdd object:nil];
-        
-//        [_addressArray addObjectsFromArray:responseObject [@"data"]];
-//        
-//        if ([_addressArray count]) {
-//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 1)];
-//            self.myTableView.tableHeaderView = label;
-//            [self.myTableView reloadData];
-//        }
-//        else {
-//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 100)];
-//            label.text = @"暂无收货地址信息";
-//            label.textAlignment = NSTextAlignmentCenter;
-//            label.textColor = [UIColor lightGrayColor];
-//            self.myTableView.tableHeaderView = label;
-//        }
+
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
     
     if ([notification.name isEqualToString:ConsigneeEdit]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeEdit object:nil];
-        
-        //删除成功后刷新
-//        [self.myTableView headerBeginRefreshing];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
 }
 

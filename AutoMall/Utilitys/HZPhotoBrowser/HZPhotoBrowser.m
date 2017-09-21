@@ -127,16 +127,16 @@
     _titleL.hidden = YES;
     _saveButton.hidden = YES;
 
-    [UIView animateWithDuration:kPhotoBrowserShowDuration animations:^{
-        tempImageView.frame = targetTemp;
-    } completion:^(BOOL finished) {
+//    [UIView animateWithDuration:kPhotoBrowserShowDuration animations:^{
+//        tempImageView.frame = targetTemp;
+//    } completion:^(BOOL finished) {
         _hasShowedPhotoBrowser = YES;
         [tempImageView removeFromSuperview];
         _scrollView.hidden = NO;
         _indexLabel.hidden = NO;
         _titleL.hidden = NO;
         _saveButton.hidden = NO;
-    }];
+//    }];
 }
 
 #pragma mark 添加scrollview
@@ -183,7 +183,7 @@
     indexLabel.clipsToBounds = YES;
  
     if (self.imageCount > 1) {
-        indexLabel.text = [NSString stringWithFormat:@"1/%ld", (long)self.imageCount];
+        indexLabel.text = [NSString stringWithFormat:@"1 / %ld", (long)self.imageCount];
         _indexLabel = indexLabel;
         [self.view addSubview:indexLabel];
     }
@@ -315,12 +315,12 @@
     [self.view.window addSubview:tempImageView];
     
     [self dismissViewControllerAnimated:NO completion:nil];
-    [UIView animateWithDuration:kPhotoBrowserHideDuration animations:^{
-        tempImageView.frame = targetTemp;
-        
-    } completion:^(BOOL finished) {
+//    [UIView animateWithDuration:kPhotoBrowserHideDuration animations:^{
+//        tempImageView.frame = targetTemp;
+//        
+//    } completion:^(BOOL finished) {
         [tempImageView removeFromSuperview];
-    }];
+//    }];
 }
 
 #pragma mark 网络加载图片

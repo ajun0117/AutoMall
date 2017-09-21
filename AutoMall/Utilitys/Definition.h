@@ -137,16 +137,18 @@
 #define CourseList                                @"/course/list"  //教程列表
 
 //商城
-#define ComCategoryList                       @"/comCategory/list"    //商品分类
-#define CommodityList                           @"/commodity/list"  //商品列表
-#define AdvertList                                  @"/advert/list"         //广告列表接口
-#define ConsigneeList                              @"/consignee/list"      //收货地址接口
-#define ConsigneeAdd                              @"/consignee/add"   //新增收货地址
-#define ConsigneeEdit                              @"/consignee/edit"      //编辑收货地址
-#define ConsigneeDele                              @"/consignee/del"       //删除收货地址
+#define ComCategoryList                        @"/comCategory/list"    //商品分类
+#define CommodityList                            @"/commodity/list"       //商品列表
+#define CommodityDetail                         @"/commodity/getInfo"   //商品详情
+#define AdvertList                                  @"/advert/list"             //广告列表接口
+#define ConsigneeList                              @"/consignee/list"        //收货地址接口
+#define ConsigneeAdd                             @"/consignee/add"        //新增收货地址
+#define ConsigneeEdit                             @"/consignee/edit"       //编辑收货地址
+#define ConsigneeDele                             @"/consignee/del"        //删除收货地址
+#define MallOrderAdd                             @"/order/add"             //新增订单
 
 //登录、注册、找回密码
-#define GetSMS                                     @"/sms/send"    //获取短信验证码
+#define GetSMS                                      @"/sms/send"    //获取短信验证码
 #define UserRegister                              @"/user/register"   //用户注册
 #define UserForget                                 @"/user/forget"     //忘记密码
 #define CheckCode                                  @"/sms/checkCode"       //校验验证码
@@ -154,7 +156,10 @@
 #define PhoneCheckup                             @"/user/checkup"       //验证手机号是否存在
 
 //保养
-#define ChecktypeList                                   @"/checktype/list"  //检查类别
+#define ChecktypeList                             @"/checktype/list"  //检查类别
+
+//个人中心
+#define MallOrderList                             @"/order/list"      //订单列表
 
 
 

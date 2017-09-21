@@ -14,5 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *addressBtn;
 @property (strong, nonatomic) IBOutlet UITextField *addDetailTF;
 @property (strong, nonatomic) IBOutlet UISwitch *defaultSW;
+@property (assign, nonatomic) BOOL isEdit;  //是否作为编辑页
+@property (strong, nonatomic) NSDictionary *addrDic;     //地址详细
 
 @end

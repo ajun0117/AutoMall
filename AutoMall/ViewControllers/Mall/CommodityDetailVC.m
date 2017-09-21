@@ -32,6 +32,9 @@ static CGFloat const scrollViewHeight = 220;
     CALayer *_layer;
     NSInteger _cnt;
     NSArray *imagesAry; //轮播图片数组
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSDictionary *commodityDic;   //详情字典
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -93,11 +96,28 @@ static CGFloat const scrollViewHeight = 220;
     [self addFootView];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
 -(void)clickImageWithIndex:(NSInteger)index {
     NSLog(@"%@",scroll.images);
     //启动图片浏览器
     HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
-    browserVC.sourceImagesContainerView = scroll; // 原图的父控件
+    browserVC.sourceImagesContainerView = self.view; // 原图的父控件
     browserVC.imageCount = imagesAry.count; // 图片总数
     browserVC.currentImageIndex = (int)index;
     browserVC.currentImageTitle = @"";
@@ -442,11 +462,11 @@ static CGFloat const scrollViewHeight = 220;
 // 添加动画以及数量
 - (void)setNum:(int)num index:(NSIndexPath *)index{
     CommodityDetailPriceCell *cell = [self.myTableView cellForRowAtIndexPath:index];
-    NSLog(@"cell.addBtn.frame: %@",NSStringFromCGRect(cell.frame))
+    NSLog(@"cell.addBtn.frame: %@",NSStringFromCGRect(cell.frame)); 
 //    CGRect parentRectA = [cell convertRect:cell.addBtn.frame toView:self.settemntView];
     CGRect parentRectA = [cell convertRect:CGRectMake(362, 450, 44, 44) toView:self.settemntView];
     CGRect rect = [self.myTableView rectForRowAtIndexPath:index];
-    NSLog(@"cell.addBtn.frame: %@",NSStringFromCGRect(cell.frame))
+    NSLog(@"cell.addBtn.frame: %@",NSStringFromCGRect(cell.frame));
 //    CGRect parentRectA = [cell convertRect:rect toView:self.settemntView];
     [self startAnimationWithRect:parentRectA ImageView:self.redView];
 }
@@ -547,6 +567,46 @@ static CGFloat const scrollViewHeight = 220;
         _redView.layer.cornerRadius = 10;
     }
     return _redView;
+}
+
+#pragma mark - 发送请求
+-(void)requestGetCommodityDetail { //获取商品详情数据
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityDetail object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityDetail, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%d",UrlPrefix(CommodityDetail),self.commodityId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:CommodityDetail]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CommodityDetail object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            commodityDic = responseObject [@"data"];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

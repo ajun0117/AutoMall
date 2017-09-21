@@ -61,14 +61,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-//    [self.myTableView headerBeginRefreshing];
-}
-
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-//    [self.myTableView reloadData];
+    [self.myTableView headerBeginRefreshing];
 }
 
 -(void)setNavitationItemWithLeftImageName:(NSString*)leftImageName rightImageName:(NSString*)rightImageName{
@@ -93,37 +86,34 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     self.myTableView.editing = NO;
 }
 
+- (IBAction)addNewAddress:(id)sender {
+    AddressInfoEditVC *addVC = [[AddressInfoEditVC alloc] init];
+    [self.navigationController pushViewController:addVC animated:YES];
+}
+
 #pragma mark -
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.section == 0) {
-//        NSDictionary *dic = _addressArray [indexPath.row];
-//        AddressInfoEditVC *editVC = [[AddressInfoEditVC alloc] init];
-////        editVC.isEdit = YES;
-////        editVC.addressDic = dic;
-//        [self.navigationController pushViewController:editVC animated:YES];
-//    }
-//    else {
-        AddressInfoEditVC *addVC = [[AddressInfoEditVC alloc] init];
-        [self.navigationController pushViewController:addVC animated:YES];
-//    }
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.isSelected) {
+        NSLog(@"您选择了一个地址");
+    }
+    else {
+        NSDictionary *dic = _addressArray [indexPath.row];
+        AddressInfoEditVC *editVC = [[AddressInfoEditVC alloc] init];
+        editVC.isEdit = YES;
+        editVC.addrDic = dic;
+        [self.navigationController pushViewController:editVC animated:YES];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 80;
-    }
-    return 44;
+    return 80;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    }
-    return 10;
+    return 1;
 }
 #pragma mark -
 #pragma mark UITableViewDataSource
@@ -133,11 +123,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-//        return [_addressArray count];
-        return 4;
-    }
-    return 1;
+    return [_addressArray count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -221,28 +207,39 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:ConsigneeList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeList object:nil];
-        
-        [_addressArray addObjectsFromArray:responseObject [@"data"]];
-        
-        if ([_addressArray count]) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 1)];
-            self.myTableView.tableHeaderView = label;
-            [self.myTableView reloadData];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [_addressArray addObjectsFromArray:responseObject [@"data"]];
+            if ([_addressArray count]) {
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 1)];
+                self.myTableView.tableHeaderView = label;
+                [self.myTableView reloadData];
+            }
+            else {
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 100)];
+                label.text = @"暂无收货地址信息";
+                label.textAlignment = NSTextAlignmentCenter;
+                label.textColor = [UIColor lightGrayColor];
+                self.myTableView.tableHeaderView = label;
+            }
         }
         else {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, 100)];
-            label.text = @"暂无收货地址信息";
-            label.textAlignment = NSTextAlignmentCenter;
-            label.textColor = [UIColor lightGrayColor];
-            self.myTableView.tableHeaderView = label;
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
     
     if ([notification.name isEqualToString:ConsigneeDele]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeDele object:nil];
-        
-        //删除成功后刷新
-        [self.myTableView headerBeginRefreshing];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            //删除成功后刷新
+            [self.myTableView headerBeginRefreshing];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
 }
 

@@ -208,7 +208,7 @@
                                 <constraint firstAttribute="height" constant="30" id="x1A-eb-hOH"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="x1A-eb-hOH"/>
@@ -387,7 +387,7 @@
                         <constraint firstAttribute="height" constant="44" id="27g-ev-eDQ"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="保存并使用">
+                    <state key="normal" title="保存">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled">

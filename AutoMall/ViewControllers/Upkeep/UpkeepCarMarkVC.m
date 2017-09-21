@@ -58,7 +58,7 @@
      //设置最大伸缩比例
      self.scrollV.maximumZoomScale = 2.0;
      //设置最小伸缩比例
-     self.scrollV.minimumZoomScale = 0.5;
+     self.scrollV.minimumZoomScale = 1.0;
 
     self.imageHight.constant = SCREEN_HEIGHT - 64;
     
@@ -119,6 +119,26 @@
     [btn addTarget:self action:@selector(toDel:) forControlEvents:UIControlEventTouchUpInside];
     [self.imageV addSubview:btn];
 }
+
+//#pragma mark 双击
+//- (void)handleDoubleTap:(UITapGestureRecognizer *)recognizer
+//{
+//    //图片加载完之后才能响应双击放大
+//    if (!self.hasLoadedImage) {
+//        return;
+//    }
+//    CGPoint touchPoint = [recognizer locationInView:self];
+//    if (self.scrollview.zoomScale <= 1.0) {
+//        
+//        CGFloat scaleX = touchPoint.x + self.scrollview.contentOffset.x;//需要放大的图片的X点
+//        CGFloat sacleY = touchPoint.y + self.scrollview.contentOffset.y;//需要放大的图片的Y点
+//        [self.scrollview zoomToRect:CGRectMake(scaleX, sacleY, 10, 10) animated:YES];
+//        
+//    } else {
+//        [self.scrollview setZoomScale:1.0 animated:YES]; //还原
+//    }
+//    
+//}
 
 -(void) toDel:(UIButton *)btn {
     [btn removeFromSuperview];

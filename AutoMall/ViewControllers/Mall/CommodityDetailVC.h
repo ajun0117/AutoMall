@@ -13,6 +13,7 @@
 
 //底部菜单
 @property (strong, nonatomic) SettlementView *settemntView;
+@property (assign, nonatomic) int commodityId;  //商品ID
 //购物车视图删除还是加载
 @property (assign, nonatomic) BOOL isShopping;
 

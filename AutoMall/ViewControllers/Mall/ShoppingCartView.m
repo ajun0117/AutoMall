@@ -36,12 +36,13 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200, Screen_wide, 200) style:UITableViewStyleGrouped];
+        _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200, Screen_wide, 200) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         [_myTableView registerNib:[UINib nibWithNibName:@"ShoppingCartCell" bundle:nil] forCellReuseIdentifier:@"ShoppingCartCell"];
         [self addSubview:_myTableView];
-   
+        _myTableView.tableFooterView = [UIView new];
+
     }
     return _myTableView;
 }
