@@ -104,6 +104,7 @@
     RegisterViewController *registerVC = [[RegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
 }
+
 - (IBAction)yzmLoginAction:(id)sender {
     YZMLoginViewController *yzmVC = [[YZMLoginViewController alloc] init];
     [self.navigationController pushViewController:yzmVC animated:YES];
