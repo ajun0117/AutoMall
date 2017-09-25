@@ -8,7 +8,8 @@
 
 #import "CarInfoSearchVC.h"
 #import "CarInfoListCell.h"
-#import "AddCarInfoVC.h"
+//#import "AddCarInfoVC.h"
+#import "CarInfoAddVC.h"
 
 @interface CarInfoSearchVC ()
 @property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
@@ -40,7 +41,7 @@
 }
 
 -(void) toRegisterNewCarInfo {
-    AddCarInfoVC *addVC = [[AddCarInfoVC alloc] init];
+    CarInfoAddVC *addVC = [[CarInfoAddVC alloc] init];
     addVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addVC animated:YES];
 }

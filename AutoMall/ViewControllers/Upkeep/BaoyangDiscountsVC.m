@@ -11,6 +11,12 @@
 #import "AddDiscountsVC.h"
 
 @interface BaoyangDiscountsVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *discountArray;
+    int currentpage;
+}
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -37,7 +43,45 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     self.myTableView.tableFooterView = [UIView new];
+    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    
+    currentpage = 0;
+    discountArray = [NSMutableArray array];
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+    
+    [self.myTableView headerBeginRefreshing];
+}
+
+#pragma mark - 下拉刷新,上拉加载
+-(void)headerRefreshing {
+    NSLog(@"下拉刷新个人信息");
+    currentpage = 0;
+    [discountArray removeAllObjects];
+    [self requestPostDiscountList];
+}
+
+-(void)footerLoadData {
+    NSLog(@"上拉加载数据");
+    currentpage ++;
+    [self requestPostDiscountList];
+}
+
 
 -(void) toAddDiscounts {
     AddDiscountsVC *addVC = [[AddDiscountsVC alloc] init];
@@ -94,6 +138,44 @@
     //    detailVC.isDrink = self.isDrink;
     //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
     //    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(void)requestPostDiscountList { //优惠列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountList object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountList, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"storeId",[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountList) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:DiscountList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+            [discountArray addObjectsFromArray:responseObject[@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

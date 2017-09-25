@@ -11,7 +11,11 @@
 #import "BaoyangHistoryVC.h"
 #import "AutoCheckVC.h"
 
-@interface AddCarInfoVC ()
+@interface AddCarInfoVC () <UITextFieldDelegate>
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+}
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -39,7 +43,53 @@
     [searchBtn addTarget:self action:@selector(toHistoryList) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+    
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+//#pragma mark 键盘出现
+//-(void)keyboardWillShow:(NSNotification *)note
+//{
+//    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+////    self.myTableView.contentInset = UIEdgeInsetsMake(0, 0, keyBoardRect.size.height, 0);
+//    self.myTableView.contentOffset = CGPointMake(0, keyBoardRect.size.height);
+//}
+//#pragma mark 键盘消失
+//-(void)keyboardWillHide:(NSNotification *)note
+//{
+////    self.myTableView.contentInset = UIEdgeInsetsZero;
+//    self.myTableView.contentOffset = CGPointMake(0, 0);
+//}
+
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - keyBoardRect.size.height);
+}
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 80);
 }
 
 -(void) toHistoryList {
@@ -49,6 +99,7 @@
 }
 
 - (IBAction)saveAction:(id)sender {
+    [self requestPostAddDiscount];
 }
 
 - (IBAction)selectAction:(id)sender {
@@ -149,7 +200,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AddCarInfoCell *cell = (AddCarInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"addCarCell"];
-    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.contentTF.delegate = self;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     switch (indexPath.section) {
         case 0: {
@@ -256,12 +308,78 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    AddCarInfoCell *cell = (AddCarInfoCell *) [tableView cellForRowAtIndexPath:indexPath];
+    for (id subView in cell.contentView.subviews) {
+        if ([subView isKindOfClass:[UITextField class]]) {
+            [subView resignFirstResponder];
+        }
+    }
     
     //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
     //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
+    //    detailVC.isDrink = self.isDrink;     //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
     //    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    for (AddCarInfoCell *cell in self.myTableView.visibleCells) {
+//        for (id subView in cell.contentView.subviews) {
+//            if ([subView isKindOfClass:[UITextField class]]) {
+//                [subView resignFirstResponder];
+//            }
+//        }
+//    }
+//}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - 发起网络请求
+-(void)requestPostAddDiscount { //新增优惠
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarAdd object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarAdd, @"op", nil];
+    AddCarInfoCell *cell1 = (AddCarInfoCell *) [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSString *mileage = cell1.contentTF.text;
+    AddCarInfoCell *cell2 = (AddCarInfoCell *) [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    NSString *fuelAmount = cell2.contentTF.text;
+    NSLog(@"mileage: %@,fuelAmount: %@",mileage,fuelAmount);
+    
+//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"storeId",self.discountsNameTF.text,@"item",self.discountsMoneyTF.text,@"money", nil];
+//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:CarAdd]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarAdd object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
 }
 
 

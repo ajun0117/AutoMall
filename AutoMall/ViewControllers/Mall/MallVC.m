@@ -85,7 +85,7 @@ static CGFloat const scrollViewHeight = 220;
     [scroll setTapImageHandle:^(NSInteger index) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:[NSString
-                                                                     stringWithFormat:@"你点击了%ld张图片", index]
+                                                                     stringWithFormat:@"你点击了第%ld张图片", index]
                                                            delegate:nil
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"Ok", nil];

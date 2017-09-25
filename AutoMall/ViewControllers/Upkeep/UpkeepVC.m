@@ -172,9 +172,12 @@
 //    }
     
     if (indexPath.item == [typeAry count]) {
-        AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-        checkVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:checkVC animated:YES];
+//        AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+//        checkVC.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:checkVC animated:YES];
+        CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
+        listVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:listVC animated:YES];
         return;
     }
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];

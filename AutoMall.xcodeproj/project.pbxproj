@@ -40,6 +40,8 @@
 		042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D211F41A09D00F5F324 /* UpkeepPlanInfoCell.xib */; };
 		042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E5D251F41A0CA00F5F324 /* UpkeepPlanNormalCell.m */; };
 		042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E5D261F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib */; };
+		042F4F1D1F7905150059B44E /* CarInfoAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F4F1B1F7905150059B44E /* CarInfoAddVC.m */; };
+		042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042F4F1C1F7905150059B44E /* CarInfoAddVC.xib */; };
 		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
@@ -379,6 +381,9 @@
 		042E5D241F41A0CA00F5F324 /* UpkeepPlanNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanNormalCell.h; sourceTree = "<group>"; };
 		042E5D251F41A0CA00F5F324 /* UpkeepPlanNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanNormalCell.m; sourceTree = "<group>"; };
 		042E5D261F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepPlanNormalCell.xib; sourceTree = "<group>"; };
+		042F4F1A1F7905150059B44E /* CarInfoAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoAddVC.h; sourceTree = "<group>"; };
+		042F4F1B1F7905150059B44E /* CarInfoAddVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoAddVC.m; sourceTree = "<group>"; };
+		042F4F1C1F7905150059B44E /* CarInfoAddVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoAddVC.xib; sourceTree = "<group>"; };
 		042FA30D1F3AB10E0095BCFD /* DVSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVSwitch.h; sourceTree = "<group>"; };
 		042FA30E1F3AB10E0095BCFD /* DVSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVSwitch.m; sourceTree = "<group>"; };
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
@@ -961,6 +966,9 @@
 				04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */,
 				04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */,
 				04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */,
+				042F4F1A1F7905150059B44E /* CarInfoAddVC.h */,
+				042F4F1B1F7905150059B44E /* CarInfoAddVC.m */,
+				042F4F1C1F7905150059B44E /* CarInfoAddVC.xib */,
 			);
 			name = "车辆信息添加";
 			sourceTree = "<group>";
@@ -2308,6 +2316,7 @@
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				0490FC051F57F97700F77661 /* CustomServiceCell.xib in Resources */,
+				042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */,
 				04F7D87A1F5EAD48004945ED /* MailOrderSingleCell.xib in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
 				04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */,
@@ -2437,6 +2446,7 @@
 				04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
+				042F4F1D1F7905150059B44E /* CarInfoAddVC.m in Sources */,
 				047ADFFB1F4A86EF00AEAE8E /* MXScrollConst.m in Sources */,
 				04DC7DCF1F31C28300AA20A7 /* MJRefreshConst.m in Sources */,
 				04D1077B1F62998D007D9F57 /* ZFYAxisLine.m in Sources */,

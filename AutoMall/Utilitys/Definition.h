@@ -118,7 +118,7 @@
 #define Updatepwd               @"/app/user/updatepwd"  //更新新密码
 
 #pragma mark - 我的相关
-#define MessageList              @"/app/message/list"    //消息列表
+//#define MessageList              @"/app/message/list"    //消息列表
 #define Statement                 @"/app/info/statement"  //免责声明
 #define Contactus                  @"/app/info/contactus"  //联系我们
 
@@ -157,9 +157,16 @@
 
 //保养
 #define ChecktypeList                             @"/checktype/list"  //检查类别
+#define DiscountList                                @"/discount/list"   //优惠列表
+#define CarAdd                                        @"/car/add"          //新增车辆信息
+#define CarUpdate                                     @"/car/update"   //更新车辆信息
+
 
 //个人中心
 #define MallOrderList                             @"/order/list"      //订单列表
+#define DiscountAdd                               @"/discount/add"    //新增优惠
+#define DiscountEdit                               @"/discount/edit"   //编辑优惠
+#define MessageList                                @"/message/list"    //消息列表
 
 
 
