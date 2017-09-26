@@ -7,12 +7,16 @@
 //
 
 #import "AutoCheckVC.h"
-#import "AutoCheckSingleCell.h"
+//#import "AutoCheckSingleCell.h"
+#import "AutoCheckMultiCell.h"
 #import "UpkeepPlanVC.h"
 #import "DVSwitch.h"
 #import "UpkeepCarMarkVC.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+{
+    NSMutableDictionary *selectedDic;   //记录已选择
+}
 
 @end
 
@@ -56,7 +60,11 @@
     self.carBodyTV.delegate = self;
     self.carBodyTV.dataSource = self;
     self.carBodyTV.allowsSelection = NO;
-    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
+    self.carBodyTV.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
+    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
+    
+    selectedDic = [NSMutableDictionary dictionary];
     
     self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
     [self.mainScrollView addSubview:self.carInsideTV];
@@ -321,40 +329,93 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 141;
+//    if (indexPath.row == 0) {
+//        return 141;
+//    }
+    return 90;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 44;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1;
+    return 10;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
+        label.font = [UIFont boldSystemFontOfSize:17];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = @"水箱水";
+        [view addSubview:label];
+
+        UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        radioBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 11, 22, 22);
+//        radioBtn.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
+        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateSelected];
+        [radioBtn setImage:[UIImage imageNamed:@"photoBtn"] forState:UIControlStateSelected | UIControlStateHighlighted];
+//        [radioBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+        radioBtn.tag = section + 100;
+        [view addSubview:radioBtn];
+        
+        return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    AutoCheckSingleCell *cell = (AutoCheckSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckSingleCell"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell.photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
+//    if (indexPath.row == 0) {
+//        AutoCheckSingleCell *cell = (AutoCheckSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckSingleCell"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [cell.photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
+//        
+//        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:@[@"严重", @"轻微",@"正常"]];
+//        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+//        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+//        switcher.font = [UIFont systemFontOfSize:13];
+//        [cell.segBgView addSubview:switcher];
+//        switcher.cornerRadius = 18;
+//        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+//        NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
+//        [switcher forceSelectedIndex:selectedIndex animated:NO];
+//        [switcher setPressedHandler:^(NSUInteger index) {
+//            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+////            NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+//            [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+//        }];
+//        
+//        return cell;
+//    }
+//    else {
+        AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:@[@"严重", @"轻微",@"正常"]];
-    NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
-    switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
-    switcher.font = [UIFont systemFontOfSize:13];
-    [cell.segBgView addSubview:switcher];
-    switcher.cornerRadius = 18;
-    switcher.backgroundColor = RGBCOLOR(254, 255, 255);
-    [switcher forceSelectedIndex:2 animated:NO];
-    [switcher setPressedHandler:^(NSUInteger index) {
-        NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-    }];
-    
-    return cell;
+        for (DVSwitch *switcher in cell.segBgView.subviews) {
+            [switcher removeFromSuperview];
+        }
+        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:@[@"严重", @"轻微",@"正常"]];
+        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+        switcher.font = [UIFont systemFontOfSize:13];
+        [cell.segBgView addSubview:switcher];
+        switcher.cornerRadius = 18;
+        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+        NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
+        [switcher forceSelectedIndex:selectedIndex animated:NO];
+        [switcher setPressedHandler:^(NSUInteger index) {
+            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+            [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+        }];
+        
+        return cell;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

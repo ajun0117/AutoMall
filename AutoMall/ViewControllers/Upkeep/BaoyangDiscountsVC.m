@@ -140,6 +140,7 @@
     //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+#pragma mark - 发送请求
 -(void)requestPostDiscountList { //优惠列表
     [_hud show:YES];
     //注册通知

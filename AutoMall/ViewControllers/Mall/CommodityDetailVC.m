@@ -35,6 +35,7 @@ static CGFloat const scrollViewHeight = 220;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSDictionary *commodityDic;   //详情字典
+    UIButton *collectBtn;   //收藏按钮
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -60,6 +61,20 @@ static CGFloat const scrollViewHeight = 220;
 //    
 //    // 设置导航栏按钮和标题颜色
 //    [self wr_setNavBarTintColor:RGBCOLOR(129, 129, 129)];
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -16;
+    
+    collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    collectBtn.frame = CGRectMake(0, 0, 44, 44);
+    [collectBtn setImage:[UIImage imageNamed:@"collect"] forState:UIControlStateNormal];
+    [collectBtn setImage:[UIImage imageNamed:@"collected"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [collectBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [collectBtn addTarget:self action:@selector(toCollectFavour) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:collectBtn];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailNormalCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailStarCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailStarCell"];
@@ -111,6 +126,15 @@ static CGFloat const scrollViewHeight = 220;
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void)toCollectFavour {        //收藏
+    if (collectBtn.selected) {  //取消收藏
+        [self requestPostDecollectFavorite];
+    }
+    else {      //收藏
+        [self requestPostCollectFavorite];
+    }
 }
 
 -(void)clickImageWithIndex:(NSInteger)index {
@@ -580,6 +604,26 @@ static CGFloat const scrollViewHeight = 220;
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
+-(void)requestPostCollectFavorite { //收藏
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteCollect object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteCollect, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"3",@"resourceType",@"1",@"resourceId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteCollect) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestPostDecollectFavorite { //取消收藏
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"resourceId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -605,6 +649,30 @@ static CGFloat const scrollViewHeight = 220;
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
+    }
+    
+    if ([notification.name isEqualToString:FavoriteCollect]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:FavoriteCollect object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            collectBtn.selected = YES;
+        }
+        _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+
+    if ([notification.name isEqualToString:FavoriteDecollect]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:FavoriteDecollect object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            collectBtn.selected = NO;
+        }
+        _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
     
 }

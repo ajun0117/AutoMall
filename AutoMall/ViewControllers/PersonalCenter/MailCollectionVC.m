@@ -11,6 +11,12 @@
 #import "CommodityDetailVC.h"
 
 @interface MailCollectionVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *collectArray;
+    int currentpage;
+}
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -26,6 +32,44 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailCollectionCell" bundle:nil] forCellReuseIdentifier:@"mailCollectionCell"];
     self.myTableView.tableFooterView = [UIView new];
+    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    
+    collectArray = [NSMutableArray array];
+    currentpage = 0;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+    
+    [self.myTableView headerBeginRefreshing];
+}
+
+#pragma mark - 下拉刷新,上拉加载
+-(void)headerRefreshing {
+    NSLog(@"下拉刷新个人信息");
+    currentpage = 0;
+    [collectArray removeAllObjects];
+    [self requestPostCollectionList];
+}
+
+-(void)footerLoadData {
+    NSLog(@"上拉加载数据");
+    currentpage ++;
+    [self requestPostCollectionList];
 }
 
 #pragma mark -
@@ -80,8 +124,9 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //        [dataArray removeObjectAtIndex:indexPath.row];
+        [collectArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        [self requestPostDecollectFavorite];    //发起取消收藏请求
     }
 }
 
@@ -94,6 +139,68 @@
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
         [self.navigationController pushViewController:detailVC animated:YES];
 }
+
+#pragma mark - 发送请求
+-(void)requestPostCollectionList { //收藏列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteList object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteList, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteList) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestPostDecollectFavorite { //取消收藏
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"resourceId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:FavoriteList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:FavoriteList object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+            [collectArray addObjectsFromArray:responseObject[@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+    if ([notification.name isEqualToString:FavoriteDecollect]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:FavoriteDecollect object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            
+        }
+        _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -137,6 +137,16 @@
                                 <action selector="carInsideAction:" destination="-1" eventType="touchUpInside" id="xNH-Ex-dn7"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Br-qj-a5U">
+                            <rect key="frame" x="0.0" y="43.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="K5g-bV-Cut"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -148,6 +158,8 @@
                         <constraint firstAttribute="trailing" secondItem="d9v-S5-Nqb" secondAttribute="trailing" constant="8" id="6BO-u8-6fx"/>
                         <constraint firstItem="aUu-Qd-m9O" firstAttribute="centerX" secondItem="vqQ-kS-4au" secondAttribute="centerX" id="6nY-f8-WcB"/>
                         <constraint firstItem="aUu-Qd-m9O" firstAttribute="leading" secondItem="7a1-CO-ifd" secondAttribute="trailing" constant="15" id="8Rm-4h-OEM"/>
+                        <constraint firstAttribute="bottom" secondItem="8Br-qj-a5U" secondAttribute="bottom" id="C97-RJ-pIV"/>
+                        <constraint firstItem="8Br-qj-a5U" firstAttribute="leading" secondItem="vqQ-kS-4au" secondAttribute="leading" id="EuU-PC-ClB"/>
                         <constraint firstItem="WOq-6V-3kR" firstAttribute="centerY" secondItem="7FG-vy-3gN" secondAttribute="centerY" id="GVo-M1-npa"/>
                         <constraint firstItem="7a1-CO-ifd" firstAttribute="width" secondItem="7FG-vy-3gN" secondAttribute="width" id="HNt-go-os2"/>
                         <constraint firstAttribute="bottom" secondItem="M3m-2u-EDL" secondAttribute="bottom" id="JWX-ks-fwa"/>
@@ -157,6 +169,7 @@
                         <constraint firstItem="d9v-S5-Nqb" firstAttribute="width" secondItem="7FG-vy-3gN" secondAttribute="width" id="TAV-Ud-SjX"/>
                         <constraint firstItem="aUu-Qd-m9O" firstAttribute="centerY" secondItem="7FG-vy-3gN" secondAttribute="centerY" id="UM8-y5-awb"/>
                         <constraint firstAttribute="height" constant="44" id="Ugs-l6-I5m"/>
+                        <constraint firstAttribute="trailing" secondItem="8Br-qj-a5U" secondAttribute="trailing" id="WGW-cS-yMa"/>
                         <constraint firstItem="d9v-S5-Nqb" firstAttribute="leading" secondItem="WOq-6V-3kR" secondAttribute="trailing" constant="15" id="a0G-Yv-lSj"/>
                         <constraint firstItem="T7A-KD-kxA" firstAttribute="centerX" secondItem="7FG-vy-3gN" secondAttribute="centerX" id="dvP-3T-ykl"/>
                         <constraint firstItem="aUu-Qd-m9O" firstAttribute="height" secondItem="7FG-vy-3gN" secondAttribute="height" id="eHu-G4-q4x"/>

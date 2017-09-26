@@ -125,7 +125,7 @@ static DataRequest *dataRequest;
         [manager.requestSerializer setValue:@"zh-cn, zh-tw,zh-hk" forHTTPHeaderField:@"Accept-Language"];
         NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
         if (token != nil && ![token isEqualToString:@""]) {
-            [manager.requestSerializer setValue:token forHTTPHeaderField:@"XPS-UserToken"];
+            [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
         }
         NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
         if (userId != nil && ![userId isEqualToString:@""]) {

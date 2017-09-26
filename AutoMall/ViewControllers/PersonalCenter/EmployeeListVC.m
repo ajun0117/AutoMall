@@ -11,6 +11,11 @@
 #import "EmployeeDetailVC.h"
 
 @interface EmployeeListVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *listArray;
+}
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -34,8 +39,27 @@
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
     
     self.myTableView.tableFooterView = [UIView new];
+    listArray = [NSMutableArray array];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+    
+    
+}
 
 -(void) toAddEmployee {
     AddEmployeeVC *addVC = [[AddEmployeeVC alloc] init];
@@ -73,7 +97,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //        [dataArray removeObjectAtIndex:indexPath.row];
+        //        [listArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -86,6 +110,64 @@
 //        detailVC.isDrink = self.isDrink;
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
 //        [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(void)requestGetStaffList { //获取员工列表
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreListStaff object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreListStaff, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreListStaff) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestDelStaff { //删除员工
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreDelStaff object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreDelStaff, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"id", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreDelStaff) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:StoreListStaff]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreListStaff object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [listArray addObjectsFromArray:responseObject [@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:StoreDelStaff]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreDelStaff object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [listArray addObjectsFromArray:responseObject [@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

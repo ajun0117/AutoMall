@@ -133,8 +133,8 @@
 #define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep/api%@",action])
 #define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
 //资讯、教程
-#define InformationList                        @"/info/list"    //资讯列表
-#define CourseList                                @"/course/list"  //教程列表
+#define InformationList                          @"/info/list"    //资讯列表
+#define CourseList                                  @"/course/list"  //教程列表
 
 //商城
 #define ComCategoryList                        @"/comCategory/list"    //商品分类
@@ -148,25 +148,32 @@
 #define MallOrderAdd                             @"/order/add"             //新增订单
 
 //登录、注册、找回密码
-#define GetSMS                                      @"/sms/send"    //获取短信验证码
-#define UserRegister                              @"/user/register"   //用户注册
-#define UserForget                                 @"/user/forget"     //忘记密码
-#define CheckCode                                  @"/sms/checkCode"       //校验验证码
-#define UserLogin                                   @"/login"                   //用户登录
-#define PhoneCheckup                             @"/user/checkup"       //验证手机号是否存在
+#define GetSMS                                      @"/sms/send"                    //获取短信验证码
+#define UserRegister                              @"/user/register"             //用户注册
+#define UserForget                                 @"/user/forget"               //忘记密码
+#define CheckCode                                  @"/sms/checkCode"          //校验验证码
+#define UserLogin                                   @"/login"                           //用户登录
+#define PhoneCheckup                             @"/user/checkup"             //验证手机号是否存在
 
 //保养
-#define ChecktypeList                             @"/checktype/list"  //检查类别
-#define DiscountList                                @"/discount/list"   //优惠列表
-#define CarAdd                                        @"/car/add"          //新增车辆信息
-#define CarUpdate                                     @"/car/update"   //更新车辆信息
-
+#define ChecktypeList                             @"/checktype/list"            //检查类别
+#define DiscountList                                @"/discount/list"               //优惠列表
+#define CarAdd                                        @"/car/add"                     //新增车辆信息
+#define CarUpdate                                   @"/car/update"                  //更新车辆信息
 
 //个人中心
-#define MallOrderList                             @"/order/list"      //订单列表
-#define DiscountAdd                               @"/discount/add"    //新增优惠
-#define DiscountEdit                               @"/discount/edit"   //编辑优惠
-#define MessageList                                @"/message/list"    //消息列表
+#define MallOrderList                             @"/order/list"                    //订单列表
+#define DiscountAdd                               @"/discount/add"              //新增优惠
+#define DiscountEdit                               @"/discount/edit"             //编辑优惠
+#define MessageList                                @"/message/list"              //消息列表
+
+#define StoreListStaff                           @"/store/listStaff"             //员工列表
+#define StoreDelStaff                            @"/store/delStaff"             //删除员工
+#define StaffSkill                                   @"/store/listStaffSkill"       //获取员工技能详情
+
+#define FavoriteList                                @"/favorite/list"                   //收藏列表
+#define FavoriteCollect                           @"/favorite/collect"              //收藏
+#define FavoriteDecollect                       @"/favorite/decollect"          //取消收藏
 
 
 
