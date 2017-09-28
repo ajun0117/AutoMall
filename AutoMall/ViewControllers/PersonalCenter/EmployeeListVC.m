@@ -105,11 +105,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//        EmployeeDetailVC *detailVC = [[EmployeeDetailVC alloc] init];
+        EmployeeDetailVC *detailVC = [[EmployeeDetailVC alloc] init];
 //        detailVC.userID = userArray[indexPath.section][@"id"];
 //        detailVC.isDrink = self.isDrink;
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-//        [self.navigationController pushViewController:detailVC animated:YES];
+        [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 -(void)requestGetStaffList { //获取员工列表

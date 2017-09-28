@@ -53,14 +53,25 @@ static CGFloat const scrollViewHeight = 220;
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品详情";
     
-//    // 设置导航栏颜色
-//    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
-//    
-//    // 设置初始导航栏透明度
-//    [self wr_setNavBarBackgroundAlpha:0];
-//    
-//    // 设置导航栏按钮和标题颜色
-//    [self wr_setNavBarTintColor:RGBCOLOR(129, 129, 129)];
+//<<<<<<< Updated upstream
+////    // 设置导航栏颜色
+////    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
+////    
+////    // 设置初始导航栏透明度
+////    [self wr_setNavBarBackgroundAlpha:0];
+////    
+////    // 设置导航栏按钮和标题颜色
+////    [self wr_setNavBarTintColor:RGBCOLOR(129, 129, 129)];
+//=======
+    // 设置导航栏颜色
+    [self wr_setNavBarBarTintColor:RGBCOLOR(129, 129, 129)];
+    
+    // 设置初始导航栏透明度
+    [self wr_setNavBarBackgroundAlpha:0];
+    
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:[UIColor darkGrayColor]];
+//>>>>>>> Stashed changes
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace

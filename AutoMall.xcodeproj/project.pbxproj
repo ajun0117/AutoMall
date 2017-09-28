@@ -329,6 +329,10 @@
 		04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55DB1F5549B800104D6B /* LoginSuccessViewController.m */; };
 		04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55DC1F5549B800104D6B /* LoginSuccessViewController.xib */; };
 		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
+		F789EF0B1F7D571E003A127C /* EmployeeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF091F7D571E003A127C /* EmployeeDetailCell.m */; };
+		F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */; };
+		F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */; };
+		F789EF111F7D63BE003A127C /* EmployeeAuthVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -884,6 +888,12 @@
 		23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.release.xcconfig"; sourceTree = "<group>"; };
 		282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.debug.xcconfig"; sourceTree = "<group>"; };
 		6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F789EF081F7D571E003A127C /* EmployeeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailCell.h; sourceTree = "<group>"; };
+		F789EF091F7D571E003A127C /* EmployeeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailCell.m; sourceTree = "<group>"; };
+		F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeDetailCell.xib; sourceTree = "<group>"; };
+		F789EF0D1F7D63BE003A127C /* EmployeeAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAuthVC.h; sourceTree = "<group>"; };
+		F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAuthVC.m; sourceTree = "<group>"; };
+		F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeAuthVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2093,6 +2103,12 @@
 				04F7D8651F5EA59F004945ED /* EmployeeDetailVC.h */,
 				04F7D8661F5EA59F004945ED /* EmployeeDetailVC.m */,
 				04F7D8671F5EA59F004945ED /* EmployeeDetailVC.xib */,
+				F789EF081F7D571E003A127C /* EmployeeDetailCell.h */,
+				F789EF091F7D571E003A127C /* EmployeeDetailCell.m */,
+				F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */,
+				F789EF0D1F7D63BE003A127C /* EmployeeAuthVC.h */,
+				F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */,
+				F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */,
 				04F7D85B1F5EA52E004945ED /* AddEmployeeVC.h */,
 				04F7D85C1F5EA52E004945ED /* AddEmployeeVC.m */,
 				04F7D85D1F5EA52E004945ED /* AddEmployeeVC.xib */,
@@ -2241,11 +2257,13 @@
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
 				047AE0081F4A8D6200AEAE8E /* CommodityDetailNormalCell.xib in Resources */,
 				04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */,
+				F789EF111F7D63BE003A127C /* EmployeeAuthVC.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				0459C6C21F614CCA0040501E /* AddressInfoEditVC.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
 				04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */,
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
+				F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
 				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
 				0459C6B31F614C870040501E /* AddressTableViewCell.xib in Resources */,
@@ -2467,6 +2485,7 @@
 				04D1078B1F62998D007D9F57 /* ZFLineChart.m in Sources */,
 				04D396491F6621110077BFB3 /* SettlementBeizhuCell.m in Sources */,
 				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
+				F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */,
 				047ADFEB1F4A86EF00AEAE8E /* CMSDWebImageDownloader.m in Sources */,
 				047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */,
 				0459C6B11F614C870040501E /* AddressItem.m in Sources */,
@@ -2547,6 +2566,7 @@
 				047ADFEC1F4A86EF00AEAE8E /* CMSDWebImageDownloaderOperation.m in Sources */,
 				04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */,
 				041076F21F542463003CB740 /* CenterNormalCell.m in Sources */,
+				F789EF0B1F7D571E003A127C /* EmployeeDetailCell.m in Sources */,
 				04DC7D0F1F31C25000AA20A7 /* HomeShopListCell.m in Sources */,
 				0459C6B81F614C870040501E /* FMDatabaseAdditions.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
@@ -2729,7 +2749,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				INFOPLIST_FILE = AutoMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2758,7 +2778,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				INFOPLIST_FILE = AutoMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
