@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEmployeeVC">
             <connections>
+                <outlet property="nameTF" destination="GYh-Js-1pH" id="c13-55-qDT"/>
+                <outlet property="passwordTF" destination="jyP-Ea-q7K" id="2ry-3a-Qdo"/>
+                <outlet property="phoneTF" destination="Fux-fB-Wr7" id="e7K-Hz-QcI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,6 +30,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="保存"/>
+                    <connections>
+                        <action selector="save:" destination="-1" eventType="touchUpInside" id="BFf-ZF-Vmh"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYh-Js-1pH">
                     <rect key="frame" x="16" y="74" width="343" height="35"/>
@@ -117,7 +123,7 @@
                 <constraint firstAttribute="trailing" secondItem="GYh-Js-1pH" secondAttribute="trailing" constant="16" id="wS3-5M-o2o"/>
                 <constraint firstAttribute="trailing" secondItem="dsu-z5-c0w" secondAttribute="trailing" id="xIe-yH-fef"/>
             </constraints>
-            <point key="canvasLocation" x="21" y="73"/>
+            <point key="canvasLocation" x="-315" y="46"/>
         </view>
     </objects>
 </document>

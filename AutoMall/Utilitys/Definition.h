@@ -169,7 +169,8 @@
 
 #define StoreListStaff                           @"/store/listStaff"             //员工列表
 #define StoreDelStaff                            @"/store/delStaff"             //删除员工
-#define StaffSkill                                   @"/store/listStaffSkill"       //获取员工技能详情
+#define StoreAddStaff                           @"/store/addStaff"           //添加员工
+#define StaffSkillList                             @"/store/listStaffSkill"       //获取员工技能列表
 
 #define FavoriteList                                @"/favorite/list"                   //收藏列表
 #define FavoriteCollect                           @"/favorite/collect"              //收藏

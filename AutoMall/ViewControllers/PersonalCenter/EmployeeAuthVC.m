@@ -9,6 +9,10 @@
 #import "EmployeeAuthVC.h"
 
 @interface EmployeeAuthVC ()
+@property (strong, nonatomic) IBOutlet UILabel *nameL;
+@property (strong, nonatomic) IBOutlet UILabel *introduceL;
+@property (strong, nonatomic) IBOutlet UIImageView *imgView;
+@property (strong, nonatomic) IBOutlet UIView *revieweView;
 
 @end
 
@@ -17,6 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"技能认证审核";
+    
+    self.nameL.text = @"认证名称名称";
+    self.introduceL.text = @"技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 ";
+    
+    if (self.isReviewed) {
+        self.revieweView.hidden = YES;
+    }
+}
+
+- (IBAction)pass:(id)sender {
+}
+
+- (IBAction)reject:(id)sender {
 }
 
 - (void)didReceiveMemoryWarning {

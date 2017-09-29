@@ -7,9 +7,16 @@
 //
 
 #import "EmployeeDetailVC.h"
+#import "EmployeeDetailTopCell.h"
 #import "EmployeeDetailCell.h"
+#import "EmployeeAuthVC.h"
 
 @interface EmployeeDetailVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *skillAry;
+}
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -21,6 +28,32 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"张三";
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailTopCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailTopCell"];
+    
+    skillAry = [NSMutableArray array];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void) toCheck {   //进行审核操作
+    EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
+    authVC.isReviewed = NO;
+    [self.navigationController pushViewController:authVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -33,12 +66,15 @@
     if (section == 0) {
         return 1;
     }
-    return 3;
+    return [skillAry count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 44;
+//            EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+//            CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//            return height + 1;
+        return 100;
     }
     return 66;
 }
@@ -56,24 +92,59 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
-        cell.nameL.text = @"高级工程师";
+        EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailTopCell"];
+        cell.contentL.text = @"技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 ";
         return cell;
     }
     else {
         EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
         cell.nameL.text = @"高级工程师";
+        [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//    MailOrderDetailVC *detailVC = [[MailOrderDetailVC alloc] init];
+    EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
     //        detailVC.userID = userArray[indexPath.section][@"id"];
     //        detailVC.isDrink = self.isDrink;
     //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-//    [self.navigationController pushViewController:detailVC animated:YES];
+    authVC.isReviewed = YES;
+    [self.navigationController pushViewController:authVC animated:YES];
+}
+
+#pragma mark - 发起请求
+-(void)requestAddStaffList { //添加员工
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StaffSkillList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StaffSkillList, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.idStr,@"id", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StaffSkillList) delegate:nil params:pram info:infoDic];
+}
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:StaffSkillList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StaffSkillList object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [skillAry addObjectsFromArray:responseObject[@"data"]];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -80,9 +80,9 @@
     return 44;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 5;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"employeeListCell"];
@@ -112,6 +112,7 @@
         [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+#pragma mark - 发起请求
 -(void)requestGetStaffList { //获取员工列表
     [_hud show:YES];
     

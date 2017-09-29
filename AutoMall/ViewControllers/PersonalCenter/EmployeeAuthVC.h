@@ -10,4 +10,6 @@
 
 @interface EmployeeAuthVC : UIViewController
 
+@property (assign, nonatomic) BOOL isReviewed; //是否审核过
+
 @end

@@ -10,4 +10,6 @@
 
 @interface EmployeeDetailVC : UIViewController
 
+@property (strong, nonatomic) NSString *idStr;  //员工ID
+
 @end
