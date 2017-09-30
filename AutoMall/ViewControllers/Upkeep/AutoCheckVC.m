@@ -12,10 +12,13 @@
 #import "UpkeepPlanVC.h"
 #import "DVSwitch.h"
 #import "UpkeepCarMarkVC.h"
+#import "AJSegmentedControl.h"
 
-@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
     NSMutableDictionary *selectedDic;   //记录已选择
+    AJSegmentedControl *mySegmentedControl;
+    NSArray *partsArray;   //车身部位数组
 }
 
 @end
@@ -50,9 +53,18 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
+    NSDictionary *dic1 = @{@"part_name":@"车身"};
+    NSDictionary *dic2 = @{@"part_name":@"车内"};
+    NSDictionary *dic3 = @{@"part_name":@"机舱"};
+    NSDictionary *dic4 = @{@"part_name":@"底盘"};
+    NSDictionary *dic5 = @{@"part_name":@"尾箱"};
+    partsArray = @[dic1, dic2, dic3, dic4, dic5];
+    [self createSegmentControlWithTitles:partsArray];
+    
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44)];
-    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, SCREEN_HEIGHT - 64 - 44 - 44);
+    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 44);
     self.mainScrollView.pagingEnabled = YES;
+    self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
     
     self.carBodyTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
@@ -66,18 +78,45 @@
     
     selectedDic = [NSMutableDictionary dictionary];
     
-    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-    [self.mainScrollView addSubview:self.carInsideTV];
+//    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+//    [self.mainScrollView addSubview:self.carInsideTV];
+//    
+//    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+//    [self.mainScrollView addSubview:self.engineRoomTV];
+//    
+//    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+//    [self.mainScrollView addSubview:self.chassisTV];
+//    
+//    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+//    [self.mainScrollView addSubview:self.trunkTV];
     
-    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-    [self.mainScrollView addSubview:self.engineRoomTV];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
-    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-    [self.mainScrollView addSubview:self.chassisTV];
-    
-    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-    [self.mainScrollView addSubview:self.trunkTV];
-    
+}
+
+#pragma mark - 自定义segmented
+- (void)createSegmentControlWithTitles:(NSArray *)titls
+{
+    mySegmentedControl = [[AJSegmentedControl alloc] initWithOriginY:64 Titles:titls delegate:self];
+    [self.view addSubview:mySegmentedControl];
+}
+
+- (void)ajSegmentedControlSelectAtIndex:(NSInteger)index
+{
+    NSLog(@"%ld",(long)index);
+    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * index, 0) animated:NO];
+
+//    [self requestGetOrderList];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.mainScrollView) {
+        int index = scrollView.contentOffset.x / scrollView.frame.size.width;
+        [mySegmentedControl changeSegmentedControlWithIndex:index];
+    }
 }
 
 -(void)toMark {

@@ -15,6 +15,7 @@
 		041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076F11F542463003CB740 /* CenterNormalCell.xib */; };
 		041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076F51F54247B003CB740 /* CenterOrderCell.m */; };
 		041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076F61F54247B003CB740 /* CenterOrderCell.xib */; };
+		041556E31F7F915900686016 /* AJSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 041556E21F7F915900686016 /* AJSegmentedControl.m */; };
 		04254DCC1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254DCB1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m */; };
 		04254DD01F6FC21F0010D49F /* NSDate+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254DCF1F6FC21F0010D49F /* NSDate+Formatter.m */; };
 		042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2001F4C3C6500EA5E5F /* CommodityDetailStarCell.m */; };
@@ -350,6 +351,8 @@
 		041076F41F54247B003CB740 /* CenterOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterOrderCell.h; sourceTree = "<group>"; };
 		041076F51F54247B003CB740 /* CenterOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterOrderCell.m; sourceTree = "<group>"; };
 		041076F61F54247B003CB740 /* CenterOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterOrderCell.xib; sourceTree = "<group>"; };
+		041556E11F7F915900686016 /* AJSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJSegmentedControl.h; sourceTree = "<group>"; };
+		041556E21F7F915900686016 /* AJSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJSegmentedControl.m; sourceTree = "<group>"; };
 		04254DCA1F6F6DC40010D49F /* UpkeepHomeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepHomeCollectionCell.h; sourceTree = "<group>"; };
 		04254DCB1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepHomeCollectionCell.m; sourceTree = "<group>"; };
 		04254DCE1F6FC21F0010D49F /* NSDate+Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Formatter.h"; sourceTree = "<group>"; };
@@ -944,6 +947,15 @@
 				041076F61F54247B003CB740 /* CenterOrderCell.xib */,
 			);
 			name = "中心首页cell";
+			sourceTree = "<group>";
+		};
+		041556E01F7F915900686016 /* CustomSegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				041556E11F7F915900686016 /* AJSegmentedControl.h */,
+				041556E21F7F915900686016 /* AJSegmentedControl.m */,
+			);
+			path = CustomSegmentControl;
 			sourceTree = "<group>";
 		};
 		04254DCD1F6FC21F0010D49F /* 日历 */ = {
@@ -1767,6 +1779,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				041556E01F7F915900686016 /* CustomSegmentControl */,
 				04254DCD1F6FC21F0010D49F /* 日历 */,
 				04D107201F62998C007D9F57 /* ZFChart */,
 				0459C68F1F614C870040501E /* AddressPicker */,
@@ -2511,6 +2524,7 @@
 				04F7D8631F5EA584004945ED /* EmployeeListVC.m in Sources */,
 				04D1077A1F62998D007D9F57 /* ZFXAxisLine.m in Sources */,
 				04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */,
+				041556E31F7F915900686016 /* AJSegmentedControl.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
 				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
