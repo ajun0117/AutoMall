@@ -19,6 +19,9 @@
     NSMutableDictionary *selectedDic;   //记录已选择
     AJSegmentedControl *mySegmentedControl;
     NSArray *partsArray;   //车身部位数组
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSArray *contentAry;    //检查内容列表
 }
 
 @end
@@ -53,16 +56,7 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
-    NSDictionary *dic1 = @{@"part_name":@"车身"};
-    NSDictionary *dic2 = @{@"part_name":@"车内"};
-    NSDictionary *dic3 = @{@"part_name":@"机舱"};
-    NSDictionary *dic4 = @{@"part_name":@"底盘"};
-    NSDictionary *dic5 = @{@"part_name":@"尾箱"};
-    partsArray = @[dic1, dic2, dic3, dic4, dic5];
-    [self createSegmentControlWithTitles:partsArray];
-    
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44)];
-    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 44);
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
@@ -77,24 +71,23 @@
     [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
     
     selectedDic = [NSMutableDictionary dictionary];
-    
-//    self.carInsideTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-//    [self.mainScrollView addSubview:self.carInsideTV];
-//    
-//    self.engineRoomTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-//    [self.mainScrollView addSubview:self.engineRoomTV];
-//    
-//    self.chassisTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-//    [self.mainScrollView addSubview:self.chassisTV];
-//    
-//    self.trunkTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 4, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-//    [self.mainScrollView addSubview:self.trunkTV];
-    
+    [self requestGetCheckcategoryList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
     
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
 }
 
 #pragma mark - 自定义segmented
@@ -106,6 +99,8 @@
 
 - (void)ajSegmentedControlSelectAtIndex:(NSInteger)index
 {
+    NSString *idString = partsArray[index] [@"id"];
+    [self requestGetChecktermListWithId:@"1"];
     NSLog(@"%ld",(long)index);
     [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * index, 0) animated:NO];
 
@@ -364,11 +359,12 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return [contentAry count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    NSDictionary *dic = contentAry[section];
+    return [dic[@"checkContents"] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -388,12 +384,13 @@
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+     NSDictionary *dic = contentAry[section];
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         view.backgroundColor = [UIColor whiteColor];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
         label.font = [UIFont boldSystemFontOfSize:17];
         label.backgroundColor = [UIColor clearColor];
-        label.text = @"水箱水";
+        label.text = dic[@"name"];
         [view addSubview:label];
 
         UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -433,27 +430,33 @@
 //        return cell;
 //    }
 //    else {
-        AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    NSDictionary *dic = contentAry[indexPath.section];
+    NSArray *ary = dic[@"checkContents"];
+    NSDictionary *dicc = ary [indexPath.row];
+
+    cell.contentL.text = dicc[@"name"];
+    for (DVSwitch *switcher in cell.segBgView.subviews) {
+        [switcher removeFromSuperview];
+    }
+    NSArray *stateAry = [NSArray arrayWithObjects:dicc[@"state1"],dicc[@"state2"],dicc[@"state3"], nil];
+    DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];
+    NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+    switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+    switcher.font = [UIFont systemFontOfSize:13];
+    [cell.segBgView addSubview:switcher];
+    switcher.cornerRadius = 18;
+    switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+    NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
+    [switcher forceSelectedIndex:selectedIndex animated:NO];
+    [switcher setPressedHandler:^(NSUInteger index) {
+        NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+    }];
     
-        for (DVSwitch *switcher in cell.segBgView.subviews) {
-            [switcher removeFromSuperview];
-        }
-        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:@[@"严重", @"轻微",@"正常"]];
-        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
-        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
-        switcher.font = [UIFont systemFontOfSize:13];
-        [cell.segBgView addSubview:switcher];
-        switcher.cornerRadius = 18;
-        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
-        NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
-        [switcher forceSelectedIndex:selectedIndex animated:NO];
-        [switcher setPressedHandler:^(NSUInteger index) {
-            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-            [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
-        }];
-        
-        return cell;
+    return cell;
 //    }
 }
 
@@ -511,6 +514,66 @@
 //            cell.backgroundView = testView;
 //    }
 //}
+
+
+#pragma mark - 发起网络请求
+-(void)requestGetCheckcategoryList { //获取检查部位列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CheckcategoryList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CheckcategoryList, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageSize=%d",UrlPrefix(CheckcategoryList),20];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestGetChecktermListWithId:(NSString *)idStr { //获取某部位的检查内容列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktermList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktermList, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?checkCategoryId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),idStr,0,50];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:CheckcategoryList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CheckcategoryList object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            partsArray = responseObject[@"data"];
+            [self createSegmentControlWithTitles:partsArray];
+            self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 44);
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:ChecktermList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ChecktermList object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            contentAry = responseObject[@"data"];
+            [self.carBodyTV reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

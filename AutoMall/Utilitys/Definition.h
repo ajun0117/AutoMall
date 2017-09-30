@@ -157,6 +157,8 @@
 
 //保养
 #define ChecktypeList                             @"/checktype/list"            //检查类别
+#define CheckcategoryList                      @"/checkcategory/list"      //检查部位列表
+#define ChecktermList                          @"/checkterm/list"            //某部位的检查内容列表
 #define DiscountList                                @"/discount/list"               //优惠列表
 #define CarAdd                                        @"/car/add"                     //新增车辆信息
 #define CarUpdate                                   @"/car/update"                  //更新车辆信息

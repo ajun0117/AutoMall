@@ -70,7 +70,7 @@
             btn.titleLabel.font = [UIFont systemFontOfSize:15];
             [btn setTitleColor:Red_BtnColor forState:UIControlStateSelected];
             NSDictionary *titleDic = titles [i];
-            [btn setTitle:titleDic[@"part_name"] forState:UIControlStateNormal];
+            [btn setTitle:titleDic[@"name"] forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventTouchUpInside];
             btn.tag = Define_Tag_add + i;
             [_scrollView addSubview:btn];
