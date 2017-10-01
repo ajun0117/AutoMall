@@ -17,6 +17,8 @@
 @interface UpkeepVC ()
 {
     NSArray *typeAry; //类别数组
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
 }
 //@property (strong, nonatomic) IBOutlet UIButton *carOwnerBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *hairdressingBtn;
@@ -25,6 +27,7 @@
 //@property (strong, nonatomic) IBOutlet UIButton *upkeepBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *synthesizeBtn;
 @property (strong, nonatomic) IBOutlet UICollectionView *myCollectionView;
+
 
 @end
 
@@ -59,9 +62,29 @@
 //    [self makeLayerWithButton:self.synthesizeBtn];
 //    [self makeLayerWithButton:self.customBtn];
     
-    typeAry = @[@{@"title":@"美容检查"},@{@"title":@"快速保养检查"},@{@"title":@"保养检查"},@{@"title":@"综合检查"}];
-    [self.myCollectionView reloadData];
+    typeAry = @[@{@"title":@"美容检查",@"id":@"1"},@{@"title":@"保养检查",@"id":@"8"},@{@"title":@"快速检查",@"id":@"9"}];
+//    [self.myCollectionView reloadData];
+    
+    [self requestGetComCategoryList];
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
 
 //-(void) makeLayerWithButton:(UIButton *)btn {
 //    btn.layer.cornerRadius = btn.frame.size.height / 2;
@@ -139,6 +162,7 @@
     collCell.layer.borderColor = [UIColor lightGrayColor].CGColor;
     collCell.layer.borderWidth = 1;
     collCell.layer.cornerRadius = 5;
+    NSLog(@"typeAry: %@",typeAry);
     if (indexPath.item == [typeAry count]) {
         [collCell.img setImage:IMG(@"timg-2")];
         collCell.titleL.text = @"自定义检查";
@@ -172,19 +196,18 @@
 //    }
     
     if (indexPath.item == [typeAry count]) {
-//        AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-//        checkVC.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:checkVC animated:YES];
         CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
         listVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listVC animated:YES];
         return;
     }
-    NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
-    
+    else {
+        NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
+        AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+        checkVC.checktypeID = dic[@"id"];
+        checkVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:checkVC animated:YES];
+    }
 }
 
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -238,6 +261,48 @@
 //    }
 //    return CGSizeMake(SCREEN_WIDTH, 100);
 //}
+
+#pragma mark - 发送请求
+-(void)requestGetComCategoryList { //获取分类列表
+    [_hud show:YES];
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktypeList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktypeList, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(ChecktypeList) delegate:nil params:nil info:infoDic];
+    
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:ChecktypeList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ChecktypeList object:nil];
+        NSLog(@"_responseObject: %@",responseObject);
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            typeAry = responseObject [@"data"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.myCollectionView reloadData]; //（需要放在主线程中执行UI更新）
+            });
+            
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,6 +10,8 @@
 
 @interface AutoCheckVC : UIViewController
 
+@property (strong, nonatomic) NSString *checktypeID;    //检查类别ID
+
 @property (strong, nonatomic) IBOutlet UIButton *carBodyBtn;
 @property (strong, nonatomic) IBOutlet UIButton *carInsideBtn;
 @property (strong, nonatomic) IBOutlet UIButton *engineRoomBtn;

@@ -522,7 +522,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CheckcategoryList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CheckcategoryList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?pageSize=%d",UrlPrefix(CheckcategoryList),20];
+    NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&pageSize=%d",UrlPrefix(CheckcategoryList),self.checktypeID,20];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -531,7 +531,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktermList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktermList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?checkCategoryId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),idStr,0,50];
+    NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&checkCategoryId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),self.checktypeID,idStr,0,50];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
