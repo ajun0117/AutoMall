@@ -25,7 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIView *trunkView;
 
 @property (strong, nonatomic) UIScrollView *mainScrollView;
-@property (strong, nonatomic) UITableView *carBodyTV;
+//@property (strong, nonatomic) UITableView *carBodyTV;
 //@property (strong, nonatomic) UITableView *carInsideTV;
 //@property (strong, nonatomic) UITableView *engineRoomTV;
 //@property (strong, nonatomic) UITableView *chassisTV;

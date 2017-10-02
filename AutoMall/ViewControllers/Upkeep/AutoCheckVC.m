@@ -22,6 +22,7 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSArray *contentAry;    //检查内容列表
+    NSInteger currentSelectIndex;  //当前选中的位置
 }
 
 @end
@@ -61,14 +62,18 @@
     self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
     
-    self.carBodyTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-    [self.mainScrollView addSubview:self.carBodyTV];
-    self.carBodyTV.delegate = self;
-    self.carBodyTV.dataSource = self;
-    self.carBodyTV.allowsSelection = NO;
-    self.carBodyTV.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
-    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
+//    UITableView *myTableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+//    myTableView1.tag = 100;
+//    [self.mainScrollView addSubview:myTableView1];
+//    myTableView1.delegate = self;
+//    myTableView1.dataSource = self;
+//    myTableView1.allowsSelection = NO;
+//    myTableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+////    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
+//    [myTableView1 registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
     
     selectedDic = [NSMutableDictionary dictionary];
     [self requestGetCheckcategoryList];
@@ -90,6 +95,20 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void) creatTableViews {
+    for (int i = 0; i < partsArray.count; ++i) {
+        UITableView *myTableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+        myTableView.tag = 100 + i;
+        [self.mainScrollView addSubview:myTableView];
+        myTableView.delegate = self;
+        myTableView.dataSource = self;
+        myTableView.allowsSelection = NO;
+        myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        //    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
+        [myTableView registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
+    }
+}
+
 #pragma mark - 自定义segmented
 - (void)createSegmentControlWithTitles:(NSArray *)titls
 {
@@ -99,8 +118,10 @@
 
 - (void)ajSegmentedControlSelectAtIndex:(NSInteger)index
 {
+    NSLog(@"index: %d",index);
+    currentSelectIndex = index;
     NSString *idString = partsArray[index] [@"id"];
-    [self requestGetChecktermListWithId:@"1"];
+    [self requestGetChecktermListWithId:idString];
     NSLog(@"%ld",(long)index);
     [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * index, 0) animated:NO];
 
@@ -378,7 +399,6 @@
     return 44;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 10;
 }
@@ -553,6 +573,8 @@
             partsArray = responseObject[@"data"];
             [self createSegmentControlWithTitles:partsArray];
             self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 44);
+            [self creatTableViews];
+            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -565,7 +587,11 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ChecktermList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             contentAry = responseObject[@"data"];
-            [self.carBodyTV reloadData];
+            if ([[self.mainScrollView viewWithTag:100+currentSelectIndex] isKindOfClass:[UITableView class]]) {
+                UITableView *tableV = [self.mainScrollView viewWithTag:100+currentSelectIndex];
+                [tableV reloadData];
+            }
+            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

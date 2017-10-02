@@ -289,10 +289,7 @@
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             typeAry = responseObject [@"data"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.myCollectionView reloadData]; //（需要放在主线程中执行UI更新）
-            });
-            
+            [self.myCollectionView reloadData];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
