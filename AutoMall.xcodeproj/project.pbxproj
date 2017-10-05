@@ -332,6 +332,8 @@
 		04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55DB1F5549B800104D6B /* LoginSuccessViewController.m */; };
 		04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55DC1F5549B800104D6B /* LoginSuccessViewController.xib */; };
 		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
+		F71245751F868B590091816F /* CheckContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245741F868B590091816F /* CheckContentItem.m */; };
+		F71245781F868DD20091816F /* CheckContentTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245771F868DD20091816F /* CheckContentTool.m */; };
 		F789EF0B1F7D571E003A127C /* EmployeeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF091F7D571E003A127C /* EmployeeDetailCell.m */; };
 		F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */; };
 		F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */; };
@@ -896,6 +898,10 @@
 		23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.release.xcconfig"; sourceTree = "<group>"; };
 		282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.debug.xcconfig"; sourceTree = "<group>"; };
 		6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F71245731F868B590091816F /* CheckContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentItem.h; sourceTree = "<group>"; };
+		F71245741F868B590091816F /* CheckContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentItem.m; sourceTree = "<group>"; };
+		F71245761F868DD20091816F /* CheckContentTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentTool.h; sourceTree = "<group>"; };
+		F71245771F868DD20091816F /* CheckContentTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentTool.m; sourceTree = "<group>"; };
 		F789EF081F7D571E003A127C /* EmployeeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailCell.h; sourceTree = "<group>"; };
 		F789EF091F7D571E003A127C /* EmployeeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailCell.m; sourceTree = "<group>"; };
 		F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeDetailCell.xib; sourceTree = "<group>"; };
@@ -1053,6 +1059,7 @@
 		044A24141F3326CF009720DE /* 汽车检查页 */ = {
 			isa = PBXGroup;
 			children = (
+				F712456F1F868AE30091816F /* 检查页数据库模型 */,
 				04A69F0A1F710CCA00E966A0 /* 车图标记 */,
 				0453D3A61F692AB0004F79C8 /* 检查页Cell */,
 				044A24151F3326F9009720DE /* AutoCheckVC.h */,
@@ -2205,6 +2212,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F712456F1F868AE30091816F /* 检查页数据库模型 */ = {
+			isa = PBXGroup;
+			children = (
+				F71245731F868B590091816F /* CheckContentItem.h */,
+				F71245741F868B590091816F /* CheckContentItem.m */,
+				F71245761F868DD20091816F /* CheckContentTool.h */,
+				F71245771F868DD20091816F /* CheckContentTool.m */,
+			);
+			name = "检查页数据库模型";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2491,11 +2509,13 @@
 				047ADFF41F4A86EF00AEAE8E /* UIImage+CMWebP.m in Sources */,
 				041076F71F54247B003CB740 /* CenterOrderCell.m in Sources */,
 				04EFEC6D1F5FA446004D9188 /* MailOrderDetailGoodsCell.m in Sources */,
+				F71245751F868B590091816F /* CheckContentItem.m in Sources */,
 				04DC7DBF1F31C28300AA20A7 /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				04D107891F62998D007D9F57 /* ZFCircle.m in Sources */,
 				04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
+				F71245781F868DD20091816F /* CheckContentTool.m in Sources */,
 				042F4F1D1F7905150059B44E /* CarInfoAddVC.m in Sources */,
 				047ADFFB1F4A86EF00AEAE8E /* MXScrollConst.m in Sources */,
 				04DC7DCF1F31C28300AA20A7 /* MJRefreshConst.m in Sources */,

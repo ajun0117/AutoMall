@@ -13,10 +13,13 @@
 #import "DVSwitch.h"
 #import "UpkeepCarMarkVC.h"
 #import "AJSegmentedControl.h"
+#import "CheckContentItem.h"
+#import "CheckContentTool.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
     NSMutableDictionary *selectedDic;   //记录已选择
+    NSMutableArray *selectedAry;   //记录已选择的状态（index对应检查部位的index，object对应相应的状态字段）
     AJSegmentedControl *mySegmentedControl;
     NSArray *partsArray;   //车身部位数组
     MBProgressHUD *_hud;
@@ -76,7 +79,9 @@
 //    [myTableView1 registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
     
     selectedDic = [NSMutableDictionary dictionary];
-    [self requestGetCheckcategoryList];
+    selectedAry = [NSMutableArray array];
+    [self requestGetCheckcategoryList];     //记录已选择的状态
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -98,7 +103,7 @@
 -(void) creatTableViews {
     for (int i = 0; i < partsArray.count; ++i) {
         UITableView *myTableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-        myTableView.tag = 100 + i;
+        myTableView.tag = 1000 + i;
         [self.mainScrollView addSubview:myTableView];
         myTableView.delegate = self;
         myTableView.dataSource = self;
@@ -107,6 +112,9 @@
         //    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
         [myTableView registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
     }
+    currentSelectIndex = 0;     //默认第一个
+    NSString *idString = partsArray[0] [@"id"];
+    [self requestGetChecktermListWithId:idString];
 }
 
 #pragma mark - 自定义segmented
@@ -118,7 +126,7 @@
 
 - (void)ajSegmentedControlSelectAtIndex:(NSInteger)index
 {
-    NSLog(@"index: %d",index);
+    NSLog(@"index: %ld",(long)index);
     currentSelectIndex = index;
     NSString *idString = partsArray[index] [@"id"];
     [self requestGetChecktermListWithId:idString];
@@ -469,12 +477,32 @@
     [cell.segBgView addSubview:switcher];
     switcher.cornerRadius = 18;
     switcher.backgroundColor = RGBCOLOR(254, 255, 255);
-    NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
+    
+    CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+    NSInteger selectedIndex = [item.stateIndex integerValue];
     [switcher forceSelectedIndex:selectedIndex animated:NO];
     [switcher setPressedHandler:^(NSUInteger index) {
         NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+//        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+        CheckContentItem *item = [[CheckContentItem alloc] init];
+        item.aid = NSStringWithNumber(dicc[@"id"]);
+        item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+//        item.stateName = stateAry[index];
+        [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
     }];
+    
+//    if (selectedAry.count) {
+//        selectedDic = (NSMutableDictionary *) selectedAry[currentSelectIndex];
+//        NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
+//        [switcher forceSelectedIndex:selectedIndex animated:NO];
+//        [switcher setPressedHandler:^(NSUInteger index) {
+//            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+//            [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+//            NSMutableDictionary *diccc = [NSMutableDictionary dictionaryWithDictionary:selectedDic];
+//            [selectedAry replaceObjectAtIndex:currentSelectIndex withObject:diccc];
+//            [selectedDic removeAllObjects];
+//        }];
+//    }
     
     return cell;
 //    }
@@ -587,11 +615,25 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ChecktermList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             contentAry = responseObject[@"data"];
-            if ([[self.mainScrollView viewWithTag:100+currentSelectIndex] isKindOfClass:[UITableView class]]) {
-                UITableView *tableV = [self.mainScrollView viewWithTag:100+currentSelectIndex];
+            NSMutableArray *ary = [NSMutableArray array];
+            for (NSDictionary *dic in contentAry) {
+                for (NSDictionary *dicc in dic[@"checkContents"]) {
+                    CheckContentItem *item = [[CheckContentItem alloc] init];
+                    item.aid = NSStringWithNumber(dicc[@"id"]);
+                    item.name = dicc[@"name"];
+                    item.pId = NSStringWithNumber(partsArray[currentSelectIndex] [@"id"]);
+                    item.pName = partsArray[currentSelectIndex] [@"name"];
+                    item.stateIndex = @"0";
+                    item.stateName = @"";
+                    [ary addObject:item];
+                }
+            }
+            [[CheckContentTool sharedManager] insertRecordsWithAry:ary];
+            
+            if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
+                UITableView *tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
                 [tableV reloadData];
             }
-            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
