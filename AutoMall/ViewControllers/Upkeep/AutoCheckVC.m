@@ -469,8 +469,8 @@
     for (DVSwitch *switcher in cell.segBgView.subviews) {
         [switcher removeFromSuperview];
     }
-    NSArray *stateAry = [NSArray arrayWithObjects:dicc[@"state1"],dicc[@"state2"],dicc[@"state3"], nil];
-    DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];
+    NSArray *stateAry = [NSArray arrayWithObjects:STRING_Nil(dicc[@"state1"]),STRING_Nil(dicc[@"state2"]),STRING_Nil(dicc[@"state3"]), nil];
+    DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];  
     NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
     switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
     switcher.font = [UIFont systemFontOfSize:13];
@@ -581,6 +581,15 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktermList, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&checkCategoryId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),self.checktypeID,idStr,0,50];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestCarUpkeepAdd { //生成检查单
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepAdd object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepAdd, @"op", nil];
+//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"storeId",self.discountsNameTF.text,@"item",self.discountsMoneyTF.text,@"money", nil];
+//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

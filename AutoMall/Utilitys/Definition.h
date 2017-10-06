@@ -40,6 +40,7 @@
 //iPhone4
 #define   isIphone4  [UIScreen mainScreen].bounds.size.height < 500
 
+#define STRING_Nil(str)         (str==[NSNull null])?nil:str
 #define STRING(str)         (str==[NSNull null])?@"":str
 #define NSStringWithNumber(number)    number==nil?@"未知":[NSString stringWithFormat:@"%@",number]
 #define NSStringZeroWithNumber(number)    number==nil?@"0":[NSString stringWithFormat:@"%@",number]
@@ -154,13 +155,15 @@
 #define CheckCode                                  @"/sms/checkCode"          //校验验证码
 #define UserLogin                                   @"/login"                           //用户登录
 #define PhoneCheckup                             @"/user/checkup"             //验证手机号是否存在
+#define UserInfo                                    @"/info"                            //获取登录用户的信息
 
 //保养
-#define ChecktypeList                             @"/checktype/list"            //检查类别
-#define CheckcategoryList                      @"/checkcategory/list"      //检查部位列表
-#define ChecktermList                          @"/checkterm/list"              //某部位的检查内容列表
-#define DiscountList                                @"/discount/list"               //优惠列表
-#define CarAdd                                        @"/car/add"                     //新增车辆信息
+#define ChecktypeList                             @"/checktype/list"              //检查类别
+#define CheckcategoryList                      @"/checkcategory/list"       //检查部位列表
+#define ChecktermList                            @"/checkterm/list"             //某部位的检查内容列表
+#define CarUpkeepAdd                            @"/carUpkeep/add"            //生成检查单信息
+#define DiscountList                                @"/discount/list"                //优惠列表
+#define CarAdd                                        @"/car/add"                       //新增车辆信息
 #define CarUpdate                                   @"/car/update"                  //更新车辆信息
 
 //个人中心

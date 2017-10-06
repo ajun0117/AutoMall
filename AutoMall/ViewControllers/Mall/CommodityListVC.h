@@ -10,4 +10,6 @@
 
 @interface CommodityListVC : UIViewController
 
+@property (strong, nonatomic) NSString *commodityTermId;    //商品分类id
+
 @end

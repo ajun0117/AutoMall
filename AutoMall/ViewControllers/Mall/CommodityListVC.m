@@ -23,6 +23,8 @@
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *commodityArray;
     int currentpage;
+    NSString *orderString;  //默认null        starLevel星级  salesVolume 销量  discount折后价
+    NSString *orderTypeString;  //默认desc
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -35,9 +37,13 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品列表";
     
-    [self adjustLeftBtnFrameWithTitle:@"项目" andButton:xiangmuBtn];
-    [self adjustLeftBtnFrameWithTitle:@"排列方式" andButton:sortBtn];
-    [self adjustLeftBtnFrameWithTitle:@"标签" andButton:tagBtn];
+//    [self adjustLeftBtnFrameWithTitle:@"项目" andButton:xiangmuBtn];
+//    [self adjustLeftBtnFrameWithTitle:@"排列方式" andButton:sortBtn];
+//    [self adjustLeftBtnFrameWithTitle:@"标签" andButton:tagBtn];
+    
+     [xiangmuBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
+     [sortBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
+     [tagBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityListCell" bundle:nil] forCellReuseIdentifier:@"commodityListCell"];
     
@@ -46,6 +52,8 @@
     
     commodityArray = [NSMutableArray array];
     currentpage = 0;
+    orderString = NULL;
+    orderTypeString = @"desc";
     [self requestGetComCategoryList];
 }
 
@@ -64,6 +72,56 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+- (IBAction)levelAction:(id)sender {
+    xiangmuBtn.backgroundColor = [UIColor lightGrayColor];
+    orderString = @"starLevel";     //按星级排序
+    if (xiangmuBtn.selected) {
+        xiangmuBtn.selected = NO;
+        orderTypeString = @"desc";   //降序
+    }
+    else {
+        xiangmuBtn.selected = YES;
+        orderTypeString = @"asc";   //升序
+    }
+    sortBtn.selected = NO;
+    sortBtn.backgroundColor = [UIColor whiteColor];
+    tagBtn.selected = NO;
+    tagBtn.backgroundColor = [UIColor whiteColor];
+    
+}
+- (IBAction)saleAction:(id)sender {
+    xiangmuBtn.selected = NO;
+    xiangmuBtn.backgroundColor = [UIColor whiteColor];
+    orderString = @"salesVolume";     //按销量排序
+    sortBtn.backgroundColor = [UIColor lightGrayColor];
+    if (sortBtn.selected) {
+        sortBtn.selected = NO;
+        orderTypeString = @"desc";   //降序
+    }
+    else {
+        sortBtn.selected = YES;
+        orderTypeString = @"asc";   //升序
+    }
+    tagBtn.selected = NO;
+    tagBtn.backgroundColor = [UIColor whiteColor];
+}
+- (IBAction)valueAction:(id)sender {
+    xiangmuBtn.selected = NO;
+    xiangmuBtn.backgroundColor = [UIColor whiteColor];
+    sortBtn.selected = NO;
+    sortBtn.backgroundColor = [UIColor whiteColor];
+    
+    orderString = @"discount";     //按星级排序
+    tagBtn.backgroundColor = [UIColor lightGrayColor];
+    if (tagBtn.selected) {
+        tagBtn.selected = NO;
+        orderTypeString = @"desc";   //降序
+    }
+    else {
+        tagBtn.selected = YES;
+        orderTypeString = @"asc";   //升序
+    }
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -259,24 +317,23 @@
 }
 
 
--(void)adjustLeftBtnFrameWithTitle:(NSString *)str andButton:(UIButton *)btn {
-    NSDictionary *attributes = @{NSFontAttributeName : btn.titleLabel.font};
-    CGSize size = [str sizeWithAttributes:attributes];
-    NSLog(@"size: %@",NSStringFromCGSize(size));
-    //    float rate = btn.frame.size.width / size.width;
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, size.width+25, 0, 0)];
-    [btn setTitle:str forState:UIControlStateNormal];
-}
+//-(void)adjustLeftBtnFrameWithTitle:(NSString *)str andButton:(UIButton *)btn {
+//    NSDictionary *attributes = @{NSFontAttributeName : btn.titleLabel.font};
+//    CGSize size = [str sizeWithAttributes:attributes];
+//    NSLog(@"size: %@",NSStringFromCGSize(size));
+//    //    float rate = btn.frame.size.width / size.width;
+//    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, size.width+25, 0, 0)];
+//    [btn setTitle:str forState:UIControlStateNormal];
+//}
 
 #pragma mark - 发送请求
 -(void)requestGetComCategoryList { //获取分类列表
     [_hud show:YES];
-    
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CommodityList),currentpage];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityTermId,@"commodityTermId",currentpage,@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
+        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
     
 }
 

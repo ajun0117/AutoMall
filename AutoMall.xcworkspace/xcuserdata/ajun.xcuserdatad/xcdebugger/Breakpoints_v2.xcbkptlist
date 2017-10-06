@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckVC.m"
-            timestampString = "528918406.863733"
+            timestampString = "528997227.203412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "624"
-            endingLineNumber = "624"
+            startingLineNumber = "633"
+            endingLineNumber = "633"
             landmarkName = "-didFinishedRequestData:"
             landmarkType = "7">
          </BreakpointContent>
