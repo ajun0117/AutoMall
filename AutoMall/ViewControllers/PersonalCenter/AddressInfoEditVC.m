@@ -183,8 +183,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeAdd object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeAdd, @"op", nil];
-    NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),@"1",self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+    NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),@"1",self.uNameTF.text,self.phoneTF.text,addrAry[0],addrAry[1],addrAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

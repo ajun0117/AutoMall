@@ -151,22 +151,39 @@
     
     self.backgroundView.layer.cornerRadius = self.cornerRadius;
     self.sliderView.layer.cornerRadius = self.cornerRadius;
-    switch (self.selectedIndex) {
-        case 0:
-            self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
-            break;
-            
-        case 1:
-            self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
-            break;
-            
-        case 2:
-            self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
-            break;
-            
-        default:
-            break;
+    if (self.strings.count == 2) {
+        switch (self.selectedIndex) {
+            case 0:
+                self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                break;
+                
+            case 1:
+                self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                break;
+                
+            default:
+                break;
+        }
     }
+    else {
+        switch (self.selectedIndex) {
+            case 0:
+                self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                break;
+                
+            case 1:
+                self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                break;
+                
+            case 2:
+                self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
     
     CGFloat sliderWidth = self.frame.size.width / [self.strings count];
     
@@ -215,21 +232,37 @@
         
     } completion:^(BOOL finished) {
         
-        switch (self.selectedIndex) {
-            case 0:
-                self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
-                break;
-                
-            case 1:
-                self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
-                break;
-                
-            case 2:
-                self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
-                break;
-                
-            default:
-                break;
+        if (self.strings.count == 2) {
+            switch (self.selectedIndex) {
+                case 0:
+                    self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                    break;
+                    
+                case 1:
+                    self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        else {
+            switch (self.selectedIndex) {
+                case 0:
+                    self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                    break;
+                    
+                case 1:
+                    self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                    break;
+                    
+                case 2:
+                    self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                    break;
+                    
+                default:
+                    break;
+            }
         }
         
         if (self.handlerBlock) {
@@ -258,22 +291,39 @@
         label.frame = CGRectMake(label.frame.origin.x - offRect.origin.x, label.frame.origin.y - offRect.origin.y, label.frame.size.width, label.frame.size.height);
     }
     
-    switch (self.selectedIndex) {
-        case 0:
-            self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
-            break;
-            
-        case 1:
-            self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
-            break;
-            
-        case 2:
-            self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
-            break;
-            
-        default:
-            break;
+    if (self.strings.count == 2) {
+        switch (self.selectedIndex) {
+            case 0:
+                self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                break;
+                
+            case 1:
+                self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                break;
+                
+            default:
+                break;
+        }
     }
+    else {
+        switch (self.selectedIndex) {
+            case 0:
+                self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                break;
+                
+            case 1:
+                self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                break;
+                
+            case 2:
+                self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
     if (self.handlerBlock) {
         self.handlerBlock(selectedIndex);
     }
@@ -362,21 +412,37 @@
                
                 self.selectedIndex = index;
                 
-                switch (self.selectedIndex) {
-                    case 0:
-                        self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
-                        break;
-                        
-                    case 1:
-                        self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
-                        break;
-                        
-                    case 2:
-                        self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
-                        break;
-                        
-                    default:
-                        break;
+                if (self.strings.count == 2) {
+                    switch (self.selectedIndex) {
+                        case 0:
+                            self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                            break;
+                            
+                        case 1:
+                            self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    switch (self.selectedIndex) {
+                        case 0:
+                            self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                            break;
+                            
+                        case 1:
+                            self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                            break;
+                            
+                        case 2:
+                            self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                            break;
+                            
+                        default:
+                            break;
+                    }
                 }
                 
                 if (self.handlerBlock) {

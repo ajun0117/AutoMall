@@ -334,6 +334,10 @@
 		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
 		F71245751F868B590091816F /* CheckContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245741F868B590091816F /* CheckContentItem.m */; };
 		F71245781F868DD20091816F /* CheckContentTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245771F868DD20091816F /* CheckContentTool.m */; };
+		F73CB9BD1F893B2600936C7A /* AutoCheckGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CB9BB1F893B2600936C7A /* AutoCheckGroupCell.m */; };
+		F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73CB9BC1F893B2600936C7A /* AutoCheckGroupCell.xib */; };
+		F73CB9C21F893C9300936C7A /* AutoCheckGroupTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CB9C01F893C9300936C7A /* AutoCheckGroupTitleCell.m */; };
+		F73CB9C31F893C9300936C7A /* AutoCheckGroupTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73CB9C11F893C9300936C7A /* AutoCheckGroupTitleCell.xib */; };
 		F789EF0B1F7D571E003A127C /* EmployeeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF091F7D571E003A127C /* EmployeeDetailCell.m */; };
 		F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */; };
 		F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */; };
@@ -902,6 +906,12 @@
 		F71245741F868B590091816F /* CheckContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentItem.m; sourceTree = "<group>"; };
 		F71245761F868DD20091816F /* CheckContentTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentTool.h; sourceTree = "<group>"; };
 		F71245771F868DD20091816F /* CheckContentTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentTool.m; sourceTree = "<group>"; };
+		F73CB9BA1F893B2600936C7A /* AutoCheckGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckGroupCell.h; sourceTree = "<group>"; };
+		F73CB9BB1F893B2600936C7A /* AutoCheckGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckGroupCell.m; sourceTree = "<group>"; };
+		F73CB9BC1F893B2600936C7A /* AutoCheckGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckGroupCell.xib; sourceTree = "<group>"; };
+		F73CB9BF1F893C9300936C7A /* AutoCheckGroupTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckGroupTitleCell.h; sourceTree = "<group>"; };
+		F73CB9C01F893C9300936C7A /* AutoCheckGroupTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckGroupTitleCell.m; sourceTree = "<group>"; };
+		F73CB9C11F893C9300936C7A /* AutoCheckGroupTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckGroupTitleCell.xib; sourceTree = "<group>"; };
 		F789EF081F7D571E003A127C /* EmployeeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailCell.h; sourceTree = "<group>"; };
 		F789EF091F7D571E003A127C /* EmployeeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailCell.m; sourceTree = "<group>"; };
 		F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeDetailCell.xib; sourceTree = "<group>"; };
@@ -1078,6 +1088,12 @@
 				04C5764D1F79DD46003BF404 /* AutoCheckMultiCell.h */,
 				04C5764E1F79DD46003BF404 /* AutoCheckMultiCell.m */,
 				04C5764F1F79DD46003BF404 /* AutoCheckMultiCell.xib */,
+				F73CB9BA1F893B2600936C7A /* AutoCheckGroupCell.h */,
+				F73CB9BB1F893B2600936C7A /* AutoCheckGroupCell.m */,
+				F73CB9BC1F893B2600936C7A /* AutoCheckGroupCell.xib */,
+				F73CB9BF1F893C9300936C7A /* AutoCheckGroupTitleCell.h */,
+				F73CB9C01F893C9300936C7A /* AutoCheckGroupTitleCell.m */,
+				F73CB9C11F893C9300936C7A /* AutoCheckGroupTitleCell.xib */,
 			);
 			name = "检查页Cell";
 			sourceTree = "<group>";
@@ -2310,6 +2326,7 @@
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
 				04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */,
+				F73CB9C31F893C9300936C7A /* AutoCheckGroupTitleCell.xib in Resources */,
 				04EFEC691F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
 				04ADD6E91F5F96A900075FE9 /* MailOrderDetailTopCell.xib in Resources */,
@@ -2325,6 +2342,7 @@
 				0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */,
 				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
 				04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */,
+				F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04D396451F661F870077BFB3 /* SettlementAddressCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
@@ -2605,6 +2623,7 @@
 				042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */,
 				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,
 				04D107931F62998D007D9F57 /* ZFWaveChart.m in Sources */,
+				F73CB9C21F893C9300936C7A /* AutoCheckGroupTitleCell.m in Sources */,
 				047ADFF01F4A86EF00AEAE8E /* NSData+CMImageContentType.m in Sources */,
 				047AE0021F4A883A00AEAE8E /* CommodityDetailVC.m in Sources */,
 				047ADFEC1F4A86EF00AEAE8E /* CMSDWebImageDownloaderOperation.m in Sources */,
@@ -2615,6 +2634,7 @@
 				0459C6B81F614C870040501E /* FMDatabaseAdditions.m in Sources */,
 				04DC7DBB1F31C28300AA20A7 /* CircleProgressView.m in Sources */,
 				04DC7DC31F31C28300AA20A7 /* QBAssetsCollectionViewCell.m in Sources */,
+				F73CB9BD1F893B2600936C7A /* AutoCheckGroupCell.m in Sources */,
 				04DC7DB81F31C28300AA20A7 /* HZPhotoBrowser.m in Sources */,
 				04D396441F661F870077BFB3 /* SettlementAddressCell.m in Sources */,
 				04ADD6E81F5F96A900075FE9 /* MailOrderDetailTopCell.m in Sources */,

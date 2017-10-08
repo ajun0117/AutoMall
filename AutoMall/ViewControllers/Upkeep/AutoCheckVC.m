@@ -469,7 +469,14 @@
     for (DVSwitch *switcher in cell.segBgView.subviews) {
         [switcher removeFromSuperview];
     }
-    NSArray *stateAry = [NSArray arrayWithObjects:STRING_Nil(dicc[@"state1"]),STRING_Nil(dicc[@"state2"]),STRING_Nil(dicc[@"state3"]), nil];
+    
+    NSArray *stateAry;
+    if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null]) {
+        stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
+    } else {
+        stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];
+    }
+    
     DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];  
     NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
     switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);

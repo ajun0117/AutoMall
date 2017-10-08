@@ -12,7 +12,12 @@
 
 @interface EditServicePackageVC ()
 {
-    NSArray *dataArray;
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *packageArray;
+    int currentpage;
+    NSMutableArray *idAry;  //已选择的id数组
+    NSMutableArray *priceAry;   //已选择的price数组
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -28,22 +33,62 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalHeadCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanNormalHeadCell"];
     self.myTableView.tableFooterView = [UIView new];
     
-    NSArray *arr = @[
-                     @{@"title":@"套餐A",@"allmoney":@"2200",@"data":@[@{@"name":@"机油更换1",@"money":@"333"},@{@"name":@"火花塞更换1",@"money":@"444"},@{@"name":@"机舱清洗保养1",@"money":@"555"}]},
-                     @{@"title":@"套餐B",@"allmoney":@"3000",@"data":@[@{@"name":@"机油更换2",@"money":@"333"},@{@"name":@"火花塞更换2",@"money":@"444"},@{@"name":@"机舱清洗保养2",@"money":@"555"},@{@"name":@"空调系统清洗2",@"money":@"666"}]}
-                     ];
-    dataArray = arr;
+//    NSArray *arr = @[
+//                     @{@"title":@"套餐A",@"allmoney":@"2200",@"data":@[@{@"name":@"机油更换1",@"money":@"333"},@{@"name":@"火花塞更换1",@"money":@"444"},@{@"name":@"机舱清洗保养1",@"money":@"555"}]},
+//                     @{@"title":@"套餐B",@"allmoney":@"3000",@"data":@[@{@"name":@"机油更换2",@"money":@"333"},@{@"name":@"火花塞更换2",@"money":@"444"},@{@"name":@"机舱清洗保养2",@"money":@"555"},@{@"name":@"空调系统清洗2",@"money":@"666"}]}
+//                     ];
+    
+    packageArray = [NSMutableArray array];
+    currentpage = 0;
+    [self requestPostListPackage];
+    
+    idAry = [NSMutableArray array];
+    priceAry = [NSMutableArray array];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+- (IBAction)saveAction:(id)sender {
+    [self requestPostCustomizeServicePackage];
+}
+
+#pragma mark - 下拉刷新,上拉加载
+-(void)headerRefreshing {
+    NSLog(@"下拉刷新个人信息");
+    currentpage = 0;
+    [packageArray removeAllObjects];
+    [self requestPostListPackage];
+}
+
+-(void)footerLoadData {
+    NSLog(@"上拉加载数据");
+    currentpage ++;
+    [self requestPostListPackage];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [dataArray count];
+    return [packageArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSDictionary *dic = dataArray[section];
-    return [dic[@"data"] count] + 2;
+    NSDictionary *dic = packageArray[section];
+    return [dic[@"serviceContents"] count] + 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -156,19 +201,23 @@
 //}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dic = dataArray[indexPath.section];
-    NSArray *arr = dic[@"data"];
+    NSDictionary *dic = packageArray[indexPath.section];
+    NSArray *arr = dic[@"serviceContents"];
     if (indexPath.row == 0) {
         UpkeepPlanNormalHeadCell *cell = (UpkeepPlanNormalHeadCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanNormalHeadCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.nameL.text = dic[@"title"];
+        cell.nameL.text =  dic[@"name"];
         [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
-        [cell.radioBtn addTarget:self action:@selector(checkPackage:) forControlEvents:UIControlEventTouchUpInside];
+        if ([idAry containsObject:dic[@"id"]]) {
+            cell.radioBtn.selected = YES;
+        } else {
+            cell.radioBtn.selected = NO;
+        }
         return cell;
     }
     else if (indexPath.row == [arr count] + 1) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [NSString stringWithFormat:@"￥%@",dic[@"allmoney"]];
+        cell.textLabel.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
         return cell;
     }
     else {
@@ -176,25 +225,92 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         NSDictionary *dicc = arr[indexPath.row - 1];
         cell.declareL.text = dicc[@"name"];
-        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"money"]];
+        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        UpkeepPlanNormalHeadCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.radioBtn.selected = !cell.radioBtn.selected;
+        NSDictionary *dic = packageArray[indexPath.section];
+        if (cell.radioBtn.selected) {
+            [idAry addObject:dic[@"id"]];
+//            [priceAry addObject:dic[@"price"]];
+        }
+        else {
+            [idAry removeObject:dic[@"id"]];
+//            [priceAry removeObject:dic[@"price"]];
+        }
+        NSLog(@"idAry: %@",idAry);
+        NSLog(@"priceAry: %@",priceAry);
+    }
+}
+
+#pragma mark - 发起网络请求
+-(void)requestPostListPackage { //定制服务套餐列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ListServicePackage object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ListServicePackage, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d",currentpage],@"pageNo",@"20",@"pageSize", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ListServicePackage) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestPostCustomizeServicePackage { //提交定制服务内容
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CustomizeServicePackage object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CustomizeServicePackage, @"op", nil];
+    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:idAry,@"id",priceAry,@"price", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"95",@"id[0]",@"10",@"price[0]", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CustomizeServicePackage) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:ListServicePackage]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ListServicePackage object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [packageArray addObjectsFromArray:responseObject [@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CustomizeServicePackage]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CustomizeServicePackage object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
-
--(void)checkPackage:(UIButton *)btn {
-    btn.selected = !btn.selected;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

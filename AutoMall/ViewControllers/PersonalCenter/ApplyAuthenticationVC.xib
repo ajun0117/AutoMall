@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ApplyAuthenticationVC">
             <connections>
+                <outlet property="addressTF" destination="f08-p1-t8w" id="aUM-ip-Vl8"/>
+                <outlet property="cardImgABtn" destination="RnY-IW-Ubs" id="WWb-a5-dMP"/>
+                <outlet property="cardImgBBtn" destination="BBU-zU-UBe" id="aMO-3U-OiR"/>
+                <outlet property="detailAddressTF" destination="6Cp-nV-zmk" id="nOQ-PI-PQF"/>
+                <outlet property="licenseImgBtn" destination="XZH-Rw-s4R" id="WLY-aJ-66e"/>
+                <outlet property="nameTF" destination="ed3-aZ-xMV" id="Fro-qn-tjk"/>
+                <outlet property="phoneTF" destination="zoI-Ps-qei" id="VAL-ZI-3vw"/>
+                <outlet property="recommendCodeTF" destination="bR6-a8-SI1" id="DzA-9a-Hrg"/>
+                <outlet property="shortNameTF" destination="I1v-8m-l3O" id="tRC-Tb-ZFj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wechatImgBtn" destination="SDb-dj-k2I" id="Y3n-2Z-5ce"/>
+                <outlet property="wechatNameTF" destination="qJa-dT-JIA" id="D93-Q3-zwD"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -92,6 +103,9 @@
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="5h7-f9-kZI"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI8-Y2-ccd">
                                     <rect key="frame" x="16" y="127" width="343" height="1"/>
@@ -293,6 +307,9 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="提交申请"/>
+                                    <connections>
+                                        <action selector="replayAction:" destination="-1" eventType="touchUpInside" id="0Fd-Rm-fdF"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDb-dj-k2I">
                                     <rect key="frame" x="16" y="515" width="100" height="100"/>
@@ -396,7 +413,7 @@
                 <constraint firstItem="zpk-gP-QiI" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Y08-8K-IVV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-223.5" y="43.5"/>
+            <point key="canvasLocation" x="-20" y="41"/>
         </view>
     </objects>
 </document>

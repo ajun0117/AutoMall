@@ -161,17 +161,23 @@
 #define ChecktypeList                             @"/checktype/list"              //检查类别
 #define CheckcategoryList                      @"/checkcategory/list"       //检查部位列表
 #define ChecktermList                            @"/checkterm/list"             //某部位的检查内容列表
+#define afafds                                         @"/checkContent/list"       //检查部位下检查内容和服务内容
 #define CarUpkeepAdd                            @"/carUpkeep/add"            //生成检查单信息
 #define DiscountList                                @"/discount/list"                //优惠列表
 #define CarAdd                                        @"/car/add"                       //新增车辆信息
 #define CarUpdate                                   @"/car/update"                  //更新车辆信息
 
 //个人中心
+#define ListServiceContent                     @"/user/listServiceContent"     //获取服务内容
+#define CustomizeServiceContent           @"/user/customizeServiceContent"     //提交定制服务内容
+#define ListServicePackage                     @"/user/listServicePackage"     //服务套餐列表
+#define CustomizeServicePackage           @"/user/customizeServicePackage"    //提交服务套餐
 #define MallOrderList                             @"/order/list"                    //订单列表
 #define DiscountAdd                               @"/discount/add"              //新增优惠
 #define DiscountEdit                               @"/discount/edit"             //编辑优惠
 #define MessageList                                @"/message/list"              //消息列表
 
+#define StoreRegister                             @"/store/register"              //门店申请
 #define StoreListStaff                           @"/store/listStaff"             //员工列表
 #define StoreDelStaff                            @"/store/delStaff"             //删除员工
 #define StoreAddStaff                           @"/store/addStaff"           //添加员工
