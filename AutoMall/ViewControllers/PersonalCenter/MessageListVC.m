@@ -1,57 +1,35 @@
 //
-//  BaoyangDiscountsVC.m
+//  MessageListVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/8/15.
+//  Created by LYD on 2017/10/9.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "BaoyangDiscountsVC.h"
+#import "MessageListVC.h"
 #import "UpkeepPlanNormalCell.h"
-#import "AddDiscountsVC.h"
 
-@interface BaoyangDiscountsVC ()
+@interface MessageListVC ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSMutableArray *discountArray;
-    int currentpage;
+    NSArray *messageAry;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
-@implementation BaoyangDiscountsVC
+@implementation MessageListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"优惠";
-    
-    if (self.canEdit) {
-        UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        searchBtn.frame = CGRectMake(0, 0, 44, 44);
-        //    searchBtn.contentMode = UIViewContentModeRight;
-        searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
-        searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
-        [searchBtn addTarget:self action:@selector(toAddDiscounts) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-        self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
-    }
-    
-    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
-    self.myTableView.tableFooterView = [UIView new];
-    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
-    
-    currentpage = 0;
-    discountArray = [NSMutableArray array];
+    self.title = @"消息";
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     if (! _hud) {
         _hud = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:_hud];
@@ -65,33 +43,20 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+    self.myTableView.tableFooterView = [UIView new];
+    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    
     [self.myTableView headerBeginRefreshing];
 }
 
 #pragma mark - 下拉刷新,上拉加载
 -(void)headerRefreshing {
-    NSLog(@"下拉刷新个人信息");
-    currentpage = 0;
-    [discountArray removeAllObjects];
-    [self requestPostDiscountList];
+    NSLog(@"下拉刷新信息");
+//    currentpage = 0;
+//    [collectArray removeAllObjects];
+    [self requestPostMessageList];
 }
-
--(void)footerLoadData {
-    NSLog(@"上拉加载数据");
-    currentpage ++;
-    [self requestPostDiscountList];
-}
-
-
--(void) toAddDiscounts {
-    AddDiscountsVC *addVC = [[AddDiscountsVC alloc] init];
-    addVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:addVC animated:YES];
-}
-
-//- (IBAction)saveAction:(id)sender {
-//
-//}
 
 #pragma mark - UITableViewDataSource
 
@@ -100,7 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return discountArray.count;
+    return messageAry.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -113,24 +78,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-    NSDictionary *dic = discountArray[indexPath.row];
+    NSDictionary *dic = messageAry[indexPath.row];
     cell.declareL.text = dic[@"item"];
     cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
     return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-     if (self.canEdit) {
-            return YES;
-     }
-    return NO;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [dataArray removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,14 +95,14 @@
 }
 
 #pragma mark - 发送请求
--(void)requestPostDiscountList { //优惠列表
+-(void)requestPostMessageList { //消息列表
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountList object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MessageList object:nil];
     
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"storeId",[NSNumber numberWithInt:currentpage],@"pageNo", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountList) delegate:nil params:pram info:infoDic];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MessageList, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"userId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MessageList) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -168,10 +119,10 @@
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     NSLog(@"GetMerchantList_responseObject: %@",responseObject);
-    if ([notification.name isEqualToString:DiscountList]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
+    if ([notification.name isEqualToString:MessageList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:MessageList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
-            [discountArray addObjectsFromArray:responseObject[@"data"]];
+            messageAry = responseObject[@"data"];
             [self.myTableView reloadData];
         }
         else {
@@ -179,7 +130,6 @@
             [alert show];
         }
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {

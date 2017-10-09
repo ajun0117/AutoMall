@@ -141,6 +141,7 @@
 #define ComCategoryList                        @"/comCategory/list"    //商品分类
 #define CommodityList                            @"/commodity/list"       //商品列表
 #define CommodityDetail                         @"/commodity/getInfo"   //商品详情
+#define CommoditytjList                         @"/commodity/tjlist"  //商品详情推荐商品列表
 #define AdvertList                                  @"/advert/list"             //广告列表接口
 #define ConsigneeList                              @"/consignee/list"        //收货地址接口
 #define ConsigneeAdd                             @"/consignee/add"        //新增收货地址
@@ -155,7 +156,7 @@
 #define CheckCode                                  @"/sms/checkCode"          //校验验证码
 #define UserLogin                                   @"/login"                           //用户登录
 #define PhoneCheckup                             @"/user/checkup"             //验证手机号是否存在
-#define UserInfo                                    @"/info"                            //获取登录用户的信息
+#define GetUserInfo                               @"/info"                            //获取登录用户的信息
 
 //保养
 #define ChecktypeList                             @"/checktype/list"              //检查类别
@@ -177,17 +178,21 @@
 #define DiscountEdit                               @"/discount/edit"             //编辑优惠
 #define MessageList                                @"/message/list"              //消息列表
 
+#define StoreGetInfo                              @"/store/get"                 //获取门店详情
+#define StoreInfoUpdate                        @"/store/update"            //修改门店信息
 #define StoreRegister                             @"/store/register"              //门店申请
 #define StoreListStaff                           @"/store/listStaff"             //员工列表
 #define StoreDelStaff                            @"/store/delStaff"             //删除员工
 #define StoreAddStaff                           @"/store/addStaff"           //添加员工
 #define StaffSkillList                             @"/store/listStaffSkill"       //获取员工技能列表
+#define StoreUpdateStaffSkill               @"/store/updateStaffSkill"     //员工自己修改技能
 
 #define FavoriteList                                @"/favorite/list"                   //收藏列表
 #define FavoriteCollect                           @"/favorite/collect"              //收藏
 #define FavoriteDecollect                       @"/favorite/decollect"          //取消收藏
 
 
+#define BaiduPush_Key @"DyHZlmzGGtjfRDyVmtcG3MG5" //百度云推送key
 
 //QQ分享
 //#define kShare_QQ_AppID @"1104928111"

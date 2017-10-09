@@ -55,9 +55,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="jifenL" destination="akq-yq-aVm" id="bBQ-Tg-GBH"/>
                 <outlet property="pingxingRV" destination="SA8-RE-kFu" id="tKp-lo-HZM"/>
+                <outlet property="saleL" destination="g9e-sB-XCK" id="8JL-xM-CZG"/>
             </connections>
-            <point key="canvasLocation" x="-220" y="40"/>
+            <point key="canvasLocation" x="-560" y="25"/>
         </tableViewCell>
     </objects>
 </document>

@@ -55,6 +55,12 @@
     }
 }
 
+-(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.nameTF resignFirstResponder];
+    [self.phoneTF resignFirstResponder];
+    [self.passwordTF resignFirstResponder];
+}
+
 #pragma mark -
 #pragma mark 手机号码及验证码格式初步验证
 -(BOOL) checkPhoneNumWithPhone:(NSString *)phone {

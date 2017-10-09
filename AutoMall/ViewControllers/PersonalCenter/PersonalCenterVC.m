@@ -23,6 +23,10 @@
 #import "BaoyangDiscountsVC.h"
 
 @interface PersonalCenterVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+}
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -63,6 +67,25 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"HeadNameCell" bundle:nil] forCellReuseIdentifier:@"headNameCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterNormalCell" bundle:nil] forCellReuseIdentifier:@"centerNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
+    
+    [self requestPostUserGetInfo];
+    [self requestPostStoreGetInfo];     //请求门店详情数据
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
 }
 
 -(void) toSet {
@@ -396,6 +419,67 @@
     }
 }
 
+#pragma mark - 发起网络请求
+-(void)requestPostStoreGetInfo { //获取门店详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreGetInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreGetInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreGetInfo) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:StoreGetInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreGetInfo object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"responseObjectresponseObject %@",responseObject)
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,7 +10,9 @@
 #import "StrikeThroughLabel.h"
 
 @interface CommodityDetailPriceCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *discountL;
 @property (strong, nonatomic) IBOutlet StrikeThroughLabel *costPriceStrikeL;
+@property (strong, nonatomic) IBOutlet UILabel *shippingFeeL;
 @property (strong, nonatomic) IBOutlet UIButton *addBtn;
 
 @end

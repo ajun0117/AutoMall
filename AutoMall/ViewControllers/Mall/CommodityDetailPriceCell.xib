@@ -69,8 +69,10 @@
             <connections>
                 <outlet property="addBtn" destination="36i-6R-Clk" id="aJV-fx-uZE"/>
                 <outlet property="costPriceStrikeL" destination="jFN-Ff-uSI" id="vWz-Jt-gAR"/>
+                <outlet property="discountL" destination="T2u-6e-kXc" id="Wqz-mz-XOm"/>
+                <outlet property="shippingFeeL" destination="DhP-w4-KuV" id="ssW-nI-Q8v"/>
             </connections>
-            <point key="canvasLocation" x="-294" y="27"/>
+            <point key="canvasLocation" x="-556" y="24"/>
         </tableViewCell>
     </objects>
     <resources>

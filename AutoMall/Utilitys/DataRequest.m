@@ -88,6 +88,11 @@ static DataRequest *dataRequest;
     
 //    if ([DataRequest checkNetwork]) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
+        if (token != nil && ![token isEqualToString:@""]) {
+            NSLog(@"Authorization: %@",token);
+            [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
+        }
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
         manager.requestSerializer.timeoutInterval = 15;
         [manager GET:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet  URLQueryAllowedCharacterSet]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -125,6 +130,7 @@ static DataRequest *dataRequest;
         [manager.requestSerializer setValue:@"zh-cn, zh-tw,zh-hk" forHTTPHeaderField:@"Accept-Language"];
         NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
         if (token != nil && ![token isEqualToString:@""]) {
+            NSLog(@"Authorization: %@",token);
             [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
         }
         NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];

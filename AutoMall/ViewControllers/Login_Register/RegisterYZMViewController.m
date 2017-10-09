@@ -7,6 +7,7 @@
 //
 
 #import "RegisterYZMViewController.h"
+#import "LoginViewController.h"
 
 #define LEFTTIME    120   //120秒限制
 
@@ -54,6 +55,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.codeNumTF resignFirstResponder];
 }
 
 /**
@@ -146,19 +151,16 @@
     if ([notification.name isEqualToString:UserRegister]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserRegister object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-//            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-            _networkConditionHUD.labelText = @"注册成功！";
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = @"恭喜！注册成功！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-//            NSDictionary *dic = responseObject[@"item"];
-//            [[GlobalSetting shareGlobalSettingInstance] setLoginPWD:self.passwordTF.text]; //存储登录密码
-//            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
-//            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
-//            [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"token"]];
-//            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
-//
-//            [self.navigationController popViewControllerAnimated:YES]; //返回登录页面
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[LoginViewController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES]; //返回登录页面
+                }
+            }
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];

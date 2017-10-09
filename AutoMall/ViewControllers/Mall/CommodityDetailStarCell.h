@@ -11,5 +11,7 @@
 
 @interface CommodityDetailStarCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet DJQRateView *pingxingRV;
+@property (strong, nonatomic) IBOutlet UILabel *saleL;
+@property (strong, nonatomic) IBOutlet UILabel *jifenL;
 
 @end

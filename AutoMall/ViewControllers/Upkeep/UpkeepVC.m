@@ -65,7 +65,7 @@
     typeAry = @[@{@"title":@"美容检查",@"id":@"1"},@{@"title":@"保养检查",@"id":@"8"},@{@"title":@"快速检查",@"id":@"9"}];
 //    [self.myCollectionView reloadData];
     
-    [self requestGetComCategoryList];
+    [self requestGetChecktypeList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -263,7 +263,7 @@
 //}
 
 #pragma mark - 发送请求
--(void)requestGetComCategoryList { //获取分类列表
+-(void)requestGetChecktypeList { //获取分类列表
     [_hud show:YES];
     
     //注册通知

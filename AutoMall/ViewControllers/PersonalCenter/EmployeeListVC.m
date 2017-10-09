@@ -40,6 +40,8 @@
     
     self.myTableView.tableFooterView = [UIView new];
     listArray = [NSMutableArray array];
+    
+    [self requestGetStaffList];     //请求员工列表数据
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -109,6 +111,7 @@
 //        detailVC.userID = userArray[indexPath.section][@"id"];
 //        detailVC.isDrink = self.isDrink;
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
+        detailVC.idStr = @"1";
         [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -146,8 +149,11 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreListStaff object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [listArray addObjectsFromArray:responseObject [@"data"]];
-            [self.myTableView reloadData];
+//            [listArray addObjectsFromArray:responseObject [@"data"]];
+//            [self.myTableView reloadData];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -160,8 +166,8 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreDelStaff object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [listArray addObjectsFromArray:responseObject [@"data"]];
-            [self.myTableView reloadData];
+//            [listArray addObjectsFromArray:responseObject [@"data"]];
+//            [self.myTableView reloadData];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

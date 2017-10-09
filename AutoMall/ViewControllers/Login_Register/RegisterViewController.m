@@ -84,6 +84,10 @@
 - (IBAction)mianzeAction:(id)sender {
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.phoneTF resignFirstResponder];
+    [self.passwordTF resignFirstResponder];
+}
 
 #pragma mark -
 #pragma mark 手机号码及验证码格式初步验证

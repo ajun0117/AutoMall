@@ -35,6 +35,7 @@ static CGFloat const scrollViewHeight = 220;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSDictionary *commodityDic;   //详情字典
+    NSArray *tjListAry; //推荐商品列表
     UIButton *collectBtn;   //收藏按钮
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -120,6 +121,8 @@ static CGFloat const scrollViewHeight = 220;
     }];
     
     [self addFootView];
+    
+    [self requestGetCommodityDetail];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -350,7 +353,7 @@ static CGFloat const scrollViewHeight = 220;
     if (section == 0) {
         return 5;
     }
-    return 10;
+    return tjListAry.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -386,21 +389,26 @@ static CGFloat const scrollViewHeight = 220;
                     CommodityDetailNormalCell *cell = (CommodityDetailNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailNormalCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-                    cell.nameL.text = @"壳牌灰喜力";
+                    cell.nameL.text = commodityDic[@"name"];
                     return cell;
                     break;
                 }
                 case 1: {
                     CommodityDetailStarCell *cell = (CommodityDetailStarCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailStarCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.pingxingRV.rate = 4.5;
+                    cell.pingxingRV.rate = [commodityDic [@"starLevel"] floatValue] / 2;
                     cell.pingxingRV.maxRate = 5;
+                    cell.saleL.text = [NSString stringWithFormat:@"月销%@单",commodityDic[@"salesVolume"]];
+                    cell.jifenL.text = [NSString stringWithFormat:@"%@积分",commodityDic[@"integral"]];
                     return cell;
                     break;
                 }
                 case 2: {
                     CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailPriceCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
+                    cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
+                    cell.shippingFeeL.text = [NSString stringWithFormat:@"配送费%@元",commodityDic[@"shippingFee"]];
                     [cell.addBtn addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
                     return cell;
                     break;
@@ -412,12 +420,11 @@ static CGFloat const scrollViewHeight = 220;
                     for (UIView *view in cell.hobbyScrollView.subviews) {
                         [view removeFromSuperview];
                     }
-//                    NSString *hobbyStr = userDetailDic [@"hobby"];
-//                    NSArray *hobbyAry = [hobbyStr componentsSeparatedByString:@","];
-                    NSArray *hobbyAry = @[@"标签",@"标签",@"标签",@"标签",@"标签"];
+                    NSString *tagStr = commodityDic[@"tag"];
+                    NSArray *tagAry = [tagStr componentsSeparatedByString:@","];
                     CGFloat originX = 0;
-                    for (int i = 0; i < hobbyAry.count; ++i) {
-                        NSString *str = hobbyAry[i];
+                    for (int i = 0; i < tagAry.count; ++i) {
+                        NSString *str = tagAry[i];
                         CGSize size =  [str sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}]; //根据字体计算出文本单行的长度和高度（宽度和高度），注意是单行，所以你返回的高度是一个定值。
                         UILabel *label = nil;
                         if (i == 0) {
@@ -458,6 +465,15 @@ static CGFloat const scrollViewHeight = 220;
         case 1:{
             CommodityDetailTuijianCell *cell = (CommodityDetailTuijianCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTuijianCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            NSDictionary *dic = tjListAry [indexPath.row];
+//            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
+//            cell.goodsNameL.text = dic [@"name"];
+//            cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
+//            cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
+//            cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
+//            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+//            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+//            cell.yunfeiL.text = [NSString stringWithFormat:@"配送费￥%@",dic[@"shippingFee"]];
             return cell;
             break;
         }
@@ -611,9 +627,20 @@ static CGFloat const scrollViewHeight = 220;
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityDetail object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityDetail, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%d",UrlPrefix(CommodityDetail),self.commodityId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CommodityDetail),self.commodityId];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
+
+-(void)requestPostCommoditytjListWithId:(NSString *)commodityTermId { //推荐列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommoditytjList object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommoditytjList, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityTermId,@"commodityTermId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommoditytjList) delegate:nil params:pram info:infoDic];
+}
+
 
 -(void)requestPostCollectFavorite { //收藏
     [_hud show:YES];
@@ -649,11 +676,25 @@ static CGFloat const scrollViewHeight = 220;
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:CommodityDetail]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CommodityDetail object:nil];
-        NSLog(@"_responseObject: %@",responseObject);
-        
+        NSLog(@"CommodityDetail_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             commodityDic = responseObject [@"data"];
-            [self.myTableView reloadData];
+            [self requestPostCommoditytjListWithId:commodityDic[@"commodityTerm"][@"id"]];
+//            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CommoditytjList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CommoditytjList object:nil];
+        NSLog(@"TjList_responseObject: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            tjListAry = responseObject [@"data"];
+             [self.myTableView reloadData];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];

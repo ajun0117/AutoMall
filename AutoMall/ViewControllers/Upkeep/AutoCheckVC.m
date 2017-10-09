@@ -471,7 +471,7 @@
     }
     
     NSArray *stateAry;
-    if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null]) {
+    if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
         stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
     } else {
         stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];

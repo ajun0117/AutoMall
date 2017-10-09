@@ -7,12 +7,16 @@
 //
 
 #import "ApplyAuthenticationVC.h"
+#import "ChooseLocationView.h"
+#import "CitiesDataTool.h"
 
-@interface ApplyAuthenticationVC ()
+@interface ApplyAuthenticationVC () <UIGestureRecognizerDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
 }
+@property (nonatomic,strong) ChooseLocationView *chooseLocationView;
+@property (nonatomic,strong) UIView  *cover;
 
 @end
 
@@ -22,6 +26,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
      self.title = @"申请认证";
+    
+    [[CitiesDataTool sharedManager] requestGetData];
+    [self.view addSubview:self.cover];
+    self.chooseLocationView.address = @"广东省 广州市 白云区";
+    self.chooseLocationView.areaCode = @"440104";
+    self.addressTF.text = @"广东省 广州市 白云区";
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -42,6 +52,69 @@
 
 - (IBAction)replayAction:(id)sender {
     [self requestPostStoreRegister];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.nameTF resignFirstResponder];
+    [self.shortNameTF resignFirstResponder];
+    [self.detailAddressTF resignFirstResponder];
+    [self.phoneTF resignFirstResponder];
+    [self.recommendCodeTF resignFirstResponder];
+    [self.wechatNameTF resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    self.cover.hidden = !self.cover.hidden;
+    self.chooseLocationView.hidden = self.cover.hidden;
+    return NO;
+}
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    
+    CGPoint point = [gestureRecognizer locationInView:gestureRecognizer.view];
+    if (CGRectContainsPoint(_chooseLocationView.frame, point)){
+        return NO;
+    }
+    return YES;
+}
+
+
+- (void)tapCover:(UITapGestureRecognizer *)tap{
+    
+    if (_chooseLocationView.chooseFinish) {
+        _chooseLocationView.chooseFinish();
+    }
+}
+
+- (ChooseLocationView *)chooseLocationView{
+    
+    if (!_chooseLocationView) {
+        _chooseLocationView = [[ChooseLocationView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 350, [UIScreen mainScreen].bounds.size.width, 350)];
+        
+    }
+    return _chooseLocationView;
+}
+
+- (UIView *)cover{
+    
+    if (!_cover) {
+        _cover = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        _cover.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+        [_cover addSubview:self.chooseLocationView];
+        __weak typeof (self) weakSelf = self;
+        _chooseLocationView.chooseFinish = ^{
+            //            [UIView animateWithDuration:0.25 animations:^{
+            weakSelf.addressTF.text = weakSelf.chooseLocationView.address;
+            //                weakSelf.view.transform = CGAffineTransformIdentity;
+            weakSelf.cover.hidden = YES;
+            //            }];
+        };
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCover:)];
+        [_cover addGestureRecognizer:tap];
+        tap.delegate = self;
+        _cover.hidden = YES;
+    }
+    return _cover;
 }
 
 #pragma mark - 发起网络请求

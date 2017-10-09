@@ -54,16 +54,12 @@
     
     if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {  //手机号码格式正确
         self.sendToPhoneL.text = self.phoneTF.text;
-//        self.firstL.textColor = [UIColor blackColor];
-//        self.secondL.textColor = Red_BtnColor;
-//        self.firstView.hidden = YES;
-//        self.secondView.hidden = NO;
-//        self.reSendBtn.enabled = NO;
-        
         [self requestSendSMSVerifyCode];
     }
     else {
-        
+        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
 }
 - (IBAction)reSendAction:(id)sender {
@@ -71,25 +67,7 @@
 }
 
 - (IBAction)checkAction:(id)sender {
-//    if ([self.codeNumTF.text isEqualToString:certCode]) {
-        self.secondL.textColor = [UIColor blackColor];
-        self.thirdL.textColor = Red_BtnColor;
-        
-        self.thirdL.hidden = NO;
-        self.secondView.hidden = YES;
-//    }
-//    else {
-//        if (!_networkConditionHUD) {
-//            _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//            [self.view addSubview:_networkConditionHUD];
-//        }
-//        _networkConditionHUD.labelText = @"验证码输入不正确";
-//        _networkConditionHUD.mode = MBProgressHUDModeText;
-//        _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
-//        _networkConditionHUD.margin = HUDMargin;
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//    }
+    [self requestVerifyCode];   //校验填写的验证码是否正确
 }
 
 
@@ -233,7 +211,6 @@
     [self.rePasswordTF resignFirstResponder];
 }
 
-
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -289,7 +266,10 @@
     if ([notification.name isEqualToString:CheckCode]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CheckCode object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
-            [self requestForgotPwd];  //重置密码
+            self.secondL.textColor = [UIColor blackColor];
+            self.thirdL.textColor = Red_BtnColor;
+            self.thirdL.hidden = NO;
+            self.secondView.hidden = YES;
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];

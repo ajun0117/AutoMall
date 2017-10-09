@@ -31,6 +31,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailTopCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailTopCell"];
     
     skillAry = [NSMutableArray array];
+    [self requestAddStaffList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -114,7 +115,7 @@
 }
 
 #pragma mark - 发起请求
--(void)requestAddStaffList { //添加员工
+-(void)requestAddStaffList { //员工技能列表
     [_hud show:YES];
     
     //注册通知

@@ -54,7 +54,7 @@
     currentpage = 0;
     orderString = NULL;
     orderTypeString = @"desc";
-    [self requestGetComCategoryList];
+    [self requestGetCommodityList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -88,7 +88,7 @@
     sortBtn.backgroundColor = [UIColor whiteColor];
     tagBtn.selected = NO;
     tagBtn.backgroundColor = [UIColor whiteColor];
-    
+    [self requestGetCommodityList];
 }
 - (IBAction)saleAction:(id)sender {
     xiangmuBtn.selected = NO;
@@ -105,6 +105,7 @@
     }
     tagBtn.selected = NO;
     tagBtn.backgroundColor = [UIColor whiteColor];
+    [self requestGetCommodityList];
 }
 - (IBAction)valueAction:(id)sender {
     xiangmuBtn.selected = NO;
@@ -122,6 +123,7 @@
         tagBtn.selected = YES;
         orderTypeString = @"asc";   //升序
     }
+    [self requestGetCommodityList];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -129,13 +131,13 @@
     NSLog(@"下拉刷新个人信息");
     currentpage = 0;
     [commodityArray removeAllObjects];
-    [self requestGetComCategoryList];
+    [self requestGetCommodityList];
 }
 
 -(void)footerLoadData {
     NSLog(@"上拉加载数据");
     currentpage ++;
-    [self requestGetComCategoryList];
+    [self requestGetCommodityList];
 }
 
 #pragma mark - UITableViewDataSource
@@ -309,9 +311,7 @@
     }
     else {
         CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
-//        detailVC.shopID = shopArray[indexPath.section][@"id"];
-//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-//        detailVC.hidesBottomBarWhenPushed = YES;
+        detailVC.commodityId = commodityArray[indexPath.section][@"id"];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
@@ -327,14 +327,13 @@
 //}
 
 #pragma mark - 发送请求
--(void)requestGetComCategoryList { //获取分类列表
+-(void)requestGetCommodityList { //获取分类列表
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
         NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityTermId,@"commodityTermId",currentpage,@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
         [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
-    
 }
 
 #pragma mark - 网络请求结果数据
