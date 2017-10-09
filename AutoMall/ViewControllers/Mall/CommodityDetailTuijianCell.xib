@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="壳牌黄壳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD0-SO-CRz">
@@ -75,7 +75,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="折" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7F7-c0-Z1S">
-                        <rect key="frame" x="297" y="11.5" width="15" height="15"/>
+                        <rect key="frame" x="297" y="10.5" width="15" height="15"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.0" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="paq-6O-lkc"/>
@@ -104,7 +104,16 @@
                     <constraint firstItem="Xdd-kr-wcV" firstAttribute="leading" secondItem="7Ph-wc-IZu" secondAttribute="trailing" constant="5" id="wcK-zY-2Fk"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="146" y="45"/>
+            <connections>
+                <outlet property="baokuanL" destination="7Ph-wc-IZu" id="xqP-rD-0I1"/>
+                <outlet property="costPriceStrikeL" destination="H2O-ip-ERu" id="tWo-BR-fRa"/>
+                <outlet property="goodsIM" destination="Cqt-o1-W0F" id="dch-Va-WG2"/>
+                <outlet property="goodsNameL" destination="VD0-SO-CRz" id="OSt-Eo-Duc"/>
+                <outlet property="moneyL" destination="no7-qA-3mL" id="KoK-I5-grB"/>
+                <outlet property="tuijianL" destination="Xdd-kr-wcV" id="Ekz-Oh-qEt"/>
+                <outlet property="zhekouL" destination="7F7-c0-Z1S" id="fVK-hP-Sji"/>
+            </connections>
+            <point key="canvasLocation" x="-141" y="27"/>
         </tableViewCell>
     </objects>
     <resources>

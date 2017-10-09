@@ -466,14 +466,10 @@ static CGFloat const scrollViewHeight = 220;
             CommodityDetailTuijianCell *cell = (CommodityDetailTuijianCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTuijianCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSDictionary *dic = tjListAry [indexPath.row];
-//            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
-//            cell.goodsNameL.text = dic [@"name"];
-//            cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
-//            cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
-//            cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
-//            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-//            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
-//            cell.yunfeiL.text = [NSString stringWithFormat:@"配送费￥%@",dic[@"shippingFee"]];
+            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"thumbnail"]] placeholderImage:IMG(@"timg-2")];
+            cell.goodsNameL.text = dic [@"name"];
+            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
             return cell;
             break;
         }

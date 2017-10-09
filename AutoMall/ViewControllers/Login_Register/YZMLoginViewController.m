@@ -287,13 +287,10 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-                        NSDictionary *dic = responseObject[@"data"];
-            //            [[GlobalSetting shareGlobalSettingInstance] setLoginPWD:self.passwordTF.text]; //存储登录密码
-            //            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
-            //            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
-                        [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"access_token"]];
-            //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
-            
+            NSDictionary *dic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
+            [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"access_token"]];
+
             [self.navigationController popToRootViewControllerAnimated:YES]; //返回首页面
         }
         else {

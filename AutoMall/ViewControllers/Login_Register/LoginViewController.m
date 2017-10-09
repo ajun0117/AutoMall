@@ -190,16 +190,13 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogin object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            _networkConditionHUD.labelText = @"登录成功！";
+//            _networkConditionHUD.labelText = @"登录成功！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
             NSDictionary *dic = responseObject[@"data"];
-//            [[GlobalSetting shareGlobalSettingInstance] setLoginPWD:self.passwordTF.text]; //存储登录密码
-//            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
-//            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic [@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
             [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"access_token"]];
-//            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"nickName"]];
 
             [self.navigationController popViewControllerAnimated:YES]; //返回上级页面
         }

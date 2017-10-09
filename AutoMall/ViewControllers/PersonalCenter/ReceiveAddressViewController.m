@@ -170,8 +170,11 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefix(ConsigneeList),@"1"];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefix(ConsigneeList),@"1"];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeList) delegate:nil params:pram info:infoDic];
 }
 
 -(void)deleteAddress:(NSString *)aid {
@@ -179,8 +182,11 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeDele object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeDele, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@",UrlPrefix(ConsigneeDele),@"1",aid];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",aid,@"id", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeDele) delegate:nil params:pram info:infoDic];
+//    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@",UrlPrefix(ConsigneeDele),@"1",aid];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 

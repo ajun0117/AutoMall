@@ -467,8 +467,11 @@
     
     if ([notification.name isEqualToString:GetUserInfo]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
-        NSLog(@"responseObjectresponseObject %@",responseObject)
+        NSLog(@"GetUserInfo_responseObject %@",responseObject)
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *dic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];

@@ -77,9 +77,9 @@ static CGFloat const scrollViewHeight = 220;
     scroll.delegate = self;
     
 ////    UIImage *img = [self imageFromURLString:@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png"];
-    scroll.images = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
-                      @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
-                      @"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png"];
+//    scroll.images = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
+//                      @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
+//                      @"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png"];
     
     
     [scroll setTapImageHandle:^(NSInteger index) {
@@ -108,7 +108,7 @@ static CGFloat const scrollViewHeight = 220;
     
     categoryArray = [[NSMutableArray alloc] init];
     
-//    [self requsetAdvertList];   //请求广告列表
+    [self requsetAdvertList];   //请求广告列表
     [self requestGetComCategoryList];   //请求分类数据
 }
 
@@ -401,7 +401,10 @@ static CGFloat const scrollViewHeight = 220;
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:AdvertList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:AdvertList, @"op", nil];
-    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(AdvertList) delegate:nil params:nil info:infoDic];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(AdvertList) delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"0",@"pageNo",@"30",@"pageSize", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(AdvertList) delegate:nil params:pram info:infoDic];
 }
 
 
@@ -450,7 +453,7 @@ static CGFloat const scrollViewHeight = 220;
             adArray = responseObject[@"data"];
             NSMutableArray *urlAry = [NSMutableArray array];
             for (NSDictionary *dic in adArray) {
-                [urlAry addObject:dic[@"image"]];
+                [urlAry addObject:ImagePrefixURL(dic[@"image"])];
             }
             scroll.images = urlAry;
         }
