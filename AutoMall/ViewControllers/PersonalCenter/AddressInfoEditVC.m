@@ -81,6 +81,9 @@
 //    [UIView animateWithDuration:0.25 animations:^{
 //        self.view.transform =CGAffineTransformMakeScale(0.95, 0.95);
 //    }];
+    [self.uNameTF resignFirstResponder];
+    [self.phoneTF resignFirstResponder];
+    [self.addDetailTF resignFirstResponder];
     self.cover.hidden = !self.cover.hidden;
     self.chooseLocationView.hidden = self.cover.hidden;
 }
@@ -184,8 +187,10 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeAdd, @"op", nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),userId,self.uNameTF.text,self.phoneTF.text,addrAry[0],addrAry[1],addrAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),userId,self.uNameTF.text,self.phoneTF.text,addrAry[0],addrAry[1],addrAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.uNameTF.text,@"name", self.phoneTF.text,@"phone", addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"county", self.addDetailTF.text,@"address", [NSNumber numberWithBool:self.defaultSW.on],@"preferred", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeAdd) delegate:nil params:pram info:infoDic];
 }
 
 -(void)editAddress {
@@ -195,8 +200,10 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeEdit, @"op", nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeEdit),userId,self.addrDic[@"id"],self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeEdit),userId,self.addrDic[@"id"],self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.addrDic[@"id"],@"id",self.uNameTF.text,@"name", self.phoneTF.text,@"phone", addAry[0],@"province", addAry[1],@"city", addAry[2],@"county", self.addDetailTF.text,@"address", [NSNumber numberWithBool:self.defaultSW.on],@"preferred", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeEdit) delegate:nil params:pram info:infoDic];
 }
 
 
@@ -227,9 +234,10 @@
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
@@ -239,6 +247,12 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ConsigneeEdit object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

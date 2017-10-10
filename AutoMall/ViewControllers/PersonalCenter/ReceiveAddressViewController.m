@@ -43,8 +43,6 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     [self.myTableView registerNib:nib forCellReuseIdentifier:AddressCellIdentify];
     
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-
-    [self getMyAddress];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -61,6 +59,9 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [_addressArray removeAllObjects];
+    [self getMyAddress];
 }
 
 -(void)setNavitationItemWithLeftImageName:(NSString*)leftImageName rightImageName:(NSString*)rightImageName{
@@ -183,11 +184,11 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeDele object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeDele, @"op", nil];
-    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",aid,@"id", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeDele) delegate:nil params:pram info:infoDic];
-//    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@",UrlPrefix(ConsigneeDele),@"1",aid];
-//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",aid,@"id", nil];
+//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeDele) delegate:nil params:pram info:infoDic];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefix(ConsigneeDele),aid];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 

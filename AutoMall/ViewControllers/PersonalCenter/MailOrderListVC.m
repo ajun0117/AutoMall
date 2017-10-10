@@ -164,9 +164,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderList object:nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?clientId=%@&pageNo=%d",UrlPrefix(MallOrderList),userId,currentpage];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-    
+//    NSString *urlString = [NSString stringWithFormat:@"%@?clientId=%@&pageNo=%d",UrlPrefix(MallOrderList),userId,currentpage];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"clientId",[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderList) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
