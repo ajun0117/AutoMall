@@ -41,13 +41,12 @@
     if (self.isEdit) {
         self.uNameTF.text = self.addrDic [@"name"];
         self.phoneTF.text = self.addrDic [@"phone"];
-        NSString *proStr = [NSString stringWithFormat:@"%@ %@ %@",self.addrDic [@"province"],self.addrDic [@"city"],self.addrDic [@"country"]];
+        NSString *proStr = [NSString stringWithFormat:@"%@ %@ %@",self.addrDic [@"province"],self.addrDic [@"city"],self.addrDic [@"county"]];
         [self.addressBtn setTitle:proStr forState:UIControlStateNormal];
         self.addDetailTF.text = self.addrDic [@"address"];
         BOOL preferred = [self.addrDic [@"preferred"] boolValue];
         self.defaultSW.on = preferred;
     }
-    
 }
 
 
@@ -183,8 +182,9 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeAdd object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeAdd, @"op", nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),@"1",self.uNameTF.text,self.phoneTF.text,addrAry[0],addrAry[1],addrAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeAdd),userId,self.uNameTF.text,self.phoneTF.text,addrAry[0],addrAry[1],addrAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -193,8 +193,9 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ConsigneeEdit object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ConsigneeEdit, @"op", nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeEdit),@"1",self.addrDic[@"id"],self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&id=%@&name=%@&phone=%@&province=%@&city=%@&county=%@&address=%@&preferred=%@",UrlPrefix(ConsigneeEdit),userId,self.addrDic[@"id"],self.uNameTF.text,self.phoneTF.text,addAry[0],addAry[1],addAry[2],self.addDetailTF.text,[NSNumber numberWithBool:self.defaultSW.on]];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

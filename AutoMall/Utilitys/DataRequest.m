@@ -91,7 +91,7 @@ static DataRequest *dataRequest;
         NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
         if (token != nil && ![token isEqualToString:@""]) {
             NSLog(@"Authorization: %@",token);
-            [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
+            [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
         }
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
         manager.requestSerializer.timeoutInterval = 15;
@@ -131,7 +131,7 @@ static DataRequest *dataRequest;
         NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
         if (token != nil && ![token isEqualToString:@""]) {
             NSLog(@"Authorization: %@",token);
-            [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
+            [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
         }
         NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
         if (userId != nil && ![userId isEqualToString:@""]) {

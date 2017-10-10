@@ -10,6 +10,13 @@
 #import "SettlementCell.h"
 #import "SettlementFootView.h"
 //#import "ConfirmOrderVC.h"
+
+@protocol SelectAddress <NSObject>
+
+-(void)selectreceiveAddress:(NSDictionary *)dic;    //选择收货地址
+
+@end
+
 @interface SettlementVC : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 

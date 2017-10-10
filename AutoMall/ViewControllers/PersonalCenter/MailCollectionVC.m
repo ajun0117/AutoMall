@@ -86,12 +86,13 @@
         [self.myTableView setEditing:NO animated:YES];
         
     }
-    [self.myTableView reloadData];
+//    [self.myTableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    NSLog(@"adfadsf: %lu",(unsigned long)collectArray.count);
+    return collectArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -115,6 +116,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MailCollectionCell *cell = (MailCollectionCell *)[tableView dequeueReusableCellWithIdentifier:@"mailCollectionCell"];
+    cell.goodsprice.text = [NSString stringWithFormat:@"￥%ld",(long)indexPath.section];
     return cell;
 }
 
@@ -124,20 +126,21 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [collectArray removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        [self requestPostDecollectFavorite];    //发起取消收藏请求
+        [self requestPostDecollectFavoriteWithId:collectArray[indexPath.section][@"id"]];    //发起取消收藏请求
+        [collectArray removeObjectAtIndex:indexPath.section];
+        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+    CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
 //        detailVC.userID = userArray[indexPath.section][@"id"];
 //        detailVC.isDrink = self.isDrink;
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-        [self.navigationController pushViewController:detailVC animated:YES];
+    detailVC.commodityId = collectArray[indexPath.section][@"resourceId"];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 发送请求
@@ -151,13 +154,13 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteList) delegate:nil params:pram info:infoDic];
 }
 
--(void)requestPostDecollectFavorite { //取消收藏
+-(void)requestPostDecollectFavoriteWithId:(NSString *)cid { //取消收藏
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"resourceId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:cid,@"resourceId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
 }
 

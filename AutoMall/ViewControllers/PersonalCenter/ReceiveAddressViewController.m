@@ -15,7 +15,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 #import "AddressInfoEditVC.h"
 //#import "PocketLYProvinceAndCityCoreObject.h"
 
-@interface ReceiveAddressViewController ()
+@interface ReceiveAddressViewController () 
 {
     NSMutableArray *_addressArray;
     MBProgressHUD *_hud;
@@ -44,6 +44,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
 
+    [self getMyAddress];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -60,8 +61,6 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-    
-    [self.myTableView headerBeginRefreshing];
 }
 
 -(void)setNavitationItemWithLeftImageName:(NSString*)leftImageName rightImageName:(NSString*)rightImageName{
@@ -72,6 +71,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 #pragma mark - 下拉刷新个人信息
 -(void)headerRefreshing {
     NSLog(@"下拉刷新个人信息");
+    [_addressArray removeAllObjects];
     [self getMyAddress];
 }
 
@@ -94,20 +94,6 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 #pragma mark -
 #pragma mark UITableViewDelegate
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (self.isSelected) {
-        NSLog(@"您选择了一个地址");
-    }
-    else {
-        NSDictionary *dic = _addressArray [indexPath.row];
-        AddressInfoEditVC *editVC = [[AddressInfoEditVC alloc] init];
-        editVC.isEdit = YES;
-        editVC.addrDic = dic;
-        [self.navigationController pushViewController:editVC animated:YES];
-    }
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
@@ -127,14 +113,14 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-        AddressListCell *cell = (AddressListCell *)[tableView dequeueReusableCellWithIdentifier:AddressCellIdentify forIndexPath:indexPath];
+    AddressListCell *cell = (AddressListCell *)[tableView dequeueReusableCellWithIdentifier:AddressCellIdentify forIndexPath:indexPath];
     NSDictionary *dic = _addressArray [indexPath.row];
     cell.unameL.text = dic [@"name"];
     cell.phoneL.text = dic [@"phone"];
     NSString *pro = dic [@"province"];
     NSString *city = dic [@"city"];
-    NSString *country = dic [@"country"];
-    cell.addressL.text = [NSString stringWithFormat:@"%@-%@-%@-%@",pro,city,country,dic [@"address"]];
+    NSString *county = dic [@"county"];
+    cell.addressL.text = [NSString stringWithFormat:@"%@-%@-%@-%@",pro,city,county,dic [@"address"]];
     BOOL preferred = [dic [@"preferred"] boolValue];
     if (preferred) {
         cell.defaultIM.hidden = NO;
@@ -158,7 +144,22 @@ static NSString *const AddressCellIdentify = @"addressListCell";
         //先删除相应的地址
         [self deleteAddress:_addressArray [indexPath.row] [@"id"]];
         [_addressArray removeObjectAtIndex:indexPath.row];//移除数据源的数据
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];//移除tableView中的数据
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];//移除tableView中的数据
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dic = _addressArray [indexPath.row];
+    if (self.isSelected) {
+        [self.addrDelegate selectreceiveAddress:dic];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        AddressInfoEditVC *editVC = [[AddressInfoEditVC alloc] init];
+        editVC.isEdit = YES;
+        editVC.addrDic = dic;
+        [self.navigationController pushViewController:editVC animated:YES];
     }
 }
 

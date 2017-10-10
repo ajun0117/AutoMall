@@ -93,7 +93,7 @@ static CGFloat const scrollViewHeight = 220;
     }];
     
     [scroll setDidScrollImageViewAtIndexHandle:^(NSInteger index) {
-        NSLog(@"滑动到了第%ld页", index);
+//        NSLog(@"滑动到了第%ld页", index);
     }];
     
     self.typeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Head_ScrollView_Height)];
@@ -353,7 +353,7 @@ static CGFloat const scrollViewHeight = 220;
                     UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-10, 40, 60, 20)];
                     subtitleL.textAlignment = NSTextAlignmentCenter;
                     subtitleL.font = [UIFont systemFontOfSize:13];
-                    subtitleL.text = [dic objectForKey:@"name"];
+                    subtitleL.text = dic[@"name"];
                     [button addSubview:subtitleL];
                     
                     [button addTarget:self action:@selector(buttontouchAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -388,10 +388,12 @@ static CGFloat const scrollViewHeight = 220;
 //    listVC.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:listVC animated:YES];
     
+    int p = (int)sender.tag - 1000;
+    NSDictionary *dic = [categoryArray objectAtIndex:p];
     CommodityListVC *listVC = [[CommodityListVC alloc] init];
+    listVC.commodityTermId = dic [@"id"];
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
-    
 }
 
 #pragma mark - 网络请求

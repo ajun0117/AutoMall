@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettlementVC.h"
 
 @interface ReceiveAddressViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
 @property (assign, nonatomic) BOOL isSelected;  //是否作为地址选择页
+@property (nonatomic, assign) id <SelectAddress> addrDelegate;
 
 @end

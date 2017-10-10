@@ -48,7 +48,12 @@
                     <constraint firstItem="Sbc-7a-aGa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="v5F-GS-Dj4"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-144" y="-32"/>
+            <connections>
+                <outlet property="goodsIMG" destination="7ON-ZD-PpV" id="GRk-TM-BrH"/>
+                <outlet property="goodsName" destination="Sbc-7a-aGa" id="RnX-4q-Wqt"/>
+                <outlet property="goodsprice" destination="7zx-D7-cN1" id="lLp-nn-txq"/>
+            </connections>
+            <point key="canvasLocation" x="-391" y="-31"/>
         </tableViewCell>
     </objects>
     <resources>

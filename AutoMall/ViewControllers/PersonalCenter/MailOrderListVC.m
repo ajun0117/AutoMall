@@ -162,8 +162,9 @@
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderList object:nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?clientId=%d&pageNo=%d",UrlPrefix(MallOrderList),1,currentpage];
+    NSString *urlString = [NSString stringWithFormat:@"%@?clientId=%@&pageNo=%d",UrlPrefix(MallOrderList),userId,currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
     
 }

@@ -99,9 +99,9 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MessageList object:nil];
-    
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MessageList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"userId", nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MessageList) delegate:nil params:pram info:infoDic];
 }
 

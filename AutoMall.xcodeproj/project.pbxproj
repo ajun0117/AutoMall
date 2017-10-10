@@ -28,6 +28,9 @@
 		042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2101F4C408F00EA5E5F /* CommodityDetailContentCell.xib */; };
 		042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AF2141F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m */; };
 		042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042AF2151F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib */; };
+		042CFCE11F8CEDB90080D720 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 042CFCDD1F8CEDB90080D720 /* CHANGELOG.md */; };
+		042CFCE21F8CEDB90080D720 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CFCDF1F8CEDB90080D720 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		042CFCE31F8CEDB90080D720 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 042CFCE01F8CEDB90080D720 /* README.md */; };
 		042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFEC1F469B860065FED8 /* CommodityListVC.m */; };
 		042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042DEFED1F469B860065FED8 /* CommodityListVC.xib */; };
 		042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042DEFF11F46E8560065FED8 /* CommodityListCell.m */; };
@@ -380,6 +383,10 @@
 		042AF2131F4C40DD00EA5E5F /* CommodityDetailTuijianCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailTuijianCell.h; sourceTree = "<group>"; };
 		042AF2141F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailTuijianCell.m; sourceTree = "<group>"; };
 		042AF2151F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityDetailTuijianCell.xib; sourceTree = "<group>"; };
+		042CFCDD1F8CEDB90080D720 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		042CFCDE1F8CEDB90080D720 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		042CFCDF1F8CEDB90080D720 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		042CFCE01F8CEDB90080D720 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		042DEFEB1F469B860065FED8 /* CommodityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityListVC.h; sourceTree = "<group>"; };
 		042DEFEC1F469B860065FED8 /* CommodityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityListVC.m; sourceTree = "<group>"; };
 		042DEFED1F469B860065FED8 /* CommodityListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommodityListVC.xib; sourceTree = "<group>"; };
@@ -986,6 +993,17 @@
 				04254DCF1F6FC21F0010D49F /* NSDate+Formatter.m */,
 			);
 			path = "日历";
+			sourceTree = "<group>";
+		};
+		042CFCDC1F8CEDB90080D720 /* Json Kit */ = {
+			isa = PBXGroup;
+			children = (
+				042CFCDD1F8CEDB90080D720 /* CHANGELOG.md */,
+				042CFCDE1F8CEDB90080D720 /* JSONKit.h */,
+				042CFCDF1F8CEDB90080D720 /* JSONKit.m */,
+				042CFCE01F8CEDB90080D720 /* README.md */,
+			);
+			path = "Json Kit";
 			sourceTree = "<group>";
 		};
 		042DEFEA1F469B4A0065FED8 /* 商品列表 */ = {
@@ -1819,6 +1837,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				042CFCDC1F8CEDB90080D720 /* Json Kit */,
 				041556E01F7F915900686016 /* CustomSegmentControl */,
 				04254DCD1F6FC21F0010D49F /* 日历 */,
 				04D107201F62998C007D9F57 /* ZFChart */,
@@ -2547,6 +2566,7 @@
 				04EFEC6D1F5FA446004D9188 /* MailOrderDetailGoodsCell.m in Sources */,
 				F71245751F868B590091816F /* CheckContentItem.m in Sources */,
 				04DC7DBF1F31C28300AA20A7 /* QBAssetsCollectionCheckmarkView.m in Sources */,
+				042CFCE11F8CEDB90080D720 /* CHANGELOG.md in Sources */,
 				04D107891F62998D007D9F57 /* ZFCircle.m in Sources */,
 				04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
@@ -2603,6 +2623,7 @@
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
 				04EFEC631F5FA188004D9188 /* MailOrderDetailWaybillCell.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
+				042CFCE31F8CEDB90080D720 /* README.md in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
 				04D1078F1F62998D007D9F57 /* ZFPolygon.m in Sources */,
 				0459C6B01F614C870040501E /* UIView+Frame.m in Sources */,
@@ -2624,6 +2645,7 @@
 				04254DD01F6FC21F0010D49F /* NSDate+Formatter.m in Sources */,
 				047ADFED1F4A86EF00AEAE8E /* CMSDWebImageManager.m in Sources */,
 				04D107791F62998D007D9F57 /* ZFPopoverLabel.m in Sources */,
+				042CFCE21F8CEDB90080D720 /* JSONKit.m in Sources */,
 				0490FC0E1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m in Sources */,
 				04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */,
 				042DEFEE1F469B860065FED8 /* CommodityListVC.m in Sources */,

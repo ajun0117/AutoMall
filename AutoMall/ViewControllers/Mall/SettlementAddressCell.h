@@ -10,4 +10,10 @@
 
 @interface SettlementAddressCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIView *addView;
+@property (strong, nonatomic) IBOutlet UIView *addressView;
+@property (strong, nonatomic) IBOutlet UILabel *nameL;
+@property (strong, nonatomic) IBOutlet UILabel *phoneL;
+@property (strong, nonatomic) IBOutlet UILabel *addressL;
+
 @end

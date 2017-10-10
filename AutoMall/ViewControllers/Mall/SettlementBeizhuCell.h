@@ -10,4 +10,6 @@
 
 @interface SettlementBeizhuCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UITextField *beizhuTF;
+
 @end

@@ -88,6 +88,8 @@
     sortBtn.backgroundColor = [UIColor whiteColor];
     tagBtn.selected = NO;
     tagBtn.backgroundColor = [UIColor whiteColor];
+    currentpage = 0;
+    [commodityArray removeAllObjects];
     [self requestGetCommodityList];
 }
 - (IBAction)saleAction:(id)sender {
@@ -105,6 +107,8 @@
     }
     tagBtn.selected = NO;
     tagBtn.backgroundColor = [UIColor whiteColor];
+    currentpage = 0;
+    [commodityArray removeAllObjects];
     [self requestGetCommodityList];
 }
 - (IBAction)valueAction:(id)sender {
@@ -123,6 +127,8 @@
         tagBtn.selected = YES;
         orderTypeString = @"asc";   //升序
     }
+    currentpage = 0;
+    [commodityArray removeAllObjects];
     [self requestGetCommodityList];
 }
 
@@ -332,8 +338,9 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
-        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityTermId,@"commodityTermId",currentpage,@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
-        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityTermId,@"commodityTermId",[NSNumber numberWithInt:currentpage],@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

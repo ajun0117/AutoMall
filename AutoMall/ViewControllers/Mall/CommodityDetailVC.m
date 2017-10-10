@@ -117,7 +117,7 @@ static CGFloat const scrollViewHeight = 220;
     }];
     
     [scroll setDidScrollImageViewAtIndexHandle:^(NSInteger index) {
-        NSLog(@"滑动到了第%ld页", index);
+//        NSLog(@"滑动到了第%ld页", index);
     }];
     
     [self addFootView];
@@ -127,12 +127,10 @@ static CGFloat const scrollViewHeight = 220;
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     if (! _hud) {
         _hud = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:_hud];
     }
-    
     if (!_networkConditionHUD) {
         _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:_networkConditionHUD];
@@ -497,6 +495,11 @@ static CGFloat const scrollViewHeight = 220;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+        detailVC.commodityId = tjListAry[indexPath.row][@"id"];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 
@@ -644,7 +647,8 @@ static CGFloat const scrollViewHeight = 220;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteCollect object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteCollect, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"3",@"resourceType",@"1",@"resourceId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"3",@"resourceType",self.commodityId,@"resourceId", nil];
+    NSLog(@"pram:    %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteCollect) delegate:nil params:pram info:infoDic];
 }
 
@@ -654,7 +658,7 @@ static CGFloat const scrollViewHeight = 220;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"resourceId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityId,@"resourceId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
 }
 
