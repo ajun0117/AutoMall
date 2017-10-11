@@ -48,7 +48,7 @@
 //    [bgView addSubview:_number];
     
     _money = [[UILabel alloc]initWithFrame:CGRectMake(66, 8, 100, 28)];
-    _money.text = @"￥1160.00";
+    _money.text = @"￥0.00";
     _money.font = FONT(14);
     _money.textColor = [UIColor blackColor];
     [bgView addSubview:_money];

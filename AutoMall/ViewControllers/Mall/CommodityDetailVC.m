@@ -195,14 +195,13 @@ static CGFloat const scrollViewHeight = 220;
 #pragma mark -- 去结算
 - (void)settlementClock{
     
+      __weak typeof(self) weakSelf = self;
+    
     SettlementVC *settlement = [[SettlementVC alloc] init];
-//    settlement.datasArr = self.myTableView.orderArr;
-    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];    //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
-    settlement.datasArr = [arr mutableCopy];
+//    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];    //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
+    settlement.datasArr = cartMulArray;
     settlement.GoBack = ^{
-        
-//        [weakSelf updateShoppingCart:self.popTableView.orderArr];
-        
+        [weakSelf updateShoppingCart:cartMulArray];
     };
     [self.navigationController pushViewController:settlement animated:YES];
 }
@@ -230,7 +229,6 @@ static CGFloat const scrollViewHeight = 220;
         [UIView animateWithDuration:.3 animations:^{
             
             self.shoppingCartView.frame =CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame) + 15);
-            NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];       //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
             self.shoppingCartView.datasArr = cartMulArray;
         } completion:^(BOOL finished)
          {
@@ -250,8 +248,8 @@ static CGFloat const scrollViewHeight = 220;
     
     __weak typeof(self) weakSelf = self;
     
-    weakSelf.settemntView.number.text  = [NSString stringWithFormat:@"%d",2];
-    weakSelf.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",30.0];
+    weakSelf.settemntView.number.text  = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:darasArr]];
+    weakSelf.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:darasArr]];
     
 //    [weakSelf.popTableView.rightTableView reloadData];
 }

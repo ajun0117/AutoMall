@@ -53,11 +53,17 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.GoBack();
+}
+
 - (void)backGo{
     
     self.GoBack();
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)initTab{
     self.title = @"结算";
     [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementCell" bundle:nil] forCellReuseIdentifier:@"SettlementCell"];
@@ -203,7 +209,7 @@
         num --;
     }
     cell.number.text = [NSString stringWithFormat:@"%d",num];
-    NSMutableDictionary * data  = [self.datasArr[indx.row] mutableCopy];
+    NSMutableDictionary * data  = self.datasArr[indx.row];
     [data setObject:@(num) forKey:@"orderCont"];
     if (num == 0) {
         [self.datasArr removeObject:data];

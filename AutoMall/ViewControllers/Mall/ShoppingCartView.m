@@ -133,34 +133,22 @@
     ShoppingCartCell * cell = (ShoppingCartCell *)indexPath.superview.superview;
     NSIndexPath *indx = [self.myTableView indexPathForCell:cell];
     int num = [cell.number.text intValue];
-    
     if (isAD) {
-        
         num ++;
     }
     else{
-     
         num --;
     }
-    
     cell.number.text = [NSString stringWithFormat:@"%d",num];
-
     NSMutableDictionary * data  = self.datasArr[indx.row];
-    
     [data setObject:@(num) forKey:@"orderCont"];
-    
     if (num == 0) {
-        
-    
-        
         [self.datasArr removeObject:data];
-
         [self.myTableView deleteRowsAtIndexPaths:@[indx] withRowAnimation:0];
     }
     
     if (self.datasArr.count == 0) {
-        
-        self.lableText.text = @"当前购物车为空快去选购吧！";
+        self.lableText.text = @"当前购物车为空，快去选购吧！";
     }
     _block(self.datasArr);
     
