@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,15 +13,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ApplyAuthenticationVC">
             <connections>
                 <outlet property="addressTF" destination="f08-p1-t8w" id="aUM-ip-Vl8"/>
+                <outlet property="aliPayCollectionbtn" destination="SAf-iD-x3H" id="Jkf-2R-dqU"/>
                 <outlet property="cardImgABtn" destination="RnY-IW-Ubs" id="WWb-a5-dMP"/>
                 <outlet property="cardImgBBtn" destination="BBU-zU-UBe" id="aMO-3U-OiR"/>
                 <outlet property="detailAddressTF" destination="6Cp-nV-zmk" id="nOQ-PI-PQF"/>
                 <outlet property="licenseImgBtn" destination="XZH-Rw-s4R" id="WLY-aJ-66e"/>
+                <outlet property="myScrollView" destination="fPB-cF-lHZ" id="jfp-X1-j0o"/>
                 <outlet property="nameTF" destination="ed3-aZ-xMV" id="Fro-qn-tjk"/>
                 <outlet property="phoneTF" destination="zoI-Ps-qei" id="VAL-ZI-3vw"/>
                 <outlet property="recommendCodeTF" destination="bR6-a8-SI1" id="DzA-9a-Hrg"/>
                 <outlet property="shortNameTF" destination="I1v-8m-l3O" id="tRC-Tb-ZFj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wechatCollectionbtn" destination="1tr-JH-sxV" id="KE6-UM-606"/>
                 <outlet property="wechatImgBtn" destination="SDb-dj-k2I" id="Y3n-2Z-5ce"/>
                 <outlet property="wechatNameTF" destination="qJa-dT-JIA" id="D93-Q3-zwD"/>
             </connections>
@@ -44,7 +47,10 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="rf1-p6-Sm2"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhf-U4-61W">
                                     <rect key="frame" x="16" y="47" width="343" height="1"/>
@@ -73,7 +79,10 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="kZs-nd-oWt"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUR-xc-T2b">
                                     <rect key="frame" x="16" y="87" width="343" height="1"/>
@@ -134,7 +143,10 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="SSu-hh-Wd2"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4I-j8-CCc">
                                     <rect key="frame" x="16" y="167" width="343" height="1"/>
@@ -163,7 +175,10 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="VFW-AZ-nIu"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuP-LU-TBT">
                                     <rect key="frame" x="16" y="207" width="343" height="1"/>
@@ -192,7 +207,10 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="gAk-oR-UO1"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-6T-JAx">
                                     <rect key="frame" x="16" y="247" width="343" height="1"/>
@@ -277,7 +295,10 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="EX4-Em-Q5U"/>
+                                    </connections>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsB-hT-qKM">
                                     <rect key="frame" x="16" y="506" width="343" height="1"/>
@@ -320,11 +341,49 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传公众号二维码图片" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-yd-28W">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传公众号二维码图片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-yd-28W">
                                     <rect key="frame" x="26" y="525" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="eap-ZX-7hH"/>
                                         <constraint firstAttribute="height" constant="80" id="kHn-cu-mXU"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tr-JH-sxV">
+                                    <rect key="frame" x="259" y="515" width="100" height="100"/>
+                                    <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="9F7-OV-Fcg"/>
+                                        <constraint firstAttribute="height" constant="100" id="pOu-0B-rq0"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传微信收款码" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmo-EP-I0V">
+                                    <rect key="frame" x="269" y="525" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="Fge-tE-LVe"/>
+                                        <constraint firstAttribute="width" constant="80" id="lE0-rg-vyE"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAf-iD-x3H">
+                                    <rect key="frame" x="137" y="515" width="100" height="100"/>
+                                    <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="F9u-eS-hgw"/>
+                                        <constraint firstAttribute="height" constant="100" id="yNE-Kf-4sP"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传支付宝收款码" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ump-2g-4Sv">
+                                    <rect key="frame" x="147" y="525" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="q68-Af-74Y"/>
+                                        <constraint firstAttribute="width" constant="80" id="te2-LL-soU"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -338,14 +397,19 @@
                                 <constraint firstAttribute="trailing" secondItem="Iy4-hP-VPb" secondAttribute="trailing" constant="16" id="1PA-EH-LcD"/>
                                 <constraint firstAttribute="trailing" secondItem="jsB-hT-qKM" secondAttribute="trailing" constant="16" id="1YH-yT-dmQ"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="width" secondItem="XZH-Rw-s4R" secondAttribute="width" id="2tk-kb-9ee"/>
+                                <constraint firstItem="ump-2g-4Sv" firstAttribute="centerX" secondItem="SAf-iD-x3H" secondAttribute="centerX" id="4Qv-hy-uyn"/>
+                                <constraint firstItem="tmo-EP-I0V" firstAttribute="centerY" secondItem="1tr-JH-sxV" secondAttribute="centerY" id="5fD-NP-zjH"/>
                                 <constraint firstItem="Iy4-hP-VPb" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="602-Dq-vu6"/>
                                 <constraint firstAttribute="trailing" secondItem="fhf-U4-61W" secondAttribute="trailing" constant="16" id="6gH-vO-OOO"/>
+                                <constraint firstItem="ump-2g-4Sv" firstAttribute="centerY" secondItem="SAf-iD-x3H" secondAttribute="centerY" id="769-U3-WHu"/>
                                 <constraint firstItem="fhf-U4-61W" firstAttribute="top" secondItem="ed3-aZ-xMV" secondAttribute="bottom" constant="2" id="7Kd-Hi-ya0"/>
                                 <constraint firstItem="h5r-6T-JAx" firstAttribute="top" secondItem="bR6-a8-SI1" secondAttribute="bottom" constant="2" id="7fF-zD-2k2"/>
                                 <constraint firstAttribute="trailing" secondItem="f08-p1-t8w" secondAttribute="trailing" constant="16" id="9ay-Ke-U0N"/>
+                                <constraint firstItem="SAf-iD-x3H" firstAttribute="centerX" secondItem="zpk-gP-QiI" secondAttribute="centerX" id="B8y-1f-Kaj"/>
                                 <constraint firstAttribute="height" constant="700" id="Bgp-8R-m0I"/>
                                 <constraint firstItem="I1v-8m-l3O" firstAttribute="top" secondItem="fhf-U4-61W" secondAttribute="bottom" constant="2" id="C2g-v1-XSm"/>
                                 <constraint firstItem="Mu4-jr-XUs" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" id="C6W-Bo-lbq"/>
+                                <constraint firstItem="SAf-iD-x3H" firstAttribute="top" secondItem="jsB-hT-qKM" secondAttribute="bottom" constant="8" id="CGY-2o-TEI"/>
                                 <constraint firstItem="h5r-6T-JAx" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="Da5-A6-Zps"/>
                                 <constraint firstAttribute="trailing" secondItem="qJa-dT-JIA" secondAttribute="trailing" constant="16" id="FpR-Vh-UKc"/>
                                 <constraint firstItem="XZH-Rw-s4R" firstAttribute="top" secondItem="h5r-6T-JAx" secondAttribute="bottom" constant="8" id="FvG-KN-ISy"/>
@@ -358,6 +422,7 @@
                                 <constraint firstItem="zoI-Ps-qei" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="QGb-VV-Zi7"/>
                                 <constraint firstItem="a4I-j8-CCc" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="QVT-jA-Lym"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="centerY" secondItem="XZH-Rw-s4R" secondAttribute="centerY" id="RIc-fI-3Ke"/>
+                                <constraint firstItem="1tr-JH-sxV" firstAttribute="top" secondItem="jsB-hT-qKM" secondAttribute="bottom" constant="8" id="S4N-Yk-eKD"/>
                                 <constraint firstAttribute="trailing" secondItem="dsX-8J-TZ0" secondAttribute="trailing" constant="16" id="SOv-YW-trY"/>
                                 <constraint firstAttribute="bottom" secondItem="Mu4-jr-XUs" secondAttribute="bottom" id="SiL-He-40M"/>
                                 <constraint firstAttribute="trailing" secondItem="VuP-LU-TBT" secondAttribute="trailing" constant="16" id="T2E-fr-zPb"/>
@@ -369,6 +434,7 @@
                                 <constraint firstItem="jsB-hT-qKM" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="WY9-PU-Qya"/>
                                 <constraint firstItem="PUR-xc-T2b" firstAttribute="top" secondItem="I1v-8m-l3O" secondAttribute="bottom" constant="2" id="WtT-EQ-2Dl"/>
                                 <constraint firstItem="KQP-yd-28W" firstAttribute="centerY" secondItem="SDb-dj-k2I" secondAttribute="centerY" id="XgH-QQ-fKZ"/>
+                                <constraint firstItem="tmo-EP-I0V" firstAttribute="centerX" secondItem="1tr-JH-sxV" secondAttribute="centerX" id="YFB-Tj-gqn"/>
                                 <constraint firstItem="a4I-j8-CCc" firstAttribute="top" secondItem="6Cp-nV-zmk" secondAttribute="bottom" constant="2" id="aKE-OR-rCQ"/>
                                 <constraint firstItem="KQP-yd-28W" firstAttribute="centerX" secondItem="SDb-dj-k2I" secondAttribute="centerX" id="amC-nH-gkr"/>
                                 <constraint firstItem="SDb-dj-k2I" firstAttribute="top" secondItem="jsB-hT-qKM" secondAttribute="bottom" constant="8" id="dgv-eH-2sO"/>
@@ -387,6 +453,7 @@
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="height" secondItem="XZH-Rw-s4R" secondAttribute="height" id="kmH-5C-b6p"/>
                                 <constraint firstItem="uI8-Y2-ccd" firstAttribute="top" secondItem="f08-p1-t8w" secondAttribute="bottom" constant="2" id="l6f-X4-NgS"/>
                                 <constraint firstAttribute="trailing" secondItem="I1v-8m-l3O" secondAttribute="trailing" constant="16" id="lnl-QE-3cZ"/>
+                                <constraint firstAttribute="trailing" secondItem="1tr-JH-sxV" secondAttribute="trailing" constant="16" id="nJ0-I2-RGC"/>
                                 <constraint firstAttribute="trailing" secondItem="h5r-6T-JAx" secondAttribute="trailing" constant="16" id="nem-a0-ySg"/>
                                 <constraint firstItem="f08-p1-t8w" firstAttribute="top" secondItem="PUR-xc-T2b" secondAttribute="bottom" constant="2" id="oq8-x5-Of6"/>
                                 <constraint firstAttribute="trailing" secondItem="a4I-j8-CCc" secondAttribute="trailing" constant="16" id="t0u-KV-pZz"/>
@@ -413,7 +480,7 @@
                 <constraint firstItem="zpk-gP-QiI" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Y08-8K-IVV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-20" y="41"/>
+            <point key="canvasLocation" x="-342" y="18"/>
         </view>
     </objects>
 </document>

@@ -64,7 +64,7 @@
     
     [orderArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
        
-        money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"current_price"] doubleValue];
+        money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
     }];
     
     return money;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MetodPaymentVC : UIViewController
+@property (nonatomic, strong) NSString *orderNumber;    //订单号
+
 /**
  * 微信
  */

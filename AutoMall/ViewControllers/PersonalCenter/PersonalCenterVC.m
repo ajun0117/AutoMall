@@ -185,6 +185,7 @@
             //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
             cell.nameL.text = @"壳牌授权店";
             cell.nickNameL.text = @"店小二";
+            cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
             return cell;
             break;
         }

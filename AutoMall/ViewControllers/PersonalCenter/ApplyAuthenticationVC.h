@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ApplyAuthenticationVC : UIViewController
+@property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
 @property (weak, nonatomic) IBOutlet UITextField *shortNameTF;
 @property (weak, nonatomic) IBOutlet UITextField *addressTF;
@@ -20,5 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cardImgBBtn;
 @property (weak, nonatomic) IBOutlet UITextField *wechatNameTF;
 @property (weak, nonatomic) IBOutlet UIButton *wechatImgBtn;
+@property (strong, nonatomic) IBOutlet UIButton *aliPayCollectionbtn;
+@property (strong, nonatomic) IBOutlet UIButton *wechatCollectionbtn;
 
 @end

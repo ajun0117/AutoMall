@@ -145,7 +145,7 @@
     
     cell.number.text = [NSString stringWithFormat:@"%d",num];
 
-    NSMutableDictionary * data  =self.datasArr[indx.row];
+    NSMutableDictionary * data  = self.datasArr[indx.row];
     
     [data setObject:@(num) forKey:@"orderCont"];
     

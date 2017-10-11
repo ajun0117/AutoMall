@@ -82,6 +82,11 @@
     remarkStr = textField.text;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark -- UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
@@ -116,14 +121,15 @@
     }
     else if (indexPath.section == 1) {
         SettlementBeizhuCell *cell = (SettlementBeizhuCell *)[tableView dequeueReusableCellWithIdentifier:@"settlementBeizhuCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.beizhuTF.delegate = self;
         return cell;
     }
     else {
         SettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettlementCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [cell.addBtn addTarget:self action:@selector(addBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.deleteBtn addTarget:self action:@selector(deleteBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.addBtn addTarget:self action:@selector(addBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.deleteBtn addTarget:self action:@selector(deleteBtn:) forControlEvents:UIControlEventTouchUpInside];
         cell.addBtn.tag = indexPath.row;
         cell.deleteBtn.tag = indexPath.row;
         cell.data = self.datasArr [indexPath.row];
@@ -172,21 +178,17 @@
 
 #pragma mark -- confirmOrderClock
 - (IBAction)confirmOrderClock:(id)sender {
-    MetodPaymentVC *pay = [MetodPaymentVC new];
-    [self.navigationController pushViewController:pay animated:YES];
+    [self requestPostAddOrder]; //提交订单
 }
 
 #pragma markl -- 加加
 - (void)addBtn:(UIButton *)sender{
-    
     [self updatesContNumber:sender addAndDele:YES];
 }
 
 #pragma mark -- 减减
 - (void)deleteBtn:(UIButton *)sender{
-    
     [self updatesContNumber:sender addAndDele:NO];
-    
 }
 - (void)updatesContNumber:(UIButton *)indexPath addAndDele:(BOOL)isAD{
     
@@ -194,28 +196,17 @@
     SettlementCell * cell = (SettlementCell *)indexPath.superview.superview;
     NSIndexPath *indx = [self.myTableView indexPathForCell:cell];
     int num = [cell.number.text intValue];
-    
     if (isAD) {
-        
         num ++;
     }
     else{
-        
         num --;
     }
-    
     cell.number.text = [NSString stringWithFormat:@"%d",num];
-    
-    NSMutableDictionary * data  =self.datasArr[indx.row];
-    
+    NSMutableDictionary * data  = [self.datasArr[indx.row] mutableCopy];
     [data setObject:@(num) forKey:@"orderCont"];
-    
     if (num == 0) {
-        
-        
-        
         [self.datasArr removeObject:data];
-        
         [self.myTableView deleteRowsAtIndexPaths:@[indx] withRowAnimation:0];
     }
     
@@ -253,11 +244,10 @@
 //    NSString *uname = [[GlobalSetting shareGlobalSettingInstance] mName];
     NSMutableArray *commAry = [NSMutableArray array];
     for (NSDictionary *dic in _datasArr) {
-        NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"commodityId",dic[@"order"],@"commodityAmount", nil];
+        NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"commodityId",dic[@"orderCont"],@"commodityAmount", nil];
         [commAry addObject:dicc];
     }
-    
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",@"999",@"totalPrice",@"888",@"actualPrice",remarkStr,@"remark",[commAry JSONString],@"detailJson", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",@"999",@"totalPrice",@"888",@"actualPrice",remarkStr,@"remark",[commAry JSONString],@"detailJson", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderAdd) delegate:nil params:pram info:infoDic];
 }
 
@@ -297,7 +287,9 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderAdd object:nil];
         NSLog(@"MallOrderAdd_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            
+            MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
+            pay.orderNumber = responseObject[@"data"][@"code"];
+            [self.navigationController pushViewController:pay animated:YES];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];

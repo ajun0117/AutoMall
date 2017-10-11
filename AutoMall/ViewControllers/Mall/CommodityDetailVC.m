@@ -18,6 +18,7 @@
 #import "SettlementVC.h"
 #import "WRNavigationBar.h"
 #import "HZPhotoBrowser.h"
+#import "ShoppingCartModel.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -37,6 +38,9 @@ static CGFloat const scrollViewHeight = 220;
     NSDictionary *commodityDic;   //详情字典
     NSArray *tjListAry; //推荐商品列表
     UIButton *collectBtn;   //收藏按钮
+    NSMutableArray *commoditymulArray;  //重组的商品数组
+    NSMutableArray *cartMulArray;  //购物车中商品数据
+    int goodsNum;           //商品数量
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -54,7 +58,7 @@ static CGFloat const scrollViewHeight = 220;
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品详情";
     
-//<<<<<<< Updated upstream
+///<<<<< Updated upstream
 ////    // 设置导航栏颜色
 ////    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
 ////    
@@ -82,6 +86,7 @@ static CGFloat const scrollViewHeight = 220;
     collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     collectBtn.frame = CGRectMake(0, 0, 44, 44);
     [collectBtn setImage:[UIImage imageNamed:@"collect"] forState:UIControlStateNormal];
+    [collectBtn setImage:[UIImage imageNamed:@"collected"] forState:UIControlStateSelected];
     [collectBtn setImage:[UIImage imageNamed:@"collected"] forState:UIControlStateSelected | UIControlStateHighlighted];
     [collectBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [collectBtn addTarget:self action:@selector(toCollectFavour) forControlEvents:UIControlEventTouchUpInside];
@@ -106,13 +111,6 @@ static CGFloat const scrollViewHeight = 220;
     
     __block typeof(self) bself = self;
     [scroll setTapImageHandle:^(NSInteger index) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-//                                                            message:[NSString
-//                                                                     stringWithFormat:@"你点击了%ld张图片", index]
-//                                                           delegate:nil
-//                                                  cancelButtonTitle:nil
-//                                                  otherButtonTitles:@"Ok", nil];
-//        [alertView show];
         [bself clickImageWithIndex:index];
     }];
     
@@ -123,6 +121,10 @@ static CGFloat const scrollViewHeight = 220;
     [self addFootView];
     
     [self requestGetCommodityDetail];
+    
+    goodsNum = 0;
+    commoditymulArray = [NSMutableArray array];
+    cartMulArray = [NSMutableArray array];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -195,7 +197,7 @@ static CGFloat const scrollViewHeight = 220;
     
     SettlementVC *settlement = [[SettlementVC alloc] init];
 //    settlement.datasArr = self.myTableView.orderArr;
-    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2"},@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}];
+    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];    //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
     settlement.datasArr = [arr mutableCopy];
     settlement.GoBack = ^{
         
@@ -210,7 +212,6 @@ static CGFloat const scrollViewHeight = 220;
     __weak typeof(self) weakSelf = self;
     if (!self.isShopping)
     {
-//        self.settemntView.backgroundColor = RGBCOLOR(239, 239, 244);
         self.shoppingCartView =[[ShoppingCartView alloc]init];
         self.shoppingCartView.frame =CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15);
         
@@ -220,7 +221,6 @@ static CGFloat const scrollViewHeight = 220;
         bgView.backgroundColor =[UIColor lightGrayColor];
         [self.view insertSubview:bgView belowSubview:self.settemntView];
         self.shoppingCartView.block = ^(NSMutableArray *darasArr){
-            
             [weakSelf updateShoppingCart:darasArr];
         };
         
@@ -230,8 +230,8 @@ static CGFloat const scrollViewHeight = 220;
         [UIView animateWithDuration:.3 animations:^{
             
             self.shoppingCartView.frame =CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame) + 15);
-            NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2"},@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}];
-            self.shoppingCartView.datasArr = [arr mutableCopy];
+            NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];       //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
+            self.shoppingCartView.datasArr = cartMulArray;
         } completion:^(BOOL finished)
          {
              
@@ -464,7 +464,7 @@ static CGFloat const scrollViewHeight = 220;
             CommodityDetailTuijianCell *cell = (CommodityDetailTuijianCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTuijianCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSDictionary *dic = tjListAry [indexPath.row];
-            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"thumbnail"]] placeholderImage:IMG(@"timg-2")];
+            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
             cell.goodsNameL.text = dic [@"name"];
             cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
             cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
@@ -502,11 +502,56 @@ static CGFloat const scrollViewHeight = 220;
     }
 }
 
-
+#pragma mark --点击+号加入购物车
 -(void)addToCart:(UIButton *)btn {
-    CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)btn.superview.superview;
-    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
-    [self setNum:3 index:index];
+     NSMutableDictionary *dic = [commoditymulArray firstObject];
+    int num = [dic[@"orderCont"] intValue];
+    num ++ ;    //已选商品数量+1
+    
+    if (cartMulArray.count != 0)
+    {
+        BOOL flage = YES;
+        for (NSDictionary *dicc in cartMulArray)
+        {
+            if (dicc[@"id"]==dic[@"id"])
+            {
+                flage = NO; //有重复，只增加数量，不增加数组个数
+                break;
+            }
+        }
+        if (flage)
+        {
+            [cartMulArray addObject:dic];
+        }
+    }
+    else{
+        [cartMulArray addObject:dic];
+    }
+    
+    NSLog(@"---%lu",(unsigned long)cartMulArray.count);
+    
+    [dic setObject:@(num) forKey:@"orderCont"];
+    
+    //设置商品数量
+    self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];
+//    [self.settemntView setNumber:self.settemntView.number];
+//    [self.settemntView.number.layer addAnimation:animation forKey:nil];
+    //设置商品价格
+    self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
+    
+//    CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)btn.superview.superview;
+//    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
+//    [self setNum:3 index:index];
+//    goodsNum ++ ;
+//    NSDictionary *dic = @{@"name":commodityDic[@"name"],@"current_price":commodityDic[@"discount"],@"orderCont":[NSNumber numberWithInt:goodsNum],@"id":commodityDic[@"id"]};
+//    [cartArray addObject:dic];
+//    
+//    float zongMoney = 0.0;    //计算总价
+//    for (NSDictionary *dic in cartArray) {
+//        zongMoney += [dic[@"current_price"] floatValue] * [dic[@"orderCont"] intValue];
+//    }
+//    self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",zongMoney];
+//    self.settemntView.peisongMoney.text = @"10";
 }
 
 // 添加动画以及数量
@@ -572,6 +617,7 @@ static CGFloat const scrollViewHeight = 220;
     groups.delegate = self;
     [_layer addAnimation:groups forKey:@"group"];
 }
+
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     
@@ -658,7 +704,7 @@ static CGFloat const scrollViewHeight = 220;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityId,@"resourceId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityId,@"id", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
 }
 
@@ -679,6 +725,10 @@ static CGFloat const scrollViewHeight = 220;
         NSLog(@"CommodityDetail_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             commodityDic = responseObject [@"data"];
+            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
+            [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
+            [commoditymulArray addObject:dic];  //重组后商品数组
+            
             [self requestPostCommoditytjListWithId:commodityDic[@"commodityTerm"][@"id"]];
 //            [self.myTableView reloadData];
         }

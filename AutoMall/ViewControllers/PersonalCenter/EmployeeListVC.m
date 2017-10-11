@@ -75,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return listArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,8 +88,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"employeeListCell"];
+    NSDictionary *dic = listArray[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.textLabel.text = @"员工名字";
+    cell.textLabel.text = dic[@"realName"];
     return cell;
 }
 
@@ -98,21 +99,23 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = listArray[indexPath.row];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //        [listArray removeObjectAtIndex:indexPath.row];
+        [self requestDelStaffWithID:NSStringWithNumber(dic[@"id"])];
+        [listArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-        EmployeeDetailVC *detailVC = [[EmployeeDetailVC alloc] init];
+    NSDictionary *dic = listArray[indexPath.row];
+    EmployeeDetailVC *detailVC = [[EmployeeDetailVC alloc] init];
 //        detailVC.userID = userArray[indexPath.section][@"id"];
 //        detailVC.isDrink = self.isDrink;
 //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-        detailVC.idStr = @"1";
-        [self.navigationController pushViewController:detailVC animated:YES];
+    detailVC.idStr = NSStringWithNumber(dic[@"id"]);
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 发起请求
@@ -125,13 +128,13 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreListStaff) delegate:nil params:nil info:infoDic];
 }
 
--(void)requestDelStaff { //删除员工
+-(void)requestDelStaffWithID:(NSString *)eid { //删除员工
     [_hud show:YES];
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreDelStaff object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreDelStaff, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"id", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:eid,@"id", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreDelStaff) delegate:nil params:pram info:infoDic];
 }
 
@@ -149,8 +152,8 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreListStaff object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-//            [listArray addObjectsFromArray:responseObject [@"data"]];
-//            [self.myTableView reloadData];
+            [listArray addObjectsFromArray:responseObject [@"data"]];
+            [self.myTableView reloadData];
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];

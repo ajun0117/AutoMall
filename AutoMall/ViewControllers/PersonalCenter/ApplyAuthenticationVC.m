@@ -32,6 +32,10 @@
     self.chooseLocationView.address = @"广东省 广州市 白云区";
     self.chooseLocationView.areaCode = @"440104";
     self.addressTF.text = @"广东省 广州市 白云区";
+    
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -50,6 +54,25 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.myScrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - keyBoardRect.size.height);
+//    self.myScrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.myScrollView.frame) - keyBoardRect.size.height);
+}
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+    self.myScrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
+}
+
 - (IBAction)replayAction:(id)sender {
     [self requestPostStoreRegister];
 }
@@ -64,9 +87,24 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    self.cover.hidden = !self.cover.hidden;
-    self.chooseLocationView.hidden = self.cover.hidden;
-    return NO;
+    if (textField == self.addressTF) {
+        [self.nameTF resignFirstResponder];
+        [self.shortNameTF resignFirstResponder];
+        [self.detailAddressTF resignFirstResponder];
+        [self.phoneTF resignFirstResponder];
+        [self.recommendCodeTF resignFirstResponder];
+        [self.wechatNameTF resignFirstResponder];
+        
+        self.cover.hidden = !self.cover.hidden;
+        self.chooseLocationView.hidden = self.cover.hidden;
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
