@@ -463,7 +463,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        }
+        } 
     }
     
     if ([notification.name isEqualToString:GetUserInfo]) {
@@ -472,7 +472,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *dic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
-            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
+//            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
