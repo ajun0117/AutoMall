@@ -218,7 +218,7 @@
     
     _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
     _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-    _footView.yunfeiL.text = [NSString stringWithFormat:@"运费：￥%.2f",5.00];
+    _footView.yunfeiL.text = [NSString stringWithFormat:@"运费：￥%.2f",self.yunfei];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -253,15 +253,15 @@
         NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"commodityId",dic[@"orderCont"],@"commodityAmount", nil];
         [commAry addObject:dicc];
     }
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",@"999",@"totalPrice",@"888",@"actualPrice",remarkStr,@"remark",[commAry JSONString],@"detailJson", nil];
+    float totalPrice = [ShoppingCartModel moneyOrderShoopingCart:self.datasArr];
+    float actualPrice = totalPrice + self.yunfei;
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",[NSString stringWithFormat:@"%.2f",totalPrice],@"totalPrice",[NSString stringWithFormat:@"%.2f",actualPrice],@"actualPrice",remarkStr,@"remark",[commAry JSONString],@"detailJson", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderAdd) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
-    [self.myTableView headerEndRefreshing];
-    [self.myTableView footerEndRefreshing];
     if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
         _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
         [_networkConditionHUD show:YES];
@@ -294,7 +294,7 @@
         NSLog(@"MallOrderAdd_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
-            pay.orderNumber = responseObject[@"data"][@"code"];
+            pay.orderNumber = responseObject[@"data"];
             [self.navigationController pushViewController:pay animated:YES];
         }
         else {

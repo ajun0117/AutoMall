@@ -156,6 +156,32 @@
 }
 
 #pragma mark - 发起网络请求
+#pragma mark - 发送请求
+-(void)requestUploadImgWithIndex:(NSIndexPath *)indexPath andImage:(WPImageView *)image delegate:(id)delegate andTargetId:(NSString *)targetId andTargetType:(NSString *)targetType andExt:(NSString *)ext {
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ImageUpload,@"op",indexPath,@"indexPath", nil];
+    
+    //data=data
+    NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
+    NSInteger length = imageData.length;
+    if (length > 1048) {
+        CGFloat packRate = 1048.0/length;
+        imageData = UIImageJPEGRepresentation(image.image, packRate);
+    }
+    //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
+    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                         (CFStringRef)baseStr,
+                                                                                         NULL,
+                                                                                         CFSTR(":/?#[]@!$&’()*+,;="),
+                                                                                         kCFStringEncodingUTF8);
+    //    NSLog(@"baseString:%@",baseString);
+    
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"imgData",@"jpg",@"ext",targetType,@"targetType",targetId,@"targetId", nil]; //评论targetType=3
+    NSLog(@"paramsDic: %@",paramsDic);
+    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:paramsDic info:infoDic];
+    //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];
+}
+
 -(void)requestPostStoreRegister { //门店认证
     [_hud show:YES];
     //注册通知

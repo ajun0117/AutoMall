@@ -103,6 +103,10 @@
 		047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE0091F4A904400AEAE8E /* picture_1.png */; };
 		047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE00A1F4A904400AEAE8E /* picture_2.png */; };
 		047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE00B1F4A904400AEAE8E /* picture_3.png */; };
+		0486E8CB1F8F667700FB746E /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0486E8C81F8F667700FB746E /* BPushCerResource.bundle */; };
+		0486E8CC1F8F667700FB746E /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486E8C91F8F667700FB746E /* libBPush.a */; };
+		0486E8CD1F8F667700FB746E /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0486E8CA1F8F667700FB746E /* test.caf */; };
+		0486E8CF1F8F669E00FB746E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486E8CE1F8F669E00FB746E /* Foundation.framework */; };
 		0490FBFF1F57F6CA00F77661 /* CustomServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490FBFD1F57F6CA00F77661 /* CustomServiceVC.m */; };
 		0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0490FBFE1F57F6CA00F77661 /* CustomServiceVC.xib */; };
 		0490FC041F57F97700F77661 /* CustomServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490FC021F57F97700F77661 /* CustomServiceCell.m */; };
@@ -511,6 +515,12 @@
 		047AE0091F4A904400AEAE8E /* picture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_1.png; sourceTree = "<group>"; };
 		047AE00A1F4A904400AEAE8E /* picture_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_2.png; sourceTree = "<group>"; };
 		047AE00B1F4A904400AEAE8E /* picture_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_3.png; sourceTree = "<group>"; };
+		0486E8C71F8F667700FB746E /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		0486E8C81F8F667700FB746E /* BPushCerResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BPushCerResource.bundle; sourceTree = "<group>"; };
+		0486E8C91F8F667700FB746E /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		0486E8CA1F8F667700FB746E /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
+		0486E8CE1F8F669E00FB746E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0486E8D01F8F6C4900FB746E /* AutoMall.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutoMall.entitlements; sourceTree = "<group>"; };
 		0490FBFC1F57F6CA00F77661 /* CustomServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomServiceVC.h; sourceTree = "<group>"; };
 		0490FBFD1F57F6CA00F77661 /* CustomServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomServiceVC.m; sourceTree = "<group>"; };
 		0490FBFE1F57F6CA00F77661 /* CustomServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomServiceVC.xib; sourceTree = "<group>"; };
@@ -937,8 +947,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0486E8CF1F8F669E00FB746E /* Foundation.framework in Frameworks */,
 				0459C6871F61392E0040501E /* libsqlite3.0.tbd in Frameworks */,
 				04DC7E001F31C77A00AA20A7 /* CoreFoundation.framework in Frameworks */,
+				0486E8CC1F8F667700FB746E /* libBPush.a in Frameworks */,
 				04DC7DFE1F31C77000AA20A7 /* CoreLocation.framework in Frameworks */,
 				04DC7DFC1F31C76700AA20A7 /* QuartzCore.framework in Frameworks */,
 				04DC7DFA1F31C75B00AA20A7 /* OpenGLES.framework in Frameworks */,
@@ -1306,6 +1318,17 @@
 			name = "商品详情";
 			sourceTree = "<group>";
 		};
+		0486E8C61F8F667700FB746E /* normalversion */ = {
+			isa = PBXGroup;
+			children = (
+				0486E8C71F8F667700FB746E /* BPush.h */,
+				0486E8C81F8F667700FB746E /* BPushCerResource.bundle */,
+				0486E8C91F8F667700FB746E /* libBPush.a */,
+				0486E8CA1F8F667700FB746E /* test.caf */,
+			);
+			path = normalversion;
+			sourceTree = "<group>";
+		};
 		0490FBFB1F57F67100F77661 /* 定制服务 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1428,6 +1451,8 @@
 		04AE980F1F2ED46500C2D158 /* AutoMall */ = {
 			isa = PBXGroup;
 			children = (
+				0486E8D01F8F6C4900FB746E /* AutoMall.entitlements */,
+				0486E8C61F8F667700FB746E /* normalversion */,
 				04DC7D141F31C26500AA20A7 /* Models */,
 				04DC7CFF1F31C25000AA20A7 /* Views */,
 				04DC7CEE1F31C24000AA20A7 /* ViewControllers */,
@@ -2237,6 +2262,7 @@
 		8AF780E2B32464023F472B06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0486E8CE1F8F669E00FB746E /* Foundation.framework */,
 				04DC7DFF1F31C77A00AA20A7 /* CoreFoundation.framework */,
 				04DC7DFD1F31C77000AA20A7 /* CoreLocation.framework */,
 				04DC7DFB1F31C76700AA20A7 /* QuartzCore.framework */,
@@ -2308,8 +2334,13 @@
 				TargetAttributes = {
 					04AE980C1F2ED46500C2D158 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = N5YFVN3TK2;
+						DevelopmentTeam = 87M7558JK5;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2337,6 +2368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0486E8CD1F8F667700FB746E /* test.caf in Resources */,
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
@@ -2422,6 +2454,7 @@
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
 				04DC7DDB1F31C28300AA20A7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				042DEFF41F46E8560065FED8 /* CommodityListCell.xib in Resources */,
+				0486E8CB1F8F667700FB746E /* BPushCerResource.bundle in Resources */,
 				0459C68E1F6148900040501E /* AddressListCell.xib in Resources */,
 				04DC7DDE1F31C28300AA20A7 /* UMSShareListController.xib in Resources */,
 				04DC7DDF1F31C28300AA20A7 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -2846,8 +2879,9 @@
 			baseConfigurationReference = 282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AutoMall/AutoMall.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = N5YFVN3TK2;
+				DEVELOPMENT_TEAM = 87M7558JK5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2862,6 +2896,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_4.2.3",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/AutoMall/normalversion",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.henglian.carm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2875,8 +2910,9 @@
 			baseConfigurationReference = 23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AutoMall/AutoMall.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = N5YFVN3TK2;
+				DEVELOPMENT_TEAM = 87M7558JK5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2891,6 +2927,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_4.2.3",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/AutoMall/normalversion",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.henglian.carm;
 				PRODUCT_NAME = "$(TARGET_NAME)";

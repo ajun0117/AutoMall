@@ -184,6 +184,7 @@ static CGFloat const scrollViewHeight = 220;
 - (void)addFootView{
     self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 59, Screen_wide, 59)];
     self.settemntView.number.text = @"0";
+    self.settemntView.yunfei = 5;
     [self.settemntView.settlement addTarget:self action:@selector(settlementClock) forControlEvents:UIControlEventTouchUpInside];
 //    [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
     self.settemntView.shoppingCart.userInteractionEnabled = NO;
@@ -200,6 +201,7 @@ static CGFloat const scrollViewHeight = 220;
     SettlementVC *settlement = [[SettlementVC alloc] init];
 //    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];    //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
     settlement.datasArr = cartMulArray;
+    settlement.yunfei = 5;
     settlement.GoBack = ^{
         [weakSelf updateShoppingCart:cartMulArray];
     };
@@ -536,7 +538,7 @@ static CGFloat const scrollViewHeight = 220;
 //    [self.settemntView.number.layer addAnimation:animation forKey:nil];
     //设置商品价格
     self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
-    
+    self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"运费：￥%.2f",5.0];
 //    CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)btn.superview.superview;
 //    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
 //    [self setNum:3 index:index];
@@ -670,15 +672,18 @@ static CGFloat const scrollViewHeight = 220;
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityDetail object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityDetail, @"op", nil];
+    NSString *userId= [[GlobalSetting shareGlobalSettingInstance] userID];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CommodityDetail),self.commodityId];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:urlString delegate:nil params:pram info:infoDic];
+    
 }
 
 -(void)requestPostCommoditytjListWithId:(NSString *)commodityTermId { //推荐列表
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommoditytjList object:nil];
-    
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommoditytjList, @"op", nil];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityTermId,@"commodityTermId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommoditytjList) delegate:nil params:pram info:infoDic];

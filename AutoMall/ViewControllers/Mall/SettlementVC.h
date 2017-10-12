@@ -30,6 +30,7 @@
  */
 @property (copy, nonatomic) void((^GoBack)());
 
+@property (assign, nonatomic) float yunfei;
 
 
 

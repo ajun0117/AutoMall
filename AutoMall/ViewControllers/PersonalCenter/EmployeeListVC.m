@@ -40,8 +40,6 @@
     
     self.myTableView.tableFooterView = [UIView new];
     listArray = [NSMutableArray array];
-    
-    [self requestGetStaffList];     //请求员工列表数据
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -60,7 +58,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    
+    [self requestGetStaffList];     //请求员工列表数据
 }
 
 -(void) toAddEmployee {
@@ -154,9 +152,6 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [listArray addObjectsFromArray:responseObject [@"data"]];
             [self.myTableView reloadData];
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -171,6 +166,9 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
 //            [listArray addObjectsFromArray:responseObject [@"data"]];
 //            [self.myTableView reloadData];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

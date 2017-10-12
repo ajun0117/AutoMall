@@ -98,7 +98,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return orderArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -121,6 +121,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic = orderArray[indexPath.section];
     if (indexPath.section == 0) {
         MailOrderMultiCell *cell = (MailOrderMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderMultiCell"];
         cell.picScrollView.contentSize = CGSizeMake((60+10) * 3, 60);
@@ -132,6 +133,13 @@
         return cell;
     }
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
+    int status = [dic[@"orderStatus"] intValue];
+    if (status == 0) {
+        cell.statusL.text = @"待支付";
+    } else {
+        cell.statusL.text = @"已完成";
+    }
+    cell.nameL.text = dic[@""];
     return cell;
 }
 

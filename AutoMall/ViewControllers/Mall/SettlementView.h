@@ -24,6 +24,8 @@
 @property (strong, nonatomic) UILabel *money;
 //配送费
 @property (strong, nonatomic) UILabel *peisongMoney;
+//配送费价格
+@property (assign, nonatomic) float yunfei;
 /*
  * 去结算
  */

@@ -20,5 +20,6 @@
  */
 @property (weak, nonatomic) IBOutlet UIImageView *ailpay;
 
+@property (strong, nonatomic) IBOutlet UIImageView *jifen;
 
 @end

@@ -54,7 +54,7 @@
     [bgView addSubview:_money];
     
     _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(VIEW_BX(_money), 8, 70, 28)];
-    _peisongMoney.text = @"配送费￥5";
+    _peisongMoney.text = [NSString stringWithFormat:@"运费：￥%.2f",self.yunfei];
     _peisongMoney.font = FONT(9);
     _peisongMoney.textColor = [UIColor darkGrayColor];
     [bgView addSubview:_peisongMoney];
@@ -72,6 +72,8 @@
     self.shoppingCart.frame = CGRectMake(10, 0, 49, 55);
     [self addSubview:self.shoppingCart];
 }
+
+
 - (void)setNumber:(UILabel *)number{
     
     CGSize size = [_number.text boundingRectWithSize:CGSizeMake(999, 25) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_number.font} context:nil].size;

@@ -109,6 +109,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

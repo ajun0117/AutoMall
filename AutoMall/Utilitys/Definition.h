@@ -137,6 +137,8 @@
 #define InformationList                          @"/info/list"    //资讯列表
 #define CourseList                                  @"/course/list"  //教程列表
 
+#define UploadUploadImg                       @"/upload/uploadImg"    //上传图片
+
 //商城
 #define ComCategoryList                        @"/comCategory/list"    //商品分类
 #define CommodityList                            @"/commodity/list"       //商品列表
@@ -148,6 +150,7 @@
 #define ConsigneeEdit                             @"/consignee/edit"       //编辑收货地址
 #define ConsigneeDele                             @"/consignee/del"        //删除收货地址
 #define MallOrderAdd                             @"/order/add"             //新增订单
+#define MallOrderChoosePayMode           @"/order/choosePayMode"     //选择支付方式
 
 //登录、注册、找回密码
 #define GetSMS                                      @"/sms/send"                    //获取短信验证码
