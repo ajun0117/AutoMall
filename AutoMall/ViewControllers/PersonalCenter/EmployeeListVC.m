@@ -58,6 +58,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
+    [listArray removeAllObjects];
     [self requestGetStaffList];     //请求员工列表数据
 }
 
