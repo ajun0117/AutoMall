@@ -15,7 +15,7 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *discountArray;
-    int currentpage;
+    int currentpage; 
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 

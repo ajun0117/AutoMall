@@ -40,7 +40,7 @@
 //iPhone4
 #define   isIphone4  [UIScreen mainScreen].bounds.size.height < 500
 
-#define STRING_Nil(str)         (str==[NSNull null])?nil:str
+#define STRING_Nil(str)         (str==nil)?@"":str
 #define STRING(str)         (str==[NSNull null])?@"":str
 #define NSStringWithNumber(number)    number==nil?@"未知":[NSString stringWithFormat:@"%@",number]
 #define NSStringZeroWithNumber(number)    number==nil?@"0":[NSString stringWithFormat:@"%@",number]
@@ -170,6 +170,7 @@
 #define DiscountList                                @"/discount/list"                //优惠列表
 #define CarAdd                                        @"/car/add"                       //新增车辆信息
 #define CarUpdate                                   @"/car/update"                  //更新车辆信息
+#define CarList                                        @"/car/list"                        //车辆列表
 
 //个人中心
 #define ListServiceContent                     @"/user/listServiceContent"     //获取服务内容

@@ -70,4 +70,17 @@
     return money;
     
 }
+
++ (double)shippingFeeShopingCart:(NSMutableArray *)orderArr {
+    __block double money = 0;
+    __block double shippingFee = 0;
+    [orderArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
+        shippingFee = [[obj valueForKey:@"shippingFee"] doubleValue];
+    }];
+    if (money >= 500) {
+        shippingFee = 0.0;
+    }
+    return shippingFee;
+}
 @end

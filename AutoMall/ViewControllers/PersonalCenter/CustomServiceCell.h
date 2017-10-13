@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameL;
 @property (strong, nonatomic) IBOutlet UIButton *radioBtn;
 @property (strong, nonatomic) IBOutlet UITextField *moneyTF;
+@property (strong, nonatomic) IBOutlet UILabel *unitL;
 
 @end

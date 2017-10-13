@@ -9,8 +9,15 @@
 #import "CarInfoListVC.h"
 #import "CarInfoListCell.h"
 #import "CarInfoSearchVC.h"
+#import "BaoyangHistoryVC.h"
 
 @interface CarInfoListVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *carArray;
+    int currentpage;
+}
 @property (strong, nonatomic) IBOutlet UITableView *infoTableView;
 
 @end
@@ -21,9 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"车辆信息";
-    [self.infoTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
-    self.infoTableView.tableFooterView = [UIView new];
-    
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
@@ -36,6 +40,47 @@
     [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+    
+    [self.infoTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
+    self.infoTableView.tableFooterView = [UIView new];
+    
+    [self.infoTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self.infoTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    
+    currentpage = 0;
+    carArray = [NSMutableArray array];
+    
+    [self.infoTableView headerBeginRefreshing];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+#pragma mark - 下拉刷新,上拉加载
+-(void)headerRefreshing {
+    NSLog(@"下拉刷新个人信息");
+    currentpage = 0;
+    [carArray removeAllObjects];
+    [self requestGetCarList];
+}
+
+-(void)footerLoadData {
+    NSLog(@"上拉加载数据");
+    currentpage ++;
+    [self requestGetCarList];
 }
 
 -(void) toSearch {  //搜索车辆保养记录
@@ -51,7 +96,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return carArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,18 +114,61 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    NSDictionary *dic = carArray[indexPath.row];
+    cell.plateNumberL.text = dic[@"plateNumber"];
+    cell.ownerL.text = dic[@"owner"];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"updateTime"] doubleValue]/1000];
+    NSString *string = [formater stringFromDate:creatDate];
+    cell.dateL.text = string;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+        BaoyangHistoryVC *detailVC = [[BaoyangHistoryVC alloc] init];
+//        detailVC.userID = userArray[indexPath.section][@"id"];
+//        detailVC.isDrink = self.isDrink;
+//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
+        [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(void)requestGetCarList { //获取车辆信息列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarList, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?plateNumber=%@&pageNo=%d",UrlPrefix(CarList),@"",currentpage];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.infoTableView headerEndRefreshing];
+    [self.infoTableView footerEndRefreshing];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    if ([notification.name isEqualToString:CarList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarList object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            carArray = responseObject[@"data"];
+            [self.infoTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

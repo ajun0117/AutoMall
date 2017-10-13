@@ -13,7 +13,7 @@
 
 @protocol SelectAddress <NSObject>
 
--(void)selectreceiveAddress:(NSDictionary *)dic;    //选择收货地址
+-(void)selectReceiveAddress:(NSDictionary *)dic;    //选择收货地址
 
 @end
 
@@ -29,8 +29,6 @@
  * 更新数量与价格
  */
 @property (copy, nonatomic) void((^GoBack)());
-
-@property (assign, nonatomic) float yunfei;
 
 
 

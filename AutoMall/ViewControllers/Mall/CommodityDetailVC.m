@@ -184,7 +184,6 @@ static CGFloat const scrollViewHeight = 220;
 - (void)addFootView{
     self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 59, Screen_wide, 59)];
     self.settemntView.number.text = @"0";
-    self.settemntView.yunfei = 5;
     [self.settemntView.settlement addTarget:self action:@selector(settlementClock) forControlEvents:UIControlEventTouchUpInside];
 //    [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
     self.settemntView.shoppingCart.userInteractionEnabled = NO;
@@ -195,18 +194,22 @@ static CGFloat const scrollViewHeight = 220;
 
 #pragma mark -- 去结算
 - (void)settlementClock{
-    
-      __weak typeof(self) weakSelf = self;
-    
-    SettlementVC *settlement = [[SettlementVC alloc] init];
-//    NSArray *arr = @[@{@"name":@"磁护",@"current_price":@"320.00",@"orderCont":@"2",@"id":@"2"}];    //,@{@"name":@"极护",@"current_price":@"520.00",@"orderCont":@"1"}
-    settlement.datasArr = cartMulArray;
-    settlement.yunfei = 5;
-    settlement.GoBack = ^{
-        [weakSelf updateShoppingCart:cartMulArray];
-    };
-    [self.navigationController pushViewController:settlement animated:YES];
+    if (cartMulArray.count > 0) {
+        __weak typeof(self) weakSelf = self;
+        SettlementVC *settlement = [[SettlementVC alloc] init];
+        settlement.datasArr = cartMulArray;
+        settlement.GoBack = ^{
+            [weakSelf updateShoppingCart:cartMulArray];
+        };
+        [self.navigationController pushViewController:settlement animated:YES];
+    }
+    else {
+        _networkConditionHUD.labelText = @"请先添加购买的商品到购物车！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
+
 #pragma mark -- 购物车按钮
 - (void)shoppingCartClock{
     
@@ -246,13 +249,13 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 #pragma mark -- 更新 数量 价钱
-- (void)updateShoppingCart:(NSMutableArray *)darasArr{
+- (void)updateShoppingCart:(NSMutableArray *)datasArr{
     
     __weak typeof(self) weakSelf = self;
     
-    weakSelf.settemntView.number.text  = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:darasArr]];
-    weakSelf.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:darasArr]];
-    
+    weakSelf.settemntView.number.text  = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:datasArr]];
+    weakSelf.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:datasArr]];
+    weakSelf.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:datasArr]];
 //    [weakSelf.popTableView.rightTableView reloadData];
 }
 
@@ -448,6 +451,7 @@ static CGFloat const scrollViewHeight = 220;
                 }
                 case 4: {
                     CommodityDetailContentCell *cell = (CommodityDetailContentCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailContentCell"];
+                    cell.remarkL.text = commodityDic[@"remark"];
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
@@ -534,24 +538,10 @@ static CGFloat const scrollViewHeight = 220;
     
     //设置商品数量
     self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];
-//    [self.settemntView setNumber:self.settemntView.number];
-//    [self.settemntView.number.layer addAnimation:animation forKey:nil];
     //设置商品价格
     self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
-    self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"运费：￥%.2f",5.0];
-//    CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)btn.superview.superview;
-//    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
-//    [self setNum:3 index:index];
-//    goodsNum ++ ;
-//    NSDictionary *dic = @{@"name":commodityDic[@"name"],@"current_price":commodityDic[@"discount"],@"orderCont":[NSNumber numberWithInt:goodsNum],@"id":commodityDic[@"id"]};
-//    [cartArray addObject:dic];
-//    
-//    float zongMoney = 0.0;    //计算总价
-//    for (NSDictionary *dic in cartArray) {
-//        zongMoney += [dic[@"current_price"] floatValue] * [dic[@"orderCont"] intValue];
-//    }
-//    self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",zongMoney];
-//    self.settemntView.peisongMoney.text = @"10";
+    //设置配送费
+    self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
 }
 
 // 添加动画以及数量

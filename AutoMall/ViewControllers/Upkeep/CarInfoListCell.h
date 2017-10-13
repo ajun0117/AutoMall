@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CarInfoListCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *plateNumberL;
+@property (strong, nonatomic) IBOutlet UILabel *ownerL;
+@property (strong, nonatomic) IBOutlet UILabel *dateL;
 
 @end

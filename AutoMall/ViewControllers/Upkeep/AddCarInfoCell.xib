@@ -34,7 +34,7 @@
                         </constraints>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                         <connections>
                             <outlet property="delegate" destination="-1" id="j2Q-H5-qWa"/>
                         </connections>

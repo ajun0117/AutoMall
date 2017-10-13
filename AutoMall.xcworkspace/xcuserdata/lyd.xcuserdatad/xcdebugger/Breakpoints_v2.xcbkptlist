@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/Mall/SettlementVC.m"
-            timestampString = "529499511.792269"
+            timestampString = "529573858.831376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "-requestPostAddOrder"
             landmarkType = "7">
          </BreakpointContent>

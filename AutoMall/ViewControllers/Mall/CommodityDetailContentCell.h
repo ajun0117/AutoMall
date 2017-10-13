@@ -10,4 +10,6 @@
 
 @interface CommodityDetailContentCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *remarkL;
+
 @end

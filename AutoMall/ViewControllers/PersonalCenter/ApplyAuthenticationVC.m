@@ -17,6 +17,7 @@
 }
 @property (nonatomic,strong) ChooseLocationView *chooseLocationView;
 @property (nonatomic,strong) UIView  *cover;
+@property (strong, nonatomic) IBOutlet WPImageView *gongzhongImg;
 
 @end
 
@@ -36,6 +37,16 @@
     //监听键盘出现和消失
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self setTextFieldInputAccessoryViewWithTF:self.nameTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.shortNameTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.detailAddressTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.phoneTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.recommendCodeTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.wechatNameTF];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGongzhonghao:)];
+    [self.gongzhongImg addGestureRecognizer:tap];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -60,6 +71,37 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+-(void)tapGongzhonghao:(UITapGestureRecognizer *)tap {
+    self.gongzhongImg.image = IMG(@"timg-2");
+    [self requestUploadImg:self.gongzhongImg imageName:@"gongzhong"];
+}
+
+
+#pragma mark - 添加完成按钮的toolBar工具栏
+- (void)setTextFieldInputAccessoryViewWithTF:(UITextField *)field{
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [doneBtn setTintColor:[UIColor grayColor]];
+    doneBtn.layer.cornerRadius = 2;
+    doneBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    doneBtn.layer.borderWidth = 0.5;
+    doneBtn.frame = CGRectMake(2, 5, 45, 25);
+    [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
+    [topView setItems:buttonsArray];
+    [field setInputAccessoryView:topView];
+    [field setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [field setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+}
+
+- (void)dealKeyboardHide {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
 {
@@ -78,22 +120,18 @@
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.nameTF resignFirstResponder];
-    [self.shortNameTF resignFirstResponder];
-    [self.detailAddressTF resignFirstResponder];
-    [self.phoneTF resignFirstResponder];
-    [self.recommendCodeTF resignFirstResponder];
-    [self.wechatNameTF resignFirstResponder];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField == self.addressTF) {
-        [self.nameTF resignFirstResponder];
-        [self.shortNameTF resignFirstResponder];
-        [self.detailAddressTF resignFirstResponder];
-        [self.phoneTF resignFirstResponder];
-        [self.recommendCodeTF resignFirstResponder];
-        [self.wechatNameTF resignFirstResponder];
+//        [self.nameTF resignFirstResponder];
+//        [self.shortNameTF resignFirstResponder];
+//        [self.detailAddressTF resignFirstResponder];
+//        [self.phoneTF resignFirstResponder];
+//        [self.recommendCodeTF resignFirstResponder];
+//        [self.wechatNameTF resignFirstResponder];
+        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
         
         self.cover.hidden = !self.cover.hidden;
         self.chooseLocationView.hidden = self.cover.hidden;
@@ -157,8 +195,8 @@
 
 #pragma mark - 发起网络请求
 #pragma mark - 发送请求
--(void)requestUploadImgWithIndex:(NSIndexPath *)indexPath andImage:(WPImageView *)image delegate:(id)delegate andTargetId:(NSString *)targetId andTargetType:(NSString *)targetType andExt:(NSString *)ext {
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ImageUpload,@"op",indexPath,@"indexPath", nil];
+-(void)requestUploadImg:(WPImageView *)image imageName:(NSString *)name {
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadUploadImg,@"op", nil];
     
     //data=data
     NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
@@ -176,9 +214,9 @@
                                                                                          kCFStringEncodingUTF8);
     //    NSLog(@"baseString:%@",baseString);
     
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"imgData",@"jpg",@"ext",targetType,@"targetType",targetId,@"targetId", nil]; //评论targetType=3
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"img",name,@"fileName", nil];
     NSLog(@"paramsDic: %@",paramsDic);
-    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:paramsDic info:infoDic];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UploadUploadImg) delegate:nil params:paramsDic info:infoDic];
     //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];
 }
 

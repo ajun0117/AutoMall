@@ -77,7 +77,12 @@
                     <constraint firstItem="Gl5-db-mZL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="rpv-Z8-mwM"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-218" y="24"/>
+            <connections>
+                <outlet property="dateL" destination="KcP-pf-5xi" id="F3h-P0-gKA"/>
+                <outlet property="ownerL" destination="dJS-hR-T37" id="YNx-nV-iOD"/>
+                <outlet property="plateNumberL" destination="Gl5-db-mZL" id="JfW-Uh-Qhg"/>
+            </connections>
+            <point key="canvasLocation" x="-433" y="21"/>
         </tableViewCell>
     </objects>
 </document>

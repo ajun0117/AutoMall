@@ -108,6 +108,31 @@
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
+#pragma mark - 添加完成按钮的toolBar工具栏
+- (void)setTextFieldInputAccessoryViewWithCell:(AddCarInfoCell *)cell{
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [doneBtn setTintColor:[UIColor grayColor]];
+    doneBtn.layer.cornerRadius = 2;
+    doneBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    doneBtn.layer.borderWidth = 0.5;
+    doneBtn.frame = CGRectMake(2, 5, 45, 25);
+    [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
+    [topView setItems:buttonsArray];
+    [cell.contentTF setInputAccessoryView:topView];
+    [cell.contentTF setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [cell.contentTF setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+}
+
+- (void)dealKeyboardHide {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -200,6 +225,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AddCarInfoCell *cell = (AddCarInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"addCarCell"];
+    [self setTextFieldInputAccessoryViewWithCell:cell];
     cell.contentTF.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -208,13 +234,15 @@
             switch (indexPath.row) {
                 case 0: {
                     cell.declareL.text = @"行驶里程";
-                    cell.contentTF.placeholder = @"行驶里程";
+                    cell.contentTF.placeholder = @"行驶里程，单位KM";
+                    cell.contentTF.keyboardType = UIKeyboardTypeNumberPad;
                     break;
                 }
                     
                 case 1: {
                     cell.declareL.text = @"燃油量";
-                    cell.contentTF.placeholder = @"燃油量";
+                    cell.contentTF.placeholder = @"燃油量，单位L";
+                    cell.contentTF.keyboardType = UIKeyboardTypeNumberPad;
                     break;
                 }
                     
@@ -235,6 +263,7 @@
                 case 1: {
                     cell.declareL.text = @"电话";
                     cell.contentTF.placeholder = @"电话";
+                    cell.contentTF.keyboardType = UIKeyboardTypeNumberPad;
                     break;
                 }
                 case 2: {

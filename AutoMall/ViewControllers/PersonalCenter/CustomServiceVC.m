@@ -9,6 +9,7 @@
 #import "CustomServiceVC.h"
 #import "CustomServiceCell.h"
 #import "EditServicePackageVC.h"
+#import "JSONKit.h"
 
 @interface CustomServiceVC () <UITextFieldDelegate>
 {
@@ -16,8 +17,8 @@
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *serviceArray;
     int currentpage;
-    NSMutableArray *idAry;  //已选择的id数组
-    NSMutableArray *priceAry;   //已选择的price数组
+    NSMutableDictionary *selectDic;     //已选择的服务数组
+//    NSMutableArray *selectArry;     //已选择的服务数组
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -51,8 +52,7 @@
     currentpage = 0;
     [self requestPostListServiceContent];
 
-    idAry = [NSMutableArray array];
-    priceAry = [NSMutableArray array];
+    selectDic = [NSMutableDictionary dictionary];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -97,6 +97,36 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"修改价格后更新选中记录中的价格");
+    NSInteger ind = textField.tag - 100;
+    NSDictionary *dic = serviceArray[ind];
+    NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
+    [dicc setObject:textField.text forKey:@"price"];
+    NSLog(@"selectDicChange: %@",selectDic);
+}
+
+#pragma mark - 添加完成按钮的toolBar工具栏
+- (void)setTextFieldInputAccessoryViewWithCell:(CustomServiceCell *)cell{
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [doneBtn setTintColor:[UIColor grayColor]];
+    doneBtn.layer.cornerRadius = 2;
+    doneBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    doneBtn.layer.borderWidth = 0.5;
+    doneBtn.frame = CGRectMake(2, 5, 45, 25);
+    [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
+    [topView setItems:buttonsArray];
+    [cell.moneyTF setInputAccessoryView:topView];
+    [cell.moneyTF setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [cell.moneyTF setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+}
+
+- (void)dealKeyboardHide {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
 #pragma mark - tableVeiw delegate
@@ -126,17 +156,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomServiceCell *cell = (CustomServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"customServiceCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSLog(@"serviceArray.count: %lu",(unsigned long)serviceArray.count);
     if (serviceArray.count == 0) {
         return cell;
     }
     NSDictionary *dic = serviceArray[indexPath.section];
     cell.nameL.text = dic[@"name"];
 //    cell.nameL.text = @"机油更换";
+    [self setTextFieldInputAccessoryViewWithCell:cell];
     cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
     cell.moneyTF.delegate = self;
+    cell.moneyTF.tag = indexPath.section + 100;
     [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    if ([idAry containsObject:dic[@"id"]]) {
+    NSArray *keys = [selectDic allKeys];
+    if ([keys containsObject:dic[@"id"]]) {
         cell.radioBtn.selected = YES;
     } else {
         cell.radioBtn.selected = NO;
@@ -150,15 +182,13 @@
     cell.radioBtn.selected = !cell.radioBtn.selected;
     NSDictionary *dic = serviceArray[indexPath.section];
     if (cell.radioBtn.selected) {
-        [idAry addObject:dic[@"id"]];
-        [priceAry addObject:cell.moneyTF.text];
+        NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",cell.moneyTF.text,@"price", nil];
+        [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
     }
     else {
-        [idAry removeObject:dic[@"id"]];
-        [priceAry removeObject:cell.moneyTF.text];
+        [selectDic removeObjectForKey:dic[@"id"]];
     }
-    NSLog(@"idAry: %@",idAry);
-    NSLog(@"priceAry: %@",priceAry);
+    NSLog(@"selectDic: %@",selectDic);
 }
 
 -(void)checkService:(UIButton *)btn {
@@ -180,8 +210,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CustomizeServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CustomizeServiceContent, @"op", nil];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:idAry,@"id",priceAry,@"price", nil];
-     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"95",@"id[0]",@"10",@"price[0]", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[[selectDic allValues] JSONString],@"data", nil];
+    NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CustomizeServiceContent) delegate:nil params:pram info:infoDic];
 }
 

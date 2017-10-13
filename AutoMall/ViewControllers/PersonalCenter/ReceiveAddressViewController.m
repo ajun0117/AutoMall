@@ -153,7 +153,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = _addressArray [indexPath.row];
     if (self.isSelected) {
-        [self.addrDelegate selectreceiveAddress:dic];
+        [self.addrDelegate selectReceiveAddress:dic];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else {

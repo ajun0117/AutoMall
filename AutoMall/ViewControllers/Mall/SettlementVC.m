@@ -78,7 +78,7 @@
     [cell.beizhuTF resignFirstResponder];
 }
 
--(void)selectreceiveAddress:(NSDictionary *)dic {
+-(void)selectReceiveAddress:(NSDictionary *)dic {
     defaultAddressDic = dic;
     [self.myTableView reloadData];
 }
@@ -165,7 +165,7 @@
         _footView = [SettlementFootView initFootView];
         _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
         _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-        
+        _footView.yunfeiL.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:self.datasArr]];
         return _footView;
      }
     return nil;
@@ -218,14 +218,9 @@
     
     _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
     _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-    _footView.yunfeiL.text = [NSString stringWithFormat:@"运费：￥%.2f",self.yunfei];
+    _footView.yunfeiL.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:self.datasArr]];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 #pragma mark - 发送请求
 -(void)getMyAddress {       //获取收货地址
@@ -242,21 +237,28 @@
 }
 
 -(void)requestPostAddOrder { //新增订单
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderAdd object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderAdd, @"op", nil];
-    NSString *userid = [[GlobalSetting shareGlobalSettingInstance] userID];
-//    NSString *uname = [[GlobalSetting shareGlobalSettingInstance] mName];
-    NSMutableArray *commAry = [NSMutableArray array];
-    for (NSDictionary *dic in _datasArr) {
-        NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"commodityId",dic[@"orderCont"],@"commodityAmount", nil];
-        [commAry addObject:dicc];
+    if (defaultAddressDic) {
+        [_hud show:YES];
+        //注册通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderAdd object:nil];
+        NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderAdd, @"op", nil];
+        NSString *userid = [[GlobalSetting shareGlobalSettingInstance] userID];
+    //    NSString *uname = [[GlobalSetting shareGlobalSettingInstance] mName];
+        NSMutableArray *commAry = [NSMutableArray array];
+        for (NSDictionary *dic in _datasArr) {
+            NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"commodityId",dic[@"orderCont"],@"commodityAmount", nil];
+            [commAry addObject:dicc];
+        }
+        float totalPrice = [ShoppingCartModel moneyOrderShoopingCart:self.datasArr];
+        float actualPrice = totalPrice + [ShoppingCartModel shippingFeeShopingCart:self.datasArr];
+        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",[NSString stringWithFormat:@"%.2f",totalPrice],@"totalPrice",[NSString stringWithFormat:@"%.2f",actualPrice],@"actualPrice",STRING_Nil(remarkStr),@"remark",[commAry JSONString],@"detailJson", nil];
+        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderAdd) delegate:nil params:pram info:infoDic];
     }
-    float totalPrice = [ShoppingCartModel moneyOrderShoopingCart:self.datasArr];
-    float actualPrice = totalPrice + self.yunfei;
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",[NSString stringWithFormat:@"%.2f",totalPrice],@"totalPrice",[NSString stringWithFormat:@"%.2f",actualPrice],@"actualPrice",remarkStr,@"remark",[commAry JSONString],@"detailJson", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderAdd) delegate:nil params:pram info:infoDic];
+    else {
+        _networkConditionHUD.labelText = @"请先选择收货地址！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark - 网络请求结果数据
@@ -304,6 +306,12 @@
         }
     }
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
 #pragma mark - Navigation
 

@@ -25,4 +25,8 @@
  * 计算商品价格
  */
 + (double)moneyOrderShoopingCart:(NSMutableArray *)orderArr;
+/**
+ * 计算商品运费，物品超过500元，免配送费
+ */
++ (double)shippingFeeShopingCart:(NSMutableArray *)orderArr;
 @end
