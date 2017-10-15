@@ -9,6 +9,7 @@
 #import "EditServicePackageVC.h"
 #import "UpkeepPlanNormalCell.h"
 #import "UpkeepPlanNormalHeadCell.h"
+#import "JSONKit.h"
 
 @interface EditServicePackageVC ()
 {
@@ -16,8 +17,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *packageArray;
     int currentpage;
-    NSMutableArray *idAry;  //已选择的id数组
-    NSMutableArray *priceAry;   //已选择的price数组
+    NSMutableDictionary *selectDic;     //已选择的服务数组
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -42,8 +42,7 @@
     currentpage = 0;
     [self requestPostListPackage];
     
-    idAry = [NSMutableArray array];
-    priceAry = [NSMutableArray array];
+    selectDic = [NSMutableDictionary dictionary];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -208,7 +207,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.nameL.text =  dic[@"name"];
         [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
-        if ([idAry containsObject:dic[@"id"]]) {
+        NSArray *keys = [selectDic allKeys];
+        if ([keys containsObject:dic[@"id"]]) {
             cell.radioBtn.selected = YES;
         } else {
             cell.radioBtn.selected = NO;
@@ -237,15 +237,13 @@
         cell.radioBtn.selected = !cell.radioBtn.selected;
         NSDictionary *dic = packageArray[indexPath.section];
         if (cell.radioBtn.selected) {
-            [idAry addObject:dic[@"id"]];
-//            [priceAry addObject:dic[@"price"]];
+            NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"price", nil];
+            [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
         }
         else {
-            [idAry removeObject:dic[@"id"]];
-//            [priceAry removeObject:dic[@"price"]];
+            [selectDic removeObjectForKey:dic[@"id"]];
         }
-        NSLog(@"idAry: %@",idAry);
-        NSLog(@"priceAry: %@",priceAry);
+        NSLog(@"selectDic: %@",selectDic);
     }
 }
 
@@ -265,7 +263,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CustomizeServicePackage object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CustomizeServicePackage, @"op", nil];
     //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:idAry,@"id",priceAry,@"price", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"95",@"id[0]",@"10",@"price[0]", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[[selectDic allValues] JSONString],@"data", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CustomizeServicePackage) delegate:nil params:pram info:infoDic];
 }
 
@@ -291,7 +289,7 @@
             [self.myTableView reloadData];
         }
         else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
@@ -300,12 +298,12 @@
     if ([notification.name isEqualToString:CustomizeServicePackage]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CustomizeServicePackage object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
         else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

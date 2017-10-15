@@ -7,8 +7,8 @@
 //
 
 #import "AutoCheckVC.h"
-//#import "AutoCheckSingleCell.h"
 #import "AutoCheckMultiCell.h"
+#import "AutoCheckGroupCell.h"
 #import "UpkeepPlanVC.h"
 #import "DVSwitch.h"
 #import "UpkeepCarMarkVC.h"
@@ -67,17 +67,6 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
-//    UITableView *myTableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
-//    myTableView1.tag = 100;
-//    [self.mainScrollView addSubview:myTableView1];
-//    myTableView1.delegate = self;
-//    myTableView1.dataSource = self;
-//    myTableView1.allowsSelection = NO;
-//    myTableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
-////    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
-//    [myTableView1 registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
-    
     selectedDic = [NSMutableDictionary dictionary];
     selectedAry = [NSMutableArray array];
     [self requestGetCheckcategoryList];     //记录已选择的状态
@@ -111,6 +100,7 @@
         myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         //    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
         [myTableView registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
+        [myTableView registerNib:[UINib nibWithNibName:@"AutoCheckGroupCell" bundle:nil] forCellReuseIdentifier:@"autoCheckGroupCell"];
     }
     currentSelectIndex = 0;     //默认第一个
     NSString *idString = partsArray[0] [@"id"];
@@ -392,8 +382,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSDictionary *dic = contentAry[section];
-    return [dic[@"checkContents"] count];
+    NSArray *array = contentAry[section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
+        NSArray *ary = [groupStr componentsSeparatedByString:@","];
+        return ary.count;
+    }
+    else {
+        return array.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -404,7 +402,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
+    NSArray *array = contentAry[section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
+        return 88;
+    }
+    else {
+        return 44;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -412,7 +418,11 @@
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-     NSDictionary *dic = contentAry[section];
+    NSArray *array = contentAry[section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
+        NSDictionary *dic = contentAry[section];
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         view.backgroundColor = [UIColor whiteColor];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
@@ -420,99 +430,138 @@
         label.backgroundColor = [UIColor clearColor];
         label.text = dic[@"name"];
         [view addSubview:label];
-
+        
         UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         radioBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 11, 22, 22);
-//        radioBtn.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+        //        radioBtn.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
         [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
         [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateSelected];
         [radioBtn setImage:[UIImage imageNamed:@"photoBtn"] forState:UIControlStateSelected | UIControlStateHighlighted];
-//        [radioBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+        //        [radioBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
         radioBtn.tag = section + 100;
         [view addSubview:radioBtn];
         
         return view;
+    }
+    else {
+        NSDictionary *dic = contentAry[section];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
+        label.font = [UIFont boldSystemFontOfSize:17];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = dic[@"name"];
+        [view addSubview:label];
+        
+        UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        radioBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 11, 22, 22);
+        //        radioBtn.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
+        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateSelected];
+        [radioBtn setImage:[UIImage imageNamed:@"photoBtn"] forState:UIControlStateSelected | UIControlStateHighlighted];
+        //        [radioBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+        radioBtn.tag = section + 100;
+        [view addSubview:radioBtn];
+        
+        return view;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.row == 0) {
-//        AutoCheckSingleCell *cell = (AutoCheckSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckSingleCell"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [cell.photoBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
-//        
-//        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:@[@"严重", @"轻微",@"正常"]];
-//        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
-//        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
-//        switcher.font = [UIFont systemFontOfSize:13];
-//        [cell.segBgView addSubview:switcher];
-//        switcher.cornerRadius = 18;
-//        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
-//        NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
+    
+    NSArray *array = contentAry[indexPath.section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
+        AutoCheckGroupCell *cell = (AutoCheckGroupCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckGroupCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSDictionary *dic = contentAry[indexPath.section];
+        NSArray *ary = dic[@"checkContents"];
+        NSDictionary *dicc = [ary firstObject];
+        
+        NSArray *groupAry = [dicc[@"group"] componentsSeparatedByString:@","];
+        
+        cell.contentL.text = groupAry[indexPath.row];
+        for (DVSwitch *switcher in cell.segBgView.subviews) {
+            [switcher removeFromSuperview];
+        }
+        
+        NSArray *stateAry;
+        if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
+            stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
+        } else {
+            stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];
+        }
+        
+        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];
+        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+        switcher.font = [UIFont systemFontOfSize:13];
+        [cell.segBgView addSubview:switcher];
+        switcher.cornerRadius = 18;
+        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+        
+//        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+//        NSInteger selectedIndex = [item.stateIndex integerValue];
 //        [switcher forceSelectedIndex:selectedIndex animated:NO];
 //        [switcher setPressedHandler:^(NSUInteger index) {
 //            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-////            NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:index] forKey:indexPath];
-//            [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+//            //        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+//            CheckContentItem *item = [[CheckContentItem alloc] init];
+//            item.aid = NSStringWithNumber(dicc[@"id"]);
+//            item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+//            //        item.stateName = stateAry[index];
+//            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
 //        }];
-//        
-//        return cell;
-//    }
-//    else {
-    AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    NSDictionary *dic = contentAry[indexPath.section];
-    NSArray *ary = dic[@"checkContents"];
-    NSDictionary *dicc = ary [indexPath.row];
-
-    cell.contentL.text = dicc[@"name"];
-    for (DVSwitch *switcher in cell.segBgView.subviews) {
-        [switcher removeFromSuperview];
+        
+        return cell;
     }
     
-    NSArray *stateAry;
-    if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
-        stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
-    } else {
-        stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];
+    else {
+        AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSDictionary *dic = contentAry[indexPath.section];
+        NSArray *ary = dic[@"checkContents"];
+        NSDictionary *dicc = ary [indexPath.row];
+        
+        cell.contentL.text = dicc[@"name"];
+        for (DVSwitch *switcher in cell.segBgView.subviews) {
+            [switcher removeFromSuperview];
+        }
+        
+        NSArray *stateAry;
+        if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
+            stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
+        } else {
+            stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];
+        }
+        
+        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];
+        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+        switcher.font = [UIFont systemFontOfSize:13];
+        [cell.segBgView addSubview:switcher];
+        switcher.cornerRadius = 18;
+        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+        
+        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        NSInteger selectedIndex = [item.stateIndex integerValue];
+        [switcher forceSelectedIndex:selectedIndex animated:NO];
+        [switcher setPressedHandler:^(NSUInteger index) {
+            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+            //        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+            CheckContentItem *item = [[CheckContentItem alloc] init];
+            item.aid = NSStringWithNumber(dicc[@"id"]);
+            item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+            //        item.stateName = stateAry[index];
+            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
+        }];
+        
+        return cell;
     }
     
-    DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];  
-    NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
-    switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
-    switcher.font = [UIFont systemFontOfSize:13];
-    [cell.segBgView addSubview:switcher];
-    switcher.cornerRadius = 18;
-    switcher.backgroundColor = RGBCOLOR(254, 255, 255);
-    
-    CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
-    NSInteger selectedIndex = [item.stateIndex integerValue];
-    [switcher forceSelectedIndex:selectedIndex animated:NO];
-    [switcher setPressedHandler:^(NSUInteger index) {
-        NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-//        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
-        CheckContentItem *item = [[CheckContentItem alloc] init];
-        item.aid = NSStringWithNumber(dicc[@"id"]);
-        item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
-//        item.stateName = stateAry[index];
-        [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
-    }];
-    
-//    if (selectedAry.count) {
-//        selectedDic = (NSMutableDictionary *) selectedAry[currentSelectIndex];
-//        NSInteger selectedIndex = [selectedDic [indexPath] integerValue];
-//        [switcher forceSelectedIndex:selectedIndex animated:NO];
-//        [switcher setPressedHandler:^(NSUInteger index) {
-//            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-//            [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
-//            NSMutableDictionary *diccc = [NSMutableDictionary dictionaryWithDictionary:selectedDic];
-//            [selectedAry replaceObjectAtIndex:currentSelectIndex withObject:diccc];
-//            [selectedDic removeAllObjects];
-//        }];
-//    }
-    
-    return cell;
-//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

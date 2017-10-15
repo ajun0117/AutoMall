@@ -141,7 +141,7 @@ static DataRequest *dataRequest;
         [manager.requestSerializer setValue:locationDic[@"longitude"] forHTTPHeaderField:@"XPS-Longitude"];
         [manager.requestSerializer setValue:locationDic[@"latitude"] forHTTPHeaderField:@"XPS-Latitude"];
 
-        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:[NSArray arrayWithObjects:@"text/plain", @"text/html",nil]];
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:[NSArray arrayWithObjects:@"text/plain", @"text/html",@"text/xml",nil]];
         manager.requestSerializer.timeoutInterval = 300;
         [manager POST:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet  URLQueryAllowedCharacterSet]] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);

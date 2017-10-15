@@ -206,7 +206,7 @@
         imageData = UIImageJPEGRepresentation(image.image, packRate);
     }
     //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
-    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
     NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                                          (CFStringRef)baseStr,
                                                                                          NULL,
@@ -214,7 +214,7 @@
                                                                                          kCFStringEncodingUTF8);
     //    NSLog(@"baseString:%@",baseString);
     
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"img",name,@"fileName", nil];
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",name,@"fileName", nil];
     NSLog(@"paramsDic: %@",paramsDic);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UploadUploadImg) delegate:nil params:paramsDic info:infoDic];
     //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];

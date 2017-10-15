@@ -10,6 +10,7 @@
 
 @interface MetodPaymentVC : UIViewController
 @property (nonatomic, strong) NSString *orderNumber;    //订单号
+@property (nonatomic, assign) float money;  //应付金额
 
 /**
  * 微信

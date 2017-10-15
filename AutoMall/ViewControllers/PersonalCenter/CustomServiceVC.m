@@ -246,12 +246,12 @@
     if ([notification.name isEqualToString:CustomizeServiceContent]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CustomizeServiceContent object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
         else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

@@ -14,6 +14,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSString *payModeStr;   //支付方式
 }
+@property (weak, nonatomic) IBOutlet UILabel *moneyL;
 
 @end
 
@@ -24,6 +25,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title =@"付款中";
     payModeStr = @"2";   //默认使用微信
+    self.moneyL.text = [NSString stringWithFormat:@"应付金额：￥%.2f",self.money];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

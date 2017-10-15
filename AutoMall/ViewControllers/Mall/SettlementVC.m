@@ -297,6 +297,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
             pay.orderNumber = responseObject[@"data"];
+            pay.money = [ShoppingCartModel moneyOrderShoopingCart:self.datasArr] + [ShoppingCartModel shippingFeeShopingCart:self.datasArr];
             [self.navigationController pushViewController:pay animated:YES];
         }
         else {

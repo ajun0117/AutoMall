@@ -697,7 +697,7 @@ static CGFloat const scrollViewHeight = 220;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityId,@"id", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityDic[@"favEntity"][@"id"],@"id", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
 }
 
@@ -718,6 +718,9 @@ static CGFloat const scrollViewHeight = 220;
         NSLog(@"CommodityDetail_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             commodityDic = responseObject [@"data"];
+            if ([commodityDic[@"favEntity"] isKindOfClass:[NSDictionary class]]) {
+                collectBtn.selected = YES;  //如果已被收藏过，则收藏按钮按下
+            }
             NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
             [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
             [commoditymulArray addObject:dic];  //重组后商品数组
