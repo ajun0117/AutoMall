@@ -51,8 +51,6 @@
 		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
-		0453D3AA1F692ADA004F79C8 /* AutoCheckSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453D3A81F692ADA004F79C8 /* AutoCheckSingleCell.m */; };
-		0453D3AB1F692ADA004F79C8 /* AutoCheckSingleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0453D3A91F692ADA004F79C8 /* AutoCheckSingleCell.xib */; };
 		0453D3B01F69349A004F79C8 /* UpkeepCarInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453D3AE1F69349A004F79C8 /* UpkeepCarInfoVC.m */; };
 		0453D3B11F69349A004F79C8 /* UpkeepCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0453D3AF1F69349A004F79C8 /* UpkeepCarInfoVC.xib */; };
 		0459C6871F61392E0040501E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF11F31C72900AA20A7 /* libsqlite3.0.tbd */; };
@@ -140,6 +138,8 @@
 		04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981C1F2ED46500C2D158 /* Main.storyboard */; };
 		04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AE981F1F2ED46500C2D158 /* Assets.xcassets */; };
 		04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */; };
+		04B3EFE21F9460DC0056BF9B /* AutoCheckCarInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3EFE01F9460DC0056BF9B /* AutoCheckCarInfoVC.m */; };
+		04B3EFE31F9460DC0056BF9B /* AutoCheckCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B3EFE11F9460DC0056BF9B /* AutoCheckCarInfoVC.xib */; };
 		04BA1C641F4D162000704A9E /* SettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C5D1F4D162000704A9E /* SettlementView.m */; };
 		04BA1C661F4D162000704A9E /* ShoppingCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C601F4D162000704A9E /* ShoppingCartCell.m */; };
 		04BA1C671F4D162000704A9E /* ShoppingCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C611F4D162000704A9E /* ShoppingCartCell.xib */; };
@@ -422,9 +422,6 @@
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
 		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
 		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
-		0453D3A71F692ADA004F79C8 /* AutoCheckSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckSingleCell.h; sourceTree = "<group>"; };
-		0453D3A81F692ADA004F79C8 /* AutoCheckSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckSingleCell.m; sourceTree = "<group>"; };
-		0453D3A91F692ADA004F79C8 /* AutoCheckSingleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckSingleCell.xib; sourceTree = "<group>"; };
 		0453D3AD1F69349A004F79C8 /* UpkeepCarInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepCarInfoVC.h; sourceTree = "<group>"; };
 		0453D3AE1F69349A004F79C8 /* UpkeepCarInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepCarInfoVC.m; sourceTree = "<group>"; };
 		0453D3AF1F69349A004F79C8 /* UpkeepCarInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepCarInfoVC.xib; sourceTree = "<group>"; };
@@ -571,6 +568,9 @@
 		04AE981F1F2ED46500C2D158 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04AE98221F2ED46500C2D158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04AE98241F2ED46500C2D158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04B3EFDF1F9460DC0056BF9B /* AutoCheckCarInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckCarInfoVC.h; sourceTree = "<group>"; };
+		04B3EFE01F9460DC0056BF9B /* AutoCheckCarInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckCarInfoVC.m; sourceTree = "<group>"; };
+		04B3EFE11F9460DC0056BF9B /* AutoCheckCarInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckCarInfoVC.xib; sourceTree = "<group>"; };
 		04BA1C5C1F4D162000704A9E /* SettlementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementView.h; sourceTree = "<group>"; };
 		04BA1C5D1F4D162000704A9E /* SettlementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementView.m; sourceTree = "<group>"; };
 		04BA1C5F1F4D162000704A9E /* ShoppingCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartCell.h; sourceTree = "<group>"; };
@@ -1110,6 +1110,9 @@
 				044A24151F3326F9009720DE /* AutoCheckVC.h */,
 				044A24161F3326F9009720DE /* AutoCheckVC.m */,
 				044A24171F3326F9009720DE /* AutoCheckVC.xib */,
+				04B3EFDF1F9460DC0056BF9B /* AutoCheckCarInfoVC.h */,
+				04B3EFE01F9460DC0056BF9B /* AutoCheckCarInfoVC.m */,
+				04B3EFE11F9460DC0056BF9B /* AutoCheckCarInfoVC.xib */,
 			);
 			name = "汽车检查页";
 			sourceTree = "<group>";
@@ -1117,9 +1120,6 @@
 		0453D3A61F692AB0004F79C8 /* 检查页Cell */ = {
 			isa = PBXGroup;
 			children = (
-				0453D3A71F692ADA004F79C8 /* AutoCheckSingleCell.h */,
-				0453D3A81F692ADA004F79C8 /* AutoCheckSingleCell.m */,
-				0453D3A91F692ADA004F79C8 /* AutoCheckSingleCell.xib */,
 				04C5764D1F79DD46003BF404 /* AutoCheckMultiCell.h */,
 				04C5764E1F79DD46003BF404 /* AutoCheckMultiCell.m */,
 				04C5764F1F79DD46003BF404 /* AutoCheckMultiCell.xib */,
@@ -2393,6 +2393,7 @@
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
 				04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */,
+				04B3EFE31F9460DC0056BF9B /* AutoCheckCarInfoVC.xib in Resources */,
 				F73CB9C31F893C9300936C7A /* AutoCheckGroupTitleCell.xib in Resources */,
 				04EFEC691F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.xib in Resources */,
 				04DC7DDD1F31C28300AA20A7 /* UMSnsAccountViewController.xib in Resources */,
@@ -2479,7 +2480,6 @@
 				04F7D8691F5EA59F004945ED /* EmployeeDetailVC.xib in Resources */,
 				04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */,
 				0490FC0F1F580CB900F77661 /* UpkeepPlanNormalHeadCell.xib in Resources */,
-				0453D3AB1F692ADA004F79C8 /* AutoCheckSingleCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2644,7 +2644,6 @@
 				047AE0071F4A8D6200AEAE8E /* CommodityDetailNormalCell.m in Sources */,
 				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
 				047ADFE91F4A86EF00AEAE8E /* CMSDWebImageCompat.m in Sources */,
-				0453D3AA1F692ADA004F79C8 /* AutoCheckSingleCell.m in Sources */,
 				04F7D87E1F5EAD79004945ED /* MailOrderMultiCell.m in Sources */,
 				042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */,
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
@@ -2692,6 +2691,7 @@
 				0459C6B91F614C870040501E /* FMDatabasePool.m in Sources */,
 				04F6B6931F45477A00052658 /* YZMLoginViewController.m in Sources */,
 				047ADFFD1F4A86EF00AEAE8E /* MXTransaction.m in Sources */,
+				04B3EFE21F9460DC0056BF9B /* AutoCheckCarInfoVC.m in Sources */,
 				04D107921F62998D007D9F57 /* ZFWave.m in Sources */,
 				042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */,
 				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,

@@ -97,6 +97,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" id="LSw-DX-DDr"/>
+                    <connections>
+                        <outlet property="myCollectionView" destination="NJo-XH-TUQ" id="dhn-z9-mgc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>

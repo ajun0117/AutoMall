@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"汽车检查页";
+    self.title = @"粤A88888";
     
 //    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
 ////    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -395,10 +395,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row == 0) {
-//        return 141;
-//    }
-    return 90;
+    return 120;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -423,24 +420,30 @@
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
         NSDictionary *dic = contentAry[section];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 90)];
         view.backgroundColor = [UIColor whiteColor];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-        label.font = [UIFont boldSystemFontOfSize:17];
+        label.font = [UIFont boldSystemFontOfSize:15];
         label.backgroundColor = [UIColor clearColor];
         label.text = dic[@"name"];
         [view addSubview:label];
         
-        UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        radioBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 11, 22, 22);
-        //        radioBtn.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
-        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateSelected];
-        [radioBtn setImage:[UIImage imageNamed:@"photoBtn"] forState:UIControlStateSelected | UIControlStateHighlighted];
-        //        [radioBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
-        radioBtn.tag = section + 100;
-        [view addSubview:radioBtn];
-        
+        UIView *contentBgView = [[UIView alloc] initWithFrame:CGRectMake(8, 48, SCREEN_WIDTH - 16, 30)];
+        contentBgView.backgroundColor = RGBCOLOR(244, 245, 246);
+        UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 77, 20)];
+        noticeL.font = [UIFont systemFontOfSize:15];
+        noticeL.text = @"检查内容：";
+        [contentBgView addSubview:noticeL];
+        UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(93, 5, CGRectGetWidth(contentBgView.frame) - 77 - 24 , 20)];
+        contentL.font = [UIFont systemFontOfSize:15];
+        NSArray *ary = dic[@"checkContents"];
+        NSDictionary *dicc;
+        if (ary.count == 1) {
+            dicc = [ary firstObject];
+        }
+        contentL.text = dicc[@"name"];
+        [contentBgView addSubview:contentL];
+        [view addSubview:contentBgView];
         return view;
     }
     else {
@@ -448,20 +451,10 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         view.backgroundColor = [UIColor whiteColor];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-        label.font = [UIFont boldSystemFontOfSize:17];
+        label.font = [UIFont boldSystemFontOfSize:15];
         label.backgroundColor = [UIColor clearColor];
         label.text = dic[@"name"];
         [view addSubview:label];
-        
-        UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        radioBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 11, 22, 22);
-        //        radioBtn.imageEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateNormal];
-        [radioBtn setImage:IMG(@"photoBtn") forState:UIControlStateSelected];
-        [radioBtn setImage:[UIImage imageNamed:@"photoBtn"] forState:UIControlStateSelected | UIControlStateHighlighted];
-        //        [radioBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
-        radioBtn.tag = section + 100;
-        [view addSubview:radioBtn];
         
         return view;
     }
@@ -478,8 +471,10 @@
         
         NSDictionary *dic = contentAry[indexPath.section];
         NSArray *ary = dic[@"checkContents"];
-        NSDictionary *dicc = [ary firstObject];
-        
+        NSDictionary *dicc;
+        if (ary.count == 1) {
+            dicc = [ary firstObject];
+        }
         NSArray *groupAry = [dicc[@"group"] componentsSeparatedByString:@","];
         
         cell.contentL.text = groupAry[indexPath.row];
@@ -501,6 +496,15 @@
         [cell.segBgView addSubview:switcher];
         switcher.cornerRadius = 18;
         switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+        
+        id tipStr = dicc[@"tip"];
+        if ([tipStr isKindOfClass:[NSString class]] && [tipStr length] > 1) {   //表示需要填写检查结果
+            cell.checkResultBtn.hidden = NO;
+            [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else {
+            cell.checkResultBtn.hidden = YES;
+        }
         
 //        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
 //        NSInteger selectedIndex = [item.stateIndex integerValue];
@@ -546,6 +550,15 @@
         switcher.cornerRadius = 18;
         switcher.backgroundColor = RGBCOLOR(254, 255, 255);
         
+        id tipStr = dicc[@"tip"];
+        if ([tipStr isKindOfClass:[NSString class]] && [tipStr length] > 1) {   //表示需要填写检查结果
+            cell.checkResultBtn.hidden = NO;
+            [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else {
+            cell.checkResultBtn.hidden = YES;
+        }
+        
         CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
         NSInteger selectedIndex = [item.stateIndex integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];
@@ -574,50 +587,15 @@
 //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-#pragma mark - GroupedCell
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([cell respondsToSelector:@selector(tintColor)]) {
-//            CGFloat cornerRadius = 5.f;
-//            cell.backgroundColor = UIColor.clearColor;
-//            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
-//            CGMutablePathRef pathRef = CGPathCreateMutable();
-//            CGRect bounds = CGRectInset(cell.bounds, 0, 0);
-//            BOOL addLine = NO;
-//            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
-//                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
-//            } else if (indexPath.row == 0) {
-//                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
-//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
-//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
-//                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
-//                addLine = YES;
-//            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
-//                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
-//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
-//                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
-//                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
-//            } else {
-//                CGPathAddRect(pathRef, nil, bounds);
-//                addLine = YES;
-//            }
-//            layer.path = pathRef;
-//            CFRelease(pathRef);
-//            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
-//            
-//            if (addLine == YES) {
-//                CALayer *lineLayer = [[CALayer alloc] init];
-//                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
-//                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
-//                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
-//                [layer addSublayer:lineLayer];
-//            }
-//            UIView *testView = [[UIView alloc] initWithFrame:bounds];
-//            [testView.layer insertSublayer:layer atIndex:0];
-//            testView.backgroundColor = UIColor.clearColor;
-//            cell.backgroundView = testView;
-//    }
-//}
+-(void)toFillTip:(UIButton *)btn {  //填写检查结果文本
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"自定义服务器地址" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil,nil];
+    [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+
+    UITextField *nameField = [alert textFieldAtIndex:0];
+    nameField.placeholder = @"请输入检查结果";
+    [alert show];
+}
 
 
 #pragma mark - 发起网络请求

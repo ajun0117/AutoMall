@@ -62,7 +62,7 @@
 //    [self makeLayerWithButton:self.synthesizeBtn];
 //    [self makeLayerWithButton:self.customBtn];
     
-    typeAry = @[@{@"title":@"美容检查",@"id":@"1"},@{@"title":@"保养检查",@"id":@"8"},@{@"title":@"快速检查",@"id":@"9"}];
+//    typeAry = @[@{@"name":@"美容检查",@"id":@"1"},@{@"name":@"保养检查",@"id":@"8"},@{@"name":@"快速检查",@"id":@"9"}];
 //    [self.myCollectionView reloadData];
     
     [self requestGetChecktypeList];
@@ -169,8 +169,8 @@
         return collCell;
     }
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-    [collCell.img sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
-    collCell.titleL.text = dic [@"title"];
+    [collCell.img sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage:IMG(@"timg-2")];
+    collCell.titleL.text = dic [@"name"];
     
     //    collCell.exchangeBtn.tag = indexPath.item + 1000;
     //    [collCell.exchangeBtn addTarget:self action:@selector(exchangeAction:) forControlEvents:UIControlEventTouchUpInside];
