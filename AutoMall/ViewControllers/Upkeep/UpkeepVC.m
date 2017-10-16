@@ -159,17 +159,17 @@
     
     UpkeepHomeCollectionCell *collCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"upkeepHomeCollectionCell" forIndexPath:indexPath];
 //    collCell.layer.borderColor = RGBCOLOR(234, 33, 45).CGColor;
-    collCell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    collCell.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
     collCell.layer.borderWidth = 1;
     collCell.layer.cornerRadius = 5;
     NSLog(@"typeAry: %@",typeAry);
     if (indexPath.item == [typeAry count]) {
-        [collCell.img setImage:IMG(@"timg-2")];
+        [collCell.img setImage:IMG(@"check_default")];
         collCell.titleL.text = @"自定义检查";
         return collCell;
     }
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-    [collCell.img sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage:IMG(@"timg-2")];
+    [collCell.img sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage:IMG(@"check_default")];
     collCell.titleL.text = dic [@"name"];
     
     //    collCell.exchangeBtn.tag = indexPath.item + 1000;

@@ -11,7 +11,7 @@
 #import "UpkeepPlanNormalHeadCell.h"
 #import "JSONKit.h"
 
-@interface EditServicePackageVC ()
+@interface EditServicePackageVC () <UITextFieldDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -79,8 +79,43 @@
     [self requestPostListPackage];
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - 添加完成按钮的toolBar工具栏
+- (void)setTextFieldInputAccessoryViewWithCell:(UITableViewCell *)cell{
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [doneBtn setTintColor:[UIColor grayColor]];
+    doneBtn.layer.cornerRadius = 2;
+    doneBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    doneBtn.layer.borderWidth = 0.5;
+    doneBtn.frame = CGRectMake(2, 5, 45, 25);
+    [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
+    [topView setItems:buttonsArray];
+    UITextField *priceTF = (UITextField *)[cell.contentView viewWithTag:10];
+    [priceTF setInputAccessoryView:topView];
+    [priceTF setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [priceTF setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+}
 
+- (void)dealKeyboardHide {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    NSLog(@"修改价格后更新选中记录中的价格");
+//    NSInteger ind = textField.tag - 100;
+//    NSDictionary *dic = serviceArray[ind];
+//    NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
+//    [dicc setObject:textField.text forKey:@"price"];
+//    NSLog(@"selectDicChange: %@",selectDic);
+}
+
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [packageArray count];
 }
@@ -217,12 +252,24 @@
     }
     else if (indexPath.row == [arr count] + 1) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.textLabel.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+        UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(12, 7, 20, 30)];
+        noticeL.font = [UIFont systemFontOfSize:15];
+        noticeL.text = @"￥";
+        [cell.contentView addSubview:noticeL];
+        UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
+        priceTF.font = [UIFont systemFontOfSize:15];
+        priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+        priceTF.tag = 10;
+        priceTF.delegate = self;
+        [cell.contentView addSubview:priceTF];
+        [self setTextFieldInputAccessoryViewWithCell:cell];
         return cell;
     }
     else {
         UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dicc = arr[indexPath.row - 1];
         cell.declareL.text = dicc[@"name"];
         cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
@@ -237,7 +284,10 @@
         cell.radioBtn.selected = !cell.radioBtn.selected;
         NSDictionary *dic = packageArray[indexPath.section];
         if (cell.radioBtn.selected) {
-            NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"price", nil];
+            NSArray *arr = dic[@"serviceContents"];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[arr count] + 1 inSection:indexPath.section]];
+            UITextField *priceTF = (UITextField *)[cell.contentView viewWithTag:10];
+            NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",priceTF.text,@"price", nil];
             [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
         }
         else {
