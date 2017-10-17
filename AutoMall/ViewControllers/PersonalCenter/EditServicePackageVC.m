@@ -43,6 +43,10 @@
     [self requestPostListPackage];
     
     selectDic = [NSMutableDictionary dictionary];
+    
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -105,15 +109,47 @@
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - keyBoardRect.size.height);
+    //    self.myScrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.myScrollView.frame) - keyBoardRect.size.height);
+}
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 44);
+}
+
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-//    NSLog(@"修改价格后更新选中记录中的价格");
-//    NSInteger ind = textField.tag - 100;
-//    NSDictionary *dic = serviceArray[ind];
-//    NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
-//    [dicc setObject:textField.text forKey:@"price"];
-//    NSLog(@"selectDicChange: %@",selectDic);
+    NSLog(@"修改价格后更新选中记录中的价格");
+    NSString *tempString = textField.text;
+    while ([tempString hasPrefix:@"0"])
+    {
+        tempString = [tempString substringFromIndex:1];
+        NSLog(@"压缩之后的tempString:%@",tempString);
+    }
+    textField.text = tempString;
+    UITableViewCell *cell = (UITableViewCell *)textField.superview.superview;
+    NSIndexPath *ind = [self.myTableView indexPathForCell:cell];
+    NSDictionary *dic = packageArray[ind.section];
+    NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
+    [dicc setObject:textField.text forKey:@"price"];
+    NSLog(@"selectDicChange: %@",selectDic);
 }
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    NSString *tempString = [NSString stringWithFormat:@"%@%@",textField.text,string];
+//    while ([tempString hasPrefix:@"0"])
+//    {
+//        tempString = [tempString substringFromIndex:1];
+//        NSLog(@"压缩之后的tempString:%@",tempString);
+//    }
+//    textField.text = tempString;
+//    return YES;
+//}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -260,7 +296,14 @@
         [cell.contentView addSubview:noticeL];
         UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
         priceTF.font = [UIFont systemFontOfSize:15];
-        priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+        priceTF.keyboardType = UIKeyboardTypeNumberPad;
+        NSArray *keys = [selectDic allKeys];
+        if ([keys containsObject:dic[@"id"]]) {
+            NSMutableDictionary *diccc = selectDic[dic[@"id"]];
+            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"price"]];
+        } else {
+            priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+        }
         priceTF.tag = 10;
         priceTF.delegate = self;
         [cell.contentView addSubview:priceTF];
@@ -312,7 +355,6 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CustomizeServicePackage object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CustomizeServicePackage, @"op", nil];
-    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:idAry,@"id",priceAry,@"price", nil];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[[selectDic allValues] JSONString],@"data", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CustomizeServicePackage) delegate:nil params:pram info:infoDic];
 }

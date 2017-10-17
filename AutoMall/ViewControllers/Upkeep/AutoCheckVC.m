@@ -15,6 +15,7 @@
 #import "AJSegmentedControl.h"
 #import "CheckContentItem.h"
 #import "CheckContentTool.h"
+#import "JSONKit.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
@@ -506,18 +507,34 @@
             cell.checkResultBtn.hidden = YES;
         }
         
-//        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
-//        NSInteger selectedIndex = [item.stateIndex integerValue];
-//        [switcher forceSelectedIndex:selectedIndex animated:NO];
-//        [switcher setPressedHandler:^(NSUInteger index) {
-//            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-//            //        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
-//            CheckContentItem *item = [[CheckContentItem alloc] init];
-//            item.aid = NSStringWithNumber(dicc[@"id"]);
-//            item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
-//            //        item.stateName = stateAry[index];
-//            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
-//        }];
+        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        NSLog(@"item.aid: %@",item.aid);
+        NSLog(@"item.dPositionData: %@",item.dPosition);
+        NSMutableArray *positionAry = [[item.dPosition objectFromJSONString] mutableCopy];
+        NSArray *aryy = [groupStr componentsSeparatedByString:@","];
+        NSString *positionStr = aryy[indexPath.row];
+        NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
+        NSInteger selectedIndex = [positionDic[positionStr] integerValue];
+        
+        [switcher forceSelectedIndex:selectedIndex animated:NO];
+        [switcher setPressedHandler:^(NSUInteger index) {
+            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+            CheckContentItem *item = [[CheckContentItem alloc] init];
+            item.aid = NSStringWithNumber(dicc[@"id"]);
+            item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+            //        item.stateName = stateAry[index];
+            [positionDic setObject:[NSString stringWithFormat:@"%lu",(unsigned long)index] forKey:positionStr];
+//            NSData *positionData = [NSKeyedArchiver archivedDataWithRootObject:positionAry];
+            NSLog(@"positionDic: %@",positionDic);
+            [positionAry replaceObjectAtIndex:indexPath.row withObject:positionDic];
+            NSLog(@"positionAry: %@",positionAry);
+            NSError *err = nil;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:positionAry options:NSJSONWritingPrettyPrinted error:&err];
+            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            NSLog(@"jsonStr: %@",jsonStr);
+            item.dPosition = jsonStr;
+            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
+        }];
         
         return cell;
     }
@@ -588,7 +605,6 @@
 }
 
 -(void)toFillTip:(UIButton *)btn {  //填写检查结果文本
-
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"自定义服务器地址" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil,nil];
     [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
 
@@ -645,7 +661,6 @@
             [self createSegmentControlWithTitles:partsArray];
             self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 44);
             [self creatTableViews];
-            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -660,7 +675,38 @@
             contentAry = responseObject[@"data"];
             NSMutableArray *ary = [NSMutableArray array];
             for (NSDictionary *dic in contentAry) {
-                for (NSDictionary *dicc in dic[@"checkContents"]) {
+                NSDictionary *dicc = [dic[@"checkContents"] firstObject];
+                id groupStr = dicc[@"group"];
+                if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
+                    NSArray *aryy = [groupStr componentsSeparatedByString:@","];
+                    NSMutableArray *mulAry = [NSMutableArray array];
+                    for (NSString *str in aryy) {
+                        NSMutableDictionary *positionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",str, nil];
+                        [mulAry addObject:positionDic];
+                    }
+                    CheckContentItem *item = [[CheckContentItem alloc] init];
+                    item.aid = NSStringWithNumber(dicc[@"id"]);
+                    item.name = dicc[@"name"];
+                    item.pId = NSStringWithNumber(partsArray[currentSelectIndex] [@"id"]);
+                    item.pName = partsArray[currentSelectIndex] [@"name"];
+                    item.stateIndex = @"0";
+                    item.stateName = @"";
+                    
+                    NSError *err = nil;
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mulAry options:NSJSONWritingPrettyPrinted error:&err];
+                    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                    NSLog(@"jsonStr: %@",jsonStr);
+                    item.dPosition = jsonStr;
+                    
+//                    NSData *positionData = [NSKeyedArchiver archivedDataWithRootObject:mulAry];
+//                    item.dPositionData = positionData;
+//                    NSArray *arr2 = [NSKeyedUnarchiver unarchiveObjectWithData:item.dPositionData];
+//                    NSLog(@" positionData: %@",positionData);
+//                    NSLog(@" item.dPositionData: %@", item.dPositionData);
+//                    NSLog(@"->%@",arr2);
+                    [ary addObject:item];
+                }
+                else {
                     CheckContentItem *item = [[CheckContentItem alloc] init];
                     item.aid = NSStringWithNumber(dicc[@"id"]);
                     item.name = dicc[@"name"];
@@ -671,6 +717,7 @@
                     [ary addObject:item];
                 }
             }
+            NSLog(@"ary.count: %lu",(unsigned long)ary.count);
             [[CheckContentTool sharedManager] insertRecordsWithAry:ary];
             
             if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {

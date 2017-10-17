@@ -121,8 +121,8 @@ static CheckContentTool *shareInstance = nil;
             for (CheckContentItem * item in ary) {
                 //pId  pName  aid  name  stateIndex  stateName
                 NSString *insertSql= [NSString stringWithFormat:
-                                      @"INSERT INTO %@ ('pId','pName','aid','name','stateIndex', 'stateName') VALUES ('%@','%@','%@','%@','%@','%@')",
-                                      locationTabbleName,item.pId, item.pName,item.aid,item.name ,item.stateIndex, item.stateName];
+                                      @"INSERT INTO %@ ('pId','pName','aid','name','stateIndex', 'stateName', 'dPosition') VALUES ('%@','%@','%@','%@','%@','%@','%@')",
+                                      locationTabbleName,item.pId, item.pName,item.aid,item.name ,item.stateIndex, item.stateName,item.dPosition];
                 BOOL a = [self.fmdb executeUpdate:insertSql];
                 if (!a)
                 {
@@ -131,13 +131,11 @@ static CheckContentTool *shareInstance = nil;
                 else
                 {
                     NSLog(@"批量插入地址信息数据成功！");
-                    
                 }
             }
             NSDate *endTime = [NSDate date];
             NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
             NSLog(@"使用事务地址信息用时%.3f秒",a);
-            
         }
         @catch (NSException *exception)
         {
@@ -194,7 +192,7 @@ static CheckContentTool *shareInstance = nil;
     } else {
         NSLog(@"地址数据库打开成功");
         //pId  pName  aid  name  stateIndex  stateName
-        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (aid text primary key,pId text,pName text,name text,stateIndex text,stateName text);",locationTabbleName];
+        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (aid text primary key,pId text,pName text,name text,stateIndex text,stateName text,dPosition text);",locationTabbleName];
         result = [self.fmdb executeUpdate:sql];
         if (!result) {
             NSLog(@"创建地址表失败");
@@ -211,10 +209,9 @@ static CheckContentTool *shareInstance = nil;
 - (NSMutableArray *)queryAllContent
 {
     if ([self.fmdb  open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE `level` = 1", locationTabbleName];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE level = 1", locationTabbleName];
         FMResultSet *result = [self.fmdb  executeQuery:sql];
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
-        //'code','sheng','di','xian','name', 'level'
         while ([result next]) {
             CheckContentItem *model = [[CheckContentItem alloc] init];
             model.pId = [result stringForColumn:@"pId"];
@@ -223,6 +220,7 @@ static CheckContentTool *shareInstance = nil;
             model.name = [result stringForColumn:@"name"];
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
+            model.dPosition = [result stringForColumn:@"dPosition"];
             [array addObject:model];
         }
         [self.fmdb close];
@@ -236,7 +234,7 @@ static CheckContentTool *shareInstance = nil;
 - (NSMutableArray *)queryAllRecordWithBuweiID:(NSString *) buwei
 {
     if ([self.fmdb  open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE `pId` = %@"  , locationTabbleName,buwei];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE pId = %@", locationTabbleName,buwei];
         FMResultSet *result = [self.fmdb  executeQuery:sql];
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
         //'code','sheng','di','xian','name', 'level'
@@ -248,6 +246,7 @@ static CheckContentTool *shareInstance = nil;
             model.name = [result stringForColumn:@"name"];
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
+            model.dPosition = [result stringForColumn:@"dPosition"];
             [array addObject:model];
         }
         [self.fmdb close];
@@ -260,7 +259,7 @@ static CheckContentTool *shareInstance = nil;
 - (CheckContentItem *)queryRecordWithID:(NSString *) aId
 {
     if ([self.fmdb  open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE `aId` = %@"  , locationTabbleName,aId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE aid = %@"  , locationTabbleName,aId];
         FMResultSet *result = [self.fmdb  executeQuery:sql];
         //'code','sheng','di','xian','name', 'level'
         CheckContentItem *model = [[CheckContentItem alloc] init];
@@ -271,6 +270,7 @@ static CheckContentTool *shareInstance = nil;
             model.name = [result stringForColumn:@"name"];
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
+            model.dPosition = [result stringForColumn:@"dPosition"];
         }
         [self.fmdb close];
         return model;
@@ -285,7 +285,8 @@ static CheckContentTool *shareInstance = nil;
         BOOL isRollBack = NO;
         @try
         {
-            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET stateIndex = %@, stateName = %@ WHERE aid = '%@' ",locationTabbleName, item.stateIndex, item.stateName, item.aid];
+            NSLog(@" item.dPosition: %@", item.dPosition);
+            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET stateIndex = '%@', stateName = '%@', dPosition = '%@' WHERE aid = '%@'",locationTabbleName, item.stateIndex, item.stateName, item.dPosition, item.aid];
             BOOL a = [self.fmdb executeUpdate:updateSql];
             if (!a)
             {

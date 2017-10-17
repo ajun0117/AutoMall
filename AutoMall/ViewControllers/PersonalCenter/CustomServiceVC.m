@@ -53,6 +53,10 @@
     [self requestPostListServiceContent];
 
     selectDic = [NSMutableDictionary dictionary];
+    
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -97,6 +101,13 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"修改价格后更新选中记录中的价格");
+    NSString *tempString = textField.text;
+    while ([tempString hasPrefix:@"0"])
+    {
+        tempString = [tempString substringFromIndex:1];
+        NSLog(@"压缩之后的tempString:%@",tempString);
+    }
+    textField.text = tempString;
     NSInteger ind = textField.tag - 100;
     NSDictionary *dic = serviceArray[ind];
     NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
@@ -127,6 +138,19 @@
 
 - (void)dealKeyboardHide {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - keyBoardRect.size.height);
+    //    self.myScrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.myScrollView.frame) - keyBoardRect.size.height);
+}
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 44);
 }
 
 #pragma mark - tableVeiw delegate
@@ -163,14 +187,16 @@
     cell.nameL.text = dic[@"name"];
 //    cell.nameL.text = @"机油更换";
     [self setTextFieldInputAccessoryViewWithCell:cell];
-    cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
     cell.moneyTF.delegate = self;
     cell.moneyTF.tag = indexPath.section + 100;
     [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
     NSArray *keys = [selectDic allKeys];
     if ([keys containsObject:dic[@"id"]]) {
+        NSMutableDictionary *dicc = selectDic[dic[@"id"]];
+        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"price"]];
         cell.radioBtn.selected = YES;
     } else {
+        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
         cell.radioBtn.selected = NO;
     }
     return cell;
