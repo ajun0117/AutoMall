@@ -285,7 +285,6 @@ static CheckContentTool *shareInstance = nil;
         BOOL isRollBack = NO;
         @try
         {
-            NSLog(@" item.dPosition: %@", item.dPosition);
             NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET stateIndex = '%@', stateName = '%@', dPosition = '%@' WHERE aid = '%@'",locationTabbleName, item.stateIndex, item.stateName, item.dPosition, item.aid];
             BOOL a = [self.fmdb executeUpdate:updateSql];
             if (!a)

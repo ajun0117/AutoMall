@@ -61,7 +61,7 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
-    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44)];
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 20)];
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
@@ -92,7 +92,7 @@
 
 -(void) creatTableViews {
     for (int i = 0; i < partsArray.count; ++i) {
-        UITableView *myTableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 44) style:UITableViewStyleGrouped];
+        UITableView *myTableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 20) style:UITableViewStyleGrouped];
         myTableView.tag = 1000 + i;
         [self.mainScrollView addSubview:myTableView];
         myTableView.delegate = self;
@@ -519,6 +519,10 @@
         [switcher forceSelectedIndex:selectedIndex animated:NO];
         [switcher setPressedHandler:^(NSUInteger index) {
             NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+            //这里要重新从数据库读一遍
+            CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+            NSMutableArray *positionAry = [[item1.dPosition objectFromJSONString] mutableCopy];
+            NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];    //这里要重新从数据库读一遍
             CheckContentItem *item = [[CheckContentItem alloc] init];
             item.aid = NSStringWithNumber(dicc[@"id"]);
             item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
@@ -697,13 +701,7 @@
                     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
                     NSLog(@"jsonStr: %@",jsonStr);
                     item.dPosition = jsonStr;
-                    
-//                    NSData *positionData = [NSKeyedArchiver archivedDataWithRootObject:mulAry];
-//                    item.dPositionData = positionData;
-//                    NSArray *arr2 = [NSKeyedUnarchiver unarchiveObjectWithData:item.dPositionData];
-//                    NSLog(@" positionData: %@",positionData);
-//                    NSLog(@" item.dPositionData: %@", item.dPositionData);
-//                    NSLog(@"->%@",arr2);
+
                     [ary addObject:item];
                 }
                 else {
