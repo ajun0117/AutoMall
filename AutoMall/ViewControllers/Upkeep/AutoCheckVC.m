@@ -16,8 +16,11 @@
 #import "CheckContentItem.h"
 #import "CheckContentTool.h"
 #import "JSONKit.h"
+#import "MyAlertView.h"
+#import "AutoCheckCarInfoVC.h"
+#import "AutoCheckPhotoVC.h"
 
-@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate>
+@interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
     NSMutableDictionary *selectedDic;   //记录已选择
     NSMutableArray *selectedAry;   //记录已选择的状态（index对应检查部位的index，object对应相应的状态字段）
@@ -27,6 +30,8 @@
     MBProgressHUD *_networkConditionHUD;
     NSArray *contentAry;    //检查内容列表
     NSInteger currentSelectIndex;  //当前选中的位置
+    NSIndexPath *currentPhotoIndexPath;     //记录当前拍照按钮对应的cell位置
+    NSDictionary *lichenDic;    //里程油量数据
 }
 
 @end
@@ -53,13 +58,20 @@
                                        target:nil action:nil];
     negativeSpacer.width = -6;
 
+    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    infoBtn.frame = CGRectMake(0, 0, 24, 24);
+    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [infoBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
+    [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
+    
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 24, 24);
     searchBtn.contentMode = UIViewContentModeScaleAspectFit;
     [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
     
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 20)];
     self.mainScrollView.pagingEnabled = YES;
@@ -134,6 +146,15 @@
     }
 }
 
+-(void)toFillLicheng {
+    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
+    infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
+        lichenDic = dic;
+        NSLog(@"lichenDic: %@",lichenDic);
+    };
+    [self.navigationController pushViewController:infoVC animated:YES];
+}
+
 -(void)toMark {
     UpkeepCarMarkVC *markVC = [[UpkeepCarMarkVC alloc] init];
     [self.navigationController pushViewController:markVC animated:YES];
@@ -200,11 +221,123 @@
     view.backgroundColor = color;
 }
 
+#pragma mark - 填写检查结果
+-(void)toFillTip:(UIButton *)btn {  //填写检查结果文本
+    UITableViewCell *cell = (UITableViewCell  *)btn.superview.superview;
+    UITableView *tableV;
+    if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
+        tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
+    }
+    NSIndexPath *ind = [tableV indexPathForCell:cell];
+    NSArray *array = contentAry[ind.section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    MyAlertView *alert = [[MyAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",dicc[@"tip"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil,nil];
+    alert.section = ind.section;
+    alert.row = ind.row;
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    UITextField *nameField = [alert textFieldAtIndex:0];
+    nameField.placeholder = @"请输入检查结果";
+    [alert show];
+}
+
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSLog(@"%@",@"点击了确定");
+        NSIndexPath *ind = [NSIndexPath indexPathForRow:alertView.row inSection:alertView.section];
+        UITableView *tableV;
+        if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
+            tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
+        }
+        UITableViewCell *cell = (UITableViewCell  *)[tableV cellForRowAtIndexPath:ind];
+        UIButton *btn = (UIButton *)[cell viewWithTag:ind.section + 100];
+        UITextField *nameField = [alertView textFieldAtIndex:0];
+        [btn setTitle:nameField.text forState:UIControlStateNormal];
+        
+        NSArray *array = contentAry[ind.section][@"checkContents"];
+        NSDictionary *dicc = [array firstObject];
+        id groupStr = dicc[@"group"];
+        if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开,,,由于接口数据不全，待测试
+            NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
+            NSString *positionStr = positionArray[ind.row];
+            CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+            NSMutableArray *tipAry = [[item1.tip objectFromJSONString] mutableCopy];
+            NSMutableDictionary *tipDic = [tipAry[ind.row] mutableCopy];
+            CheckContentItem *item2 = [[CheckContentItem alloc] init];
+            item2.aid = NSStringWithNumber(dicc[@"id"]);
+            [tipDic setObject:nameField.text forKey:positionStr];
+            [tipAry replaceObjectAtIndex:ind.row withObject:tipDic];
+            NSLog(@"tipAry: %@",tipAry);
+            NSError *err = nil;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tipAry options:NSJSONWritingPrettyPrinted error:&err];
+            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            NSLog(@"jsonStr: %@",jsonStr);
+            item2.tip = jsonStr;
+            [[CheckContentTool sharedManager] UpdateContentItemTipWithItem:item2];
+        }
+        else {
+            CheckContentItem *item = [[CheckContentItem alloc] init];
+            item.aid = NSStringWithNumber(dicc[@"id"]);
+            item.tip = nameField.text;
+            [[CheckContentTool sharedManager] UpdateContentItemTipWithItem:item];
+        }
+    }
+}
+
+
 //点击拍照按钮，通过按钮的父视图判断出项目
 -(void) toTakePhoto:(UIButton *)btn {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选取照片方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"相机" otherButtonTitles:@"图库", nil];
-    //    sheet.tag = 3000;
-    [sheet showInView:self.view];
+//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选取照片方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"相机" otherButtonTitles:@"图库", nil];
+//    //    sheet.tag = 3000;
+//    [sheet showInView:self.view];
+    
+    UITableViewCell *cell = (UITableViewCell  *)btn.superview.superview;
+    UITableView *tableV;
+    if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
+        tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
+    }
+    currentPhotoIndexPath = [tableV indexPathForCell:cell];     //记录当前拍照按钮对应的cell位置
+    
+    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
+    photoVC.GoBackUpdate = ^(NSArray *array) {
+        [self updatePhotoWithImages:array];
+    };
+    [self.navigationController pushViewController:photoVC animated:YES];
+}
+
+-(void)updatePhotoWithImages:(NSArray *)images {
+    NSLog(@"拍照后返回了%@",images);
+    NSArray *array = contentAry[currentPhotoIndexPath.section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开,,,由于接口数据不全，待测试
+        NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
+        NSString *positionStr = positionArray[currentPhotoIndexPath.row];
+        CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        NSMutableArray *imagesAry = [[item1.tip objectFromJSONString] mutableCopy];
+        NSMutableDictionary *imagesDic = [imagesAry[currentPhotoIndexPath.row] mutableCopy];
+        CheckContentItem *item2 = [[CheckContentItem alloc] init];
+        item2.aid = NSStringWithNumber(dicc[@"id"]);
+        [imagesDic setObject:images forKey:positionStr];
+        [imagesAry replaceObjectAtIndex:currentPhotoIndexPath.row withObject:imagesDic];
+        NSLog(@"imagesAry: %@",imagesAry);
+        NSError *err = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:imagesAry options:NSJSONWritingPrettyPrinted error:&err];
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"jsonStr: %@",jsonStr);
+        item2.images = jsonStr;
+        [[CheckContentTool sharedManager] UpdateContentItemImagesWithItem:item2];
+    }
+    else {
+        CheckContentItem *item = [[CheckContentItem alloc] init];
+        item.aid = NSStringWithNumber(dicc[@"id"]);
+        NSError *err = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:images options:NSJSONWritingPrettyPrinted error:&err];
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"jsonStr: %@",jsonStr);
+        item.images = jsonStr;
+        [[CheckContentTool sharedManager] UpdateContentItemImagesWithItem:item];
+    }
+
 }
 
 #pragma mark -
@@ -396,7 +529,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    return 130;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -412,7 +545,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 15;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -469,20 +602,11 @@
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
         AutoCheckGroupCell *cell = (AutoCheckGroupCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckGroupCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        NSDictionary *dic = contentAry[indexPath.section];
-        NSArray *ary = dic[@"checkContents"];
-        NSDictionary *dicc;
-        if (ary.count == 1) {
-            dicc = [ary firstObject];
-        }
-        NSArray *groupAry = [dicc[@"group"] componentsSeparatedByString:@","];
-        
+        NSArray *groupAry = [groupStr componentsSeparatedByString:@","];
         cell.contentL.text = groupAry[indexPath.row];
         for (DVSwitch *switcher in cell.segBgView.subviews) {
             [switcher removeFromSuperview];
         }
-        
         NSArray *stateAry;
         if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
             stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
@@ -498,8 +622,25 @@
         switcher.cornerRadius = 18;
         switcher.backgroundColor = RGBCOLOR(254, 255, 255);
         
+        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        NSLog(@"item.aid: %@",item.aid);
+        NSLog(@"item.images: %@",item.images);
+        NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
+        NSString *positionStr = positionArray[indexPath.row];
+        
         id tipStr = dicc[@"tip"];
+        cell.checkResultBtn.tag = indexPath.section + 100;
         if ([tipStr isKindOfClass:[NSString class]] && [tipStr length] > 1) {   //表示需要填写检查结果
+            NSMutableArray *tipAry = [[item.tip objectFromJSONString] mutableCopy];
+            NSMutableDictionary *tipDic = [tipAry[indexPath.row] mutableCopy];
+            NSString *tipString = tipDic[positionStr];
+            NSLog(@"tipString: %@",tipString);
+            if ([tipString length] > 0) {
+                [cell.checkResultBtn setTitle:tipString forState:UIControlStateNormal];
+            }
+            else {
+                [cell.checkResultBtn setTitle:@"检查结果>" forState:UIControlStateNormal];
+            }
             cell.checkResultBtn.hidden = NO;
             [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -507,26 +648,26 @@
             cell.checkResultBtn.hidden = YES;
         }
         
-        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
-        NSLog(@"item.aid: %@",item.aid);
-        NSLog(@"item.dPositionData: %@",item.dPosition);
+        NSMutableArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+        NSMutableDictionary *imagesDic = [imagesAry[indexPath.row] mutableCopy];
+        NSArray *imagesArray = imagesDic[positionStr];
+        NSLog(@"imagesArray: %@",imagesArray);
+        [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+
         NSMutableArray *positionAry = [[item.dPosition objectFromJSONString] mutableCopy];
-        NSArray *aryy = [groupStr componentsSeparatedByString:@","];
-        NSString *positionStr = aryy[indexPath.row];
         NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
         NSInteger selectedIndex = [positionDic[positionStr] integerValue];
-        
         [switcher forceSelectedIndex:selectedIndex animated:NO];
         [switcher setPressedHandler:^(NSUInteger index) {
             NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
             //这里要重新从数据库读一遍
             CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
             NSMutableArray *positionAry = [[item1.dPosition objectFromJSONString] mutableCopy];
-            NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];    //这里要重新从数据库读一遍
-            CheckContentItem *item = [[CheckContentItem alloc] init];
-            item.aid = NSStringWithNumber(dicc[@"id"]);
-            item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
-            //        item.stateName = stateAry[index];
+            NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
+            CheckContentItem *item2 = [[CheckContentItem alloc] init];
+            item2.aid = NSStringWithNumber(dicc[@"id"]);
+            item2.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+            //        item2.stateName = stateAry[index];
             [positionDic setObject:[NSString stringWithFormat:@"%lu",(unsigned long)index] forKey:positionStr];
 //            NSData *positionData = [NSKeyedArchiver archivedDataWithRootObject:positionAry];
             NSLog(@"positionDic: %@",positionDic);
@@ -536,8 +677,8 @@
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:positionAry options:NSJSONWritingPrettyPrinted error:&err];
             NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             NSLog(@"jsonStr: %@",jsonStr);
-            item.dPosition = jsonStr;
-            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
+            item2.dPosition = jsonStr;
+            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item2];
         }];
         
         return cell;
@@ -546,10 +687,8 @@
     else {
         AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        NSDictionary *dic = contentAry[indexPath.section];
-        NSArray *ary = dic[@"checkContents"];
-        NSDictionary *dicc = ary [indexPath.row];
+
+        NSDictionary *dicc = array [indexPath.row];
         
         cell.contentL.text = dicc[@"name"];
         for (DVSwitch *switcher in cell.segBgView.subviews) {
@@ -571,8 +710,17 @@
         switcher.cornerRadius = 18;
         switcher.backgroundColor = RGBCOLOR(254, 255, 255);
         
+        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
         id tipStr = dicc[@"tip"];
+        cell.checkResultBtn.tag = indexPath.section + 100;
         if ([tipStr isKindOfClass:[NSString class]] && [tipStr length] > 1) {   //表示需要填写检查结果
+            NSLog(@"item.tip: %@",item.tip);
+            if ([item.tip length] > 0) {
+                [cell.checkResultBtn setTitle:item.tip forState:UIControlStateNormal];
+            }
+            else {
+                [cell.checkResultBtn setTitle:@"检查结果>" forState:UIControlStateNormal];
+            }
             cell.checkResultBtn.hidden = NO;
             [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -580,7 +728,11 @@
             cell.checkResultBtn.hidden = YES;
         }
         
-        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        
+        NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+        NSLog(@"imagesAry: %@",imagesAry);
+        [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+        
         NSInteger selectedIndex = [item.stateIndex integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];
         [switcher setPressedHandler:^(NSUInteger index) {
@@ -607,16 +759,6 @@
 //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
 //    [self.navigationController pushViewController:detailVC animated:YES];
 }
-
--(void)toFillTip:(UIButton *)btn {  //填写检查结果文本
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"自定义服务器地址" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil,nil];
-    [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-
-    UITextField *nameField = [alert textFieldAtIndex:0];
-    nameField.placeholder = @"请输入检查结果";
-    [alert show];
-}
-
 
 #pragma mark - 发起网络请求
 -(void)requestGetCheckcategoryList { //获取检查部位列表
@@ -684,9 +826,17 @@
                 if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
                     NSArray *aryy = [groupStr componentsSeparatedByString:@","];
                     NSMutableArray *mulAry = [NSMutableArray array];
+                    NSMutableArray *tipMulAry = [NSMutableArray array];
+                    NSMutableArray *imagesMulAry = [NSMutableArray array];
                     for (NSString *str in aryy) {
                         NSMutableDictionary *positionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",str, nil];
                         [mulAry addObject:positionDic];
+                        
+                        NSMutableDictionary *tipPositionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"",str, nil];
+                        [tipMulAry addObject:tipPositionDic];
+                        
+                        NSMutableDictionary *imagesPositionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[],str, nil];
+                        [imagesMulAry addObject:imagesPositionDic];
                     }
                     CheckContentItem *item = [[CheckContentItem alloc] init];
                     item.aid = NSStringWithNumber(dicc[@"id"]);
@@ -695,12 +845,22 @@
                     item.pName = partsArray[currentSelectIndex] [@"name"];
                     item.stateIndex = @"0";
                     item.stateName = @"";
-                    
+                    //位置state重组
                     NSError *err = nil;
                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mulAry options:NSJSONWritingPrettyPrinted error:&err];
                     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
                     NSLog(@"jsonStr: %@",jsonStr);
                     item.dPosition = jsonStr;
+                    //位置tip重组
+                    NSData *tipJsonData = [NSJSONSerialization dataWithJSONObject:tipMulAry options:NSJSONWritingPrettyPrinted error:&err];
+                    NSString *tipJsonStr = [[NSString alloc] initWithData:tipJsonData encoding:NSUTF8StringEncoding];
+                    NSLog(@"tipJsonStr: %@",tipJsonStr);
+                    item.tip = tipJsonStr;
+                    //位置images重组
+                    NSData *imagesJsonData = [NSJSONSerialization dataWithJSONObject:imagesMulAry options:NSJSONWritingPrettyPrinted error:&err];
+                    NSString *imagesJsonStr = [[NSString alloc] initWithData:imagesJsonData encoding:NSUTF8StringEncoding];
+                    NSLog(@"imagesJsonStr: %@",imagesJsonStr);
+                    item.images = imagesJsonStr;
 
                     [ary addObject:item];
                 }
@@ -712,6 +872,13 @@
                     item.pName = partsArray[currentSelectIndex] [@"name"];
                     item.stateIndex = @"0";
                     item.stateName = @"";
+                    item.tip = @"";
+                    //位置images重组
+                    NSError *err = nil;
+                    NSData *imagesJsonData = [NSJSONSerialization dataWithJSONObject:@[] options:NSJSONWritingPrettyPrinted error:&err];
+                    NSString *imagesJsonStr = [[NSString alloc] initWithData:imagesJsonData encoding:NSUTF8StringEncoding];
+                    NSLog(@"imagesJsonStr: %@",imagesJsonStr);
+                    item.images = imagesJsonStr;
                     [ary addObject:item];
                 }
             }

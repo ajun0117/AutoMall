@@ -121,8 +121,8 @@ static CheckContentTool *shareInstance = nil;
             for (CheckContentItem * item in ary) {
                 //pId  pName  aid  name  stateIndex  stateName
                 NSString *insertSql= [NSString stringWithFormat:
-                                      @"INSERT INTO %@ ('pId','pName','aid','name','stateIndex', 'stateName', 'dPosition') VALUES ('%@','%@','%@','%@','%@','%@','%@')",
-                                      locationTabbleName,item.pId, item.pName,item.aid,item.name ,item.stateIndex, item.stateName,item.dPosition];
+                                      @"INSERT INTO %@ ('pId','pName','aid','name','stateIndex', 'stateName', 'dPosition', 'tip', 'images') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@')",
+                                      locationTabbleName,item.pId, item.pName,item.aid,item.name ,item.stateIndex, item.stateName,item.dPosition,item.tip,item.images];
                 BOOL a = [self.fmdb executeUpdate:insertSql];
                 if (!a)
                 {
@@ -192,7 +192,7 @@ static CheckContentTool *shareInstance = nil;
     } else {
         NSLog(@"地址数据库打开成功");
         //pId  pName  aid  name  stateIndex  stateName
-        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (aid text primary key,pId text,pName text,name text,stateIndex text,stateName text,dPosition text);",locationTabbleName];
+        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (aid text primary key,pId text,pName text,name text,stateIndex text,stateName text,dPosition text,tip text,images text);",locationTabbleName];
         result = [self.fmdb executeUpdate:sql];
         if (!result) {
             NSLog(@"创建地址表失败");
@@ -221,6 +221,8 @@ static CheckContentTool *shareInstance = nil;
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
             model.dPosition = [result stringForColumn:@"dPosition"];
+            model.tip = [result stringForColumn:@"tip"];
+            model.images = [result stringForColumn:@"images"];
             [array addObject:model];
         }
         [self.fmdb close];
@@ -247,6 +249,8 @@ static CheckContentTool *shareInstance = nil;
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
             model.dPosition = [result stringForColumn:@"dPosition"];
+            model.tip = [result stringForColumn:@"tip"];
+            model.images = [result stringForColumn:@"images"];
             [array addObject:model];
         }
         [self.fmdb close];
@@ -271,6 +275,8 @@ static CheckContentTool *shareInstance = nil;
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
             model.dPosition = [result stringForColumn:@"dPosition"];
+            model.tip = [result stringForColumn:@"tip"];
+            model.images = [result stringForColumn:@"images"];
         }
         [self.fmdb close];
         return model;
@@ -313,6 +319,80 @@ static CheckContentTool *shareInstance = nil;
         } else {
             NSLog(@"更新数据时数据库打开失败");
         }
+}
+
+-(void)UpdateContentItemImagesWithItem:(CheckContentItem *)item {     //通过检查内容id修改
+    // 开启事务
+    if ([self.fmdb open] && [self.fmdb beginTransaction]) {
+        
+        BOOL isRollBack = NO;
+        @try
+        {
+            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET images = '%@' WHERE aid = '%@'",locationTabbleName, item.images, item.aid];
+            BOOL a = [self.fmdb executeUpdate:updateSql];
+            if (!a)
+            {
+                NSLog(@"修改数据失败");
+            }
+            else
+            {
+                NSLog(@"修改数据成功！");
+            }
+        }
+        @catch (NSException *exception)
+        {
+            isRollBack = YES;
+            [self.fmdb rollback];
+        }
+        @finally
+        {
+            if (!isRollBack)
+            {
+                [self.fmdb commit];
+            }
+        }
+        [self.fmdb close];
+        
+    } else {
+        NSLog(@"更新数据时数据库打开失败");
+    }
+}
+
+-(void)UpdateContentItemTipWithItem:(CheckContentItem *)item {     //通过检查内容id修改
+    // 开启事务
+    if ([self.fmdb open] && [self.fmdb beginTransaction]) {
+        
+        BOOL isRollBack = NO;
+        @try
+        {
+            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET tip = '%@' WHERE aid = '%@'",locationTabbleName, item.tip, item.aid];
+            BOOL a = [self.fmdb executeUpdate:updateSql];
+            if (!a)
+            {
+                NSLog(@"修改数据失败");
+            }
+            else
+            {
+                NSLog(@"修改数据成功！");
+            }
+        }
+        @catch (NSException *exception)
+        {
+            isRollBack = YES;
+            [self.fmdb rollback];
+        }
+        @finally
+        {
+            if (!isRollBack)
+            {
+                [self.fmdb commit];
+            }
+        }
+        [self.fmdb close];
+        
+    } else {
+        NSLog(@"更新数据时数据库打开失败");
+    }
 }
 
 @end

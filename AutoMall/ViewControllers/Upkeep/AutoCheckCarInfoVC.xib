@@ -89,14 +89,29 @@
                         <constraint firstItem="hyg-bL-581" firstAttribute="leading" secondItem="H4e-j4-KlP" secondAttribute="leading" constant="16" id="yFq-7u-UiK"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odr-Gp-dLx">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="gEa-Ix-xdg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="保存"/>
+                    <connections>
+                        <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="4cA-bC-5zX"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstItem="H4e-j4-KlP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Kh-L1-8aC"/>
                 <constraint firstAttribute="trailing" secondItem="H4e-j4-KlP" secondAttribute="trailing" id="Uan-lo-ura"/>
+                <constraint firstAttribute="trailing" secondItem="Odr-Gp-dLx" secondAttribute="trailing" id="byI-z8-HAv"/>
                 <constraint firstItem="H4e-j4-KlP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="eUB-Ji-Lcl"/>
+                <constraint firstItem="Odr-Gp-dLx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qve-PK-XVa"/>
+                <constraint firstAttribute="bottom" secondItem="Odr-Gp-dLx" secondAttribute="bottom" id="rMY-iF-L1h"/>
             </constraints>
-            <point key="canvasLocation" x="-299" y="53"/>
+            <point key="canvasLocation" x="-616" y="-6"/>
         </view>
     </objects>
 </document>

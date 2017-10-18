@@ -21,5 +21,7 @@
 //根据检查内容Id 查询出该Id的数据
 - (CheckContentItem *)queryRecordWithID:(NSString *) aId;
 -(void)UpdateContentItemWithItem:(CheckContentItem *)item;     //通过检查内容id修改
+-(void)UpdateContentItemImagesWithItem:(CheckContentItem *)item;
+-(void)UpdateContentItemTipWithItem:(CheckContentItem *)item;
 
 @end

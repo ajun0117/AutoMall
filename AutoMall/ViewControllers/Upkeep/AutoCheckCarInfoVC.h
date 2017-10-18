@@ -10,4 +10,9 @@
 
 @interface AutoCheckCarInfoVC : UIViewController
 
+/**
+ * 提交里程油量
+ */
+@property (copy, nonatomic) void((^GoBackSubmitLicheng)(NSDictionary *dic));
+
 @end

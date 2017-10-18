@@ -159,6 +159,11 @@
 		04C35D1E1F8B57BC00062014 /* MessageListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C35D1C1F8B57BC00062014 /* MessageListVC.xib */; };
 		04C576501F79DD46003BF404 /* AutoCheckMultiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5764E1F79DD46003BF404 /* AutoCheckMultiCell.m */; };
 		04C576511F79DD46003BF404 /* AutoCheckMultiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C5764F1F79DD46003BF404 /* AutoCheckMultiCell.xib */; };
+		04C6563F1F96F68F00611AFF /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6563E1F96F68F00611AFF /* MyAlertView.m */; };
+		04C656431F96FEE000611AFF /* AutoCheckPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C656411F96FEE000611AFF /* AutoCheckPhotoVC.m */; };
+		04C656441F96FEE000611AFF /* AutoCheckPhotoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C656421F96FEE000611AFF /* AutoCheckPhotoVC.xib */; };
+		04C656481F97694400611AFF /* AutoCheckOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C656461F97694400611AFF /* AutoCheckOrderVC.m */; };
+		04C656491F97694400611AFF /* AutoCheckOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C656471F97694400611AFF /* AutoCheckOrderVC.xib */; };
 		04D1071A1F6296A1007D9F57 /* UpkeepStatementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */; };
 		04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */; };
 		04D107731F62998D007D9F57 /* NSNumber+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107231F62998C007D9F57 /* NSNumber+Zirkfied.m */; };
@@ -602,6 +607,14 @@
 		04C5764D1F79DD46003BF404 /* AutoCheckMultiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckMultiCell.h; sourceTree = "<group>"; };
 		04C5764E1F79DD46003BF404 /* AutoCheckMultiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckMultiCell.m; sourceTree = "<group>"; };
 		04C5764F1F79DD46003BF404 /* AutoCheckMultiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckMultiCell.xib; sourceTree = "<group>"; };
+		04C6563D1F96F68F00611AFF /* MyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertView.h; sourceTree = "<group>"; };
+		04C6563E1F96F68F00611AFF /* MyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertView.m; sourceTree = "<group>"; };
+		04C656401F96FEE000611AFF /* AutoCheckPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckPhotoVC.h; sourceTree = "<group>"; };
+		04C656411F96FEE000611AFF /* AutoCheckPhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckPhotoVC.m; sourceTree = "<group>"; };
+		04C656421F96FEE000611AFF /* AutoCheckPhotoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckPhotoVC.xib; sourceTree = "<group>"; };
+		04C656451F97694400611AFF /* AutoCheckOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckOrderVC.h; sourceTree = "<group>"; };
+		04C656461F97694400611AFF /* AutoCheckOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckOrderVC.m; sourceTree = "<group>"; };
+		04C656471F97694400611AFF /* AutoCheckOrderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckOrderVC.xib; sourceTree = "<group>"; };
 		04D107171F6296A1007D9F57 /* UpkeepStatementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepStatementVC.h; sourceTree = "<group>"; };
 		04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepStatementVC.m; sourceTree = "<group>"; };
 		04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepStatementVC.xib; sourceTree = "<group>"; };
@@ -1107,12 +1120,17 @@
 				F712456F1F868AE30091816F /* 检查页数据库模型 */,
 				04A69F0A1F710CCA00E966A0 /* 车图标记 */,
 				0453D3A61F692AB0004F79C8 /* 检查页Cell */,
+				04C6563D1F96F68F00611AFF /* MyAlertView.h */,
+				04C6563E1F96F68F00611AFF /* MyAlertView.m */,
 				044A24151F3326F9009720DE /* AutoCheckVC.h */,
 				044A24161F3326F9009720DE /* AutoCheckVC.m */,
 				044A24171F3326F9009720DE /* AutoCheckVC.xib */,
 				04B3EFDF1F9460DC0056BF9B /* AutoCheckCarInfoVC.h */,
 				04B3EFE01F9460DC0056BF9B /* AutoCheckCarInfoVC.m */,
 				04B3EFE11F9460DC0056BF9B /* AutoCheckCarInfoVC.xib */,
+				04C656401F96FEE000611AFF /* AutoCheckPhotoVC.h */,
+				04C656411F96FEE000611AFF /* AutoCheckPhotoVC.m */,
+				04C656421F96FEE000611AFF /* AutoCheckPhotoVC.xib */,
 			);
 			name = "汽车检查页";
 			sourceTree = "<group>";
@@ -1376,6 +1394,9 @@
 		04AD1FD91F43ECD400247819 /* 订单页 */ = {
 			isa = PBXGroup;
 			children = (
+				04C656451F97694400611AFF /* AutoCheckOrderVC.h */,
+				04C656461F97694400611AFF /* AutoCheckOrderVC.m */,
+				04C656471F97694400611AFF /* AutoCheckOrderVC.xib */,
 			);
 			name = "订单页";
 			sourceTree = "<group>";
@@ -2382,6 +2403,7 @@
 				F789EF111F7D63BE003A127C /* EmployeeAuthVC.xib in Resources */,
 				04DC7D0E1F31C25000AA20A7 /* HomeCityCollectionViewCell.xib in Resources */,
 				0459C6C21F614CCA0040501E /* AddressInfoEditVC.xib in Resources */,
+				04C656441F96FEE000611AFF /* AutoCheckPhotoVC.xib in Resources */,
 				04DC7DDC1F31C28300AA20A7 /* UMSLoginViewController.xib in Resources */,
 				04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */,
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
@@ -2408,6 +2430,7 @@
 				047AE0031F4A883A00AEAE8E /* CommodityDetailVC.xib in Resources */,
 				04C576511F79DD46003BF404 /* AutoCheckMultiCell.xib in Resources */,
 				0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */,
+				04C656491F97694400611AFF /* AutoCheckOrderVC.xib in Resources */,
 				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
 				04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */,
 				F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */,
@@ -2573,6 +2596,7 @@
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
 				04D107841F62998D007D9F57 /* ZFGenericAxis.m in Sources */,
 				041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */,
+				04C656481F97694400611AFF /* AutoCheckOrderVC.m in Sources */,
 				042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */,
 				047ADFEF1F4A86EF00AEAE8E /* MKAnnotationView+CMWebCache.m in Sources */,
 				04DC7D1F1F31C26500AA20A7 /* CityDistrictsCoreObject.m in Sources */,
@@ -2614,6 +2638,7 @@
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
 				04052C691F7E5790004E6188 /* EmployeeDetailTopCell.m in Sources */,
 				042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */,
+				04C6563F1F96F68F00611AFF /* MyAlertView.m in Sources */,
 				04D1078B1F62998D007D9F57 /* ZFLineChart.m in Sources */,
 				04D396491F6621110077BFB3 /* SettlementBeizhuCell.m in Sources */,
 				04F6B6981F459D6600052658 /* FindPWDViewController.m in Sources */,
@@ -2684,6 +2709,7 @@
 				04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */,
 				047ADFF61F4A86EF00AEAE8E /* UIImageView+CMWebCache.m in Sources */,
 				042AF2071F4C3D0A00EA5E5F /* CommodityDetailPriceCell.m in Sources */,
+				04C656431F96FEE000611AFF /* AutoCheckPhotoVC.m in Sources */,
 				04D107851F62998D007D9F57 /* ZFGenericChart.m in Sources */,
 				04F7D8681F5EA59F004945ED /* EmployeeDetailVC.m in Sources */,
 				042E5D221F41A09D00F5F324 /* UpkeepPlanInfoCell.m in Sources */,

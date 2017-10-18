@@ -17,6 +17,8 @@
 @property (nonatomic,copy) NSString *stateIndex;   //结果选择位置
 @property (nonatomic,copy) NSString *stateName;   //结果名称
 @property (nonatomic,copy) NSString *dPosition;      //具体位置
+@property (nonatomic,copy) NSString *tip;              //检查结果文本
+@property (nonatomic,copy) NSString *images;         //照片
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end
