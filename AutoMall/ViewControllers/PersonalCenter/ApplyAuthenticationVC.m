@@ -72,7 +72,7 @@
 }
 
 -(void)tapGongzhonghao:(UITapGestureRecognizer *)tap {
-    self.gongzhongImg.image = IMG(@"timg-2");
+    self.gongzhongImg.image = IMG(@"check_default");
     [self requestUploadImg:self.gongzhongImg imageName:@"gongzhong"];
 }
 
@@ -200,11 +200,11 @@
     
     //data=data
     NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
-    NSInteger length = imageData.length;
-    if (length > 1048) {
-        CGFloat packRate = 1048.0/length;
-        imageData = UIImageJPEGRepresentation(image.image, packRate);
-    }
+//    NSInteger length = imageData.length;
+//    if (length > 1048) {
+//        CGFloat packRate = 1048.0/length;
+//        imageData = UIImageJPEGRepresentation(image.image, packRate);
+//    }
     //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
     NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
     NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -214,7 +214,7 @@
                                                                                          kCFStringEncodingUTF8);
     //    NSLog(@"baseString:%@",baseString);
     
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",name,@"fileName", nil];
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",@"png",@"fileName", nil];
     NSLog(@"paramsDic: %@",paramsDic);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UploadUploadImg) delegate:nil params:paramsDic info:infoDic];
     //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];
