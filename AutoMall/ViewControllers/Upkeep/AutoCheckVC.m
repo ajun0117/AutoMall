@@ -163,11 +163,11 @@
 }
 
 - (IBAction)creatChecklistAction:(id)sender {
-//    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-//    planVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:planVC animated:YES];
-    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
-    [self.navigationController pushViewController:orderVC animated:YES];
+    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+    planVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:planVC animated:YES];
+//    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
+//    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {

@@ -26,6 +26,7 @@
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
+    NSString *mobileUserType;     //登录用户类别 0：手机普通用户 1：门店老板 2: 门店员工
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -70,6 +71,8 @@
     
     [self requestPostUserGetInfo];
     [self requestPostStoreGetInfo];     //请求门店详情数据
+    
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -102,32 +105,111 @@
 
 #pragma mark - tableVeiw delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
+        return 4;
+    }
+    else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        return 5;
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
+        return 6;
+    }
+    return 2;   //未登录用户
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
+        switch (section) {
+            case 0: {
+                return 1;
+                break;
+            }
+            case 1: {
+                return 1;
+                break;
+            }
+            case 2: {
+                return 1;
+                break;
+            }
+            case 3: {
+                return 2;
+                break;
+            }
+            default:
+                return 0;
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        switch (section) {
+            case 0: {
+                return 1;
+                break;
+            }
+            case 1: {
+                return 6;
+                break;
+            }
+            case 2: {
+                return 3;
+                break;
+            }
+            case 3: {
+                return 2;
+                break;
+            }
+            case 4: {
+                return 2;
+                break;
+            }
+            default:
+                return 0;
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
+        switch (section) {
+            case 0: {
+                return 1;
+                break;
+            }
+            case 1: {
+                return 2;
+                break;
+            }
+            case 2: {
+                return 3;
+                break;
+            }
+            case 3: {
+                return 1;
+                break;
+            }
+            case 4: {
+                return 1;
+                break;
+            }
+            case 5: {
+                return 2;
+                break;
+            }
+                
+            default:
+                return 0;
+                break;
+        }
+    }
+    
     switch (section) {
         case 0: {
             return 1;
             break;
         }
         case 1: {
-            return 6;
-            break;
-        }
-        case 2: {
-            return 3;
-            break;
-        }
-        case 3: {
             return 2;
             break;
         }
-        case 4: {
-            return 2;
-            break;
-        }
-            
         default:
             return 0;
             break;
@@ -135,30 +217,106 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
+        switch (indexPath.section) {
+            case 0: {
+                return 80;
+                break;
+            }
+            case 1: {
+                return 44;
+                break;
+            }
+            case 2: {
+                return 44;
+                break;
+            }
+            case 3: {
+                return 44;
+                break;
+            }
+                
+            default:
+                return 0;
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        switch (indexPath.section) {
+            case 0: {
+                return 80;
+                break;
+            }
+            case 1: {
+                if (indexPath.row == 1) {
+                    return 80;
+                }
+                return 44;
+                break;
+            }
+            case 2: {
+                if (indexPath.row == 1) {
+                    return 80;
+                }
+                return 44;
+                break;
+            }
+            case 3: {
+                return 44;
+                break;
+            }
+            case 4: {
+                return 44;
+                break;
+            }
+                
+            default:
+                return 0;
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
+        switch (indexPath.section) {
+            case 0: {
+                return 80;
+                break;
+            }
+            case 1: {
+                return 80;
+                break;
+            }
+            case 2: {
+                if (indexPath.row == 1) {
+                    return 80;
+                }
+                return 44;
+                break;
+            }
+            case 3: {
+                return 44;
+                break;
+            }
+            case 4: {
+                return 44;
+                break;
+            }
+            case 5: {
+                return 44;
+                break;
+            }
+                
+            default:
+                return 0;
+                break;
+        }
+    }
+    
     switch (indexPath.section) {
         case 0: {
             return 80;
             break;
         }
         case 1: {
-            if (indexPath.row == 1) {
-                return 80;
-            }
-            return 44;
-            break;
-        }
-        case 2: {
-            if (indexPath.row == 1) {
-                return 80;
-            }
-            return 44;
-            break;
-        }
-        case 3: {
-            return 44;
-            break;
-        }
-        case 4: {
             return 44;
             break;
         }
@@ -178,6 +336,305 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
+        switch (indexPath.section) {
+            case 0: {
+                HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+                cell.nameL.text = @"壳牌授权店";
+                cell.nickNameL.text = @"店小二";
+                cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+                return cell;
+                break;
+            }
+                
+            case 1:{
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"商品收藏";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                return cell;
+                break;
+            }
+                
+            case 2:{
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"修改密码";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                return cell;
+                break;
+            }
+            case 3:{
+                if (indexPath.row == 0) {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"免责声明";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                else {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"联系我们";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                break;
+            }
+            default:
+                return nil;
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        switch (indexPath.section) {
+            case 0: {
+                HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+                cell.nameL.text = @"壳牌授权店";
+                cell.nickNameL.text = @"店小二";
+                cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+                return cell;
+                break;
+            }
+                
+            case 1:{
+                switch (indexPath.row) {
+                    case 0: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"服务订单";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 1: {
+                        CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.firstL.text = @"检查完成";
+                        [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.secondL.text = @"订单确认";
+                        cell.thirdBtn.hidden = NO;
+                        cell.thirdL.hidden = NO;
+                        [cell.thirdBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.thirdL.text = @"施工完成";
+                        cell.fourthBtn.hidden = NO;
+                        cell.fourthL.hidden = NO;
+                        [cell.fourthBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.fourthL.text = @"已付款";
+                        return cell;
+                        break;
+                    }
+                    case 2: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"统计报表";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 3: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"定制服务";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 4: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"优惠管理";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 5: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"员工管理";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    default:
+                        return nil;
+                        break;
+                }
+                break;
+            }
+            case 2:{
+                switch (indexPath.row) {
+                    case 0: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"商城订单";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 1: {
+                        CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.firstL.text = @"待付款";
+                        [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.secondL.text = @"已付款";
+                        return cell;
+                        break;
+                    }
+                    case 2: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"商品收藏";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    default:
+                        return nil;
+                        break;
+                }
+                break;
+            }
+                
+            case 3:{
+                if (indexPath.row == 0) {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"修改密码";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                else {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"地址管理";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                break;
+            }
+            case 4:{
+                if (indexPath.row == 0) {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"免责声明";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                else {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"联系我们";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                break;
+            }
+            default:
+                return nil;
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
+        switch (indexPath.section) {
+            case 0: {
+                HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+                cell.nameL.text = @"壳牌授权店";
+                cell.nickNameL.text = @"店小二";
+                cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+                return cell;
+                break;
+            }
+            case 1:{
+                switch (indexPath.row) {
+                    case 0: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"技能特长";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 1: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"技能认证";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    default:
+                        return nil;
+                        break;
+                }
+                break;
+            }
+            case 2:{
+                switch (indexPath.row) {
+                    case 0: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"服务订单";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 1: {
+                        CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.firstL.text = @"检查完成";
+                        [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.secondL.text = @"订单确认";
+                        cell.thirdBtn.hidden = NO;
+                        cell.thirdL.hidden = NO;
+                        [cell.thirdBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.thirdL.text = @"施工完成";
+                        cell.fourthBtn.hidden = NO;
+                        cell.fourthL.hidden = NO;
+                        [cell.fourthBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        cell.fourthL.text = @"已付款";
+                        return cell;
+                        break;
+                    }
+                    case 2: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.nameL.text = @"统计报表";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    default:
+                        return nil;
+                        break;
+                }
+                break;
+            }
+            case 3:{
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"商品收藏";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                return cell;
+                break;
+            }
+            case 4:{
+                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.nameL.text = @"修改密码";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                return cell;
+                break;
+            }
+            case 5:{
+                if (indexPath.row == 0) {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"免责声明";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                else {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.nameL.text = @"联系我们";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                break;
+            }
+            default:
+                return nil;
+                break;
+        }
+    }
+    
     switch (indexPath.section) {
         case 0: {
             HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
@@ -189,120 +646,7 @@
             return cell;
             break;
         }
-            
         case 1:{
-            switch (indexPath.row) {
-                case 0: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"服务订单";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                case 1: {
-                    CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
-                    cell.firstL.text = @"检查完成";
-                    [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
-                    cell.secondL.text = @"订单确认";
-                    cell.thirdBtn.hidden = NO;
-                    cell.thirdL.hidden = NO;
-                    [cell.thirdBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
-                    cell.thirdL.text = @"施工完成";
-                    cell.fourthBtn.hidden = NO;
-                    cell.fourthL.hidden = NO;
-                    [cell.fourthBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
-                    cell.fourthL.text = @"已付款";
-                    return cell;
-                    break;
-                }
-                case 2: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"统计报表";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                case 3: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"定制服务";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                case 4: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"优惠管理";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                case 5: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"员工管理";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                    
-                default:
-                    return nil;
-                    break;
-            }
-            break;
-        }
-            
-        case 2:{
-            switch (indexPath.row) {
-                case 0: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"商城订单";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                case 1: {
-                    CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
-                    cell.firstL.text = @"待付款";
-                    [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
-                    cell.secondL.text = @"已付款";
-                    return cell;
-                    break;
-                }
-                case 2: {
-                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                    cell.nameL.text = @"商品收藏";
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                    break;
-                }
-                default:
-                    return nil;
-                    break;
-            }
-            break;
-        }
-            
-        case 3:{
-            if (indexPath.row == 0) {
-                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                cell.nameL.text = @"修改密码";
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                return cell;
-            }
-            else {
-                CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                cell.nameL.text = @"地址管理";
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                return cell;
-            }
-            break;
-        }
-            
-        case 4:{
             if (indexPath.row == 0) {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                 cell.nameL.text = @"免责声明";
@@ -317,30 +661,159 @@
             }
             break;
         }
-            
         default:
             return nil;
             break;
     }
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if (section == 1) {
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 40)];
-//        //        view.backgroundColor = RGBCOLOR(249, 250, 251);
-//        view.backgroundColor = [UIColor whiteColor];
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, 100, 20)];
-//        label.font = [UIFont systemFontOfSize:15];
-//        label.backgroundColor = [UIColor clearColor];
-//        label.text = @"向您推荐";
-//        [view addSubview:label];
-//        return view;
-//    }
-//    return nil;
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
+        switch (indexPath.section) {
+            case 0: {
+                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+                applyVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:applyVC animated:YES];
+                break;
+            }
+            case 1: {
+                MailCollectionVC *collectionVC = [[MailCollectionVC alloc] init];
+                collectionVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:collectionVC animated:YES];
+                break;
+            }
+            case 2: {
+                FindPWDViewController *changeVC = [[FindPWDViewController alloc] init];
+                changeVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:changeVC animated:YES];
+                break;
+            }
+            case 3: {
+                NSLog(@"联系我们");
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        switch (indexPath.section) {
+            case 0: {
+                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+                applyVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:applyVC animated:YES];
+                break;
+            }
+            case 1: {
+                switch (indexPath.row) {
+                    case 2: {
+                        UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
+                        statementVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:statementVC animated:YES];
+                        break;
+                    }
+                    case 3: {
+                        CustomServiceVC *customVC = [[CustomServiceVC alloc] init];
+                        customVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:customVC animated:YES];
+                        break;
+                    }
+                    case 4: {
+                        BaoyangDiscountsVC *disVC = [[BaoyangDiscountsVC alloc] init];
+                        disVC.canEdit = YES;
+                        disVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:disVC animated:YES];
+                        break;
+                    }
+                    case 5: {
+                        EmployeeListVC *listVC = [[EmployeeListVC alloc] init];
+                        listVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:listVC animated:YES];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                break;
+            }
+            case 2: {
+                if (indexPath.row == 0) {
+                    MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
+                    listVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:listVC animated:YES];
+                }
+                else if (indexPath.row == 2) {
+                    MailCollectionVC *collectionVC = [[MailCollectionVC alloc] init];
+                    collectionVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:collectionVC animated:YES];
+                }
+                break;
+            }
+            case 3: {
+                if (indexPath.row == 0) {
+                    FindPWDViewController *changeVC = [[FindPWDViewController alloc] init];
+                    changeVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:changeVC animated:YES];
+                }
+                else if (indexPath.row == 1) {
+                    ReceiveAddressViewController *addressVC = [[ReceiveAddressViewController alloc] init];
+                    addressVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:addressVC animated:YES];
+                }
+                break;
+            }
+            case 4: {
+                NSLog(@"联系我们");
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
+        switch (indexPath.section) {
+            case 0: {
+                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+                applyVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:applyVC animated:YES];
+                break;
+            }
+            case 2: {
+                switch (indexPath.row) {
+                    case 2: {
+                        UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
+                        statementVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:statementVC animated:YES];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                break;
+            }
+            case 3: {
+                MailCollectionVC *collectionVC = [[MailCollectionVC alloc] init];
+                collectionVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:collectionVC animated:YES];
+                break;
+            }
+            case 4: {
+                FindPWDViewController *changeVC = [[FindPWDViewController alloc] init];
+                changeVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:changeVC animated:YES];
+                break;
+            }
+            case 5: {
+                NSLog(@"联系我们");
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+    
     switch (indexPath.section) {
         case 0: {
             ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
@@ -349,69 +822,7 @@
             break;
         }
         case 1: {
-            switch (indexPath.row) {
-                case 2: {
-                    UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
-                    statementVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:statementVC animated:YES];
-                    break;
-                }
-
-                case 3: {
-                    CustomServiceVC *customVC = [[CustomServiceVC alloc] init];
-                    customVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:customVC animated:YES];
-                    break;
-                }
-                    
-                case 4: {
-                    BaoyangDiscountsVC *disVC = [[BaoyangDiscountsVC alloc] init];
-                    disVC.canEdit = YES;
-                    disVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:disVC animated:YES];
-                    break;
-                }
-                    
-                case 5: {
-                    EmployeeListVC *listVC = [[EmployeeListVC alloc] init];
-                    listVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:listVC animated:YES];
-                    break;
-                }
-                    
-                default:
-                    break;
-            }
-            
-            
-            break;
-        }
-            
-        case 2: {
-            if (indexPath.row == 0) {
-                MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
-                listVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:listVC animated:YES];
-            }
-            else if (indexPath.row == 2) {
-                MailCollectionVC *collectionVC = [[MailCollectionVC alloc] init];
-                collectionVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:collectionVC animated:YES];
-            }
-            break;
-        }
-            
-        case 3: {
-            if (indexPath.row == 0) {
-                FindPWDViewController *changeVC = [[FindPWDViewController alloc] init];
-                changeVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:changeVC animated:YES];
-            }
-            else if (indexPath.row == 1) {
-                ReceiveAddressViewController *addressVC = [[ReceiveAddressViewController alloc] init];
-                addressVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:addressVC animated:YES];
-            }
+            NSLog(@"联系我们");
             break;
         }
             
@@ -477,6 +888,10 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+//            mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+            mobileUserType = @"2";
+            [self.myTableView reloadData];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

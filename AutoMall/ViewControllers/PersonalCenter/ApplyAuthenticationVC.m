@@ -222,9 +222,7 @@
     NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
     //    NSLog(@"baseString:%@",baseString);
     NSData *decodedImageData = [[NSData alloc] initWithBase64EncodedString:baseStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
-    
     [self.licenseImgBtn setBackgroundImage:decodedImage forState:UIControlStateNormal];
     
     
