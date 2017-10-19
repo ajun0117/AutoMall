@@ -9,6 +9,7 @@
 #import "ApplyAuthenticationVC.h"
 #import "ChooseLocationView.h"
 #import "CitiesDataTool.h"
+#import "GTMBase64.h"
 
 @interface ApplyAuthenticationVC () <UIGestureRecognizerDelegate>
 {
@@ -47,6 +48,8 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGongzhonghao:)];
     [self.gongzhongImg addGestureRecognizer:tap];
+    
+    self.gongzhongImg.image = IMG(@"check_default");
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -72,8 +75,13 @@
 }
 
 -(void)tapGongzhonghao:(UITapGestureRecognizer *)tap {
-    self.gongzhongImg.image = IMG(@"check_default");
-    [self requestUploadImg:self.gongzhongImg imageName:@"gongzhong"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // 设置时间格式
+    formatter.dateFormat = @"yyyyMMddHHmmss";
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+    
+    [self requestUploadImg:self.gongzhongImg imageName:fileName];
 }
 
 
@@ -199,22 +207,32 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadUploadImg,@"op", nil];
     
     //data=data
-    NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
-//    NSInteger length = imageData.length;
-//    if (length > 1048) {
-//        CGFloat packRate = 1048.0/length;
-//        imageData = UIImageJPEGRepresentation(image.image, packRate);
-//    }
+    UIImage *im = IMG(@"picture_1");
+    NSData *imageData = UIImageJPEGRepresentation(im, 1);
+    NSInteger length = imageData.length;
+    if (length > 1048) {
+        CGFloat packRate = 1048.0/length;
+        imageData = UIImageJPEGRepresentation(im, packRate);
+    }
     //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
-    NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
-    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                         (CFStringRef)baseStr,
-                                                                                         NULL,
-                                                                                         CFSTR(":/?#[]@!$&’()*+,;="),
-                                                                                         kCFStringEncodingUTF8);
-    //    NSLog(@"baseString:%@",baseString);
     
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",@"png",@"fileName", nil];
+//    imageData= [GTMBase64 encodeData:imageData];
+//    NSString *baseStr = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
+    
+    NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
+    //    NSLog(@"baseString:%@",baseString);
+    NSData *decodedImageData = [[NSData alloc] initWithBase64EncodedString:baseStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
+    
+    [self.licenseImgBtn setBackgroundImage:decodedImage forState:UIControlStateNormal];
+    
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"txt"];
+//    NSString *content = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    
+    
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",name,@"fileName", nil];
     NSLog(@"paramsDic: %@",paramsDic);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UploadUploadImg) delegate:nil params:paramsDic info:infoDic];
     //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];

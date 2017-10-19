@@ -193,7 +193,7 @@
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = zixunArray[indexPath.section];
         //    cell.zixunIMG.image = IMG(@"personalCenter");
-        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
         //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -203,7 +203,7 @@
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = jiaochengArray[indexPath.section];
         //    cell.zixunIMG.image = IMG(@"personalCenter");
-        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
         //        cell.selectionStyle = UITableViewCellSelectionStyleNone;

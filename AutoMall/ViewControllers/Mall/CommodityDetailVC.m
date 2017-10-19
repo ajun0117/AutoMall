@@ -468,7 +468,7 @@ static CGFloat const scrollViewHeight = 220;
             CommodityDetailTuijianCell *cell = (CommodityDetailTuijianCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTuijianCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSDictionary *dic = tjListAry [indexPath.row];
-            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
+            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"timg-2")];
             cell.goodsNameL.text = dic [@"name"];
             cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
             cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
@@ -662,8 +662,14 @@ static CGFloat const scrollViewHeight = 220;
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityDetail object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityDetail, @"op", nil];
+    NSString *urlString;
     NSString *userId= [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?userId=%@",UrlPrefix(CommodityDetail),self.commodityId,userId];
+    if (userId) {
+        urlString = [NSString stringWithFormat:@"%@/%@?userId=%@",UrlPrefix(CommodityDetail),self.commodityId,userId];
+    } else {
+        urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CommodityDetail),self.commodityId];
+    }
+    
      [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
 //    [[DataRequest sharedDataRequest] postDataWithUrl:urlString delegate:nil params:pram info:infoDic];

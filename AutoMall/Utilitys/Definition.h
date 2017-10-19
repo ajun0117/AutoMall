@@ -131,69 +131,70 @@
 
 
 //汽车商城
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep/api%@",action])
-#define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+//#define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
 //资讯、教程
-#define InformationList                          @"/info/list"    //资讯列表
-#define CourseList                                  @"/course/list"  //教程列表
+#define InformationList                          @"/api/info/list"    //资讯列表
+#define CourseList                                  @"/api/course/list"  //教程列表
 
-#define UploadUploadImg                       @"/upload/uploadImg"    //上传图片
+#define UploadUploadImg                       @"/api/upload/uploadImg"    //上传图片
 
 //商城
-#define ComCategoryList                        @"/comCategory/list"    //商品分类
-#define CommodityList                            @"/commodity/list"       //商品列表
-#define CommodityDetail                         @"/commodity/getInfo"   //商品详情
-#define CommoditytjList                         @"/commodity/tjlist"  //商品详情推荐商品列表
-#define AdvertList                                  @"/advert/list"             //广告列表接口
-#define ConsigneeList                              @"/consignee/list"        //收货地址接口
-#define ConsigneeAdd                             @"/consignee/add"        //新增收货地址
-#define ConsigneeEdit                             @"/consignee/edit"       //编辑收货地址
-#define ConsigneeDele                             @"/consignee/del"        //删除收货地址
-#define MallOrderAdd                             @"/order/add"             //新增订单
-#define MallOrderChoosePayMode           @"/order/choosePayMode"     //选择支付方式
+#define ComCategoryList                        @"/api/comCategory/list"    //商品分类
+#define CommodityList                            @"/api/commodity/list"       //商品列表
+#define CommodityDetail                         @"/api/commodity/getInfo"   //商品详情
+#define CommoditytjList                         @"/api/commodity/tjlist"  //商品详情推荐商品列表
+#define AdvertList                                  @"/api/advert/list"             //广告列表接口
+#define ConsigneeList                              @"/api/consignee/list"        //收货地址接口
+#define ConsigneeAdd                             @"/api/consignee/add"        //新增收货地址
+#define ConsigneeEdit                             @"/api/consignee/edit"       //编辑收货地址
+#define ConsigneeDele                             @"/api/consignee/del"        //删除收货地址
+#define MallOrderAdd                             @"/api/order/add"             //新增订单
+#define MallOrderChoosePayMode           @"/api/order/choosePayMode"     //选择支付方式
 
 //登录、注册、找回密码
-#define GetSMS                                      @"/sms/send"                    //获取短信验证码
-#define UserRegister                              @"/user/register"             //用户注册
-#define UserForget                                 @"/user/forget"               //忘记密码
-#define CheckCode                                  @"/sms/checkCode"          //校验验证码
-#define UserLogin                                   @"/login"                           //用户登录
-#define PhoneCheckup                             @"/user/checkup"             //验证手机号是否存在
-#define GetUserInfo                               @"/info"                            //获取登录用户的信息
+#define GetSMS                                      @"/api/sms/send"                    //获取短信验证码
+#define UserRegister                              @"/api/user/register"             //用户注册
+#define UserForget                                 @"/api/user/forget"               //忘记密码
+#define CheckCode                                  @"/api/sms/checkCode"          //校验验证码
+#define UserLogin                                   @"/api/login"                           //用户登录
+#define PhoneCheckup                             @"/api/user/checkup"             //验证手机号是否存在
+#define GetUserInfo                               @"/api/info"                            //获取登录用户的信息
 
 //保养
-#define ChecktypeList                             @"/checktype/list"              //检查类别
-#define CheckcategoryList                      @"/checkcategory/list"       //检查部位列表
-#define ChecktermList                            @"/checkterm/list"             //某部位的检查内容列表
-#define afafds                                         @"/checkContent/list"       //检查部位下检查内容和服务内容
-#define CarUpkeepAdd                            @"/carUpkeep/add"            //生成检查单信息
-#define DiscountList                                @"/discount/list"                //优惠列表
-#define CarAdd                                        @"/car/add"                       //新增车辆信息
-#define CarUpdate                                   @"/car/update"                  //更新车辆信息
-#define CarList                                        @"/car/list"                        //车辆列表
+#define ChecktypeList                             @"/api/checktype/list"              //检查类别
+#define CheckcategoryList                      @"/api/checkcategory/list"       //检查部位列表
+#define ChecktermList                            @"/api/checkterm/list"             //某部位的检查内容列表
+#define afafds                                         @"/api/checkContent/list"       //检查部位下检查内容和服务内容
+#define CarUpkeepAdd                            @"/api/carUpkeep/add"            //生成检查单信息
+#define DiscountList                                @"/api/discount/list"                //优惠列表
+#define CarAdd                                        @"/api/car/add"                       //新增车辆信息
+#define CarUpdate                                   @"/api/car/update"                  //更新车辆信息
+#define CarList                                        @"/api/car/list"                        //车辆列表
+#define CarUpkeepUpdate                       @"/api/carUpkeep/update"    //更新检查订单支付状态
 
 //个人中心
-#define ListServiceContent                     @"/user/listServiceContent"     //获取服务内容
-#define CustomizeServiceContent           @"/user/customizeServiceContent"     //提交定制服务内容
-#define ListServicePackage                     @"/user/listServicePackage"     //服务套餐列表
-#define CustomizeServicePackage           @"/user/customizeServicePackage"    //提交服务套餐
-#define MallOrderList                             @"/order/list"                    //订单列表
-#define DiscountAdd                               @"/discount/add"              //新增优惠
-#define DiscountEdit                               @"/discount/edit"             //编辑优惠
-#define MessageList                                @"/message/list"              //消息列表
+#define ListServiceContent                     @"/api/user/listServiceContent"     //获取服务内容
+#define CustomizeServiceContent           @"/api/user/customizeServiceContent"     //提交定制服务内容
+#define ListServicePackage                     @"/api/user/listServicePackage"     //服务套餐列表
+#define CustomizeServicePackage           @"/api/user/customizeServicePackage"    //提交服务套餐
+#define MallOrderList                             @"/api/order/list"                    //订单列表
+#define DiscountAdd                               @"/api/discount/add"              //新增优惠
+#define DiscountEdit                               @"/api/discount/edit"             //编辑优惠
+#define MessageList                                @"/api/message/list"              //消息列表
 
-#define StoreGetInfo                              @"/store/get"                 //获取门店详情
-#define StoreInfoUpdate                        @"/store/update"            //修改门店信息
-#define StoreRegister                             @"/store/register"              //门店申请
-#define StoreListStaff                           @"/store/listStaff"             //员工列表
-#define StoreDelStaff                            @"/store/delStaff"             //删除员工
-#define StoreAddStaff                           @"/store/addStaff"           //添加员工
-#define StaffSkillList                             @"/store/listStaffSkill"       //获取员工技能列表
-#define StoreUpdateStaffSkill               @"/store/updateStaffSkill"     //员工自己修改技能
+#define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
+#define StoreInfoUpdate                        @"/api/store/update"            //修改门店信息
+#define StoreRegister                             @"/api/store/register"              //门店申请
+#define StoreListStaff                           @"/api/store/listStaff"             //员工列表
+#define StoreDelStaff                            @"/api/store/delStaff"             //删除员工
+#define StoreAddStaff                           @"/api/store/addStaff"           //添加员工
+#define StaffSkillList                             @"/api/store/listStaffSkill"       //获取员工技能列表
+#define StoreUpdateStaffSkill               @"/api/store/updateStaffSkill"     //员工自己修改技能
 
-#define FavoriteList                                @"/favorite/list"                   //收藏列表
-#define FavoriteCollect                           @"/favorite/collect"              //收藏
-#define FavoriteDecollect                       @"/favorite/decollect"          //取消收藏
+#define FavoriteList                                @"/api/favorite/list"                   //收藏列表
+#define FavoriteCollect                           @"/api/favorite/collect"              //收藏
+#define FavoriteDecollect                       @"/api/favorite/decollect"          //取消收藏
 
 
 #define BaiduPush_Key @"DyHZlmzGGtjfRDyVmtcG3MG5" //百度云推送key

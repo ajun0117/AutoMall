@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/ApplyAuthenticationVC.m"
-            timestampString = "529995153.14156"
+            timestampString = "530103604.673003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "-requestUploadImg:imageName:"
             landmarkType = "7">
          </BreakpointContent>

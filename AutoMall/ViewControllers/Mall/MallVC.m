@@ -277,7 +277,7 @@ static CGFloat const scrollViewHeight = 220;
 //    InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
 //    NSDictionary *dic = inforArray[indexPath.section];
 //    //    cell.zixunIMG.image = IMG(@"personalCenter");
-//    [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage: IMG(@"personalCenter")];
+//    [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"personalCenter")];
 //    cell.zixunTitle.text = STRING(dic[@"title"]);
 //    cell.zixunContent.text = STRING(dic[@"content"]);
 //    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -455,7 +455,7 @@ static CGFloat const scrollViewHeight = 220;
             adArray = responseObject[@"data"];
             NSMutableArray *urlAry = [NSMutableArray array];
             for (NSDictionary *dic in adArray) {
-                [urlAry addObject:ImagePrefixURL(dic[@"image"])];
+                [urlAry addObject:UrlPrefix(dic[@"image"])];
             }
             scroll.images = urlAry;
         }

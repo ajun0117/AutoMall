@@ -19,6 +19,8 @@
 #import "MyAlertView.h"
 #import "AutoCheckCarInfoVC.h"
 #import "AutoCheckPhotoVC.h"
+#import "AddPicViewController.h"
+#import "AutoCheckOrderPayModeVC.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
@@ -160,60 +162,12 @@
     [self.navigationController pushViewController:markVC animated:YES];
 }
 
-- (IBAction)carBodyAction:(id)sender {
-    [self setButton:self.carBodyBtn withBool:YES andView:self.carBodyView withColor:Red_BtnColor];
-    [self setButton:self.carInsideBtn withBool:NO andView:self.carInsideView withColor:[UIColor clearColor]];
-    [self setButton:self.engineRoomBtn withBool:NO andView:self.engineRoomView withColor:[UIColor clearColor]];
-    [self setButton:self.chassisBtn withBool:NO andView:self.chassisView withColor:[UIColor clearColor]];
-    [self setButton:self.trunkBtn withBool:NO andView:self.trunkView withColor:[UIColor clearColor]];
-    
-    [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-}
-
-- (IBAction)carInsideAction:(id)sender {
-    [self setButton:self.carBodyBtn withBool:NO andView:self.carBodyView withColor:[UIColor clearColor]];
-    [self setButton:self.carInsideBtn withBool:YES andView:self.carInsideView withColor:Red_BtnColor];
-    [self setButton:self.engineRoomBtn withBool:NO andView:self.engineRoomView withColor:[UIColor clearColor]];
-    [self setButton:self.chassisBtn withBool:NO andView:self.chassisView withColor:[UIColor clearColor]];
-    [self setButton:self.trunkBtn withBool:NO andView:self.trunkView withColor:[UIColor clearColor]];
-    
-    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:NO];
-}
-
-- (IBAction)engineRoomAction:(id)sender {
-    [self setButton:self.carBodyBtn withBool:NO andView:self.carBodyView withColor:[UIColor clearColor]];
-    [self setButton:self.carInsideBtn withBool:NO andView:self.carInsideView withColor:[UIColor clearColor]];
-    [self setButton:self.engineRoomBtn withBool:YES andView:self.engineRoomView withColor:Red_BtnColor];
-    [self setButton:self.chassisBtn withBool:NO andView:self.chassisView withColor:[UIColor clearColor]];
-    [self setButton:self.trunkBtn withBool:NO andView:self.trunkView withColor:[UIColor clearColor]];
-    
-    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * 2, 0) animated:NO];
-}
-
-- (IBAction)chassisAction:(id)sender {
-    [self setButton:self.carBodyBtn withBool:NO andView:self.carBodyView withColor:[UIColor clearColor]];
-    [self setButton:self.carInsideBtn withBool:NO andView:self.carInsideView withColor:[UIColor clearColor]];
-    [self setButton:self.engineRoomBtn withBool:NO andView:self.engineRoomView withColor:[UIColor clearColor]];
-    [self setButton:self.chassisBtn withBool:YES andView:self.chassisView withColor:Red_BtnColor];
-    [self setButton:self.trunkBtn withBool:NO andView:self.trunkView withColor:[UIColor clearColor]];
-    
-    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * 3, 0) animated:NO];
-}
-
-- (IBAction)trunkAction:(id)sender {
-    [self setButton:self.carBodyBtn withBool:NO andView:self.carBodyView withColor:[UIColor clearColor]];
-    [self setButton:self.carInsideBtn withBool:NO andView:self.carInsideView withColor:[UIColor clearColor]];
-    [self setButton:self.engineRoomBtn withBool:NO andView:self.engineRoomView withColor:[UIColor clearColor]];
-    [self setButton:self.chassisBtn withBool:NO andView:self.chassisView withColor:[UIColor clearColor]];
-    [self setButton:self.trunkBtn withBool:YES andView:self.trunkView withColor:Red_BtnColor];
-    
-    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH * 4, 0) animated:NO];
-}
-
 - (IBAction)creatChecklistAction:(id)sender {
-    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-    planVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:planVC animated:YES];
+//    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+//    planVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:planVC animated:YES];
+    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -297,10 +251,12 @@
     }
     currentPhotoIndexPath = [tableV indexPathForCell:cell];     //记录当前拍照按钮对应的cell位置
     
-    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
-    photoVC.GoBackUpdate = ^(NSArray *array) {
-        [self updatePhotoWithImages:array];
-    };
+//    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
+//    photoVC.GoBackUpdate = ^(NSArray *array) {
+//        [self updatePhotoWithImages:array];
+//    };
+//    [self.navigationController pushViewController:photoVC animated:YES];
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     [self.navigationController pushViewController:photoVC animated:YES];
 }
 

@@ -454,15 +454,16 @@ static GlobalSetting *globalSetting;
     return [userDefaults valueForKey:kToken];
 }
 
--(void)setOrganizationID:(NSString *)oid {
+//登录用户身份
+-(void)setMobileUserType:(NSString *)type {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:oid forKey:@"OrganizationID"];
+    [userDefaults setObject:type forKey:@"mobileUserType"];
     [userDefaults synchronize];
 }
 
--(NSString *)organizationID {
+-(NSString *)mobileUserType {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults valueForKey:@"OrganizationID"];
+    return [userDefaults valueForKey:@"mobileUserType"];
 }
 
 -(void)setmName:(NSString *)mName {
@@ -519,7 +520,6 @@ static GlobalSetting *globalSetting;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults valueForKey:@"mlocation"];
 }
-
 
 
 -(void)setAuthenticate:(id)authenticate {

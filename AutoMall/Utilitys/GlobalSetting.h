@@ -168,9 +168,9 @@
 -(void)setToken:(NSString *)token;
 -(NSString *)token;
 
-//组织ID
--(void)setOrganizationID:(NSString *)oid;
--(NSString *)organizationID;
+//登录用户身份
+-(void)setMobileUserType:(NSString *)type;
+-(NSString *)mobileUserType;
 
 //认证姓名
 -(void)setmName:(NSString *)mName;

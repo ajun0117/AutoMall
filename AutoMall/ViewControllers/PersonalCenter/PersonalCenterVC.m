@@ -472,6 +472,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *dic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
 //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

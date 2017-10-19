@@ -169,7 +169,7 @@
         return collCell;
     }
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-    [collCell.img sd_setImageWithURL:[NSURL URLWithString:ImagePrefixURL(dic[@"image"])] placeholderImage:IMG(@"check_default")];
+    [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"check_default")];
     collCell.titleL.text = dic [@"name"];
     
     //    collCell.exchangeBtn.tag = indexPath.item + 1000;
