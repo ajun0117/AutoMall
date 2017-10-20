@@ -93,9 +93,9 @@
 //}
 
 -(void)toCarOwner:(UIButton *)btn {
-    BaoyangHistoryVC *historyVC = [[BaoyangHistoryVC alloc] init];
-    historyVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:historyVC animated:YES];
+    CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
 }
 
 - (IBAction)toCheckAutoAction:(id)sender {

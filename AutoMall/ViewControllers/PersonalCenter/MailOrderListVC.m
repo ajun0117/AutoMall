@@ -16,7 +16,8 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *orderArray;
-    int currentpage; 
+    int currentpage;
+    NSString *orderStatus;      //0未支付，1已支付
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -37,6 +38,7 @@
     
     orderArray = [NSMutableArray array];
     currentpage = 0;
+    orderStatus = @"0";
     [self requestGetMallOrderList];
 }
 
@@ -73,21 +75,30 @@
 
 
 - (IBAction)daifuAction:(id)sender {
+    orderStatus = @"0";
+    [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:YES andView:self.daifuView withColor:Red_BtnColor];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
     [self setButton:self.allBtn withBool:NO andView:self.allView withColor:[UIColor clearColor]];
+    [self requestGetMallOrderList];
 }
 
 - (IBAction)yifuAction:(id)sender {
-        [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
-        [self setButton:self.yifuBtn withBool:YES andView:self.yifuView withColor:Red_BtnColor];
-        [self setButton:self.allBtn withBool:NO andView:self.allView withColor:[UIColor clearColor]];
+    orderStatus = @"1";
+    [orderArray removeAllObjects];
+    [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
+    [self setButton:self.yifuBtn withBool:YES andView:self.yifuView withColor:Red_BtnColor];
+    [self setButton:self.allBtn withBool:NO andView:self.allView withColor:[UIColor clearColor]];
+    [self requestGetMallOrderList];
 }
 
 - (IBAction)allAction:(id)sender {
-        [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
-        [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
-        [self setButton:self.allBtn withBool:YES andView:self.allView withColor:Red_BtnColor];
+    orderStatus = nil;
+    [orderArray removeAllObjects];
+    [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
+    [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
+    [self setButton:self.allBtn withBool:YES andView:self.allView withColor:Red_BtnColor];
+    [self requestGetMallOrderList];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -195,7 +206,7 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderList, @"op", nil];
 //    NSString *urlString = [NSString stringWithFormat:@"%@?clientId=%@&pageNo=%d",UrlPrefix(MallOrderList),userId,currentpage];
 //    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"clientId",[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"clientId",[NSNumber numberWithInt:currentpage],@"pageNo",orderStatus,@"orderStatus", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderList) delegate:nil params:pram info:infoDic];
 }
 

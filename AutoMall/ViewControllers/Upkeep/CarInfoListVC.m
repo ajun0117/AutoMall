@@ -135,12 +135,13 @@
         [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+#pragma mark - 发送请求
 -(void)requestGetCarList { //获取车辆信息列表
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?plateNumber=%@&pageNo=%d",UrlPrefix(CarList),@"",currentpage];
+    NSString *urlString = [NSString stringWithFormat:@"%@?plateNumber=%@",UrlPrefix(CarList),@""];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

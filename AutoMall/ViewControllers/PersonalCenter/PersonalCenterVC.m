@@ -813,21 +813,22 @@
         }
     }
     
-    
-    switch (indexPath.section) {
-        case 0: {
-            ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
-            applyVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:applyVC animated:YES];
-            break;
+    else {
+        switch (indexPath.section) {
+            case 0: {
+                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+                applyVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:applyVC animated:YES];
+                break;
+            }
+            case 1: {
+                NSLog(@"联系我们");
+                break;
+            }
+                
+            default:
+                break;
         }
-        case 1: {
-            NSLog(@"联系我们");
-            break;
-        }
-            
-        default:
-            break;
     }
 }
 

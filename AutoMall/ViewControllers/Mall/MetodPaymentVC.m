@@ -209,7 +209,6 @@
             //            _networkConditionHUD.labelText = @"网络连接出错";
             payresultStr = @"failure";
         }
-        [self performSelectorOnMainThread:@selector(alipayBack:) withObject:payresultStr waitUntilDone:NO];
     }
 //    if ([notification.name isEqualToString:WxPayNotification]) {
 //        [[NSNotificationCenter defaultCenter] removeObserver:self name:WxPayNotification object:nil];

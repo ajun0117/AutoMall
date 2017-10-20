@@ -14,6 +14,7 @@
                 <outlet property="nameTF" destination="GYh-Js-1pH" id="c13-55-qDT"/>
                 <outlet property="passwordTF" destination="jyP-Ea-q7K" id="2ry-3a-Qdo"/>
                 <outlet property="phoneTF" destination="Fux-fB-Wr7" id="e7K-Hz-QcI"/>
+                <outlet property="rePasswordTF" destination="tNE-33-gAF" id="41Y-4C-8Uy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -101,19 +102,54 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HF-Km-Sve">
+                    <rect key="frame" x="16" y="191" width="343" height="1"/>
+                    <color key="backgroundColor" red="0.91664922240000002" green="0.91662180419999995" blue="0.91663730139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="uBG-5C-x8n"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="uBG-5C-x8n"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="uBG-5C-x8n"/>
+                        </mask>
+                    </variation>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="确认初始密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tNE-33-gAF">
+                    <rect key="frame" x="16" y="194" width="343" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="rgB-hm-APP"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="tNE-33-gAF" secondAttribute="trailing" constant="16" id="2xi-F7-BVL"/>
                 <constraint firstItem="GYh-Js-1pH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="7Np-bK-bDd"/>
                 <constraint firstAttribute="trailing" secondItem="Fux-fB-Wr7" secondAttribute="trailing" constant="16" id="DgN-f2-yC7"/>
                 <constraint firstItem="jyP-Ea-q7K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Efo-3D-VkC"/>
                 <constraint firstAttribute="bottom" secondItem="dsu-z5-c0w" secondAttribute="bottom" id="Krl-mX-XLc"/>
+                <constraint firstItem="9HF-Km-Sve" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="LR1-03-Raw"/>
                 <constraint firstItem="Fux-fB-Wr7" firstAttribute="top" secondItem="SHh-wa-o1B" secondAttribute="bottom" constant="2" id="Oa7-n7-r1z"/>
                 <constraint firstAttribute="trailing" secondItem="SHh-wa-o1B" secondAttribute="trailing" constant="16" id="W2H-fl-PZo"/>
                 <constraint firstItem="Fux-fB-Wr7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Wuf-K5-u2a"/>
+                <constraint firstItem="9HF-Km-Sve" firstAttribute="top" secondItem="jyP-Ea-q7K" secondAttribute="bottom" constant="2" id="Wyq-x6-TKC"/>
+                <constraint firstAttribute="trailing" secondItem="9HF-Km-Sve" secondAttribute="trailing" constant="16" id="XU3-XB-iw0"/>
                 <constraint firstAttribute="trailing" secondItem="jyP-Ea-q7K" secondAttribute="trailing" constant="16" id="Zex-Rz-qBp"/>
                 <constraint firstItem="i65-YQ-1Ab" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="bfV-MX-6wL"/>
+                <constraint firstItem="tNE-33-gAF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="dtI-gc-xwv"/>
                 <constraint firstItem="SHh-wa-o1B" firstAttribute="top" secondItem="GYh-Js-1pH" secondAttribute="bottom" constant="2" id="fF9-uf-6bh"/>
+                <constraint firstItem="tNE-33-gAF" firstAttribute="top" secondItem="9HF-Km-Sve" secondAttribute="bottom" constant="2" id="hNt-Et-wxs"/>
                 <constraint firstItem="jyP-Ea-q7K" firstAttribute="top" secondItem="i65-YQ-1Ab" secondAttribute="bottom" constant="2" id="htA-6e-Ukr"/>
                 <constraint firstItem="GYh-Js-1pH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="jfg-Pu-m7i"/>
                 <constraint firstItem="SHh-wa-o1B" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="kLb-GO-kep"/>

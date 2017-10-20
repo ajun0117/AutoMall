@@ -12,6 +12,7 @@
 @interface RegisterViewController ()
 {
      IBOutlet UIButton *mimaEyeBtn;
+    __weak IBOutlet UIButton *reMimaEyeBtn;
     IBOutlet UIButton *radioBtn;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -30,6 +31,7 @@
     
     
     [mimaEyeBtn setImage:[UIImage imageNamed:@"mimaEye_close"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [reMimaEyeBtn setImage:[UIImage imageNamed:@"mimaEye_close"] forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -66,18 +68,40 @@
         self.passwordTF.text = tempPwdStr;
     }
 }
+- (IBAction)rePwdTextSwitch:(id)sender {
+    UIButton *eyeBtn = (UIButton *)sender;
+    eyeBtn.selected = !eyeBtn.selected;
+    
+    if (eyeBtn.selected) { // 按下去了就是暗文
+        NSString *tempPwdStr = self.rePasswordTF.text;
+        self.rePasswordTF.text = @""; // 这句代码可以防止切换的时候光标偏移
+        self.rePasswordTF.secureTextEntry = YES;
+        self.rePasswordTF.text = tempPwdStr;
+        
+    } else { // 明文
+        NSString *tempPwdStr = self.rePasswordTF.text;
+        self.rePasswordTF.text = @"";
+        self.rePasswordTF.secureTextEntry = NO;
+        self.rePasswordTF.text = tempPwdStr;
+    }
+}
 
 - (IBAction)registerAction:(id)sender {
     [self.phoneTF resignFirstResponder];
     [self.passwordTF resignFirstResponder];
     
-    if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
-        [self requestVerifyMobile];
+    if (! [self.passwordTF.text isEqualToString:self.rePasswordTF.text]) {
+        _networkConditionHUD.labelText = @"两次输入的密码不同，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
-    else {
+    else if (! [self checkPhoneNumWithPhone:self.phoneTF.text]){
         _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    else {
+        [self requestVerifyMobile];
     }
 }
 

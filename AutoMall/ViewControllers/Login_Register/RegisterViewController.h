@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet CustomTextField *phoneTF;
 @property (weak, nonatomic) IBOutlet CustomTextField *passwordTF;
+@property (weak, nonatomic) IBOutlet CustomTextField *rePasswordTF;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 
 @end

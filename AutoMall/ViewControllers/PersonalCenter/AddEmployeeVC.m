@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameTF;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTF;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTF;
+@property (weak, nonatomic) IBOutlet UITextField *rePasswordTF;
 
 @end
 
@@ -45,13 +46,18 @@
 }
 
 - (IBAction)save:(id)sender {
-    if ([self checkPhoneNumWithPhone:self.phoneTF.text]) {
-         [self requestAddStaffList];
+    if (! [self.passwordTF.text isEqualToString:self.rePasswordTF.text]) {
+        _networkConditionHUD.labelText = @"两次输入的密码不同，请重新输入。";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
-    else {
+    else if (! [self checkPhoneNumWithPhone:self.phoneTF.text]){
         _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    else {
+        [self requestAddStaffList];
     }
 }
 
