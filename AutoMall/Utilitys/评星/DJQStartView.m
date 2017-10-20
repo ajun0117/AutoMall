@@ -19,7 +19,7 @@
         CGFloat y = frame.size.height / 2;
         self.radius = x < y ? x:y;
         self.value = 1;
-        self.startColor = RGBCOLOR(255, 116, 0);
+        self.startColor = RGBCOLOR(234, 156, 51);
         self.backgroundColor = [UIColor clearColor];
         self.boundsColor = RGBCOLOR(197, 198, 200);
         self.opaque = NO;
@@ -45,7 +45,7 @@
         CGFloat y = self.frame.size.height / 2;
         self.radius = x < y ? x:y;
         self.value = 1;
-        self.startColor = RGBCOLOR(255, 116, 0);
+        self.startColor = RGBCOLOR(234, 156, 51);
         self.backgroundColor = [UIColor clearColor];
         self.boundsColor = RGBCOLOR(197, 198, 200);
       

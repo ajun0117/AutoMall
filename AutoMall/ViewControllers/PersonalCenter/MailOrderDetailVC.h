@@ -10,4 +10,6 @@
 
 @interface MailOrderDetailVC : UIViewController
 
+@property (strong, nonatomic) NSString *orderId;    //订单id
+
 @end

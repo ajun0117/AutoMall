@@ -10,4 +10,9 @@
 
 @interface MailOrderDetailGoodsCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgView;
+@property (strong, nonatomic) IBOutlet UILabel *nameL;
+@property (strong, nonatomic) IBOutlet UILabel *UnitPriceL;
+@property (strong, nonatomic) IBOutlet UILabel *numL;
+
 @end

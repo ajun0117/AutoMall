@@ -58,7 +58,13 @@
                     <constraint firstAttribute="trailing" secondItem="gb0-au-gLA" secondAttribute="trailing" constant="16" id="tRb-3A-r5A"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="25" y="74"/>
+            <connections>
+                <outlet property="UnitPriceL" destination="6ix-Ud-JE8" id="TQW-o3-2Ow"/>
+                <outlet property="imgView" destination="O0e-e3-7FX" id="uby-Y1-YGZ"/>
+                <outlet property="nameL" destination="gb0-au-gLA" id="ZCi-F2-lPg"/>
+                <outlet property="numL" destination="dPV-zg-39x" id="wqp-Aa-gby"/>
+            </connections>
+            <point key="canvasLocation" x="-366" y="52"/>
         </tableViewCell>
     </objects>
     <resources>

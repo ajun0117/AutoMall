@@ -54,7 +54,11 @@
                     <constraint firstItem="3es-CM-Pi8" firstAttribute="leading" secondItem="h6z-Dx-05F" secondAttribute="trailing" constant="10" id="yJh-Xa-O6D"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="25" y="58"/>
+            <connections>
+                <outlet property="actualPaymentL" destination="3es-CM-Pi8" id="Ssd-QN-2pt"/>
+                <outlet property="dateL" destination="oGM-s7-D9O" id="jGJ-SG-dsY"/>
+            </connections>
+            <point key="canvasLocation" x="-348" y="50"/>
         </tableViewCell>
     </objects>
 </document>

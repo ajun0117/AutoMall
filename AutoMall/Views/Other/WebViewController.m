@@ -28,9 +28,9 @@
     self.title = self.titleStr;
     [_webView setScalesPageToFit:YES];
     
-    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Right-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    items = [NSMutableArray arrayWithObjects:backButnItem, nil];
-    self.navigationItem.leftBarButtonItems = items;
+//    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Right-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+//    items = [NSMutableArray arrayWithObjects:backButnItem, nil];
+//    self.navigationItem.leftBarButtonItems = items;
     
     if (self.canShare) {
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_action_share_white"] style:UIBarButtonItemStylePlain target:self action:@selector(shareClicked)];

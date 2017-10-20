@@ -133,9 +133,14 @@
 //汽车商城
 #define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
 //#define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+
+
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表
+#define InformationDetail                      @"/api/info/info"   //资讯详情
 #define CourseList                                  @"/api/course/list"  //教程列表
+#define CourseDetail                               @"/api/course/info"  //教程详情
+
 
 #define UploadUploadImg                       @"/api/upload/uploadImg"    //上传图片
 
@@ -178,7 +183,8 @@
 #define CustomizeServiceContent           @"/api/user/customizeServiceContent"     //提交定制服务内容
 #define ListServicePackage                     @"/api/user/listServicePackage"     //服务套餐列表
 #define CustomizeServicePackage           @"/api/user/customizeServicePackage"    //提交服务套餐
-#define MallOrderList                             @"/api/order/list"                    //订单列表
+#define MallOrderList                             @"/api/order/list"                    //商城订单列表
+#define MallOrderGetInfo                      @"/api/order/getInfo"               //商城订单详情
 #define DiscountAdd                               @"/api/discount/add"              //新增优惠
 #define DiscountEdit                               @"/api/discount/edit"             //编辑优惠
 #define MessageList                                @"/api/message/list"              //消息列表
@@ -198,6 +204,12 @@
 
 
 #define BaiduPush_Key @"DyHZlmzGGtjfRDyVmtcG3MG5" //百度云推送key
+
+#pragma mark - 支付宝配置区
+#define AliPay_AppId                            @"2017101609335037"
+//#define Alipay_Rsa2PrivateKey               @"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsLs8Y1IMwkIMNy/jXRiOjrOyK0TEibTUwJl5LQRbNCueX6NYABsFsfPtCTEUarSoyuKf5YWtQ6KdBPwNWHDNx2B+vgx7fsluMHmv2Yj742sX5CCV6mdB9EPmr7kySFMv6sh8RSK13DnS5xOpUSxX3kDbNBo4ayQ8lXUvLhIJZPl42C1ToVJZhGMU3jBIYSSe9q1fjF4DzYEpEmfsziP7nn5f67udQhCYzP7eB5pGJTHVdk3R67ZQOAEdmC5sU7pyJ9IoJyW6FbyvXJ3BsVNkJYXQN0HjtLbK3HsLb7mlZrjDjyLkm69EfGmG+l7xTlPI4S7XgC9TUP0GTYJLJmBocQIDAQAB"
+#define Alipay_Rsa2PrivateKey              @"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANolGFJ9a/52qMkoJ5mSbReFNshUnghUAh6WPsUXsAbgwYhjQs7wZ+Vs0etHsHDgQrv1dO9S7d+d9QdoWyQyXSQL2z5/Vm03JpuPSrlOsuiwvUdFRZeYkj+7FCxSsLMUIpBxz6p9K3CFrSAq7+0SgCn1EkdeDSjYdoOccYKSAaErAgMBAAECgYAzLGyOPVnuMcvalI7lmdH5qIh3alJAReTRZBGJjsr+cg80fYSYoxDcYzDDbufXMuS0zxoFYoDm6lkmybZHwYDTmuu+4/FvnSzPwNMqZtBfbIaBGDL5wqw8RqGDMn7vvzlxleHnYea2JjRXhNZvNAPC+cJMtdwIgkVGAaUG/lPREQJBAPf7KgjW0HA3TlKol7gjQJrIPKOe+2ey03vSxNq4h1TIM5J6xgxSUlYHp2bBPHi3FlkdNiSrVpdAKEl4vXwvxcUCQQDhMvDd/6t0GmniKslE2yaFsJw4aYh7PQWPQLUqEk9HcUMB141bVTQ3qgnym4X3JqQ3/mroCzo4uUQhRDlKQiovAkAuwMfYCsgZoBPAOdEBAoR3qjDkmGDF2E1PFxnOMuQw893lTAhy4kJrvd2t3djM2Zf5DSzcFQGqWoo97+mptEgRAkEAjtmleO0JcWif6duCOK9bTEqvjglDjgkzUZ+WS825hHQQMUbuYBU4PmcaUE7fN9vHJ823OuKEWB8NXJzOSpCV+QJBANAHUyuGNjsYBLCYeWkPWZ2Om7KhVoh3mmqgJPgLI5EgYQHq3onJL8l3ht+2bGcBToM+Aag5vLqT6Cgy6iHss+M="
+
 
 //QQ分享
 //#define kShare_QQ_AppID @"1104928111"

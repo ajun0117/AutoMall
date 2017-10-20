@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MailOrderDetailReceiverInfoCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *nameL;
+@property (strong, nonatomic) IBOutlet UILabel *phoneL;
+@property (strong, nonatomic) IBOutlet UILabel *addressL;
 
 @end

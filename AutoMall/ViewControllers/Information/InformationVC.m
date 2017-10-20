@@ -8,6 +8,7 @@
 
 #import "InformationVC.h"
 #import "InformationCell.h"
+#import "WebViewController.h"
 
 @interface InformationVC () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
@@ -53,7 +54,6 @@
     [self.mainScrollView addSubview:self.zixunTV];
     self.zixunTV.delegate = self;
     self.zixunTV.dataSource = self;
-    self.zixunTV.allowsSelection = NO;
     [self.zixunTV registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
     self.zixunTV.tableFooterView = [UIView new];
     [self.zixunTV addHeaderWithTarget:self action:@selector(zixunHeaderRefreshing)];
@@ -63,7 +63,6 @@
     [self.mainScrollView addSubview:self.jiaochengTV];
     self.jiaochengTV.delegate = self;
     self.jiaochengTV.dataSource = self;
-    self.jiaochengTV.allowsSelection = NO;
     [self.jiaochengTV registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
     self.jiaochengTV.tableFooterView = [UIView new];
     [self.jiaochengTV addHeaderWithTarget:self action:@selector(jiaochengHeaderRefreshing)];
@@ -181,6 +180,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 5;
+    }
     return 1;
 }
 
@@ -192,34 +194,35 @@
     if (tableView == self.zixunTV) {
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = zixunArray[indexPath.section];
-        //    cell.zixunIMG.image = IMG(@"personalCenter");
         [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
-        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else {
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = jiaochengArray[indexPath.section];
-        //    cell.zixunIMG.image = IMG(@"personalCenter");
         [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
-        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    NSLog(@"adfasdfasdfasdf");
+    WebViewController *webVC = [[WebViewController alloc] init];
+    if (tableView == self.zixunTV) {
+        webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(InformationDetail),zixunArray[indexPath.section][@"id"]];
+        webVC.titleStr = @"资讯详情";
+    } else {
+        webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CourseDetail),jiaochengArray[indexPath.section][@"id"]];
+        webVC.titleStr = @"教程详情";
+    }
+    webVC.canShare = NO;
+    webVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 #pragma mark - 网络请求

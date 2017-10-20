@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/PersonalCenter/ApplyAuthenticationVC.m"
-            timestampString = "530103604.673003"
+            filePath = "AutoMall/ViewControllers/Mall/CommodityListVC.m"
+            timestampString = "530182322.309594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-requestUploadImg:imageName:"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

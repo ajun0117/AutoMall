@@ -438,7 +438,7 @@ static CGFloat const scrollViewHeight = 220;
                         }
                         label.layer.cornerRadius = 8;   //圆角
                         label.clipsToBounds = YES;
-                        label.backgroundColor = [UIColor blackColor];
+                        label.backgroundColor = RGBCOLOR(171, 159, 32);
                         label.textColor = [UIColor whiteColor];
                         label.font = [UIFont systemFontOfSize:12];
                         label.text = str;
@@ -542,6 +542,10 @@ static CGFloat const scrollViewHeight = 220;
     self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
     //设置配送费
     self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
+    
+    _networkConditionHUD.labelText = @"已添加至购物车";
+    [_networkConditionHUD show:YES];
+    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 }
 
 // 添加动画以及数量

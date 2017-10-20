@@ -60,7 +60,12 @@
                     <constraint firstAttribute="bottom" secondItem="cuX-B6-AW9" secondAttribute="bottom" constant="8" id="pJ2-MT-JCM"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="25" y="71"/>
+            <connections>
+                <outlet property="addressL" destination="cuX-B6-AW9" id="WIv-73-WN3"/>
+                <outlet property="nameL" destination="IDE-FB-dww" id="qfI-FE-SJc"/>
+                <outlet property="phoneL" destination="2Cm-Ze-15X" id="fbv-bN-F6X"/>
+            </connections>
+            <point key="canvasLocation" x="-338" y="56"/>
         </tableViewCell>
     </objects>
     <resources>

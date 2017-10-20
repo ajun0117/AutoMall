@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MailOrderDetailTotalMoneyCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *actualPaymentL;
+@property (strong, nonatomic) IBOutlet UILabel *dateL;
 
 @end

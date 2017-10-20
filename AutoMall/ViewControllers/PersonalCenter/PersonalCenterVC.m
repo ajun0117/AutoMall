@@ -890,7 +890,7 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
 //            mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-            mobileUserType = @"2";
+            mobileUserType = @"1";
             [self.myTableView reloadData];
         }
         else {

@@ -122,46 +122,67 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = orderArray[indexPath.section];
-    if (indexPath.section == 0) {
+    NSArray *goodsAry = dic[@"orderDetails"];
+    if (goodsAry.count > 1) {   //多商品订单
         MailOrderMultiCell *cell = (MailOrderMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderMultiCell"];
         cell.picScrollView.contentSize = CGSizeMake((60+10) * 3, 60);
-        for (int i = 0; i < 3; ++i) {
+        int amount = 0;
+        for (int i = 0; i < goodsAry.count; ++i) {
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i*(60+10), 0, 60, 60)];
-            img.image = IMG(@"timg-2");
+            [img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(goodsAry[i][@"commodityImage"])] placeholderImage:IMG(@"timg-2")];
             [cell.picScrollView addSubview:img];
+            amount += [goodsAry[i][@"commodityAmount"] intValue];
         }
+        int status = [dic[@"orderStatus"] intValue];
+        if (status == 0) {
+            cell.statusL.text = @"待付款";
+            [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
+        } else if (status == 1) {
+            cell.statusL.text = @"已付款";
+            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        }
+        else {
+            cell.statusL.text = @"已完成";
+            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        }
+        cell.numberL.text = [NSString stringWithFormat:@"%d",amount];
+        cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"totalPrice"]];
         return cell;
     }
+    
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
+    NSDictionary *detailDic = [goodsAry firstObject];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"timg-2")];
+    cell.nameL.text = detailDic[@"commodityName"];
+    cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"commodityPrice"]];
+    cell.numL.text = [NSString stringWithFormat:@"x%@", detailDic[@"commodityAmount"]];
+    int amount = 0;
+    for (int i = 0; i < goodsAry.count; ++i) {
+        amount += [goodsAry[i][@"commodityAmount"] intValue];
+    }
     int status = [dic[@"orderStatus"] intValue];
     if (status == 0) {
-        cell.statusL.text = @"待支付";
-    } else {
-        cell.statusL.text = @"已完成";
+        cell.statusL.text = @"待付款";
+        [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
+    } else if (status == 1) {
+        cell.statusL.text = @"已付款";
+        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
     }
-    cell.nameL.text = dic[@""];
+    else {
+        cell.statusL.text = @"已完成";
+        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+    }
+    cell.numberL.text = [NSString stringWithFormat:@"%d",amount];
+    cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"totalPrice"]];
     return cell;
 }
-
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
-//
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        //        [dataArray removeObjectAtIndex:indexPath.row];
-//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    }
-//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-        MailOrderDetailVC *detailVC = [[MailOrderDetailVC alloc] init];
-//        detailVC.userID = userArray[indexPath.section][@"id"];
-//        detailVC.isDrink = self.isDrink;
-//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-        [self.navigationController pushViewController:detailVC animated:YES];
+    MailOrderDetailVC *detailVC = [[MailOrderDetailVC alloc] init];
+    detailVC.orderId = orderArray[indexPath.section][@"id"];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 发送请求
@@ -204,7 +225,6 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
