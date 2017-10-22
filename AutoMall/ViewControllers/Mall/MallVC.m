@@ -38,6 +38,7 @@ static CGFloat const scrollViewHeight = 220;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *categoryArray;
     NSArray *adArray;   //广告数组
+    NSArray *tjListAry; //推荐商品列表
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic, strong) UIScrollView *typeScrollView; //分类
@@ -110,6 +111,7 @@ static CGFloat const scrollViewHeight = 220;
     
     [self requsetAdvertList];   //请求广告列表
     [self requestGetComCategoryList];   //请求分类数据
+    [self requestPostCommoditytjList];  //请求推荐商品列表
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -295,8 +297,39 @@ static CGFloat const scrollViewHeight = 220;
         MailGoodsCell *cell = (MailGoodsCell *)[tableView dequeueReusableCellWithIdentifier:@"mailGoodsCell"];
         cell.bgViewConsH.constant = (Screen_Width - 8*3)/2 + 50;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-        //    cell.nameL.text = @"壳牌灰喜力";
+        if (tjListAry.count >= 4) {
+            NSDictionary *dic1 = tjListAry[0];
+            [cell.img1 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic1[@"image"])] placeholderImage:IMG(@"timg-2")];
+            cell.name1.text = dic1[@"name"];
+            cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
+            cell.yuan1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
+            cell.btn1.tag = 101;
+            [cell.btn1 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic2 = tjListAry[1];
+            [cell.img2 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic2[@"image"])] placeholderImage:IMG(@"timg-2")];
+            cell.name2.text = dic2[@"name"];
+            cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
+            cell.yuan2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
+            cell.btn2.tag = 102;
+            [cell.btn2 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic3 = tjListAry[2];
+            [cell.img3 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic3[@"image"])] placeholderImage:IMG(@"timg-2")];
+            cell.name3.text = dic3[@"name"];
+            cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
+            cell.yuan3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
+            cell.btn3.tag = 103;
+            [cell.btn3 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic4 = tjListAry[3];
+            [cell.img4 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic4[@"image"])] placeholderImage:IMG(@"timg-2")];
+            cell.name4.text = dic4[@"name"];
+            cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
+            cell.yuan4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
+            cell.btn4.tag = 104;
+            [cell.btn4 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+        }
         return cell;
     }
     return nil;
@@ -346,8 +379,8 @@ static CGFloat const scrollViewHeight = 220;
                     button.frame = CGRectMake(15 + n * (40 + margin) + a * SCREEN_WIDTH , 10 + m * (60 + rowMargin), Head_button_Width, Head_button_Height);
                     button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, Head_button_Height - Head_button_Width, 0);
                     button.tag = p + 1000;
-//                    [button sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"icon_url"]] forState:UIControlStateNormal placeholderImage:IMG(@"bg_merchant_photo_placeholder")];
-                    [button setImage:IMG(@"add_carInfo") forState:UIControlStateNormal];
+                    [button sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] forState:UIControlStateNormal placeholderImage:IMG(@"add_carInfo")];
+//                    [button setImage:IMG(@"add_carInfo") forState:UIControlStateNormal];
                     
                     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                     UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-10, 40, 60, 20)];
@@ -396,6 +429,13 @@ static CGFloat const scrollViewHeight = 220;
     [self.navigationController pushViewController:listVC animated:YES];
 }
 
+-(void)toDetail:(UIButton *)btn {
+    CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+    detailVC.commodityId = tjListAry[btn.tag - 101][@"id"];
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 #pragma mark - 网络请求
 -(void)requsetAdvertList {      //获取广告列表
     [_hud show:YES];
@@ -421,6 +461,15 @@ static CGFloat const scrollViewHeight = 220;
     //    NSLog(@"pram: %@",pram);
     //    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(MessageList) delegate:nil params:pram info:infoDic];
     [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(ComCategoryList) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestPostCommoditytjList { //推荐列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommoditytjList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommoditytjList, @"op", nil];
+//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityTermId,@"commodityTermId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommoditytjList) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -461,6 +510,20 @@ static CGFloat const scrollViewHeight = 220;
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CommoditytjList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CommoditytjList object:nil];
+        NSLog(@"TjList_responseObject: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            tjListAry = responseObject [@"data"];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

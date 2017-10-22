@@ -202,11 +202,35 @@
         return;
     }
     else {
-        NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-        AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-        checkVC.checktypeID = dic[@"id"];
-        checkVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:checkVC animated:YES];
+        NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+        if (mobileUserType.length > 0) {    //已登录用户
+            NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
+            BOOL requireAuth = [dic[@"requireAuth"] boolValue];
+            if (requireAuth) {  //需要权限，且登录身份为老板或员工
+                if ([mobileUserType isEqualToString:@"0"]) {
+                    _networkConditionHUD.labelText = @"认证后才能查看！";
+                    [_networkConditionHUD show:YES];
+                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                }
+                else {
+                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                    checkVC.checktypeID = dic[@"id"];
+                    checkVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:checkVC animated:YES];
+                }
+            }
+            else {
+                AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                checkVC.checktypeID = dic[@"id"];
+                checkVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:checkVC animated:YES];
+            }
+        }
+        else {
+            _networkConditionHUD.labelText = @"登录后才能查看！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
 }
 

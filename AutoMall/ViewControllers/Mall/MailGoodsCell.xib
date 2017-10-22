@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -46,13 +46,20 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5lq-5s-Xii">
+                                <rect key="frame" x="0.0" y="0.0" width="148" height="240"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="240" id="C9u-Tn-7FL"/>
                             <constraint firstItem="9Nr-Xn-E5M" firstAttribute="leading" secondItem="YWm-rm-8Qz" secondAttribute="trailing" constant="8" id="Djl-hV-4b0"/>
+                            <constraint firstItem="5lq-5s-Xii" firstAttribute="top" secondItem="Eb5-Xh-FgM" secondAttribute="top" id="Fvx-RP-SZ1"/>
                             <constraint firstItem="YWm-rm-8Qz" firstAttribute="leading" secondItem="Eb5-Xh-FgM" secondAttribute="leading" constant="8" id="HYA-jE-Wim"/>
                             <constraint firstItem="9Nr-Xn-E5M" firstAttribute="centerY" secondItem="YWm-rm-8Qz" secondAttribute="centerY" id="NBz-w1-VRh"/>
+                            <constraint firstAttribute="bottom" secondItem="5lq-5s-Xii" secondAttribute="bottom" id="aEL-3C-Omi"/>
+                            <constraint firstItem="5lq-5s-Xii" firstAttribute="leading" secondItem="Eb5-Xh-FgM" secondAttribute="leading" id="abW-sJ-cZI"/>
+                            <constraint firstAttribute="trailing" secondItem="5lq-5s-Xii" secondAttribute="trailing" id="ajb-z0-AUe"/>
                             <constraint firstItem="N3b-fi-NLe" firstAttribute="leading" secondItem="Eb5-Xh-FgM" secondAttribute="leading" id="c6f-6v-wf1"/>
                             <constraint firstItem="N3b-fi-NLe" firstAttribute="top" secondItem="Eb5-Xh-FgM" secondAttribute="top" id="f8M-cu-hvk"/>
                             <constraint firstAttribute="trailing" secondItem="N3b-fi-NLe" secondAttribute="trailing" id="hIi-K9-Fin"/>
@@ -88,16 +95,23 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yN-J5-PTz">
+                                <rect key="frame" x="0.0" y="0.0" width="148" height="240"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="3yN-J5-PTz" secondAttribute="bottom" id="3cw-2T-v6d"/>
                             <constraint firstItem="ues-X3-bIk" firstAttribute="leading" secondItem="yXO-eO-lb6" secondAttribute="leading" constant="8" id="CIi-fU-pox"/>
                             <constraint firstAttribute="bottom" secondItem="ErK-g3-srP" secondAttribute="bottom" constant="8" id="Cw5-YK-Uwp"/>
+                            <constraint firstItem="3yN-J5-PTz" firstAttribute="leading" secondItem="yXO-eO-lb6" secondAttribute="leading" id="EAj-dD-OWq"/>
+                            <constraint firstItem="3yN-J5-PTz" firstAttribute="top" secondItem="yXO-eO-lb6" secondAttribute="top" id="JkX-Nu-dd2"/>
                             <constraint firstItem="ig1-2Q-yCN" firstAttribute="centerY" secondItem="ErK-g3-srP" secondAttribute="centerY" id="MCI-6A-JhL"/>
                             <constraint firstItem="Vxy-26-Vdu" firstAttribute="top" secondItem="yXO-eO-lb6" secondAttribute="top" id="O8I-dq-KVe"/>
                             <constraint firstAttribute="trailing" secondItem="Vxy-26-Vdu" secondAttribute="trailing" id="VKV-vA-ttg"/>
                             <constraint firstItem="ErK-g3-srP" firstAttribute="leading" secondItem="yXO-eO-lb6" secondAttribute="leading" constant="8" id="Zon-Ji-EmH"/>
                             <constraint firstItem="ErK-g3-srP" firstAttribute="top" secondItem="ues-X3-bIk" secondAttribute="bottom" constant="5" id="bvj-hD-PIU"/>
+                            <constraint firstAttribute="trailing" secondItem="3yN-J5-PTz" secondAttribute="trailing" id="faA-P8-NMW"/>
                             <constraint firstItem="ues-X3-bIk" firstAttribute="top" secondItem="Vxy-26-Vdu" secondAttribute="bottom" constant="6" id="mxO-lO-RaR"/>
                             <constraint firstItem="Vxy-26-Vdu" firstAttribute="leading" secondItem="yXO-eO-lb6" secondAttribute="leading" id="wed-CC-CD9"/>
                             <constraint firstItem="ig1-2Q-yCN" firstAttribute="leading" secondItem="ErK-g3-srP" secondAttribute="trailing" constant="8" id="yCs-O2-qlK"/>
@@ -130,9 +144,14 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUJ-rs-4HH">
+                                <rect key="frame" x="0.0" y="0.0" width="148" height="240"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="QUJ-rs-4HH" firstAttribute="top" secondItem="ixW-pR-Els" secondAttribute="top" id="6Yc-9N-5ab"/>
+                            <constraint firstItem="QUJ-rs-4HH" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="leading" id="C6S-Vj-C4z"/>
                             <constraint firstItem="CR5-iR-2Z5" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="leading" constant="8" id="JiG-20-3JP"/>
                             <constraint firstItem="FJV-Gz-yen" firstAttribute="leading" secondItem="UNm-Po-XNS" secondAttribute="trailing" constant="8" id="N12-cL-2si"/>
                             <constraint firstItem="E0g-iG-5ea" firstAttribute="top" secondItem="ixW-pR-Els" secondAttribute="top" id="NNo-j3-eyx"/>
@@ -141,6 +160,8 @@
                             <constraint firstItem="CR5-iR-2Z5" firstAttribute="top" secondItem="E0g-iG-5ea" secondAttribute="bottom" constant="6" id="WDS-Ow-BiR"/>
                             <constraint firstAttribute="trailing" secondItem="E0g-iG-5ea" secondAttribute="trailing" id="aum-dd-fcj"/>
                             <constraint firstAttribute="bottom" secondItem="UNm-Po-XNS" secondAttribute="bottom" constant="8" id="cTb-gQ-Cia"/>
+                            <constraint firstAttribute="trailing" secondItem="QUJ-rs-4HH" secondAttribute="trailing" id="e57-VX-kn0"/>
+                            <constraint firstAttribute="bottom" secondItem="QUJ-rs-4HH" secondAttribute="bottom" id="iAh-JT-JsE"/>
                             <constraint firstItem="UNm-Po-XNS" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="leading" constant="8" id="sls-ge-IuC"/>
                             <constraint firstItem="E0g-iG-5ea" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="leading" id="yaD-Fn-cPD"/>
                         </constraints>
@@ -172,19 +193,26 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5o-7x-bB8">
+                                <rect key="frame" x="0.0" y="0.0" width="148" height="240"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IvK-Gq-bjI" firstAttribute="top" secondItem="9Ys-aF-O2T" secondAttribute="top" id="5gq-Dc-Loe"/>
                             <constraint firstItem="qod-xi-dqQ" firstAttribute="top" secondItem="IvK-Gq-bjI" secondAttribute="bottom" constant="6" id="9U0-Ao-rH2"/>
+                            <constraint firstAttribute="bottom" secondItem="V5o-7x-bB8" secondAttribute="bottom" id="EBU-Wl-dew"/>
                             <constraint firstItem="IvK-Gq-bjI" firstAttribute="leading" secondItem="9Ys-aF-O2T" secondAttribute="leading" id="FuU-ZM-xMu"/>
                             <constraint firstItem="rDK-ms-kXU" firstAttribute="top" secondItem="qod-xi-dqQ" secondAttribute="bottom" constant="5" id="HgR-bC-heV"/>
                             <constraint firstItem="VH1-0x-W1J" firstAttribute="leading" secondItem="rDK-ms-kXU" secondAttribute="trailing" constant="8" id="JDR-xl-w1P"/>
                             <constraint firstAttribute="bottom" secondItem="rDK-ms-kXU" secondAttribute="bottom" constant="8" id="a4B-Fn-rzh"/>
+                            <constraint firstItem="V5o-7x-bB8" firstAttribute="leading" secondItem="9Ys-aF-O2T" secondAttribute="leading" id="aDW-Ko-0V9"/>
+                            <constraint firstItem="V5o-7x-bB8" firstAttribute="top" secondItem="9Ys-aF-O2T" secondAttribute="top" id="iB9-ub-b9b"/>
                             <constraint firstItem="VH1-0x-W1J" firstAttribute="centerY" secondItem="rDK-ms-kXU" secondAttribute="centerY" id="jVE-98-COJ"/>
                             <constraint firstItem="qod-xi-dqQ" firstAttribute="leading" secondItem="9Ys-aF-O2T" secondAttribute="leading" constant="8" id="qaF-VW-gZS"/>
                             <constraint firstItem="rDK-ms-kXU" firstAttribute="leading" secondItem="9Ys-aF-O2T" secondAttribute="leading" constant="8" id="tAv-u1-oHI"/>
                             <constraint firstAttribute="trailing" secondItem="IvK-Gq-bjI" secondAttribute="trailing" id="wCu-Ha-bpl"/>
+                            <constraint firstAttribute="trailing" secondItem="V5o-7x-bB8" secondAttribute="trailing" id="yUL-pH-wzh"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -211,12 +239,32 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgViewConsH" destination="C9u-Tn-7FL" id="gyj-Kq-DsW"/>
+                <outlet property="btn1" destination="5lq-5s-Xii" id="NX1-z1-bQl"/>
+                <outlet property="btn2" destination="3yN-J5-PTz" id="b8I-SU-TK2"/>
+                <outlet property="btn3" destination="QUJ-rs-4HH" id="Axh-n9-l36"/>
+                <outlet property="btn4" destination="V5o-7x-bB8" id="vqG-8Z-xrs"/>
                 <outlet property="costPriceStrikeL1" destination="9Nr-Xn-E5M" id="J8p-kR-6Bj"/>
                 <outlet property="costPriceStrikeL2" destination="ig1-2Q-yCN" id="Ioq-cH-1xH"/>
                 <outlet property="costPriceStrikeL3" destination="FJV-Gz-yen" id="sfk-kh-Ild"/>
                 <outlet property="costPriceStrikeL4" destination="VH1-0x-W1J" id="t4d-4S-xiY"/>
+                <outlet property="img1" destination="N3b-fi-NLe" id="A6N-8S-uKG"/>
+                <outlet property="img2" destination="Vxy-26-Vdu" id="FvO-Da-vmM"/>
+                <outlet property="img3" destination="E0g-iG-5ea" id="HpC-7W-Ub5"/>
+                <outlet property="img4" destination="IvK-Gq-bjI" id="XyF-vk-j7y"/>
+                <outlet property="money1" destination="YWm-rm-8Qz" id="vOx-4I-YdX"/>
+                <outlet property="money2" destination="ErK-g3-srP" id="tm0-Mq-rRc"/>
+                <outlet property="money3" destination="UNm-Po-XNS" id="Ra1-HG-6Vd"/>
+                <outlet property="money4" destination="rDK-ms-kXU" id="OAY-5X-QHt"/>
+                <outlet property="name1" destination="VbF-nU-Xt2" id="d8c-oA-pvk"/>
+                <outlet property="name2" destination="ues-X3-bIk" id="YEg-9Q-vFy"/>
+                <outlet property="name3" destination="CR5-iR-2Z5" id="NQ7-F7-uOm"/>
+                <outlet property="name4" destination="qod-xi-dqQ" id="WDa-bu-O1Z"/>
+                <outlet property="yuan1" destination="9Nr-Xn-E5M" id="x4h-s8-B0l"/>
+                <outlet property="yuan2" destination="ig1-2Q-yCN" id="wdG-5e-89d"/>
+                <outlet property="yuan3" destination="FJV-Gz-yen" id="FCu-Cc-Rju"/>
+                <outlet property="yuan4" destination="VH1-0x-W1J" id="9jY-3M-nQt"/>
             </connections>
-            <point key="canvasLocation" x="32" y="-82.5"/>
+            <point key="canvasLocation" x="-201" y="-119.5"/>
         </tableViewCell>
     </objects>
     <resources>

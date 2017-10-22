@@ -21,7 +21,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.GoBackUpdate(@[@"1",@"2",@"3"]);
+    self.GoBackUpdate(@[@{@"relativePath":@"1"},@{@"relativePath":@"2"},@{@"relativePath":@"3"}]);
 }
 
 - (void)didReceiveMemoryWarning {

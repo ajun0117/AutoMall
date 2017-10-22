@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/Login_Register/LoginViewController.m"
-            timestampString = "530028663.141982"
+            filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckVC.m"
+            timestampString = "530382859.11833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "-didFinishedRequestData:"
+            startingLineNumber = "786"
+            endingLineNumber = "786"
+            landmarkName = "-requestCarUpkeepAdd"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -16,7 +16,9 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSString *payModeStr;   //支付方式
+    NSDictionary *aliPayDic;    //支付宝参数字典
 }
+@property (weak, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (weak, nonatomic) IBOutlet UILabel *moneyL;
 
 @end
@@ -28,6 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title =@"付款中";
     payModeStr = @"2";   //默认使用微信
+    self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号：%@",self.orderNumber];
     self.moneyL.text = [NSString stringWithFormat:@"应付金额：￥%.2f",self.money];
 }
 
@@ -65,10 +68,9 @@
         self.jifen.image = [UIImage imageNamed:@"checkbox_yes"];
         payModeStr = @"3";
     }
-    
-    //测试时直接调用
-    [self doAlipayPay];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"AliPayNotification" object:nil];
+}
+- (IBAction)confirmAction:(id)sender {
+    [self getChoosePayMode];    //选择支付方式
 }
 
 #pragma mark -
@@ -126,10 +128,11 @@
     // NOTE: 参数编码格式
     order.charset = @"utf-8";
     
-    // NOTE: 当前时间点
-    NSDateFormatter* formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    order.timestamp = [formatter stringFromDate:[NSDate date]];
+//    // NOTE: 当前时间点
+//    NSDateFormatter* formatter = [NSDateFormatter new];
+//    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    order.timestamp = [formatter stringFromDate:[NSDate date]];
+    order.timestamp = aliPayDic[@"timestamp"];
     
     // NOTE: 支付版本
     order.version = @"1.0";
@@ -139,11 +142,13 @@
     
     // NOTE: 商品数据
     order.biz_content = [BizContent new];
-    order.biz_content.body = @"我是测试数据";
-    order.biz_content.subject = @"1";
+    order.biz_content.body = aliPayDic[@"body"];
+    order.biz_content.subject = aliPayDic[@"subject"];
     order.biz_content.out_trade_no = self.orderNumber; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
-    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
+//    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
+    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", self.money]; //商品价格
+    order.biz_content.seller_id = @"2088721713116140";
     
     //将商品信息拼接成字符串
     NSString *orderInfo = [order orderInfoEncoded:NO];
@@ -159,16 +164,17 @@
     } else {
         signedString = [signer signString:orderInfo withRSA2:NO];
     }
-    
-    // NOTE: 如果加签成功，则继续执行支付
-    if (signedString != nil) {
+    NSLog(@"signedString: %@",signedString);
+//     NOTE: 如果加签成功，则继续执行支付
+//    if (signedString != nil) {
         //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
         NSString *appScheme = @"AliPay2017101609335037";
         
         // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
-        NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",
-                                 orderInfoEncoded, signedString];
-        
+        NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",orderInfoEncoded, aliPayDic[@"sign"]];
+    
+//        NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",orderInfoEncoded, signedString];
+        NSLog(@"signedString2:   %@",orderString);
         // NOTE: 调用支付结果开始支付
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
@@ -178,7 +184,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AliPayNotification" object:nil userInfo:userInfo];
             
         }];
-    }
+//    }
 }
 
 #pragma mark - 支付完成后回调通知
@@ -245,17 +251,16 @@
 }
 
 #pragma mark - 发送请求
--(void)getMyAddress {       //获取收货地址
-    //    [_addressArray removeAllObjects];
+-(void)getChoosePayMode {       //发起支付方式选择请求
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderChoosePayMode object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderChoosePayMode, @"op", nil];
-    //    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefix(ConsigneeList),@"1"];
-    //    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderNumber,@"code",payModeStr,@"payMode", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderChoosePayMode) delegate:nil params:pram info:infoDic];
+        NSString *urlString = [NSString stringWithFormat:@"%@?code=%@&payMode=%@",UrlPrefix(MallOrderChoosePayMode),self.orderNumber,payModeStr];
+        [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderNumber,@"code",payModeStr,@"payMode", nil];
+//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderChoosePayMode) delegate:nil params:pram info:infoDic];
 }
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
@@ -269,7 +274,14 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:MallOrderChoosePayMode]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderChoosePayMode object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {   //支付宝
+            if ([payModeStr isEqualToString:@"1"]) {
+                aliPayDic = responseObject[@"data"];
+                [self doAlipayPay];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"AliPayNotification" object:nil];
+            }else if ([payModeStr isEqualToString:@"2"]) {    //微信
+                
+            }
             
         }
         else {

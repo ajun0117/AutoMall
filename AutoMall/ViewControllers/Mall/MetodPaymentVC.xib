@@ -14,6 +14,7 @@
                 <outlet property="ailpay" destination="kxG-mm-eQ9" id="ar8-EK-s1Y"/>
                 <outlet property="jifen" destination="5NA-nd-7Fn" id="7Cq-e4-b3A"/>
                 <outlet property="moneyL" destination="kwT-7f-Abb" id="WJx-8A-fAr"/>
+                <outlet property="orderNumberL" destination="3jd-JI-cSf" id="C5I-7C-ZVd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wx" destination="7T5-en-u41" id="6TB-Oo-fm9"/>
             </connections>
@@ -424,6 +425,9 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="Lrl-k8-PhR"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -474,7 +478,7 @@
                     <include reference="cXl-ni-BB4"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-147" y="52"/>
+            <point key="canvasLocation" x="-371" y="-4"/>
         </view>
     </objects>
     <resources>

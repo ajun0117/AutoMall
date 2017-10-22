@@ -25,7 +25,7 @@
 
 // This method sets handler block that is getting called after the switcher is done animating the transition
 
-- (void)setPressedHandler:(void (^)(NSUInteger index))handler;
+- (void)setPressedHandler:(void (^)(NSUInteger index, NSInteger tag))handler;
 
 
 // This method sets handler block that is getting called right before the switcher starts animating the transition

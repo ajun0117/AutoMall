@@ -68,7 +68,7 @@
 
 - (IBAction)statusAction:(id)sender {
     int status = [orderDetailDic[@"orderStatus"] intValue];
-    if (status == 0) {  //未付款是隐藏物流信息
+    if (status == 0) {  //未付款时隐藏物流信息
         MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
         pay.orderNumber = orderDetailDic[@"code"];
         pay.money = [orderDetailDic[@"actualPrice"] floatValue];
@@ -96,7 +96,7 @@
             
         case 1: {
             int status = [orderDetailDic[@"orderStatus"] intValue];
-            if (status == 0) {  //未付款是隐藏物流信息
+            if (status == 0) {  //未付款时隐藏物流信息
                 return 1;
             }
             else {
@@ -127,7 +127,7 @@
         }
         case 1: {
             int status = [orderDetailDic[@"orderStatus"] intValue];
-            if (status == 0) {  //未付款是隐藏物流信息
+            if (status == 0) {  //未付款时隐藏物流信息
                 return 80;
             }
             else {
@@ -173,7 +173,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.nameL.text = [NSString stringWithFormat:@"订单号：%@",orderDetailDic[@"code"]];
             int status = [orderDetailDic[@"orderStatus"] intValue];
-            if (status == 0) {  //未付款是隐藏物流信息
+            if (status == 0) {  //未付款时隐藏物流信息
                 cell.contentL.text = @"待付款";
             }
             else if (status == 1) {
@@ -187,7 +187,7 @@
         }
         case 1: {
             int status = [orderDetailDic[@"orderStatus"] intValue];
-            if (status == 0) {  //未付款是隐藏物流信息
+            if (status == 0) {  //未付款时隐藏物流信息
                 MailOrderDetailReceiverInfoCell *cell = (MailOrderDetailReceiverInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailReceiverInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.nameL.text = orderDetailDic[@"consigneeName"];
@@ -232,7 +232,7 @@
             NSDictionary *dic = goodsAry[indexPath.row];
             [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"commodityImage"])] placeholderImage:IMG(@"timg-2")];
             cell.nameL.text = dic[@"commodityName"];
-            cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", dic[@"commodityPrice"]];
+            cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", dic[@"actualPrice"]];
             cell.numL.text = [NSString stringWithFormat:@"x%@", dic[@"commodityAmount"]];
             return cell;
             break;
@@ -326,7 +326,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             orderDetailDic = responseObject [@"data"];
             int status = [orderDetailDic[@"orderStatus"] intValue];
-            if (status == 0) {  //未付款是隐藏物流信息
+            if (status == 0) {  //未付款时隐藏物流信息
                 [self.statusBtn setTitle:@"去付款" forState:UIControlStateNormal];
             }
             else {

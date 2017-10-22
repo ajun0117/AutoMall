@@ -209,7 +209,7 @@ static CheckContentTool *shareInstance = nil;
 - (NSMutableArray *)queryAllContent
 {
     if ([self.fmdb  open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE level = 1", locationTabbleName];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@", locationTabbleName];
         FMResultSet *result = [self.fmdb  executeQuery:sql];
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
         while ([result next]) {

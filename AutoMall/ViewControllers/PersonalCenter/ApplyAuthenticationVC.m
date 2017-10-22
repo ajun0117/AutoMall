@@ -10,6 +10,7 @@
 #import "ChooseLocationView.h"
 #import "CitiesDataTool.h"
 #import "GTMBase64.h"
+#import "openssl_wrapper.h"
 
 @interface ApplyAuthenticationVC () <UIGestureRecognizerDelegate>
 {
@@ -221,6 +222,9 @@
     
     NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
     //    NSLog(@"baseString:%@",baseString);
+    
+//    NSString * baseStr = base64StringFromData(imageData);
+    
     NSData *decodedImageData = [[NSData alloc] initWithBase64EncodedString:baseStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     [self.licenseImgBtn setBackgroundImage:decodedImage forState:UIControlStateNormal];

@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSMutableArray *onTopLabels;
 @property (strong, nonatomic) NSArray *strings;
 
-@property (strong, nonatomic) void (^handlerBlock)(NSUInteger index);
+@property (strong, nonatomic) void (^handlerBlock)(NSUInteger index, NSInteger tag);
 @property (strong, nonatomic) void (^willBePressedHandlerBlock)(NSUInteger index);
 
 @property (strong, nonatomic) UIView *backgroundView;
@@ -111,7 +111,7 @@
     return self;
 }
 
-- (void)setPressedHandler:(void (^)(NSUInteger))handler
+- (void)setPressedHandler:(void (^)(NSUInteger,NSInteger))handler
 {
     self.handlerBlock = handler;
 }
@@ -155,10 +155,12 @@
         switch (self.selectedIndex) {
             case 0:
                 self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                self.sliderView.tag = 5001;
                 break;
                 
             case 1:
                 self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                self.sliderView.tag = 5003;
                 break;
                 
             default:
@@ -169,14 +171,17 @@
         switch (self.selectedIndex) {
             case 0:
                 self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                self.sliderView.tag = 5001;
                 break;
                 
             case 1:
                 self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                self.sliderView.tag = 5002;
                 break;
                 
             case 2:
                 self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                self.sliderView.tag = 5003;
                 break;
                 
             default:
@@ -236,10 +241,12 @@
             switch (self.selectedIndex) {
                 case 0:
                     self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                    self.sliderView.tag = 5001;
                     break;
                     
                 case 1:
                     self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                    self.sliderView.tag = 5003;
                     break;
                     
                 default:
@@ -250,14 +257,17 @@
             switch (self.selectedIndex) {
                 case 0:
                     self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                    self.sliderView.tag = 5001;
                     break;
                     
                 case 1:
                     self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                    self.sliderView.tag = 5002;
                     break;
                     
                 case 2:
                     self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                    self.sliderView.tag = 5003;
                     break;
                     
                 default:
@@ -266,7 +276,7 @@
         }
         
         if (self.handlerBlock) {
-            self.handlerBlock(selectedIndex);
+            self.handlerBlock(selectedIndex,self.sliderView.tag);
         }
     }];
 }
@@ -295,10 +305,12 @@
         switch (self.selectedIndex) {
             case 0:
                 self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                self.sliderView.tag = 5001;
                 break;
                 
             case 1:
                 self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                self.sliderView.tag = 5003;
                 break;
                 
             default:
@@ -309,14 +321,17 @@
         switch (self.selectedIndex) {
             case 0:
                 self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                self.sliderView.tag = 5001;
                 break;
                 
             case 1:
                 self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                self.sliderView.tag = 5002;
                 break;
                 
             case 2:
                 self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                self.sliderView.tag = 5003;
                 break;
                 
             default:
@@ -325,7 +340,7 @@
     }
     
     if (self.handlerBlock) {
-        self.handlerBlock(selectedIndex);
+        self.handlerBlock(selectedIndex, self.sliderView.tag);
     }
 }
 
@@ -416,10 +431,12 @@
                     switch (self.selectedIndex) {
                         case 0:
                             self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                            self.sliderView.tag = 5001;
                             break;
                             
                         case 1:
                             self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                            self.sliderView.tag = 5003;
                             break;
                             
                         default:
@@ -430,14 +447,17 @@
                     switch (self.selectedIndex) {
                         case 0:
                             self.sliderView.backgroundColor = RGBCOLOR(250, 69, 89);
+                            self.sliderView.tag = 5001;
                             break;
                             
                         case 1:
                             self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
+                            self.sliderView.tag = 5002;
                             break;
                             
                         case 2:
                             self.sliderView.backgroundColor = RGBCOLOR(71, 188, 92);
+                            self.sliderView.tag = 5003;
                             break;
                             
                         default:
@@ -446,7 +466,7 @@
                 }
                 
                 if (self.handlerBlock) {
-                    self.handlerBlock(index);
+                    self.handlerBlock(index, self.sliderView.tag);
                 }
                 
             }];
@@ -454,7 +474,7 @@
         } else {
             
                 if (self.handlerBlock) {
-                    self.handlerBlock(self.selectedIndex);
+                    self.handlerBlock(self.selectedIndex, self.sliderView.tag);
                 }
         }
     }

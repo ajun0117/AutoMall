@@ -24,8 +24,6 @@
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
-    NSMutableDictionary *selectedDic;   //记录已选择
-    NSMutableArray *selectedAry;   //记录已选择的状态（index对应检查部位的index，object对应相应的状态字段）
     AJSegmentedControl *mySegmentedControl;
     NSArray *partsArray;   //车身部位数组
     MBProgressHUD *_hud;
@@ -82,8 +80,6 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    selectedDic = [NSMutableDictionary dictionary];
-    selectedAry = [NSMutableArray array];
     [self requestGetCheckcategoryList];     //记录已选择的状态
 
 }
@@ -163,11 +159,12 @@
 }
 
 - (IBAction)creatChecklistAction:(id)sender {
-    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-    planVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:planVC animated:YES];
+//    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+//    planVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:planVC animated:YES];
 //    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
 //    [self.navigationController pushViewController:orderVC animated:YES];
+    [self requestCarUpkeepAdd];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -251,13 +248,13 @@
     }
     currentPhotoIndexPath = [tableV indexPathForCell:cell];     //记录当前拍照按钮对应的cell位置
     
-//    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
-//    photoVC.GoBackUpdate = ^(NSArray *array) {
-//        [self updatePhotoWithImages:array];
-//    };
-//    [self.navigationController pushViewController:photoVC animated:YES];
-    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
+    photoVC.GoBackUpdate = ^(NSArray *array) {
+        [self updatePhotoWithImages:array];
+    };
     [self.navigationController pushViewController:photoVC animated:YES];
+//    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+//    [self.navigationController pushViewController:photoVC animated:YES];
 }
 
 -(void)updatePhotoWithImages:(NSArray *)images {
@@ -269,7 +266,7 @@
         NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
         NSString *positionStr = positionArray[currentPhotoIndexPath.row];
         CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
-        NSMutableArray *imagesAry = [[item1.tip objectFromJSONString] mutableCopy];
+        NSMutableArray *imagesAry = [[item1.images objectFromJSONString] mutableCopy];
         NSMutableDictionary *imagesDic = [imagesAry[currentPhotoIndexPath.row] mutableCopy];
         CheckContentItem *item2 = [[CheckContentItem alloc] init];
         item2.aid = NSStringWithNumber(dicc[@"id"]);
@@ -614,8 +611,9 @@
         NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
         NSInteger selectedIndex = [positionDic[positionStr] integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];
-        [switcher setPressedHandler:^(NSUInteger index) {
+        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag) {
             NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
+            NSLog(@"Did press position on first switch tag: %lu", (unsigned long)tag);
             //这里要重新从数据库读一遍
             CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
             NSMutableArray *positionAry = [[item1.dPosition objectFromJSONString] mutableCopy];
@@ -691,9 +689,9 @@
         
         NSInteger selectedIndex = [item.stateIndex integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];
-        [switcher setPressedHandler:^(NSUInteger index) {
+        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag) {
             NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-            //        [selectedDic setObject:[NSNumber numberWithInteger:index] forKey:indexPath];
+            NSLog(@"Did press position on first switch tag: %lu", (unsigned long)tag);
             CheckContentItem *item = [[CheckContentItem alloc] init];
             item.aid = NSStringWithNumber(dicc[@"id"]);
             item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
@@ -736,12 +734,56 @@
 }
 
 -(void)requestCarUpkeepAdd { //生成检查单
-    [_hud show:YES];
+//    [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepAdd object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepAdd, @"op", nil];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"storeId",self.discountsNameTF.text,@"item",self.discountsMoneyTF.text,@"money", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
+    
+    NSDictionary *carDic = @{@"id":@"1",@"mileage":@"3000",@"fuelAmount":@"20"};
+    NSMutableArray *carUpkeepCheckContentsAry = [NSMutableArray array];
+    NSMutableArray *items = [[CheckContentTool sharedManager] queryAllContent];    //从数据库查出所有记录
+    for (CheckContentItem *item in items) {
+        NSMutableArray *positionAry = [[item.dPosition objectFromJSONString] mutableCopy];
+        if (positionAry.count > 0) {  //说明是多个位置
+            NSMutableArray *tipAry = [[item.tip objectFromJSONString] mutableCopy];
+            NSMutableArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+            for (int i=0; i<positionAry.count; ++i) {
+                NSMutableDictionary *checkContentDic = [NSMutableDictionary dictionary];
+                NSMutableDictionary *positionDic = positionAry[i];
+                NSMutableDictionary *tipDic = tipAry[i];
+                NSMutableDictionary *imagesDic = imagesAry[i];
+                [checkContentDic setObject:@"" forKey:@"result"];
+                [checkContentDic setObject:[[positionDic allValues] firstObject] forKey:@"level"];
+                [checkContentDic setObject:[[positionDic allKeys] firstObject] forKey:@"dPosition"];
+                [checkContentDic setObject:[[tipDic allValues] firstObject] forKey:@"describe"];
+                [checkContentDic setObject:[[imagesDic allValues] firstObject]  forKey:@"minorImages"];
+                int idNum = [item.aid intValue];
+                NSDictionary *contentDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:idNum],@"id",item.name,@"name", nil];
+                [checkContentDic setObject:contentDic forKey:@"checkContent"];
+                [carUpkeepCheckContentsAry addObject:checkContentDic];
+            }
+        }
+        else {
+            NSMutableDictionary *checkContentDic = [NSMutableDictionary dictionary];
+            NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+            [checkContentDic setObject:@"" forKey:@"result"];
+            [checkContentDic setObject:item.stateIndex forKey:@"level"];
+            [checkContentDic setObject:@"" forKey:@"dPosition"];
+            [checkContentDic setObject:item.tip forKey:@"describe"];
+            [checkContentDic setObject:imagesAry forKey:@"minorImages"];
+            int idNum = [item.aid intValue];
+            NSDictionary *contentDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:idNum],@"id",item.name,@"name", nil];
+            [checkContentDic setObject:contentDic forKey:@"checkContent"];
+            [carUpkeepCheckContentsAry addObject:checkContentDic];
+        }
+        
+    }
+    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
+    
+    
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
