@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet CustomTextField *passwordTF;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
+@property (assign, nonatomic) BOOL isPresented; 
+
 @end

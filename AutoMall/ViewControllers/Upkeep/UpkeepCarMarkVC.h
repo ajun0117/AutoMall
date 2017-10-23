@@ -10,4 +10,9 @@
 
 @interface UpkeepCarMarkVC : UIViewController
 
+/**
+ * 更新照片
+ */
+@property (copy, nonatomic) void((^GoBackGet)(NSString *imageUrl));
+
 @end

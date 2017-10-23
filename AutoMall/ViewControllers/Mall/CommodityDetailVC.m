@@ -19,6 +19,7 @@
 #import "WRNavigationBar.h"
 #import "HZPhotoBrowser.h"
 #import "ShoppingCartModel.h"
+#import "LoginViewController.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -41,6 +42,7 @@ static CGFloat const scrollViewHeight = 220;
     NSMutableArray *commoditymulArray;  //重组的商品数组
     NSMutableArray *cartMulArray;  //购物车中商品数据
     int goodsNum;           //商品数量
+    NSString *collectId;   //收藏id
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -143,11 +145,24 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 -(void)toCollectFavour {        //收藏
-    if (collectBtn.selected) {  //取消收藏
-        [self requestPostDecollectFavorite];
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if (mobileUserType.length > 0) {    //已登录
+        if (collectBtn.selected) {  //取消收藏
+            [self requestPostDecollectFavorite];
+        }
+        else {      //收藏
+            [self requestPostCollectFavorite];
+        }
     }
-    else {      //收藏
-        [self requestPostCollectFavorite];
+    else {
+        _networkConditionHUD.labelText = @"登录后才能操作！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 
@@ -194,19 +209,37 @@ static CGFloat const scrollViewHeight = 220;
 
 #pragma mark -- 去结算
 - (void)settlementClock{
-    if (cartMulArray.count > 0) {
-        __weak typeof(self) weakSelf = self;
-        SettlementVC *settlement = [[SettlementVC alloc] init];
-        settlement.datasArr = cartMulArray;
-        settlement.GoBack = ^{
-            [weakSelf updateShoppingCart:cartMulArray];
-        };
-        [self.navigationController pushViewController:settlement animated:YES];
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"1"]) {    //老板
+        if (cartMulArray.count > 0) {
+            __weak typeof(self) weakSelf = self;
+            SettlementVC *settlement = [[SettlementVC alloc] init];
+            settlement.datasArr = cartMulArray;
+            settlement.GoBack = ^{
+                [weakSelf updateShoppingCart:cartMulArray];
+            };
+            [self.navigationController pushViewController:settlement animated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = @"请先添加购买的商品到购物车！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
-    else {
-        _networkConditionHUD.labelText = @"请先添加购买的商品到购物车！";
+    else if ([mobileUserType isEqualToString:@"0"] || [mobileUserType isEqualToString:@"2"]){
+        _networkConditionHUD.labelText = @"只有门店老板才能操作！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    else {  //未登录
+        _networkConditionHUD.labelText = @"登录后才能操作！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 
@@ -407,9 +440,17 @@ static CGFloat const scrollViewHeight = 220;
                 case 2: {
                     CommodityDetailPriceCell *cell = (CommodityDetailPriceCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailPriceCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
-                    cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
-                    cell.shippingFeeL.text = [NSString stringWithFormat:@"配送费%@元",commodityDic[@"shippingFee"]];
+                    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+                    if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                        cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
+                        cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
+                        cell.shippingFeeL.text = [NSString stringWithFormat:@"配送费%@元",commodityDic[@"shippingFee"]];
+                    }
+                    else {
+                        cell.discountL.text = @"￥--";
+                        cell.costPriceStrikeL.text = @"￥--";
+                        cell.shippingFeeL.text = @"配送费--元";
+                    }
                     [cell.addBtn addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
                     return cell;
                     break;
@@ -508,44 +549,62 @@ static CGFloat const scrollViewHeight = 220;
 
 #pragma mark --点击+号加入购物车
 -(void)addToCart:(UIButton *)btn {
-     NSMutableDictionary *dic = [commoditymulArray firstObject];
-    int num = [dic[@"orderCont"] intValue];
-    num ++ ;    //已选商品数量+1
-    
-    if (cartMulArray.count != 0)
-    {
-        BOOL flage = YES;
-        for (NSDictionary *dicc in cartMulArray)
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"1"]) {    //老板
+         NSMutableDictionary *dic = [commoditymulArray firstObject];
+        int num = [dic[@"orderCont"] intValue];
+        num ++ ;    //已选商品数量+1
+        
+        if (cartMulArray.count != 0)
         {
-            if (dicc[@"id"]==dic[@"id"])
+            BOOL flage = YES;
+            for (NSDictionary *dicc in cartMulArray)
             {
-                flage = NO; //有重复，只增加数量，不增加数组个数
-                break;
+                if (dicc[@"id"]==dic[@"id"])
+                {
+                    flage = NO; //有重复，只增加数量，不增加数组个数
+                    break;
+                }
+            }
+            if (flage)
+            {
+                [cartMulArray addObject:dic];
             }
         }
-        if (flage)
-        {
+        else{
             [cartMulArray addObject:dic];
         }
+        
+        NSLog(@"---%lu",(unsigned long)cartMulArray.count);
+        
+        [dic setObject:@(num) forKey:@"orderCont"];
+        
+        //设置商品数量
+        self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];
+        //设置商品价格
+        self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
+        //设置配送费
+        self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
+        
+        _networkConditionHUD.labelText = @"已添加至购物车";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
-    else{
-        [cartMulArray addObject:dic];
+    else if ([mobileUserType isEqualToString:@"0"] || [mobileUserType isEqualToString:@"2"]){
+        _networkConditionHUD.labelText = @"只有门店老板才能操作！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
-    
-    NSLog(@"---%lu",(unsigned long)cartMulArray.count);
-    
-    [dic setObject:@(num) forKey:@"orderCont"];
-    
-    //设置商品数量
-    self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];
-    //设置商品价格
-    self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
-    //设置配送费
-    self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
-    
-    _networkConditionHUD.labelText = @"已添加至购物车";
-    [_networkConditionHUD show:YES];
-    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    else {  //未登录
+        _networkConditionHUD.labelText = @"登录后才能操作！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 // 添加动画以及数量
@@ -707,7 +766,8 @@ static CGFloat const scrollViewHeight = 220;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:FavoriteDecollect object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:FavoriteDecollect, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityDic[@"favEntity"][@"id"],@"id", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:collectId,@"id", nil];
+    NSLog(@"pram:    %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(FavoriteDecollect) delegate:nil params:pram info:infoDic];
 }
 
@@ -730,6 +790,7 @@ static CGFloat const scrollViewHeight = 220;
             commodityDic = responseObject [@"data"];
             if ([commodityDic[@"favEntity"] isKindOfClass:[NSDictionary class]]) {
                 collectBtn.selected = YES;  //如果已被收藏过，则收藏按钮按下
+                collectId = commodityDic[@"favEntity"][@"id"];
             }
             NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
             [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
@@ -765,6 +826,7 @@ static CGFloat const scrollViewHeight = 220;
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             collectBtn.selected = YES;
+            collectId = responseObject[@"data"][@"id"];
         }
         _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
         [_networkConditionHUD show:YES];

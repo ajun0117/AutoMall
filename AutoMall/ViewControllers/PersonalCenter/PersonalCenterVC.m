@@ -21,6 +21,7 @@
 #import "UpkeepStatementVC.h"
 #import "LoginViewController.h"
 #import "BaoyangDiscountsVC.h"
+#import "MessageListVC.h"
 
 @interface PersonalCenterVC ()
 {
@@ -48,13 +49,13 @@
                                        target:nil action:nil];
     negativeSpacer.width = -16;
     
-    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    setBtn.frame = CGRectMake(0, 0, 44, 44);
-    [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
-    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [setBtn addTarget:self action:@selector(toSet) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
-    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, setBtnBarBtn, nil];
+//    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    setBtn.frame = CGRectMake(0, 0, 44, 44);
+//    [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
+//    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [setBtn addTarget:self action:@selector(toSet) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
+//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, setBtnBarBtn, nil];
     
     UIButton *msgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     msgBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -69,10 +70,8 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterNormalCell" bundle:nil] forCellReuseIdentifier:@"centerNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
     
-    [self requestPostUserGetInfo];
-    [self requestPostStoreGetInfo];     //请求门店详情数据
-    
-    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+//    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+//    [self.myTableView reloadData];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -89,6 +88,12 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    [self.myTableView reloadData];
+    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        [self requestPostStoreGetInfo];     //请求门店详情数据
+    }
 }
 
 -(void) toSet {
@@ -98,9 +103,9 @@
 }
 
 -(void) toMessage {
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    loginVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:loginVC animated:YES];
+    MessageListVC *msgVC = [[MessageListVC alloc] init];
+    msgVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:msgVC animated:YES];
 }
 
 #pragma mark - tableVeiw delegate
@@ -471,8 +476,10 @@
                         CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.firstBtn addTarget:self action:@selector(daifuAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.firstL.text = @"待付款";
                         [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.secondBtn addTarget:self action:@selector(yifuAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.secondL.text = @"已付款";
                         return cell;
                         break;
@@ -774,9 +781,12 @@
     else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
         switch (indexPath.section) {
             case 0: {
-                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
-                applyVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:applyVC animated:YES];
+//                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+//                applyVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:applyVC animated:YES];
+                _networkConditionHUD.labelText = @"门店员工不能修改店铺信息";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 break;
             }
             case 2: {
@@ -832,6 +842,20 @@
     }
 }
 
+-(void)daifuAction:(UIButton *)btn {
+    MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
+    listVC.orderStatus = @"0";   //未付款
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
+}
+
+-(void)yifuAction:(UIButton *)btn {
+    MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
+    listVC.orderStatus = @"1";   //已付款
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
+}
+
 #pragma mark - 发起网络请求
 -(void)requestPostStoreGetInfo { //获取门店详情
     [_hud show:YES];
@@ -839,14 +863,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreGetInfo object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreGetInfo, @"op", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreGetInfo) delegate:nil params:nil info:infoDic];
-}
-
--(void)requestPostUserGetInfo { //获取登录用户信息
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
-    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -867,38 +883,15 @@
     if ([notification.name isEqualToString:StoreGetInfo]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreGetInfo object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+//            [_networkConditionHUD show:YES];
+//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         } 
-    }
-    
-    if ([notification.name isEqualToString:GetUserInfo]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
-        NSLog(@"GetUserInfo_responseObject %@",responseObject)
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            NSDictionary *dic = responseObject[@"data"];
-            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
-            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
-//            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            
-//            mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-            mobileUserType = @"1";
-            [self.myTableView reloadData];
-        }
-        else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        }
     }
 }
 

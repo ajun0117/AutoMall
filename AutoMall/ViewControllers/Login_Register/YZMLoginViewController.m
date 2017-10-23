@@ -241,6 +241,14 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserLogin) delegate:nil params:pram info:infoDic];
 }
 
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -290,8 +298,29 @@
             NSDictionary *dic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
             [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"access_token"]];
-
-            [self.navigationController popToRootViewControllerAnimated:YES]; //返回首页面
+            
+            [self requestPostUserGetInfo];   //紧接着请求用户信息;
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"GetUserInfo_responseObject %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *dic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
+            //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES]; //返回上级页面
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

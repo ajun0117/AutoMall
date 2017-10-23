@@ -107,8 +107,9 @@
 - (IBAction)save:(id)sender {
     self.scrollV.zoomScale = 1.0;
     UIImage *image = [self imageFromView:self.imageV];
-    
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    
+    self.GoBackGet(@"carImageURLString");
 }
 
 -(void) toMark:(UITapGestureRecognizer *)tap {
@@ -199,6 +200,8 @@
         label.text = @"保存成功";
     }
     [label performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:1.0];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

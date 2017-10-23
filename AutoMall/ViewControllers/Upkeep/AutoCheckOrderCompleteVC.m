@@ -54,7 +54,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUpdate object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUpdate, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderId,@"id",@"5",@"status", self.statusFlow,@"statusFlow",nil]; //已完成
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.checkOrderId,@"id",@"5",@"status", self.statusFlow,@"statusFlow",nil]; //已完成
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepUpdate) delegate:nil params:pram info:infoDic];
 }
 

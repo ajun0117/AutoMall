@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "BaoyangHistoryVC.h"
 #import "UpkeepHomeCollectionCell.h"
+#import "LoginViewController.h"
 
 
 @interface UpkeepVC ()
@@ -65,7 +66,7 @@
 //    typeAry = @[@{@"name":@"美容检查",@"id":@"1"},@{@"name":@"保养检查",@"id":@"8"},@{@"name":@"快速检查",@"id":@"9"}];
 //    [self.myCollectionView reloadData];
     
-    [self requestGetChecktypeList];
+//    [self requestGetChecktypeList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -83,6 +84,8 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [self requestGetChecktypeList];
 }
 
 
@@ -183,17 +186,6 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-
-//    int typeInt = [dic [@"type"] intValue];
-//    if (typeInt == 1) {  //商家
-//        ShopListViewController *shopListVC = [[ShopListViewController alloc] init];
-//        shopListVC.hidesBottomBarWhenPushed = YES;
-//        shopListVC.viewTitleStr = dic[@"name"];
-//        shopListVC.serviceId = dic [@"id"];
-//        shopListVC.slidePlaceList = NSStringWithNumber(dic [@"slidePlaceList"]);
-//        shopListVC.slidePlaceDetail = NSStringWithNumber(dic [@"slidePlaceDetail"]);
-//        [self.navigationController pushViewController:shopListVC animated:YES];
-//    }
     
     if (indexPath.item == [typeAry count]) {
         CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
@@ -230,6 +222,11 @@
             _networkConditionHUD.labelText = @"登录后才能查看！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            loginVC.isPresented = YES;
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
         }
     }
 }

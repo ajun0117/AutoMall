@@ -10,7 +10,7 @@
 
 @interface MailSearchVC ()
 @property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
-@property (strong, nonatomic) IBOutlet UICollectionView *myCollectionView;
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 

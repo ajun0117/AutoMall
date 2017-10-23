@@ -18,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIView *yifuView;
 @property (strong, nonatomic) IBOutlet UIView *allView;
 
+@property (strong, nonatomic) NSString *orderStatus;      //0未支付，1已支付
+
 
 @end

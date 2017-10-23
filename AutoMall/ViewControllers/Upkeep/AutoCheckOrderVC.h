@@ -11,7 +11,7 @@
 @interface AutoCheckOrderVC : UIViewController
 
 //@property (assign, nonatomic) BOOL isPayFirst;    //先付款
-@property (strong, nonatomic) NSString *statusFlow;   //状态流程方式 0：先付款   1：先施工
-@property (strong, nonatomic) NSString *orderId;    //订单id
+@property (strong, nonatomic) NSString *statusFlow;   //状态流程方式 1：先付款   0：先施工
+@property (strong, nonatomic) NSString *checkOrderId;    //订单id
 
 @end

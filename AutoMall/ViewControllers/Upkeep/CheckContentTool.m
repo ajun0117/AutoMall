@@ -121,8 +121,8 @@ static CheckContentTool *shareInstance = nil;
             for (CheckContentItem * item in ary) {
                 //pId  pName  aid  name  stateIndex  stateName
                 NSString *insertSql= [NSString stringWithFormat:
-                                      @"INSERT INTO %@ ('pId','pName','aid','name','stateIndex', 'stateName', 'dPosition', 'tip', 'images') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@')",
-                                      locationTabbleName,item.pId, item.pName,item.aid,item.name ,item.stateIndex, item.stateName,item.dPosition,item.tip,item.images];
+                                      @"INSERT INTO %@ ('pId','pName','aid','name','stateIndex', 'stateName', 'level', 'dPosition', 'tip', 'images') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",
+                                      locationTabbleName,item.pId, item.pName,item.aid,item.name ,item.stateIndex, item.stateName,item.level,item.dPosition,item.tip,item.images];
                 BOOL a = [self.fmdb executeUpdate:insertSql];
                 if (!a)
                 {
@@ -192,7 +192,7 @@ static CheckContentTool *shareInstance = nil;
     } else {
         NSLog(@"地址数据库打开成功");
         //pId  pName  aid  name  stateIndex  stateName
-        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (aid text primary key,pId text,pName text,name text,stateIndex text,stateName text,dPosition text,tip text,images text);",locationTabbleName];
+        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (aid text primary key,pId text,pName text,name text,stateIndex text,stateName text,level text,dPosition text,tip text,images text);",locationTabbleName];
         result = [self.fmdb executeUpdate:sql];
         if (!result) {
             NSLog(@"创建地址表失败");
@@ -220,6 +220,7 @@ static CheckContentTool *shareInstance = nil;
             model.name = [result stringForColumn:@"name"];
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
+            model.level = [result stringForColumn:@"level"];
             model.dPosition = [result stringForColumn:@"dPosition"];
             model.tip = [result stringForColumn:@"tip"];
             model.images = [result stringForColumn:@"images"];
@@ -248,6 +249,7 @@ static CheckContentTool *shareInstance = nil;
             model.name = [result stringForColumn:@"name"];
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
+            model.level = [result stringForColumn:@"level"];
             model.dPosition = [result stringForColumn:@"dPosition"];
             model.tip = [result stringForColumn:@"tip"];
             model.images = [result stringForColumn:@"images"];
@@ -274,6 +276,7 @@ static CheckContentTool *shareInstance = nil;
             model.name = [result stringForColumn:@"name"];
             model.stateIndex = [result stringForColumn:@"stateIndex"];
             model.stateName = [result stringForColumn:@"stateName"];
+            model.level = [result stringForColumn:@"level"];
             model.dPosition = [result stringForColumn:@"dPosition"];
             model.tip = [result stringForColumn:@"tip"];
             model.images = [result stringForColumn:@"images"];
@@ -291,7 +294,7 @@ static CheckContentTool *shareInstance = nil;
         BOOL isRollBack = NO;
         @try
         {
-            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET stateIndex = '%@', stateName = '%@', dPosition = '%@' WHERE aid = '%@'",locationTabbleName, item.stateIndex, item.stateName, item.dPosition, item.aid];
+            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET stateIndex = '%@', stateName = '%@', level = '%@', dPosition = '%@' WHERE aid = '%@'",locationTabbleName, item.stateIndex, item.stateName, item.level, item.dPosition, item.aid];
             BOOL a = [self.fmdb executeUpdate:updateSql];
             if (!a)
             {
@@ -374,6 +377,43 @@ static CheckContentTool *shareInstance = nil;
             else
             {
                 NSLog(@"修改数据成功！");
+            }
+        }
+        @catch (NSException *exception)
+        {
+            isRollBack = YES;
+            [self.fmdb rollback];
+        }
+        @finally
+        {
+            if (!isRollBack)
+            {
+                [self.fmdb commit];
+            }
+        }
+        [self.fmdb close];
+        
+    } else {
+        NSLog(@"更新数据时数据库打开失败");
+    }
+}
+
+-(void)removeAllContentItems {
+    // 开启事务
+    if ([self.fmdb open] && [self.fmdb beginTransaction]) {
+        
+        BOOL isRollBack = NO;
+        @try
+        {
+            NSString *delSql = [NSString stringWithFormat:@"DELETE FROM '%@'",locationTabbleName];
+            BOOL a = [self.fmdb executeUpdate:delSql];
+            if (!a)
+            {
+                NSLog(@"删除数据失败");
+            }
+            else
+            {
+                NSLog(@"删除数据成功！");
             }
         }
         @catch (NSException *exception)

@@ -156,6 +156,7 @@
 #define ConsigneeDele                             @"/api/consignee/del"        //删除收货地址
 #define MallOrderAdd                             @"/api/order/add"             //新增订单
 #define MallOrderChoosePayMode           @"/api/order/choosePayMode"     //选择支付方式
+#define MallOrderPaySuccess                  @"/order/paySuccess"                 //支付成功回调
 
 //登录、注册、找回密码
 #define GetSMS                                      @"/api/sms/send"                    //获取短信验证码

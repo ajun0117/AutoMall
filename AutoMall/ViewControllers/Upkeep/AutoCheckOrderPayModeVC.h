@@ -10,6 +10,6 @@
 
 @interface AutoCheckOrderPayModeVC : UIViewController
 
-@property (strong, nonatomic) NSString *orderId;    //订单id
+@property (strong, nonatomic) NSString *checkOrderId;    //检查单id
 
 @end

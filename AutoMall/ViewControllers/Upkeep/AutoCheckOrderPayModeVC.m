@@ -14,7 +14,7 @@
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSString *statusFlow;   //状态流程方式 0：先付款   1：先施工
+    NSString *statusFlow;   //状态流程方式 1：先付款   0：先施工
 }
 @property (strong, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (strong, nonatomic) IBOutlet UILabel *moneyL;
@@ -48,21 +48,21 @@
 }
 
 - (IBAction)payFirstAction:(id)sender {
-    statusFlow = @"0";          //先付款
+    statusFlow = @"1";          //先付款
 //    [self requestPostUpdateStatus];
     AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
     orderVC.statusFlow = statusFlow;
-    orderVC.orderId = self.orderId;
+    orderVC.checkOrderId = self.checkOrderId;
     [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 - (IBAction)upkeepFirstAction:(id)sender {
-    statusFlow = @"1";          //先施工
-//    [self requestPostUpdateStatus];
-    AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
-    workingVC.statusFlow = statusFlow;
-    workingVC.orderId = self.orderId;
-    [self.navigationController pushViewController:workingVC animated:YES];
+    statusFlow = @"0";          //先施工
+    [self requestPostUpdateStatus];
+//    AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
+//    workingVC.statusFlow = statusFlow;
+//    workingVC.checkOrderId = self.checkOrderId;
+//    [self.navigationController pushViewController:workingVC animated:YES];
 }
 
 #pragma mark - 发送请求
@@ -72,7 +72,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUpdate object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUpdate, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderId,@"id",@"1",@"status", statusFlow,@"statusFlow",nil]; //施工订单确认
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.checkOrderId,@"id",@"2",@"status", statusFlow,@"statusFlow",nil]; //此界面只有一个施工操作
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepUpdate) delegate:nil params:pram info:infoDic];
 }
 
@@ -91,16 +91,16 @@
     if ([notification.name isEqualToString:CarUpkeepUpdate]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUpdate object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //接口正确
-            if ([statusFlow isEqualToString:@"0"]) {
+            if ([statusFlow isEqualToString:@"1"]) {    //先付款
                 AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
                 orderVC.statusFlow = statusFlow;
-                orderVC.orderId = self.orderId;
+                orderVC.checkOrderId = self.checkOrderId;
                 [self.navigationController pushViewController:orderVC animated:YES];
             }
-            else if ([statusFlow isEqualToString:@"1"]) {
+            else if ([statusFlow isEqualToString:@"0"]) {   //先施工
                 AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
                 workingVC.statusFlow = statusFlow;
-                workingVC.orderId = self.orderId;
+                workingVC.checkOrderId = self.checkOrderId;
                 [self.navigationController pushViewController:workingVC animated:YES];
             }
         }

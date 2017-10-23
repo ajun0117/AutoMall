@@ -111,7 +111,7 @@ static CGFloat const scrollViewHeight = 220;
     
     [self requsetAdvertList];   //请求广告列表
     [self requestGetComCategoryList];   //请求分类数据
-    [self requestPostCommoditytjList];  //请求推荐商品列表
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -129,6 +129,8 @@ static CGFloat const scrollViewHeight = 220;
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [self requestPostCommoditytjList];  //请求推荐商品列表
 }
 
 - (UIImage *) imageFromURLString: (NSString *) urlstring
@@ -154,12 +156,9 @@ static CGFloat const scrollViewHeight = 220;
 //    searchVC.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:searchVC animated:YES];
     
-//    CommodityListVC *listVC = [[CommodityListVC alloc] init];
-//    listVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:listVC animated:YES];
-    CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
-    detailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    CommodityListVC *listVC = [[CommodityListVC alloc] init];
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
 }
 
 #pragma mark - scrollView delegate
@@ -297,36 +296,45 @@ static CGFloat const scrollViewHeight = 220;
         MailGoodsCell *cell = (MailGoodsCell *)[tableView dequeueReusableCellWithIdentifier:@"mailGoodsCell"];
         cell.bgViewConsH.constant = (Screen_Width - 8*3)/2 + 50;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if (tjListAry.count >= 4) {
             NSDictionary *dic1 = tjListAry[0];
             [cell.img1 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic1[@"image"])] placeholderImage:IMG(@"timg-2")];
             cell.name1.text = dic1[@"name"];
-            cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
-            cell.yuan1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
+                cell.yuan1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
+            }
             cell.btn1.tag = 101;
             [cell.btn1 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
             
             NSDictionary *dic2 = tjListAry[1];
             [cell.img2 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic2[@"image"])] placeholderImage:IMG(@"timg-2")];
             cell.name2.text = dic2[@"name"];
-            cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
-            cell.yuan2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
+                cell.yuan2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
+            }
             cell.btn2.tag = 102;
             [cell.btn2 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
             
             NSDictionary *dic3 = tjListAry[2];
             [cell.img3 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic3[@"image"])] placeholderImage:IMG(@"timg-2")];
             cell.name3.text = dic3[@"name"];
-            cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
-            cell.yuan3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
+                cell.yuan3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
+            }
             cell.btn3.tag = 103;
             [cell.btn3 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
             
             NSDictionary *dic4 = tjListAry[3];
             [cell.img4 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic4[@"image"])] placeholderImage:IMG(@"timg-2")];
             cell.name4.text = dic4[@"name"];
-            cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
-            cell.yuan4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
+                cell.yuan4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
+            }
             cell.btn4.tag = 104;
             [cell.btn4 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -400,27 +408,6 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 -(void)buttontouchAction:(UIButton *)sender {
-//    NSLog(@"sender.tag: %ld",(long)sender.tag);
-//    NSDictionary *dic = [merchantTypeArray objectAtIndex:sender.tag - 1000];
-//    //    NSLog(@"sender.icon_url: %@",[dic objectForKey:@"icon_url"]);
-//    NSLog(@"menu_code: %@",[dic objectForKey:@"menu_code"]);
-    
-    //    self.tabBarController.selectedIndex = 1;
-    //    UINavigationController *nav = (UINavigationController *)self.tabBarController.selectedViewController;
-    //    ShopListViewController *listVC = (ShopListViewController *)nav.visibleViewController;
-    //    listVC.menu_subtitle = [dic objectForKey:@"menu_subtitle"];
-    //    listVC.menu_code = [dic objectForKey:@"menu_code"];
-    //    listVC.typeID = dic [@"menu_code"];
-    //    [listVC.typeBtn setTitle:[dic objectForKey:@"menu_subtitle"] forState:UIControlStateNormal];
-    
-//    ShopListVC *listVC = [[ShopListVC alloc] init];
-//    listVC.menu_subtitle = [dic objectForKey:@"menu_subtitle"];
-//    listVC.menu_code = [dic objectForKey:@"menu_code"];
-//    listVC.typeID = dic [@"menu_code"];
-//    [listVC.typeBtn setTitle:[dic objectForKey:@"menu_subtitle"] forState:UIControlStateNormal];
-//    listVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:listVC animated:YES];
-    
     int p = (int)sender.tag - 1000;
     NSDictionary *dic = [categoryArray objectAtIndex:p];
     CommodityListVC *listVC = [[CommodityListVC alloc] init];

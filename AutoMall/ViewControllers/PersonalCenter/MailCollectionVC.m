@@ -115,8 +115,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic = collectArray[indexPath.section][@"resource"];
     MailCollectionCell *cell = (MailCollectionCell *)[tableView dequeueReusableCellWithIdentifier:@"mailCollectionCell"];
-    cell.goodsprice.text = [NSString stringWithFormat:@"￥%ld",(long)indexPath.section];
+    [cell.goodsIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"timg-2")];
+    cell.goodsName.text = dic[@"name"];
+    cell.goodsprice.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
     return cell;
 }
 

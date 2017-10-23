@@ -237,28 +237,17 @@
         cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
         cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
         cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
-        cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-        cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
-        cell.yunfeiL.text = [NSString stringWithFormat:@"配送费￥%@",dic[@"shippingFee"]];
-        
-//        cell.shopIM.layer.cornerRadius = 5;
-//        cell.shopIM.clipsToBounds = YES;
-//        
-//        cell.tuijianL.layer.cornerRadius = 9;
-//        cell.tuijianL.clipsToBounds = YES;
-//        cell.youhuiL.layer.cornerRadius = 9;
-//        cell.youhuiL.clipsToBounds = YES;
-//        cell.jifenL.layer.cornerRadius = 9;
-//        cell.jifenL.clipsToBounds = YES;
-//        //    cell.contactL.text = [NSString stringWithFormat:@"电话：%@ / 微信：%@ / QQ：%@ / QQ群：%@ / 经理：%@",dic[@"phone"],dic[@"wechat"],dic[@"qq"],dic[@"qqGroup"],dic[@"manager"]];
-//        //    电话：13838888888 / 微信：阿俊 / QQ：123456789 / QQ群：123456 / 经理：刘经理
-//        //        NSString *text = [NSString stringWithFormat:@"<font color=\"lightGray\">电话：<font color=\"black\">%@<font color=\"lightGray\"> / 微信：<font color=\"black\">%@<font color=\"lightGray\"> / QQ：<font color=\"black\">%@<font color=\"lightGray\"> / QQ群：<font color=\"black\">%@<font color=\"lightGray\"> / 经理：<font color=\"black\">%@",dic[@"phone"],dic[@"wechat"],dic[@"qq"],dic[@"qqGroup"],dic[@"manager"]];
-//        //        MarkupParser *p = [[MarkupParser alloc] init];
-//        //        NSAttributedString *attString = [p attrStringFromMarkup:text];
-//        //        [cell.contactL setNeedsDisplay];
-//        //        [cell.contactL setAttString:attString];
-//        //        [cell.contactL sizeToFit];
-        
+        NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+        if ([mobileUserType isEqualToString:@"1"]) {    //老板
+            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
+        }
+        else {
+            cell.moneyL.text = @"￥--";
+            cell.costPriceStrikeL.text = @"￥--";
+            cell.yunfeiL.text = @"配送费--元";
+        }
         return cell;
     }
 }

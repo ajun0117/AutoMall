@@ -17,7 +17,6 @@
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *orderArray;
     int currentpage;
-    NSString *orderStatus;      //0未支付，1已支付
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -38,7 +37,9 @@
     
     orderArray = [NSMutableArray array];
     currentpage = 0;
-    orderStatus = @"0";
+    if (! _orderStatus) {
+        _orderStatus = @"0";
+    }
     [self requestGetMallOrderList];
 }
 
@@ -75,7 +76,7 @@
 
 
 - (IBAction)daifuAction:(id)sender {
-    orderStatus = @"0";
+    _orderStatus = @"0";
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:YES andView:self.daifuView withColor:Red_BtnColor];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
@@ -84,7 +85,7 @@
 }
 
 - (IBAction)yifuAction:(id)sender {
-    orderStatus = @"1";
+    _orderStatus = @"1";
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:YES andView:self.yifuView withColor:Red_BtnColor];
@@ -93,7 +94,7 @@
 }
 
 - (IBAction)allAction:(id)sender {
-    orderStatus = nil;
+    _orderStatus = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
@@ -206,7 +207,7 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderList, @"op", nil];
 //    NSString *urlString = [NSString stringWithFormat:@"%@?clientId=%@&pageNo=%d",UrlPrefix(MallOrderList),userId,currentpage];
 //    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"clientId",[NSNumber numberWithInt:currentpage],@"pageNo",orderStatus,@"orderStatus", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"clientId",[NSNumber numberWithInt:currentpage],@"pageNo",_orderStatus,@"orderStatus", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderList) delegate:nil params:pram info:infoDic];
 }
 

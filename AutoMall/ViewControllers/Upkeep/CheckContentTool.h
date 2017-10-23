@@ -23,5 +23,6 @@
 -(void)UpdateContentItemWithItem:(CheckContentItem *)item;     //通过检查内容id修改
 -(void)UpdateContentItemImagesWithItem:(CheckContentItem *)item;
 -(void)UpdateContentItemTipWithItem:(CheckContentItem *)item;
-
+//删除表中所有数据
+-(void)removeAllContentItems;
 @end

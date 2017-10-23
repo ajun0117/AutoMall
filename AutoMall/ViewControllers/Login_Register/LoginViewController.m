@@ -30,6 +30,10 @@
     //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
+    if (self.isPresented) {
+        [self setNavigationbar];
+    }
+    
 //    UIButton *rightButn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    rightButn.frame = CGRectMake(0, 0, 60, 26);
 //    rightButn.contentMode = UIViewContentModeScaleAspectFit;
@@ -61,6 +65,36 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+#pragma mark -
+#pragma self Methods
+/**
+ *  设置导航条
+ */
+- (void)setNavigationbar
+{
+    //    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Right-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(backButnClicked:)];
+    //
+    //    self.navigationItem.leftBarButtonItem = back;
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton addTarget:self action:@selector((backButnClicked:)) forControlEvents:UIControlEventTouchUpInside];
+    backButton.frame = CGRectMake(0, 0, 52, 30);
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [backButton setTitle:@"关闭" forState:UIControlStateNormal];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [backButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [backButton setImage:[UIImage imageNamed:@"return_left"] forState:UIControlStateNormal];
+    //    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)]; // 向左边移动
+    [backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)]; // 向右边移动
+    [backButton setContentEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
+    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = backButnItem;
+}
+
+-(void)backButnClicked:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)pwdTextSwitch:(id)sender {
@@ -167,6 +201,14 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserLogin) delegate:nil params:pram info:infoDic];
 }
 
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -197,14 +239,40 @@
             NSDictionary *dic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setIsLogined:YES];  //已登录标示
             [[GlobalSetting shareGlobalSettingInstance] setToken:dic [@"access_token"]];
-
-            [self.navigationController popViewControllerAnimated:YES]; //返回上级页面
+            
+            [self requestPostUserGetInfo];   //紧接着请求用户信息;
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
         }
     }
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"GetUserInfo_responseObject %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *dic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
+            //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            if (self.isPresented) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+            [self.navigationController popViewControllerAnimated:YES]; //返回上级页面
+            }
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
 }
 
 

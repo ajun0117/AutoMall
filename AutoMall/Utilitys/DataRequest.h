@@ -28,6 +28,8 @@
 -(void) getDataWithUrl:(NSString *)urlStr delegate:(id)delegate params:(NSDictionary *)params info:(NSDictionary *)infoDic;
 //post方式访问网络
 -(void) postDataWithUrl:(NSString *)urlStr delegate:(id)delegate params:(id)params info:(NSDictionary *)infoDic;
+//设置传参方式为JSON
+-(void) postJSONRequestWithUrl:(NSString *)urlStr delegate:(id)delegate params:(id)params info:(NSDictionary *)infoDic;
 //上传图片到服务器
 -(void) uploadImageWithUrl:(NSString *)urlStr params:(NSDictionary *)param target:(WPImageView *)imageView delegate:(id)delegate info:(NSDictionary *)infoDic;
 

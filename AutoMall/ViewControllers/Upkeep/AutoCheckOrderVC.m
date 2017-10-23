@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    if ([self.statusFlow isEqualToString:@"0"]) {
+    if ([self.statusFlow isEqualToString:@"1"]) {   //先付款
         self.title = @"先付款后开工";
     }
     else {
@@ -60,13 +60,13 @@
     if ([self.statusFlow isEqualToString:@"0"]) {   //先付款，付款完成，至施工
         AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
         workingVC.statusFlow = self.statusFlow;
-        workingVC.orderId = self.orderId;
+        workingVC.checkOrderId = self.checkOrderId;
         [self.navigationController pushViewController:workingVC animated:YES];
     }
     else if ([self.statusFlow isEqualToString:@"1"]) {      //先施工，付款完成，至完工页
         AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
         completeVC.statusFlow = self.statusFlow;
-        completeVC.orderId = self.orderId;
+        completeVC.checkOrderId = self.checkOrderId;
         [self.navigationController pushViewController:completeVC animated:YES];
     }
 }
@@ -78,7 +78,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUpdate object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUpdate, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderId,@"id",@"3",@"status", self.statusFlow,@"statusFlow",nil]; //已付款
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.checkOrderId,@"id",@"3",@"status", self.statusFlow,@"statusFlow",nil]; //已付款
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepUpdate) delegate:nil params:pram info:infoDic];
 }
 
@@ -100,13 +100,13 @@
             if ([self.statusFlow isEqualToString:@"0"]) {   //先付款，付款完成，至施工
                 AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
                 workingVC.statusFlow = self.statusFlow;
-                workingVC.orderId = self.orderId;
+                workingVC.checkOrderId = self.checkOrderId;
                 [self.navigationController pushViewController:workingVC animated:YES];
             }
             else if ([self.statusFlow isEqualToString:@"1"]) {      //先施工，付款完成，至完工页
                 AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
                 completeVC.statusFlow = self.statusFlow;
-                completeVC.orderId = self.orderId;
+                completeVC.checkOrderId = self.checkOrderId;
                 [self.navigationController pushViewController:completeVC animated:YES];
             }
         }

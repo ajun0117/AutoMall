@@ -201,10 +201,12 @@
         }
         else if (resultStatus == 9000) {
             //            _networkConditionHUD.labelText = @"订单支付成功";
+            [self requestOrderPaySuccess];
             payresultStr = @"success";
         }
         else if (resultStatus == 8000) {
             //            _networkConditionHUD.labelText = @"订单正在处理中，请稍后查看订单状态";
+            [self requestOrderPaySuccess];
             payresultStr = @"success";
         }
         else if (resultStatus == 4000) {
@@ -258,10 +260,17 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderChoosePayMode, @"op", nil];
         NSString *urlString = [NSString stringWithFormat:@"%@?code=%@&payMode=%@",UrlPrefix(MallOrderChoosePayMode),self.orderNumber,payModeStr];
         [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-//    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderNumber,@"code",payModeStr,@"payMode", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderChoosePayMode) delegate:nil params:pram info:infoDic];
 }
+
+-(void)requestOrderPaySuccess {     //支付成功回调
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderPaySuccess object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderPaySuccess, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?code=%@",UrlPrefix(MallOrderPaySuccess),self.orderNumber];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -282,7 +291,21 @@
             }else if ([payModeStr isEqualToString:@"2"]) {    //微信
                 
             }
-            
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:MallOrderPaySuccess]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderPaySuccess object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {   //支付宝
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

@@ -134,10 +134,6 @@
 		04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B141F3D969600053A98 /* CarInfoListVC.xib */; };
 		04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */; };
 		04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */; };
-		04A0E2801F414940008FE8AF /* AddCarInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E27E1F414940008FE8AF /* AddCarInfoVC.m */; };
-		04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */; };
-		04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */; };
-		04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */; };
 		04A69F0E1F710D1300E966A0 /* UpkeepCarMarkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */; };
 		04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */; };
 		04ABFB321F9837CE0015EE78 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABFB301F9837CE0015EE78 /* GTMBase64.m */; };
@@ -668,12 +664,6 @@
 		04A09B171F3DAFBE00053A98 /* CarInfoSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoSearchVC.h; sourceTree = "<group>"; };
 		04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoSearchVC.m; sourceTree = "<group>"; };
 		04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoSearchVC.xib; sourceTree = "<group>"; };
-		04A0E27D1F414940008FE8AF /* AddCarInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoVC.h; sourceTree = "<group>"; };
-		04A0E27E1F414940008FE8AF /* AddCarInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoVC.m; sourceTree = "<group>"; };
-		04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCarInfoVC.xib; sourceTree = "<group>"; };
-		04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoCell.h; sourceTree = "<group>"; };
-		04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoCell.m; sourceTree = "<group>"; };
-		04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCarInfoCell.xib; sourceTree = "<group>"; };
 		04A69F0B1F710D1300E966A0 /* UpkeepCarMarkVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepCarMarkVC.h; sourceTree = "<group>"; };
 		04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepCarMarkVC.m; sourceTree = "<group>"; };
 		04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepCarMarkVC.xib; sourceTree = "<group>"; };
@@ -1207,12 +1197,6 @@
 		042E5D111F419B4F00F5F324 /* 车辆信息添加 */ = {
 			isa = PBXGroup;
 			children = (
-				04A0E27D1F414940008FE8AF /* AddCarInfoVC.h */,
-				04A0E27E1F414940008FE8AF /* AddCarInfoVC.m */,
-				04A0E27F1F414940008FE8AF /* AddCarInfoVC.xib */,
-				04A0E2821F4149B7008FE8AF /* AddCarInfoCell.h */,
-				04A0E2831F4149B7008FE8AF /* AddCarInfoCell.m */,
-				04A0E2841F4149B7008FE8AF /* AddCarInfoCell.xib */,
 				042F4F1A1F7905150059B44E /* CarInfoAddVC.h */,
 				042F4F1B1F7905150059B44E /* CarInfoAddVC.m */,
 				042F4F1C1F7905150059B44E /* CarInfoAddVC.xib */,
@@ -1263,6 +1247,19 @@
 				042FA30E1F3AB10E0095BCFD /* DVSwitch.m */,
 			);
 			path = DVSwitch;
+			sourceTree = "<group>";
+		};
+		0434274A1F9DDDCF00129940 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				04D396411F661F870077BFB3 /* SettlementAddressCell.h */,
+				04D396421F661F870077BFB3 /* SettlementAddressCell.m */,
+				04D396431F661F870077BFB3 /* SettlementAddressCell.xib */,
+				04D396461F6621110077BFB3 /* SettlementBeizhuCell.h */,
+				04D396471F6621110077BFB3 /* SettlementBeizhuCell.m */,
+				04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */,
+			);
+			name = cells;
 			sourceTree = "<group>";
 		};
 		044A24141F3326CF009720DE /* 汽车检查页 */ = {
@@ -1822,6 +1819,7 @@
 		04BA1C6A1F4D8CD100704A9E /* 结算 */ = {
 			isa = PBXGroup;
 			children = (
+				0434274A1F9DDDCF00129940 /* cells */,
 				04BA1C6B1F4D8CE100704A9E /* SettlementVC.h */,
 				04BA1C6C1F4D8CE100704A9E /* SettlementVC.m */,
 				04BA1C6D1F4D8CE100704A9E /* SettlementVC.xib */,
@@ -1839,12 +1837,6 @@
 				04BA1C841F4D8E1D00704A9E /* ShoppingCartModel.h */,
 				04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */,
 				04BA1C7A1F4D8DBB00704A9E /* ConfirmOrderVC.h */,
-				04D396411F661F870077BFB3 /* SettlementAddressCell.h */,
-				04D396421F661F870077BFB3 /* SettlementAddressCell.m */,
-				04D396431F661F870077BFB3 /* SettlementAddressCell.xib */,
-				04D396461F6621110077BFB3 /* SettlementBeizhuCell.h */,
-				04D396471F6621110077BFB3 /* SettlementBeizhuCell.m */,
-				04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */,
 			);
 			name = "结算";
 			sourceTree = "<group>";
@@ -2757,11 +2749,9 @@
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
-				04A0E2811F414940008FE8AF /* AddCarInfoVC.xib in Resources */,
 				04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */,
 				04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */,
 				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
-				04A0E2861F4149B7008FE8AF /* AddCarInfoCell.xib in Resources */,
 				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
 				04EFEC7E1F5FEA16004D9188 /* MailCollectionVC.xib in Resources */,
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
@@ -3083,11 +3073,9 @@
 				046B8DCD1F9A03A200784AA8 /* Order.m in Sources */,
 				04ABFB321F9837CE0015EE78 /* GTMBase64.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
-				04A0E2851F4149B7008FE8AF /* AddCarInfoCell.m in Sources */,
 				04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */,
 				04DC7DC11F31C28300AA20A7 /* QBAssetsCollectionOverlayView.m in Sources */,
 				04DC7DB51F31C28300AA20A7 /* DataRequest.m in Sources */,
-				04A0E2801F414940008FE8AF /* AddCarInfoVC.m in Sources */,
 				04DC7DC61F31C28300AA20A7 /* QBImagePickerController.m in Sources */,
 				04DC7DD41F31C28300AA20A7 /* UIView+MJExtension.m in Sources */,
 				0459C6BD1F614C870040501E /* CitiesDataTool.m in Sources */,
@@ -3248,7 +3236,6 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-<<<<<<< Updated upstream
 				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3259,9 +3246,6 @@
 					"\"${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage\"",
 					"\"$(SRCROOT)/AutoMall/Utilitys/支付宝蚂蚁金服支付\"",
 				);
-=======
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
->>>>>>> Stashed changes
 				INFOPLIST_FILE = AutoMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3294,7 +3278,6 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-<<<<<<< Updated upstream
 				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3305,9 +3288,6 @@
 					"\"${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage\"",
 					"\"$(SRCROOT)/AutoMall/Utilitys/支付宝蚂蚁金服支付\"",
 				);
-=======
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
->>>>>>> Stashed changes
 				INFOPLIST_FILE = AutoMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

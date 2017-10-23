@@ -43,7 +43,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+//    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     
@@ -77,10 +77,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
     NSDictionary *dic = messageAry[indexPath.row];
-    cell.declareL.text = dic[@"item"];
-    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    
+//    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+//    cell.declareL.text = dic[@"title"];
+//    cell.contentL.text = dic[@"content"];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"messageListCell"];
+    cell.textLabel.text = dic[@"title"];
+    cell.detailTextLabel.text = dic[@"content"];
     return cell;
 }
 
@@ -118,7 +122,6 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
     if ([notification.name isEqualToString:MessageList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MessageList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确

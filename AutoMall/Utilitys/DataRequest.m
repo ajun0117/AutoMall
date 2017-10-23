@@ -165,6 +165,57 @@ static DataRequest *dataRequest;
 //    }
 }
 
+//post方式访问网络
+-(void) postJSONRequestWithUrl:(NSString *)urlStr delegate:(id)delegate params:(id)params info:(NSDictionary *)infoDic {
+    
+    //    NSMutableString *appendString = [NSMutableString stringWithFormat:@"%@?_fs=1/_vc=%@",urlStr,version];
+    
+    //    if ([DataRequest checkNetwork]) {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];  //设置传参方式为JSON
+    
+    //为这个下载任务HTTP头添加@"User-Agent"字段
+    [manager.requestSerializer setValue:[self getUserAgentString] forHTTPHeaderField:@"User-Agent"];
+    [manager.requestSerializer setValue:@"zh-cn, zh-tw,zh-hk" forHTTPHeaderField:@"Accept-Language"];
+    NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
+    if (token != nil && ![token isEqualToString:@""]) {
+        NSLog(@"Authorization: %@",token);
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    }
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    if (userId != nil && ![userId isEqualToString:@""]) {
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@",userId] forHTTPHeaderField:@"XPS-UserId"];
+    }
+    NSDictionary *locationDic = [[GlobalSetting shareGlobalSettingInstance] myLocation];
+    [manager.requestSerializer setValue:locationDic[@"longitude"] forHTTPHeaderField:@"XPS-Longitude"];
+    [manager.requestSerializer setValue:locationDic[@"latitude"] forHTTPHeaderField:@"XPS-Latitude"];
+    
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromArray:[NSArray arrayWithObjects:@"text/plain", @"text/html",nil]];
+    manager.requestSerializer.timeoutInterval = 300;
+    [manager POST:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet  URLQueryAllowedCharacterSet]] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        //            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult",@"成功获取数据！",@"ContentResult", responseObject, @"RespData", [infoDic objectForKey:@"op"], @"op",nil];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult",@"上传成功！",@"ContentResult", responseObject, @"RespData", [infoDic objectForKey:@"op"], @"op",[infoDic objectForKey:@"indexPath"], @"indexPath",nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:[infoDic objectForKey:@"op"] object:nil userInfo:userInfo];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error.description);
+        NSLog(@"Error: %@", error.debugDescription);
+        NSDictionary *userInfo = nil;
+        if (error.code == -1001) {
+            userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"error",@"RespResult",@"请求超时！",@"ContentResult",error,@"RespData",[infoDic objectForKey:@"op"], @"op", nil];
+        } else {
+            userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"error",@"RespResult",@"网络请求失败！",@"ContentResult",error,@"RespData",[infoDic objectForKey:@"op"], @"op", nil];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:[infoDic objectForKey:@"op"] object:nil userInfo:userInfo];
+    }];
+    //    } else {
+    //        NSDictionary *result = [[NSDictionary alloc] initWithObjectsAndKeys:@"error",@"RespResult",@"网络无法连接！",@"ContentResult", [infoDic objectForKey:@"op"], @"op",nil];
+    //        [[NSNotificationCenter defaultCenter] postNotificationName:[infoDic objectForKey:@"op"] object:nil userInfo:result];
+    //    }
+}
+
+
+
 //上传图片到服务器
 -(void) uploadImageWithUrl:(NSString *)urlStr params:(NSDictionary *)param target:(WPImageView *)imageView delegate:(id)delegate info:(NSDictionary *)infoDic {
     

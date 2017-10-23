@@ -12,6 +12,7 @@
 #import "ServicePackageVC.h"
 #import "BaoyangDiscountsVC.h"
 #import "UpkeepCarInfoVC.h"
+#import "AutoCheckOrderPayModeVC.h"
 
 @interface UpkeepPlanVC ()
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -47,7 +48,8 @@
 }
 
 - (IBAction)confirmAction:(id)sender {
-    
+        AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
+        [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

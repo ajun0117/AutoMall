@@ -32,6 +32,7 @@
     NSInteger currentSelectIndex;  //当前选中的位置
     NSIndexPath *currentPhotoIndexPath;     //记录当前拍照按钮对应的cell位置
     NSDictionary *lichenDic;    //里程油量数据
+    NSString *carImageUrl;  //车图的url
 }
 
 @end
@@ -80,6 +81,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [[CheckContentTool sharedManager] removeAllContentItems];   //先删除所有数据
+    
     [self requestGetCheckcategoryList];     //记录已选择的状态
 
 }
@@ -114,7 +117,7 @@
         [myTableView registerNib:[UINib nibWithNibName:@"AutoCheckGroupCell" bundle:nil] forCellReuseIdentifier:@"autoCheckGroupCell"];
     }
     currentSelectIndex = 0;     //默认第一个
-    NSString *idString = partsArray[0] [@"id"];
+    NSString *idString = [partsArray firstObject] [@"id"];
     [self requestGetChecktermListWithId:idString];
 }
 
@@ -155,6 +158,10 @@
 
 -(void)toMark {
     UpkeepCarMarkVC *markVC = [[UpkeepCarMarkVC alloc] init];
+    markVC.GoBackGet = ^(NSString *imageUrl) {
+        carImageUrl = imageUrl;
+        NSLog(@"carImageUrl: %@",carImageUrl);
+    };
     [self.navigationController pushViewController:markVC animated:YES];
 }
 
@@ -609,21 +616,22 @@
 
         NSMutableArray *positionAry = [[item.dPosition objectFromJSONString] mutableCopy];
         NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
-        NSInteger selectedIndex = [positionDic[positionStr] integerValue];
+        NSDictionary *objDic = positionDic[positionStr];
+        NSInteger selectedIndex = [objDic[@"stateIndex"] integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];
-        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag) {
-            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-            NSLog(@"Did press position on first switch tag: %lu", (unsigned long)tag);
+        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag, NSString *indexName) {
+            NSLog(@"Did press position on first switch index: %lu, tag: %lu, indexName:%@",  (unsigned long)index,(unsigned long)tag,indexName);
             //这里要重新从数据库读一遍
             CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
             NSMutableArray *positionAry = [[item1.dPosition objectFromJSONString] mutableCopy];
             NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
             CheckContentItem *item2 = [[CheckContentItem alloc] init];
             item2.aid = NSStringWithNumber(dicc[@"id"]);
-            item2.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
-            //        item2.stateName = stateAry[index];
-            [positionDic setObject:[NSString stringWithFormat:@"%lu",(unsigned long)index] forKey:positionStr];
-//            NSData *positionData = [NSKeyedArchiver archivedDataWithRootObject:positionAry];
+//            item2.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+//            item2.stateName = [NSString stringWithFormat:@"%@",indexName];
+//            item2.level = indexName;
+            NSDictionary *objectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%lu",(unsigned long)index],@"stateIndex",[NSString stringWithFormat:@"%lu",(unsigned long)tag-5000],@"level",indexName,@"result", nil];
+            [positionDic setObject:objectDic forKey:positionStr];
             NSLog(@"positionDic: %@",positionDic);
             [positionAry replaceObjectAtIndex:indexPath.row withObject:positionDic];
             NSLog(@"positionAry: %@",positionAry);
@@ -689,13 +697,13 @@
         
         NSInteger selectedIndex = [item.stateIndex integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];
-        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag) {
-            NSLog(@"Did press position on first switch at index: %lu", (unsigned long)index);
-            NSLog(@"Did press position on first switch tag: %lu", (unsigned long)tag);
+        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag, NSString *indexName) {
+            NSLog(@"Did press position on first switch index: %lu, tag: %lu, indexName:%@",  (unsigned long)index,(unsigned long)tag,indexName);
             CheckContentItem *item = [[CheckContentItem alloc] init];
             item.aid = NSStringWithNumber(dicc[@"id"]);
             item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
-            //        item.stateName = stateAry[index];
+            item.stateName = indexName;
+            item.level = [NSString stringWithFormat:@"%lu",(unsigned long)tag-5000];
             [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
         }];
         
@@ -739,7 +747,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepAdd object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepAdd, @"op", nil];
     
-    NSDictionary *carDic = @{@"id":@"1",@"mileage":@"3000",@"fuelAmount":@"20"};
+    NSDictionary *carDic = @{@"id":[NSNumber numberWithInt:1],@"mileage":@"3000",@"fuelAmount":@"20"};
     NSMutableArray *carUpkeepCheckContentsAry = [NSMutableArray array];
     NSMutableArray *items = [[CheckContentTool sharedManager] queryAllContent];    //从数据库查出所有记录
     for (CheckContentItem *item in items) {
@@ -752,11 +760,15 @@
                 NSMutableDictionary *positionDic = positionAry[i];
                 NSMutableDictionary *tipDic = tipAry[i];
                 NSMutableDictionary *imagesDic = imagesAry[i];
-                [checkContentDic setObject:@"" forKey:@"result"];
-                [checkContentDic setObject:[[positionDic allValues] firstObject] forKey:@"level"];
+                NSDictionary *objDic = [[positionDic allValues] firstObject];
+                [checkContentDic setObject:objDic[@"result"] forKey:@"result"];
+                [checkContentDic setObject:objDic[@"level"] forKey:@"level"];
                 [checkContentDic setObject:[[positionDic allKeys] firstObject] forKey:@"dPosition"];
                 [checkContentDic setObject:[[tipDic allValues] firstObject] forKey:@"describe"];
-                [checkContentDic setObject:[[imagesDic allValues] firstObject]  forKey:@"minorImages"];
+                NSArray *imgs = [[imagesDic allValues] firstObject];
+                if (imgs.count > 0) {
+                    [checkContentDic setObject:imgs  forKey:@"minorImages"];
+                }
                 int idNum = [item.aid intValue];
                 NSDictionary *contentDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:idNum],@"id",item.name,@"name", nil];
                 [checkContentDic setObject:contentDic forKey:@"checkContent"];
@@ -766,11 +778,13 @@
         else {
             NSMutableDictionary *checkContentDic = [NSMutableDictionary dictionary];
             NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
-            [checkContentDic setObject:@"" forKey:@"result"];
-            [checkContentDic setObject:item.stateIndex forKey:@"level"];
+            [checkContentDic setObject:item.stateName forKey:@"result"];
+            [checkContentDic setObject:item.level forKey:@"level"];
             [checkContentDic setObject:@"" forKey:@"dPosition"];
             [checkContentDic setObject:item.tip forKey:@"describe"];
-            [checkContentDic setObject:imagesAry forKey:@"minorImages"];
+            if (imagesAry.count > 0) {
+                [checkContentDic setObject:imagesAry forKey:@"minorImages"];
+            }
             int idNum = [item.aid intValue];
             NSDictionary *contentDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:idNum],@"id",item.name,@"name", nil];
             [checkContentDic setObject:contentDic forKey:@"checkContent"];
@@ -779,11 +793,13 @@
         
     }
     NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
-    
-    
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
+//    NSError *err = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pram options:NSJSONWritingPrettyPrinted error:&err];
+//    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"jsonStr: %@",jsonStr);
     NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -827,7 +843,8 @@
                     NSMutableArray *tipMulAry = [NSMutableArray array];
                     NSMutableArray *imagesMulAry = [NSMutableArray array];
                     for (NSString *str in aryy) {
-                        NSMutableDictionary *positionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",str, nil];
+                        NSDictionary *objectDic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"stateIndex",[NSString stringWithFormat:@"%lu",(unsigned long)1],@"level",dicc[@"state1"],@"result", nil];
+                        NSMutableDictionary *positionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:objectDic,str, nil];
                         [mulAry addObject:positionDic];
                         
                         NSMutableDictionary *tipPositionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"",str, nil];
@@ -841,8 +858,9 @@
                     item.name = dicc[@"name"];
                     item.pId = NSStringWithNumber(partsArray[currentSelectIndex] [@"id"]);
                     item.pName = partsArray[currentSelectIndex] [@"name"];
-                    item.stateIndex = @"0";
-                    item.stateName = @"";
+//                    item.stateIndex = @"0";
+//                    item.stateName = @"";
+//                    item.level = @"1";
                     //位置state重组
                     NSError *err = nil;
                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mulAry options:NSJSONWritingPrettyPrinted error:&err];
@@ -869,7 +887,8 @@
                     item.pId = NSStringWithNumber(partsArray[currentSelectIndex] [@"id"]);
                     item.pName = partsArray[currentSelectIndex] [@"name"];
                     item.stateIndex = @"0";
-                    item.stateName = @"";
+                    item.stateName = dicc[@"state1"];
+                    item.level = @"1";
                     item.tip = @"";
                     //位置images重组
                     NSError *err = nil;

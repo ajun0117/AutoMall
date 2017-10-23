@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSMutableArray *onTopLabels;
 @property (strong, nonatomic) NSArray *strings;
 
-@property (strong, nonatomic) void (^handlerBlock)(NSUInteger index, NSInteger tag);
+@property (strong, nonatomic) void (^handlerBlock)(NSUInteger index, NSInteger tag, NSString *indexName);
 @property (strong, nonatomic) void (^willBePressedHandlerBlock)(NSUInteger index);
 
 @property (strong, nonatomic) UIView *backgroundView;
@@ -111,7 +111,7 @@
     return self;
 }
 
-- (void)setPressedHandler:(void (^)(NSUInteger,NSInteger))handler
+- (void)setPressedHandler:(void (^)(NSUInteger,NSInteger,NSString *))handler
 {
     self.handlerBlock = handler;
 }
@@ -274,9 +274,10 @@
                     break;
             }
         }
-        
+        UILabel *label = self.labels[selectedIndex];
+        NSString *string = label.text;
         if (self.handlerBlock) {
-            self.handlerBlock(selectedIndex,self.sliderView.tag);
+            self.handlerBlock(selectedIndex,self.sliderView.tag,string);
         }
     }];
 }
@@ -338,9 +339,10 @@
                 break;
         }
     }
-    
+    UILabel *label = self.labels[selectedIndex];
+    NSString *string = label.text;
     if (self.handlerBlock) {
-        self.handlerBlock(selectedIndex, self.sliderView.tag);
+        self.handlerBlock(selectedIndex, self.sliderView.tag,string);
     }
 }
 
@@ -464,17 +466,19 @@
                             break;
                     }
                 }
-                
+                UILabel *label = self.labels[self.selectedIndex];
+                NSString *string = label.text;
                 if (self.handlerBlock) {
-                    self.handlerBlock(index, self.sliderView.tag);
+                    self.handlerBlock(index, self.sliderView.tag,string);
                 }
                 
             }];
             
         } else {
-            
+                UILabel *label = self.labels[self.selectedIndex];
+                NSString *string = label.text;
                 if (self.handlerBlock) {
-                    self.handlerBlock(self.selectedIndex, self.sliderView.tag);
+                    self.handlerBlock(self.selectedIndex, self.sliderView.tag,string);
                 }
         }
     }
