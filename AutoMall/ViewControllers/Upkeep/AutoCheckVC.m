@@ -843,7 +843,12 @@
                     NSMutableArray *tipMulAry = [NSMutableArray array];
                     NSMutableArray *imagesMulAry = [NSMutableArray array];
                     for (NSString *str in aryy) {
-                        NSDictionary *objectDic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"stateIndex",[NSString stringWithFormat:@"%lu",(unsigned long)1],@"level",dicc[@"state1"],@"result", nil];
+                        NSDictionary *objectDic;
+                        if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {  //存在state2，则默认在2的位置
+                            objectDic = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"stateIndex",[NSString stringWithFormat:@"%lu",(unsigned long)3],@"level",dicc[@"state3"],@"result", nil];
+                        } else {
+                            objectDic = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"stateIndex",[NSString stringWithFormat:@"%lu",(unsigned long)3],@"level",dicc[@"state3"],@"result", nil];
+                        }
                         NSMutableDictionary *positionDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:objectDic,str, nil];
                         [mulAry addObject:positionDic];
                         
@@ -886,9 +891,13 @@
                     item.name = dicc[@"name"];
                     item.pId = NSStringWithNumber(partsArray[currentSelectIndex] [@"id"]);
                     item.pName = partsArray[currentSelectIndex] [@"name"];
-                    item.stateIndex = @"0";
-                    item.stateName = dicc[@"state1"];
-                    item.level = @"1";
+                    if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {  //存在state2，则默认在2的位置
+                        item.stateIndex = @"2";
+                    } else {
+                        item.stateIndex = @"1";
+                    }
+                    item.stateName = dicc[@"state3"];
+                    item.level = @"3";
                     item.tip = @"";
                     //位置images重组
                     NSError *err = nil;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,14 +25,15 @@
                     <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="pSG-Xr-Dul"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="zN3-Jl-WXH"/>
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="T9h-fr-hF6"/>
+                    </connections>
                 </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yLe-NZ-VGp">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="yLe-NZ-VGp">
                     <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="P2W-it-OUR"/>
                         <outlet property="delegate" destination="-1" id="hPO-PQ-VH1"/>
@@ -41,9 +42,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="yLe-NZ-VGp" firstAttribute="top" secondItem="Gqi-Xz-JR8" secondAttribute="bottom" id="Fho-kp-qDa"/>
+                <constraint firstItem="yLe-NZ-VGp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OAN-ql-u1d"/>
                 <constraint firstAttribute="trailing" secondItem="Gqi-Xz-JR8" secondAttribute="trailing" id="j92-ZZ-YQh"/>
                 <constraint firstItem="Gqi-Xz-JR8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oSp-sr-ydF"/>
+                <constraint firstAttribute="trailing" secondItem="yLe-NZ-VGp" secondAttribute="trailing" id="pub-K9-QRk"/>
                 <constraint firstItem="Gqi-Xz-JR8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="rfv-9X-f8r"/>
+                <constraint firstAttribute="bottom" secondItem="yLe-NZ-VGp" secondAttribute="bottom" id="xTT-un-Grg"/>
             </constraints>
             <point key="canvasLocation" x="-487" y="-2"/>
         </view>

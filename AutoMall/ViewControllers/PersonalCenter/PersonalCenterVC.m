@@ -675,7 +675,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (! mobileUserType) {
+        _networkConditionHUD.labelText = @"登录后才能查看！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+        return;
+    }
     if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
         switch (indexPath.section) {
             case 0: {

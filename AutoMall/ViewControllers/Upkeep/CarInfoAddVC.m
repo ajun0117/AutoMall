@@ -107,7 +107,7 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    [self requestPostAddDiscount];
+    [self requestPostAddCar];
 }
 
 - (IBAction)selectAction:(id)sender {
@@ -122,7 +122,7 @@
 }
 
 #pragma mark - 发起网络请求
--(void)requestPostAddDiscount { //新增优惠
+-(void)requestPostAddCar { //新增车辆
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarAdd object:nil];

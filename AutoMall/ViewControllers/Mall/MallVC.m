@@ -152,13 +152,9 @@ static CGFloat const scrollViewHeight = 220;
 //}
 
 -(void) toSearch {  //搜索车辆保养记录
-//    MailSearchVC *searchVC = [[MailSearchVC alloc] init];
-//    searchVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:searchVC animated:YES];
-    
-    CommodityListVC *listVC = [[CommodityListVC alloc] init];
-    listVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
+    MailSearchVC *searchVC = [[MailSearchVC alloc] init];
+    searchVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 #pragma mark - scrollView delegate

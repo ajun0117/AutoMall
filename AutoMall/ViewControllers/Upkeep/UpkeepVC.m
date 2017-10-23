@@ -56,6 +56,8 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
+    self.myCollectionView.alwaysBounceVertical = YES;
+    
 //    [self makeLayerWithButton:self.carOwnerBtn];
 //    [self makeLayerWithButton:self.hairdressingBtn];
 //    [self makeLayerWithButton:self.quickBtn];
