@@ -176,7 +176,7 @@
 #define DiscountList                                @"/api/discount/list"                //优惠列表
 #define CarAdd                                        @"/api/car/add"                       //新增车辆信息
 #define CarUpdate                                   @"/api/car/update"                  //更新车辆信息
-#define CarList                                        @"/api/car/list"                        //车辆列表
+#define CarListOrSearch                         @"/api/car/search"                  //车辆列表及搜索
 #define CarUpkeepUpdate                       @"/api/carUpkeep/update"    //更新检查订单支付状态
 
 //个人中心

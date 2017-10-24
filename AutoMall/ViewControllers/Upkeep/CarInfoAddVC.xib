@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarInfoAddVC">
             <connections>
+                <outlet property="birthdayDatePicker" destination="oW1-NT-Xmb" id="D0U-1D-ghZ"/>
                 <outlet property="birthdayTF" destination="EER-RJ-YNF" id="TjX-10-ufW"/>
                 <outlet property="brandTF" destination="UJs-q1-lkf" id="GeE-xm-7hb"/>
                 <outlet property="engineNoTF" destination="pLB-Qb-syT" id="wgE-4Q-Owf"/>
@@ -90,7 +91,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="行驶里程" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brK-Bq-52q">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="行驶里程" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brK-Bq-52q">
                                             <rect key="frame" x="85" y="7" width="282" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="jAv-GI-B62"/>
@@ -118,7 +119,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="燃油量" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wfu-Uv-do7">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="燃油量" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wfu-Uv-do7">
                                             <rect key="frame" x="69.5" y="51" width="297.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="sEj-mg-uSh"/>
@@ -168,7 +169,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ibb-0l-SPH">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="姓名" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ibb-0l-SPH">
                                             <rect key="frame" x="55" y="52" width="312.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="LSl-eO-KYX"/>
@@ -196,7 +197,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="生日" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EER-RJ-YNF">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="生日" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EER-RJ-YNF">
                                             <rect key="frame" x="54.5" y="229.5" width="312.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="afM-Nk-jYW"/>
@@ -256,7 +257,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="电话" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LVf-6W-hRq">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="电话" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LVf-6W-hRq">
                                             <rect key="frame" x="55" y="97" width="312" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="4xq-FG-dAV"/>
@@ -274,7 +275,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="微信" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dLr-iK-3LR">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="微信" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dLr-iK-3LR">
                                             <rect key="frame" x="55" y="141.5" width="312" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="ehV-WP-8OM"/>
@@ -295,7 +296,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="性别" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8io-XW-Jle">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="性别" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8io-XW-Jle">
                                             <rect key="frame" x="55" y="186" width="312" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="CKe-fx-aMd"/>
@@ -389,7 +390,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="车牌号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pi7-dO-0mk">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="车牌号" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pi7-dO-0mk">
                                             <rect key="frame" x="70" y="52" width="297.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="ClF-FN-LWe"/>
@@ -420,7 +421,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="品牌" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UJs-q1-lkf">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="品牌" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UJs-q1-lkf">
                                             <rect key="frame" x="55" y="97" width="312" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="7L2-4B-dBz"/>
@@ -451,7 +452,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="车型" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X9Z-8r-go2">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="车型" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X9Z-8r-go2">
                                             <rect key="frame" x="55" y="141.5" width="312" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="L8F-ep-dSq"/>
@@ -482,7 +483,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="购买时间" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oTc-jZ-umq">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="购买时间" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oTc-jZ-umq">
                                             <rect key="frame" x="85.5" y="186" width="281.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="jUg-Yc-b0d"/>
@@ -513,7 +514,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="发动机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pLB-Qb-syT">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="发动机号" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pLB-Qb-syT">
                                             <rect key="frame" x="85.5" y="229" width="281" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="YD8-1T-bgS"/>
@@ -544,7 +545,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="车架号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jxp-x4-B2f">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="车架号" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jxp-x4-B2f">
                                             <rect key="frame" x="70" y="273" width="297" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="uoZ-ni-xLM"/>
@@ -639,10 +640,20 @@
                         <constraint firstAttribute="trailing" secondItem="VLY-4y-45k" secondAttribute="trailing" id="u2r-Lu-gy9"/>
                     </constraints>
                 </scrollView>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oW1-NT-Xmb">
+                    <rect key="frame" x="0.0" y="667" width="375" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="wki-Eb-Mbu"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="530530736.74985099">
+                        <!--2017-10-24 09:38:56 +0000-->
+                    </date>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="wOe-7V-F6I" secondAttribute="trailing" id="2fl-eX-i2A"/>
+                <constraint firstItem="oW1-NT-Xmb" firstAttribute="top" secondItem="wOe-7V-F6I" secondAttribute="bottom" id="5H7-bw-vzN"/>
                 <constraint firstItem="Anl-hI-GET" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6mR-XR-5nh"/>
                 <constraint firstItem="wOe-7V-F6I" firstAttribute="top" secondItem="Anl-hI-GET" secondAttribute="bottom" id="JSV-xF-PO6"/>
                 <constraint firstItem="Anl-hI-GET" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Lyh-az-ziI"/>
@@ -650,9 +661,11 @@
                 <constraint firstItem="VLY-4y-45k" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="SF7-JN-eXs"/>
                 <constraint firstItem="wOe-7V-F6I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jD0-fb-GQU"/>
                 <constraint firstItem="Anl-hI-GET" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="p8F-hO-0hv"/>
+                <constraint firstAttribute="trailing" secondItem="oW1-NT-Xmb" secondAttribute="trailing" id="qxh-uA-p6k"/>
                 <constraint firstAttribute="bottom" secondItem="wOe-7V-F6I" secondAttribute="bottom" id="sci-Fk-Fy2"/>
+                <constraint firstItem="oW1-NT-Xmb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xic-Ye-sDr"/>
             </constraints>
-            <point key="canvasLocation" x="-36" y="63"/>
+            <point key="canvasLocation" x="-576" y="84"/>
         </view>
     </objects>
 </document>

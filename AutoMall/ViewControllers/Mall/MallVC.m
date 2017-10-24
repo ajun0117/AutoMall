@@ -14,6 +14,7 @@
 #import "WRNavigationBar.h"
 #import "CommodityListVC.h"
 #import "CommodityDetailVC.h"
+#import "WebViewController.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -77,20 +78,9 @@ static CGFloat const scrollViewHeight = 220;
     scroll.showPageIndicator = NO;
     scroll.delegate = self;
     
-////    UIImage *img = [self imageFromURLString:@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png"];
-//    scroll.images = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
-//                      @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
-//                      @"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png"];
-    
-    
+    __weak typeof(self) weakSelf = self;
     [scroll setTapImageHandle:^(NSInteger index) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:[NSString
-                                                                     stringWithFormat:@"你点击了第%ld张图片", index]
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"Ok", nil];
-        [alertView show];
+        [weakSelf toWebView:index];
     }];
     
     [scroll setDidScrollImageViewAtIndexHandle:^(NSInteger index) {
@@ -133,10 +123,20 @@ static CGFloat const scrollViewHeight = 220;
     [self requestPostCommoditytjList];  //请求推荐商品列表
 }
 
-- (UIImage *) imageFromURLString: (NSString *) urlstring
-{
-    return [UIImage imageWithData:[NSData  dataWithContentsOfURL:[NSURL URLWithString:urlstring]]];
-    
+#pragma mark - 点击进入webView
+-(void)toWebView:(NSInteger)index {
+    NSDictionary *dic = adArray[index];
+    if (dic[@"targetUrl"]) {
+        WebViewController *webVC = [[WebViewController alloc] init];
+        webVC.webUrlStr = dic[@"targetUrl"];
+        webVC.titleStr = @"广告详情";
+        webVC.canShare = NO;
+        webVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
+    else {
+        NSLog(@"点击了第%ld页", index);
+    }
 }
 
 //-(void) viewDidAppear:(BOOL)animated {

@@ -139,9 +139,9 @@
 -(void)requestGetCarList { //获取车辆信息列表
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarList object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?plateNumber=%@",UrlPrefix(CarList),@""];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarListOrSearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarListOrSearch, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CarListOrSearch),currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -157,11 +157,10 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
-    if ([notification.name isEqualToString:CarList]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarList object:nil];
+    if ([notification.name isEqualToString:CarListOrSearch]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarListOrSearch object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
-            carArray = responseObject[@"data"];
+            [carArray addObjectsFromArray:responseObject[@"data"]];
             [self.infoTableView reloadData];
         }
         else {
