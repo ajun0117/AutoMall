@@ -150,8 +150,11 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarListOrSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarListOrSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&pageNo=%d",UrlPrefix(CarListOrSearch),self.mySearchBar.text,currentpage];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&pageNo=%d",UrlPrefix(CarListOrSearch),self.mySearchBar.text,currentpage];
+//    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.mySearchBar.text,@"keyword",[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarListOrSearch) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

@@ -15,7 +15,8 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     UIPickerView *genderPickerView;    //性别选择
-    IBOutlet UIDatePicker *birthdayDatePicker;  //生日日期选择
+    UIDatePicker *birthdayDatePicker;  //生日日期选择
+    UIDatePicker *buyDatePicker;        //购买日期选择
     NSArray *nameArray;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
@@ -62,18 +63,29 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     nameArray = @[@"男", @"女"];
-    genderPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 100)];
+    genderPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 150)];
     genderPickerView.delegate = self;
     genderPickerView.dataSource = self;
+    
+    birthdayDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 150)];
+    birthdayDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+    //显示方式是只显示年月日
+    birthdayDatePicker.datePickerMode = UIDatePickerModeDate;
+    [birthdayDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+    
+    buyDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 150)];
+    buyDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+    //显示方式是只显示年月日
+    buyDatePicker.datePickerMode = UIDatePickerModeDate;
+    [buyDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
     [self setTextFieldInputAccessoryViewWithTF:self.mileageTF];
     [self setTextFieldInputAccessoryViewWithTF:self.fuelAmountTF];
     [self setTextFieldInputAccessoryViewWithTF:self.ownerTF];
     [self setTextFieldInputAccessoryViewWithTF:self.phoneTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatTF];
-    [self setPickerViewInputAccessoryViewWithPicker:self.genderTF];
-    self.genderTF.inputView = genderPickerView;
-//    [self setTextFieldInputAccessoryViewWithTF:self.birthdayTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.genderTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.birthdayTF];
     [self setTextFieldInputAccessoryViewWithTF:self.plateNumberTF];
     [self setTextFieldInputAccessoryViewWithTF:self.brandTF];
     [self setTextFieldInputAccessoryViewWithTF:self.modelTF];
@@ -81,7 +93,6 @@
     [self setTextFieldInputAccessoryViewWithTF:self.engineNoTF];
     [self setTextFieldInputAccessoryViewWithTF:self.vinTF];
     
-
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -116,32 +127,38 @@
     UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
     NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
     [topView setItems:buttonsArray];
+    if (field == self.genderTF) {
+        [field setInputView:genderPickerView];
+    }
+    else if (field == self.birthdayTF) {
+        [field setInputView:birthdayDatePicker];
+    }
+    else if (field == self.purchaseDateTF) {
+        [field setInputView:buyDatePicker];
+    }
     [field setInputAccessoryView:topView];
     [field setAutocorrectionType:UITextAutocorrectionTypeNo];
     [field setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 }
 
-- (void)setPickerViewInputAccessoryViewWithPicker:(UITextField *)field{
-    // --- tool bar ---
-    UIBarButtonItem *doneBBI = [[UIBarButtonItem alloc]
-                                initWithTitle:@"确定"
-                                style:UIBarButtonItemStyleDone
-                                target:self
-                                action:@selector(doneClick)];
+#pragma mark - 日期选择
+- (void)dateChange:(UIDatePicker *)datePicker
+{
+    NSDate *theDate = datePicker.date;
+    NSLog(@"%@",[theDate descriptionWithLocale:[NSLocale currentLocale]]);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"YYYY年MM月dd日";
+    NSString *dateString = [dateFormatter stringFromDate:theDate];
+    if (datePicker == birthdayDatePicker) {
+        self.birthdayTF.text = dateString;
+    }
+    else if (datePicker == buyDatePicker) {
+        self.purchaseDateTF.text = dateString;
+    }
     
-    UIBarButtonItem *cancelBBI = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelClick)];
-    UIBarButtonItem *flexibleBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIToolbar *myToolbar = [[UIToolbar alloc]initWithFrame:
-                      CGRectMake(0, 0, SCREEN_WIDTH, 35)];
-    [myToolbar setBarStyle:UIBarStyleBlackOpaque];
-    NSArray *toolbarItems = [NSArray arrayWithObjects:cancelBBI, flexibleBBI, doneBBI, nil, nil];
-    [myToolbar setItems:toolbarItems];
-//    [field setInputView:genderPickerView];
-    [field setInputAccessoryView:myToolbar];
 }
 
 #pragma mark - tool bar 上按钮的点击事件
-
 - (void)doneClick {
     if ( [self.genderTF isFirstResponder] ) {
         [self.genderTF resignFirstResponder];
@@ -172,6 +189,9 @@
     BaoyangHistoryVC *historyVC = [[BaoyangHistoryVC alloc] init];
     historyVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:historyVC animated:YES];
+}
+
+- (IBAction)photoAction:(id)sender {
 }
 
 - (IBAction)saveAction:(id)sender {
