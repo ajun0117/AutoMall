@@ -48,7 +48,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityListCell" bundle:nil] forCellReuseIdentifier:@"commodityListCell"];
     
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)]; 
     
     commodityArray = [NSMutableArray array];
     currentpage = 0;

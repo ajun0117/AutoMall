@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *plateNumberL;
 @property (strong, nonatomic) IBOutlet UILabel *ownerL;
 @property (strong, nonatomic) IBOutlet UILabel *dateL;
+@property (strong, nonatomic) IBOutlet UIButton *selectBtn;
 
 @end

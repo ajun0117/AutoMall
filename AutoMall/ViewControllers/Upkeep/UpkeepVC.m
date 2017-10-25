@@ -20,6 +20,7 @@
     NSArray *typeAry; //类别数组
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
+    NSNumber *selectedCarId;    //选择的保养车辆id
 }
 //@property (strong, nonatomic) IBOutlet UIButton *carOwnerBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *hairdressingBtn;
@@ -58,17 +59,9 @@
     
     self.myCollectionView.alwaysBounceVertical = YES;
     
-//    [self makeLayerWithButton:self.carOwnerBtn];
-//    [self makeLayerWithButton:self.hairdressingBtn];
-//    [self makeLayerWithButton:self.quickBtn];
-//    [self makeLayerWithButton:self.upkeepBtn];
-//    [self makeLayerWithButton:self.synthesizeBtn];
-//    [self makeLayerWithButton:self.customBtn];
+    [self.myCollectionView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     
-//    typeAry = @[@{@"name":@"美容检查",@"id":@"1"},@{@"name":@"保养检查",@"id":@"8"},@{@"name":@"快速检查",@"id":@"9"}];
-//    [self.myCollectionView reloadData];
-    
-//    [self requestGetChecktypeList];
+    [self requestGetChecktypeList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -86,70 +79,43 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-    
+}
+
+#pragma mark - 下拉刷新
+-(void)headerRefreshing {
+    NSLog(@"下拉刷新");
     [self requestGetChecktypeList];
 }
 
-
-//-(void) makeLayerWithButton:(UIButton *)btn {
-//    btn.layer.cornerRadius = btn.frame.size.height / 2;
-//    btn.layer.borderWidth = 1;
-//    btn.layer.borderColor = RGBCOLOR(244, 245, 246).CGColor;
-//}
-
+#pragma mark - 选择车辆
 -(void)toCarOwner:(UIButton *)btn {
-    CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
-    listVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
-}
-
-- (IBAction)toCheckAutoAction:(id)sender {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
-}
-
-- (IBAction)toLoginAction:(id)sender {
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    loginVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:loginVC animated:YES];
-}
-
-- (IBAction)carInfoListAction:(id)sender {
-    CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
-    listVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
-}
-
-- (IBAction)quickAction:(id)sender {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
-}
-
-- (IBAction)upkeepAction:(id)sender {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
-}
-
-- (IBAction)synthesizeAction:(id)sender {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
-}
-
-- (IBAction)customAction:(id)sender {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if (mobileUserType.length > 0) {    //已登录用户
+        CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
+        listVC.GoBackSelectCarId = ^(NSNumber *carId) {
+            selectedCarId = carId;
+            NSLog(@"selectedCarId: %@",selectedCarId);
+        };
+        listVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:listVC animated:YES];
+    }
+    else {
+        _networkConditionHUD.labelText = @"登录后才能查看！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 #pragma mark - UICollectionViewDelegate
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [typeAry count] + 1;
+    return [typeAry count];
 }
 
 //定义展示的Section的个数
@@ -163,22 +129,12 @@
 {
     
     UpkeepHomeCollectionCell *collCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"upkeepHomeCollectionCell" forIndexPath:indexPath];
-//    collCell.layer.borderColor = RGBCOLOR(234, 33, 45).CGColor;
     collCell.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
     collCell.layer.borderWidth = 1;
     collCell.layer.cornerRadius = 5;
-    NSLog(@"typeAry: %@",typeAry);
-    if (indexPath.item == [typeAry count]) {
-        [collCell.img setImage:IMG(@"check_default")];
-        collCell.titleL.text = @"自定义检查";
-        return collCell;
-    }
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
     [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"check_default")];
     collCell.titleL.text = dic [@"name"];
-    
-    //    collCell.exchangeBtn.tag = indexPath.item + 1000;
-    //    [collCell.exchangeBtn addTarget:self action:@selector(exchangeAction:) forControlEvents:UIControlEventTouchUpInside];
     
     return collCell;
 }
@@ -189,101 +145,61 @@
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.item == [typeAry count]) {
-        CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
-        listVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:listVC animated:YES];
-        return;
-    }
-    else {
-        NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-        if (mobileUserType.length > 0) {    //已登录用户
-            NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-            BOOL requireAuth = [dic[@"requireAuth"] boolValue];
-            if (requireAuth) {  //需要权限，且登录身份为老板或员工
-                if ([mobileUserType isEqualToString:@"0"]) {
-                    _networkConditionHUD.labelText = @"认证后才能查看！";
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if (mobileUserType.length > 0) {    //已登录用户
+        NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
+        BOOL requireAuth = [dic[@"requireAuth"] boolValue];
+        if (requireAuth) {  //需要权限，且登录身份为老板或员工
+            if ([mobileUserType isEqualToString:@"0"]) {
+                _networkConditionHUD.labelText = @"认证后才能查看！";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
+            else {
+                if (selectedCarId) {
+                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                    checkVC.checktypeID = dic[@"id"];
+                    checkVC.carId = selectedCarId;
+                    checkVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:checkVC animated:YES];
+                }   else {
+                    _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
                     [_networkConditionHUD show:YES];
                     [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 }
-                else {
-                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-                    checkVC.checktypeID = dic[@"id"];
-                    checkVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:checkVC animated:YES];
-                }
-            }
-            else {
-                AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-                checkVC.checktypeID = dic[@"id"];
-                checkVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:checkVC animated:YES];
             }
         }
         else {
-            _networkConditionHUD.labelText = @"登录后才能查看！";
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            
-            LoginViewController *loginVC = [[LoginViewController alloc] init];
-            loginVC.isPresented = YES;
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-            [self presentViewController:nav animated:YES completion:nil];
+            if (selectedCarId) {
+                AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                checkVC.checktypeID = dic[@"id"];
+                checkVC.carId = selectedCarId;
+                checkVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:checkVC animated:YES];
+            } else {
+                _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
         }
     }
-}
+    else {
+        _networkConditionHUD.labelText = @"登录后才能查看！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (kind == UICollectionElementKindSectionHeader) {
-//        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-//        headerView.backgroundColor = [UIColor clearColor];
-//        if (! _adView) {
-//            _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH - 20 , (SCREEN_WIDTH - 20)/2)];
-//            _adView.delegate = self;
-//            _adView.isHomeAd = YES;
-//            [_adView initSubViews];
-//            [headerView addSubview:_adView];
-//        }
-//        return headerView;
-//    }
-//    UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
-//    footerView.backgroundColor = [UIColor whiteColor];
-//    footerView.layer.cornerRadius = 5;
-//    footerView.layer.masksToBounds = YES;
-//    if (! _messageView) {
-//        _messageView = [[AJMessageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20 , 100)];
-//        _messageView.delegate = self;
-//        //        _messageView.layer.cornerRadius = 5;
-//        //        _messageView.layer.masksToBounds = YES;
-//        [_messageView initSubViews];
-//        [footerView addSubview:_messageView];
-//    }
-//    return footerView;
-//}
+}
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake((SCREEN_WIDTH-20) / 3 - 8, ((SCREEN_WIDTH-20) / 3 - 8)*349/221);
 }
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//
-//}
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-//
-//}
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-//
-//}
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-//    return CGSizeMake(SCREEN_WIDTH - 20, (SCREEN_WIDTH - 20)/2 + 10);
-//}
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-//    if (_messageArray.count == 0) {
-//        return CGSizeZero;
-//    }
-//    return CGSizeMake(SCREEN_WIDTH, 100);
-//}
 
 #pragma mark - 发送请求
 -(void)requestGetChecktypeList { //获取分类列表
@@ -292,13 +208,14 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktypeList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktypeList, @"op", nil];
-    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(ChecktypeList) delegate:nil params:nil info:infoDic];
-    
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageSize=20",UrlPrefix(ChecktypeList)];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
+    [self.myCollectionView headerEndRefreshing];
     if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
         _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
         [_networkConditionHUD show:YES];

@@ -77,6 +77,7 @@
     buyDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
     //显示方式是只显示年月日
     buyDatePicker.datePickerMode = UIDatePickerModeDate;
+    buyDatePicker.maximumDate = [NSDate date];
     [buyDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
     [self setTextFieldInputAccessoryViewWithTF:self.mileageTF];

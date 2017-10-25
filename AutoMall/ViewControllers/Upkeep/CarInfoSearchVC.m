@@ -131,6 +131,9 @@
     NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"updateTime"] doubleValue]/1000];
     NSString *string = [formater stringFromDate:creatDate];
     cell.dateL.text = string;
+    cell.selectBtn.tag = indexPath.row + 100;
+    [cell.selectBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -142,6 +145,14 @@
     //        detailVC.isDrink = self.isDrink;
     //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
 //    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(void)selectTheCar:(UIButton *)btn {
+    btn.selected = YES;
+    NSInteger row = btn.tag - 100;
+    NSDictionary *dic = carArray[row];
+    self.GoBackSelectCarId(dic[@"id"]);
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 发送请求

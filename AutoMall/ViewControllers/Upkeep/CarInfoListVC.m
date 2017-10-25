@@ -85,7 +85,9 @@
 
 -(void) toSearch {  //搜索车辆保养记录
     CarInfoSearchVC *searchVC = [[CarInfoSearchVC alloc] init];
-    searchVC.hidesBottomBarWhenPushed = YES;
+    searchVC.GoBackSelectCarId = ^(NSNumber *carId) {
+        self.GoBackSelectCarId(carId);      //传参至保养首页
+    };
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
@@ -122,17 +124,28 @@
     NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"updateTime"] doubleValue]/1000];
     NSString *string = [formater stringFromDate:creatDate];
     cell.dateL.text = string;
+    cell.selectBtn.tag = indexPath.row + 100;
+    [cell.selectBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-        BaoyangHistoryVC *detailVC = [[BaoyangHistoryVC alloc] init];
-//        detailVC.userID = userArray[indexPath.section][@"id"];
-//        detailVC.isDrink = self.isDrink;
-//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-        [self.navigationController pushViewController:detailVC animated:YES];
+//        BaoyangHistoryVC *detailVC = [[BaoyangHistoryVC alloc] init];
+////        detailVC.userID = userArray[indexPath.section][@"id"];
+////        detailVC.isDrink = self.isDrink;
+////        detailVC.slidePlaceDetail = self.slidePlaceDetail;
+//        [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(void)selectTheCar:(UIButton *)btn {
+    btn.selected = YES;
+    NSInteger row = btn.tag - 100;
+    NSDictionary *dic = carArray[row];
+    self.GoBackSelectCarId(dic[@"id"]);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 发送请求

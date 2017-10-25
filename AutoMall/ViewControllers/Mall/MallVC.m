@@ -26,7 +26,7 @@ static CGFloat const scrollViewHeight = 220;
 #define Head_ScrollView_Height      180
 #define Head_PageControl_Width     80
 #define Head_PageControl_Height     30
-#define Head_button_Width           40
+#define Head_button_Width           45
 #define Head_button_Height          60
 
 
@@ -367,12 +367,9 @@ static CGFloat const scrollViewHeight = 220;
         self.typePageControl.hidden = YES;
     }
     self.typePageControl.numberOfPages = page;
-    
     self.typeScrollView.contentSize = CGSizeMake(page * SCREEN_WIDTH, Head_ScrollView_Height);
-    
     int margin = (SCREEN_WIDTH - Head_button_Width * 4 - 15 * 2) / 3; //按钮列间距
     int rowMargin = Head_ScrollView_Height - Head_PageControl_Height - Head_button_Height * 2 - 15; //按钮行间距
-    
     int p = 0;
     for (int a = 0; a < page; ++ a) {
         for (int m = 0; m < 2; ++ m) {
@@ -385,16 +382,13 @@ static CGFloat const scrollViewHeight = 220;
                     button.tag = p + 1000;
                     [button sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] forState:UIControlStateNormal placeholderImage:IMG(@"add_carInfo")];
 //                    [button setImage:IMG(@"add_carInfo") forState:UIControlStateNormal];
-                    
                     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                    UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-10, 40, 60, 20)];
+                    UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-5, 40, 60, 20)];
                     subtitleL.textAlignment = NSTextAlignmentCenter;
                     subtitleL.font = [UIFont systemFontOfSize:13];
                     subtitleL.text = dic[@"name"];
                     [button addSubview:subtitleL];
-                    
                     [button addTarget:self action:@selector(buttontouchAction:) forControlEvents:UIControlEventTouchUpInside];
-                    
                     [self.typeScrollView addSubview:button];
                 }
                 p ++;

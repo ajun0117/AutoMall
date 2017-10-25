@@ -31,7 +31,7 @@
     NSArray *contentAry;    //检查内容列表
     NSInteger currentSelectIndex;  //当前选中的位置
     NSIndexPath *currentPhotoIndexPath;     //记录当前拍照按钮对应的cell位置
-    NSDictionary *lichenDic;    //里程油量数据
+    NSDictionary *lichengDic;    //里程油量数据
     NSString *carImageUrl;  //车图的url
 }
 
@@ -150,8 +150,8 @@
 -(void)toFillLicheng {
     AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
     infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
-        lichenDic = dic;
-        NSLog(@"lichenDic: %@",lichenDic);
+        lichengDic = dic;
+        NSLog(@"lichengDic: %@",lichengDic);
     };
     [self.navigationController pushViewController:infoVC animated:YES];
 }
@@ -165,13 +165,13 @@
     [self.navigationController pushViewController:markVC animated:YES];
 }
 
+#pragma mark - 提交生成检查单
 - (IBAction)creatChecklistAction:(id)sender {
-//    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-//    planVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:planVC animated:YES];
-//    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
-//    [self.navigationController pushViewController:orderVC animated:YES];
-    [self requestCarUpkeepAdd];
+    if (lichengDic) {
+        [self requestCarUpkeepAdd];
+    } else {
+        
+    }
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -747,7 +747,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepAdd object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepAdd, @"op", nil];
     
-    NSDictionary *carDic = @{@"id":[NSNumber numberWithInt:1],@"mileage":@"3000",@"fuelAmount":@"20"};
     NSMutableArray *carUpkeepCheckContentsAry = [NSMutableArray array];
     NSMutableArray *items = [[CheckContentTool sharedManager] queryAllContent];    //从数据库查出所有记录
     for (CheckContentItem *item in items) {
@@ -793,6 +792,8 @@
         
     }
     NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
+    
+    NSDictionary *carDic = @{@"id":self.carId,@"mileage":lichengDic[@"mileage"],@"fuelAmount":lichengDic[@"fuelAmount"]};
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
 //    NSError *err = nil;
 //    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pram options:NSJSONWritingPrettyPrinted error:&err];

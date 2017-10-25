@@ -173,8 +173,6 @@
 		04BA1C771F4D8D7C00704A9E /* SettlementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C721F4D8D7C00704A9E /* SettlementCell.xib */; };
 		04BA1C781F4D8D7C00704A9E /* SettlementFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C741F4D8D7C00704A9E /* SettlementFootView.m */; };
 		04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C751F4D8D7C00704A9E /* SettlementFootView.xib */; };
-		04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C7B1F4D8DBB00704A9E /* ConfirmOrderVC.m */; };
-		04BA1C7E1F4D8DBB00704A9E /* ConfirmOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C7C1F4D8DBB00704A9E /* ConfirmOrderVC.xib */; };
 		04BA1C821F4D8DE600704A9E /* MetodPaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */; };
 		04BA1C831F4D8DE600704A9E /* MetodPaymentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */; };
 		04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */; };
@@ -726,9 +724,6 @@
 		04BA1C731F4D8D7C00704A9E /* SettlementFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementFootView.h; sourceTree = "<group>"; };
 		04BA1C741F4D8D7C00704A9E /* SettlementFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementFootView.m; sourceTree = "<group>"; };
 		04BA1C751F4D8D7C00704A9E /* SettlementFootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementFootView.xib; sourceTree = "<group>"; };
-		04BA1C7A1F4D8DBB00704A9E /* ConfirmOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderVC.h; sourceTree = "<group>"; };
-		04BA1C7B1F4D8DBB00704A9E /* ConfirmOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderVC.m; sourceTree = "<group>"; };
-		04BA1C7C1F4D8DBB00704A9E /* ConfirmOrderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmOrderVC.xib; sourceTree = "<group>"; };
 		04BA1C7F1F4D8DE600704A9E /* MetodPaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetodPaymentVC.h; sourceTree = "<group>"; };
 		04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetodPaymentVC.m; sourceTree = "<group>"; };
 		04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetodPaymentVC.xib; sourceTree = "<group>"; };
@@ -1829,14 +1824,11 @@
 				04BA1C731F4D8D7C00704A9E /* SettlementFootView.h */,
 				04BA1C741F4D8D7C00704A9E /* SettlementFootView.m */,
 				04BA1C751F4D8D7C00704A9E /* SettlementFootView.xib */,
-				04BA1C7B1F4D8DBB00704A9E /* ConfirmOrderVC.m */,
-				04BA1C7C1F4D8DBB00704A9E /* ConfirmOrderVC.xib */,
 				04BA1C7F1F4D8DE600704A9E /* MetodPaymentVC.h */,
 				04BA1C801F4D8DE600704A9E /* MetodPaymentVC.m */,
 				04BA1C811F4D8DE600704A9E /* MetodPaymentVC.xib */,
 				04BA1C841F4D8E1D00704A9E /* ShoppingCartModel.h */,
 				04BA1C851F4D8E1D00704A9E /* ShoppingCartModel.m */,
-				04BA1C7A1F4D8DBB00704A9E /* ConfirmOrderVC.h */,
 			);
 			name = "结算";
 			sourceTree = "<group>";
@@ -2768,7 +2760,6 @@
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
 				042DEFEF1F469B860065FED8 /* CommodityListVC.xib in Resources */,
 				04DC7D101F31C25000AA20A7 /* HomeShopListCell.xib in Resources */,
-				04BA1C7E1F4D8DBB00704A9E /* ConfirmOrderVC.xib in Resources */,
 				0490FC0A1F58049600F77661 /* EditServicePackageVC.xib in Resources */,
 				04ABFB381F984B510015EE78 /* AddPicViewController.xib in Resources */,
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
@@ -3073,7 +3064,6 @@
 				046B8DCD1F9A03A200784AA8 /* Order.m in Sources */,
 				04ABFB321F9837CE0015EE78 /* GTMBase64.m in Sources */,
 				04DC7DB61F31C28300AA20A7 /* GlobalSetting.m in Sources */,
-				04BA1C7D1F4D8DBB00704A9E /* ConfirmOrderVC.m in Sources */,
 				04DC7DC11F31C28300AA20A7 /* QBAssetsCollectionOverlayView.m in Sources */,
 				04DC7DB51F31C28300AA20A7 /* DataRequest.m in Sources */,
 				04DC7DC61F31C28300AA20A7 /* QBImagePickerController.m in Sources */,
@@ -3236,7 +3226,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3278,7 +3268,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
