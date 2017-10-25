@@ -208,20 +208,20 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadUploadImg,@"op", nil];
     
     //data=data
-    UIImage *im = IMG(@"picture_1");
+    UIImage *im = IMG(@"picture_3");
     NSData *imageData = UIImageJPEGRepresentation(im, 1);
     NSInteger length = imageData.length;
     if (length > 1048) {
         CGFloat packRate = 1048.0/length;
         imageData = UIImageJPEGRepresentation(im, packRate);
     }
-    //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
+    //    NSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
     
 //    imageData= [GTMBase64 encodeData:imageData];
 //    NSString *baseStr = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
     
     NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
-    //    NSLog(@"baseString:%@",baseString);
+    NSLog(@"baseStr:%@",baseStr);
     
 //    NSString * baseStr = base64StringFromData(imageData);
     
@@ -229,10 +229,8 @@
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     [self.licenseImgBtn setBackgroundImage:decodedImage forState:UIControlStateNormal];
     
-    
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"txt"];
 //    NSString *content = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    
     
     NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",name,@"fileName", nil];
     NSLog(@"paramsDic: %@",paramsDic);
@@ -255,7 +253,6 @@
     [_hud hide:YES];
     
     if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
-        
         _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];

@@ -283,7 +283,7 @@
                                 <constraint firstAttribute="height" constant="0.5" id="tqg-8r-cwX"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wxPay" translatesAutoresizingMaskIntoConstraints="NO" id="USz-mL-X52">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jifenpay" translatesAutoresizingMaskIntoConstraints="NO" id="USz-mL-X52">
                             <rect key="frame" x="12" y="159" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="Anf-eb-xbl"/>
@@ -482,10 +482,11 @@
         </view>
     </objects>
     <resources>
-        <image name="alipay" width="202" height="202"/>
+        <image name="alipay" width="512" height="512"/>
         <image name="checkbox_no" width="27" height="27"/>
         <image name="checkbox_yes" width="27" height="27"/>
+        <image name="jifenpay" width="512" height="512"/>
         <image name="success" width="512" height="512"/>
-        <image name="wxPay" width="202" height="202"/>
+        <image name="wxPay" width="512" height="512"/>
     </resources>
 </document>

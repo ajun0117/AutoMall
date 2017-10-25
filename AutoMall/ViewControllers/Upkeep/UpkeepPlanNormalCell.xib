@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,20 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机油更换" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuv-ND-8Qm">
-                        <rect key="frame" x="16" y="12" width="61.5" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="bUE-iQ-P6l"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥666" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRY-Io-3A4">
-                        <rect key="frame" x="268.5" y="12" width="35.5" height="21"/>
+                        <rect key="frame" x="268.5" y="11" width="35.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="DsW-50-hRM"/>
                         </constraints>
@@ -36,19 +27,27 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机油更换" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="jZD-0v-VtY" customClass="StrikeThroughLabel">
+                        <rect key="frame" x="16" y="11" width="61.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="54Z-4X-m0n"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="tuv-ND-8Qm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="R8O-DY-7hM"/>
-                    <constraint firstItem="PRY-Io-3A4" firstAttribute="centerY" secondItem="tuv-ND-8Qm" secondAttribute="centerY" id="ase-J8-bF0"/>
-                    <constraint firstItem="tuv-ND-8Qm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bfU-y0-msV"/>
+                    <constraint firstItem="PRY-Io-3A4" firstAttribute="centerY" secondItem="jZD-0v-VtY" secondAttribute="centerY" id="Bel-fp-h2f"/>
+                    <constraint firstItem="jZD-0v-VtY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Nq1-aB-0rV"/>
+                    <constraint firstItem="jZD-0v-VtY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="k8g-La-QiM"/>
                     <constraint firstAttribute="trailing" secondItem="PRY-Io-3A4" secondAttribute="trailing" constant="16" id="nSh-Ig-rbh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentL" destination="PRY-Io-3A4" id="TcL-se-UMf"/>
-                <outlet property="declareL" destination="tuv-ND-8Qm" id="yd7-Yf-l9K"/>
+                <outlet property="declareL" destination="jZD-0v-VtY" id="Wrw-Xr-Urv"/>
             </connections>
-            <point key="canvasLocation" x="-394" y="48"/>
+            <point key="canvasLocation" x="-149" y="2"/>
         </tableViewCell>
     </objects>
 </document>

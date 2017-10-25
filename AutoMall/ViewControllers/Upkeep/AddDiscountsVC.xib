@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,8 +24,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7AC-UH-ST6">
                     <rect key="frame" x="0.0" y="84" width="375" height="44"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请填写优惠内容" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Xv-lz-04c">
-                            <rect key="frame" x="8" y="7" width="169.5" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写优惠内容" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Xv-lz-04c">
+                            <rect key="frame" x="16" y="7" width="166" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="3AF-R5-o40"/>
                             </constraints>
@@ -33,22 +33,35 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请填写优惠金额" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kti-rS-cIX">
-                            <rect key="frame" x="197.5" y="7" width="169.5" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写优惠金额" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kti-rS-cIX">
+                            <rect key="frame" x="193" y="7" width="166" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                         </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaU-10-pDL">
+                            <rect key="frame" x="187" y="0.0" width="1" height="44"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="1" id="U6B-pX-BGX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="kti-rS-cIX" firstAttribute="height" secondItem="6Xv-lz-04c" secondAttribute="height" id="0mw-H5-dMV"/>
+                        <constraint firstItem="gaU-10-pDL" firstAttribute="centerX" secondItem="7AC-UH-ST6" secondAttribute="centerX" id="D9f-25-pO4"/>
+                        <constraint firstAttribute="bottom" secondItem="gaU-10-pDL" secondAttribute="bottom" id="Lez-jF-hAK"/>
                         <constraint firstItem="kti-rS-cIX" firstAttribute="centerY" secondItem="6Xv-lz-04c" secondAttribute="centerY" id="bZO-5i-mwG"/>
-                        <constraint firstItem="6Xv-lz-04c" firstAttribute="leading" secondItem="7AC-UH-ST6" secondAttribute="leading" constant="8" id="hgh-cj-fNb"/>
+                        <constraint firstItem="gaU-10-pDL" firstAttribute="leading" secondItem="6Xv-lz-04c" secondAttribute="trailing" constant="5" id="bfN-ZA-yjt"/>
+                        <constraint firstItem="6Xv-lz-04c" firstAttribute="leading" secondItem="7AC-UH-ST6" secondAttribute="leading" constant="16" id="hgh-cj-fNb"/>
+                        <constraint firstItem="gaU-10-pDL" firstAttribute="top" secondItem="7AC-UH-ST6" secondAttribute="top" id="kVv-EZ-uIj"/>
                         <constraint firstAttribute="height" constant="44" id="lI9-UM-1pK"/>
-                        <constraint firstItem="kti-rS-cIX" firstAttribute="width" secondItem="6Xv-lz-04c" secondAttribute="width" id="lW3-yT-6ej"/>
-                        <constraint firstAttribute="trailing" secondItem="kti-rS-cIX" secondAttribute="trailing" constant="8" id="ml3-3h-fyJ"/>
-                        <constraint firstItem="kti-rS-cIX" firstAttribute="leading" secondItem="6Xv-lz-04c" secondAttribute="trailing" constant="20" id="uQq-IC-hGm"/>
+                        <constraint firstAttribute="trailing" secondItem="kti-rS-cIX" secondAttribute="trailing" constant="16" id="ml3-3h-fyJ"/>
+                        <constraint firstItem="kti-rS-cIX" firstAttribute="leading" secondItem="gaU-10-pDL" secondAttribute="trailing" constant="5" id="sHr-lJ-HFa"/>
                         <constraint firstItem="6Xv-lz-04c" firstAttribute="centerY" secondItem="7AC-UH-ST6" secondAttribute="centerY" id="zhe-SX-JP6"/>
                     </constraints>
                 </view>
@@ -74,7 +87,7 @@
                 <constraint firstItem="7AC-UH-ST6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="uVI-ge-Ok1"/>
                 <constraint firstItem="juc-gu-p4W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yQT-Kg-MSw"/>
             </constraints>
-            <point key="canvasLocation" x="-286" y="57"/>
+            <point key="canvasLocation" x="-15.5" y="54.5"/>
         </view>
     </objects>
 </document>

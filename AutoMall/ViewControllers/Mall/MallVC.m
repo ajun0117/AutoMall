@@ -37,7 +37,7 @@ static CGFloat const scrollViewHeight = 220;
     NSInteger _cnt;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSMutableArray *categoryArray;
+    NSArray *categoryArray;
     NSArray *adArray;   //广告数组
     NSArray *tjListAry; //推荐商品列表
 }
@@ -55,8 +55,13 @@ static CGFloat const scrollViewHeight = 220;
 //    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     self.title = @"商城";
     
-    //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
-//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+//    最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    
+    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
+        [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    }
+    
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
@@ -72,6 +77,7 @@ static CGFloat const scrollViewHeight = 220;
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];;
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailGoodsCell" bundle:nil] forCellReuseIdentifier:@"mailGoodsCell"];
+    self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, scrollViewHeight) rootTableView:self.myTableView];
     scroll.hasNavigationBar = NO;
@@ -80,7 +86,7 @@ static CGFloat const scrollViewHeight = 220;
     
     __weak typeof(self) weakSelf = self;
     [scroll setTapImageHandle:^(NSInteger index) {
-        [weakSelf toWebView:index];
+//        [weakSelf toWebView:index];
     }];
     
     [scroll setDidScrollImageViewAtIndexHandle:^(NSInteger index) {
@@ -97,11 +103,8 @@ static CGFloat const scrollViewHeight = 220;
     self.typePageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.typePageControl.currentPageIndicatorTintColor = RGBCOLOR(229, 24, 35);
     
-    categoryArray = [[NSMutableArray alloc] init];
-    
-    [self requsetAdvertList];   //请求广告列表
-    [self requestGetComCategoryList];   //请求分类数据
-
+//    [self requsetAdvertList];   //请求广告列表
+//    [self requestGetComCategoryList];   //请求分类数据
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -120,6 +123,8 @@ static CGFloat const scrollViewHeight = 220;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
+    [self requsetAdvertList];   //请求广告列表
+    [self requestGetComCategoryList];   //请求分类数据
     [self requestPostCommoditytjList];  //请求推荐商品列表
 }
 
@@ -290,6 +295,7 @@ static CGFloat const scrollViewHeight = 220;
     }
     else if (indexPath.section == 1) {
         MailGoodsCell *cell = (MailGoodsCell *)[tableView dequeueReusableCellWithIdentifier:@"mailGoodsCell"];
+        
         cell.bgViewConsH.constant = (Screen_Width - 8*3)/2 + 50;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
@@ -465,7 +471,7 @@ static CGFloat const scrollViewHeight = 220;
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ComCategoryList object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [categoryArray addObjectsFromArray:responseObject [@"data"]];
+            categoryArray = responseObject [@"data"];
             [self initHeadScrollViewWithArray:categoryArray];
         }
         else {

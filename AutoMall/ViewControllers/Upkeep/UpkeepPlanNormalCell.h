@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StrikeThroughLabel.h"
 
 @interface UpkeepPlanNormalCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *declareL;
+@property (strong, nonatomic) IBOutlet StrikeThroughLabel *declareL;
 @property (strong, nonatomic) IBOutlet UILabel *contentL;
 
 @end

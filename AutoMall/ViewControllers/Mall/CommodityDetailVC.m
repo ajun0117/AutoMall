@@ -739,12 +739,13 @@ static CGFloat const scrollViewHeight = 220;
     
 }
 
--(void)requestPostCommoditytjListWithId:(NSString *)commodityTermId { //推荐列表
+//推荐列表
+-(void)requestPostCommoditytjListWithId:(NSString *)commodityTermId commId:(NSString *)commId {
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommoditytjList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommoditytjList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityTermId,@"commodityTermId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:commodityTermId,@"commodityTermId",commId,@"commodiId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommoditytjList) delegate:nil params:pram info:infoDic];
 }
 
@@ -796,7 +797,7 @@ static CGFloat const scrollViewHeight = 220;
             [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
             [commoditymulArray addObject:dic];  //重组后商品数组
             
-            [self requestPostCommoditytjListWithId:commodityDic[@"commodityTerm"][@"id"]];
+            [self requestPostCommoditytjListWithId:commodityDic[@"commodityTerm"][@"id"] commId:commodityDic[@"id"]];
 //            [self.myTableView reloadData];
         }
         else {

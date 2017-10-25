@@ -290,6 +290,62 @@
 
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        return YES;
+    }
+    return NO;
+}
+
+/**
+ *  左滑cell时出现什么按钮
+ */
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"添加" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        cell.declareL.strikeThroughEnabled = NO;
+        tableView.editing = NO;
+    }];
+    
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        cell.declareL.strikeThroughEnabled = YES;
+        tableView.editing = NO;
+    }];
+    
+    if (cell.declareL.strikeThroughEnabled) {
+        return @[action0];
+    }
+    return @[action1];
+}
+
+////指定编辑模式，插入，删除
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    //单插入
+//    //return UITableViewCellEditingStyleInsert ;
+//    //多选删除
+//    return UITableViewCellEditingStyleInsert | UITableViewCellEditingStyleDelete;
+//}
+//
+////触发编辑方法；根据editingStyle来判断时那种类型
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    //删除
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        
+//    }
+//    
+//    if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        //先添加
+//        
+//    }
+//}
+//
+////更改删除按钮上的文本
+//- (NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return @"删掉我吧";
+//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

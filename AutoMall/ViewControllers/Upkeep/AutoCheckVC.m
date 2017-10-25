@@ -167,11 +167,15 @@
 
 #pragma mark - 提交生成检查单
 - (IBAction)creatChecklistAction:(id)sender {
-    if (lichengDic) {
-        [self requestCarUpkeepAdd];
-    } else {
-        
-    }
+//    if (lichengDic) {
+//        [self requestCarUpkeepAdd];
+//    } else {
+//        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//    }
+    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+    [self.navigationController pushViewController:planVC animated:YES];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
