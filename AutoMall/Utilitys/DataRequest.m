@@ -123,7 +123,7 @@ static DataRequest *dataRequest;
     
 //    if ([DataRequest checkNetwork]) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//        manager.requestSerializer = [AFJSONRequestSerializer serializer];  //设置传参方式为JSON
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];  //设置传参方式为JSON
     
         //为这个下载任务HTTP头添加@"User-Agent"字段
         [manager.requestSerializer setValue:[self getUserAgentString] forHTTPHeaderField:@"User-Agent"];

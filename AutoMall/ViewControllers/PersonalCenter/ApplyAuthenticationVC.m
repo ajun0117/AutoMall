@@ -210,7 +210,7 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadUploadImg,@"op", nil];
     
     //data=data
-    UIImage *im = IMG(@"picture_3");
+    UIImage *im = IMG(@"indicator");
     NSData *imageData = UIImageJPEGRepresentation(im, 1.0f);
 //    NSInteger length = imageData.length;
 //    if (length > 1048) {
@@ -218,31 +218,37 @@
 //        imageData = UIImageJPEGRepresentation(im, packRate);
 //    }
     
-//    NSString *baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
 //    NSString *newString = (__bridge_transfer id)(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)baseStr, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+////    NSLog(@"newString: %@",newString);
+//    
+    baseStr = [baseStr stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)];
+    NSLog(@"baseStr: %@",baseStr);
 //    NSLog(@"newString: %@",newString);
     
-    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                                                (CFStringRef)baseStr,
-                                                                                                                NULL,
-                                                                                                                CFSTR(":/?#[]@!$&’()*+,;="),
-                                                                                                                kCFStringEncodingUTF8);
+//    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                                                                (CFStringRef)baseStr,
+//                                                                                                                NULL,
+//                                                                                                                CFSTR(":/?#[]@!$&’()*+,;="),
+//                                                                                                                kCFStringEncodingUTF8);
 //    baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
 //                                                                               (CFStringRef)baseString,
 //                                                                               NULL,
 //                                                                               CFSTR(":/?#[]@!$&’()*+,;="),
 //                                                                               kCFStringEncodingUTF8);
-    NSLog(@"baseString:%@",baseString);
+//    NSLog(@"baseString:%@",baseString);
     
     
     NSData *decodedImageData = [[NSData alloc] initWithBase64EncodedString:baseStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     [self.licenseImgBtn setBackgroundImage:decodedImage forState:UIControlStateNormal];
     
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"img",name,@"fileName", nil];
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",nil];
     NSLog(@"paramsDic: %@",paramsDic);
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UploadUploadImg) delegate:nil params:paramsDic info:infoDic];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?fileName=indicator.png",UrlPrefix(UploadUploadImg)];
+    [[DataRequest sharedDataRequest] postDataWithUrl:urlStr delegate:nil params:paramsDic info:infoDic];
     //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];
 }
 
@@ -274,6 +280,18 @@
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UploadUploadImg]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadUploadImg object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [_wechatCollectionbtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(responseObject[@"data"])] forState:UIControlStateNormal];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];

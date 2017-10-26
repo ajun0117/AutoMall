@@ -367,6 +367,12 @@
 		04FD55DD1F5549B800104D6B /* LoginSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55DB1F5549B800104D6B /* LoginSuccessViewController.m */; };
 		04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55DC1F5549B800104D6B /* LoginSuccessViewController.xib */; };
 		0D3767D49EAD0D2B54057370 /* libPods-AutoMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */; };
+		F70A50931FA212B70047D804 /* AutoCheckResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A50911FA212B70047D804 /* AutoCheckResultVC.m */; };
+		F70A50941FA212B70047D804 /* AutoCheckResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70A50921FA212B70047D804 /* AutoCheckResultVC.xib */; };
+		F70A50991FA220640047D804 /* ShopInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A50971FA220640047D804 /* ShopInfoCell.m */; };
+		F70A509A1FA220640047D804 /* ShopInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70A50981FA220640047D804 /* ShopInfoCell.xib */; };
+		F70A509E1FA22B4A0047D804 /* CheckResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A509C1FA22B4A0047D804 /* CheckResultCell.m */; };
+		F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */; };
 		F71245751F868B590091816F /* CheckContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245741F868B590091816F /* CheckContentItem.m */; };
 		F71245781F868DD20091816F /* CheckContentTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245771F868DD20091816F /* CheckContentTool.m */; };
 		F73CB9BD1F893B2600936C7A /* AutoCheckGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CB9BB1F893B2600936C7A /* AutoCheckGroupCell.m */; };
@@ -1065,6 +1071,15 @@
 		23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.release.xcconfig"; sourceTree = "<group>"; };
 		282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoMall/Pods-AutoMall.debug.xcconfig"; sourceTree = "<group>"; };
 		6104260ED1A4BFCFF80992F9 /* libPods-AutoMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70A50901FA212B70047D804 /* AutoCheckResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckResultVC.h; sourceTree = "<group>"; };
+		F70A50911FA212B70047D804 /* AutoCheckResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckResultVC.m; sourceTree = "<group>"; };
+		F70A50921FA212B70047D804 /* AutoCheckResultVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckResultVC.xib; sourceTree = "<group>"; };
+		F70A50961FA220640047D804 /* ShopInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopInfoCell.h; sourceTree = "<group>"; };
+		F70A50971FA220640047D804 /* ShopInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopInfoCell.m; sourceTree = "<group>"; };
+		F70A50981FA220640047D804 /* ShopInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopInfoCell.xib; sourceTree = "<group>"; };
+		F70A509B1FA22B4A0047D804 /* CheckResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultCell.h; sourceTree = "<group>"; };
+		F70A509C1FA22B4A0047D804 /* CheckResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultCell.m; sourceTree = "<group>"; };
+		F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultCell.xib; sourceTree = "<group>"; };
 		F71245731F868B590091816F /* CheckContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentItem.h; sourceTree = "<group>"; };
 		F71245741F868B590091816F /* CheckContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentItem.m; sourceTree = "<group>"; };
 		F71245761F868DD20091816F /* CheckContentTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentTool.h; sourceTree = "<group>"; };
@@ -1276,6 +1291,10 @@
 				04C656401F96FEE000611AFF /* AutoCheckPhotoVC.h */,
 				04C656411F96FEE000611AFF /* AutoCheckPhotoVC.m */,
 				04C656421F96FEE000611AFF /* AutoCheckPhotoVC.xib */,
+				F70A50901FA212B70047D804 /* AutoCheckResultVC.h */,
+				F70A50911FA212B70047D804 /* AutoCheckResultVC.m */,
+				F70A50921FA212B70047D804 /* AutoCheckResultVC.xib */,
+				F70A50951FA220220047D804 /* 检查结果页cell */,
 			);
 			name = "汽车检查页";
 			sourceTree = "<group>";
@@ -2609,6 +2628,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F70A50951FA220220047D804 /* 检查结果页cell */ = {
+			isa = PBXGroup;
+			children = (
+				F70A50961FA220640047D804 /* ShopInfoCell.h */,
+				F70A50971FA220640047D804 /* ShopInfoCell.m */,
+				F70A50981FA220640047D804 /* ShopInfoCell.xib */,
+				F70A509B1FA22B4A0047D804 /* CheckResultCell.h */,
+				F70A509C1FA22B4A0047D804 /* CheckResultCell.m */,
+				F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */,
+			);
+			name = "检查结果页cell";
+			sourceTree = "<group>";
+		};
 		F712456F1F868AE30091816F /* 检查页数据库模型 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2691,6 +2723,7 @@
 				0486E8CD1F8F667700FB746E /* test.caf in Resources */,
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
+				F70A50941FA212B70047D804 /* AutoCheckResultVC.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */,
 				047ADFFC1F4A86EF00AEAE8E /* MXScrollView.bundle in Resources */,
@@ -2766,6 +2799,7 @@
 				046B8DBF1F99F76400784AA8 /* AlipaySDK.bundle in Resources */,
 				04F7D86F1F5EA9C5004945ED /* ShopGradeVC.xib in Resources */,
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
+				F70A509A1FA220640047D804 /* ShopInfoCell.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */,
@@ -2791,6 +2825,7 @@
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
 				04FD55D91F552DB200104D6B /* RegisterYZMViewController.xib in Resources */,
 				0459C6B61F614C870040501E /* Cities.json in Resources */,
+				F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				0490FC051F57F97700F77661 /* CustomServiceCell.xib in Resources */,
@@ -2905,6 +2940,7 @@
 				047ADFEF1F4A86EF00AEAE8E /* MKAnnotationView+CMWebCache.m in Sources */,
 				04DC7D1F1F31C26500AA20A7 /* CityDistrictsCoreObject.m in Sources */,
 				047ADFF71F4A86EF00AEAE8E /* UIView+CMWebCacheOperation.m in Sources */,
+				F70A50991FA220640047D804 /* ShopInfoCell.m in Sources */,
 				04D107811F62998D007D9F57 /* ZFBarChart.m in Sources */,
 				04DC7DCE1F31C28300AA20A7 /* MJRefreshBaseView.m in Sources */,
 				042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */,
@@ -2921,6 +2957,7 @@
 				04EFEC721F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m in Sources */,
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
 				046B8DDC1F9A044300784AA8 /* openssl_wrapper.m in Sources */,
+				F70A50931FA212B70047D804 /* AutoCheckResultVC.m in Sources */,
 				04DC7DE71F31C28300AA20A7 /* DJQRateView.m in Sources */,
 				04DC7D121F31C25000AA20A7 /* WebViewController.m in Sources */,
 				04254DCC1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m in Sources */,
@@ -2976,6 +3013,7 @@
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
 				0459C6C11F614CCA0040501E /* AddressInfoEditVC.m in Sources */,
 				042E5D1D1F419C3500F5F324 /* UpkeepPlanVC.m in Sources */,
+				F70A509E1FA22B4A0047D804 /* CheckResultCell.m in Sources */,
 				047AE0071F4A8D6200AEAE8E /* CommodityDetailNormalCell.m in Sources */,
 				04A09B101F3D967B00053A98 /* CarInfoListCell.m in Sources */,
 				047ADFE91F4A86EF00AEAE8E /* CMSDWebImageCompat.m in Sources */,
@@ -3226,7 +3264,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3268,7 +3306,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
