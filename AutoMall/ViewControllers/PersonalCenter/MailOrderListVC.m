@@ -28,6 +28,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"商城订单";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailOrderSingleCell" bundle:nil] forCellReuseIdentifier:@"mailOrderSingleCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"MailOrderMultiCell" bundle:nil] forCellReuseIdentifier:@"mailOrderMultiCell"];
     self.myTableView.tableFooterView = [UIView new];
@@ -141,7 +144,7 @@
         int amount = 0;
         for (int i = 0; i < goodsAry.count; ++i) {
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i*(60+10), 0, 60, 60)];
-            [img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(goodsAry[i][@"commodityImage"])] placeholderImage:IMG(@"timg-2")];
+            [img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(goodsAry[i][@"commodityImage"])] placeholderImage:IMG(@"default")];
             [cell.picScrollView addSubview:img];
             amount += [goodsAry[i][@"commodityAmount"] intValue];
         }
@@ -164,7 +167,7 @@
     
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
     NSDictionary *detailDic = [goodsAry firstObject];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"timg-2")];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"default")];
     cell.nameL.text = detailDic[@"commodityName"];
     cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"actualPrice"]];
     cell.numL.text = [NSString stringWithFormat:@"x%@", detailDic[@"commodityAmount"]];

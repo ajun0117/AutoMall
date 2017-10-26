@@ -36,8 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     self.title = @"资讯";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
 //    [self.myTableView registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"inforCell"];
 //    self.myTableView.tableFooterView = [UIView new];
 //    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
@@ -194,7 +196,7 @@
     if (tableView == self.zixunTV) {
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = zixunArray[indexPath.section];
-        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"default")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
         return cell;
@@ -202,7 +204,7 @@
     else {
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = jiaochengArray[indexPath.section];
-        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"baoyang_history")];
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"default")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
         return cell;

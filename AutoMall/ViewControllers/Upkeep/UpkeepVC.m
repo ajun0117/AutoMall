@@ -39,7 +39,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"保养服务";
-    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
@@ -131,9 +132,9 @@
     UpkeepHomeCollectionCell *collCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"upkeepHomeCollectionCell" forIndexPath:indexPath];
     collCell.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
     collCell.layer.borderWidth = 1;
-    collCell.layer.cornerRadius = 5;
+//    collCell.layer.cornerRadius = 5;
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-    [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"check_default")];
+    [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
     collCell.titleL.text = dic [@"name"];
     
     return collCell;

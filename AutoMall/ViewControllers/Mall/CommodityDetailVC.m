@@ -16,7 +16,7 @@
 #import "CommodityDetailTuijianCell.h"
 #import "ShoppingCartView.h"
 #import "SettlementVC.h"
-#import "WRNavigationBar.h"
+//#import "WRNavigationBar.h"
 #import "HZPhotoBrowser.h"
 #import "ShoppingCartModel.h"
 #import "LoginViewController.h"
@@ -59,26 +59,8 @@ static CGFloat const scrollViewHeight = 220;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品详情";
-    
-///<<<<< Updated upstream
-////    // 设置导航栏颜色
-////    [self wr_setNavBarBarTintColor:RGBCOLOR(247, 247, 247)];
-////    
-////    // 设置初始导航栏透明度
-////    [self wr_setNavBarBackgroundAlpha:0];
-////    
-////    // 设置导航栏按钮和标题颜色
-////    [self wr_setNavBarTintColor:RGBCOLOR(129, 129, 129)];
-//=======
-    // 设置导航栏颜色
-    [self wr_setNavBarBarTintColor:RGBCOLOR(129, 129, 129)];
-    
-    // 设置初始导航栏透明度
-    [self wr_setNavBarBackgroundAlpha:0];
-    
     // 设置导航栏按钮和标题颜色
-    [self wr_setNavBarTintColor:[UIColor darkGrayColor]];
-//>>>>>>> Stashed changes
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
@@ -250,12 +232,12 @@ static CGFloat const scrollViewHeight = 220;
     if (!self.isShopping)
     {
         self.shoppingCartView =[[ShoppingCartView alloc]init];
-        self.shoppingCartView.frame =CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15);
+        self.shoppingCartView.frame = CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15);
         
         UIView *bgView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15)];
-        bgView.alpha = .7;
+        bgView.alpha = 0;
         bgView.tag = 111;
-        bgView.backgroundColor =[UIColor lightGrayColor];
+        bgView.backgroundColor =[UIColor blackColor];
         [self.view insertSubview:bgView belowSubview:self.settemntView];
         self.shoppingCartView.block = ^(NSMutableArray *darasArr){
             [weakSelf updateShoppingCart:darasArr];
@@ -265,18 +247,23 @@ static CGFloat const scrollViewHeight = 220;
         [self.view insertSubview:self.shoppingCartView belowSubview:self.settemntView];
         
         [UIView animateWithDuration:.3 animations:^{
-            
-            self.shoppingCartView.frame =CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame) + 15);
+            bgView.alpha = .5;
+            self.shoppingCartView.frame = CGRectMake(0, 0, Screen_wide,self.view.bounds.size.height-CGRectGetHeight(self.settemntView.frame) + 15);
             self.shoppingCartView.datasArr = cartMulArray;
         } completion:^(BOOL finished)
          {
-             
          }];
-        
     }
     else{
-//        self.settemntView.backgroundColor = [UIColor clearColor];
-        [self.shoppingCartView removeSubView:self];
+        [UIView animateWithDuration:.3 animations:^{
+            UIView * v = [self.view viewWithTag:111];
+            v.alpha = 0;
+            self.shoppingCartView.frame = CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15);
+        } completion:^(BOOL finished)
+         {
+             [self.shoppingCartView removeSubView:self];
+         }];
+        
     }
     self.isShopping = !self.isShopping;
 }
@@ -305,7 +292,7 @@ static CGFloat const scrollViewHeight = 220;
 //        CGFloat alpha = (offsetY + 220 - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
         CGFloat alpha = (offsetY + 220) / 156;
         [self wr_setNavBarBackgroundAlpha:alpha];
-        [self wr_setNavBarTintColor:[RGBCOLOR(129, 129, 129) colorWithAlphaComponent:alpha]];
+        [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
         [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
         [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
         self.title = @"商品详情";
@@ -313,7 +300,7 @@ static CGFloat const scrollViewHeight = 220;
     else
     {
         [self wr_setNavBarBackgroundAlpha:0];
-        [self wr_setNavBarTintColor:[UIColor whiteColor]];
+        [self wr_setNavBarTintColor:[UIColor blackColor]];
         [self wr_setNavBarTitleColor:[UIColor whiteColor]];
         [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
         self.title = @"";
@@ -412,7 +399,7 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -509,7 +496,7 @@ static CGFloat const scrollViewHeight = 220;
             CommodityDetailTuijianCell *cell = (CommodityDetailTuijianCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTuijianCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSDictionary *dic = tjListAry [indexPath.row];
-            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"timg-2")];
+            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
             cell.goodsNameL.text = dic [@"name"];
             cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
             cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];

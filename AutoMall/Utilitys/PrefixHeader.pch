@@ -27,6 +27,7 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIButton+WebCache.h"
 #import "MJRefresh.h"
+#import "WRNavigationBar.h"
 
 //商城购物车
 #import "KSHeader.h"

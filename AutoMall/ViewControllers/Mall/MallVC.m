@@ -11,7 +11,6 @@
 #import "CommodityListVC.h"
 #import "MXScrollView.h"
 #import "MailGoodsCell.h"
-#import "WRNavigationBar.h"
 #import "CommodityListVC.h"
 #import "CommodityDetailVC.h"
 #import "WebViewController.h"
@@ -54,6 +53,8 @@ static CGFloat const scrollViewHeight = 220;
     // Do any additional setup after loading the view.
 //    self.navigationController.navigationBar.tintColor = RGBCOLOR(129, 129, 129);
     self.title = @"商城";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
 //    最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
@@ -301,7 +302,7 @@ static CGFloat const scrollViewHeight = 220;
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if (tjListAry.count >= 4) {
             NSDictionary *dic1 = tjListAry[0];
-            [cell.img1 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic1[@"image"])] placeholderImage:IMG(@"timg-2")];
+            [cell.img1 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic1[@"image"])] placeholderImage:IMG(@"default")];
             cell.name1.text = dic1[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
@@ -311,7 +312,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.btn1 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
             
             NSDictionary *dic2 = tjListAry[1];
-            [cell.img2 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic2[@"image"])] placeholderImage:IMG(@"timg-2")];
+            [cell.img2 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic2[@"image"])] placeholderImage:IMG(@"default")];
             cell.name2.text = dic2[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
@@ -321,7 +322,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.btn2 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
             
             NSDictionary *dic3 = tjListAry[2];
-            [cell.img3 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic3[@"image"])] placeholderImage:IMG(@"timg-2")];
+            [cell.img3 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic3[@"image"])] placeholderImage:IMG(@"default")];
             cell.name3.text = dic3[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
@@ -331,7 +332,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.btn3 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
             
             NSDictionary *dic4 = tjListAry[3];
-            [cell.img4 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic4[@"image"])] placeholderImage:IMG(@"timg-2")];
+            [cell.img4 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic4[@"image"])] placeholderImage:IMG(@"default")];
             cell.name4.text = dic4[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
@@ -386,7 +387,7 @@ static CGFloat const scrollViewHeight = 220;
                     button.frame = CGRectMake(15 + n * (40 + margin) + a * SCREEN_WIDTH , 10 + m * (60 + rowMargin), Head_button_Width, Head_button_Height);
                     button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, Head_button_Height - Head_button_Width, 0);
                     button.tag = p + 1000;
-                    [button sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] forState:UIControlStateNormal placeholderImage:IMG(@"add_carInfo")];
+                    [button sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] forState:UIControlStateNormal placeholderImage:IMG(@"defaultCircle")];
 //                    [button setImage:IMG(@"add_carInfo") forState:UIControlStateNormal];
                     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                     UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-5, 40, 60, 20)];

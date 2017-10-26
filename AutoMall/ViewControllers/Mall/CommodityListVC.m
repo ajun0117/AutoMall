@@ -36,6 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"商品列表";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
 //    [self adjustLeftBtnFrameWithTitle:@"项目" andButton:xiangmuBtn];
 //    [self adjustLeftBtnFrameWithTitle:@"排列方式" andButton:sortBtn];
@@ -174,7 +176,7 @@
     if (tableView == selectTableView) {
         return 1;
     }
-    return 5;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -230,7 +232,7 @@
     else {
         CommodityListCell *cell = (CommodityListCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityListCell"];
         NSDictionary *dic = commodityArray [indexPath.section];
-        [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:IMG(@"timg-2")];
+        [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
         cell.goodsNameL.text = dic [@"name"];
 //        cell.baokuanL.text =
 //        cell.tuijianL.text =

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define DefineMessageImage @"squareImageDefault"
+#define DefineMessageImage @"default"
 #define DefineMessageTime  4
 
 @class AJMessageView;

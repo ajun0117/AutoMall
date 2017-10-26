@@ -33,6 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"订单详情";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     self.statusBtn.layer.cornerRadius = 2;
     self.statusBtn.layer.borderColor = [UIColor blackColor].CGColor;
@@ -230,7 +232,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray *goodsAry = orderDetailDic[@"orderDetails"];
             NSDictionary *dic = goodsAry[indexPath.row];
-            [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"commodityImage"])] placeholderImage:IMG(@"timg-2")];
+            [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"commodityImage"])] placeholderImage:IMG(@"default")];
             cell.nameL.text = dic[@"commodityName"];
             cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", dic[@"actualPrice"]];
             cell.numL.text = [NSString stringWithFormat:@"x%@", dic[@"commodityAmount"]];

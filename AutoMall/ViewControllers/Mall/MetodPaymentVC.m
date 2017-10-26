@@ -29,6 +29,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title =@"付款中";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     payModeStr = @"2";   //默认使用微信
     self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号：%@",self.orderNumber];
     self.moneyL.text = [NSString stringWithFormat:@"应付金额：￥%.2f",self.money];

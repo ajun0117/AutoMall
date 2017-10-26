@@ -35,6 +35,8 @@
 #define Cell_sepLineColor       RGBCOLOR(200, 199, 204)     //tablecell间隔线颜色
 #define Cell_SelectedColor      RGBCOLOR(234, 234, 234)      //cell点击背景色
 
+#define NavBarTintColor         [UIColor blackColor]        //导航栏返回按钮颜色
+
 #define isIOS8Later ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0)
 
 //iPhone4

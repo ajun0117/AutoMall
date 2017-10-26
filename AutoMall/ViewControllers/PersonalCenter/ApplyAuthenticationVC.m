@@ -29,6 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
      self.title = @"申请认证";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     [[CitiesDataTool sharedManager] requestGetData];
     [self.view addSubview:self.cover];
@@ -80,7 +82,7 @@
     // 设置时间格式
     formatter.dateFormat = @"yyyyMMddHHmmss";
     NSString *str = [formatter stringFromDate:[NSDate date]];
-    NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+    NSString *fileName = [NSString stringWithFormat:@"picture_3.png"];
     
     [self requestUploadImg:self.gongzhongImg imageName:fileName];
 }
@@ -209,30 +211,36 @@
     
     //data=data
     UIImage *im = IMG(@"picture_3");
-    NSData *imageData = UIImageJPEGRepresentation(im, 1);
-    NSInteger length = imageData.length;
-    if (length > 1048) {
-        CGFloat packRate = 1048.0/length;
-        imageData = UIImageJPEGRepresentation(im, packRate);
-    }
-    //    NSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *imageData = UIImageJPEGRepresentation(im, 1.0f);
+//    NSInteger length = imageData.length;
+//    if (length > 1048) {
+//        CGFloat packRate = 1048.0/length;
+//        imageData = UIImageJPEGRepresentation(im, packRate);
+//    }
     
-//    imageData= [GTMBase64 encodeData:imageData];
-//    NSString *baseStr = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
+//    NSString *baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//    NSString *newString = (__bridge_transfer id)(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)baseStr, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+//    NSLog(@"newString: %@",newString);
     
-    NSString* baseStr = [imageData base64EncodedStringWithOptions:0];
-    NSLog(@"baseStr:%@",baseStr);
+    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                                                (CFStringRef)baseStr,
+                                                                                                                NULL,
+                                                                                                                CFSTR(":/?#[]@!$&’()*+,;="),
+                                                                                                                kCFStringEncodingUTF8);
+//    baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                               (CFStringRef)baseString,
+//                                                                               NULL,
+//                                                                               CFSTR(":/?#[]@!$&’()*+,;="),
+//                                                                               kCFStringEncodingUTF8);
+    NSLog(@"baseString:%@",baseString);
     
-//    NSString * baseStr = base64StringFromData(imageData);
     
     NSData *decodedImageData = [[NSData alloc] initWithBase64EncodedString:baseStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     [self.licenseImgBtn setBackgroundImage:decodedImage forState:UIControlStateNormal];
     
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"txt"];
-//    NSString *content = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseStr,@"img",name,@"fileName", nil];
+    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"img",name,@"fileName", nil];
     NSLog(@"paramsDic: %@",paramsDic);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UploadUploadImg) delegate:nil params:paramsDic info:infoDic];
     //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];

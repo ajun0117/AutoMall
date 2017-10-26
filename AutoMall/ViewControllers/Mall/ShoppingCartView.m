@@ -112,9 +112,16 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FootView" object:nil];
-    [self removeSubView:_viewController];
-    CommodityDetailVC *dvc = (CommodityDetailVC *)_viewController;
-    dvc.isShopping = NO;
+    [UIView animateWithDuration:.3 animations:^{
+        UIView * v = [_viewController.view viewWithTag:111];
+        v.alpha = 0;
+        self.frame = CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT + 15);
+    } completion:^(BOOL finished)
+     {
+         [self removeSubView:_viewController];
+         CommodityDetailVC *dvc = (CommodityDetailVC *)_viewController;
+         dvc.isShopping = NO;
+     }];
 }
 #pragma markl -- 加加
 - (void)addBtn:(UIButton *)sender{

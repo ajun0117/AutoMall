@@ -34,6 +34,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"快速注册";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     NSLog(@"phoneStr:   %@",self.phoneStr);
     [self requestGetSMS];  //发送验证码
 }

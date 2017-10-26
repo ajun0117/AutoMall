@@ -53,6 +53,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @" 服务项目统计";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     
     dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     dateBtn.frame = CGRectMake(0, 0, 80, 44);

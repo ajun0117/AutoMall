@@ -26,6 +26,9 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = self.titleStr;
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     [_webView setScalesPageToFit:YES];
     
 //    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Right-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];

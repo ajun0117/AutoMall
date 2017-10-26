@@ -43,6 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"粤A88888";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
 //    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
 ////    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

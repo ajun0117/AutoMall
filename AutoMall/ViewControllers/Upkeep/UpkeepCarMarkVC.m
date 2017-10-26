@@ -29,6 +29,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"车身标记";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     
     //1添加 UIScrollView
     //设置 UIScrollView的位置与屏幕大小相同

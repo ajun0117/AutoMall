@@ -42,6 +42,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"添加图片";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
@@ -167,7 +170,7 @@
         //    cell.AlbumBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         //    cell.AlbumBtn.clipsToBounds = YES;
         
-        [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:dic[@"path"]] forState:UIControlStateNormal placeholderImage:IMG(@"squareImageDefault")];
+        [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"path"])] forState:UIControlStateNormal placeholderImage:IMG(@"squareImageDefault")];
         cell.AlbumBtn.tag = indexPath.item + 2000;
         
         [cell.AlbumBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

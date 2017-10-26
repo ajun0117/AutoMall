@@ -29,7 +29,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                     <subviews>
                         <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carMark" translatesAutoresizingMaskIntoConstraints="NO" id="Tex-hN-C2V">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="533"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="600" id="m9c-6a-CT1"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -125,7 +128,7 @@
     </objects>
     <resources>
         <image name="add_carInfo" width="512" height="512"/>
-        <image name="carMark" width="348" height="533"/>
+        <image name="carMark" width="2415" height="1564"/>
         <image name="del_carInfo_gray" width="512" height="512"/>
         <image name="goods_add" width="512" height="512"/>
         <image name="goods_del" width="512" height="512"/>

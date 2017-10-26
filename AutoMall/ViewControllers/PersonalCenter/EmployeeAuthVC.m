@@ -22,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"技能认证审核";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     self.nameL.text = @"认证名称名称";
     self.introduceL.text = @"技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 技能介绍介绍 ";

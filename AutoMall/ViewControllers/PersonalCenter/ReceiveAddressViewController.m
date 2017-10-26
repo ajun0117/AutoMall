@@ -31,6 +31,9 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     [super viewDidLoad];
     
     self.title = @"收货地址";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
