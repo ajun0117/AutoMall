@@ -25,25 +25,25 @@
                         <constraints>
                             <constraint firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="height" id="wfc-Zz-gWq"/>
                         </constraints>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
-                        <state key="normal" image="information_pressed">
+                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <state key="normal" image="center_inProgress">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKC-Eb-3FB">
                         <rect key="frame" x="105" y="3.5" width="72.5" height="73"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
-                        <state key="normal" image="information_pressed"/>
+                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <state key="normal" image="center_servicesConfirmed"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-aO-BSg">
                         <rect key="frame" x="197.5" y="3.5" width="73" height="73"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
-                        <state key="normal" image="information_pressed"/>
+                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <state key="normal" image="center_workDone"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-IZ-ood">
                         <rect key="frame" x="290.5" y="3.5" width="72.5" height="73"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="25"/>
-                        <state key="normal" image="information_pressed"/>
+                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <state key="normal" image="center_paid"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检查完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-WV-12j">
                         <rect key="frame" x="18" y="47" width="61.5" height="18"/>
@@ -110,6 +110,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="information_pressed" width="33" height="33"/>
+        <image name="center_inProgress" width="120" height="120"/>
+        <image name="center_paid" width="120" height="120"/>
+        <image name="center_servicesConfirmed" width="120" height="120"/>
+        <image name="center_workDone" width="120" height="120"/>
     </resources>
 </document>

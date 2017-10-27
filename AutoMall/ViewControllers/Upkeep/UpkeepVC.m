@@ -134,7 +134,7 @@
     collCell.layer.borderWidth = 1;
 //    collCell.layer.cornerRadius = 5;
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
-    [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+    [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];      //  IMG(@"check_default")
     collCell.titleL.text = dic [@"name"];
     
     return collCell;

@@ -80,12 +80,6 @@ static DataRequest *dataRequest;
 
 //get方式访问网络
 -(void) getDataWithUrl:(NSString *)urlStr delegate:(id)delegate params:(NSDictionary *)params info:(NSDictionary *)infoDic{
-    
-//    NSMutableString *appendString = [NSMutableString stringWithFormat:@"%@?_fs=1/_vc=%@",urlStr,version];
-//    if ([urlStr rangeOfString:@"?"].location != NSNotFound) {
-//        appendString = [urlStr mutableCopy];
-//    }
-    
 //    if ([DataRequest checkNetwork]) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *token = [[GlobalSetting shareGlobalSettingInstance] token];
@@ -118,12 +112,9 @@ static DataRequest *dataRequest;
 
 //post方式访问网络
 -(void) postDataWithUrl:(NSString *)urlStr delegate:(id)delegate params:(id)params info:(NSDictionary *)infoDic{
-    
-//    NSMutableString *appendString = [NSMutableString stringWithFormat:@"%@?_fs=1/_vc=%@",urlStr,version];
-    
 //    if ([DataRequest checkNetwork]) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];  //设置传参方式为JSON
+//        manager.requestSerializer = [AFJSONRequestSerializer serializer];  //设置传参方式为JSON
     
         //为这个下载任务HTTP头添加@"User-Agent"字段
         [manager.requestSerializer setValue:[self getUserAgentString] forHTTPHeaderField:@"User-Agent"];
@@ -167,9 +158,6 @@ static DataRequest *dataRequest;
 
 //post方式访问网络
 -(void) postJSONRequestWithUrl:(NSString *)urlStr delegate:(id)delegate params:(id)params info:(NSDictionary *)infoDic {
-    
-    //    NSMutableString *appendString = [NSMutableString stringWithFormat:@"%@?_fs=1/_vc=%@",urlStr,version];
-    
     //    if ([DataRequest checkNetwork]) {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];  //设置传参方式为JSON

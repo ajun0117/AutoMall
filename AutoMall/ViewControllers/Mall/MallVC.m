@@ -104,7 +104,7 @@ static CGFloat const scrollViewHeight = 220;
     self.typePageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.typePageControl.currentPageIndicatorTintColor = RGBCOLOR(229, 24, 35);
     
-//    [self requsetAdvertList];   //请求广告列表
+    [self requsetAdvertList];   //请求广告列表
 //    [self requestGetComCategoryList];   //请求分类数据
 }
 
@@ -124,7 +124,7 @@ static CGFloat const scrollViewHeight = 220;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self requsetAdvertList];   //请求广告列表
+//    [self requsetAdvertList];   //请求广告列表
     [self requestGetComCategoryList];   //请求分类数据
     [self requestPostCommoditytjList];  //请求推荐商品列表
 }

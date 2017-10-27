@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="autoCheckGroupCell" rowHeight="130" id="KGk-i7-Jjw" customClass="AutoCheckGroupCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="autoCheckGroupCell" rowHeight="138" id="KGk-i7-Jjw" customClass="AutoCheckGroupCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="137.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="左上" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVb-aE-TXO">
@@ -28,13 +28,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mQ-WH-vvE">
-                        <rect key="frame" x="8" y="40" width="304" height="35"/>
+                        <rect key="frame" x="8" y="48" width="304" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="UGO-bT-PLM"/>
                         </constraints>
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzs-rM-M3Q">
-                        <rect key="frame" x="8" y="83" width="200" height="40"/>
+                        <rect key="frame" x="8" y="91" width="200" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="StB-f3-9Zm"/>
                             <constraint firstAttribute="height" constant="40" id="tMq-cu-Jcy"/>
@@ -45,7 +45,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u80-wu-KtR">
-                        <rect key="frame" x="272" y="83" width="40" height="40"/>
+                        <rect key="frame" x="272" y="91" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="IKs-mZ-TOI"/>
                             <constraint firstAttribute="width" constant="40" id="ggA-Dz-hsB"/>
@@ -63,7 +63,7 @@
                     <constraint firstItem="8mQ-WH-vvE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="t0s-KQ-hWn"/>
                     <constraint firstItem="u80-wu-KtR" firstAttribute="centerY" secondItem="Qzs-rM-M3Q" secondAttribute="centerY" id="tFI-Pf-m58"/>
                     <constraint firstItem="Qzs-rM-M3Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="vzj-sr-0ht"/>
-                    <constraint firstItem="8mQ-WH-vvE" firstAttribute="top" secondItem="oVb-aE-TXO" secondAttribute="bottom" constant="8" id="xNL-rd-GJZ"/>
+                    <constraint firstItem="8mQ-WH-vvE" firstAttribute="top" secondItem="oVb-aE-TXO" secondAttribute="bottom" constant="16" id="xNL-rd-GJZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -72,7 +72,7 @@
                 <outlet property="photoBtn" destination="u80-wu-KtR" id="9wO-g8-rae"/>
                 <outlet property="segBgView" destination="8mQ-WH-vvE" id="zlG-cp-8Z0"/>
             </connections>
-            <point key="canvasLocation" x="-704" y="9"/>
+            <point key="canvasLocation" x="-704" y="13"/>
         </tableViewCell>
     </objects>
     <resources>

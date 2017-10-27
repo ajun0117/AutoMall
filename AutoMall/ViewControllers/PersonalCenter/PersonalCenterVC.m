@@ -359,6 +359,7 @@
                 
             case 1:{
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.img.image = IMG(@"center_fav");
                 cell.nameL.text = @"商品收藏";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
@@ -367,6 +368,7 @@
                 
             case 2:{
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.img.image = IMG(@"center_changePW");
                 cell.nameL.text = @"修改密码";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
@@ -375,12 +377,14 @@
             case 3:{
                 if (indexPath.row == 0) {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_disclaimer");
                     cell.nameL.text = @"免责声明";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                 }
                 else {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_contact");
                     cell.nameL.text = @"联系我们";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -409,6 +413,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"information_pressed");
                         cell.nameL.text = @"服务订单";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -417,23 +422,24 @@
                     case 1: {
                         CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.firstBtn setImage:IMG(@"center_inProgress") forState:UIControlStateNormal];
                         cell.firstL.text = @"检查完成";
-                        [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.secondBtn setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
                         cell.secondL.text = @"订单确认";
                         cell.thirdBtn.hidden = NO;
                         cell.thirdL.hidden = NO;
-                        [cell.thirdBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.thirdBtn setImage:IMG(@"center_workDone") forState:UIControlStateNormal];
                         cell.thirdL.text = @"施工完成";
                         cell.fourthBtn.hidden = NO;
                         cell.fourthL.hidden = NO;
-                        [cell.fourthBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.fourthBtn setImage:IMG(@"center_paid-checkup") forState:UIControlStateNormal];
                         cell.fourthL.text = @"已付款";
                         return cell;
                         break;
                     }
                     case 2: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_statistics");
                         cell.nameL.text = @"统计报表";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -441,6 +447,7 @@
                     }
                     case 3: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_customizedServices");
                         cell.nameL.text = @"定制服务";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -448,6 +455,7 @@
                     }
                     case 4: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_discount");
                         cell.nameL.text = @"优惠管理";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -455,6 +463,7 @@
                     }
                     case 5: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_staff");
                         cell.nameL.text = @"员工管理";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -470,6 +479,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"information_pressed");
                         cell.nameL.text = @"商城订单";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -478,10 +488,10 @@
                     case 1: {
                         CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.firstBtn setImage:IMG(@"center_toPay") forState:UIControlStateNormal];
                         [cell.firstBtn addTarget:self action:@selector(daifuAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.firstL.text = @"待付款";
-                        [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.secondBtn setImage:IMG(@"center_paid") forState:UIControlStateNormal];
                         [cell.secondBtn addTarget:self action:@selector(yifuAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.secondL.text = @"已付款";
                         return cell;
@@ -489,6 +499,7 @@
                     }
                     case 2: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_fav");
                         cell.nameL.text = @"商品收藏";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -504,12 +515,14 @@
             case 3:{
                 if (indexPath.row == 0) {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_changePW");
                     cell.nameL.text = @"修改密码";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                 }
                 else {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_address");
                     cell.nameL.text = @"地址管理";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -519,12 +532,14 @@
             case 4:{
                 if (indexPath.row == 0) {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_disclaimer");
                     cell.nameL.text = @"免责声明";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                 }
                 else {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_contact");
                     cell.nameL.text = @"联系我们";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -552,6 +567,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_changePw");
                         cell.nameL.text = @"技能特长";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -559,6 +575,7 @@
                     }
                     case 1: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_changePw");
                         cell.nameL.text = @"技能认证";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -574,6 +591,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"information_pressed");
                         cell.nameL.text = @"服务订单";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -584,21 +602,22 @@
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
                         cell.firstL.text = @"检查完成";
-                        [cell.secondBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.secondBtn setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
                         cell.secondL.text = @"订单确认";
                         cell.thirdBtn.hidden = NO;
                         cell.thirdL.hidden = NO;
-                        [cell.thirdBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.thirdBtn setImage:IMG(@"center_workDone") forState:UIControlStateNormal];
                         cell.thirdL.text = @"施工完成";
                         cell.fourthBtn.hidden = NO;
                         cell.fourthL.hidden = NO;
-                        [cell.fourthBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.fourthBtn setImage:IMG(@"center_paid-checkup") forState:UIControlStateNormal];
                         cell.fourthL.text = @"已付款";
                         return cell;
                         break;
                     }
                     case 2: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_statistics");
                         cell.nameL.text = @"统计报表";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -612,6 +631,7 @@
             }
             case 3:{
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.img.image = IMG(@"center_fav");
                 cell.nameL.text = @"商品收藏";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
@@ -619,6 +639,7 @@
             }
             case 4:{
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.img.image = IMG(@"center_changePW");
                 cell.nameL.text = @"修改密码";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
@@ -627,12 +648,14 @@
             case 5:{
                 if (indexPath.row == 0) {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_disclaimer");
                     cell.nameL.text = @"免责声明";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                 }
                 else {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_contact");
                     cell.nameL.text = @"联系我们";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -659,12 +682,14 @@
         case 1:{
             if (indexPath.row == 0) {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.img.image = IMG(@"center_disclaimer");
                 cell.nameL.text = @"免责声明";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
             else {
                 CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                cell.img.image = IMG(@"center_contact");
                 cell.nameL.text = @"联系我们";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;

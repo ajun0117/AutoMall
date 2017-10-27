@@ -145,9 +145,10 @@
 
 
 #define UploadUploadImg                       @"/api/upload/uploadImg"    //上传图片
+#define UploadImgFile                            @"/api/upload/uploadFile"    //上传图片（通过二进制流上传）
 
 //商城
-#define ComCategoryList                        @"/api/comCategory/list"    //商品分类
+#define ComCategoryList                         @"/api/comCategory/list"    //商品分类
 #define CommodityList                            @"/api/commodity/list"       //商品列表
 #define CommodityDetail                         @"/api/commodity/getInfo"   //商品详情
 #define CommoditytjList                         @"/api/commodity/tjlist"  //商品详情推荐商品列表

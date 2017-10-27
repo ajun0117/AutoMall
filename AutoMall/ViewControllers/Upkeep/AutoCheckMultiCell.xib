@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="autoCheckMultiCell" rowHeight="131" id="KGk-i7-Jjw" customClass="AutoCheckMultiCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="autoCheckMultiCell" rowHeight="138" id="KGk-i7-Jjw" customClass="AutoCheckMultiCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="136.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSA-D1-ZUd">
@@ -44,13 +44,13 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iA-28-E4i">
-                        <rect key="frame" x="8" y="40" width="304" height="35"/>
+                        <rect key="frame" x="8" y="48" width="304" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="NKG-mu-HI2"/>
                         </constraints>
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxV-Rp-wNd">
-                        <rect key="frame" x="8" y="83" width="200" height="40"/>
+                        <rect key="frame" x="8" y="91" width="200" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="WEE-J2-QVN"/>
                             <constraint firstAttribute="height" constant="40" id="qPn-l0-Qu4"/>
@@ -61,7 +61,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nq-xE-qpG">
-                        <rect key="frame" x="272" y="83" width="40" height="40"/>
+                        <rect key="frame" x="272" y="91" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="1Ns-FZ-4YB"/>
                             <constraint firstAttribute="width" constant="40" id="wgK-2k-pDs"/>
@@ -75,7 +75,7 @@
                     <constraint firstAttribute="trailing" secondItem="2iA-28-E4i" secondAttribute="trailing" constant="8" id="KXi-0c-mrG"/>
                     <constraint firstAttribute="trailing" secondItem="CSA-D1-ZUd" secondAttribute="trailing" constant="8" id="N14-CF-NY3"/>
                     <constraint firstItem="HxV-Rp-wNd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="bGD-RV-Yv2"/>
-                    <constraint firstItem="2iA-28-E4i" firstAttribute="top" secondItem="CSA-D1-ZUd" secondAttribute="bottom" constant="8" id="dHB-F5-xEZ"/>
+                    <constraint firstItem="2iA-28-E4i" firstAttribute="top" secondItem="CSA-D1-ZUd" secondAttribute="bottom" constant="16" id="dHB-F5-xEZ"/>
                     <constraint firstItem="CSA-D1-ZUd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="eDX-4C-hW9"/>
                     <constraint firstAttribute="trailing" secondItem="6nq-xE-qpG" secondAttribute="trailing" constant="8" id="mka-Xb-BJb"/>
                     <constraint firstItem="HxV-Rp-wNd" firstAttribute="top" secondItem="2iA-28-E4i" secondAttribute="bottom" constant="8" id="sz0-oZ-SPc"/>
@@ -89,7 +89,7 @@
                 <outlet property="photoBtn" destination="6nq-xE-qpG" id="1Ly-NH-KMv"/>
                 <outlet property="segBgView" destination="2iA-28-E4i" id="9xA-Um-9qx"/>
             </connections>
-            <point key="canvasLocation" x="-372" y="5"/>
+            <point key="canvasLocation" x="-372" y="8.5"/>
         </tableViewCell>
     </objects>
     <resources>

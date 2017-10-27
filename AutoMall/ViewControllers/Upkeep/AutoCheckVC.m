@@ -20,7 +20,7 @@
 #import "AutoCheckCarInfoVC.h"
 #import "AutoCheckPhotoVC.h"
 #import "AddPicViewController.h"
-#import "AutoCheckOrderPayModeVC.h"
+#import "AutoCheckResultVC.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
@@ -62,14 +62,14 @@
     negativeSpacer.width = -6;
 
     UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    infoBtn.frame = CGRectMake(0, 0, 24, 24);
+    infoBtn.frame = CGRectMake(0, 0, 44, 44);
     infoBtn.contentMode = UIViewContentModeScaleAspectFit;
-    [infoBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
+    [infoBtn setImage:[UIImage imageNamed:@"carInfo"] forState:UIControlStateNormal];
     [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 24, 24);
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
     searchBtn.contentMode = UIViewContentModeScaleAspectFit;
     [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];
@@ -176,8 +176,8 @@
 //        [_networkConditionHUD show:YES];
 //        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //    }
-    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-    [self.navigationController pushViewController:planVC animated:YES];
+    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+    [self.navigationController pushViewController:resultVC animated:YES];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -495,7 +495,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 130;
+    return 138;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

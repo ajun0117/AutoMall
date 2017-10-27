@@ -315,6 +315,22 @@
 		04DC7DFE1F31C77000AA20A7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DFD1F31C77000AA20A7 /* CoreLocation.framework */; };
 		04DC7E001F31C77A00AA20A7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DFF1F31C77A00AA20A7 /* CoreFoundation.framework */; };
 		04DC7E031F31D1CD00AA20A7 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7E021F31D1CD00AA20A7 /* TabBarController.m */; };
+		04DCA1701FA2E0F8004B1054 /* CheckResultSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA16E1FA2E0F8004B1054 /* CheckResultSingleCell.m */; };
+		04DCA1711FA2E0F8004B1054 /* CheckResultSingleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA16F1FA2E0F8004B1054 /* CheckResultSingleCell.xib */; };
+		04DCA1751FA2E316004B1054 /* CheckResultMultiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA1731FA2E316004B1054 /* CheckResultMultiCell.m */; };
+		04DCA1761FA2E316004B1054 /* CheckResultMultiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA1741FA2E316004B1054 /* CheckResultMultiCell.xib */; };
+		04DCA17A1FA2F1AA004B1054 /* CheckResultTechnicianCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA1781FA2F1AA004B1054 /* CheckResultTechnicianCell.m */; };
+		04DCA17B1FA2F1AA004B1054 /* CheckResultTechnicianCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA1791FA2F1AA004B1054 /* CheckResultTechnicianCell.xib */; };
+		04DCA17F1FA2F30B004B1054 /* CheckResultQRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA17D1FA2F30B004B1054 /* CheckResultQRCell.m */; };
+		04DCA1801FA2F30B004B1054 /* CheckResultQRCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA17E1FA2F30B004B1054 /* CheckResultQRCell.xib */; };
+		04DCA1851FA33BBF004B1054 /* AutoCheckResultProblemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA1831FA33BBF004B1054 /* AutoCheckResultProblemVC.m */; };
+		04DCA1861FA33BBF004B1054 /* AutoCheckResultProblemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA1841FA33BBF004B1054 /* AutoCheckResultProblemVC.xib */; };
+		04DCA18A1FA346CD004B1054 /* AutoCheckResultDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA1881FA346CD004B1054 /* AutoCheckResultDetailVC.m */; };
+		04DCA18B1FA346CD004B1054 /* AutoCheckResultDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA1891FA346CD004B1054 /* AutoCheckResultDetailVC.xib */; };
+		04DCA1901FA34992004B1054 /* ResultCheckContentDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA18E1FA34992004B1054 /* ResultCheckContentDetailCell.m */; };
+		04DCA1911FA34992004B1054 /* ResultCheckContentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA18F1FA34992004B1054 /* ResultCheckContentDetailCell.xib */; };
+		04DCA1951FA34AB9004B1054 /* ResultDetailHazardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DCA1931FA34AB9004B1054 /* ResultDetailHazardCell.m */; };
+		04DCA1961FA34AB9004B1054 /* ResultDetailHazardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DCA1941FA34AB9004B1054 /* ResultDetailHazardCell.xib */; };
 		04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD8EE21F50169D00159776 /* WRNavigationBar.m */; };
 		04E410831F5D52750097E0A6 /* ApplyAuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E410811F5D52750097E0A6 /* ApplyAuthenticationVC.m */; };
 		04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E410821F5D52750097E0A6 /* ApplyAuthenticationVC.xib */; };
@@ -991,6 +1007,30 @@
 		04DC7DFF1F31C77A00AA20A7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		04DC7E011F31D1CD00AA20A7 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		04DC7E021F31D1CD00AA20A7 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		04DCA16D1FA2E0F8004B1054 /* CheckResultSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultSingleCell.h; sourceTree = "<group>"; };
+		04DCA16E1FA2E0F8004B1054 /* CheckResultSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultSingleCell.m; sourceTree = "<group>"; };
+		04DCA16F1FA2E0F8004B1054 /* CheckResultSingleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultSingleCell.xib; sourceTree = "<group>"; };
+		04DCA1721FA2E316004B1054 /* CheckResultMultiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultMultiCell.h; sourceTree = "<group>"; };
+		04DCA1731FA2E316004B1054 /* CheckResultMultiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultMultiCell.m; sourceTree = "<group>"; };
+		04DCA1741FA2E316004B1054 /* CheckResultMultiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultMultiCell.xib; sourceTree = "<group>"; };
+		04DCA1771FA2F1AA004B1054 /* CheckResultTechnicianCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultTechnicianCell.h; sourceTree = "<group>"; };
+		04DCA1781FA2F1AA004B1054 /* CheckResultTechnicianCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultTechnicianCell.m; sourceTree = "<group>"; };
+		04DCA1791FA2F1AA004B1054 /* CheckResultTechnicianCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultTechnicianCell.xib; sourceTree = "<group>"; };
+		04DCA17C1FA2F30B004B1054 /* CheckResultQRCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultQRCell.h; sourceTree = "<group>"; };
+		04DCA17D1FA2F30B004B1054 /* CheckResultQRCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultQRCell.m; sourceTree = "<group>"; };
+		04DCA17E1FA2F30B004B1054 /* CheckResultQRCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultQRCell.xib; sourceTree = "<group>"; };
+		04DCA1821FA33BBF004B1054 /* AutoCheckResultProblemVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckResultProblemVC.h; sourceTree = "<group>"; };
+		04DCA1831FA33BBF004B1054 /* AutoCheckResultProblemVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckResultProblemVC.m; sourceTree = "<group>"; };
+		04DCA1841FA33BBF004B1054 /* AutoCheckResultProblemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckResultProblemVC.xib; sourceTree = "<group>"; };
+		04DCA1871FA346CD004B1054 /* AutoCheckResultDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckResultDetailVC.h; sourceTree = "<group>"; };
+		04DCA1881FA346CD004B1054 /* AutoCheckResultDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckResultDetailVC.m; sourceTree = "<group>"; };
+		04DCA1891FA346CD004B1054 /* AutoCheckResultDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckResultDetailVC.xib; sourceTree = "<group>"; };
+		04DCA18D1FA34992004B1054 /* ResultCheckContentDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultCheckContentDetailCell.h; sourceTree = "<group>"; };
+		04DCA18E1FA34992004B1054 /* ResultCheckContentDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultCheckContentDetailCell.m; sourceTree = "<group>"; };
+		04DCA18F1FA34992004B1054 /* ResultCheckContentDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultCheckContentDetailCell.xib; sourceTree = "<group>"; };
+		04DCA1921FA34AB9004B1054 /* ResultDetailHazardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultDetailHazardCell.h; sourceTree = "<group>"; };
+		04DCA1931FA34AB9004B1054 /* ResultDetailHazardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultDetailHazardCell.m; sourceTree = "<group>"; };
+		04DCA1941FA34AB9004B1054 /* ResultDetailHazardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultDetailHazardCell.xib; sourceTree = "<group>"; };
 		04DD8EE11F50169D00159776 /* WRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRNavigationBar.h; sourceTree = "<group>"; };
 		04DD8EE21F50169D00159776 /* WRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRNavigationBar.m; sourceTree = "<group>"; };
 		04E410801F5D52750097E0A6 /* ApplyAuthenticationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyAuthenticationVC.h; sourceTree = "<group>"; };
@@ -1275,6 +1315,7 @@
 		044A24141F3326CF009720DE /* 汽车检查页 */ = {
 			isa = PBXGroup;
 			children = (
+				04DCA1811FA33B2F004B1054 /* 检查结果页详细 */,
 				04ABFB391F984BCF0015EE78 /* 相册及浏览 */,
 				04ABFB331F984B340015EE78 /* 添加检查图片 */,
 				F712456F1F868AE30091816F /* 检查页数据库模型 */,
@@ -1291,10 +1332,6 @@
 				04C656401F96FEE000611AFF /* AutoCheckPhotoVC.h */,
 				04C656411F96FEE000611AFF /* AutoCheckPhotoVC.m */,
 				04C656421F96FEE000611AFF /* AutoCheckPhotoVC.xib */,
-				F70A50901FA212B70047D804 /* AutoCheckResultVC.h */,
-				F70A50911FA212B70047D804 /* AutoCheckResultVC.m */,
-				F70A50921FA212B70047D804 /* AutoCheckResultVC.xib */,
-				F70A50951FA220220047D804 /* 检查结果页cell */,
 			);
 			name = "汽车检查页";
 			sourceTree = "<group>";
@@ -2438,6 +2475,37 @@
 			path = "评星";
 			sourceTree = "<group>";
 		};
+		04DCA1811FA33B2F004B1054 /* 检查结果页详细 */ = {
+			isa = PBXGroup;
+			children = (
+				F70A50951FA220220047D804 /* 检查结果页cell */,
+				F70A50901FA212B70047D804 /* AutoCheckResultVC.h */,
+				F70A50911FA212B70047D804 /* AutoCheckResultVC.m */,
+				F70A50921FA212B70047D804 /* AutoCheckResultVC.xib */,
+				04DCA1821FA33BBF004B1054 /* AutoCheckResultProblemVC.h */,
+				04DCA1831FA33BBF004B1054 /* AutoCheckResultProblemVC.m */,
+				04DCA1841FA33BBF004B1054 /* AutoCheckResultProblemVC.xib */,
+				04DCA1871FA346CD004B1054 /* AutoCheckResultDetailVC.h */,
+				04DCA1881FA346CD004B1054 /* AutoCheckResultDetailVC.m */,
+				04DCA1891FA346CD004B1054 /* AutoCheckResultDetailVC.xib */,
+				04DCA18C1FA34904004B1054 /* 检查结果详情cell */,
+			);
+			name = "检查结果页详细";
+			sourceTree = "<group>";
+		};
+		04DCA18C1FA34904004B1054 /* 检查结果详情cell */ = {
+			isa = PBXGroup;
+			children = (
+				04DCA18D1FA34992004B1054 /* ResultCheckContentDetailCell.h */,
+				04DCA18E1FA34992004B1054 /* ResultCheckContentDetailCell.m */,
+				04DCA18F1FA34992004B1054 /* ResultCheckContentDetailCell.xib */,
+				04DCA1921FA34AB9004B1054 /* ResultDetailHazardCell.h */,
+				04DCA1931FA34AB9004B1054 /* ResultDetailHazardCell.m */,
+				04DCA1941FA34AB9004B1054 /* ResultDetailHazardCell.xib */,
+			);
+			name = "检查结果详情cell";
+			sourceTree = "<group>";
+		};
 		04DD8EE01F50169D00159776 /* WRNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2637,6 +2705,18 @@
 				F70A509B1FA22B4A0047D804 /* CheckResultCell.h */,
 				F70A509C1FA22B4A0047D804 /* CheckResultCell.m */,
 				F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */,
+				04DCA16D1FA2E0F8004B1054 /* CheckResultSingleCell.h */,
+				04DCA16E1FA2E0F8004B1054 /* CheckResultSingleCell.m */,
+				04DCA16F1FA2E0F8004B1054 /* CheckResultSingleCell.xib */,
+				04DCA1721FA2E316004B1054 /* CheckResultMultiCell.h */,
+				04DCA1731FA2E316004B1054 /* CheckResultMultiCell.m */,
+				04DCA1741FA2E316004B1054 /* CheckResultMultiCell.xib */,
+				04DCA1771FA2F1AA004B1054 /* CheckResultTechnicianCell.h */,
+				04DCA1781FA2F1AA004B1054 /* CheckResultTechnicianCell.m */,
+				04DCA1791FA2F1AA004B1054 /* CheckResultTechnicianCell.xib */,
+				04DCA17C1FA2F30B004B1054 /* CheckResultQRCell.h */,
+				04DCA17D1FA2F30B004B1054 /* CheckResultQRCell.m */,
+				04DCA17E1FA2F30B004B1054 /* CheckResultQRCell.xib */,
 			);
 			name = "检查结果页cell";
 			sourceTree = "<group>";
@@ -2723,6 +2803,7 @@
 				0486E8CD1F8F667700FB746E /* test.caf in Resources */,
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
+				04DCA18B1FA346CD004B1054 /* AutoCheckResultDetailVC.xib in Resources */,
 				F70A50941FA212B70047D804 /* AutoCheckResultVC.xib in Resources */,
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */,
@@ -2766,13 +2847,16 @@
 				0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */,
 				04C656491F97694400611AFF /* AutoCheckOrderVC.xib in Resources */,
 				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
+				04DCA1801FA2F30B004B1054 /* CheckResultQRCell.xib in Resources */,
 				04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */,
 				F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
+				04DCA17B1FA2F1AA004B1054 /* CheckResultTechnicianCell.xib in Resources */,
 				04D396451F661F870077BFB3 /* SettlementAddressCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */,
+				04DCA1911FA34992004B1054 /* ResultCheckContentDetailCell.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
 				04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */,
 				04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */,
@@ -2785,7 +2869,9 @@
 				04ABFB4D1F9887630015EE78 /* AutoCheckOrderCompleteVC.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */,
+				04DCA1711FA2E0F8004B1054 /* CheckResultSingleCell.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
+				04DCA1861FA33BBF004B1054 /* AutoCheckResultProblemVC.xib in Resources */,
 				04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */,
 				04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
@@ -2833,8 +2919,10 @@
 				042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */,
 				04F7D87A1F5EAD48004945ED /* MailOrderSingleCell.xib in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
+				04DCA1761FA2E316004B1054 /* CheckResultMultiCell.xib in Resources */,
 				04052C6A1F7E5790004E6188 /* EmployeeDetailTopCell.xib in Resources */,
 				04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */,
+				04DCA1961FA34AB9004B1054 /* ResultDetailHazardCell.xib in Resources */,
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
 				047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */,
 				04F7D8691F5EA59F004945ED /* EmployeeDetailVC.xib in Resources */,
@@ -2953,6 +3041,7 @@
 				04ABFB4C1F9887630015EE78 /* AutoCheckOrderCompleteVC.m in Sources */,
 				04ABFB421F9858EB0015EE78 /* AutoCheckOrderPayModeVC.m in Sources */,
 				04DC7DC21F31C28300AA20A7 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
+				04DCA1901FA34992004B1054 /* ResultCheckContentDetailCell.m in Sources */,
 				04D396541F6636CB0077BFB3 /* MailGoodsCell.m in Sources */,
 				04EFEC721F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.m in Sources */,
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
@@ -2960,6 +3049,7 @@
 				F70A50931FA212B70047D804 /* AutoCheckResultVC.m in Sources */,
 				04DC7DE71F31C28300AA20A7 /* DJQRateView.m in Sources */,
 				04DC7D121F31C25000AA20A7 /* WebViewController.m in Sources */,
+				04DCA1851FA33BBF004B1054 /* AutoCheckResultProblemVC.m in Sources */,
 				04254DCC1F6F6DC40010D49F /* UpkeepHomeCollectionCell.m in Sources */,
 				047ADFF51F4A86EF00AEAE8E /* UIImageView+CMHighlightedWebCache.m in Sources */,
 				047ADFF41F4A86EF00AEAE8E /* UIImage+CMWebP.m in Sources */,
@@ -2970,6 +3060,7 @@
 				042CFCE11F8CEDB90080D720 /* CHANGELOG.md in Sources */,
 				04D107891F62998D007D9F57 /* ZFCircle.m in Sources */,
 				04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */,
+				04DCA17A1FA2F1AA004B1054 /* CheckResultTechnicianCell.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
 				046B8DDD1F9A044300784AA8 /* RSADataSigner.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
@@ -3000,6 +3091,7 @@
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
+				04DCA1701FA2E0F8004B1054 /* CheckResultSingleCell.m in Sources */,
 				0490FC041F57F97700F77661 /* CustomServiceCell.m in Sources */,
 				04F7D8631F5EA584004945ED /* EmployeeListVC.m in Sources */,
 				04D1077A1F62998D007D9F57 /* ZFXAxisLine.m in Sources */,
@@ -3021,6 +3113,7 @@
 				042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */,
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
+				04DCA1751FA2E316004B1054 /* CheckResultMultiCell.m in Sources */,
 				04EFEC681F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m in Sources */,
 				04D1077F1F62998D007D9F57 /* ZFMethod.m in Sources */,
 				047ADFEE1F4A86EF00AEAE8E /* CMSDWebImagePrefetcher.m in Sources */,
@@ -3087,6 +3180,7 @@
 				F73CB9BD1F893B2600936C7A /* AutoCheckGroupCell.m in Sources */,
 				04DC7DB81F31C28300AA20A7 /* HZPhotoBrowser.m in Sources */,
 				04D396441F661F870077BFB3 /* SettlementAddressCell.m in Sources */,
+				04DCA17F1FA2F30B004B1054 /* CheckResultQRCell.m in Sources */,
 				04ADD6E81F5F96A900075FE9 /* MailOrderDetailTopCell.m in Sources */,
 				04DC7DB11F31C28300AA20A7 /* DashedBoxView.m in Sources */,
 				04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */,
@@ -3107,10 +3201,12 @@
 				04DC7DC61F31C28300AA20A7 /* QBImagePickerController.m in Sources */,
 				04DC7DD41F31C28300AA20A7 /* UIView+MJExtension.m in Sources */,
 				0459C6BD1F614C870040501E /* CitiesDataTool.m in Sources */,
+				04DCA18A1FA346CD004B1054 /* AutoCheckResultDetailVC.m in Sources */,
 				04D1078A1F62998D007D9F57 /* ZFLine.m in Sources */,
 				04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */,
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,
 				04DC7DBE1F31C28300AA20A7 /* ImageObject.m in Sources */,
+				04DCA1951FA34AB9004B1054 /* ResultDetailHazardCell.m in Sources */,
 				0459C6B51F614C870040501E /* ChooseLocationView.m in Sources */,
 				0453D3B01F69349A004F79C8 /* UpkeepCarInfoVC.m in Sources */,
 				04D1077C1F62998D007D9F57 /* ZFCurveAttribute.m in Sources */,
@@ -3264,7 +3360,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3306,7 +3402,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

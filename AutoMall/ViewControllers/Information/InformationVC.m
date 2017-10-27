@@ -75,6 +75,8 @@
     
     jiaochengCurrentpage = 0; //默认首页
     jiaochengArray = [[NSMutableArray alloc] init];
+    
+    [self requestGetMyMessage];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -93,7 +95,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self.zixunTV headerBeginRefreshing];
+//    [self.zixunTV headerBeginRefreshing];
 }
 
 - (IBAction)zixunAction:(id)sender {

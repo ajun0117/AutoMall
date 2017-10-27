@@ -18,15 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="information_pressed" translatesAutoresizingMaskIntoConstraints="NO" id="IZq-nJ-LZL">
-                        <rect key="frame" x="12" y="8" width="25" height="28"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="IZq-nJ-LZL">
+                        <rect key="frame" x="12" y="7" width="30" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="28" id="4xw-DZ-Ikx"/>
-                            <constraint firstAttribute="width" constant="25" id="HJj-Ry-tol"/>
+                            <constraint firstAttribute="height" constant="30" id="4xw-DZ-Ikx"/>
+                            <constraint firstAttribute="width" constant="30" id="HJj-Ry-tol"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn7-1y-RW6">
-                        <rect key="frame" x="45" y="12" width="65.5" height="20"/>
+                        <rect key="frame" x="50" y="12" width="65.5" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -47,6 +47,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="information_pressed" width="33" height="33"/>
+        <image name="default" width="512" height="512"/>
     </resources>
 </document>

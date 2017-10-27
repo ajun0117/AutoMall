@@ -53,7 +53,8 @@
     currentpage = 0;
     carArray = [NSMutableArray array];
     
-    [self.infoTableView headerBeginRefreshing];
+    [self requestGetCarList];
+//    [self.infoTableView headerBeginRefreshing];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
