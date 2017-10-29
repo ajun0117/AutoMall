@@ -30,15 +30,34 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"个人信息";
     
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -16;
+    
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+//    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
+    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [searchBtn setTitle:@"退出" forState:UIControlStateNormal];
+//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [searchBtn addTarget:self action:@selector(toExit) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];;
+    
     self.accountL.text = self.infoDic[@"phone"];
     self.nickNameTF.text = STRING(self.infoDic[@"nickname"]);
     self.wechatTF.text = STRING(self.infoDic[@"wechat"]);
-    self.jifenL.text = [NSString stringWithFormat:@"%@分",NSStringZeroWithNumber(self.infoDic[@"integral"])];
-    self.expireJifenL.text = [NSString stringWithFormat:@"%@分",NSStringZeroWithNumber(self.infoDic[@"expiredIntegral"])];
+    self.jifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"integral"])];
+    self.expireJifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
     
     [self setTextFieldInputAccessoryViewWithTF:self.nickNameTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatTF];
     textFieldArray = @[self.nickNameTF,self.wechatTF];
+}
+
+-(void) toExit {    //清空本地数据，退出登录
+    [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
 }
 
 - (IBAction)saveInfoAction:(id)sender {

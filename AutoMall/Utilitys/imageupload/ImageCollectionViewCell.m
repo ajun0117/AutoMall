@@ -97,7 +97,7 @@
 
 #pragma mark - 发送请求
 -(void)requestUploadImgWithIndex:(NSIndexPath *)indexPath andImage:(WPImageView *)image delegate:(id)delegate andTargetId:(NSString *)targetId andTargetType:(NSString *)targetType andExt:(NSString *)ext {
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ImageUpload,@"op",indexPath,@"indexPath", nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op",indexPath,@"indexPath", nil];
 
     //data=data
     NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
@@ -117,8 +117,8 @@
     
     NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"imgData",@"jpg",@"ext",targetType,@"targetType",targetId,@"targetId", nil]; //评论targetType=3
     NSLog(@"paramsDic: %@",paramsDic);
-    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:paramsDic info:infoDic];
-//    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];
+//    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:paramsDic info:infoDic];
+    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(UploadImgFile) params:paramsDic target:image delegate:delegate info:infoDic];
 }
 
 @end

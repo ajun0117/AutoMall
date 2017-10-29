@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BaoyangHistoryCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *lichengL;
+@property (weak, nonatomic) IBOutlet UILabel *ranyouL;
+@property (weak, nonatomic) IBOutlet UILabel *ownerL;
+@property (weak, nonatomic) IBOutlet UILabel *dateL;
 
 @end

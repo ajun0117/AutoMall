@@ -10,6 +10,13 @@
 #import "BaoyangHistoryCell.h"
 
 @interface BaoyangHistoryVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSMutableArray *historyArray;
+    int currentpage;
+}
+
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -25,8 +32,47 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"BaoyangHistoryCell" bundle:nil] forCellReuseIdentifier:@"historyCell"];
     self.myTableView.tableFooterView = [UIView new];
-
+    
+    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    
+    currentpage = 0;
+    historyArray = [NSMutableArray array];
+    
+    [self requestGetHistoryList];
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+
+#pragma mark - 下拉刷新,上拉加载
+-(void)headerRefreshing {
+    NSLog(@"下拉刷新个人信息");
+    currentpage = 0;
+    [historyArray removeAllObjects];
+    [self requestGetHistoryList];
+}
+
+-(void)footerLoadData {
+    NSLog(@"上拉加载数据");
+    currentpage ++;
+    [self requestGetHistoryList];
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -35,7 +81,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return historyArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -52,8 +98,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
-    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    NSDictionary *dic = historyArray[indexPath.row];
+    cell.lichengL.text = [NSString stringWithFormat:@"%@公里",dic[@""]];
+    cell.ranyouL.text = [NSString stringWithFormat:@"%@L",dic[@""]];
+    cell.ownerL.text = dic[@""];
+    cell.dateL.text = dic[@"endTime"];
     return cell;
 }
 
@@ -67,6 +116,41 @@
     //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+#pragma mark - 发送请求
+-(void)requestGetHistoryList { //获取车辆保养历史信息记录
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=4",UrlPrefix(CarUpkeepSearch),self.carId, currentpage];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:CarUpkeepSearch]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepSearch object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            [historyArray addObjectsFromArray:responseObject[@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

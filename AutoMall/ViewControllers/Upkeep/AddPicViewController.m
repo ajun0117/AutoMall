@@ -574,9 +574,6 @@
         CGFloat packRate = 1048.0/length;
         imageData = UIImageJPEGRepresentation(image, packRate);
     }
-    //    http://112.74.84.233:8080/yimiyule/uploads/2015/12/ce6b1c89-2e43-4f46-8923-962c713a27a0.png
-    //    http://112.74.84.233:8080/yimiyule/uploads/2015/12/6b6f1d93-bf3a-47e9-97bf-0153bb39e4d6.jpg
-    //    http://112.74.84.233:8080/yimiyule/uploads/2015/12/9c09a177-bc54-419b-8d06-b7d357e47199.png
     NSString *baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                                          (CFStringRef)baseStr,

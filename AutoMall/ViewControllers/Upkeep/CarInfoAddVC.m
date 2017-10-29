@@ -10,7 +10,7 @@
 #import "BaoyangHistoryVC.h"
 #import "AutoCheckVC.h"
 
-@interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource>
+@interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -19,6 +19,7 @@
     UIDatePicker *buyDatePicker;        //购买日期选择
     NSArray *nameArray;
     NSArray *textFieldArray;
+    NSString *carImgUrl;    //车图url
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *wechatTF;
 @property (strong, nonatomic) IBOutlet UITextField *genderTF;
 @property (strong, nonatomic) IBOutlet UITextField *birthdayTF;
+@property (weak, nonatomic) IBOutlet WPImageView *carImgView;
 @property (strong, nonatomic) IBOutlet UITextField *plateNumberTF;
 @property (strong, nonatomic) IBOutlet UITextField *brandTF;
 @property (strong, nonatomic) IBOutlet UITextField *modelTF;
@@ -226,11 +228,13 @@
 
 -(void) toHistoryList {
     BaoyangHistoryVC *historyVC = [[BaoyangHistoryVC alloc] init];
+    historyVC.carId = @"";          //id逻辑暂未完成
     historyVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:historyVC animated:YES];
 }
 
 - (IBAction)photoAction:(id)sender {
+    [self selectThePhotoOrCamera];
 }
 
 - (IBAction)saveAction:(id)sender {
@@ -243,17 +247,73 @@
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-//    if (textField == self.genderTF) {
-//        genderPickerView.hidden = NO;
-//        return NO;
-//    }
-//    if (textField == self.birthdayTF) {
-//        birthdayDatePicker.hidden = NO;
-//        return NO;
-//    }
-//    return YES;
-//}
+-(void)selectThePhotoOrCamera {
+    UIActionSheet *actionSheet;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    }else{
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图像" delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+    }
+    actionSheet.tag = 1000;
+    [actionSheet showInView:self.view];
+}
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 1000) {
+        NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    //来源:相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    //来源:相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 2:
+                    return;
+            }
+        }
+        else {
+            if (buttonIndex == 1) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    }
+}
+// 拍照完成回调
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
+{
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+    {
+        //图片存入相册
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
+    self.carImgView.image = image;
+    [self requestUploadImgFile:self.carImgView];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//进入拍摄页面点击取消按钮
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Picker view data source
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -298,13 +358,21 @@
 }
 
 #pragma mark - 发起网络请求
+-(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];
+    [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
+}
+
 -(void)requestPostAddCar { //新增车辆
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarAdd object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarAdd, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.mileageTF.text,@"mileage",self.fuelAmountTF.text,@"fuelAmount",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",self.wechatTF.text,@"wechat",self.genderTF.text,@"gender",self.birthdayTF.text,@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",self.purchaseDateTF.text,@"purchaseDate",self.engineNoTF.text,@"engineNo",self.vinTF.text,@"vin", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.mileageTF.text,@"mileage",self.fuelAmountTF.text,@"fuelAmount",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",self.wechatTF.text,@"wechat",self.genderTF.text,@"gender",self.birthdayTF.text,@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",self.purchaseDateTF.text,@"purchaseDate",STRING_Nil(carImgUrl),@"image",self.engineNoTF.text,@"engineNo",self.vinTF.text,@"vin", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }
 
@@ -331,6 +399,18 @@
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UploadImgFile]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+        if ([responseObject[@"result"] boolValue]) {
+            carImgUrl = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
     

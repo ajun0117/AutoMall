@@ -44,7 +44,8 @@
 
 #define STRING_Nil(str)         (str==nil)?@"":str
 #define STRING(str)         (str==[NSNull null])?@"":str
-#define NSStringWithNumber(number)    number==nil?@"未知":[NSString stringWithFormat:@"%@",number]
+#define NSStringWithNumberNULL(number)    number==[NSNull null]?@"0":[NSString stringWithFormat:@"%@",number]
+#define NSStringWithNumber(number)    number==nil?@"":[NSString stringWithFormat:@"%@",number]
 #define NSStringZeroWithNumber(number)    number==nil?@"0":[NSString stringWithFormat:@"%@",number]
 
 #define SCREEN_HEIGHT [[UIScreen mainScreen]bounds].size.height
@@ -182,6 +183,7 @@
 #define CarUpdate                                   @"/api/car/update"                  //更新车辆信息
 #define CarListOrSearch                         @"/api/car/search"                  //车辆列表及搜索
 #define CarUpkeepUpdate                       @"/api/carUpkeep/update"    //更新检查订单支付状态
+#define CarUpkeepSearch                       @"/api/carUpkeep/search"    //app车辆保养记录列表和app个人中心，不同状态下的检查单和保养记录列表
 
 //个人中心
 #define ListServiceContent                     @"/api/user/listServiceContent"     //获取服务内容

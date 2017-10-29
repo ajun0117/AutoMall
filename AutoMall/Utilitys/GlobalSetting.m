@@ -715,8 +715,10 @@ static GlobalSetting *globalSetting;
 
 -(void)removeUserDefaultsValue{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    
+    [userDefaults removeObjectForKey:@"mobileUserType"];
+    [userDefaults removeObjectForKey:@"mMobile"];
+    [userDefaults removeObjectForKey:@"mHead"];
+    [userDefaults removeObjectForKey:kUserID];
     [userDefaults synchronize];
 }
 

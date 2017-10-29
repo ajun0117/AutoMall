@@ -1078,7 +1078,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+ 
 #pragma mark - 发起网络请求
 -(void)requestPostUserGetInfo { //获取登录用户信息
     [_hud show:YES];
@@ -1147,9 +1147,6 @@
             [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(userInfoDic[@"image"])];
             [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",userInfoDic[@"mobileUserType"]]];
             //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
             [self.myTableView reloadData];
         }

@@ -39,6 +39,28 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -6;
+    
+    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    infoBtn.frame = CGRectMake(0, 0, 30, 30);
+    //    [infoBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [infoBtn setImage:[UIImage imageNamed:@"commFilter"] forState:UIControlStateNormal];
+    [infoBtn addTarget:self action:@selector(toFilter) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
+    
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
+    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    searchBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
+    
 //    [self adjustLeftBtnFrameWithTitle:@"项目" andButton:xiangmuBtn];
 //    [self adjustLeftBtnFrameWithTitle:@"排列方式" andButton:sortBtn];
 //    [self adjustLeftBtnFrameWithTitle:@"标签" andButton:tagBtn];
@@ -74,6 +96,14 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void) toSearch {      //搜索
+    
+}
+
+-(void) toFilter {      //筛选项目
+    
 }
 
 - (IBAction)levelAction:(id)sender {
