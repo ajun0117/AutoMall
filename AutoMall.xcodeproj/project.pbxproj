@@ -147,7 +147,6 @@
 		04ABFB481F985AC90015EE78 /* AutoCheckOrderWorkingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ABFB461F985AC90015EE78 /* AutoCheckOrderWorkingVC.xib */; };
 		04ABFB4C1F9887630015EE78 /* AutoCheckOrderCompleteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABFB4A1F9887630015EE78 /* AutoCheckOrderCompleteVC.m */; };
 		04ABFB4D1F9887630015EE78 /* AutoCheckOrderCompleteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ABFB4B1F9887630015EE78 /* AutoCheckOrderCompleteVC.xib */; };
-		04ABFB4F1F98B7E60015EE78 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04ABFB4E1F98B7E60015EE78 /* 1.txt */; };
 		04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FDB1F43EEFB00247819 /* InformationCell.m */; };
 		04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1FDC1F43EEFB00247819 /* InformationCell.xib */; };
 		04AD1FEC1F44417A00247819 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1FE71F44417A00247819 /* LoginViewController.m */; };
@@ -399,6 +398,10 @@
 		F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */; };
 		F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */; };
 		F789EF111F7D63BE003A127C /* EmployeeAuthVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */; };
+		F7D87A201FA4E6A1009EB53F /* CenterEmployeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D87A1E1FA4E6A1009EB53F /* CenterEmployeeCell.m */; };
+		F7D87A211FA4E6A1009EB53F /* CenterEmployeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D87A1F1FA4E6A1009EB53F /* CenterEmployeeCell.xib */; };
+		F7D87A261FA5BFC6009EB53F /* CenterAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D87A241FA5BFC6009EB53F /* CenterAccountVC.m */; };
+		F7D87A271FA5BFC6009EB53F /* CenterAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D87A251FA5BFC6009EB53F /* CenterAccountVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -705,7 +708,6 @@
 		04ABFB491F9887630015EE78 /* AutoCheckOrderCompleteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckOrderCompleteVC.h; sourceTree = "<group>"; };
 		04ABFB4A1F9887630015EE78 /* AutoCheckOrderCompleteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckOrderCompleteVC.m; sourceTree = "<group>"; };
 		04ABFB4B1F9887630015EE78 /* AutoCheckOrderCompleteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckOrderCompleteVC.xib; sourceTree = "<group>"; };
-		04ABFB4E1F98B7E60015EE78 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 		04AD1FDA1F43EEFB00247819 /* InformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
 		04AD1FDB1F43EEFB00247819 /* InformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCell.m; sourceTree = "<group>"; };
 		04AD1FDC1F43EEFB00247819 /* InformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationCell.xib; sourceTree = "<group>"; };
@@ -1136,6 +1138,12 @@
 		F789EF0D1F7D63BE003A127C /* EmployeeAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAuthVC.h; sourceTree = "<group>"; };
 		F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAuthVC.m; sourceTree = "<group>"; };
 		F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeAuthVC.xib; sourceTree = "<group>"; };
+		F7D87A1D1FA4E6A1009EB53F /* CenterEmployeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterEmployeeCell.h; sourceTree = "<group>"; };
+		F7D87A1E1FA4E6A1009EB53F /* CenterEmployeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterEmployeeCell.m; sourceTree = "<group>"; };
+		F7D87A1F1FA4E6A1009EB53F /* CenterEmployeeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterEmployeeCell.xib; sourceTree = "<group>"; };
+		F7D87A231FA5BFC6009EB53F /* CenterAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterAccountVC.h; sourceTree = "<group>"; };
+		F7D87A241FA5BFC6009EB53F /* CenterAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterAccountVC.m; sourceTree = "<group>"; };
+		F7D87A251FA5BFC6009EB53F /* CenterAccountVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterAccountVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1189,6 +1197,9 @@
 				041076F41F54247B003CB740 /* CenterOrderCell.h */,
 				041076F51F54247B003CB740 /* CenterOrderCell.m */,
 				041076F61F54247B003CB740 /* CenterOrderCell.xib */,
+				F7D87A1D1FA4E6A1009EB53F /* CenterEmployeeCell.h */,
+				F7D87A1E1FA4E6A1009EB53F /* CenterEmployeeCell.m */,
+				F7D87A1F1FA4E6A1009EB53F /* CenterEmployeeCell.xib */,
 			);
 			name = "中心首页cell";
 			sourceTree = "<group>";
@@ -2146,6 +2157,8 @@
 		04DC7CF51F31C24000AA20A7 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				F7D87A221FA5BF9E009EB53F /* 账户管理 */,
+				F7D87A1C1FA4E5D9009EB53F /* 员工上传认证Cell */,
 				04C35D191F8B579000062014 /* 消息列表 */,
 				04D107161F629653007D9F57 /* 统计报表 */,
 				04EFEC7F1F5FF717004D9188 /* 收货地址管理 */,
@@ -2518,7 +2531,6 @@
 		04E4107F1F5D52170097E0A6 /* 申请认证 */ = {
 			isa = PBXGroup;
 			children = (
-				04ABFB4E1F98B7E60015EE78 /* 1.txt */,
 				04E410801F5D52750097E0A6 /* ApplyAuthenticationVC.h */,
 				04E410811F5D52750097E0A6 /* ApplyAuthenticationVC.m */,
 				04E410821F5D52750097E0A6 /* ApplyAuthenticationVC.xib */,
@@ -2732,6 +2744,23 @@
 			name = "检查页数据库模型";
 			sourceTree = "<group>";
 		};
+		F7D87A1C1FA4E5D9009EB53F /* 员工上传认证Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "员工上传认证Cell";
+			sourceTree = "<group>";
+		};
+		F7D87A221FA5BF9E009EB53F /* 账户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				F7D87A231FA5BFC6009EB53F /* CenterAccountVC.h */,
+				F7D87A241FA5BFC6009EB53F /* CenterAccountVC.m */,
+				F7D87A251FA5BFC6009EB53F /* CenterAccountVC.xib */,
+			);
+			name = "账户管理";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2838,7 +2867,6 @@
 				0459C6BC1F614C870040501E /* Info.plist in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
-				04ABFB4F1F98B7E60015EE78 /* 1.txt in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				04EB162C1F42F95200974972 /* BaoyangDiscountsVC.xib in Resources */,
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
@@ -2872,6 +2900,7 @@
 				04DCA1711FA2E0F8004B1054 /* CheckResultSingleCell.xib in Resources */,
 				04DC7DE01F31C28300AA20A7 /* Info.plist in Resources */,
 				04DCA1861FA33BBF004B1054 /* AutoCheckResultProblemVC.xib in Resources */,
+				F7D87A271FA5BFC6009EB53F /* CenterAccountVC.xib in Resources */,
 				04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */,
 				04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
@@ -2919,6 +2948,7 @@
 				042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */,
 				04F7D87A1F5EAD48004945ED /* MailOrderSingleCell.xib in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
+				F7D87A211FA4E6A1009EB53F /* CenterEmployeeCell.xib in Resources */,
 				04DCA1761FA2E316004B1054 /* CheckResultMultiCell.xib in Resources */,
 				04052C6A1F7E5790004E6188 /* EmployeeDetailTopCell.xib in Resources */,
 				04FD55DE1F5549B800104D6B /* LoginSuccessViewController.xib in Resources */,
@@ -3057,6 +3087,7 @@
 				04EFEC6D1F5FA446004D9188 /* MailOrderDetailGoodsCell.m in Sources */,
 				F71245751F868B590091816F /* CheckContentItem.m in Sources */,
 				04DC7DBF1F31C28300AA20A7 /* QBAssetsCollectionCheckmarkView.m in Sources */,
+				F7D87A261FA5BFC6009EB53F /* CenterAccountVC.m in Sources */,
 				042CFCE11F8CEDB90080D720 /* CHANGELOG.md in Sources */,
 				04D107891F62998D007D9F57 /* ZFCircle.m in Sources */,
 				04D1077D1F62998D007D9F57 /* ZFGradientAttribute.m in Sources */,
@@ -3119,6 +3150,7 @@
 				047ADFEE1F4A86EF00AEAE8E /* CMSDWebImagePrefetcher.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
+				F7D87A201FA4E6A1009EB53F /* CenterEmployeeCell.m in Sources */,
 				04EFEC631F5FA188004D9188 /* MailOrderDetailWaybillCell.m in Sources */,
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042CFCE31F8CEDB90080D720 /* README.md in Sources */,
@@ -3360,7 +3392,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3402,7 +3434,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

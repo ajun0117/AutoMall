@@ -408,7 +408,8 @@ static CGFloat const scrollViewHeight = 220;
     int p = (int)sender.tag - 1000;
     NSDictionary *dic = [categoryArray objectAtIndex:p];
     CommodityListVC *listVC = [[CommodityListVC alloc] init];
-    listVC.commodityTermId = dic [@"id"];
+    listVC.categoryId = dic [@"id"];
+    listVC.categoryName = dic [@"name"];
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
 }

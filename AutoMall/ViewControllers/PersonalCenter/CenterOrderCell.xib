@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNW-A2-61t">
@@ -25,25 +25,25 @@
                         <constraints>
                             <constraint firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="height" id="wfc-Zz-gWq"/>
                         </constraints>
-                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="26"/>
                         <state key="normal" image="center_inProgress">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKC-Eb-3FB">
                         <rect key="frame" x="105" y="3.5" width="72.5" height="73"/>
-                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="28"/>
                         <state key="normal" image="center_servicesConfirmed"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-aO-BSg">
                         <rect key="frame" x="197.5" y="3.5" width="73" height="73"/>
-                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
+                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="28"/>
                         <state key="normal" image="center_workDone"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-IZ-ood">
                         <rect key="frame" x="290.5" y="3.5" width="72.5" height="73"/>
-                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
-                        <state key="normal" image="center_paid"/>
+                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="28"/>
+                        <state key="normal" image="center_paid-checkup"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检查完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-WV-12j">
                         <rect key="frame" x="18" y="47" width="61.5" height="18"/>
@@ -106,12 +106,12 @@
                 <outlet property="thirdBtn" destination="9J8-aO-BSg" id="e0Q-le-9w7"/>
                 <outlet property="thirdL" destination="Svu-RW-bzj" id="Gn0-bM-s2L"/>
             </connections>
-            <point key="canvasLocation" x="-405" y="113"/>
+            <point key="canvasLocation" x="-409" y="77"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="center_inProgress" width="120" height="120"/>
-        <image name="center_paid" width="120" height="120"/>
+        <image name="center_paid-checkup" width="120" height="120"/>
         <image name="center_servicesConfirmed" width="120" height="120"/>
         <image name="center_workDone" width="120" height="120"/>
     </resources>

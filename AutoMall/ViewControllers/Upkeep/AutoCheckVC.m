@@ -62,14 +62,16 @@
     negativeSpacer.width = -6;
 
     UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    infoBtn.frame = CGRectMake(0, 0, 44, 44);
+    infoBtn.frame = CGRectMake(0, 0, 30, 30);
+//    [infoBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     infoBtn.contentMode = UIViewContentModeScaleAspectFit;
     [infoBtn setImage:[UIImage imageNamed:@"carInfo"] forState:UIControlStateNormal];
     [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    searchBtn.frame = CGRectMake(0, 0, 30, 30);
+//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     searchBtn.contentMode = UIViewContentModeScaleAspectFit;
     [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];

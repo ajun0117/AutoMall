@@ -22,12 +22,19 @@
 #import "LoginViewController.h"
 #import "BaoyangDiscountsVC.h"
 #import "MessageListVC.h"
+#import "CenterEmployeeCell.h"
+#import "WebViewController.h"
+#import "CenterAccountVC.h"
 
-@interface PersonalCenterVC ()
+@interface PersonalCenterVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSString *mobileUserType;     //登录用户类别 0：手机普通用户 1：门店老板 2: 门店员工
+    NSDictionary *shopInfoDic;  //店铺信息
+    NSDictionary *userInfoDic;  //用户信息字典
+    int approvalStatus;
+    WPImageView *head;      //头像
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -72,6 +79,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"HeadNameCell" bundle:nil] forCellReuseIdentifier:@"headNameCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterNormalCell" bundle:nil] forCellReuseIdentifier:@"centerNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"CenterEmployeeCell" bundle:nil] forCellReuseIdentifier:@"centerEmployeeCell"];
     
 //    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
 //    [self.myTableView reloadData];
@@ -93,10 +101,16 @@
     _networkConditionHUD.margin = HUDMargin;
     
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    NSLog(@"mobileUserType: %@",mobileUserType);
     [self.myTableView reloadData];
     if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
         [self requestPostStoreGetInfo];     //请求门店详情数据
     }
+    else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
+        [self requestGetApprovalStatus];     //请求门店审批状态
+    }
+
+    [self requestPostUserGetInfo];      //刷新用户信息
 }
 
 -(void) toSet {
@@ -106,9 +120,21 @@
 }
 
 -(void) toMessage {
-    MessageListVC *msgVC = [[MessageListVC alloc] init];
-    msgVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:msgVC animated:YES];
+    if (mobileUserType.length > 0) {    //已登录用户
+        MessageListVC *msgVC = [[MessageListVC alloc] init];
+        msgVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:msgVC animated:YES];
+    }
+    else {
+        _networkConditionHUD.labelText = @"登录后才能查看！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        loginVC.isPresented = YES;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 #pragma mark - tableVeiw delegate
@@ -290,7 +316,9 @@
                 break;
             }
             case 1: {
-                return 80;
+                CenterEmployeeCell *cell = (CenterEmployeeCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+                CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+                return height + 1;
                 break;
             }
             case 2: {
@@ -349,10 +377,17 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
+                [cell.headIMG addGestureRecognizer:tap];
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-                cell.nameL.text = @"壳牌授权店";
-                cell.nickNameL.text = @"店小二";
-                cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+                [cell.accountBtn setTitle:STRING(shopInfoDic[@"phone"]) forState:UIControlStateNormal];
+                [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+                cell.applyBtn.hidden =NO;
+                [cell.applyBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
+                cell.shopNameBtn.hidden = YES;
+                cell.shopLevelIM.hidden= YES;
+                cell.jifenL.hidden = YES;
                 return cell;
                 break;
             }
@@ -401,9 +436,18 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
+                [cell.headIMG addGestureRecognizer:tap];
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-                cell.nameL.text = @"壳牌授权店";
-                cell.nickNameL.text = @"店小二";
+                [cell.accountBtn setTitle:STRING(shopInfoDic[@"phone"]) forState:UIControlStateNormal];
+                [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+                cell.applyBtn.hidden = YES;
+                cell.shopNameBtn.hidden = NO;
+                cell.shopLevelIM.hidden= NO;
+                [cell.shopNameBtn setTitle:shopInfoDic[@"name"] forState:UIControlStateNormal];
+                cell.shopLevelIM.image = IMG(@"bronzeBadge");
+                cell.jifenL.hidden = NO;
                 cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
                 return cell;
                 break;
@@ -413,7 +457,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                        cell.img.image = IMG(@"information_pressed");
+                        cell.img.image = IMG(@"center_checkupOrder");
                         cell.nameL.text = @"服务订单";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -479,7 +523,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                        cell.img.image = IMG(@"information_pressed");
+                        cell.img.image = IMG(@"center_shopping");
                         cell.nameL.text = @"商城订单";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -556,28 +600,40 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-                cell.nameL.text = @"壳牌授权店";
-                cell.nickNameL.text = @"店小二";
-                cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
+                [cell.headIMG addGestureRecognizer:tap];
+                [cell.accountBtn setTitle:STRING(shopInfoDic[@"phone"]) forState:UIControlStateNormal];
+                [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+                cell.applyBtn.hidden = YES;
+                cell.shopNameBtn.hidden = NO;
+                [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
+                cell.shopLevelIM.hidden= NO;
+                [cell.shopNameBtn setTitle:shopInfoDic[@"name"] forState:UIControlStateNormal];
+                cell.shopLevelIM.image = IMG(@"bronzeBadge");
+                cell.jifenL.hidden = YES;
                 return cell;
                 break;
             }
             case 1:{
                 switch (indexPath.row) {
                     case 0: {
-                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                        cell.img.image = IMG(@"center_changePw");
-                        cell.nameL.text = @"技能特长";
+                        CenterEmployeeCell *cell = (CenterEmployeeCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeCell"];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.imgView.image = IMG(@"default");
+                        cell.titleL.text = @"技能特长";
+                        cell.contentL.text = @"技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述";
+                        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 104;
                         return cell;
                         break;
                     }
                     case 1: {
-                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                        cell.img.image = IMG(@"center_changePw");
-                        cell.nameL.text = @"技能认证";
+                        CenterEmployeeCell *cell = (CenterEmployeeCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeCell"];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.imgView.image = IMG(@"default");
+                        cell.titleL.text = @"技能认证";
+                        cell.contentL.text = @"技能认证描述";
+                        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 104;
                         return cell;
                         break;
                     }
@@ -591,7 +647,7 @@
                 switch (indexPath.row) {
                     case 0: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                        cell.img.image = IMG(@"information_pressed");
+                        cell.img.image = IMG(@"center_checkupOrder");
                         cell.nameL.text = @"服务订单";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -672,10 +728,17 @@
         case 0: {
             HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-            cell.nameL.text = @"壳牌授权店";
-            cell.nickNameL.text = @"店小二";
-            cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+            [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
+            [cell.headIMG addGestureRecognizer:tap];
+            [cell.accountBtn setTitle:STRING(shopInfoDic[@"phone"]) forState:UIControlStateNormal];
+            [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+            cell.applyBtn.hidden = YES;
+            cell.shopNameBtn.hidden = NO;
+            cell.shopLevelIM.hidden= NO;
+            [cell.shopNameBtn setTitle:@"门店名称" forState:UIControlStateNormal];
+            cell.shopLevelIM.image = IMG(@"bronzeBadge");
+            cell.jifenL.hidden = YES;
             return cell;
             break;
         }
@@ -718,9 +781,10 @@
     if ([mobileUserType isEqualToString:@"0"]) {    //普通用户
         switch (indexPath.section) {
             case 0: {
-                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
-                applyVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:applyVC animated:YES];
+//                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+////                applyVC.infoDic = shopInfoDic;
+//                applyVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:applyVC animated:YES];
                 break;
             }
             case 1: {
@@ -736,6 +800,15 @@
                 break;
             }
             case 3: {
+                if (indexPath.row == 0) {
+                    WebViewController *webVC = [[WebViewController alloc] init];
+                    webVC.webUrlStr = AgreementInfo;
+//                    webVC.webUrlStr = @"http://119.23.227.246/carupkeep/api/agreement/info";
+                    webVC.titleStr = @"免责声明";
+                    webVC.canShare = NO;
+                    webVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:webVC animated:YES];
+                }
                 NSLog(@"联系我们");
                 break;
             }
@@ -746,9 +819,10 @@
     else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
         switch (indexPath.section) {
             case 0: {
-                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
-                applyVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:applyVC animated:YES];
+//                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+//                applyVC.infoDic = shopInfoDic;
+//                applyVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:applyVC animated:YES];
                 break;
             }
             case 1: {
@@ -810,6 +884,14 @@
                 break;
             }
             case 4: {
+                if (indexPath.row == 0) {
+                    WebViewController *webVC = [[WebViewController alloc] init];
+                    webVC.webUrlStr = AgreementInfo;
+                    webVC.titleStr = @"免责声明";
+                    webVC.canShare = NO;
+                    webVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:webVC animated:YES];
+                }
                 NSLog(@"联系我们");
                 break;
             }
@@ -820,9 +902,6 @@
     else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
         switch (indexPath.section) {
             case 0: {
-//                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
-//                applyVC.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:applyVC animated:YES];
                 _networkConditionHUD.labelText = @"门店员工不能修改店铺信息";
                 [_networkConditionHUD show:YES];
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
@@ -854,6 +933,14 @@
                 break;
             }
             case 5: {
+                if (indexPath.row == 0) {
+                    WebViewController *webVC = [[WebViewController alloc] init];
+                    webVC.webUrlStr = AgreementInfo;
+                    webVC.titleStr = @"免责声明";
+                    webVC.canShare = NO;
+                    webVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:webVC animated:YES];
+                }
                 NSLog(@"联系我们");
                 break;
             }
@@ -865,12 +952,20 @@
     else {
         switch (indexPath.section) {
             case 0: {
-                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
-                applyVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:applyVC animated:YES];
+//                ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+//                applyVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:applyVC animated:YES];
                 break;
             }
             case 1: {
+                if (indexPath.row == 0) {
+                    WebViewController *webVC = [[WebViewController alloc] init];
+                    webVC.webUrlStr = AgreementInfo;
+                    webVC.titleStr = @"免责声明";
+                    webVC.canShare = NO;
+                    webVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:webVC animated:YES];
+                }
                 NSLog(@"联系我们");
                 break;
             }
@@ -895,13 +990,136 @@
     [self.navigationController pushViewController:listVC animated:YES];
 }
 
+-(void) toAccountView {     //去账户页面
+    CenterAccountVC *accountVC = [[CenterAccountVC alloc] init];
+    accountVC.infoDic = userInfoDic;
+    accountVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:accountVC animated:YES];
+}
+
+-(void) toApplyView {   //去店铺信息页面
+    ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+     if ([mobileUserType isEqualToString:@"1"]) {    //门店老板
+        applyVC.infoDic = shopInfoDic;
+     }
+    applyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:applyVC animated:YES];
+}
+
+-(void)tapUserHead:(UITapGestureRecognizer *)tap {
+    head = (WPImageView *)tap.view;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)selectThePhotoOrCamera {
+    UIActionSheet *actionSheet;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    }else{
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图像" delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+    }
+    actionSheet.tag = 1000;
+    [actionSheet showInView:self.view];
+}
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 1000) {
+        NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    //来源:相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    //来源:相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 2:
+                    return;
+            }
+        }
+        else {
+            if (buttonIndex == 1) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    }
+}
+// 拍照完成回调
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
+{
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+    {
+        //图片存入相册
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
+//    head.image = image;
+    [self requestUploadImgFile:head];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//进入拍摄页面点击取消按钮
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - 发起网络请求
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
 -(void)requestPostStoreGetInfo { //获取门店详情
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreGetInfo object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreGetInfo, @"op", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreGetInfo) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestGetApprovalStatus { //获取门店审核状态
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetApprovalStatus object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetApprovalStatus, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(GetApprovalStatus) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];
+    [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
+}
+
+-(void)requestUserChangeImageWithImageUrl:(NSString *)url {     //修改个人头像
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserChangeImage object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserChangeImage,@"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:url,@"image", nil];
+    NSLog(@"pram:    %@",pram);
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserChangeImage) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -918,13 +1136,34 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"GetUserInfo_responseObject %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            userInfoDic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",userInfoDic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(userInfoDic[@"image"])];
+            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",userInfoDic[@"mobileUserType"]]];
+            //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
     if ([notification.name isEqualToString:StoreGetInfo]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreGetInfo object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-//            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-//            [_networkConditionHUD show:YES];
-//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            shopInfoDic = responseObject[@"data"];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -932,6 +1171,45 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         } 
     }
+    
+    if ([notification.name isEqualToString:GetApprovalStatus]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetApprovalStatus object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            approvalStatus = [responseObject[@"data"][@"approvalStatus"] intValue];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UploadImgFile]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+        if ([responseObject[@"result"] boolValue]) {
+            NSString *relativePath = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
+            [head sd_setImageWithURL:[NSURL URLWithString:responseObject[@"url"]] placeholderImage:IMG(@"default")];
+            [self requestUserChangeImageWithImageUrl:relativePath];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UserChangeImage]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserChangeImage object:nil];
+        if ([responseObject[@"result"] boolValue]) {
+            NSLog(@"头像修改成功");
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

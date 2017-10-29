@@ -31,7 +31,7 @@
                     <rect key="frame" x="0.0" y="74" width="375" height="120"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wkk-oY-dTo">
-                            <rect key="frame" x="20" y="39.5" width="335" height="1"/>
+                            <rect key="frame" x="20" y="40" width="335" height="1"/>
                             <color key="backgroundColor" red="0.91664922240000002" green="0.91662180419999995" blue="0.91663730139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="mH0-kt-wRY"/>
@@ -50,8 +50,8 @@
                                 </mask>
                             </variation>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-cS-pyK">
-                            <rect key="frame" x="20" y="79.5" width="335" height="1"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-cS-pyK">
+                            <rect key="frame" x="20" y="80" width="335" height="1"/>
                             <color key="backgroundColor" red="0.91664922240000002" green="0.91662180419999995" blue="0.91663730139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="Zbl-MV-Exd"/>
@@ -181,7 +181,6 @@
                             <state key="selected" image="mimaEye_close"/>
                             <state key="highlighted" image="mimaEye_open"/>
                             <connections>
-                                <action selector="pwdTextSwitch:" destination="-1" eventType="touchUpInside" id="c7M-fe-IlO"/>
                                 <action selector="rePwdTextSwitch:" destination="-1" eventType="touchUpInside" id="PEJ-DB-1at"/>
                             </connections>
                         </button>
@@ -194,6 +193,7 @@
                             <variation key="widthClass=compact" constant="20"/>
                         </constraint>
                         <constraint firstItem="bcO-F5-sNf" firstAttribute="leading" secondItem="ayx-1S-8lg" secondAttribute="trailing" constant="10" id="BvZ-Ji-tUd"/>
+                        <constraint firstItem="DWZ-cS-pyK" firstAttribute="leading" secondItem="ayx-1S-8lg" secondAttribute="leading" id="Cyq-ds-T0V"/>
                         <constraint firstItem="CEQ-5S-Wqv" firstAttribute="centerY" secondItem="GQz-Hq-fIj" secondAttribute="centerY" id="FED-Xt-PGj"/>
                         <constraint firstItem="EI7-gq-oke" firstAttribute="leading" secondItem="GQz-Hq-fIj" secondAttribute="trailing" constant="10" id="Ht0-tb-Jb6"/>
                         <constraint firstItem="GQz-Hq-fIj" firstAttribute="leading" secondItem="too-TC-4z3" secondAttribute="leading" constant="20" id="R0X-JN-Dhm"/>
@@ -211,6 +211,7 @@
                         <constraint firstItem="2ld-E0-Oml" firstAttribute="top" secondItem="too-TC-4z3" secondAttribute="top" constant="10" id="hB3-ce-eHk"/>
                         <constraint firstAttribute="trailing" secondItem="CEQ-5S-Wqv" secondAttribute="trailing" constant="20" id="htF-jd-cxH"/>
                         <constraint firstAttribute="bottom" secondItem="GQz-Hq-fIj" secondAttribute="bottom" constant="9" id="jGV-c5-xCO"/>
+                        <constraint firstItem="DWZ-cS-pyK" firstAttribute="trailing" secondItem="05B-7m-tD4" secondAttribute="trailing" id="mve-O8-hER"/>
                         <constraint firstItem="EI7-gq-oke" firstAttribute="centerY" secondItem="GQz-Hq-fIj" secondAttribute="centerY" id="n39-lQ-NcE"/>
                         <constraint firstItem="DWZ-cS-pyK" firstAttribute="centerY" secondItem="too-TC-4z3" secondAttribute="centerY" multiplier="4:3" id="nsy-ip-v9R"/>
                         <constraint firstItem="bcO-F5-sNf" firstAttribute="centerY" secondItem="ayx-1S-8lg" secondAttribute="centerY" id="p6k-Yf-Yjh"/>
@@ -272,7 +273,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已阅读并同意" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsV-ge-kZs">
-                    <rect key="frame" x="44" y="288" width="107.5" height="21"/>
+                    <rect key="frame" x="44" y="288" width="108" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="UQh-Jg-IAG"/>
                     </constraints>

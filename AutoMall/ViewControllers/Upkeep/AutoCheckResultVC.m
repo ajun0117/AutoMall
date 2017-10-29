@@ -43,20 +43,15 @@
                                        target:nil action:nil];
     negativeSpacer.width = -6;
     
-    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    infoBtn.frame = CGRectMake(0, 0, 24, 24);
-    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
-    [infoBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
-    [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareBtn.frame = CGRectMake(0, 0, 44, 44);
+    [shareBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    shareBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [shareBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [shareBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *shareBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 24, 24);
-    searchBtn.contentMode = UIViewContentModeScaleAspectFit;
-    [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, shareBtnBarBtn, nil];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"ShopInfoCell" bundle:nil] forCellReuseIdentifier:@"shopInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultCell" bundle:nil] forCellReuseIdentifier:@"checkResultCell"];

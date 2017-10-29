@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,15 +23,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personalCenter" translatesAutoresizingMaskIntoConstraints="NO" id="1u7-xl-KGa">
-                    <rect key="frame" x="138" y="61" width="100" height="100"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="100" id="N26-Ha-86I"/>
-                        <constraint firstAttribute="width" constant="100" id="ha2-aD-0wM"/>
-                    </constraints>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvy-4G-1bZ">
-                    <rect key="frame" x="0.0" y="181" width="375" height="80"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgO-40-vnM">
                             <rect key="frame" x="20" y="39.5" width="335" height="1"/>
@@ -204,7 +196,7 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-iM-Guh">
-                    <rect key="frame" x="20" y="281" width="335" height="40"/>
+                    <rect key="frame" x="20" y="164" width="335" height="40"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Hgo-wr-bWc"/>
@@ -234,16 +226,11 @@
                 <constraint firstItem="tOf-iM-Guh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="0cI-Dc-eAn"/>
                 <constraint firstItem="tvy-4G-1bZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FMY-2c-PME"/>
                 <constraint firstAttribute="trailing" secondItem="tOf-iM-Guh" secondAttribute="trailing" constant="20" id="Ncb-eH-naW"/>
-                <constraint firstItem="tvy-4G-1bZ" firstAttribute="top" secondItem="1u7-xl-KGa" secondAttribute="bottom" constant="20" id="Opo-nc-lEN"/>
                 <constraint firstAttribute="trailing" secondItem="tvy-4G-1bZ" secondAttribute="trailing" id="Sy4-1m-mhm"/>
-                <constraint firstItem="1u7-xl-KGa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bEY-DW-STR"/>
+                <constraint firstItem="tvy-4G-1bZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="ZMo-lc-QxO"/>
                 <constraint firstItem="tOf-iM-Guh" firstAttribute="top" secondItem="tvy-4G-1bZ" secondAttribute="bottom" constant="20" id="nkb-Rk-Icu"/>
-                <constraint firstItem="1u7-xl-KGa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1:3" id="zTB-sa-3OP"/>
             </constraints>
             <point key="canvasLocation" x="-881" y="41"/>
         </view>
     </objects>
-    <resources>
-        <image name="personalCenter" width="33" height="33"/>
-    </resources>
 </document>

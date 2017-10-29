@@ -568,6 +568,17 @@ static GlobalSetting *globalSetting;
     return [userDefaults valueForKey:@"mMobile"];
 }
 
+-(void)setmHead:(id)mHead {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:mHead forKey:@"mHead"];
+    [userDefaults synchronize];
+}
+
+-(id)mHead {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:@"mHead"];
+}
+
 
 -(void)setPension:(NSString *)pension {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

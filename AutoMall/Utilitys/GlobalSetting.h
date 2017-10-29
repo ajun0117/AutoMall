@@ -224,6 +224,9 @@
 -(void)setmMobile:(id)mMobile;
 -(id)mMobile;
 
+-(void)setmHead:(id)mHead;
+-(id)mHead;
+
 /**
  *  养老金金额
  *

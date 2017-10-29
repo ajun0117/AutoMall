@@ -12,14 +12,22 @@
 #import "GTMBase64.h"
 #import "openssl_wrapper.h"
 
-@interface ApplyAuthenticationVC () <UIGestureRecognizerDelegate>
+@interface ApplyAuthenticationVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
+    int whichImg;   //标识是哪个图片
+    NSString *shopImgUrl;
+    NSString *licenseImgUrl;
+    NSString *cardAImgUrl;
+    NSString *cardBImgUrl;
+    NSString *gongzhongImgUrl;
+    NSString *aliPayCollectionImgUrl;
+    NSString *wechatCollectionImgUrl;
+    NSArray *textFieldArray;
 }
 @property (nonatomic,strong) ChooseLocationView *chooseLocationView;
 @property (nonatomic,strong) UIView  *cover;
-@property (strong, nonatomic) IBOutlet WPImageView *gongzhongImg;
 
 @end
 
@@ -28,7 +36,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-     self.title = @"申请认证";
+    if (self.infoDic) {
+        self.title = @"门店信息";
+        [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])] placeholderImage:IMG(@"default")];
+        self.nameTF.text =  STRING(self.infoDic[@"name"]);
+        self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
+        self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
+        self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
+        self.phoneTF.text = STRING(self.infoDic[@"phone"]);
+        self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
+        
+        [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])] placeholderImage:IMG(@"default")];
+        [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])] placeholderImage:IMG(@"default")];
+        [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])] placeholderImage:IMG(@"default")];
+
+        self.wechatNameTF.text = STRING(self.infoDic[@"wechatName"]);
+        [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])] placeholderImage:IMG(@"default")];
+        [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])] placeholderImage:IMG(@"default")];
+        [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])] placeholderImage:IMG(@"default")];
+    }
+    else {
+        self.title = @"申请认证";
+    }
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -36,11 +65,7 @@
     [self.view addSubview:self.cover];
     self.chooseLocationView.address = @"广东省 广州市 白云区";
     self.chooseLocationView.areaCode = @"440104";
-    self.addressTF.text = @"广东省 广州市 白云区";
-    
-    //监听键盘出现和消失
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+//    self.addressTF.text = @"广东省 广州市 白云区";
     
     [self setTextFieldInputAccessoryViewWithTF:self.nameTF];
     [self setTextFieldInputAccessoryViewWithTF:self.shortNameTF];
@@ -49,12 +74,30 @@
     [self setTextFieldInputAccessoryViewWithTF:self.recommendCodeTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatNameTF];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGongzhonghao:)];
-    [self.gongzhongImg addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapShopHead:)];
+    [self.shopImg addGestureRecognizer:tap0];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLicense:)];
+    [self.licenseImg addGestureRecognizer:tap1];
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCardA:)];
+    [self.cardAImg addGestureRecognizer:tap2];
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCardB:)];
+    [self.cardBImg addGestureRecognizer:tap3];
+    UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGongzhonghao:)];
+    [self.gongzhongImg addGestureRecognizer:tap4];
+    UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAliPay:)];
+    [self.aliPayCollectionImg addGestureRecognizer:tap5];
+    UITapGestureRecognizer *tap6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapWechat:)];
+    [self.wechatCollectionImg addGestureRecognizer:tap6];
+    
+    textFieldArray = @[self.nameTF,self.shortNameTF,self.addressTF,self.detailAddressTF,self.phoneTF,self.recommendCodeTF,self.wechatNameTF];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     if (! _hud) {
         _hud = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:_hud];
@@ -75,16 +118,39 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+-(void)tapShopHead:(UITapGestureRecognizer *)tap {
+    whichImg = 0;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)tapLicense:(UITapGestureRecognizer *)tap {
+    whichImg = 1;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)tapCardA:(UITapGestureRecognizer *)tap {
+    whichImg = 2;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)tapCardB:(UITapGestureRecognizer *)tap {
+    whichImg = 3;
+    [self selectThePhotoOrCamera];
+}
+
 -(void)tapGongzhonghao:(UITapGestureRecognizer *)tap {
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    // 设置时间格式
-//    formatter.dateFormat = @"yyyyMMddHHmmss";
-//    NSString *str = [formatter stringFromDate:[NSDate date]];
-//    NSString *fileName = [NSString stringWithFormat:@"picture_3.png"];
-    
-    [self requestUploadImgFile:self.gongzhongImg];
-    
-//    [self requestUploadImg:self.gongzhongImg imageName:fileName];
+    whichImg = 4;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)tapAliPay:(UITapGestureRecognizer *)tap {
+    whichImg = 5;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)tapWechat:(UITapGestureRecognizer *)tap {
+    whichImg = 6;
+    [self selectThePhotoOrCamera];
 }
 
 
@@ -93,24 +159,70 @@
     UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
     [topView setBarStyle:UIBarStyleDefault];
     UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [nextBtn setTitle:@"下一项" forState:UIControlStateNormal];
+    nextBtn.tag = field.tag;
+    nextBtn.frame = CGRectMake(2, 5, 60, 25);
+    [nextBtn addTarget:self action:@selector(nextField:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *nextBtnItem = [[UIBarButtonItem alloc]initWithCustomView:nextBtn];
+    
+    UIButton *lastBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [lastBtn setTitle:@"上一项" forState:UIControlStateNormal];
+    lastBtn.tag = field.tag;
+    lastBtn.frame = CGRectMake(2, 5, 60, 25);
+    [lastBtn addTarget:self action:@selector(lastField:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *lastBtnItem = [[UIBarButtonItem alloc]initWithCustomView:lastBtn];
+    
     UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [doneBtn setTintColor:[UIColor grayColor]];
-    doneBtn.layer.cornerRadius = 2;
-    doneBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    doneBtn.layer.borderWidth = 0.5;
     doneBtn.frame = CGRectMake(2, 5, 45, 25);
     [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
-    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
+    
+    NSArray * buttonsArray = [NSArray arrayWithObjects:lastBtnItem, nextBtnItem, spaceBtn, doneBtnItem,nil];
     [topView setItems:buttonsArray];
     [field setInputAccessoryView:topView];
     [field setAutocorrectionType:UITextAutocorrectionTypeNo];
     [field setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 }
 
+-(void)nextField:(UIButton *)nextBtn {
+    NSInteger textFieldIndex = nextBtn.tag;
+    UITextField *textField = (UITextField *)textFieldArray[textFieldIndex];
+    [textField resignFirstResponder];
+    if (textFieldIndex < [textFieldArray count] - 1)
+    {
+        UITextField *nextTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex + 1)];
+        [nextTextField becomeFirstResponder];
+    }
+}
+
+-(void)lastField:(UIButton *)lastBtn {
+    NSInteger textFieldIndex = lastBtn.tag;
+    UITextField *textField = (UITextField *)textFieldArray[textFieldIndex];
+    [textField resignFirstResponder];
+    if (textFieldIndex > 0)
+    {
+        UITextField *lastTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex - 1)];
+        [lastTextField becomeFirstResponder];
+    }
+}
+
 - (void)dealKeyboardHide {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger textFieldIndex = textField.tag;
+    [textField resignFirstResponder];
+    if (textFieldIndex < [textFieldArray count] - 1)
+    {
+        UITextField *nextTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex + 1)];
+        [nextTextField becomeFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark 键盘出现
@@ -127,7 +239,13 @@
 }
 
 - (IBAction)replayAction:(id)sender {
-    [self requestPostStoreRegister];
+    if (licenseImgUrl && cardAImgUrl && cardBImgUrl) {
+        [self requestPostStoreRegister];
+    }  else {
+        _networkConditionHUD.labelText = @"请将证件上传齐全，否则将影响您的审核！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -151,10 +269,10 @@
     return YES;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    [textField resignFirstResponder];
+//    return YES;
+//}
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     
@@ -204,6 +322,125 @@
     return _cover;
 }
 
+-(void)selectThePhotoOrCamera {
+    UIActionSheet *actionSheet;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    }else{
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图像" delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+    }
+    actionSheet.tag = 1000;
+    [actionSheet showInView:self.view];
+}
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 1000) {
+        NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    //来源:相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    //来源:相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 2:
+                    return;
+            }
+        }
+        else {
+            if (buttonIndex == 1) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    }
+}
+
+//#pragma mark - UIImagePickerControllerDelegate
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+//{
+//    [picker dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
+//    
+//    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    self.headImage.image = image;
+//}
+
+// 拍照完成回调
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
+{
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+    {
+        //图片存入相册
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
+    switch (whichImg) {
+        case 0: {
+            self.shopImg.image = image;
+            [self requestUploadImgFile:self.shopImg];
+            break;
+        }
+        case 1: {
+            self.licenseImg.image = image;
+            [self requestUploadImgFile:self.licenseImg];
+            break;
+        }
+        case 2: {
+            self.cardAImg.image = image;
+            [self requestUploadImgFile:self.cardAImg];
+            break;
+        }
+        case 3: {
+            self.cardBImg.image = image;
+            [self requestUploadImgFile:self.cardBImg];
+            break;
+        }
+        case 4: {
+            self.gongzhongImg.image = image;
+            [self requestUploadImgFile:self.gongzhongImg];
+            break;
+        }
+        case 5: {
+            self.aliPayCollectionImg.image = image;
+            [self requestUploadImgFile:self.aliPayCollectionImg];
+            break;
+        }
+        case 6: {
+            self.wechatCollectionImg.image = image;
+            [self requestUploadImgFile:self.wechatCollectionImg];
+            break;
+        }
+            
+        default:
+        break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//进入拍摄页面点击取消按钮
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 #pragma mark - 发起网络请求
 //-(void)requestUploadImg:(WPImageView *)image imageName:(NSString *)name {
 //    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadUploadImg,@"op", nil];
@@ -221,9 +458,6 @@
 ////    NSString *newString = (__bridge_transfer id)(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)baseStr, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
 //////    NSLog(@"newString: %@",newString);
 ////    
-//    baseStr = [baseStr stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)];
-//    NSLog(@"baseStr: %@",baseStr);
-////    NSLog(@"newString: %@",newString);
 //    
 ////    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 ////    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -249,16 +483,6 @@
 //    //    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(ImageUpload) params:paramsDic target:image delegate:delegate info:infoDic];
 //}
 
--(void)requestPostStoreRegister { //门店认证
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreRegister object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreRegister, @"op", nil];
-    NSArray *addrAry = [self.addressTF.text componentsSeparatedByString:@" "];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",self.licenseImgBtn.currentImage,@"licenseImg",self.cardImgABtn.currentImage,@"cardImgA",self.cardImgBBtn.currentImage,@"cardImgB",self.recommendCodeTF.text,@"presenter.recommendCode",self.wechatNameTF.text,@"wechatName",self.wechatImgBtn.currentImage,@"wechatImg", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreRegister) delegate:nil params:pram info:infoDic];
-}
-
 -(void)requestUploadImgFile:(WPImageView *)image {
     [_hud show:YES];
     //注册通知
@@ -267,6 +491,16 @@
     [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
 }
 
+-(void)requestPostStoreRegister { //门店认证
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreRegister object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreRegister, @"op", nil];
+    NSArray *addrAry = [self.addressTF.text componentsSeparatedByString:@" "];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",shopImgUrl,@"image",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(StoreRegister) delegate:nil params:pram info:infoDic];
+}
 
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
@@ -280,12 +514,43 @@
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     NSLog(@"GetMerchantList_responseObject: %@",responseObject);
-    if ([notification.name isEqualToString:StoreRegister]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreRegister object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    
+    if ([notification.name isEqualToString:UploadImgFile]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+        if ([responseObject[@"result"] boolValue]) {
+            switch (whichImg) {
+                case 0: {
+                    shopImgUrl = responseObject[@"url"];
+                    break;
+                }
+                case 1: {
+                    licenseImgUrl = responseObject[@"url"];
+                    break;
+                }
+                case 2: {
+                    cardAImgUrl = responseObject[@"url"];
+                    break;
+                }
+                case 3: {
+                    cardBImgUrl = responseObject[@"url"];
+                    break;
+                }
+                case 4: {
+                    gongzhongImgUrl = responseObject[@"url"];
+                    break;
+                }
+                case 5: {
+                    aliPayCollectionImgUrl = responseObject[@"url"];
+                    break;
+                }
+                case 6: {
+                    wechatCollectionImgUrl = responseObject[@"url"];
+                    break;
+                }
+                    
+                default:
+                    break;
+            }
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
@@ -294,17 +559,23 @@
         }
     }
     
-    if ([notification.name isEqualToString:UploadImgFile]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
-        if ([responseObject[@"result"] boolValue]) {
-            [_wechatCollectionbtn sd_setImageWithURL:[NSURL URLWithString:responseObject[@"url"]] forState:UIControlStateNormal];
+    if ([notification.name isEqualToString:StoreRegister]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreRegister object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            self.replayBtn.enabled = NO;
+            [self.replayBtn setTitle:@"审核中..." forState:UIControlStateDisabled];
         }
         else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+
 }
 
 - (void)didReceiveMemoryWarning {

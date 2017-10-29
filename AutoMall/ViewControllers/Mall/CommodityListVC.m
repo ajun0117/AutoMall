@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"商品列表";
+    self.title = self.categoryName;
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -330,7 +330,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.commodityTermId,@"commodityTermId",[NSNumber numberWithInt:currentpage],@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.categoryId,@"categoryId",[NSNumber numberWithInt:currentpage],@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
 }

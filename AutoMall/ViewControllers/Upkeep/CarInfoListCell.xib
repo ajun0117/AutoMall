@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="粤A 88888" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gl5-db-mZL">
-                        <rect key="frame" x="16" y="8" width="85.5" height="21"/>
+                        <rect key="frame" x="86" y="8" width="85.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="zHe-zt-w8J"/>
                         </constraints>
@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车主：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NI2-FX-s9L">
-                        <rect key="frame" x="16" y="37" width="40" height="21"/>
+                        <rect key="frame" x="86" y="37" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Gda-Mc-dxt"/>
                         </constraints>
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="陈先生" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJS-hR-T37">
-                        <rect key="frame" x="56" y="37" width="40" height="21"/>
+                        <rect key="frame" x="126" y="37" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="kpQ-FP-IAO"/>
                         </constraints>
@@ -46,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最近保养时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhc-By-FYR">
-                        <rect key="frame" x="16" y="60.5" width="93" height="21"/>
+                        <rect key="frame" x="86" y="60.5" width="93" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Udv-Un-bGk"/>
                         </constraints>
@@ -55,7 +55,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-6-20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcP-pf-5xi">
-                        <rect key="frame" x="109" y="61" width="65.5" height="21"/>
+                        <rect key="frame" x="179" y="61" width="65.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="5Lj-pA-SWf"/>
                         </constraints>
@@ -73,32 +73,43 @@
                         <state key="normal" image="checkbox_yes"/>
                         <state key="selected" image="checkbox_yes"/>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-uo-tfa">
+                        <rect key="frame" x="8" y="10" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="g1F-yo-dVk"/>
+                            <constraint firstAttribute="width" constant="70" id="iYO-ml-EhY"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Mhc-By-FYR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="4mD-Nc-7Zp"/>
                     <constraint firstItem="dJS-hR-T37" firstAttribute="leading" secondItem="NI2-FX-s9L" secondAttribute="trailing" id="7td-C0-Smd"/>
                     <constraint firstItem="KcP-pf-5xi" firstAttribute="leading" secondItem="Mhc-By-FYR" secondAttribute="trailing" id="A6S-LS-NdO"/>
-                    <constraint firstItem="NI2-FX-s9L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FVy-ak-4Qz"/>
+                    <constraint firstItem="Mhc-By-FYR" firstAttribute="leading" secondItem="8vg-uo-tfa" secondAttribute="trailing" constant="8" id="FQP-1l-R28"/>
                     <constraint firstItem="NI2-FX-s9L" firstAttribute="top" secondItem="Gl5-db-mZL" secondAttribute="bottom" constant="8" id="IS2-rM-dX4"/>
                     <constraint firstItem="GTT-db-EP4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IvF-bM-qgq"/>
                     <constraint firstItem="dJS-hR-T37" firstAttribute="centerY" secondItem="NI2-FX-s9L" secondAttribute="centerY" id="S1c-Vx-BYh"/>
                     <constraint firstItem="Gl5-db-mZL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="YR4-WM-cxm"/>
+                    <constraint firstItem="8vg-uo-tfa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yfi-Kn-jf0"/>
                     <constraint firstItem="KcP-pf-5xi" firstAttribute="centerY" secondItem="Mhc-By-FYR" secondAttribute="centerY" id="cRY-Dj-mZX"/>
+                    <constraint firstItem="Gl5-db-mZL" firstAttribute="leading" secondItem="8vg-uo-tfa" secondAttribute="trailing" constant="8" id="cbb-On-fI1"/>
                     <constraint firstAttribute="bottom" secondItem="Mhc-By-FYR" secondAttribute="bottom" constant="8" id="ntX-q2-6rI"/>
-                    <constraint firstItem="Gl5-db-mZL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="rpv-Z8-mwM"/>
+                    <constraint firstItem="8vg-uo-tfa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="qXK-kj-Zot"/>
                     <constraint firstAttribute="trailing" secondItem="GTT-db-EP4" secondAttribute="trailing" constant="8" id="t9D-Tc-C4W"/>
+                    <constraint firstItem="NI2-FX-s9L" firstAttribute="leading" secondItem="8vg-uo-tfa" secondAttribute="trailing" constant="8" id="uKL-M0-qJG"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateL" destination="KcP-pf-5xi" id="F3h-P0-gKA"/>
+                <outlet property="imgView" destination="8vg-uo-tfa" id="BVa-QW-tG7"/>
                 <outlet property="ownerL" destination="dJS-hR-T37" id="YNx-nV-iOD"/>
                 <outlet property="plateNumberL" destination="Gl5-db-mZL" id="JfW-Uh-Qhg"/>
                 <outlet property="selectBtn" destination="GTT-db-EP4" id="xrx-0f-Z2G"/>
             </connections>
-            <point key="canvasLocation" x="-428" y="-84"/>
+            <point key="canvasLocation" x="-135" y="-61"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="checkbox_yes" width="27" height="27"/>
+        <image name="default" width="512" height="512"/>
     </resources>
 </document>

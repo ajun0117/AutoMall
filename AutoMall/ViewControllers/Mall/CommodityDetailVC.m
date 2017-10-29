@@ -527,6 +527,9 @@ static CGFloat const scrollViewHeight = 220;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        
+    }
     if (indexPath.section == 1) {
         CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
         detailVC.commodityId = tjListAry[indexPath.row][@"id"];

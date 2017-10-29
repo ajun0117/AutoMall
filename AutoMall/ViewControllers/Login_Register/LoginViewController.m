@@ -257,6 +257,8 @@
             NSDictionary *dic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
             [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",dic[@"phone"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(dic[@"image"])];
             //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CarInfoListCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UILabel *plateNumberL;
 @property (strong, nonatomic) IBOutlet UILabel *ownerL;
 @property (strong, nonatomic) IBOutlet UILabel *dateL;

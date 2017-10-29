@@ -70,15 +70,15 @@
     if (section == 0) {
         return 1;
     }
-    return [skillAry count];
+//    return [skillAry count];
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-//            EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-//            CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//            return height + 1;
-        return 100;
+        EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 1;
     }
     return 66;
 }
@@ -98,6 +98,7 @@
     if (indexPath.section == 0) {
         EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailTopCell"];
         cell.contentL.text = @"技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 ";
+        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 24;
         return cell;
     }
     else {
@@ -110,9 +111,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
-    //        detailVC.userID = userArray[indexPath.section][@"id"];
-    //        detailVC.isDrink = self.isDrink;
-    //        detailVC.slidePlaceDetail = self.slidePlaceDetail;
     authVC.isReviewed = YES;
     [self.navigationController pushViewController:authVC animated:YES];
 }

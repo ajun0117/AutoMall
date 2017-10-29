@@ -35,6 +35,8 @@
 	<string>16</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>需要访问相机权限</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要访问相册权限</string>
 	<key>UILaunchStoryboardName</key>

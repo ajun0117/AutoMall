@@ -149,7 +149,8 @@
 
 //商城
 #define ComCategoryList                         @"/api/comCategory/list"    //商品分类
-#define CommodityList                            @"/api/commodity/list"       //商品列表
+//#define CommodityList                            @"/api/commodity/list"       //商品列表
+#define CommodityList                            @"/api/commodity/search"       //商品列表
 #define CommodityDetail                         @"/api/commodity/getInfo"   //商品详情
 #define CommoditytjList                         @"/api/commodity/tjlist"  //商品详情推荐商品列表
 #define AdvertList                                  @"/api/advert/list"             //广告列表接口
@@ -192,6 +193,10 @@
 #define DiscountAdd                               @"/api/discount/add"              //新增优惠
 #define DiscountEdit                               @"/api/discount/edit"             //编辑优惠
 #define MessageList                                @"/api/message/list"              //消息列表
+#define AgreementInfo                           @"http://119.23.227.246/carupkeep/api/agreement/info"         //免责声明
+#define ChangeNickName                         @"/api/user/changeNickname"     //修改昵称和微信
+#define GetApprovalStatus                      @"/api/store/getApprovalStatus"     //获取门店的审批状态
+#define UserChangeImage                       @"/api/user/changeImage"        //修改个人头像
 
 #define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
 #define StoreInfoUpdate                        @"/api/store/update"            //修改门店信息

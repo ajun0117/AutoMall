@@ -18,6 +18,7 @@
     UIDatePicker *birthdayDatePicker;  //生日日期选择
     UIDatePicker *buyDatePicker;        //购买日期选择
     NSArray *nameArray;
+    NSArray *textFieldArray;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
@@ -66,17 +67,17 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     nameArray = @[@"男", @"女"];
-    genderPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 150)];
+    genderPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
     genderPickerView.delegate = self;
     genderPickerView.dataSource = self;
     
-    birthdayDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 150)];
+    birthdayDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
     birthdayDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
     //显示方式是只显示年月日
     birthdayDatePicker.datePickerMode = UIDatePickerModeDate;
     [birthdayDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
-    buyDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 150)];
+    buyDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
     buyDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
     //显示方式是只显示年月日
     buyDatePicker.datePickerMode = UIDatePickerModeDate;
@@ -97,6 +98,7 @@
     [self setTextFieldInputAccessoryViewWithTF:self.engineNoTF];
     [self setTextFieldInputAccessoryViewWithTF:self.vinTF];
     
+    textFieldArray = @[self.mileageTF, self.fuelAmountTF, self.ownerTF, self.phoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF, self.purchaseDateTF, self.engineNoTF, self.vinTF];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -120,16 +122,27 @@
     UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
     [topView setBarStyle:UIBarStyleDefault];
     UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [nextBtn setTitle:@"下一项" forState:UIControlStateNormal];
+    nextBtn.tag = field.tag;
+    nextBtn.frame = CGRectMake(2, 5, 60, 25);
+    [nextBtn addTarget:self action:@selector(nextField:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *nextBtnItem = [[UIBarButtonItem alloc]initWithCustomView:nextBtn];
+    
+    UIButton *lastBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [lastBtn setTitle:@"上一项" forState:UIControlStateNormal];
+    lastBtn.tag = field.tag;
+    lastBtn.frame = CGRectMake(2, 5, 60, 25);
+    [lastBtn addTarget:self action:@selector(lastField:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *lastBtnItem = [[UIBarButtonItem alloc]initWithCustomView:lastBtn];
+    
     UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [doneBtn setTintColor:[UIColor grayColor]];
-    doneBtn.layer.cornerRadius = 2;
-    doneBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    doneBtn.layer.borderWidth = 0.5;
     doneBtn.frame = CGRectMake(2, 5, 45, 25);
     [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
-    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn,doneBtnItem,nil];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:lastBtnItem, nextBtnItem, spaceBtn, doneBtnItem,nil];
     [topView setItems:buttonsArray];
     if (field == self.genderTF) {
         [field setInputView:genderPickerView];
@@ -143,6 +156,40 @@
     [field setInputAccessoryView:topView];
     [field setAutocorrectionType:UITextAutocorrectionTypeNo];
     [field setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+}
+
+-(void)nextField:(UIButton *)nextBtn {
+    NSInteger textFieldIndex = nextBtn.tag;
+    UITextField *textField = (UITextField *)textFieldArray[textFieldIndex];
+    [textField resignFirstResponder];
+    if (textFieldIndex < [textFieldArray count] - 1)
+    {
+        UITextField *nextTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex + 1)];
+        [nextTextField becomeFirstResponder];
+    }
+}
+
+-(void)lastField:(UIButton *)lastBtn {
+    NSInteger textFieldIndex = lastBtn.tag;
+    UITextField *textField = (UITextField *)textFieldArray[textFieldIndex];
+    [textField resignFirstResponder];
+    if (textFieldIndex > 0)
+    {
+        UITextField *lastTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex - 1)];
+        [lastTextField becomeFirstResponder];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger textFieldIndex = textField.tag;
+    [textField resignFirstResponder];
+    if (textFieldIndex < [textFieldArray count] - 1)
+    {
+        UITextField *nextTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex + 1)];
+        [nextTextField becomeFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark - 日期选择
@@ -159,18 +206,6 @@
     else if (datePicker == buyDatePicker) {
         self.purchaseDateTF.text = dateString;
     }
-    
-}
-
-#pragma mark - tool bar 上按钮的点击事件
-- (void)doneClick {
-    if ( [self.genderTF isFirstResponder] ) {
-        [self.genderTF resignFirstResponder];
-    }
-}
-
-- (void)cancelClick {
-    [self doneClick];
 }
 
 - (void)dealKeyboardHide {
@@ -206,11 +241,6 @@
     AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
     checkVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:checkVC animated:YES];
-}
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
 }
 
 //- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
