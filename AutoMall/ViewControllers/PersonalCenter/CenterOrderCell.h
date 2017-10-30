@@ -17,5 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *thirdL;
 @property (strong, nonatomic) IBOutlet UIButton *fourthBtn;
 @property (strong, nonatomic) IBOutlet UILabel *fourthL;
+@property (strong, nonatomic) IBOutlet UIButton *fiveBtn;
+@property (strong, nonatomic) IBOutlet UILabel *fiveL;
 
 @end

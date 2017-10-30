@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -17,88 +17,109 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNW-A2-61t">
-                        <rect key="frame" x="12" y="3.5" width="73" height="73"/>
+                        <rect key="frame" x="8" y="6" width="68" height="68"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="height" id="wfc-Zz-gWq"/>
+                            <constraint firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="height" multiplier="1:1" id="eHg-0f-UGr"/>
                         </constraints>
-                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="26"/>
+                        <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="20"/>
                         <state key="normal" image="center_inProgress">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKC-Eb-3FB">
-                        <rect key="frame" x="105" y="3.5" width="72.5" height="73"/>
-                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="28"/>
+                        <rect key="frame" x="81" y="6" width="67.5" height="68"/>
+                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="10" maxY="22"/>
                         <state key="normal" image="center_servicesConfirmed"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-aO-BSg">
-                        <rect key="frame" x="197.5" y="3.5" width="73" height="73"/>
-                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="28"/>
+                        <rect key="frame" x="153.5" y="6" width="68" height="68"/>
+                        <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="24"/>
                         <state key="normal" image="center_workDone"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-IZ-ood">
-                        <rect key="frame" x="290.5" y="3.5" width="72.5" height="73"/>
-                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="28"/>
+                        <rect key="frame" x="226.5" y="6" width="67.5" height="68"/>
+                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="24"/>
                         <state key="normal" image="center_paid-checkup"/>
                     </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7A-mf-o4S">
+                        <rect key="frame" x="299" y="6" width="68" height="68"/>
+                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="20"/>
+                        <state key="normal" image="center_finished"/>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检查完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-WV-12j">
-                        <rect key="frame" x="18" y="47" width="61.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="16" y="52" width="53.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单确认" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5c-bo-YnI">
-                        <rect key="frame" x="111" y="47" width="61.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="88" y="52" width="53.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="施工完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svu-RW-bzj">
-                        <rect key="frame" x="204" y="47" width="61.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="161" y="52" width="53.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnY-ev-2Ye">
-                        <rect key="frame" x="304" y="47" width="46" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="240" y="52" width="40" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUG-rV-lzM">
+                        <rect key="frame" x="313" y="52" width="40" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="LnY-ev-2Ye" firstAttribute="centerX" secondItem="J3B-IZ-ood" secondAttribute="centerX" id="1lx-Fl-uW6"/>
-                    <constraint firstItem="9J8-aO-BSg" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="2SF-xc-Tqm"/>
-                    <constraint firstItem="9J8-aO-BSg" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="2Wc-1x-OrO"/>
-                    <constraint firstItem="E5c-bo-YnI" firstAttribute="centerY" secondItem="YKC-Eb-3FB" secondAttribute="centerY" multiplier="7:5" id="3od-Ml-EHe"/>
-                    <constraint firstItem="J3B-IZ-ood" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="7Tq-OW-NBU"/>
-                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="93D-vD-ABa"/>
-                    <constraint firstItem="Svu-RW-bzj" firstAttribute="centerX" secondItem="9J8-aO-BSg" secondAttribute="centerX" id="Bm9-vf-bb4"/>
-                    <constraint firstItem="J3B-IZ-ood" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="Cp8-Yy-gJg"/>
-                    <constraint firstItem="E5c-bo-YnI" firstAttribute="centerX" secondItem="YKC-Eb-3FB" secondAttribute="centerX" id="EKN-eY-8ZE"/>
-                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="leading" secondItem="UNW-A2-61t" secondAttribute="trailing" constant="20" id="Fpg-Sr-t4P"/>
-                    <constraint firstItem="LnY-ev-2Ye" firstAttribute="centerY" secondItem="J3B-IZ-ood" secondAttribute="centerY" multiplier="7:5" id="NaH-9P-RCs"/>
-                    <constraint firstItem="eSp-WV-12j" firstAttribute="centerX" secondItem="UNW-A2-61t" secondAttribute="centerX" id="QZP-Tw-YBv"/>
-                    <constraint firstItem="9J8-aO-BSg" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="STu-Q3-1M5"/>
-                    <constraint firstItem="Svu-RW-bzj" firstAttribute="centerY" secondItem="9J8-aO-BSg" secondAttribute="centerY" multiplier="7:5" id="TuF-E5-cDk"/>
-                    <constraint firstItem="UNW-A2-61t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VzN-nP-2Uh"/>
-                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="YoY-dt-edV"/>
-                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="gl4-ee-cwH"/>
-                    <constraint firstItem="UNW-A2-61t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="lsm-VE-Zcb"/>
-                    <constraint firstAttribute="trailing" secondItem="J3B-IZ-ood" secondAttribute="trailing" constant="12" id="mBe-9Y-kH0"/>
-                    <constraint firstItem="9J8-aO-BSg" firstAttribute="leading" secondItem="YKC-Eb-3FB" secondAttribute="trailing" constant="20" id="oNP-Lz-QMX"/>
-                    <constraint firstItem="J3B-IZ-ood" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="rkh-5e-Yk1"/>
-                    <constraint firstItem="J3B-IZ-ood" firstAttribute="leading" secondItem="9J8-aO-BSg" secondAttribute="trailing" constant="20" id="s2P-61-AcL"/>
-                    <constraint firstItem="eSp-WV-12j" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" multiplier="7:5" id="wlh-TM-2Qa"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="6fy-AZ-rkc"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="7wg-il-IJo"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="98o-iz-rht"/>
+                    <constraint firstItem="E5c-bo-YnI" firstAttribute="centerY" secondItem="YKC-Eb-3FB" secondAttribute="centerY" multiplier="3:2" id="9N6-QV-pe7"/>
+                    <constraint firstItem="d7A-mf-o4S" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="9VV-hA-WGn"/>
+                    <constraint firstAttribute="trailing" secondItem="d7A-mf-o4S" secondAttribute="trailing" constant="8" id="9aS-6K-bWx"/>
+                    <constraint firstItem="Svu-RW-bzj" firstAttribute="centerY" secondItem="9J8-aO-BSg" secondAttribute="centerY" multiplier="3:2" id="A6d-CB-8G7"/>
+                    <constraint firstItem="LnY-ev-2Ye" firstAttribute="centerY" secondItem="J3B-IZ-ood" secondAttribute="centerY" multiplier="3:2" id="Boq-v9-1yq"/>
+                    <constraint firstItem="d7A-mf-o4S" firstAttribute="leading" secondItem="J3B-IZ-ood" secondAttribute="trailing" constant="5" id="Jco-Wv-HeY"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="Kro-K6-Zep"/>
+                    <constraint firstItem="d7A-mf-o4S" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="L3c-Vs-rkK"/>
+                    <constraint firstItem="d7A-mf-o4S" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="L97-KV-zml"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="leading" secondItem="UNW-A2-61t" secondAttribute="trailing" constant="5" id="MpR-Ye-Z8g"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="Ry3-Ud-EoX"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="leading" secondItem="YKC-Eb-3FB" secondAttribute="trailing" constant="5" id="SVK-f0-7yn"/>
+                    <constraint firstItem="YKC-Eb-3FB" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="SjU-bM-8U1"/>
+                    <constraint firstItem="E5c-bo-YnI" firstAttribute="centerX" secondItem="YKC-Eb-3FB" secondAttribute="centerX" id="VU5-kq-2jM"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="leading" secondItem="YKC-Eb-3FB" secondAttribute="trailing" constant="5" id="Vqn-MJ-56a"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="height" secondItem="UNW-A2-61t" secondAttribute="height" id="VzF-uP-jSh"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="leading" secondItem="9J8-aO-BSg" secondAttribute="trailing" constant="5" id="WGS-J7-zXt"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="width" id="Y4b-KQ-lHG"/>
+                    <constraint firstItem="yUG-rV-lzM" firstAttribute="centerX" secondItem="d7A-mf-o4S" secondAttribute="centerX" id="aX2-RC-12I"/>
+                    <constraint firstItem="9J8-aO-BSg" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" id="c2Z-4w-JdO"/>
+                    <constraint firstItem="eSp-WV-12j" firstAttribute="centerX" secondItem="UNW-A2-61t" secondAttribute="centerX" id="cYe-H7-FbU"/>
+                    <constraint firstItem="eSp-WV-12j" firstAttribute="centerY" secondItem="UNW-A2-61t" secondAttribute="centerY" multiplier="3:2" id="dAL-cU-RWb"/>
+                    <constraint firstItem="J3B-IZ-ood" firstAttribute="leading" secondItem="9J8-aO-BSg" secondAttribute="trailing" constant="5" id="dY5-HX-mj7"/>
+                    <constraint firstItem="LnY-ev-2Ye" firstAttribute="centerX" secondItem="J3B-IZ-ood" secondAttribute="centerX" id="gbe-hw-ATf"/>
+                    <constraint firstItem="UNW-A2-61t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iBH-Gk-nye"/>
+                    <constraint firstItem="yUG-rV-lzM" firstAttribute="centerY" secondItem="d7A-mf-o4S" secondAttribute="centerY" multiplier="3:2" id="kAe-Ub-6Pr"/>
+                    <constraint firstItem="Svu-RW-bzj" firstAttribute="centerX" secondItem="9J8-aO-BSg" secondAttribute="centerX" id="pJq-1h-yhJ"/>
+                    <constraint firstItem="UNW-A2-61t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="wsc-xo-CKl"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="firstBtn" destination="UNW-A2-61t" id="dQd-2Q-K6u"/>
                 <outlet property="firstL" destination="eSp-WV-12j" id="14r-8L-1lJ"/>
+                <outlet property="fiveBtn" destination="d7A-mf-o4S" id="cRB-wh-b5P"/>
+                <outlet property="fiveL" destination="yUG-rV-lzM" id="HCo-OE-cXK"/>
                 <outlet property="fourthBtn" destination="J3B-IZ-ood" id="98Y-Rx-Il2"/>
                 <outlet property="fourthL" destination="LnY-ev-2Ye" id="1t6-y6-Qzt"/>
                 <outlet property="secondBtn" destination="YKC-Eb-3FB" id="L1Y-NE-WEz"/>
@@ -106,10 +127,11 @@
                 <outlet property="thirdBtn" destination="9J8-aO-BSg" id="e0Q-le-9w7"/>
                 <outlet property="thirdL" destination="Svu-RW-bzj" id="Gn0-bM-s2L"/>
             </connections>
-            <point key="canvasLocation" x="-409" y="77"/>
+            <point key="canvasLocation" x="-727" y="-33"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="center_finished" width="120" height="120"/>
         <image name="center_inProgress" width="120" height="120"/>
         <image name="center_paid-checkup" width="120" height="120"/>
         <image name="center_servicesConfirmed" width="120" height="120"/>

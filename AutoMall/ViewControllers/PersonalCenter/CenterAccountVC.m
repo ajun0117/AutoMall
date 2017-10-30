@@ -8,7 +8,7 @@
 
 #import "CenterAccountVC.h"
 
-@interface CenterAccountVC ()
+@interface CenterAccountVC () <UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -29,21 +29,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"个人信息";
-    
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = -16;
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
-//    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
+    //    searchBtn.contentMode = UIViewContentModeRight;
+    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [searchBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [searchBtn setTitle:@"退出" forState:UIControlStateNormal];
-//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [searchBtn addTarget:self action:@selector(toExit) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];;
+    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
     
     self.accountL.text = self.infoDic[@"phone"];
     self.nickNameTF.text = STRING(self.infoDic[@"nickname"]);
@@ -57,7 +55,20 @@
 }
 
 -(void) toExit {    //清空本地数据，退出登录
-    [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认注销" message:@"确定要退出当前账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认注销", nil];
+    alert.delegate = self;
+    alert.tag = 1001;
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1 && alertView.tag == 1000) {
+        //立即更新
+        //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[[_upDateObjectDic objectForKey:@"results"] firstObject] objectForKey:@"trackViewUrl"]]];
+    }
+    if (buttonIndex == 1 && alertView.tag == 1001) {
+        [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
+    }
 }
 
 - (IBAction)saveInfoAction:(id)sender {
@@ -165,6 +176,8 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            NSDictionary *dic = @{@"nickname":self.nickNameTF.text,@"wechat":self.wechatTF.text};
+            self.UpdateUserInfo(dic);
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

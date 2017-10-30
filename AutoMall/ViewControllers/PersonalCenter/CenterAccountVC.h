@@ -12,4 +12,7 @@
 
 @property (strong, nonatomic) NSDictionary *infoDic;
 
+//更新用户资料
+@property (copy, nonatomic) void((^UpdateUserInfo)(NSDictionary *infoDic));
+
 @end

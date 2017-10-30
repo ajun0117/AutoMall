@@ -184,6 +184,8 @@
 		04C656441F96FEE000611AFF /* AutoCheckPhotoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C656421F96FEE000611AFF /* AutoCheckPhotoVC.xib */; };
 		04C656481F97694400611AFF /* AutoCheckOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C656461F97694400611AFF /* AutoCheckOrderVC.m */; };
 		04C656491F97694400611AFF /* AutoCheckOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C656471F97694400611AFF /* AutoCheckOrderVC.xib */; };
+		04D0358D1FA7279D0013AD6F /* UpkeepOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D0358B1FA7279D0013AD6F /* UpkeepOrderVC.m */; };
+		04D0358E1FA7279D0013AD6F /* UpkeepOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D0358C1FA7279D0013AD6F /* UpkeepOrderVC.xib */; };
 		04D1071A1F6296A1007D9F57 /* UpkeepStatementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */; };
 		04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */; };
 		04D107731F62998D007D9F57 /* NSNumber+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D107231F62998C007D9F57 /* NSNumber+Zirkfied.m */; };
@@ -767,6 +769,9 @@
 		04C656451F97694400611AFF /* AutoCheckOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckOrderVC.h; sourceTree = "<group>"; };
 		04C656461F97694400611AFF /* AutoCheckOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckOrderVC.m; sourceTree = "<group>"; };
 		04C656471F97694400611AFF /* AutoCheckOrderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckOrderVC.xib; sourceTree = "<group>"; };
+		04D0358A1FA7279D0013AD6F /* UpkeepOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepOrderVC.h; sourceTree = "<group>"; };
+		04D0358B1FA7279D0013AD6F /* UpkeepOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepOrderVC.m; sourceTree = "<group>"; };
+		04D0358C1FA7279D0013AD6F /* UpkeepOrderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepOrderVC.xib; sourceTree = "<group>"; };
 		04D107171F6296A1007D9F57 /* UpkeepStatementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepStatementVC.h; sourceTree = "<group>"; };
 		04D107181F6296A1007D9F57 /* UpkeepStatementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepStatementVC.m; sourceTree = "<group>"; };
 		04D107191F6296A1007D9F57 /* UpkeepStatementVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepStatementVC.xib; sourceTree = "<group>"; };
@@ -1910,6 +1915,16 @@
 			name = "消息列表";
 			sourceTree = "<group>";
 		};
+		04D035891FA727480013AD6F /* 保养订单 */ = {
+			isa = PBXGroup;
+			children = (
+				04D0358A1FA7279D0013AD6F /* UpkeepOrderVC.h */,
+				04D0358B1FA7279D0013AD6F /* UpkeepOrderVC.m */,
+				04D0358C1FA7279D0013AD6F /* UpkeepOrderVC.xib */,
+			);
+			name = "保养订单";
+			sourceTree = "<group>";
+		};
 		04D107161F629653007D9F57 /* 统计报表 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2158,6 +2173,7 @@
 			isa = PBXGroup;
 			children = (
 				F7D87A221FA5BF9E009EB53F /* 账户管理 */,
+				04D035891FA727480013AD6F /* 保养订单 */,
 				F7D87A1C1FA4E5D9009EB53F /* 员工上传认证Cell */,
 				04C35D191F8B579000062014 /* 消息列表 */,
 				04D107161F629653007D9F57 /* 统计报表 */,
@@ -2925,6 +2941,7 @@
 				042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */,
 				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
 				0453D3B11F69349A004F79C8 /* UpkeepCarInfoVC.xib in Resources */,
+				04D0358E1FA7279D0013AD6F /* UpkeepOrderVC.xib in Resources */,
 				04DC7DD51F31C28300AA20A7 /* UMSocialLocalizable.strings in Resources */,
 				04DC7DDB1F31C28300AA20A7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				042DEFF41F46E8560065FED8 /* CommodityListCell.xib in Resources */,
@@ -3196,6 +3213,7 @@
 				04ABFB3D1F984BE00015EE78 /* AlbumListCollectionViewCell.m in Sources */,
 				04D107921F62998D007D9F57 /* ZFWave.m in Sources */,
 				042DEFF31F46E8560065FED8 /* CommodityListCell.m in Sources */,
+				04D0358D1FA7279D0013AD6F /* UpkeepOrderVC.m in Sources */,
 				04AD1FDD1F43EEFB00247819 /* InformationCell.m in Sources */,
 				04D107931F62998D007D9F57 /* ZFWaveChart.m in Sources */,
 				F73CB9C21F893C9300936C7A /* AutoCheckGroupTitleCell.m in Sources */,
@@ -3392,7 +3410,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3403,7 +3421,7 @@
 					"\"$(SRCROOT)/AutoMall/Utilitys/支付宝蚂蚁金服支付\"",
 				);
 				INFOPLIST_FILE = AutoMall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3434,7 +3452,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3445,7 +3463,7 @@
 					"\"$(SRCROOT)/AutoMall/Utilitys/支付宝蚂蚁金服支付\"",
 				);
 				INFOPLIST_FILE = AutoMall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

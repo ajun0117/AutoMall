@@ -40,10 +40,16 @@
     
     orderArray = [NSMutableArray array];
     currentpage = 0;
-    if (! _orderStatus) {
-        _orderStatus = @"0";
+    
+    if ([self.orderStatus isEqualToString:@"0"]) {
+        [self daifuAction:self.daifuBtn];
     }
-    [self requestGetMallOrderList];
+    else if ([self.orderStatus isEqualToString:@"1"]) {
+        [self yifuAction:self.yifuBtn];
+    }
+    else {
+        [self allAction:self.allBtn];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {

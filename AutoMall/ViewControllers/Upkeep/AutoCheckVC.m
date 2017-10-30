@@ -26,7 +26,7 @@
 {
     AJSegmentedControl *mySegmentedControl;
     NSArray *partsArray;   //车身部位数组
-    MBProgressHUD *_hud;
+    MBProgressHUD *_hud; 
     MBProgressHUD *_networkConditionHUD;
     NSArray *contentAry;    //检查内容列表
     NSInteger currentSelectIndex;  //当前选中的位置

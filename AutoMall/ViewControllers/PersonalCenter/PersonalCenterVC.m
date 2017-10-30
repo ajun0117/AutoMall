@@ -25,6 +25,7 @@
 #import "CenterEmployeeCell.h"
 #import "WebViewController.h"
 #import "CenterAccountVC.h"
+#import "UpkeepOrderVC.h"
 
 @interface PersonalCenterVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -81,8 +82,17 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterEmployeeCell" bundle:nil] forCellReuseIdentifier:@"centerEmployeeCell"];
     
-//    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-//    [self.myTableView reloadData];
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    NSLog(@"mobileUserType: %@",mobileUserType);
+    [self.myTableView reloadData];
+    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        [self requestPostStoreGetInfo];     //请求门店详情数据
+    }
+    else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
+        [self requestGetApprovalStatus];     //请求门店审批状态
+    }
+    
+    [self requestPostUserGetInfo];      //刷新用户信息
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -99,18 +109,6 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-    
-    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-    NSLog(@"mobileUserType: %@",mobileUserType);
-    [self.myTableView reloadData];
-    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
-        [self requestPostStoreGetInfo];     //请求门店详情数据
-    }
-    else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
-        [self requestGetApprovalStatus];     //请求门店审批状态
-    }
-
-    [self requestPostUserGetInfo];      //刷新用户信息
 }
 
 -(void) toSet {
@@ -377,7 +375,7 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(shopInfoDic[@"image"])] placeholderImage:IMG(@"default")];
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
@@ -436,7 +434,7 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(shopInfoDic[@"image"])] placeholderImage:IMG(@"default")];
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
@@ -446,6 +444,7 @@
                 cell.shopNameBtn.hidden = NO;
                 cell.shopLevelIM.hidden= NO;
                 [cell.shopNameBtn setTitle:shopInfoDic[@"name"] forState:UIControlStateNormal];
+                [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopLevelIM.image = IMG(@"bronzeBadge");
                 cell.jifenL.hidden = NO;
                 cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
@@ -467,17 +466,26 @@
                         CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         [cell.firstBtn setImage:IMG(@"center_inProgress") forState:UIControlStateNormal];
+                        [cell.firstBtn addTarget:self action:@selector(upkeepCheckCompleteAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.firstL.text = @"检查完成";
                         [cell.secondBtn setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                        [cell.secondBtn addTarget:self action:@selector(upkeepServicesConfirmedAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.secondL.text = @"订单确认";
                         cell.thirdBtn.hidden = NO;
                         cell.thirdL.hidden = NO;
                         [cell.thirdBtn setImage:IMG(@"center_workDone") forState:UIControlStateNormal];
+                        [cell.thirdBtn addTarget:self action:@selector(upkeepWorkDoneAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.thirdL.text = @"施工完成";
                         cell.fourthBtn.hidden = NO;
                         cell.fourthL.hidden = NO;
                         [cell.fourthBtn setImage:IMG(@"center_paid-checkup") forState:UIControlStateNormal];
+                        [cell.fourthBtn addTarget:self action:@selector(upkeepPaidAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.fourthL.text = @"已付款";
+                        cell.fiveBtn.hidden = NO;
+                        cell.fiveL.hidden = NO;
+                        [cell.fiveBtn setImage:IMG(@"center_finished") forState:UIControlStateNormal];
+                        [cell.fiveBtn addTarget:self action:@selector(upkeepFinishedAction:) forControlEvents:UIControlEventTouchUpInside];
+                        cell.fiveL.text = @"已完成";
                         return cell;
                         break;
                     }
@@ -600,7 +608,7 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(shopInfoDic[@"image"])] placeholderImage:IMG(@"default")];
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
                 [cell.accountBtn setTitle:STRING(shopInfoDic[@"phone"]) forState:UIControlStateNormal];
@@ -656,18 +664,27 @@
                     case 1: {
                         CenterOrderCell *cell = (CenterOrderCell *)[tableView dequeueReusableCellWithIdentifier:@"centerOrderCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        [cell.firstBtn setImage:IMG(@"information_pressed") forState:UIControlStateNormal];
+                        [cell.firstBtn setImage:IMG(@"center_inProgress") forState:UIControlStateNormal];
+                        [cell.firstBtn addTarget:self action:@selector(upkeepCheckCompleteAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.firstL.text = @"检查完成";
                         [cell.secondBtn setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                        [cell.secondBtn addTarget:self action:@selector(upkeepServicesConfirmedAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.secondL.text = @"订单确认";
                         cell.thirdBtn.hidden = NO;
                         cell.thirdL.hidden = NO;
                         [cell.thirdBtn setImage:IMG(@"center_workDone") forState:UIControlStateNormal];
+                        [cell.thirdBtn addTarget:self action:@selector(upkeepWorkDoneAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.thirdL.text = @"施工完成";
                         cell.fourthBtn.hidden = NO;
                         cell.fourthL.hidden = NO;
                         [cell.fourthBtn setImage:IMG(@"center_paid-checkup") forState:UIControlStateNormal];
+                        [cell.fourthBtn addTarget:self action:@selector(upkeepPaidAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.fourthL.text = @"已付款";
+                        cell.fiveBtn.hidden = NO;
+                        cell.fiveL.hidden = NO;
+                        [cell.fiveBtn setImage:IMG(@"center_finished") forState:UIControlStateNormal];
+                        [cell.fiveBtn addTarget:self action:@selector(upkeepFinishedAction:) forControlEvents:UIControlEventTouchUpInside];
+                        cell.fiveL.text = @"已完成";
                         return cell;
                         break;
                     }
@@ -728,14 +745,14 @@
         case 0: {
             HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:shopInfoDic[@"image"]] placeholderImage:IMG(@"default")];
+            [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(shopInfoDic[@"image"])] placeholderImage:IMG(@"default")];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
             [cell.headIMG addGestureRecognizer:tap];
-            [cell.accountBtn setTitle:STRING(shopInfoDic[@"phone"]) forState:UIControlStateNormal];
+            [cell.accountBtn setTitle:@"登录" forState:UIControlStateNormal];
             [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
             cell.applyBtn.hidden = YES;
-            cell.shopNameBtn.hidden = NO;
-            cell.shopLevelIM.hidden= NO;
+            cell.shopNameBtn.hidden = YES;
+            cell.shopLevelIM.hidden= YES;
             [cell.shopNameBtn setTitle:@"门店名称" forState:UIControlStateNormal];
             cell.shopLevelIM.image = IMG(@"bronzeBadge");
             cell.jifenL.hidden = YES;
@@ -827,6 +844,12 @@
             }
             case 1: {
                 switch (indexPath.row) {
+                    case 0: {
+                        UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+                        orderVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:orderVC animated:YES];
+                        break;
+                    }
                     case 2: {
                         UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
                         statementVC.hidesBottomBarWhenPushed = YES;
@@ -976,6 +999,43 @@
     }
 }
 
+#pragma mark - 保养订单
+-(void)upkeepCheckCompleteAction:(UIButton *)btn {
+    UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+    orderVC.orderStatus = @"0";
+    orderVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
+-(void)upkeepServicesConfirmedAction:(UIButton *)btn {
+    UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+    orderVC.orderStatus = @"1";
+    orderVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
+-(void)upkeepWorkDoneAction:(UIButton *)btn {
+    UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+    orderVC.orderStatus = @"2";
+    orderVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
+-(void)upkeepPaidAction:(UIButton *)btn {
+    UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+    orderVC.orderStatus = @"3";
+    orderVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
+-(void)upkeepFinishedAction:(UIButton *)btn {
+    UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+    orderVC.orderStatus = @"4";
+    orderVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
+#pragma mark - 商城订单
 -(void)daifuAction:(UIButton *)btn {
     MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
     listVC.orderStatus = @"0";   //未付款
@@ -993,6 +1053,9 @@
 -(void) toAccountView {     //去账户页面
     CenterAccountVC *accountVC = [[CenterAccountVC alloc] init];
     accountVC.infoDic = userInfoDic;
+    accountVC.UpdateUserInfo = ^(NSDictionary *infoDic) {
+        [self requestPostUserGetInfo];      //刷新用户信息
+    };
     accountVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:accountVC animated:YES];
 }
@@ -1067,7 +1130,7 @@
         //图片存入相册
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
-//    head.image = image;
+    head.image = image;
     [self requestUploadImgFile:head];
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -1119,7 +1182,7 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserChangeImage,@"op", nil];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:url,@"image", nil];
     NSLog(@"pram:    %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserChangeImage) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(UserChangeImage) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

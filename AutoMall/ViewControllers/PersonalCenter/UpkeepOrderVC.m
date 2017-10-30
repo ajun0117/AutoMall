@@ -1,32 +1,34 @@
 //
-//  BaoyangHistoryVC.m
+//  UpkeepOrderVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/8/14.
+//  Created by LYD on 2017/10/30.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "BaoyangHistoryVC.h"
+#import "UpkeepOrderVC.h"
+#import "AJSegmentedControl.h"
 #import "BaoyangHistoryCell.h"
 
-@interface BaoyangHistoryVC ()
+@interface UpkeepOrderVC () <AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
+    AJSegmentedControl *mySegmentedControl;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSMutableArray *historyArray;
     int currentpage;
+    NSMutableArray *orderAry;    //订单列表
+    NSString *paymentStatus;      //订单状态
 }
-
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
-@implementation BaoyangHistoryVC
+@implementation UpkeepOrderVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"粤A55555";
+    self.title = @"保养订单";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -37,9 +39,11 @@
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
     currentpage = 0;
-    historyArray = [NSMutableArray array];
+    orderAry = [NSMutableArray array];
     
     [self requestGetHistoryList];
+    
+    [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"订单确认"}, @{@"name":@"施工完成"}, @{@"name":@"已付款"}, @{@"name":@"已完成"}]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -58,11 +62,12 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+
 #pragma mark - 下拉刷新,上拉加载
 -(void)headerRefreshing {
     NSLog(@"下拉刷新个人信息");
     currentpage = 0;
-    [historyArray removeAllObjects];
+    [orderAry removeAllObjects];
     [self requestGetHistoryList];
 }
 
@@ -72,6 +77,47 @@
     [self requestGetHistoryList];
 }
 
+#pragma mark - 自定义segmented
+- (void)createSegmentControlWithTitles:(NSArray *)titls
+{
+    mySegmentedControl = [[AJSegmentedControl alloc] initWithOriginY:64 Titles:titls delegate:self];
+    [self.view addSubview:mySegmentedControl];
+}
+
+- (void)ajSegmentedControlSelectAtIndex:(NSInteger)index
+{
+    NSLog(@"index: %ld",(long)index);
+    switch (index) {
+        case 0: {
+            paymentStatus = @"0";
+            break;
+        }
+        case 1: {
+            paymentStatus = @"1";
+            break;
+        }
+        case 2: {
+            paymentStatus = @"2";
+            break;
+        }
+        case 3: {
+            paymentStatus = @"3";
+            break;
+        }
+        case 4: {
+            paymentStatus = @"4";
+            break;
+        }
+        case 5: {
+            paymentStatus = @"0";
+            break;
+        }
+            
+        default:
+            break;
+    }
+    [self requestGetHistoryList];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -80,7 +126,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return historyArray.count;
+    return orderAry.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,7 +143,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
-    NSDictionary *dic = historyArray[indexPath.row];
+    NSDictionary *dic = orderAry[indexPath.row];
     cell.lichengL.text = [NSString stringWithFormat:@"%@公里",dic[@""]];
     cell.ranyouL.text = [NSString stringWithFormat:@"%@L",dic[@""]];
     cell.ownerL.text = dic[@"carOwnerName"];
@@ -121,7 +167,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=4",UrlPrefix(CarUpkeepSearch),self.carId, currentpage];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&pageNo=%d&paymentStatus=%@",UrlPrefix(CarUpkeepSearch),userId, currentpage,paymentStatus];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -140,7 +187,7 @@
     if ([notification.name isEqualToString:CarUpkeepSearch]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepSearch object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
-            [historyArray addObjectsFromArray:responseObject[@"data"]];
+            [orderAry addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];
         }
         else {
