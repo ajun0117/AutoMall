@@ -15,4 +15,7 @@
 //更新用户资料
 @property (copy, nonatomic) void((^UpdateUserInfo)(NSDictionary *infoDic));
 
+//更新登录状态
+@property (copy, nonatomic) void((^UpdateLoginStatus)());
+
 @end

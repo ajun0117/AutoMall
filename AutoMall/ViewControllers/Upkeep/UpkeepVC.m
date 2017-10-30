@@ -108,6 +108,7 @@
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        nav.navigationBar.barTintColor = [UIColor whiteColor];
         [self presentViewController:nav animated:YES completion:nil];
     }
 }
@@ -192,6 +193,7 @@
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        nav.navigationBar.barTintColor = [UIColor whiteColor];
         [self presentViewController:nav animated:YES completion:nil];
     }
 

@@ -59,7 +59,7 @@
                             <rect key="frame" x="0.0" y="44" width="375" height="200"/>
                             <subviews>
                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wN7-8K-50T" customClass="WPImageView">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <rect key="frame" x="16" y="0.0" width="343" height="200"/>
                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传门店图片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-Fj-6rd">
@@ -75,8 +75,8 @@
                                 <constraint firstAttribute="height" constant="200" id="GJg-3Z-piM"/>
                                 <constraint firstItem="Kub-Fj-6rd" firstAttribute="centerY" secondItem="wN7-8K-50T" secondAttribute="centerY" id="Pvu-Ga-1rI"/>
                                 <constraint firstItem="wN7-8K-50T" firstAttribute="top" secondItem="RP6-2c-xfz" secondAttribute="top" id="bCR-LJ-uwa"/>
-                                <constraint firstAttribute="trailing" secondItem="wN7-8K-50T" secondAttribute="trailing" id="dno-Hi-Eqg"/>
-                                <constraint firstItem="wN7-8K-50T" firstAttribute="leading" secondItem="RP6-2c-xfz" secondAttribute="leading" id="mST-2f-pTo"/>
+                                <constraint firstAttribute="trailing" secondItem="wN7-8K-50T" secondAttribute="trailing" constant="16" id="dno-Hi-Eqg"/>
+                                <constraint firstItem="wN7-8K-50T" firstAttribute="leading" secondItem="RP6-2c-xfz" secondAttribute="leading" constant="16" id="mST-2f-pTo"/>
                                 <constraint firstItem="Kub-Fj-6rd" firstAttribute="centerX" secondItem="wN7-8K-50T" secondAttribute="centerX" id="ueX-BE-8UB"/>
                             </constraints>
                         </view>

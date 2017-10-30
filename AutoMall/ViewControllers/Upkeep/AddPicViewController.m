@@ -52,9 +52,9 @@
     [self.imgsCollectionView registerNib:[UINib nibWithNibName:@"AlbumListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:AlbumListCell];
 //    [self.myCollectionView registerNib:[UINib nibWithNibName:@"AddPicFooterCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     
-    [self.imgsCollectionView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.imgsCollectionView addFooterWithTarget:self action:@selector(footerLoadData)];
-    [self.imgsCollectionView headerBeginRefreshing];
+//    [self.imgsCollectionView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+//    [self.imgsCollectionView addFooterWithTarget:self action:@selector(footerLoadData)];
+//    [self.imgsCollectionView headerBeginRefreshing];
     
     currentpage = 1;
     _imgsArray = [[NSMutableArray alloc] init];
@@ -104,6 +104,11 @@
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.GoBackUpdate(@[@{@"relativePath":@"1"},@{@"relativePath":@"2"},@{@"relativePath":@"3"}]);
+}
+
 -(void)edit:(UIBarButtonItem *)rightItem {
     if ([rightItem.title isEqualToString:@"完成"]) {
         rightItem.title = @"编辑";
@@ -120,16 +125,16 @@
     [self.imgsCollectionView reloadData];
 }
 
-#pragma mark - 下拉刷新,上拉加载
--(void)headerRefreshing {
-    currentpage = 1;
-    [self requestGetAlbumList];
-}
-
--(void)footerLoadData {
-    currentpage ++;
-    [self requestGetAlbumList];
-}
+//#pragma mark - 下拉刷新,上拉加载
+//-(void)headerRefreshing {
+//    currentpage = 1;
+//    [self requestGetAlbumList];
+//}
+//
+//-(void)footerLoadData {
+//    currentpage ++;
+//    [self requestGetAlbumList];
+//}
 
 #pragma mark --UICollectionViewDataSource
 //定义展示的UICollectionViewCell的个数
@@ -340,11 +345,16 @@
 -(void)takePhoto
 {
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     }
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //设置导航栏背景颜色
+        picker.navigationBar.barTintColor = [UIColor whiteColor];
+        //设置右侧取消按钮的字体颜色
+        picker.navigationBar.tintColor = [UIColor blackColor];
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = sourceType;

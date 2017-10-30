@@ -38,7 +38,7 @@
     // Do any additional setup after loading the view from its nib.
     if (self.infoDic) {
         self.title = @"门店信息";
-        [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])] placeholderImage:IMG(@"default")];
+        [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
@@ -46,14 +46,14 @@
         self.phoneTF.text = STRING(self.infoDic[@"phone"]);
         self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
         
-        [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])] placeholderImage:IMG(@"default")];
-        [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])] placeholderImage:IMG(@"default")];
-        [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])] placeholderImage:IMG(@"default")];
+        [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])]];
+        [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])]];
+        [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])]];
 
         self.wechatNameTF.text = STRING(self.infoDic[@"wechatName"]);
-        [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])] placeholderImage:IMG(@"default")];
-        [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])] placeholderImage:IMG(@"default")];
-        [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])] placeholderImage:IMG(@"default")];
+        [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])]];
+        [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])]];
+        [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
     }
     else {
         self.title = @"申请认证";
@@ -63,8 +63,8 @@
     
     [[CitiesDataTool sharedManager] requestGetData];
     [self.view addSubview:self.cover];
-    self.chooseLocationView.address = @"广东省 广州市 白云区";
-    self.chooseLocationView.areaCode = @"440104";
+//    self.chooseLocationView.address = @"广东省 广州市 白云区";
+//    self.chooseLocationView.areaCode = @"440104";
 //    self.addressTF.text = @"广东省 广州市 白云区";
     
     [self setTextFieldInputAccessoryViewWithTF:self.nameTF];
@@ -361,6 +361,11 @@
         }
         // 跳转到相机或相册页面
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //设置导航栏背景颜色
+        imagePickerController.navigationBar.barTintColor = [UIColor whiteColor];
+        //设置右侧取消按钮的字体颜色
+        imagePickerController.navigationBar.tintColor = [UIColor blackColor];
         imagePickerController.delegate = self;
         imagePickerController.allowsEditing = YES;
         imagePickerController.sourceType = sourceType;
@@ -513,7 +518,7 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    NSLog(@"responseObject: %@",responseObject);
     
     if ([notification.name isEqualToString:UploadImgFile]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];

@@ -719,6 +719,7 @@ static GlobalSetting *globalSetting;
     [userDefaults removeObjectForKey:@"mMobile"];
     [userDefaults removeObjectForKey:@"mHead"];
     [userDefaults removeObjectForKey:kUserID];
+    [userDefaults removeObjectForKey:kToken];
     [userDefaults synchronize];
 }
 

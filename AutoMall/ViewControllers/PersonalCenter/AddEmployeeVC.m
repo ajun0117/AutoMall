@@ -173,7 +173,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreAddStaff object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreAddStaff, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"realName",self.phoneTF.text,@"phone",self.passwordTF.text,@"password", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"nickname",self.phoneTF.text,@"phone",self.passwordTF.text,@"password", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreAddStaff) delegate:nil params:pram info:infoDic];
 }
 #pragma mark - 网络请求结果数据
@@ -188,7 +188,7 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:StoreAddStaff]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreAddStaff object:nil];
-        NSLog(@"_responseObject: %@",responseObject);
+        NSLog(@"StoreAddStaff: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

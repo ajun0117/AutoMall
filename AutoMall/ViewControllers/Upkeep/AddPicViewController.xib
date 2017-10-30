@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-Kn-mjA">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="scrollIndicatorInsets" minX="10" minY="20" maxX="10" maxY="10"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="NaQ-cc-vH7">
                         <size key="itemSize" width="60" height="60"/>
@@ -207,16 +207,16 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="Qrk-Ka-kCN"/>
-                            <exclude reference="L3W-wz-EyW"/>
-                            <exclude reference="cyd-xC-1eS"/>
-                            <exclude reference="Xu1-xa-iII"/>
-                            <exclude reference="zOB-Dc-WqD"/>
                             <exclude reference="BVd-jX-nr0"/>
                             <exclude reference="cX9-yU-ZWB"/>
                             <exclude reference="d46-tF-kn2"/>
+                            <exclude reference="L3W-wz-EyW"/>
+                            <exclude reference="cyd-xC-1eS"/>
                             <exclude reference="0I1-eY-h2f"/>
                             <exclude reference="6v4-Zk-D6S"/>
                             <exclude reference="sou-i1-TvQ"/>
+                            <exclude reference="Xu1-xa-iII"/>
+                            <exclude reference="zOB-Dc-WqD"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
@@ -228,21 +228,21 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="Qrk-Ka-kCN"/>
-                            <include reference="L3W-wz-EyW"/>
-                            <include reference="cyd-xC-1eS"/>
-                            <include reference="Xu1-xa-iII"/>
-                            <include reference="zOB-Dc-WqD"/>
                             <include reference="BVd-jX-nr0"/>
                             <include reference="cX9-yU-ZWB"/>
                             <include reference="d46-tF-kn2"/>
+                            <include reference="L3W-wz-EyW"/>
+                            <include reference="cyd-xC-1eS"/>
                             <include reference="0I1-eY-h2f"/>
                             <include reference="6v4-Zk-D6S"/>
                             <include reference="sou-i1-TvQ"/>
+                            <include reference="Xu1-xa-iII"/>
+                            <include reference="zOB-Dc-WqD"/>
                         </mask>
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Kjc-gC-1VK" secondAttribute="trailing" id="0zd-yc-gD4"/>
                 <constraint firstItem="qA4-Kn-mjA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4L1-nk-HZD"/>
@@ -259,14 +259,14 @@
                     <exclude reference="Kjc-gC-1VK"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="0zd-yc-gD4"/>
-                    <exclude reference="4eq-qo-2tR"/>
-                    <exclude reference="V3L-Y2-NeJ"/>
-                    <exclude reference="uec-Jf-2Vt"/>
                     <exclude reference="4L1-nk-HZD"/>
                     <exclude reference="7dR-2n-aNH"/>
                     <exclude reference="dRY-Ci-PlK"/>
                     <exclude reference="oBP-mO-00P"/>
+                    <exclude reference="0zd-yc-gD4"/>
+                    <exclude reference="4eq-qo-2tR"/>
+                    <exclude reference="V3L-Y2-NeJ"/>
+                    <exclude reference="uec-Jf-2Vt"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -275,17 +275,17 @@
                     <include reference="Kjc-gC-1VK"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="0zd-yc-gD4"/>
-                    <include reference="4eq-qo-2tR"/>
-                    <include reference="V3L-Y2-NeJ"/>
-                    <include reference="uec-Jf-2Vt"/>
                     <include reference="4L1-nk-HZD"/>
                     <include reference="7dR-2n-aNH"/>
                     <include reference="dRY-Ci-PlK"/>
                     <exclude reference="oBP-mO-00P"/>
+                    <include reference="0zd-yc-gD4"/>
+                    <include reference="4eq-qo-2tR"/>
+                    <include reference="V3L-Y2-NeJ"/>
+                    <include reference="uec-Jf-2Vt"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="273" y="143"/>
+            <point key="canvasLocation" x="68" y="-136"/>
         </view>
     </objects>
 </document>

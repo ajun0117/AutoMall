@@ -10,4 +10,6 @@
 
 @interface YZMLoginViewController : UIViewController
 
+@property (assign, nonatomic) BOOL isPresented; 
+
 @end

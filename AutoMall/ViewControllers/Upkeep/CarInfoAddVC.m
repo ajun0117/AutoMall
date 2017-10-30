@@ -286,6 +286,11 @@
         }
         // 跳转到相机或相册页面
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //设置导航栏背景颜色
+        imagePickerController.navigationBar.barTintColor = [UIColor whiteColor];
+        //设置右侧取消按钮的字体颜色
+        imagePickerController.navigationBar.tintColor = [UIColor blackColor];
         imagePickerController.delegate = self;
         imagePickerController.allowsEditing = YES;
         imagePickerController.sourceType = sourceType;

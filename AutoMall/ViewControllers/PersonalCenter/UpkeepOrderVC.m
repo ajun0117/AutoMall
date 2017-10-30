@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"保养订单";
+    self.title = @"服务订单";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -61,7 +61,6 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
 }
-
 
 #pragma mark - 下拉刷新,上拉加载
 -(void)headerRefreshing {
@@ -108,10 +107,10 @@
             paymentStatus = @"4";
             break;
         }
-        case 5: {
-            paymentStatus = @"0";
-            break;
-        }
+//        case 5: {
+//            paymentStatus = @"";
+//            break;
+//        }
             
         default:
             break;
@@ -186,6 +185,7 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:CarUpkeepSearch]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepSearch object:nil];
+        NSLog(@"CarUpkeepSearch: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             [orderAry addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];

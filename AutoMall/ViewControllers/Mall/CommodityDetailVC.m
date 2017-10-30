@@ -20,6 +20,7 @@
 #import "HZPhotoBrowser.h"
 #import "ShoppingCartModel.h"
 #import "LoginViewController.h"
+#import "WebViewController.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -144,6 +145,7 @@ static CGFloat const scrollViewHeight = 220;
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        nav.navigationBar.barTintColor = [UIColor whiteColor];
         [self presentViewController:nav animated:YES completion:nil];
     }
 }
@@ -221,6 +223,7 @@ static CGFloat const scrollViewHeight = 220;
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        nav.navigationBar.barTintColor = [UIColor whiteColor];
         [self presentViewController:nav animated:YES completion:nil];
     }
 }
@@ -528,7 +531,14 @@ static CGFloat const scrollViewHeight = 220;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
-        
+        if (indexPath.row == 4) {
+            WebViewController *webVC = [[WebViewController alloc] init];
+            webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CommodityGetDesInfo),self.commodityId];
+            webVC.titleStr = @"商品详情";
+            webVC.canShare = NO;
+            webVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:webVC animated:YES];
+        }
     }
     if (indexPath.section == 1) {
         CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
@@ -593,6 +603,7 @@ static CGFloat const scrollViewHeight = 220;
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        nav.navigationBar.barTintColor = [UIColor whiteColor];
         [self presentViewController:nav animated:YES completion:nil];
     }
 }

@@ -57,7 +57,7 @@
                 <outlet property="imgView" destination="4a3-F3-tPo" id="xMC-PC-WVi"/>
                 <outlet property="nameL" destination="d1p-tQ-tdd" id="gKk-Cg-y6E"/>
             </connections>
-            <point key="canvasLocation" x="-100" y="42"/>
+            <point key="canvasLocation" x="-11" y="26"/>
         </tableViewCell>
     </objects>
     <resources>

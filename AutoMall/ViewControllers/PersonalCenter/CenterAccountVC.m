@@ -54,6 +54,23 @@
     textFieldArray = @[self.nickNameTF,self.wechatTF];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
 -(void) toExit {    //清空本地数据，退出登录
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认注销" message:@"确定要退出当前账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认注销", nil];
     alert.delegate = self;
@@ -62,12 +79,10 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1 && alertView.tag == 1000) {
-        //立即更新
-        //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[[_upDateObjectDic objectForKey:@"results"] firstObject] objectForKey:@"trackViewUrl"]]];
-    }
     if (buttonIndex == 1 && alertView.tag == 1001) {
         [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
+        self.UpdateLoginStatus();
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -150,6 +165,7 @@
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
+#pragma mark - 发送请求
 -(void)requestPostUpdateNickNameAndWechat { //修改资料
     [_hud show:YES];
     //注册通知
@@ -176,8 +192,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            NSDictionary *dic = @{@"nickname":self.nickNameTF.text,@"wechat":self.wechatTF.text};
-            self.UpdateUserInfo(dic);
+            self.UpdateUserInfo(nil);
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

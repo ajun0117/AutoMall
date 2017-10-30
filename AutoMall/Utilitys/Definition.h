@@ -152,7 +152,8 @@
 #define ComCategoryList                         @"/api/comCategory/list"    //商品分类
 //#define CommodityList                            @"/api/commodity/list"       //商品列表
 #define CommodityList                            @"/api/commodity/search"       //商品列表
-#define CommodityDetail                         @"/api/commodity/getInfo"   //商品详情
+#define CommodityDetail                        @"/api/commodity/getInfo"   //商品详情
+#define CommodityGetDesInfo               @"/api/commodity/getDesInfo"    //获取商品描述url
 #define CommoditytjList                         @"/api/commodity/tjlist"  //商品详情推荐商品列表
 #define AdvertList                                  @"/api/advert/list"             //广告列表接口
 #define ConsigneeList                              @"/api/consignee/list"        //收货地址接口
@@ -212,6 +213,8 @@
 #define FavoriteList                                @"/api/favorite/list"                   //收藏列表
 #define FavoriteCollect                           @"/api/favorite/collect"              //收藏
 #define FavoriteDecollect                       @"/api/favorite/decollect"          //取消收藏
+
+
 
 
 #define BaiduPush_Key @"DyHZlmzGGtjfRDyVmtcG3MG5" //百度云推送key

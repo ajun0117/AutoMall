@@ -320,11 +320,12 @@
             [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",dic[@"phone"]]];
             [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(dic[@"image"])];
             //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            
-            [self.navigationController popToRootViewControllerAnimated:YES]; //返回上级页面
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];     //发送登录成功通知
+            if (self.isPresented) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self.navigationController popToRootViewControllerAnimated:YES]; //返回上级页面
+            }
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

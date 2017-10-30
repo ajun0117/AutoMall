@@ -263,13 +263,17 @@
     }
     currentPhotoIndexPath = [tableV indexPathForCell:cell];     //记录当前拍照按钮对应的cell位置
     
-    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
+//    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
+//    photoVC.GoBackUpdate = ^(NSArray *array) {
+//        [self updatePhotoWithImages:array];
+//    };
+//    [self.navigationController pushViewController:photoVC animated:YES];
+    
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     photoVC.GoBackUpdate = ^(NSArray *array) {
         [self updatePhotoWithImages:array];
     };
     [self.navigationController pushViewController:photoVC animated:YES];
-//    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-//    [self.navigationController pushViewController:photoVC animated:YES];
 }
 
 -(void)updatePhotoWithImages:(NSArray *)images {
@@ -513,7 +517,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 15;
+    return 10;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

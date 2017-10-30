@@ -91,7 +91,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"employeeListCell"];
     NSDictionary *dic = listArray[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.textLabel.text = dic[@"realName"];
+    cell.textLabel.text = STRING(dic[@"nickname"]);
     return cell;
 }
 

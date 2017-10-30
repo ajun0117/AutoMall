@@ -10,4 +10,9 @@
 
 @interface AddPicViewController : UIViewController
 
+/**
+ * 更新照片
+ */
+@property (copy, nonatomic) void((^GoBackUpdate)(NSArray *array));
+
 @end
