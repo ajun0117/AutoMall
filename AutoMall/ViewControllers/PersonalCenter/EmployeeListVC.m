@@ -112,10 +112,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = listArray[indexPath.row];
     EmployeeDetailVC *detailVC = [[EmployeeDetailVC alloc] init];
-//        detailVC.userID = userArray[indexPath.section][@"id"];
-//        detailVC.isDrink = self.isDrink;
-//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    detailVC.idStr = NSStringWithNumber(dic[@"id"]);
+    detailVC.staffDic = dic;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

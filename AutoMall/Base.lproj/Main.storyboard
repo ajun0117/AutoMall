@@ -56,7 +56,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="check_default" translatesAutoresizingMaskIntoConstraints="NO" id="9jZ-UH-S3r">
-                                                    <rect key="frame" x="5" y="5" width="102" height="171"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="176"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快速保养检查" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywp-Ou-Lhv">
                                                     <rect key="frame" x="0.0" y="184" width="112" height="18"/>
@@ -72,13 +72,13 @@
                                         </view>
                                         <color key="backgroundColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="9jZ-UH-S3r" secondAttribute="trailing" constant="5" id="FAf-Q2-Ta2"/>
+                                            <constraint firstAttribute="trailing" secondItem="9jZ-UH-S3r" secondAttribute="trailing" id="FAf-Q2-Ta2"/>
                                             <constraint firstItem="Ywp-Ou-Lhv" firstAttribute="top" secondItem="9jZ-UH-S3r" secondAttribute="bottom" constant="8" id="NrL-FZ-234"/>
                                             <constraint firstAttribute="bottom" secondItem="Ywp-Ou-Lhv" secondAttribute="bottom" constant="8" id="WSk-WB-i6z"/>
                                             <constraint firstAttribute="trailing" secondItem="Ywp-Ou-Lhv" secondAttribute="trailing" id="XmA-B7-wy6"/>
                                             <constraint firstItem="Ywp-Ou-Lhv" firstAttribute="leading" secondItem="7Ty-62-hd2" secondAttribute="leading" id="foH-0A-PKl"/>
-                                            <constraint firstItem="9jZ-UH-S3r" firstAttribute="top" secondItem="7Ty-62-hd2" secondAttribute="top" constant="5" id="jb3-u2-6MV"/>
-                                            <constraint firstItem="9jZ-UH-S3r" firstAttribute="leading" secondItem="7Ty-62-hd2" secondAttribute="leading" constant="5" id="pN1-GI-nH4"/>
+                                            <constraint firstItem="9jZ-UH-S3r" firstAttribute="top" secondItem="7Ty-62-hd2" secondAttribute="top" id="jb3-u2-6MV"/>
+                                            <constraint firstItem="9jZ-UH-S3r" firstAttribute="leading" secondItem="7Ty-62-hd2" secondAttribute="leading" id="pN1-GI-nH4"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="img" destination="9jZ-UH-S3r" id="hMS-wN-HEJ"/>

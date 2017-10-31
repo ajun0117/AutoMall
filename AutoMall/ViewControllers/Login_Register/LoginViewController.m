@@ -229,7 +229,6 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"_responseObject: %@",responseObject);
     
     if ([notification.name isEqualToString:UserLogin]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogin object:nil];

@@ -44,29 +44,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.title = @"车辆信息";
+
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = -16;
-    
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    [searchBtn setImage:[UIImage imageNamed:@"baoyang_history"] forState:UIControlStateNormal];
-    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [searchBtn addTarget:self action:@selector(toHistoryList) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
-    
-//    self.myScrollV.contentSize = CGSizeMake(SCREEN_WIDTH, 720);
+    if (self.carDic) {
+        self.title = @"车辆信息编辑";
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                           target:nil action:nil];
+        negativeSpacer.width = -16;
+        
+        UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        searchBtn.frame = CGRectMake(0, 0, 44, 44);
+        [searchBtn setImage:[UIImage imageNamed:@"baoyang_history"] forState:UIControlStateNormal];
+        [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+        [searchBtn addTarget:self action:@selector(toHistoryList) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+        
+    }
+    else {
+        self.title = @"新增车辆";
+    }
     
     //监听键盘出现和消失
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoAction)];
+    [self.carImgView addGestureRecognizer:tap0];
     
     nameArray = @[@"男", @"女"];
     genderPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
@@ -233,7 +240,7 @@
     [self.navigationController pushViewController:historyVC animated:YES];
 }
 
-- (IBAction)photoAction:(id)sender {
+- (void)photoAction {
     [self selectThePhotoOrCamera];
 }
 
@@ -300,7 +307,7 @@
         }];
     }
 }
-// 拍照完成回调
+// 拍照完成回调 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0)
 {
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)

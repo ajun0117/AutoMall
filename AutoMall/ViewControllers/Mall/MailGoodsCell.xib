@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eb5-Xh-FgM">
                         <rect key="frame" x="8" y="8" width="149" height="240"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="timg-2" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-fi-NLe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-fi-NLe">
                                 <rect key="frame" x="5" y="0.0" width="139" height="148"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="N3b-fi-NLe" secondAttribute="height" id="6QV-Gl-LWB"/>
@@ -71,7 +71,7 @@
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yXO-eO-lb6">
                         <rect key="frame" x="163" y="8" width="149" height="240"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="timg-2" translatesAutoresizingMaskIntoConstraints="NO" id="Vxy-26-Vdu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="Vxy-26-Vdu">
                                 <rect key="frame" x="5" y="0.0" width="139" height="148"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Vxy-26-Vdu" secondAttribute="height" id="FE2-7O-IG1"/>
@@ -120,7 +120,7 @@
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ixW-pR-Els">
                         <rect key="frame" x="8" y="256" width="149" height="240"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="timg-2" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-iG-5ea">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-iG-5ea">
                                 <rect key="frame" x="5" y="0.0" width="139" height="148"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="E0g-iG-5ea" secondAttribute="height" id="vkQ-cU-byp"/>
@@ -169,7 +169,7 @@
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ys-aF-O2T">
                         <rect key="frame" x="163" y="255.5" width="149" height="240.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="timg-2" translatesAutoresizingMaskIntoConstraints="NO" id="IvK-Gq-bjI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="IvK-Gq-bjI">
                                 <rect key="frame" x="5" y="0.0" width="139" height="148"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IvK-Gq-bjI" secondAttribute="height" id="Kog-YW-IOg"/>
@@ -268,6 +268,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="timg-2" width="691" height="667"/>
+        <image name="default" width="512" height="512"/>
     </resources>
 </document>

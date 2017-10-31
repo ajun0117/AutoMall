@@ -1,38 +1,49 @@
 //
-//  EmployeeDetailVC.m
+//  EmployeeSkillListVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/9/5.
+//  Created by LYD on 2017/10/31.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "EmployeeDetailVC.h"
-#import "EmployeeDetailTopCell.h"
+#import "EmployeeSkillListVC.h"
 #import "EmployeeDetailCell.h"
-#import "EmployeeAuthVC.h"
+#import "EmployeeEditSkillCertificationVC.h"
 
-@interface EmployeeDetailVC ()
+@interface EmployeeSkillListVC ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSArray *skillAry;
 }
-@property (weak, nonatomic) IBOutlet UITableView *myTableView;
+
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
-@implementation EmployeeDetailVC
+@implementation EmployeeSkillListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = self.staffDic[@"nickname"];
+    
+    self.title = @"我的技能认证";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    //    searchBtn.contentMode = UIViewContentModeRight;
+    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
+    [searchBtn addTarget:self action:@selector(toAddSkill) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailCell"];
-    [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailTopCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailTopCell"];
-     
+    
     [self requestGetStaffList];
 }
 
@@ -53,38 +64,26 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
--(void) toCheck {   //进行审核操作
-    EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
-    authVC.isReviewed = NO;
-    [self.navigationController pushViewController:authVC animated:YES];
+-(void)toAddSkill {
+    EmployeeEditSkillCertificationVC *editVC = [[EmployeeEditSkillCertificationVC alloc] init];
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    }
     return [skillAry count];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        return height + 1;
-    }
     return 66;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 10;
-    }
     return 1;
 }
 
@@ -93,31 +92,21 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailTopCell"];
-        cell.contentL.text = @"技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 ";
-        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 24;
-        return cell;
-    }
-    else {
-        NSDictionary *dic = skillAry[indexPath.row];
-        EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
-        cell.nameL.text = dic[@"name"];
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
-        cell.daishenBtn.hidden = NO;
-        [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
-    }
+    NSDictionary *dic = skillAry[indexPath.section];
+    EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
+    cell.nameL.text = dic[@"name"];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+//    [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
+    return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1) {
-        NSDictionary *dic = skillAry[indexPath.row];
-        EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
-        authVC.isReviewed = NO;
-        authVC.skillDic = dic;      //技能字典
-        [self.navigationController pushViewController:authVC animated:YES];
-    }
+
+    NSDictionary *dic = skillAry[indexPath.section];
+    EmployeeEditSkillCertificationVC *editVC = [[EmployeeEditSkillCertificationVC alloc] init];
+    editVC.skillDic = dic;
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 #pragma mark - 发起请求
@@ -126,8 +115,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StaffSkillList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StaffSkillList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.staffDic[@"id"],@"id", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StaffSkillList) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StaffSkillList) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

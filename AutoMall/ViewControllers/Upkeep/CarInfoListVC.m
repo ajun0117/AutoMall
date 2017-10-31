@@ -10,6 +10,7 @@
 #import "CarInfoListCell.h"
 #import "CarInfoSearchVC.h"
 #import "BaoyangHistoryVC.h"
+#import "CarInfoAddVC.h"
 
 @interface CarInfoListVC ()
 {
@@ -34,15 +35,22 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = -16;
+    negativeSpacer.width = -6;
+    
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    addBtn.frame = CGRectMake(0, 0, 30, 30);
+    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+//    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    searchBtn.frame = CGRectMake(0, 0, 30, 30);
     [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
-    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, addBtnBarBtn, nil];
     
     [self.infoTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
     self.infoTableView.tableFooterView = [UIView new];
@@ -73,6 +81,11 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void) toRegisterNewCarInfo {
+    CarInfoAddVC *addVC = [[CarInfoAddVC alloc] init];
+    [self.navigationController pushViewController:addVC animated:YES];
+}
+
 #pragma mark - 下拉刷新,上拉加载
 -(void)headerRefreshing {
     NSLog(@"下拉刷新个人信息");
@@ -89,8 +102,8 @@
 
 -(void) toSearch {  //搜索车辆保养记录
     CarInfoSearchVC *searchVC = [[CarInfoSearchVC alloc] init];
-    searchVC.GoBackSelectCarId = ^(NSNumber *carId) {
-        self.GoBackSelectCarId(carId);      //传参至保养首页
+    searchVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+        self.GoBackSelectCarDic(carDic);      //传参至保养首页
     };
     [self.navigationController pushViewController:searchVC animated:YES];
 }
@@ -136,19 +149,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//        BaoyangHistoryVC *detailVC = [[BaoyangHistoryVC alloc] init];
-////        detailVC.userID = userArray[indexPath.section][@"id"];
-////        detailVC.isDrink = self.isDrink;
-////        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-//        [self.navigationController pushViewController:detailVC animated:YES];
+        NSDictionary *dic = carArray[indexPath.row];
+        CarInfoAddVC *editVC = [[CarInfoAddVC alloc] init];
+        editVC.carDic = dic;
+        [self.navigationController pushViewController:editVC animated:YES];
 }
 
 -(void)selectTheCar:(UIButton *)btn {
     btn.selected = YES;
     NSInteger row = btn.tag - 100;
     NSDictionary *dic = carArray[row];
-    self.GoBackSelectCarId(dic[@"id"]);
+    self.GoBackSelectCarDic(dic);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -160,6 +171,9 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarListOrSearch, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CarListOrSearch),currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+//    NSLog(@"pram: %@",pram);
+//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarListOrSearch) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

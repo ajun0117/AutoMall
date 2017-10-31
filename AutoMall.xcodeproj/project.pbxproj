@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		04052C691F7E5790004E6188 /* EmployeeDetailTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04052C671F7E5790004E6188 /* EmployeeDetailTopCell.m */; };
 		04052C6A1F7E5790004E6188 /* EmployeeDetailTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04052C681F7E5790004E6188 /* EmployeeDetailTopCell.xib */; };
+		040BC8BB1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BC8B91FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m */; };
+		040BC8BC1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040BC8BA1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib */; };
+		040BC8C11FA88482009AD3BA /* EmployeeSkillListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BC8BF1FA88482009AD3BA /* EmployeeSkillListVC.m */; };
+		040BC8C21FA88482009AD3BA /* EmployeeSkillListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040BC8C01FA88482009AD3BA /* EmployeeSkillListVC.xib */; };
 		041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076EB1F54243B003CB740 /* HeadNameCell.m */; };
 		041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076EC1F54243B003CB740 /* HeadNameCell.xib */; };
 		041076F21F542463003CB740 /* CenterNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076F01F542463003CB740 /* CenterNormalCell.m */; };
@@ -414,6 +418,12 @@
 		04052C661F7E5790004E6188 /* EmployeeDetailTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailTopCell.h; sourceTree = "<group>"; };
 		04052C671F7E5790004E6188 /* EmployeeDetailTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailTopCell.m; sourceTree = "<group>"; };
 		04052C681F7E5790004E6188 /* EmployeeDetailTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeDetailTopCell.xib; sourceTree = "<group>"; };
+		040BC8B81FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeEditSkillCertificationVC.h; sourceTree = "<group>"; };
+		040BC8B91FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeEditSkillCertificationVC.m; sourceTree = "<group>"; };
+		040BC8BA1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeEditSkillCertificationVC.xib; sourceTree = "<group>"; };
+		040BC8BE1FA88482009AD3BA /* EmployeeSkillListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeSkillListVC.h; sourceTree = "<group>"; };
+		040BC8BF1FA88482009AD3BA /* EmployeeSkillListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeSkillListVC.m; sourceTree = "<group>"; };
+		040BC8C01FA88482009AD3BA /* EmployeeSkillListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeSkillListVC.xib; sourceTree = "<group>"; };
 		041076EA1F54243B003CB740 /* HeadNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadNameCell.h; sourceTree = "<group>"; };
 		041076EB1F54243B003CB740 /* HeadNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadNameCell.m; sourceTree = "<group>"; };
 		041076EC1F54243B003CB740 /* HeadNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeadNameCell.xib; sourceTree = "<group>"; };
@@ -1200,6 +1210,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040BC8BD1FA8844F009AD3BA /* 员工查看自己的技能列表 */ = {
+			isa = PBXGroup;
+			children = (
+				040BC8BE1FA88482009AD3BA /* EmployeeSkillListVC.h */,
+				040BC8BF1FA88482009AD3BA /* EmployeeSkillListVC.m */,
+				040BC8C01FA88482009AD3BA /* EmployeeSkillListVC.xib */,
+			);
+			name = "员工查看自己的技能列表";
+			sourceTree = "<group>";
+		};
 		041076E91F5423FB003CB740 /* 中心首页cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2188,7 +2208,8 @@
 				F7D87A221FA5BF9E009EB53F /* 账户管理 */,
 				04D035891FA727480013AD6F /* 保养服务订单 */,
 				F7AC8DA91FA7961900B284DA /* 员工编辑技能介绍 */,
-				F7D87A1C1FA4E5D9009EB53F /* 员工上传认证Cell */,
+				040BC8BD1FA8844F009AD3BA /* 员工查看自己的技能列表 */,
+				F7D87A1C1FA4E5D9009EB53F /* 员工修改技能认证 */,
 				04C35D191F8B579000062014 /* 消息列表 */,
 				04D107161F629653007D9F57 /* 统计报表 */,
 				04EFEC7F1F5FF717004D9188 /* 收货地址管理 */,
@@ -2784,11 +2805,14 @@
 			name = "员工编辑技能介绍";
 			sourceTree = "<group>";
 		};
-		F7D87A1C1FA4E5D9009EB53F /* 员工上传认证Cell */ = {
+		F7D87A1C1FA4E5D9009EB53F /* 员工修改技能认证 */ = {
 			isa = PBXGroup;
 			children = (
+				040BC8B81FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.h */,
+				040BC8B91FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m */,
+				040BC8BA1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib */,
 			);
-			name = "员工上传认证Cell";
+			name = "员工修改技能认证";
 			sourceTree = "<group>";
 		};
 		F7D87A221FA5BF9E009EB53F /* 账户管理 */ = {
@@ -2869,6 +2893,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040BC8C21FA88482009AD3BA /* EmployeeSkillListVC.xib in Resources */,
 				0486E8CD1F8F667700FB746E /* test.caf in Resources */,
 				04DC7DE31F31C28300AA20A7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				041076F81F54247B003CB740 /* CenterOrderCell.xib in Resources */,
@@ -2908,6 +2933,7 @@
 				0459C6BC1F614C870040501E /* Info.plist in Resources */,
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
+				040BC8BC1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				04EB162C1F42F95200974972 /* BaoyangDiscountsVC.xib in Resources */,
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
@@ -3174,6 +3200,7 @@
 				041556E31F7F915900686016 /* AJSegmentedControl.m in Sources */,
 				046B8DDA1F9A044300784AA8 /* base64.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
+				040BC8BB1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
 				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
@@ -3189,6 +3216,7 @@
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
 				04DCA1751FA2E316004B1054 /* CheckResultMultiCell.m in Sources */,
+				040BC8C11FA88482009AD3BA /* EmployeeSkillListVC.m in Sources */,
 				04EFEC681F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m in Sources */,
 				04D1077F1F62998D007D9F57 /* ZFMethod.m in Sources */,
 				047ADFEE1F4A86EF00AEAE8E /* CMSDWebImagePrefetcher.m in Sources */,
@@ -3438,7 +3466,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3480,7 +3508,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

@@ -10,4 +10,6 @@
 
 @interface EmployeeEditIntroduceVC : UIViewController
 
+@property (strong , nonatomic) NSString *introduceStr;
+
 @end

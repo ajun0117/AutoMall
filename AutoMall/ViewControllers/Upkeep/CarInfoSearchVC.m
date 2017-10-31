@@ -35,15 +35,15 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = -16;
+    negativeSpacer.width = -6;
     
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    [searchBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
-    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [searchBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    addBtn.frame = CGRectMake(0, 0, 30, 30);
+    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+//    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, addBtnBarBtn, nil];
     
     [self.searchTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
     self.searchTableView.tableFooterView = [UIView new];
@@ -73,7 +73,6 @@
 
 -(void) toRegisterNewCarInfo {
     CarInfoAddVC *addVC = [[CarInfoAddVC alloc] init];
-    addVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
@@ -153,7 +152,7 @@
     btn.selected = YES;
     NSInteger row = btn.tag - 100;
     NSDictionary *dic = carArray[row];
-    self.GoBackSelectCarId(dic[@"id"]);
+    self.GoBackSelectCarDic(dic);
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

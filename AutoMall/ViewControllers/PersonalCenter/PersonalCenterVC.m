@@ -27,6 +27,8 @@
 #import "WebViewController.h"
 #import "CenterAccountVC.h"
 #import "UpkeepOrderVC.h"
+#import "EmployeeEditIntroduceVC.h"
+#import "EmployeeSkillListVC.h"
 
 @interface PersonalCenterVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -640,7 +642,7 @@
                     case 0: {
                         CenterEmployeeCell *cell = (CenterEmployeeCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeCell"];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.contentL.text = @"技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述 技能特长描述";
+                        cell.contentL.text = @"快修改技能描述，提升信誉度吧！";
                         cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 50;
                         return cell;
                         break;
@@ -940,10 +942,14 @@
             }
             case 1: {
                 if (indexPath.row == 0) {
-                    
+                    EmployeeEditIntroduceVC *editVC = [[EmployeeEditIntroduceVC alloc] init];
+                    editVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:editVC animated:YES];
                 }
                 else {
-                    
+                    EmployeeSkillListVC *editVC = [[EmployeeSkillListVC alloc] init];
+                    editVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:editVC animated:YES];
                 }
                 break;
             }

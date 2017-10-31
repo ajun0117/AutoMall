@@ -11,5 +11,6 @@
 @interface EmployeeAuthVC : UIViewController
 
 @property (assign, nonatomic) BOOL isReviewed; //是否审核过
+@property (strong, nonatomic) NSDictionary *skillDic;   //技能字典
 
 @end

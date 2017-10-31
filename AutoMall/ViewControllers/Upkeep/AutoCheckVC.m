@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"粤A88888";
+    self.title = self.carDic[@"plateNumber"];
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -805,7 +805,7 @@
     }
     NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
     
-    NSDictionary *carDic = @{@"id":self.carId,@"mileage":lichengDic[@"mileage"],@"fuelAmount":lichengDic[@"fuelAmount"]};
+    NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":lichengDic[@"mileage"],@"fuelAmount":lichengDic[@"fuelAmount"]};
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
 //    NSError *err = nil;
 //    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pram options:NSJSONWritingPrettyPrinted error:&err];

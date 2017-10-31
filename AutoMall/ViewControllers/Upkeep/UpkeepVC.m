@@ -20,7 +20,7 @@
     NSArray *typeAry; //类别数组
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSNumber *selectedCarId;    //选择的保养车辆id
+    NSDictionary *selectedCarDic;    //选择的保养车辆Dic
 }
 //@property (strong, nonatomic) IBOutlet UIButton *carOwnerBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *hairdressingBtn;
@@ -93,9 +93,10 @@
     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if (mobileUserType.length > 0) {    //已登录用户
         CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
-        listVC.GoBackSelectCarId = ^(NSNumber *carId) {
-            selectedCarId = carId;
-            NSLog(@"selectedCarId: %@",selectedCarId);
+        listVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+            selectedCarDic = carDic;
+            self.title = carDic[@"plateNumber"];
+            NSLog(@"selectedCarDic: %@",selectedCarDic);
         };
         listVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listVC animated:YES];
@@ -131,8 +132,8 @@
 {
     
     UpkeepHomeCollectionCell *collCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"upkeepHomeCollectionCell" forIndexPath:indexPath];
-    collCell.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
-    collCell.layer.borderWidth = 1;
+//    collCell.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
+//    collCell.layer.borderWidth = 1;
 //    collCell.layer.cornerRadius = 5;
     NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
     [collCell.img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];      //  IMG(@"check_default")
@@ -158,10 +159,10 @@
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             }
             else {
-                if (selectedCarId) {
+                if (selectedCarDic) {
                     AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
                     checkVC.checktypeID = dic[@"id"];
-                    checkVC.carId = selectedCarId;
+                    checkVC.carDic = selectedCarDic;
                     checkVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:checkVC animated:YES];
                 }   else {
@@ -172,10 +173,10 @@
             }
         }
         else {
-            if (selectedCarId) {
+            if (selectedCarDic) {
                 AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
                 checkVC.checktypeID = dic[@"id"];
-                checkVC.carId = selectedCarId;
+                checkVC.carDic = selectedCarDic;
                 checkVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:checkVC animated:YES];
             } else {

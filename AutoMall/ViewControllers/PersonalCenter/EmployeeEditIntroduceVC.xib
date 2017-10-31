@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmployeeEditIntroduceVC">
             <connections>
                 <outlet property="jieshaoTV" destination="obe-KQ-vA4" id="DhQ-sk-Kfl"/>
+                <outlet property="lbNums" destination="umG-ej-HTA" id="vQU-Rj-sUL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,18 +29,24 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="保存"/>
+                    <connections>
+                        <action selector="changeAction:" destination="-1" eventType="touchUpInside" id="wmk-Re-vaY"/>
+                    </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJA-LM-b1S">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWG-Y1-TRf">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+                            <rect key="frame" x="0.0" y="64" width="375" height="260"/>
                             <subviews>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="obe-KQ-vA4">
-                                    <rect key="frame" x="16" y="59" width="343" height="181"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="技能详细介绍" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="obe-KQ-vA4">
+                                    <rect key="frame" x="16" y="59" width="343" height="157"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="yRj-ky-4dM"/>
+                                    </connections>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="技能特长" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cS-vp-sYb">
                                     <rect key="frame" x="16" y="8" width="69.5" height="22"/>
@@ -52,32 +59,41 @@
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4b-jP-XNb">
                                     <rect key="frame" x="16" y="38" width="359" height="1"/>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="gJ6-x3-Tax"/>
+                                        <constraint firstAttribute="height" constant="0.5" id="gJ6-x3-Tax"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/255" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umG-ej-HTA">
+                                    <rect key="frame" x="322.5" y="228" width="36.5" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="260" id="5fC-MP-IxD"/>
+                                <constraint firstItem="umG-ej-HTA" firstAttribute="top" secondItem="obe-KQ-vA4" secondAttribute="bottom" constant="12" id="9MD-MV-OrP"/>
                                 <constraint firstItem="2cS-vp-sYb" firstAttribute="leading" secondItem="EWG-Y1-TRf" secondAttribute="leading" constant="16" id="CPz-Hl-MuL"/>
                                 <constraint firstAttribute="trailing" secondItem="obe-KQ-vA4" secondAttribute="trailing" constant="16" id="D1W-Zu-i9w"/>
+                                <constraint firstAttribute="trailing" secondItem="umG-ej-HTA" secondAttribute="trailing" constant="16" id="EXQ-8N-xiJ"/>
                                 <constraint firstItem="obe-KQ-vA4" firstAttribute="leading" secondItem="EWG-Y1-TRf" secondAttribute="leading" constant="16" id="FWf-kA-764"/>
                                 <constraint firstAttribute="trailing" secondItem="W4b-jP-XNb" secondAttribute="trailing" id="O3Z-V6-gJc"/>
                                 <constraint firstItem="2cS-vp-sYb" firstAttribute="top" secondItem="EWG-Y1-TRf" secondAttribute="top" constant="8" id="PJw-sQ-gX1"/>
-                                <constraint firstAttribute="bottom" secondItem="obe-KQ-vA4" secondAttribute="bottom" constant="20" id="RC6-f3-1iH"/>
                                 <constraint firstItem="W4b-jP-XNb" firstAttribute="top" secondItem="2cS-vp-sYb" secondAttribute="bottom" constant="8" id="RD2-ho-VTN"/>
                                 <constraint firstItem="W4b-jP-XNb" firstAttribute="leading" secondItem="EWG-Y1-TRf" secondAttribute="leading" constant="16" id="YcF-06-CVq"/>
+                                <constraint firstAttribute="bottom" secondItem="umG-ej-HTA" secondAttribute="bottom" constant="16" id="bf6-Cx-yft"/>
                                 <constraint firstItem="obe-KQ-vA4" firstAttribute="top" secondItem="W4b-jP-XNb" secondAttribute="bottom" constant="20" id="rrc-hp-C3x"/>
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="EWG-Y1-TRf" firstAttribute="top" secondItem="WJA-LM-b1S" secondAttribute="top" id="QaA-lu-cK2"/>
+                        <constraint firstItem="EWG-Y1-TRf" firstAttribute="top" secondItem="WJA-LM-b1S" secondAttribute="top" constant="64" id="QaA-lu-cK2"/>
                         <constraint firstItem="EWG-Y1-TRf" firstAttribute="leading" secondItem="WJA-LM-b1S" secondAttribute="leading" id="ZIF-UO-T7b"/>
                         <constraint firstAttribute="bottom" secondItem="EWG-Y1-TRf" secondAttribute="bottom" constant="352" id="iUE-3W-geh"/>
                         <constraint firstAttribute="trailing" secondItem="EWG-Y1-TRf" secondAttribute="trailing" id="zxr-0w-Rxb"/>
@@ -95,7 +111,7 @@
                 <constraint firstItem="WJA-LM-b1S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wSs-Ay-JyD"/>
                 <constraint firstAttribute="trailing" secondItem="WJA-LM-b1S" secondAttribute="trailing" id="wqd-KN-vYq"/>
             </constraints>
-            <point key="canvasLocation" x="-101" y="57"/>
+            <point key="canvasLocation" x="-359.5" y="-15.5"/>
         </view>
     </objects>
 </document>

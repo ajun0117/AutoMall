@@ -268,7 +268,6 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"_responseObject: %@",responseObject);
     
     if ([notification.name isEqualToString:GetSMS]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:GetSMS object:nil];
