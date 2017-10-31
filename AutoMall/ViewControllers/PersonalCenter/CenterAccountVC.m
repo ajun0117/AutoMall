@@ -188,6 +188,7 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:ChangeNickName]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ChangeNickName object:nil];
+        NSLog(@"ChangeNickName: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

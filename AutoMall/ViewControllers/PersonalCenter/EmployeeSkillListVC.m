@@ -7,7 +7,7 @@
 //
 
 #import "EmployeeSkillListVC.h"
-#import "EmployeeDetailCell.h"
+#import "EmployeeSkillListCell.h"
 #import "EmployeeEditSkillCertificationVC.h"
 
 @interface EmployeeSkillListVC ()
@@ -42,7 +42,7 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
     
-    [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeSkillListCell" bundle:nil] forCellReuseIdentifier:@"employeeSkillListCell"];
     
     [self requestGetStaffList];
 }
@@ -80,7 +80,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 66;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -93,10 +95,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = skillAry[indexPath.section];
-    EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
-    cell.nameL.text = dic[@"name"];
+    EmployeeSkillListCell *cell = (EmployeeSkillListCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeSkillListCell"];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
-//    [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
+    cell.nameL.text = dic[@"name"];
+    cell.introduceL.text = dic[@"remark"];
+    cell.introduceL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 84;
     return cell;
 }
 

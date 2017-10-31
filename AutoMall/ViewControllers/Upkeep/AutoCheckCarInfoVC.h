@@ -15,4 +15,6 @@
  */
 @property (copy, nonatomic) void((^GoBackSubmitLicheng)(NSDictionary *dic));
 
+@property (strong, nonatomic) NSDictionary *carDic;
+
 @end

@@ -70,7 +70,7 @@
                             <constraint firstAttribute="height" constant="50" id="vdN-96-9Nu"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
-                        <state key="normal" image="checkbox_yes"/>
+                        <state key="normal" image="checkbox_no"/>
                         <state key="selected" image="checkbox_yes"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-uo-tfa">
@@ -109,6 +109,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="checkbox_no" width="27" height="27"/>
         <image name="checkbox_yes" width="27" height="27"/>
         <image name="default" width="512" height="512"/>
     </resources>

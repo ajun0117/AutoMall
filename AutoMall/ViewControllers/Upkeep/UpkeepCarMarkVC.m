@@ -32,6 +32,18 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -6;
+    
+    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+    [searchBtn setImage:[UIImage imageNamed:@"cars"] forState:UIControlStateNormal];
+    //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [searchBtn addTarget:self action:@selector(toReset:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
     //1添加 UIScrollView
     //设置 UIScrollView的位置与屏幕大小相同
@@ -67,6 +79,10 @@
     
     [self.addBtn setImage:[UIImage imageNamed:@"goods_add"] forState:UIControlStateSelected | UIControlStateHighlighted];
     [self.delBtn setImage:[UIImage imageNamed:@"goods_del"] forState:UIControlStateSelected | UIControlStateHighlighted];
+}
+
+#pragma mark - 重置
+-(void)toReset:(UIButton *)btn {
 }
 
 //告诉scrollview要缩放的是哪个子控件

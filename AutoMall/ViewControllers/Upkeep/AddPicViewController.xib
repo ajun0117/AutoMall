@@ -84,7 +84,7 @@
                                 </mask>
                             </variation>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkC-q4-R99">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkC-q4-R99">
                             <rect key="frame" x="275" y="5" width="90" height="30"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -93,10 +93,8 @@
                                     <variation key="widthClass=compact" constant="90"/>
                                 </constraint>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="立即上传">
-                                <color key="titleColor" red="1" green="0.4549019608" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="立即上传"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="N3U-8k-r0A"/>

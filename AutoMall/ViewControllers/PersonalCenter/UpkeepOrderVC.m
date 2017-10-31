@@ -17,7 +17,6 @@
     MBProgressHUD *_networkConditionHUD;
     int currentpage;
     NSMutableArray *orderAry;    //订单列表
-    NSString *paymentStatus;      //订单状态
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -41,6 +40,9 @@
     currentpage = 0;
     orderAry = [NSMutableArray array];
     
+    if (! self.orderStatus) {
+        self.orderStatus = @"0";
+    }
     [self requestGetHistoryList];
     
     [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"订单确认"}, @{@"name":@"施工完成"}, @{@"name":@"已付款"}, @{@"name":@"已完成"}]];
@@ -88,27 +90,27 @@
     NSLog(@"index: %ld",(long)index);
     switch (index) {
         case 0: {
-            paymentStatus = @"0";
+            self.orderStatus = @"0";
             break;
         }
         case 1: {
-            paymentStatus = @"1";
+            self.orderStatus = @"1";
             break;
         }
         case 2: {
-            paymentStatus = @"2";
+            self.orderStatus = @"2";
             break;
         }
         case 3: {
-            paymentStatus = @"3";
+            self.orderStatus = @"3";
             break;
         }
         case 4: {
-            paymentStatus = @"4";
+            self.orderStatus = @"4";
             break;
         }
 //        case 5: {
-//            paymentStatus = @"";
+//            self.orderStatus = @"";
 //            break;
 //        }
             
@@ -167,7 +169,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&pageNo=%d&paymentStatus=%@",UrlPrefix(CarUpkeepSearch),userId, currentpage,paymentStatus];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@&pageNo=%d&paymentStatus=%@",UrlPrefix(CarUpkeepSearch),userId, currentpage,self.orderStatus];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

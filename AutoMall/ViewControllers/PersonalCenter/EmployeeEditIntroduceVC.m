@@ -202,10 +202,10 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:UserChangeRemark]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserChangeRemark object:nil];
+        NSLog(@"UserChangeRemark: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            self.UpdateUserInfo();
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

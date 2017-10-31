@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -41,11 +41,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                             <subviews>
                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Enp-ue-Yd0" customClass="WPImageView">
-                                    <rect key="frame" x="16" y="8" width="343" height="192"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传车辆图片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zv-Rc-t0m">
-                                    <rect key="frame" x="141.5" y="94.5" width="92" height="18"/>
+                                    <rect key="frame" x="141.5" y="90.5" width="92" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -53,13 +53,13 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="Enp-ue-Yd0" firstAttribute="top" secondItem="vej-6b-N6E" secondAttribute="top" constant="8" id="YJp-PK-94w"/>
+                                <constraint firstItem="Enp-ue-Yd0" firstAttribute="top" secondItem="vej-6b-N6E" secondAttribute="top" id="YJp-PK-94w"/>
                                 <constraint firstAttribute="height" constant="200" id="ZPg-TK-LuA"/>
                                 <constraint firstAttribute="bottom" secondItem="Enp-ue-Yd0" secondAttribute="bottom" id="auL-Hq-qTS"/>
-                                <constraint firstAttribute="trailing" secondItem="Enp-ue-Yd0" secondAttribute="trailing" constant="16" id="gcO-ag-yja"/>
+                                <constraint firstAttribute="trailing" secondItem="Enp-ue-Yd0" secondAttribute="trailing" id="gcO-ag-yja"/>
                                 <constraint firstItem="3Zv-Rc-t0m" firstAttribute="centerX" secondItem="Enp-ue-Yd0" secondAttribute="centerX" id="jfq-3S-9EB"/>
                                 <constraint firstItem="3Zv-Rc-t0m" firstAttribute="centerY" secondItem="Enp-ue-Yd0" secondAttribute="centerY" id="qiG-4v-RAB"/>
-                                <constraint firstItem="Enp-ue-Yd0" firstAttribute="leading" secondItem="vej-6b-N6E" secondAttribute="leading" constant="16" id="sMz-cm-fnC"/>
+                                <constraint firstItem="Enp-ue-Yd0" firstAttribute="leading" secondItem="vej-6b-N6E" secondAttribute="leading" id="sMz-cm-fnC"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLY-4y-45k">
@@ -645,19 +645,19 @@
                     <rect key="frame" x="0.0" y="1074" width="375" height="49"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1u-xk-mUB">
-                            <rect key="frame" x="0.0" y="0.0" width="185" height="49"/>
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="49"/>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="保存"/>
                             <connections>
                                 <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="CGA-Jn-Lhr"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak3-tY-VPk">
-                            <rect key="frame" x="190" y="0.0" width="185" height="49"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="选择"/>
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="49"/>
+                            <color key="backgroundColor" red="0.96862745098039216" green="0.58039215686274503" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="保存并选择"/>
                             <connections>
                                 <action selector="selectAction:" destination="-1" eventType="touchUpInside" id="Als-p7-eR5"/>
                             </connections>
@@ -666,7 +666,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="N1u-xk-mUB" secondAttribute="bottom" id="CyY-Hd-EYv"/>
-                        <constraint firstItem="ak3-tY-VPk" firstAttribute="leading" secondItem="N1u-xk-mUB" secondAttribute="trailing" constant="5" id="FCo-6s-oKf"/>
+                        <constraint firstItem="ak3-tY-VPk" firstAttribute="leading" secondItem="N1u-xk-mUB" secondAttribute="trailing" id="FCo-6s-oKf"/>
                         <constraint firstItem="N1u-xk-mUB" firstAttribute="leading" secondItem="MUN-he-tzY" secondAttribute="leading" id="J8Y-cc-r45"/>
                         <constraint firstAttribute="trailing" secondItem="ak3-tY-VPk" secondAttribute="trailing" id="Lm8-Ow-C8C"/>
                         <constraint firstItem="N1u-xk-mUB" firstAttribute="top" secondItem="MUN-he-tzY" secondAttribute="top" id="MMD-C4-dpG"/>
@@ -674,7 +674,6 @@
                         <constraint firstAttribute="height" constant="49" id="R3j-oU-6ca"/>
                         <constraint firstAttribute="bottom" secondItem="ak3-tY-VPk" secondAttribute="bottom" id="VGb-eP-P6D"/>
                         <constraint firstItem="ak3-tY-VPk" firstAttribute="top" secondItem="MUN-he-tzY" secondAttribute="top" id="XJa-ez-Wew"/>
-                        <constraint firstItem="ak3-tY-VPk" firstAttribute="leading" secondItem="N1u-xk-mUB" secondAttribute="trailing" constant="5" id="p0h-Xk-Xlg"/>
                     </constraints>
                 </view>
             </subviews>
@@ -691,7 +690,7 @@
                 <constraint firstItem="MUN-he-tzY" firstAttribute="top" secondItem="Anl-hI-GET" secondAttribute="bottom" id="wXr-qc-EQf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-390.5" y="103.5"/>
+            <point key="canvasLocation" x="-781" y="345"/>
         </view>
     </objects>
 </document>

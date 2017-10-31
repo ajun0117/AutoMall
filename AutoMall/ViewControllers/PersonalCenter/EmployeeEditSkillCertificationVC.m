@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = self.skillDic[@"name"];
+    self.title = @"添加技能";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -47,6 +47,14 @@
     
     UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView:)];
     [self.imgView addGestureRecognizer:tap0];
+    
+    if (self.skillDic) {
+        self.title = @"编辑技能";
+        imgUrl = self.skillDic[@"image"];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"default")];
+        self.nameTF.text = self.skillDic[@"name"];
+        self.contentTF.text = self.skillDic[@"remark"];
+    }
 }
 
 -(void)tapImageView:(UITapGestureRecognizer *)tap {
@@ -58,7 +66,14 @@
 //}
 
 - (IBAction)toSubmitSkillAction:(id)sender {
-    [self requestPostStoreUpdateStaffSkill];
+    if (self.nameTF.text.length > 0 && self.contentTF.text.length > 0 && imgUrl.length > 0) {
+        [self requestPostStoreUpdateStaffSkill];
+    }
+    else {
+        _networkConditionHUD.labelText = @"请填写完所有信息！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void)selectThePhotoOrCamera {
@@ -222,17 +237,22 @@
 -(void)requestPostStoreUpdateStaffSkill { //修改技能
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreUpdateStaffSkill object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreUpdateStaffSkill, @"op", nil];
-    NSDictionary *pram;
-    if (self.skillDic) {
-        pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.skillDic[@"id"],@"skillId",self.nameTF.text,@"skillName",self.contentTF.text,@"skillRemark", imgUrl, @"skillImage", nil];
+     if (self.skillDic) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreUpdateStaffSkill object:nil];
+        NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreUpdateStaffSkill, @"op", nil];
+        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.skillDic[@"id"],@"skillId",self.nameTF.text,@"skillName",self.contentTF.text,@"skillRemark", imgUrl, @"skillImage", nil];
+         NSLog(@"pram: %@",pram);
+        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreUpdateStaffSkill) delegate:nil params:pram info:infoDic];
     }
     else {
-        pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"skillName",self.contentTF.text,@"skillRemark", imgUrl, @"skillImage", nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserAppendSkill object:nil];
+        NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserAppendSkill, @"op", nil];
+        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"skillName",self.contentTF.text,@"skillRemark", imgUrl, @"skillImage", nil];
+        NSLog(@"pram: %@",pram);
+        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserAppendSkill) delegate:nil params:pram info:infoDic];
     }
-    NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreUpdateStaffSkill) delegate:nil params:pram info:infoDic];
+    
+    
 }
 
 #pragma mark - 网络请求结果数据
@@ -260,6 +280,23 @@
     if ([notification.name isEqualToString:StoreUpdateStaffSkill]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreUpdateStaffSkill object:nil];
         NSLog(@"StoreUpdateStaffSkill: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UserAppendSkill]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserAppendSkill object:nil];
+        NSLog(@"UserAppendSkill: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

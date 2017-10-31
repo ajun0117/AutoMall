@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -35,7 +35,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Tex-hN-C2V" secondAttribute="bottom" id="6Gc-jj-CHt"/>
                         <constraint firstItem="Tex-hN-C2V" firstAttribute="top" secondItem="DLE-fB-ZhW" secondAttribute="top" id="A17-Wz-Pyo"/>
@@ -62,13 +62,12 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juX-SI-iRg">
-                            <rect key="frame" x="119.5" y="42" width="136" height="30"/>
+                            <rect key="frame" x="0.0" y="31" width="375" height="49"/>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="136" id="7N6-OU-pl7"/>
-                                <constraint firstAttribute="height" constant="30" id="Ugx-xA-Emb"/>
+                                <constraint firstAttribute="height" constant="49" id="TOu-dg-Db1"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="保存"/>
                             <connections>
                                 <action selector="save:" destination="-1" eventType="touchUpInside" id="AUI-Cl-xfO"/>
@@ -102,17 +101,18 @@
                         <constraint firstItem="dGm-xr-8B3" firstAttribute="top" secondItem="eif-R5-aU1" secondAttribute="top" constant="8" id="0T0-Sb-g3F"/>
                         <constraint firstItem="mBw-fE-QYY" firstAttribute="leading" secondItem="eif-R5-aU1" secondAttribute="leading" id="272-xK-vUp"/>
                         <constraint firstItem="5xZ-Fp-tba" firstAttribute="top" secondItem="eif-R5-aU1" secondAttribute="top" constant="8" id="6Cs-OU-Rc5"/>
-                        <constraint firstAttribute="bottom" secondItem="juX-SI-iRg" secondAttribute="bottom" constant="8" id="DoH-nz-CXI"/>
                         <constraint firstItem="dGm-xr-8B3" firstAttribute="centerX" secondItem="eif-R5-aU1" secondAttribute="centerX" multiplier="6:5" id="K2K-GR-gBR"/>
+                        <constraint firstAttribute="bottom" secondItem="juX-SI-iRg" secondAttribute="bottom" id="LI3-VJ-YiG"/>
                         <constraint firstItem="5xZ-Fp-tba" firstAttribute="centerX" secondItem="eif-R5-aU1" secondAttribute="centerX" multiplier="4:5" id="Qri-xU-ZeZ"/>
                         <constraint firstItem="mBw-fE-QYY" firstAttribute="top" secondItem="eif-R5-aU1" secondAttribute="top" id="eWd-1e-zzw"/>
-                        <constraint firstItem="juX-SI-iRg" firstAttribute="centerX" secondItem="eif-R5-aU1" secondAttribute="centerX" id="jd4-qj-ofT"/>
                         <constraint firstAttribute="trailing" secondItem="mBw-fE-QYY" secondAttribute="trailing" id="kXg-3h-dit"/>
                         <constraint firstAttribute="height" constant="80" id="pgC-gD-0qf"/>
+                        <constraint firstItem="juX-SI-iRg" firstAttribute="leading" secondItem="eif-R5-aU1" secondAttribute="leading" id="tZv-Vs-ByX"/>
+                        <constraint firstAttribute="trailing" secondItem="juX-SI-iRg" secondAttribute="trailing" id="zWg-nL-S6B"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="eif-R5-aU1" firstAttribute="top" secondItem="DLE-fB-ZhW" secondAttribute="bottom" id="93y-47-jA3"/>
                 <constraint firstItem="eif-R5-aU1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9d8-J0-5hb"/>
@@ -123,7 +123,7 @@
                 <constraint firstItem="Tex-hN-C2V" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="i6v-Wi-Rb0"/>
                 <constraint firstAttribute="bottom" secondItem="eif-R5-aU1" secondAttribute="bottom" id="oNe-ht-TLy"/>
             </constraints>
-            <point key="canvasLocation" x="-390.5" y="47.5"/>
+            <point key="canvasLocation" x="6" y="58"/>
         </view>
     </objects>
     <resources>

@@ -404,6 +404,8 @@
 		F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */; };
 		F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */; };
 		F789EF111F7D63BE003A127C /* EmployeeAuthVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */; };
+		F7A39CBC1FA8BBFA000EFB76 /* EmployeeSkillListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A39CBA1FA8BBFA000EFB76 /* EmployeeSkillListCell.m */; };
+		F7A39CBD1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7A39CBB1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib */; };
 		F7AC8DA71FA793E100B284DA /* CenterEmployeeAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7AC8DA51FA793E100B284DA /* CenterEmployeeAuthCell.m */; };
 		F7AC8DA81FA793E100B284DA /* CenterEmployeeAuthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AC8DA61FA793E100B284DA /* CenterEmployeeAuthCell.xib */; };
 		F7AC8DAD1FA7965F00B284DA /* EmployeeEditIntroduceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7AC8DAB1FA7965F00B284DA /* EmployeeEditIntroduceVC.m */; };
@@ -1157,6 +1159,9 @@
 		F789EF0D1F7D63BE003A127C /* EmployeeAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAuthVC.h; sourceTree = "<group>"; };
 		F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAuthVC.m; sourceTree = "<group>"; };
 		F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeAuthVC.xib; sourceTree = "<group>"; };
+		F7A39CB91FA8BBFA000EFB76 /* EmployeeSkillListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeSkillListCell.h; sourceTree = "<group>"; };
+		F7A39CBA1FA8BBFA000EFB76 /* EmployeeSkillListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeSkillListCell.m; sourceTree = "<group>"; };
+		F7A39CBB1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeSkillListCell.xib; sourceTree = "<group>"; };
 		F7AC8DA41FA793E100B284DA /* CenterEmployeeAuthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterEmployeeAuthCell.h; sourceTree = "<group>"; };
 		F7AC8DA51FA793E100B284DA /* CenterEmployeeAuthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterEmployeeAuthCell.m; sourceTree = "<group>"; };
 		F7AC8DA61FA793E100B284DA /* CenterEmployeeAuthCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterEmployeeAuthCell.xib; sourceTree = "<group>"; };
@@ -1216,6 +1221,9 @@
 				040BC8BE1FA88482009AD3BA /* EmployeeSkillListVC.h */,
 				040BC8BF1FA88482009AD3BA /* EmployeeSkillListVC.m */,
 				040BC8C01FA88482009AD3BA /* EmployeeSkillListVC.xib */,
+				F7A39CB91FA8BBFA000EFB76 /* EmployeeSkillListCell.h */,
+				F7A39CBA1FA8BBFA000EFB76 /* EmployeeSkillListCell.m */,
+				F7A39CBB1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib */,
 			);
 			name = "员工查看自己的技能列表";
 			sourceTree = "<group>";
@@ -2970,6 +2978,7 @@
 				F7D87A271FA5BFC6009EB53F /* CenterAccountVC.xib in Resources */,
 				04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */,
 				04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */,
+				F7A39CBD1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
 				04EFEC731F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
@@ -3182,6 +3191,7 @@
 				F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */,
 				047ADFEB1F4A86EF00AEAE8E /* CMSDWebImageDownloader.m in Sources */,
 				047ADFE81F4A86EF00AEAE8E /* CMSDImageCache.m in Sources */,
+				F7A39CBC1FA8BBFA000EFB76 /* EmployeeSkillListCell.m in Sources */,
 				0459C6B11F614C870040501E /* AddressItem.m in Sources */,
 				04DC7DBC1F31C28300AA20A7 /* ExtendCollectionView.m in Sources */,
 				047ADFFA1F4A86EF00AEAE8E /* MXPageControl.m in Sources */,
@@ -3466,7 +3476,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3508,7 +3518,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

@@ -95,7 +95,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailTopCell"];
-        cell.contentL.text = @"技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 技能特长介绍 ";
+        cell.contentL.text = STRING(self.staffDic[@"remark"]);
         cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 24;
         return cell;
     }
@@ -104,7 +104,26 @@
         EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
         cell.nameL.text = dic[@"name"];
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
-        cell.daishenBtn.hidden = NO;
+        switch ([dic[@"approvalStatus"] intValue]) {
+            case 0:{
+                cell.daishenBtn.hidden = NO;
+                [cell.daishenBtn setTitle:@"等待审核" forState:UIControlStateNormal];
+                break;
+            }
+            case 1:{
+                cell.daishenBtn.hidden = YES;
+//                [cell.daishenBtn setTitle:@"已通过" forState:UIControlStateNormal];
+                break;
+            }
+            case -1:{
+                cell.daishenBtn.hidden = NO;
+                [cell.daishenBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+                break;
+            }
+                
+            default:
+                break;
+        }
         [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }

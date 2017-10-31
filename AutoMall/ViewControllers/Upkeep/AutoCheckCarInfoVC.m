@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"粤A88888";
+    self.title = self.carDic[@"plateNumber"];
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     

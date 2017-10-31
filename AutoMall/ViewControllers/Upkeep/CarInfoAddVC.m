@@ -235,7 +235,7 @@
 
 -(void) toHistoryList {
     BaoyangHistoryVC *historyVC = [[BaoyangHistoryVC alloc] init];
-    historyVC.carId = @"";          //id逻辑暂未完成
+    historyVC.carId = self.carDic[@"id"];
     historyVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:historyVC animated:YES];
 }

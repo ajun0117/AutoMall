@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *contentL;
 @property (strong, nonatomic) IBOutlet UIView *segBgView;
+@property (weak, nonatomic) IBOutlet UILabel *resultL;
 @property (strong, nonatomic) IBOutlet UIButton *checkResultBtn;
 @property (strong, nonatomic) IBOutlet UIButton *photoBtn;
 

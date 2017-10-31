@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -50,13 +50,13 @@
                         </constraints>
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxV-Rp-wNd">
-                        <rect key="frame" x="8" y="91" width="200" height="40"/>
+                        <rect key="frame" x="88" y="91" width="120" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="WEE-J2-QVN"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="jq0-Mt-ckS"/>
                             <constraint firstAttribute="height" constant="40" id="qPn-l0-Qu4"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" title="检查结果&gt;">
+                        <state key="normal">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -68,13 +68,24 @@
                         </constraints>
                         <state key="normal" image="photoBtn"/>
                     </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检查结果&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwR-q1-eEa">
+                        <rect key="frame" x="16" y="102.5" width="72" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="72" id="v0V-9q-I5v"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2iA-28-E4i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="0h0-Jj-l46"/>
                     <constraint firstItem="CSA-D1-ZUd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="3bi-db-7MJ"/>
+                    <constraint firstItem="QwR-q1-eEa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="4Qb-8P-OXU"/>
+                    <constraint firstItem="HxV-Rp-wNd" firstAttribute="leading" secondItem="QwR-q1-eEa" secondAttribute="trailing" id="8eP-rJ-PbF"/>
                     <constraint firstAttribute="trailing" secondItem="2iA-28-E4i" secondAttribute="trailing" constant="8" id="KXi-0c-mrG"/>
                     <constraint firstAttribute="trailing" secondItem="CSA-D1-ZUd" secondAttribute="trailing" constant="8" id="N14-CF-NY3"/>
-                    <constraint firstItem="HxV-Rp-wNd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="bGD-RV-Yv2"/>
+                    <constraint firstItem="QwR-q1-eEa" firstAttribute="centerY" secondItem="HxV-Rp-wNd" secondAttribute="centerY" id="Y29-0B-LJV"/>
                     <constraint firstItem="2iA-28-E4i" firstAttribute="top" secondItem="CSA-D1-ZUd" secondAttribute="bottom" constant="16" id="dHB-F5-xEZ"/>
                     <constraint firstItem="CSA-D1-ZUd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="eDX-4C-hW9"/>
                     <constraint firstAttribute="trailing" secondItem="6nq-xE-qpG" secondAttribute="trailing" constant="8" id="mka-Xb-BJb"/>
@@ -87,9 +98,10 @@
                 <outlet property="checkResultBtn" destination="HxV-Rp-wNd" id="ABx-7a-gEO"/>
                 <outlet property="contentL" destination="QZf-nm-QRn" id="qwh-L3-y4r"/>
                 <outlet property="photoBtn" destination="6nq-xE-qpG" id="1Ly-NH-KMv"/>
+                <outlet property="resultL" destination="QwR-q1-eEa" id="c5g-1m-vrR"/>
                 <outlet property="segBgView" destination="2iA-28-E4i" id="9xA-Um-9qx"/>
             </connections>
-            <point key="canvasLocation" x="-372" y="8.5"/>
+            <point key="canvasLocation" x="-140" y="-6"/>
         </tableViewCell>
     </objects>
     <resources>

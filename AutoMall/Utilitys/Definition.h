@@ -203,14 +203,16 @@
 #define UserChangeRemark                     @"/api/user/changeRemark"       //员工修改个人特长
 
 #define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
+#define UserGetStoreInfo                      @"/api/user/getStore"           //员工获取门店详情
 #define StoreInfoUpdate                        @"/api/store/update"            //修改门店信息
 #define StoreRegister                             @"/api/store/register"              //门店申请
 #define StoreListStaff                           @"/api/store/listStaff"             //员工列表
 #define StoreDelStaff                            @"/api/store/delStaff"             //删除员工
 #define StoreAddStaff                           @"/api/store/addStaff"           //添加员工
 #define StaffSkillList                             @"/api/store/listStaffSkill"       //获取员工技能列表
-#define StoreApproveSkill                      @"/api/store/approveSkill"      //老板审核员工技能认证
+#define StoreApproveSkill                      @"/api/store/approveSkill"           //老板审核员工技能认证
 #define StoreUpdateStaffSkill               @"/api/store/updateStaffSkill"     //员工自己修改技能
+#define UserAppendSkill                         @"/api/user/appendSkill"            //员工自己添加技能
 
 #define FavoriteList                                @"/api/favorite/list"                   //收藏列表
 #define FavoriteCollect                           @"/api/favorite/collect"              //收藏

@@ -38,7 +38,7 @@
     negativeSpacer.width = -6;
     
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    addBtn.frame = CGRectMake(0, 0, 30, 30);
+    addBtn.frame = CGRectMake(0, 0, 28, 28);
     [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
 //    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];

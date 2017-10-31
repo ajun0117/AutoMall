@@ -83,15 +83,18 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"HeadNameCell" bundle:nil] forCellReuseIdentifier:@"headNameCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterNormalCell" bundle:nil] forCellReuseIdentifier:@"centerNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CenterOrderCell" bundle:nil] forCellReuseIdentifier:@"centerOrderCell"];
-    [self.myTableView registerNib:[UINib nibWithNibName:@"CenterEmployeeCell" bundle:nil] forCellReuseIdentifier:@"centerEmployeeCell"];
-    [self.myTableView registerNib:[UINib nibWithNibName:@"CenterEmployeeAuthCell" bundle:nil] forCellReuseIdentifier:@"centerEmployeeAuthCell"];
+//    [self.myTableView registerNib:[UINib nibWithNibName:@"CenterEmployeeCell" bundle:nil] forCellReuseIdentifier:@"centerEmployeeCell"];
+//    [self.myTableView registerNib:[UINib nibWithNibName:@"CenterEmployeeAuthCell" bundle:nil] forCellReuseIdentifier:@"centerEmployeeAuthCell"];
     
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     NSLog(@"mobileUserType: %@",mobileUserType);
     
     if (mobileUserType) {   //登录状态
-        if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"2"]) {   //门店老板和员工
+        if ([mobileUserType isEqualToString:@"1"]) {   //门店老板和员工
             [self requestPostStoreGetInfo];     //请求门店详情数据
+        }
+        else if ([mobileUserType isEqualToString:@"2"]) {
+            [self requestPostUserGetStoreInfo];     //员工请求门店详情数据
         }
         else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
             [self requestGetApprovalStatus];     //请求门店审批状态
@@ -318,12 +321,7 @@
                 break;
             }
             case 1: {
-                if (indexPath.row == 0) {
-                    CenterEmployeeCell *cell = (CenterEmployeeCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-                    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-                    return height + 1;
-                }
-                return 65;
+                return 44;
                 break;
             }
             case 2: {
@@ -640,20 +638,30 @@
             case 1:{
                 switch (indexPath.row) {
                     case 0: {
-                        CenterEmployeeCell *cell = (CenterEmployeeCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeCell"];
+//                        CenterEmployeeCell *cell = (CenterEmployeeCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeCell"];
+//                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                        cell.contentL.text = @"快修改技能描述，提升信誉度吧！";
+//                        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 50;
+//                        return cell;
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.contentL.text = @"快修改技能描述，提升信誉度吧！";
-                        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 50;
+                        cell.textLabel.font = [UIFont systemFontOfSize:16];
+                        cell.textLabel.text = @"技能特长";
                         return cell;
                         break;
                     }
                     case 1: {
-                        CenterEmployeeAuthCell *cell = (CenterEmployeeAuthCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeAuthCell"];
+//                        CenterEmployeeAuthCell *cell = (CenterEmployeeAuthCell *)[tableView dequeueReusableCellWithIdentifier:@"centerEmployeeAuthCell"];
+//                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                        cell.imgView.image = IMG(@"default");
+//                        cell.titleL.text = @"技能认证";
+//                        cell.contentL.text = @"技能认证描述 技能认证描述";
+//                        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 104;
+//                        return cell;
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.imgView.image = IMG(@"default");
-                        cell.titleL.text = @"技能认证";
-                        cell.contentL.text = @"技能认证描述 技能认证描述";
-                        cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 104;
+                        cell.textLabel.font = [UIFont systemFontOfSize:16];
+                        cell.textLabel.text = @"技能认证";
                         return cell;
                         break;
                     }
@@ -943,6 +951,10 @@
             case 1: {
                 if (indexPath.row == 0) {
                     EmployeeEditIntroduceVC *editVC = [[EmployeeEditIntroduceVC alloc] init];
+                    editVC.introduceStr = userInfoDic[@"remark"];
+                    editVC.UpdateUserInfo = ^{
+                        [self requestPostUserGetInfo];      //刷新用户信息
+                    };
                     editVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:editVC animated:YES];
                 }
@@ -955,6 +967,12 @@
             }
             case 2: {
                 switch (indexPath.row) {
+                    case 0: {
+                        UpkeepOrderVC *orderVC = [[UpkeepOrderVC alloc] init];
+                        orderVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:orderVC animated:YES];
+                        break;
+                    }
                     case 2: {
                         UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
                         statementVC.hidesBottomBarWhenPushed = YES;
@@ -1092,6 +1110,20 @@
     if ([mobileUserType isEqualToString:@"2"]) {    //门店员工，禁止查看
         return;
     }
+    else if ([mobileUserType isEqualToString:@"0"]) {    //普通注册用户
+        if ([userInfoDic[@"storeApprovalStatus"] intValue] == 0) {
+            _networkConditionHUD.labelText = @"您申请的门店还在审核中";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return;
+        }
+        else if ([userInfoDic[@"storeApprovalStatus"] intValue] == -1) {
+            _networkConditionHUD.labelText = @"您申请的门店已被拒绝！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return;
+        }
+    }
     ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
      if ([mobileUserType isEqualToString:@"1"]) {    //门店老板
         applyVC.infoDic = shopDic;
@@ -1118,14 +1150,17 @@
 -(void)LoginSuccess {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginSuccess" object:nil];
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-    if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"2"]) {   //门店老板和员工
+    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板和员工
         [self requestPostStoreGetInfo];     //请求门店详情数据
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {
+        [self requestPostUserGetStoreInfo];     //员工请求门店详情数据
     }
     else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
         [self requestGetApprovalStatus];     //请求门店审批状态
     }
     
-    [self requestPostUserGetInfo];
+    [self requestPostUserGetInfo];      //刷新用户信息
 }
 
 -(void)selectThePhotoOrCamera {
@@ -1218,6 +1253,14 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreGetInfo) delegate:nil params:nil info:infoDic];
 }
 
+-(void)requestPostUserGetStoreInfo { //员工获取门店详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserGetStoreInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserGetStoreInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserGetStoreInfo) delegate:nil params:nil info:infoDic];
+}
+
 -(void)requestGetApprovalStatus { //获取门店审核状态
     [_hud show:YES];
     //注册通知
@@ -1283,7 +1326,6 @@
         NSLog(@"StoreGetInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             shopDic = responseObject[@"data"];
-            
             [self.myTableView reloadData];
         }
         else {
@@ -1291,6 +1333,20 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         } 
+    }
+    
+    if ([notification.name isEqualToString:UserGetStoreInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserGetStoreInfo object:nil];
+        NSLog(@"UserGetStoreInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            shopDic = responseObject[@"data"];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
     
     if ([notification.name isEqualToString:GetApprovalStatus]) {

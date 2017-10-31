@@ -48,7 +48,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = -10;
+    negativeSpacer.width = -6;
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -98,6 +98,7 @@
             self.title = carDic[@"plateNumber"];
             NSLog(@"selectedCarDic: %@",selectedCarDic);
         };
+        listVC.carId = selectedCarDic[@"id"];
         listVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listVC animated:YES];
     }

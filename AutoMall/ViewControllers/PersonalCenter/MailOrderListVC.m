@@ -234,7 +234,7 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:MallOrderList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderList object:nil];
-        NSLog(@"_responseObject: %@",responseObject);
+        NSLog(@"MallOrderList: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [orderArray addObjectsFromArray:responseObject [@"data"]];

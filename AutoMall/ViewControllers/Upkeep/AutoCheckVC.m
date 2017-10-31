@@ -78,7 +78,7 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
     
-    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 20)];
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49 - 20)];
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
@@ -109,7 +109,7 @@
 
 -(void) creatTableViews {
     for (int i = 0; i < partsArray.count; ++i) {
-        UITableView *myTableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 20) style:UITableViewStyleGrouped];
+        UITableView *myTableView = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49 - 20) style:UITableViewStyleGrouped];
         myTableView.tag = 1000 + i;
         [self.mainScrollView addSubview:myTableView];
         myTableView.delegate = self;
@@ -157,6 +157,7 @@
         lichengDic = dic;
         NSLog(@"lichengDic: %@",lichengDic);
     };
+    infoVC.carDic = self.carDic;
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 
@@ -611,12 +612,14 @@
                 [cell.checkResultBtn setTitle:tipString forState:UIControlStateNormal];
             }
             else {
-                [cell.checkResultBtn setTitle:@"检查结果>" forState:UIControlStateNormal];
+                [cell.checkResultBtn setTitle:@"" forState:UIControlStateNormal];
             }
+            cell.resultL.hidden = NO;
             cell.checkResultBtn.hidden = NO;
             [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
         }
         else {
+            cell.resultL.hidden = YES;
             cell.checkResultBtn.hidden = YES;
         }
         
@@ -693,12 +696,14 @@
                 [cell.checkResultBtn setTitle:item.tip forState:UIControlStateNormal];
             }
             else {
-                [cell.checkResultBtn setTitle:@"检查结果>" forState:UIControlStateNormal];
+                [cell.checkResultBtn setTitle:@"" forState:UIControlStateNormal];
             }
+            cell.resultL.hidden = NO;
             cell.checkResultBtn.hidden = NO;
             [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
         }
         else {
+            cell.resultL.hidden = YES;
             cell.checkResultBtn.hidden = YES;
         }
         
@@ -832,7 +837,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             partsArray = responseObject[@"data"];
             [self createSegmentControlWithTitles:partsArray];
-            self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 44);
+            self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 49);
             [self creatTableViews];
         }
         else {

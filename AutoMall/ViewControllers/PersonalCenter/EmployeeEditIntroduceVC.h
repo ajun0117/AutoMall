@@ -12,4 +12,7 @@
 
 @property (strong , nonatomic) NSString *introduceStr;
 
+//更新用户信息
+@property (copy, nonatomic) void((^UpdateUserInfo)());
+
 @end
