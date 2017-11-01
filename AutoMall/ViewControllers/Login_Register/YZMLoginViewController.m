@@ -318,7 +318,7 @@
             [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
             [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",dic[@"phone"]]];
             [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(dic[@"image"])];
-            //            [[GlobalSetting shareGlobalSettingInstance] setmName:dic [@"userName"]];
+            [[GlobalSetting shareGlobalSettingInstance] setmName:[NSString stringWithFormat:@"%@",STRING(dic[@"nickname"])]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];     //发送登录成功通知
             if (self.isPresented) {
                 [self dismissViewControllerAnimated:YES completion:nil];

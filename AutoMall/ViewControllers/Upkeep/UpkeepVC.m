@@ -52,8 +52,8 @@
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    [searchBtn setImage:[UIImage imageNamed:@"cars"] forState:UIControlStateNormal];
-//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [searchBtn setImage:[UIImage imageNamed:@"carList"] forState:UIControlStateNormal];
+    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [searchBtn addTarget:self action:@selector(toCarOwner:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];

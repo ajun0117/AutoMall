@@ -24,6 +24,7 @@
     MBProgressHUD *_networkConditionHUD;
     AJAdView *_adView;
     NSArray *_adArray;   //广告图数组
+    NSDictionary *carUpkeepDic;     //检查单数据
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -350,6 +351,46 @@
     AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
     [self.navigationController pushViewController:problemVC animated:YES];
 }
+
+
+//CarUpkeepInfo
+#pragma mark - 发送请求
+-(void)requestGetUpkeepInfo { //获取检查单详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepInfo, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepInfo),self.carUpkeepId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:CarUpkeepInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepInfo object:nil];
+        NSLog(@"CarListOrSearch: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            carUpkeepDic = responseObject[@"data"];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

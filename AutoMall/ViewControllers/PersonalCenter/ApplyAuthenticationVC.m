@@ -398,36 +398,43 @@
     switch (whichImg) {
         case 0: {
             self.shopImg.image = image;
+            self.shopImgL.hidden = YES;
             [self requestUploadImgFile:self.shopImg];
             break;
         }
         case 1: {
             self.licenseImg.image = image;
+            self.licenseImgL.hidden = YES;
             [self requestUploadImgFile:self.licenseImg];
             break;
         }
         case 2: {
             self.cardAImg.image = image;
+            self.cardAImgL.hidden = YES;
             [self requestUploadImgFile:self.cardAImg];
             break;
         }
         case 3: {
             self.cardBImg.image = image;
+            self.cardBImgL.hidden = YES;
             [self requestUploadImgFile:self.cardBImg];
             break;
         }
         case 4: {
-//            self.gongzhongImg.image = image;
+            self.gongzhongImg.image = image;
+            self.gongzhongImgL.hidden = YES;
             [self requestUploadImgFile:self.gongzhongImg];
             break;
         }
         case 5: {
             self.aliPayCollectionImg.image = image;
+            self.aliPayImgL.hidden = YES;
             [self requestUploadImgFile:self.aliPayCollectionImg];
             break;
         }
         case 6: {
             self.wechatCollectionImg.image = image;
+            self.wechatImgL.hidden = YES;
             [self requestUploadImgFile:self.wechatCollectionImg];
             break;
         }

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameTF;
 @property (strong, nonatomic) IBOutlet UITextField *contentTF;
 @property (strong, nonatomic) IBOutlet WPImageView *imgView;
+@property (weak, nonatomic) IBOutlet UILabel *imgL;
 
 @end
 
@@ -138,6 +139,7 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
     self.imgView.image = image;
+    self.imgL.hidden = YES;
     [self requestUploadImgFile:self.imgView];
     
     [self dismissViewControllerAnimated:YES completion:nil];

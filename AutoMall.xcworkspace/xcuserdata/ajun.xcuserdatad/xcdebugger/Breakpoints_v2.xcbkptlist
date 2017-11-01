@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/EmployeeEditSkillCertificationVC.m"
-            timestampString = "531159408.489653"
+            timestampString = "531236499.712302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-requestPostStoreUpdateStaffSkill"
             landmarkType = "7">
          </BreakpointContent>

@@ -717,6 +717,7 @@ static GlobalSetting *globalSetting;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:@"mobileUserType"];
     [userDefaults removeObjectForKey:@"mMobile"];
+    [userDefaults removeObjectForKey:@"mName"];
     [userDefaults removeObjectForKey:@"mHead"];
     [userDefaults removeObjectForKey:kUserID];
     [userDefaults removeObjectForKey:kToken];

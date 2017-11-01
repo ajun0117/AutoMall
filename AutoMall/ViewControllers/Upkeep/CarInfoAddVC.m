@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *genderTF;
 @property (strong, nonatomic) IBOutlet UITextField *birthdayTF;
 @property (weak, nonatomic) IBOutlet WPImageView *carImgView;
+@property (weak, nonatomic) IBOutlet UILabel *carImgL;
 @property (strong, nonatomic) IBOutlet UITextField *plateNumberTF;
 @property (strong, nonatomic) IBOutlet UITextField *brandTF;
 @property (strong, nonatomic) IBOutlet UITextField *modelTF;
@@ -53,7 +54,7 @@
         UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                            initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                            target:nil action:nil];
-        negativeSpacer.width = -16;
+        negativeSpacer.width = -6;
         
         UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         searchBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -330,7 +331,8 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
     self.carImgView.image = image;
-    [self requestUploadImgFile:self.carImgView];
+    self.carImgL.hidden = YES;
+    [self requestUploadImgFile:self.carImgView]; 
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -414,7 +416,7 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    NSLog(@"responseObject: %@",responseObject);
     if ([notification.name isEqualToString:CarAdd]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarAdd object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确

@@ -44,11 +44,9 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
     self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
-    
-    self.navigationItem.backBarButtonItem.tintColor = [UIColor redColor];
     
 //    UIButton *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    editBtn.frame = CGRectMake(0, 0, 50, 44);
@@ -164,8 +162,10 @@
         cell.deleBtn.tag = indexPath.item + 1000;
         [cell.deleBtn addTarget:self action:@selector(deleImage:) forControlEvents:UIControlEventTouchUpInside];
         //让图片不变形，以适应按钮宽高，按钮中图片部分内容可能看不到
-        //    cell.AlbumBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        //    cell.AlbumBtn.clipsToBounds = YES;
+        cell.AlbumBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        cell.AlbumBtn.clipsToBounds = YES;
+        cell.AlbumBtn.contentHorizontalAlignment= UIControlContentHorizontalAlignmentFill;
+        cell.AlbumBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
         
         [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"relativePath"])] forState:UIControlStateNormal placeholderImage:IMG(@"default")];
         cell.AlbumBtn.tag = indexPath.item + 2000;
@@ -292,7 +292,7 @@
 //    NSArray *imgAry = myInfoDic [@"images"];
 //    NSDictionary *dic = imgAry [index];
     NSDictionary *dic = _imgsArray [index];
-    NSString *urlStr = dic [@"relativePath"];
+    NSString *urlStr = UrlPrefix(dic[@"relativePath"]);
     return [NSURL URLWithString:urlStr];
 }
 

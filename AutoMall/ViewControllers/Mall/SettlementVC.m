@@ -254,7 +254,9 @@
         }
         float totalPrice = [ShoppingCartModel moneyOrderShoopingCart:self.datasArr];
         float actualPrice = totalPrice + [ShoppingCartModel shippingFeeShopingCart:self.datasArr];
-        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",[NSString stringWithFormat:@"%.2f",totalPrice],@"totalPrice",[NSString stringWithFormat:@"%.2f",actualPrice],@"actualPrice",STRING_Nil(remarkStr),@"remark",[commAry JSONString],@"detailJson", nil];
+        NSString *phoneStr = [[GlobalSetting shareGlobalSettingInstance] mMobile];
+        NSString *nickNameStr = [[GlobalSetting shareGlobalSettingInstance] mName];
+        NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"clientId",nickNameStr,@"clientUsername",phoneStr,@"clientPhone",defaultAddressDic[@"id"],@"consigneeId",defaultAddressDic[@"name"],@"consigneeName",defaultAddressDic[@"phone"],@"consigneePhone",defaultAddressDic[@"province"],@"consigneeProvince",defaultAddressDic[@"city"],@"consigneeCity",defaultAddressDic[@"county"],@"consigneeCounty",defaultAddressDic[@"address"],@"consigneeAddress",[NSString stringWithFormat:@"%.2f",totalPrice],@"totalPrice",[NSString stringWithFormat:@"%.2f",actualPrice],@"actualPrice",STRING_Nil(remarkStr),@"remark",[commAry JSONString],@"detailJson", nil];
         [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderAdd) delegate:nil params:pram info:infoDic];
     }
     else {

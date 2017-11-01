@@ -164,7 +164,7 @@
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button addTarget:strongSelf action:@selector(reloadImage) forControlEvents:UIControlEventTouchUpInside];
             
-//            [self addSubview:button];
+            [self addSubview:button];
             return;
         }
         strongSelf.hasLoadedImage = YES;//图片加载成功

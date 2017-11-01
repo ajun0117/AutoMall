@@ -10,4 +10,6 @@
 
 @interface AutoCheckResultVC : UIViewController
 
+@property (strong, nonatomic) NSString *carUpkeepId;    //检查单id
+
 @end

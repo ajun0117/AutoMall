@@ -7,18 +7,25 @@
 //
 
 #import "UpkeepCarMarkVC.h"
+#import "WPImageView.h"
 
 @interface UpkeepCarMarkVC ()
 {
 //    UIScrollView *_scrollview;
 //    UIImageView *_imageview;
     UIImage *chooseImg;
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollV;
-@property (strong, nonatomic) IBOutlet UIImageView *imageV;
+@property (strong, nonatomic) IBOutlet WPImageView *imageV;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imageHight;
-@property (strong, nonatomic) IBOutlet UIButton *addBtn;
-@property (strong, nonatomic) IBOutlet UIButton *delBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *scratchBtn;
+@property (weak, nonatomic) IBOutlet UIButton *dentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *dirtBtn;
+@property (weak, nonatomic) IBOutlet UIButton *othersBtn;
+
 @property (strong, nonatomic) IBOutlet UIButton *saveBtn;
 
 @end
@@ -32,18 +39,7 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = -6;
-    
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    [searchBtn setImage:[UIImage imageNamed:@"cars"] forState:UIControlStateNormal];
-    //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [searchBtn addTarget:self action:@selector(toReset:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toReset:)];
     
     //1添加 UIScrollView
     //设置 UIScrollView的位置与屏幕大小相同
@@ -77,12 +73,35 @@
 
     self.imageHight.constant = SCREEN_HEIGHT - 64;
     
-    [self.addBtn setImage:[UIImage imageNamed:@"goods_add"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [self.delBtn setImage:[UIImage imageNamed:@"goods_del"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.scratchBtn setImage:[UIImage imageNamed:@"scratchRed"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.dentBtn setImage:[UIImage imageNamed:@"dentRed"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.dirtBtn setImage:[UIImage imageNamed:@"dirtRed"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.othersBtn setImage:[UIImage imageNamed:@"othersRed"] forState:UIControlStateSelected | UIControlStateHighlighted];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
 }
 
 #pragma mark - 重置
 -(void)toReset:(UIButton *)btn {
+    for (UIButton *btn in self.imageV.subviews) {
+        if ([btn isKindOfClass:[UIButton class]]) {
+            [btn removeFromSuperview];
+        }
+    }
 }
 
 //告诉scrollview要缩放的是哪个子控件
@@ -96,39 +115,68 @@
 //    NSLog(@"theView.frame.size:  %@",NSStringFromCGSize(_imageview.frame.size));
 }
 
-- (IBAction)add:(id)sender {
-//    UIButton *btn = (UIButton *)sender;
-//    btn.selected = !btn.selected;
-//    chooseImg = btn.currentImage;
-    if (self.addBtn.selected) {
-        self.addBtn.selected = NO;
+- (IBAction)dent:(id)sender {
+    if (self.dentBtn.selected) {
+        self.dentBtn.selected = NO;
         chooseImg = nil;
     }
     else {
-        self.addBtn.selected = YES;
-        self.delBtn.selected = NO;
-        chooseImg = self.addBtn.currentImage;
+        self.dentBtn.selected = YES;
+        self.scratchBtn.selected = NO;
+        self.dirtBtn.selected = NO;
+        self.othersBtn.selected = NO;
+        chooseImg = self.dentBtn.currentImage;
     }
 }
 
-- (IBAction)del:(id)sender {
-    if (self.delBtn.selected) {
-        self.delBtn.selected = NO;
+- (IBAction)scratch:(id)sender {
+    if (self.scratchBtn.selected) {
+        self.scratchBtn.selected = NO;
         chooseImg = nil;
     }
     else {
-        self.delBtn.selected = YES;
-        self.addBtn.selected = NO;
-        chooseImg = self.delBtn.currentImage;
+        self.scratchBtn.selected = YES;
+        self.dentBtn.selected = NO;
+        self.dirtBtn.selected = NO;
+        self.othersBtn.selected = NO;
+        chooseImg = self.scratchBtn.currentImage;
+    }
+}
+
+- (IBAction)dirt:(id)sender {
+    if (self.dirtBtn.selected) {
+        self.dirtBtn.selected = NO;
+        chooseImg = nil;
+    }
+    else {
+        self.dirtBtn.selected = YES;
+        self.dentBtn.selected = NO;
+        self.scratchBtn.selected = NO;
+        self.othersBtn.selected = NO;
+        chooseImg = self.dirtBtn.currentImage;
+    }
+}
+
+- (IBAction)others:(id)sender {
+    if (self.othersBtn.selected) {
+        self.othersBtn.selected = NO;
+        chooseImg = nil;
+    }
+    else {
+        self.othersBtn.selected = YES;
+        self.dentBtn.selected = NO;
+        self.scratchBtn.selected = NO;
+        self.dirtBtn.selected = NO;
+        chooseImg = self.othersBtn.currentImage;
     }
 }
 
 - (IBAction)save:(id)sender {
     self.scrollV.zoomScale = 1.0;
     UIImage *image = [self imageFromView:self.imageV];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-    
-    self.GoBackGet(@"carImageURLString");
+    self.imageV.image = image;
+    [self requestUploadImgFile:self.imageV];
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
 -(void) toMark:(UITapGestureRecognizer *)tap {
@@ -222,6 +270,51 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+#pragma mark - 发起网络请求
+-(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];
+    [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
+}
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    NSLog(@"UploadImgFile: %@",responseObject);
+    if ([notification.name isEqualToString:UploadImgFile]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+        _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        if ([responseObject[@"result"] boolValue]) {
+            NSString *carImgUrl = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
+            self.GoBackGet(carImgUrl);
+            [self performSelector:@selector(toPopVC) withObject:nil afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
+
+- (void)toPopVC {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 
 /*

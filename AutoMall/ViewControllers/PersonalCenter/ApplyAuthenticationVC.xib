@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,20 +14,27 @@
             <connections>
                 <outlet property="addressTF" destination="f08-p1-t8w" id="aUM-ip-Vl8"/>
                 <outlet property="aliPayCollectionImg" destination="pEg-k3-aPT" id="4iO-Iw-WId"/>
+                <outlet property="aliPayImgL" destination="ump-2g-4Sv" id="8Z5-rn-Xx0"/>
                 <outlet property="cardAImg" destination="UGJ-Y5-cHI" id="Fka-Ib-Epn"/>
+                <outlet property="cardAImgL" destination="4WK-0r-wlA" id="tMY-01-kRF"/>
                 <outlet property="cardBImg" destination="HbI-zE-PSu" id="ImG-r0-8VE"/>
+                <outlet property="cardBImgL" destination="hYV-BP-nqC" id="Oxu-CK-Dxt"/>
                 <outlet property="detailAddressTF" destination="6Cp-nV-zmk" id="nOQ-PI-PQF"/>
                 <outlet property="gongzhongImg" destination="gXp-Zz-elE" id="Kwk-rK-jUY"/>
+                <outlet property="gongzhongImgL" destination="KQP-yd-28W" id="9Q2-4C-KHS"/>
                 <outlet property="licenseImg" destination="0pW-ky-RzV" id="X5u-0e-bYT"/>
+                <outlet property="licenseImgL" destination="wm0-RL-Nc6" id="rb0-1X-sIg"/>
                 <outlet property="myScrollView" destination="fPB-cF-lHZ" id="jfp-X1-j0o"/>
                 <outlet property="nameTF" destination="ed3-aZ-xMV" id="Fro-qn-tjk"/>
                 <outlet property="phoneTF" destination="zoI-Ps-qei" id="VAL-ZI-3vw"/>
                 <outlet property="recommendCodeTF" destination="bR6-a8-SI1" id="DzA-9a-Hrg"/>
                 <outlet property="replayBtn" destination="Ggi-so-8Bg" id="VkR-Cf-CZu"/>
                 <outlet property="shopImg" destination="wN7-8K-50T" id="9Z6-T3-E0u"/>
+                <outlet property="shopImgL" destination="Kub-Fj-6rd" id="POO-Nm-Ijf"/>
                 <outlet property="shortNameTF" destination="I1v-8m-l3O" id="tRC-Tb-ZFj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wechatCollectionImg" destination="p4D-RQ-vRo" id="ayN-np-vzN"/>
+                <outlet property="wechatImgL" destination="tmo-EP-I0V" id="fGf-23-IcY"/>
                 <outlet property="wechatNameTF" destination="qJa-dT-JIA" id="D93-Q3-zwD"/>
             </connections>
         </placeholder>

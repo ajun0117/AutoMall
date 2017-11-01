@@ -288,14 +288,14 @@
             }
             case 1: {
                 if (indexPath.row == 1) {
-                    return 80;
+                    return 70;
                 }
                 return 44;
                 break;
             }
             case 2: {
                 if (indexPath.row == 1) {
-                    return 80;
+                    return 70;
                 }
                 return 44;
                 break;
@@ -326,7 +326,7 @@
             }
             case 2: {
                 if (indexPath.row == 1) {
-                    return 80;
+                    return 70;
                 }
                 return 44;
                 break;
@@ -1310,6 +1310,7 @@
             userInfoDic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",userInfoDic[@"id"]]];
             [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmName:[NSString stringWithFormat:@"%@",STRING(userInfoDic[@"nickname"])]];
             [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(userInfoDic[@"image"])];
             [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",userInfoDic[@"mobileUserType"]]];
             
