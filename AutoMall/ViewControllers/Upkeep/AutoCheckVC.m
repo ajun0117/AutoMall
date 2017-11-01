@@ -271,7 +271,7 @@
 //    [self.navigationController pushViewController:photoVC animated:YES];
     
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-    photoVC.GoBackUpdate = ^(NSArray *array) {
+    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
         [self updatePhotoWithImages:array];
     };
     [self.navigationController pushViewController:photoVC animated:YES];

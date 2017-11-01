@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,7 +37,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPB-cF-lHZ">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="1455"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="1450"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXp-n9-uLY">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -56,14 +57,14 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RP6-2c-xfz">
-                            <rect key="frame" x="0.0" y="44" width="375" height="200"/>
+                            <rect key="frame" x="0.0" y="44" width="375" height="211"/>
                             <subviews>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wN7-8K-50T" customClass="WPImageView">
-                                    <rect key="frame" x="16" y="0.0" width="343" height="200"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wN7-8K-50T" customClass="WPImageView">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传门店图片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-Fj-6rd">
-                                    <rect key="frame" x="141.5" y="90.5" width="92" height="18"/>
+                                    <rect key="frame" x="141.5" y="96" width="92" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -72,17 +73,37 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="wN7-8K-50T" secondAttribute="bottom" id="FGQ-4v-Z4m"/>
-                                <constraint firstAttribute="height" constant="200" id="GJg-3Z-piM"/>
+                                <constraint firstAttribute="width" secondItem="RP6-2c-xfz" secondAttribute="height" multiplier="16:9" id="NMq-OY-jPQ"/>
                                 <constraint firstItem="Kub-Fj-6rd" firstAttribute="centerY" secondItem="wN7-8K-50T" secondAttribute="centerY" id="Pvu-Ga-1rI"/>
                                 <constraint firstItem="wN7-8K-50T" firstAttribute="top" secondItem="RP6-2c-xfz" secondAttribute="top" id="bCR-LJ-uwa"/>
-                                <constraint firstAttribute="trailing" secondItem="wN7-8K-50T" secondAttribute="trailing" constant="16" id="dno-Hi-Eqg"/>
-                                <constraint firstItem="wN7-8K-50T" firstAttribute="leading" secondItem="RP6-2c-xfz" secondAttribute="leading" constant="16" id="mST-2f-pTo"/>
+                                <constraint firstAttribute="trailing" secondItem="wN7-8K-50T" secondAttribute="trailing" id="dno-Hi-Eqg"/>
+                                <constraint firstItem="wN7-8K-50T" firstAttribute="leading" secondItem="RP6-2c-xfz" secondAttribute="leading" id="mST-2f-pTo"/>
                                 <constraint firstItem="Kub-Fj-6rd" firstAttribute="centerX" secondItem="wN7-8K-50T" secondAttribute="centerX" id="ueX-BE-8UB"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpk-gP-QiI">
-                            <rect key="frame" x="0.0" y="244" width="375" height="1100"/>
+                            <rect key="frame" x="0.0" y="255" width="375" height="1100"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OK6-Bd-rfK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="fem-vP-Tqa" customClass="NSLayoutConstraintOnePixelLine"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="fem-vP-Tqa"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="fem-vP-Tqa"/>
+                                        </mask>
+                                    </variation>
+                                </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="门店名称（营业执照名）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ed3-aZ-xMV">
                                     <rect key="frame" x="16" y="10" width="343" height="30"/>
                                     <constraints>
@@ -97,9 +118,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhf-U4-61W">
                                     <rect key="frame" x="16" y="47" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="1yf-fL-2bb"/>
+                                        <constraint firstAttribute="height" constant="1" id="1yf-fL-2bb" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -129,9 +150,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUR-xc-T2b">
                                     <rect key="frame" x="16" y="92" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="Wee-q2-ylG"/>
+                                        <constraint firstAttribute="height" constant="1" id="Wee-q2-ylG" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -161,9 +182,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI8-Y2-ccd">
                                     <rect key="frame" x="16" y="137" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="qmW-57-nQk"/>
+                                        <constraint firstAttribute="height" constant="1" id="qmW-57-nQk" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -193,9 +214,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4I-j8-CCc">
                                     <rect key="frame" x="16" y="182" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="xqg-BJ-WEb"/>
+                                        <constraint firstAttribute="height" constant="1" id="xqg-BJ-WEb" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -225,9 +246,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuP-LU-TBT">
                                     <rect key="frame" x="16" y="227" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="Eqr-MM-Oav"/>
+                                        <constraint firstAttribute="height" constant="1" id="Eqr-MM-Oav" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -257,9 +278,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-6T-JAx">
                                     <rect key="frame" x="16" y="272" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="gcI-rf-TaL"/>
+                                        <constraint firstAttribute="height" constant="1" id="gcI-rf-TaL" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -275,9 +296,9 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pW-ky-RzV" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pW-ky-RzV" customClass="WPImageView">
                                     <rect key="frame" x="16" y="281" width="161.5" height="200"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="200" id="elC-zj-Adi"/>
                                     </constraints>
@@ -295,9 +316,9 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsX-8J-TZ0">
                                     <rect key="frame" x="197.5" y="281" width="161.5" height="200"/>
                                     <subviews>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UGJ-Y5-cHI" customClass="WPImageView">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UGJ-Y5-cHI" customClass="WPImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="161.5" height="90"/>
-                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传名片正面" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4WK-0r-wlA">
                                             <rect key="frame" x="21" y="4.5" width="120" height="80"/>
@@ -309,9 +330,9 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-zE-PSu" customClass="WPImageView">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-zE-PSu" customClass="WPImageView">
                                             <rect key="frame" x="0.0" y="110" width="161.5" height="89.5"/>
-                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传名片反面" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYV-BP-nqC">
                                             <rect key="frame" x="21" y="114" width="120" height="80"/>
@@ -343,9 +364,9 @@
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iy4-hP-VPb">
                                     <rect key="frame" x="0.0" y="493" width="375" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="zXu-NB-nxU"/>
+                                        <constraint firstAttribute="height" constant="1" id="zXu-NB-nxU" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -372,9 +393,9 @@
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiI-ND-qXz">
                                     <rect key="frame" x="16" y="538.5" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="shv-fL-NEu"/>
+                                        <constraint firstAttribute="height" constant="1" id="shv-fL-NEu" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -404,9 +425,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsB-hT-qKM">
                                     <rect key="frame" x="16" y="583.5" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="Wvz-Of-IhX"/>
+                                        <constraint firstAttribute="height" constant="1" id="Wvz-Of-IhX" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -422,9 +443,9 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-Zz-elE" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-Zz-elE" customClass="WPImageView">
                                     <rect key="frame" x="16" y="592.5" width="161.5" height="200"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传公众号二维码图片（可选）" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-yd-28W">
                                     <rect key="frame" x="57" y="652.5" width="80" height="80"/>
@@ -438,9 +459,9 @@
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIU-vm-wDT">
                                     <rect key="frame" x="0.0" y="804.5" width="375" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="uzX-To-XVQ"/>
+                                        <constraint firstAttribute="height" constant="1" id="uzX-To-XVQ" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -467,9 +488,9 @@
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mys-Bq-48v">
                                     <rect key="frame" x="16" y="849.5" width="343" height="1"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="AT1-F1-wfl"/>
+                                        <constraint firstAttribute="height" constant="1" id="AT1-F1-wfl" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -485,16 +506,16 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-k3-aPT" customClass="WPImageView">
+                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-k3-aPT" customClass="WPImageView">
                                     <rect key="frame" x="16" y="857.5" width="161.5" height="200"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="200" id="hsk-VD-Nip"/>
                                     </constraints>
                                 </imageView>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p4D-RQ-vRo" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p4D-RQ-vRo" customClass="WPImageView">
                                     <rect key="frame" x="197.5" y="857.5" width="161.5" height="200"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传微信 收款码  （可选）" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmo-EP-I0V">
                                     <rect key="frame" x="238" y="917.5" width="80" height="80"/>
@@ -515,6 +536,26 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-Av-oS8">
+                                    <rect key="frame" x="0.0" y="1099" width="375" height="1"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="EA8-6h-eXN" customClass="NSLayoutConstraintOnePixelLine"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="EA8-6h-eXN"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="EA8-6h-eXN"/>
+                                        </mask>
+                                    </variation>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -565,6 +606,7 @@
                                 <constraint firstItem="6Cp-nV-zmk" firstAttribute="top" secondItem="uI8-Y2-ccd" secondAttribute="bottom" constant="7" id="Vgv-7m-bws"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="height" secondItem="0pW-ky-RzV" secondAttribute="height" id="Vmb-jg-rzZ"/>
                                 <constraint firstItem="bR6-a8-SI1" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="Vv4-hX-wTg"/>
+                                <constraint firstAttribute="bottom" secondItem="OLi-Av-oS8" secondAttribute="bottom" id="Vwn-Wl-UZi"/>
                                 <constraint firstItem="BtE-Gh-dWb" firstAttribute="top" secondItem="Iy4-hP-VPb" secondAttribute="bottom" constant="7" id="W59-Pa-V7s"/>
                                 <constraint firstItem="jsB-hT-qKM" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="WY9-PU-Qya"/>
                                 <constraint firstItem="ump-2g-4Sv" firstAttribute="centerY" secondItem="pEg-k3-aPT" secondAttribute="centerY" id="WgQ-U7-Ecm"/>
@@ -582,20 +624,25 @@
                                 <constraint firstItem="pEg-k3-aPT" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="h6Q-z9-Z7e"/>
                                 <constraint firstItem="ed3-aZ-xMV" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="hoO-Az-izy"/>
                                 <constraint firstItem="VuP-LU-TBT" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="iNw-YV-1O8"/>
+                                <constraint firstAttribute="trailing" secondItem="OLi-Av-oS8" secondAttribute="trailing" id="iT9-Er-gAL"/>
                                 <constraint firstItem="fhf-U4-61W" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="jJ5-Qw-yQJ"/>
                                 <constraint firstItem="KQP-yd-28W" firstAttribute="centerX" secondItem="gXp-Zz-elE" secondAttribute="centerX" id="jb2-VU-t4Q"/>
+                                <constraint firstItem="OK6-Bd-rfK" firstAttribute="top" secondItem="zpk-gP-QiI" secondAttribute="top" id="kL8-tK-YZA"/>
                                 <constraint firstItem="jsB-hT-qKM" firstAttribute="top" secondItem="qJa-dT-JIA" secondAttribute="bottom" constant="7" id="kVS-C0-t8U"/>
                                 <constraint firstAttribute="trailing" secondItem="uI8-Y2-ccd" secondAttribute="trailing" constant="16" id="kj9-Sw-FjA"/>
                                 <constraint firstItem="uI8-Y2-ccd" firstAttribute="top" secondItem="f08-p1-t8w" secondAttribute="bottom" constant="7" id="l6f-X4-NgS"/>
                                 <constraint firstAttribute="trailing" secondItem="I1v-8m-l3O" secondAttribute="trailing" constant="16" id="lnl-QE-3cZ"/>
                                 <constraint firstItem="pEg-k3-aPT" firstAttribute="width" secondItem="gXp-Zz-elE" secondAttribute="width" id="lzB-s4-ukh"/>
                                 <constraint firstAttribute="trailing" secondItem="h5r-6T-JAx" secondAttribute="trailing" constant="16" id="nem-a0-ySg"/>
+                                <constraint firstAttribute="trailing" secondItem="OK6-Bd-rfK" secondAttribute="trailing" id="oCN-SO-L5E"/>
                                 <constraint firstItem="f08-p1-t8w" firstAttribute="top" secondItem="PUR-xc-T2b" secondAttribute="bottom" constant="7" id="oq8-x5-Of6"/>
+                                <constraint firstItem="OK6-Bd-rfK" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" id="pDl-Lf-4Hw"/>
                                 <constraint firstItem="0pW-ky-RzV" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="q3Y-aa-P6t"/>
                                 <constraint firstItem="ZDs-8Q-bo0" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="q4p-ZW-7eJ"/>
                                 <constraint firstItem="qiI-ND-qXz" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="s0K-31-EfO"/>
                                 <constraint firstItem="wm0-RL-Nc6" firstAttribute="centerY" secondItem="0pW-ky-RzV" secondAttribute="centerY" id="sVM-M9-84F"/>
                                 <constraint firstAttribute="trailing" secondItem="a4I-j8-CCc" secondAttribute="trailing" constant="16" id="t0u-KV-pZz"/>
+                                <constraint firstItem="OLi-Av-oS8" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" id="tIA-fk-l03"/>
                                 <constraint firstItem="0pW-ky-RzV" firstAttribute="top" secondItem="h5r-6T-JAx" secondAttribute="bottom" constant="8" id="uO8-Yy-wBe"/>
                                 <constraint firstItem="f08-p1-t8w" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="wR5-0q-r8u"/>
                                 <constraint firstItem="uI8-Y2-ccd" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="xnf-WY-CmO"/>
@@ -622,12 +669,12 @@
                     </constraints>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ggi-so-8Bg">
-                    <rect key="frame" x="0.0" y="1455" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="1450" width="375" height="49"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="z1B-Kl-tRH"/>
+                        <constraint firstAttribute="height" constant="49" id="z1B-Kl-tRH"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="提交申请"/>
                     <connections>
                         <action selector="replayAction:" destination="-1" eventType="touchUpInside" id="7Wx-1e-7Ak"/>

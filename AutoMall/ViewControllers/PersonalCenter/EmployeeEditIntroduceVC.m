@@ -204,8 +204,11 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserChangeRemark object:nil];
         NSLog(@"UserChangeRemark: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            self.UpdateUserInfo();
-            [self.navigationController popViewControllerAnimated:YES];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -213,6 +216,12 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+
+- (void)toPopVC:(NSString *)string {
+    self.UpdateUserInfo();
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

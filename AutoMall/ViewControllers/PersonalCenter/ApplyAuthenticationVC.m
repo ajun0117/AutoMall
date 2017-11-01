@@ -417,7 +417,7 @@
             break;
         }
         case 4: {
-            self.gongzhongImg.image = image;
+//            self.gongzhongImg.image = image;
             [self requestUploadImgFile:self.gongzhongImg];
             break;
         }

@@ -13,6 +13,7 @@
 		040BC8BC1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040BC8BA1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib */; };
 		040BC8C11FA88482009AD3BA /* EmployeeSkillListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 040BC8BF1FA88482009AD3BA /* EmployeeSkillListVC.m */; };
 		040BC8C21FA88482009AD3BA /* EmployeeSkillListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040BC8C01FA88482009AD3BA /* EmployeeSkillListVC.xib */; };
+		040E6EA31FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E6EA21FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.m */; };
 		041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076EB1F54243B003CB740 /* HeadNameCell.m */; };
 		041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041076EC1F54243B003CB740 /* HeadNameCell.xib */; };
 		041076F21F542463003CB740 /* CenterNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041076F01F542463003CB740 /* CenterNormalCell.m */; };
@@ -426,6 +427,8 @@
 		040BC8BE1FA88482009AD3BA /* EmployeeSkillListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeSkillListVC.h; sourceTree = "<group>"; };
 		040BC8BF1FA88482009AD3BA /* EmployeeSkillListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeSkillListVC.m; sourceTree = "<group>"; };
 		040BC8C01FA88482009AD3BA /* EmployeeSkillListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeSkillListVC.xib; sourceTree = "<group>"; };
+		040E6EA11FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLayoutConstraintOnePixelLine.h; sourceTree = "<group>"; };
+		040E6EA21FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLayoutConstraintOnePixelLine.m; sourceTree = "<group>"; };
 		041076EA1F54243B003CB740 /* HeadNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadNameCell.h; sourceTree = "<group>"; };
 		041076EB1F54243B003CB740 /* HeadNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadNameCell.m; sourceTree = "<group>"; };
 		041076EC1F54243B003CB740 /* HeadNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeadNameCell.xib; sourceTree = "<group>"; };
@@ -1226,6 +1229,15 @@
 				F7A39CBB1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib */,
 			);
 			name = "员工查看自己的技能列表";
+			sourceTree = "<group>";
+		};
+		040E6EA01FA9750500C2FA9A /* NSLayoutConstraintOnePixelLine */ = {
+			isa = PBXGroup;
+			children = (
+				040E6EA11FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.h */,
+				040E6EA21FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.m */,
+			);
+			name = NSLayoutConstraintOnePixelLine;
 			sourceTree = "<group>";
 		};
 		041076E91F5423FB003CB740 /* 中心首页cell */ = {
@@ -2300,6 +2312,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				040E6EA01FA9750500C2FA9A /* NSLayoutConstraintOnePixelLine */,
 				046B8DBC1F99F76400784AA8 /* 支付宝蚂蚁金服支付 */,
 				04ABFB2E1F9837CE0015EE78 /* GTMBase64 */,
 				042CFCDC1F8CEDB90080D720 /* Json Kit */,
@@ -3333,6 +3346,7 @@
 				04D107871F62998D007D9F57 /* ZFHorizontalBar.m in Sources */,
 				04DC7DCA1F31C28300AA20A7 /* AJMessageView.m in Sources */,
 				04DC7DAE1F31C28300AA20A7 /* CustomLabel.m in Sources */,
+				040E6EA31FA9752D00C2FA9A /* NSLayoutConstraintOnePixelLine.m in Sources */,
 				04D107731F62998D007D9F57 /* NSNumber+Zirkfied.m in Sources */,
 				04DC7DBD1F31C28300AA20A7 /* ImageCollectionViewCell.m in Sources */,
 				04DC7DE61F31C28300AA20A7 /* UITabBarItem+Universal.m in Sources */,
@@ -3476,7 +3490,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3518,7 +3532,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

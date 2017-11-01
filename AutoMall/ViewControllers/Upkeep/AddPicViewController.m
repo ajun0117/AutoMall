@@ -25,7 +25,6 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSDictionary *myInfoDic;
-    int currentpage;
     NSMutableArray *_imgsArray;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *imgsCollectionView;
@@ -46,17 +45,25 @@
     [self wr_setNavBarTintColor:NavBarTintColor];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor redColor];
+    
+//    UIButton *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    editBtn.frame = CGRectMake(0, 0, 50, 44);
+//    //    searchBtn.contentMode = UIViewContentModeRight;
+//    editBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    [editBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
+//    editBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+//    [editBtn setTitle:@"编辑" forState:UIControlStateNormal];
+//    [editBtn addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *editBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:editBtn];
+//    self.navigationItem.rightBarButtonItem = editBtnBarBtn;
 
     [self.imgsCollectionView registerNib:[UINib nibWithNibName:@"AlbumListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:AlbumListCell];
 //    [self.myCollectionView registerNib:[UINib nibWithNibName:@"AddPicFooterCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     
-//    [self.imgsCollectionView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-//    [self.imgsCollectionView addFooterWithTarget:self action:@selector(footerLoadData)];
-//    [self.imgsCollectionView headerBeginRefreshing];
-    
-    currentpage = 1;
     _imgsArray = [[NSMutableArray alloc] init];
     self.imageDataArr = [[NSMutableArray alloc] init];
     //图片占位
@@ -106,7 +113,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.GoBackUpdate(@[@{@"relativePath":@"1"},@{@"relativePath":@"2"},@{@"relativePath":@"3"}]);
+    self.GoBackUpdate(_imgsArray);
 }
 
 -(void)edit:(UIBarButtonItem *)rightItem {
@@ -125,24 +132,11 @@
     [self.imgsCollectionView reloadData];
 }
 
-//#pragma mark - 下拉刷新,上拉加载
-//-(void)headerRefreshing {
-//    currentpage = 1;
-//    [self requestGetAlbumList];
-//}
-//
-//-(void)footerLoadData {
-//    currentpage ++;
-//    [self requestGetAlbumList];
-//}
-
 #pragma mark --UICollectionViewDataSource
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (collectionView == self.imgsCollectionView) {
-//        NSArray *imgAry = myInfoDic [@"images"];
-//        return [imgAry count];
         return [_imgsArray count];
     }
     return self.imageDataArr.count;
@@ -158,8 +152,6 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.imgsCollectionView) {
-//        NSArray *imgAry = myInfoDic [@"images"];
-//        NSDictionary *dic = imgAry [indexPath.item];
         NSDictionary *dic = _imgsArray [indexPath.item];
         AlbumListCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:AlbumListCell forIndexPath:indexPath];
         cell.titleL.text = @"";
@@ -175,7 +167,7 @@
         //    cell.AlbumBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         //    cell.AlbumBtn.clipsToBounds = YES;
         
-        [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"path"])] forState:UIControlStateNormal placeholderImage:IMG(@"squareImageDefault")];
+        [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"relativePath"])] forState:UIControlStateNormal placeholderImage:IMG(@"default")];
         cell.AlbumBtn.tag = indexPath.item + 2000;
         
         [cell.AlbumBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -206,7 +198,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.imgsCollectionView) {
-        CGSize size = CGSizeMake(80, 80);
+        CGSize size = CGSizeMake(100, 100);
         return size;
     }
     return CGSizeMake(100, 100);
@@ -300,7 +292,7 @@
 //    NSArray *imgAry = myInfoDic [@"images"];
 //    NSDictionary *dic = imgAry [index];
     NSDictionary *dic = _imgsArray [index];
-    NSString *urlStr = dic [@"path"];
+    NSString *urlStr = dic [@"relativePath"];
     return [NSURL URLWithString:urlStr];
 }
 
@@ -509,8 +501,10 @@
     int row = (int)btn.tag - 1000;
 //    NSArray *imgAry = myInfoDic [@"images"];
 //    NSDictionary *dic = imgAry [row];
-    NSDictionary *dic = _imgsArray [row];
-    [self requestDeleImageWithImageID:dic [@"id"]];     //删除照片
+//   NSDictionary *dic = _imgsArray [row];
+    NSLog(@"row: %d",row);
+    [_imgsArray removeObjectAtIndex:row];
+   [self.myCollectionView reloadData];
 }
 
 - (IBAction)uploadAction:(id)sender {
@@ -520,16 +514,16 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     } else {
         [_hud show:YES];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ImageUpload object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
         for (int i = 0; i < self.imageDataArr.count; i++) {
             ImageObject *obj = self.imageDataArr[i];
             ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[self.myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             if (!obj.imageStorePath && obj.uploadStatus == ImageUploadingStatusDefault) {
                 [cell changeUploadStatus:ImageUploadingStatusUploading];
                 obj.uploadStatus = ImageUploadingStatusUploading;
-                [cell.imageView setCurrentProgress:0.0];
-                [cell.imageView setCircleProgressViewHidden:YES];
-                [cell uploadImage:self andTargetId:nil andTargetType:@"2"];  //2：用户的相册，5：用户的头像
+//                [cell.imageView setCurrentProgress:0.0];
+//                [cell.imageView setCircleProgressViewHidden:NO];
+                [cell uploadImage:self andTargetId:nil andTargetType:nil]; 
                 
                 //break;
             }
@@ -537,78 +531,15 @@
     }
 }
 
-#pragma mark - 发送请求
-//-(void)requestGetMyInfo { //获取我的详情信息
-//    [_hud show:YES];
-//    //注册通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserDetail object:nil];
-//    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserDetail, @"op", nil];
-//    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"targetUserId", nil];
-//    NSLog(@"pram: %@",pram);
-//    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(UserDetail) delegate:nil params:nil info:infoDic];
-//}
-
--(void)requestGetAlbumList { //获取相册
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ImageList object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ImageList, @"op", nil];
-    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"targetType",userId,@"targetId",[NSNumber numberWithInt:currentpage],@"page",@"30",@"limit", nil];
-    NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageList) delegate:nil params:pram info:infoDic];
-}
-
--(void)requestDeleImageWithImageID:(NSString *)imageId { //删除我的相册照片
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ImageDelete object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ImageDelete, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:imageId,@"id", nil];
-    NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageDelete) delegate:nil params:pram info:infoDic];
-}
-
--(void)requestUploadHeadImageWithImage:(UIImage *)image {     //上传头像
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ImageUpload object:nil];
-    
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ImageUpload, @"op", nil];
-    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    /**************************/
-    NSData *imageData = UIImageJPEGRepresentation(image, 1);
-    NSInteger length = imageData.length;
-    if (length > 1048) {
-        CGFloat packRate = 1048.0/length;
-        imageData = UIImageJPEGRepresentation(image, packRate);
-    }
-    NSString *baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                         (CFStringRef)baseStr,
-                                                                                         NULL,
-                                                                                         CFSTR(":/?#[]@!$&’()*+,;="),
-                                                                                         kCFStringEncodingUTF8);
-    /**************************/
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"imgData",@"jpg",@"ext",@"2",@"targetType",userId,@"targetId", nil]; //用户相册targetType=2
-    
-    NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:pram info:infoDic];
-}
-
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
-    [self.imgsCollectionView headerEndRefreshing];
-    [self.imgsCollectionView footerEndRefreshing];
     NSIndexPath *indexPath = [notification.userInfo objectForKey:@"indexPath"];
     ImageCollectionViewCell *cell = nil;
     if (indexPath) {
         cell = (ImageCollectionViewCell *)[self.myCollectionView cellForItemAtIndexPath:indexPath];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [cell.imageView setCircleProgressViewHidden:YES];
-            
+//            [cell.imageView setCircleProgressViewHidden:YES];
             return ;
         });
     }
@@ -620,48 +551,15 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    if ([notification.name isEqualToString:ImageList]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ImageList object:nil];
-        if ([responseObject[@"result"] boolValue]) {
-//            myInfoDic = responseObject [@"item"];
-            if (currentpage == 1) { //如果是第一页
-                [_imgsArray removeAllObjects];
-            }
-            [_imgsArray addObjectsFromArray:responseObject[@"items"]];
-        }
-        else {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            
-            if (currentpage == 1) { //如果是第一页
-                [_imgsArray removeAllObjects];
-            }
-        }
-        //先清空collectionView的所有cell，防止subViews的位置发生重用
-        for (UIView *view in self.imgsCollectionView.subviews) {
-            if ([view isKindOfClass:[AlbumListCollectionViewCell class]]) {
-                [view removeFromSuperview];
-            }
-        }
-        [self.imgsCollectionView reloadData];
-    }
     
-    if ([notification.name isEqualToString:ImageDelete]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ImageDelete object:nil];
-        if ([responseObject[@"result"] boolValue]) {
-            currentpage = 1;
-            [self requestGetAlbumList];    //刷新数据
-        }
-        _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-    }
-    
-    if ([notification.name isEqualToString:ImageUpload]) {
+    if ([notification.name isEqualToString:UploadImgFile]) {
         //[[NSNotificationCenter defaultCenter] removeObserver:self name:REQUEST_GET_PubImage object:nil];
         ImageObject *obj = [self.imageDataArr objectAtIndex:indexPath.row];
-        NSString *path = [[responseObject objectForKey:@"item"] objectForKey:@"path"];
+        
+        NSString *path = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
+        NSDictionary *dic = @{@"relativePath":path};
+        [_imgsArray addObject:dic];
+        
         obj.imageStorePath = path;
         obj.uploadStatus = ImageUploadingStatusFinished;
         [cell changeUploadStatus:ImageUploadingStatusFinished];
@@ -673,7 +571,7 @@
             }
         }
         if (isComplete) {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:ImageUpload object:nil];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
             [_hud hide:YES];
             
             NSLog(@"jj:%@",self.imageDataArr.description);
@@ -683,10 +581,10 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
             [self.imageDataArr removeAllObjects];
+            NSLog(@"_imgsArray: %@",_imgsArray);
+            [self.imgsCollectionView reloadData];
             [self.myCollectionView reloadData];
             self.navigationItem.rightBarButtonItem.title = @"编辑";
-            currentpage = 1;
-            [self requestGetAlbumList];    //刷新数据
         }
     }
 

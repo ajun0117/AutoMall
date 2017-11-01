@@ -103,21 +103,21 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyV-Bo-qPO">
-                    <rect key="frame" x="0.0" y="618" width="185" height="49"/>
+                    <rect key="frame" x="0.0" y="618" width="187.5" height="49"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="U59-WU-nHg"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="先付款再开工"/>
                     <connections>
                         <action selector="payFirstAction:" destination="-1" eventType="touchUpInside" id="fJ7-QO-SD4"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SK7-tU-RFG">
-                    <rect key="frame" x="190" y="618" width="185" height="49"/>
-                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <rect key="frame" x="187.5" y="618" width="187.5" height="49"/>
+                    <color key="backgroundColor" red="0.96862745100000003" green="0.58039215690000001" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="完工后付款"/>
                     <connections>
                         <action selector="upkeepFirstAction:" destination="-1" eventType="touchUpInside" id="KO7-lJ-5AH"/>
@@ -126,7 +126,7 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="SK7-tU-RFG" firstAttribute="leading" secondItem="LyV-Bo-qPO" secondAttribute="trailing" constant="5" id="0fE-WV-Mwd"/>
+                <constraint firstItem="SK7-tU-RFG" firstAttribute="leading" secondItem="LyV-Bo-qPO" secondAttribute="trailing" id="0fE-WV-Mwd"/>
                 <constraint firstAttribute="trailing" secondItem="SK7-tU-RFG" secondAttribute="trailing" id="NEi-8P-qCw"/>
                 <constraint firstAttribute="bottom" secondItem="LyV-Bo-qPO" secondAttribute="bottom" id="PAG-bQ-D97"/>
                 <constraint firstAttribute="bottom" secondItem="SK7-tU-RFG" secondAttribute="bottom" id="Tha-Sp-eXa"/>

@@ -25,6 +25,8 @@
         
         self.imageView = [[WPImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80) backColor:[UIColor colorWithWhite:0.603 alpha:0.390] progressColor:[UIColor greenColor] lineWidth:2];
         //self.imageView.center = self.contentView.center;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.clipsToBounds = YES;
         [self addSubview:self.imageView];
         
         //初始化删除按钮
@@ -99,26 +101,27 @@
 -(void)requestUploadImgWithIndex:(NSIndexPath *)indexPath andImage:(WPImageView *)image delegate:(id)delegate andTargetId:(NSString *)targetId andTargetType:(NSString *)targetType andExt:(NSString *)ext {
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op",indexPath,@"indexPath", nil];
 
-    //data=data
-    NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
-    NSInteger length = imageData.length;
-    if (length > 1048) {
-        CGFloat packRate = 1048.0/length;
-        imageData = UIImageJPEGRepresentation(image.image, packRate);
-    }
-    //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
-    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                         (CFStringRef)baseStr,
-                                                                                         NULL,
-                                                                                         CFSTR(":/?#[]@!$&’()*+,;="),
-                                                                                         kCFStringEncodingUTF8);
-//    NSLog(@"baseString:%@",baseString); 
+//    //data=data
+//    NSData *imageData = UIImageJPEGRepresentation(image.image, 1);
+//    NSInteger length = imageData.length;
+//    if (length > 1048) {
+//        CGFloat packRate = 1048.0/length;
+//        imageData = UIImageJPEGRepresentation(image.image, packRate);
+//    }
+//    //    NNSData* originData = [originStr dataUsingEncoding:NSASCIIStringEncoding];
+//    NSString* baseStr = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+//    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                                         (CFStringRef)baseStr,
+ //                                                                                        NULL,
+//                                                                                         CFSTR(":/?#[]@!$&’()*+,;="),
+//                                                                                         kCFStringEncodingUTF8);
+////    NSLog(@"baseString:%@",baseString);
+//
+//    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"imgData",@"jpg",@"ext",targetType,@"targetType",targetId,@"targetId", nil]; //评论targetType=3
+//    NSLog(@"paramsDic: %@",paramsDic);
+////    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:paramsDic info:infoDic];
     
-    NSDictionary *paramsDic = [[NSDictionary alloc] initWithObjectsAndKeys:baseString,@"imgData",@"jpg",@"ext",targetType,@"targetType",targetId,@"targetId", nil]; //评论targetType=3
-    NSLog(@"paramsDic: %@",paramsDic);
-//    [[DataRequest sharedDataRequest] postDataWithUrl:RequestURL(ImageUpload) delegate:nil params:paramsDic info:infoDic];
-    [[DataRequest sharedDataRequest] uploadImageWithUrl:RequestURL(UploadImgFile) params:paramsDic target:image delegate:delegate info:infoDic];
+    [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
 }
 
 @end

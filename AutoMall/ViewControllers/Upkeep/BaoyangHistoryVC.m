@@ -98,10 +98,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
     NSDictionary *dic = historyArray[indexPath.row];
-    cell.lichengL.text = [NSString stringWithFormat:@"%@公里",dic[@""]];
-    cell.ranyouL.text = [NSString stringWithFormat:@"%@L",dic[@""]];
+    cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"car"][@"mileage"])];
+    cell.ranyouL.text = [NSString stringWithFormat:@"%@L",STRING(dic[@"car"][@"fuelAmount"])];
     cell.ownerL.text = dic[@"carOwnerName"];
-    cell.dateL.text = dic[@"endTime"];
+    cell.dateL.text = STRING(dic[@"endTime"]);
     return cell;
 }
 
@@ -121,7 +121,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=4",UrlPrefix(CarUpkeepSearch),self.carId, currentpage];
+    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=0",UrlPrefix(CarUpkeepSearch),self.carId, currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

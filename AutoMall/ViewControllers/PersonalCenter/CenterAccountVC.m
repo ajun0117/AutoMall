@@ -193,7 +193,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            self.UpdateUserInfo(nil);
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -201,6 +201,11 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+- (void)toPopVC:(NSString *)string {
+    self.UpdateUserInfo(nil);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -106,9 +106,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mo-KY-tim">
                         <rect key="frame" x="0.0" y="139" width="320" height="1"/>
-                        <color key="backgroundColor" red="0.91664922240000002" green="0.91662180419999995" blue="0.91663730139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="Cdk-MN-fE4"/>
+                            <constraint firstAttribute="height" constant="1" id="Cdk-MN-fE4" customClass="NSLayoutConstraintOnePixelLine"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

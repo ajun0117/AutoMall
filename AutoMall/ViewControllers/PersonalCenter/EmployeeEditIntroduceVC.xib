@@ -22,19 +22,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fAG-zu-2Bl">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="BCW-sI-Xi9"/>
+                        <constraint firstAttribute="height" constant="49" id="BCW-sI-Xi9"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="保存"/>
                     <connections>
                         <action selector="changeAction:" destination="-1" eventType="touchUpInside" id="wmk-Re-vaY"/>
                     </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJA-LM-b1S">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWG-Y1-TRf">
                             <rect key="frame" x="0.0" y="64" width="375" height="260"/>
@@ -59,9 +59,9 @@
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4b-jP-XNb">
                                     <rect key="frame" x="16" y="38" width="359" height="1"/>
-                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="gJ6-x3-Tax"/>
+                                        <constraint firstAttribute="height" constant="1" id="gJ6-x3-Tax" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>

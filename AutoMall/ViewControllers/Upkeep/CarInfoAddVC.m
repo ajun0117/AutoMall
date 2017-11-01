@@ -8,7 +8,6 @@
 
 #import "CarInfoAddVC.h"
 #import "BaoyangHistoryVC.h"
-#import "AutoCheckVC.h"
 
 @interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -20,6 +19,7 @@
     NSArray *nameArray;
     NSArray *textFieldArray;
     NSString *carImgUrl;    //车图url
+    BOOL isAutoSelect;      //自动选择
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
@@ -63,6 +63,20 @@
         UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
         self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
         
+        [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"default")];
+        self.mileageTF.text = NSStringWithNumber(self.carDic[@"mileage"]);
+        self.fuelAmountTF.text = NSStringWithNumber(self.carDic[@"fuelAmount"]);
+        self.ownerTF.text = NSStringWithNumber(self.carDic[@"owner"]);
+        self.phoneTF.text = NSStringWithNumber(self.carDic[@"phone"]);
+        self.wechatTF.text = NSStringWithNumber(self.carDic[@"wechat"]);
+        self.genderTF.text = NSStringWithNumber(self.carDic[@"gender"]);
+        self.birthdayTF.text = NSStringWithNumber(self.carDic[@"birthday"]);
+        self.plateNumberTF.text = NSStringWithNumber(self.carDic[@"plateNumber"]);
+        self.brandTF.text = NSStringWithNumber(self.carDic[@"brand"]);
+        self.modelTF.text = NSStringWithNumber(self.carDic[@"purchaseDate"]);
+        self.purchaseDateTF.text = NSStringWithNumber(self.carDic[@""]);
+        self.engineNoTF.text = NSStringWithNumber(self.carDic[@"engineNo"]);
+        self.vinTF.text = NSStringWithNumber(self.carDic[@"cjh123456"]);
     }
     else {
         self.title = @"新增车辆";
@@ -245,13 +259,13 @@
 }
 
 - (IBAction)saveAction:(id)sender {
+    isAutoSelect = NO;
     [self requestPostAddCar];
 }
 
 - (IBAction)selectAction:(id)sender {
-    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-    checkVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:checkVC animated:YES];
+    isAutoSelect = YES;
+    [self requestPostAddCar];
 }
 
 -(void)selectThePhotoOrCamera {
@@ -407,6 +421,8 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
@@ -416,6 +432,7 @@
     
     if ([notification.name isEqualToString:UploadImgFile]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+//        [self.carImgView setCircleProgressViewHidden:YES];
         if ([responseObject[@"result"] boolValue]) {
             carImgUrl = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
         }
@@ -425,7 +442,14 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
-    
+}
+
+- (void)toPopVC:(NSString *)carId {
+    if (isAutoSelect) {
+        NSDictionary *car = @{@"id":carId,@"plateNumber":self.plateNumberTF.text};
+        self.GoBackSelectCarDic(car);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

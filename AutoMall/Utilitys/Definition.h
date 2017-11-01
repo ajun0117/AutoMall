@@ -113,7 +113,7 @@
 
 #define FavoritePraise        @"/app/favorite/praise" //点赞
 
-#define ImageUpload            @"/app/image/upload"    //上传图片
+//#define ImageUpload            @"/app/image/upload"    //上传图片
 #define ImageList                @"/app/image/list"      //查询相册图片列表
 
 #define CommentSend          @"/app/comment/send"    //发表评论
@@ -177,7 +177,7 @@
 #define ChecktypeList                             @"/api/checktype/list"              //检查类别
 #define CheckcategoryList                      @"/api/checkcategory/list"       //检查部位列表
 #define ChecktermList                            @"/api/checkterm/list"             //某部位的检查内容列表
-#define afafds                                         @"/api/checkContent/list"       //检查部位下检查内容和服务内容
+#define CheckContentList                        @"/api/checkContent/list"       //检查部位下检查内容和服务内容
 #define CarUpkeepAdd                            @"/api/carUpkeep/add"            //生成检查单信息
 #define DiscountList                                @"/api/discount/list"                //优惠列表
 #define CarAdd                                        @"/api/car/add"                       //新增车辆信息

@@ -627,6 +627,7 @@
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
+                [cell.shopNameBtn setTitle:shopDic[@"name"] forState:UIControlStateNormal];
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
 //                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 cell.shopLevelIM.hidden= NO;
@@ -943,9 +944,9 @@
     else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
         switch (indexPath.section) {
             case 0: {
-                _networkConditionHUD.labelText = @"门店员工不能修改店铺信息";
-                [_networkConditionHUD show:YES];
-                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//                _networkConditionHUD.labelText = @"门店员工不能修改店铺信息";
+//                [_networkConditionHUD show:YES];
+//                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 break;
             }
             case 1: {

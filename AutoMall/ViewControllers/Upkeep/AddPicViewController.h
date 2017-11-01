@@ -13,6 +13,6 @@
 /**
  * 更新照片
  */
-@property (copy, nonatomic) void((^GoBackUpdate)(NSArray *array));
+@property (copy, nonatomic) void((^GoBackUpdate)(NSMutableArray *array));
 
 @end

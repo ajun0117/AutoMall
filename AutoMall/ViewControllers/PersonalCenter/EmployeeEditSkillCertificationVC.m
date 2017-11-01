@@ -251,8 +251,6 @@
         NSLog(@"pram: %@",pram);
         [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserAppendSkill) delegate:nil params:pram info:infoDic];
     }
-    
-    
 }
 
 #pragma mark - 网络请求结果数据
@@ -285,7 +283,7 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -302,7 +300,7 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -312,6 +310,10 @@
     }
 }
 
+
+- (void)toPopVC:(NSString *)string {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

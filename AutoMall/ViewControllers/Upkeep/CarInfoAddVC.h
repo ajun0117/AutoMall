@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSDictionary *carDic; //车辆信息，有值就是编辑
 
+@property (copy, nonatomic) void((^GoBackSelectCarDic)(NSDictionary *carDic));
+
 @end

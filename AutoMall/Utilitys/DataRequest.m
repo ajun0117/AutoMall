@@ -198,6 +198,9 @@ static DataRequest *dataRequest;
 -(void) uploadImageWithUrl:(NSString *)urlStr params:(NSDictionary *)param target:(WPImageView *)imageView delegate:(id)delegate info:(NSDictionary *)infoDic {
     
 //    if ([DataRequest checkNetwork]) {
+        [imageView setCurrentProgress:0.0];
+        [imageView setCircleProgressViewHidden:NO];
+    
         AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
         NSError *error = nil;
         NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:urlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -259,6 +262,9 @@ static DataRequest *dataRequest;
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [imageView_ setCurrentProgress:progress];
+                if (progress == 1.0) {
+                    [imageView setCircleProgressViewHidden:YES];
+                }
             });
         }];
         

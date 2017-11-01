@@ -37,9 +37,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXD-nc-bVz">
                         <rect key="frame" x="0.0" y="45" width="320" height="0.5"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="hAz-jP-5BS"/>
+                            <constraint firstAttribute="height" constant="1" id="hAz-jP-5BS" customClass="NSLayoutConstraintOnePixelLine"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -65,9 +65,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKQ-E6-sxi">
                         <rect key="frame" x="0.0" y="89.5" width="320" height="0.5"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="C8c-qS-qEL"/>
+                            <constraint firstAttribute="height" constant="1" id="C8c-qS-qEL" customClass="NSLayoutConstraintOnePixelLine"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -90,9 +90,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JET-EK-To9">
                         <rect key="frame" x="0.0" y="134.5" width="320" height="0.5"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="kVi-PM-0xU"/>
+                            <constraint firstAttribute="height" constant="1" id="kVi-PM-0xU" customClass="NSLayoutConstraintOnePixelLine"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -115,9 +115,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsU-Qi-TPa">
                         <rect key="frame" x="0.0" y="179" width="320" height="0.5"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="Ehl-ZQ-xPi"/>
+                            <constraint firstAttribute="height" constant="1" id="Ehl-ZQ-xPi" customClass="NSLayoutConstraintOnePixelLine"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -131,9 +131,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-3A-fx9">
                         <rect key="frame" x="159.5" y="45.5" width="0.5" height="174"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="0.5" id="vYN-zl-psC"/>
+                            <constraint firstAttribute="width" constant="1" id="vYN-zl-psC" customClass="NSLayoutConstraintOnePixelLine"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>

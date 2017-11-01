@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -53,9 +53,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBH-NF-gsl">
                                     <rect key="frame" x="16" y="45" width="359" height="0.5"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="4wi-DT-8hZ"/>
+                                        <constraint firstAttribute="height" constant="1" id="4wi-DT-8hZ" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -85,19 +85,19 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff9-Mu-92y">
                                     <rect key="frame" x="0.0" y="89" width="375" height="0.5"/>
-                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="gQ9-cd-g4A"/>
+                                        <constraint firstAttribute="height" constant="1" id="gQ9-cd-g4A" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="woS-Rp-xld" customClass="WPImageView">
-                                    <rect key="frame" x="37.5" y="97" width="300" height="150"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="woS-Rp-xld" customClass="WPImageView">
+                                    <rect key="frame" x="54" y="97" width="267" height="150"/>
+                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="woS-Rp-xld" secondAttribute="height" multiplier="2:1" id="ARo-DY-nB1"/>
+                                        <constraint firstAttribute="width" secondItem="woS-Rp-xld" secondAttribute="height" multiplier="16:9" id="ARo-DY-nB1"/>
                                         <constraint firstAttribute="height" constant="150" id="clL-DR-IHd"/>
                                     </constraints>
                                 </imageView>
@@ -153,7 +153,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="Smc-rR-TW7"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="提交审核"/>
                     <connections>
                         <action selector="toSubmitSkillAction:" destination="-1" eventType="touchUpInside" id="xit-wI-WXG"/>

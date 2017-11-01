@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,18 +18,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhJ-QR-C8Z">
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhJ-QR-C8Z">
+                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                         <state key="normal">
                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
                     <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l6Z-ap-aZN">
+                        <rect key="frame" x="0.0" y="100" width="130" height="30"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="GEj-wC-n7Z"/>
                         </constraints>
                     </view>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Wa-rm-9ub">
+                        <rect key="frame" x="0.0" y="104" width="130" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="MOg-DA-xsZ"/>
                         </constraints>
@@ -35,11 +41,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTh-ab-xcS">
+                        <rect key="frame" x="105" y="0.0" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="J83-YL-sDI"/>
                             <constraint firstAttribute="height" constant="25" id="U76-oS-R8d"/>
                         </constraints>
-                        <state key="normal" image="delete_pic.png"/>
+                        <state key="normal" image="delete_pic"/>
                     </button>
                 </subviews>
             </view>
@@ -67,6 +74,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="delete_pic.png" width="25" height="25"/>
+        <image name="delete_pic" width="50" height="50"/>
     </resources>
 </document>

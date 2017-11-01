@@ -47,6 +47,21 @@
     }
     return self;
 }
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+//    self.userInteractionEnabled = YES;
+//    CGRect frame1 = self.frame;
+//    frame1.origin.x = 0;
+//    frame1.origin.y = 0;
+//    frame1.size.height -=0;
+//    frame1.size.width -=0;
+    self.circleProgressView = [[CircleProgressView alloc] initWithFrame:CGRectMake(0, 0, 60, 60) backColor:[UIColor colorWithWhite:0.603 alpha:0.390] progressColor:[UIColor greenColor] lineWidth:2];
+    self.circleProgressView.center = self.center;
+    self.circleProgressView.hidden = YES;
+    [self addSubview:self.circleProgressView];
+}
+
 //-(void)setImage:(UIImage *)image{
 //    self.imageView.image = image;
 //}

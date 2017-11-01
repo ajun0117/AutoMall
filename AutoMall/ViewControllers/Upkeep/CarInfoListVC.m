@@ -83,6 +83,9 @@
 
 -(void) toRegisterNewCarInfo {
     CarInfoAddVC *addVC = [[CarInfoAddVC alloc] init];
+    addVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+        self.GoBackSelectCarDic(carDic);
+    };
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
@@ -155,10 +158,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        NSDictionary *dic = carArray[indexPath.row];
-        CarInfoAddVC *editVC = [[CarInfoAddVC alloc] init];
-        editVC.carDic = dic;
-        [self.navigationController pushViewController:editVC animated:YES];
+    NSDictionary *dic = carArray[indexPath.row];
+    CarInfoAddVC *editVC = [[CarInfoAddVC alloc] init];
+    editVC.carDic = dic;
+    editVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+        self.GoBackSelectCarDic(carDic);
+    };
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 -(void)selectTheCar:(UIButton *)btn {
