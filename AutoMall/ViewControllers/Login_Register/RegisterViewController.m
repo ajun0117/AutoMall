@@ -135,7 +135,7 @@
         return YES;
     }
     return NO;
-}
+} 
 
 #pragma mark - 发送请求
 -(void)requestVerifyMobile { //验证是否已注册

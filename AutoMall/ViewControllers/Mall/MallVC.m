@@ -22,7 +22,7 @@ static CGFloat const scrollViewHeight = 220;
 #define NAVBAR_COLORCHANGE_POINT (scrollViewHeight - NAV_HEIGHT)
 #define NAV_HEIGHT 64
 
-#define Head_ScrollView_Height      180
+#define Head_ScrollView_Height      160
 #define Head_PageControl_Width     80
 #define Head_PageControl_Height     30
 #define Head_button_Width           45
@@ -265,7 +265,7 @@ static CGFloat const scrollViewHeight = 220;
         NSLog(@"%f",height);
         return height + 1;
     }
-    return 180;
+    return Head_ScrollView_Height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -375,8 +375,8 @@ static CGFloat const scrollViewHeight = 220;
     }
     self.typePageControl.numberOfPages = page;
     self.typeScrollView.contentSize = CGSizeMake(page * SCREEN_WIDTH, Head_ScrollView_Height);
-    int margin = (SCREEN_WIDTH - Head_button_Width * 4 - 15 * 2) / 3; //按钮列间距
-    int rowMargin = Head_ScrollView_Height - Head_PageControl_Height - Head_button_Height * 2 - 15; //按钮行间距
+    int margin = (SCREEN_WIDTH - Head_button_Width * 4 - 8 * 2) / 3; //按钮列间距
+    int rowMargin = Head_ScrollView_Height - Head_PageControl_Height - Head_button_Height * 2 - 8; //按钮行间距
     int p = 0;
     for (int a = 0; a < page; ++ a) {
         for (int m = 0; m < 2; ++ m) {

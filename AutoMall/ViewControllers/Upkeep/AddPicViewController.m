@@ -44,8 +44,10 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
     self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
 //    UIButton *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -63,6 +65,9 @@
 //    [self.myCollectionView registerNib:[UINib nibWithNibName:@"AddPicFooterCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     
     _imgsArray = [[NSMutableArray alloc] init];
+    if (self.localImgsArray) {
+        [_imgsArray addObjectsFromArray:self.localImgsArray];
+    }
     self.imageDataArr = [[NSMutableArray alloc] init];
     //图片占位
     for (int i = 0; i < UpLoafImagesCount; i ++) {
@@ -109,25 +114,15 @@
     }
 }
 
--(void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    self.GoBackUpdate(_imgsArray);
-}
-
--(void)edit:(UIBarButtonItem *)rightItem {
-    if ([rightItem.title isEqualToString:@"完成"]) {
-        rightItem.title = @"编辑";
+-(void)save:(UIBarButtonItem *)rightItem {
+    if (_imgsArray.count) {
+        self.GoBackUpdate(_imgsArray);
+    } else {
+        _hud.labelText = @"你还没有上传任何照片哦！";
+        [_hud show:YES];
+        [_hud hide:YES afterDelay:HUDDelay];
     }
-    else {
-        rightItem.title = @"完成";
-    }
-    //先清空collectionView的所有cell，防止subViews的位置发生重用
-    for (UIView *view in self.imgsCollectionView.subviews) {
-        if ([view isKindOfClass:[AlbumListCollectionViewCell class]]) {
-            [view removeFromSuperview];
-        }
-    }
-    [self.imgsCollectionView reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark --UICollectionViewDataSource
@@ -153,14 +148,14 @@
         NSDictionary *dic = _imgsArray [indexPath.item];
         AlbumListCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:AlbumListCell forIndexPath:indexPath];
         cell.titleL.text = @"";
-        if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"编辑"]) {
-            cell.deleBtn.hidden = YES;
-        }
-        else {
-            cell.deleBtn.hidden = NO;
-        }
-        cell.deleBtn.tag = indexPath.item + 1000;
-        [cell.deleBtn addTarget:self action:@selector(deleImage:) forControlEvents:UIControlEventTouchUpInside];
+//        if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"编辑"]) {
+//            cell.deleBtn.hidden = YES;
+//        }
+//        else {
+//            cell.deleBtn.hidden = NO;
+//        }
+//        cell.deleBtn.tag = indexPath.item + 1000;
+//        [cell.deleBtn addTarget:self action:@selector(deleImage:) forControlEvents:UIControlEventTouchUpInside];
         //让图片不变形，以适应按钮宽高，按钮中图片部分内容可能看不到
         cell.AlbumBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         cell.AlbumBtn.clipsToBounds = YES;
@@ -584,7 +579,6 @@
             NSLog(@"_imgsArray: %@",_imgsArray);
             [self.imgsCollectionView reloadData];
             [self.myCollectionView reloadData];
-            self.navigationItem.rightBarButtonItem.title = @"编辑";
         }
     }
 

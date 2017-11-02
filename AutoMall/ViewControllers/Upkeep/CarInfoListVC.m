@@ -83,8 +83,13 @@
 
 -(void) toRegisterNewCarInfo {
     CarInfoAddVC *addVC = [[CarInfoAddVC alloc] init];
-    addVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
-        self.GoBackSelectCarDic(carDic);
+//    addVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+//        self.GoBackSelectCarDic(carDic);
+//        self.carId = carDic[@"id"];
+//        [self.infoTableView headerBeginRefreshing];
+//    };
+    addVC.GoBackAddedCarDic = ^{
+        [self.infoTableView headerBeginRefreshing];
     };
     [self.navigationController pushViewController:addVC animated:YES];
 }
@@ -105,9 +110,11 @@
 
 -(void) toSearch {  //搜索车辆保养记录
     CarInfoSearchVC *searchVC = [[CarInfoSearchVC alloc] init];
-    searchVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
-        self.GoBackSelectCarDic(carDic);      //传参至保养首页
-    };
+//    searchVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+//        self.GoBackSelectCarDic(carDic);      //传参至保养首页
+//        self.carId = carDic[@"id"];
+//        [self.infoTableView reloadData];
+//    };
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
@@ -137,6 +144,7 @@
     CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = carArray[indexPath.row];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
     cell.plateNumberL.text = dic[@"plateNumber"];
     cell.ownerL.text = dic[@"owner"];
     NSDateFormatter* formater = [[NSDateFormatter alloc] init];
@@ -146,13 +154,14 @@
     cell.dateL.text = string;
     cell.selectBtn.tag = indexPath.row + 100;
     [cell.selectBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
     if ([dic[@"id"] intValue] == [self.carId intValue]) {
         cell.selectBtn.selected = YES;
     }
     else {
         cell.selectBtn.selected = NO;
     }
-    [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
 }
 
@@ -161,8 +170,13 @@
     NSDictionary *dic = carArray[indexPath.row];
     CarInfoAddVC *editVC = [[CarInfoAddVC alloc] init];
     editVC.carDic = dic;
-    editVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
-        self.GoBackSelectCarDic(carDic);
+//    editVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+//        self.GoBackSelectCarDic(carDic);
+//        self.carId = carDic[@"id"];
+//        [self.infoTableView reloadData];
+//    };
+    editVC.GoBackAddedCarDic = ^{
+        [self.infoTableView headerBeginRefreshing];
     };
     [self.navigationController pushViewController:editVC animated:YES];
 }
@@ -171,8 +185,9 @@
     btn.selected = YES;
     NSInteger row = btn.tag - 100;
     NSDictionary *dic = carArray[row];
-    self.GoBackSelectCarDic(dic);
-    [self.navigationController popViewControllerAnimated:YES];
+//    self.GoBackSelectCarDic(dic);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:dic];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 发送请求

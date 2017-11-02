@@ -85,22 +85,42 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 30;
+    return 40;
 }
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView *vc = [UIView new];
     vc.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    UILabel *lable =[[UILabel alloc]initWithFrame:CGRectMake(8, 0, 100, 30)];
+    UILabel *lable =[[UILabel alloc]initWithFrame:CGRectMake(8, 0, 100, 40)];
     lable.text = @"购物车";
     lable.textAlignment = NSTextAlignmentLeft;
     lable.textColor = [UIColor blackColor];
     lable.font = [UIFont systemFontOfSize:16];
     [vc addSubview:lable];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(SCREEN_WIDTH - 40 - 8, 5, 30, 30);
+    [btn setImage:IMG(@"cart_delete") forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(clearCart) forControlEvents:UIControlEventTouchUpInside];
+    [vc addSubview:btn];
+    
     return vc;
 }
+
+-(void)clearCart {
+    for (NSMutableDictionary * data in self.datasArr) {
+        [data setObject:@(0) forKey:@"orderCont"];
+    }
+    [self.datasArr removeAllObjects];
+    [self.myTableView reloadData];
+    self.lableText.text = @"当前购物车为空，快去选购吧！";
+    _block(self.datasArr);
+}
+
 - (void)addShoppingCartView:(UIViewController *)vc{
     _viewController = vc;
 //    [vc.view addSubview:self];
@@ -158,7 +178,9 @@
         self.lableText.text = @"当前购物车为空，快去选购吧！";
     }
     _block(self.datasArr);
-    
 }
+
+
+
 @end
 

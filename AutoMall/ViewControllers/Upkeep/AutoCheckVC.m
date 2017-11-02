@@ -18,7 +18,6 @@
 #import "JSONKit.h"
 #import "MyAlertView.h"
 #import "AutoCheckCarInfoVC.h"
-#import "AutoCheckPhotoVC.h"
 #import "AddPicViewController.h"
 #import "AutoCheckResultVC.h"
 
@@ -253,9 +252,6 @@
 
 //点击拍照按钮，通过按钮的父视图判断出项目
 -(void) toTakePhoto:(UIButton *)btn {
-//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选取照片方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"相机" otherButtonTitles:@"图库", nil];
-//    //    sheet.tag = 3000;
-//    [sheet showInView:self.view];
     
     UITableViewCell *cell = (UITableViewCell  *)btn.superview.superview;
     UITableView *tableV;
@@ -264,16 +260,33 @@
     }
     currentPhotoIndexPath = [tableV indexPathForCell:cell];     //记录当前拍照按钮对应的cell位置
     
-//    AutoCheckPhotoVC *photoVC = [[AutoCheckPhotoVC alloc] init];
-//    photoVC.GoBackUpdate = ^(NSArray *array) {
-//        [self updatePhotoWithImages:array];
-//    };
-//    [self.navigationController pushViewController:photoVC animated:YES];
-    
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     photoVC.GoBackUpdate = ^(NSMutableArray *array) {
         [self updatePhotoWithImages:array];
     };
+    
+    NSArray *array = contentAry[currentPhotoIndexPath.section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开,,,由于接口数据不全，待测试
+        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        NSLog(@"item.aid: %@",item.aid);
+        NSLog(@"item.images: %@",item.images);
+        NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
+        NSString *positionStr = positionArray[currentPhotoIndexPath.row];
+        NSMutableArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+        NSMutableDictionary *imagesDic = [imagesAry[currentPhotoIndexPath.row] mutableCopy];
+        NSArray *imagesArray = imagesDic[positionStr];
+        NSLog(@"imagesArray: %@",imagesArray);
+        photoVC.localImgsArray = imagesArray;
+    }
+    else {
+        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+        NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+        NSLog(@"imagesAry: %@",imagesAry);
+        photoVC.localImgsArray = imagesAry;
+    }
+
     [self.navigationController pushViewController:photoVC animated:YES];
 }
 
@@ -623,10 +636,10 @@
             cell.checkResultBtn.hidden = YES;
         }
         
-        NSMutableArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
-        NSMutableDictionary *imagesDic = [imagesAry[indexPath.row] mutableCopy];
-        NSArray *imagesArray = imagesDic[positionStr];
-        NSLog(@"imagesArray: %@",imagesArray);
+//        NSMutableArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+//        NSMutableDictionary *imagesDic = [imagesAry[indexPath.row] mutableCopy];
+//        NSArray *imagesArray = imagesDic[positionStr];
+//        NSLog(@"imagesArray: %@",imagesArray);
         [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
 
         NSMutableArray *positionAry = [[item.dPosition objectFromJSONString] mutableCopy];
@@ -707,9 +720,8 @@
             cell.checkResultBtn.hidden = YES;
         }
         
-        
-        NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
-        NSLog(@"imagesAry: %@",imagesAry);
+//        NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+//        NSLog(@"imagesAry: %@",imagesAry);
         [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
         
         NSInteger selectedIndex = [item.stateIndex integerValue];

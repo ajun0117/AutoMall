@@ -14,9 +14,9 @@
 @interface CommodityListVC ()
 {
     IBOutlet UIView *topView;
-    IBOutlet UIButton *xiangmuBtn;
+    IBOutlet UIButton *xingjiBtn;
     IBOutlet UIButton *sortBtn;
-    IBOutlet UIButton *tagBtn;
+    IBOutlet UIButton *priceBtn;
     UIView *selectBgView;
     UITableView *selectTableView;
     MBProgressHUD *_hud;
@@ -65,9 +65,9 @@
 //    [self adjustLeftBtnFrameWithTitle:@"排列方式" andButton:sortBtn];
 //    [self adjustLeftBtnFrameWithTitle:@"标签" andButton:tagBtn];
     
-     [xiangmuBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
+     [xingjiBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
      [sortBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
-     [tagBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
+     [priceBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityListCell" bundle:nil] forCellReuseIdentifier:@"commodityListCell"];
     
@@ -107,29 +107,24 @@
 }
 
 - (IBAction)levelAction:(id)sender {
-    xiangmuBtn.backgroundColor = [UIColor lightGrayColor];
     orderString = @"starLevel";     //按星级排序
-    if (xiangmuBtn.selected) {
-        xiangmuBtn.selected = NO;
+    if (xingjiBtn.selected) {
+        xingjiBtn.selected = NO;
         orderTypeString = @"desc";   //降序
     }
     else {
-        xiangmuBtn.selected = YES;
+        xingjiBtn.selected = YES;
         orderTypeString = @"asc";   //升序
     }
     sortBtn.selected = NO;
-    sortBtn.backgroundColor = [UIColor whiteColor];
-    tagBtn.selected = NO;
-    tagBtn.backgroundColor = [UIColor whiteColor];
+    priceBtn.selected = NO;
     currentpage = 0;
     [commodityArray removeAllObjects];
     [self requestGetCommodityList];
 }
 - (IBAction)saleAction:(id)sender {
-    xiangmuBtn.selected = NO;
-    xiangmuBtn.backgroundColor = [UIColor whiteColor];
+    xingjiBtn.selected = NO;
     orderString = @"salesVolume";     //按销量排序
-    sortBtn.backgroundColor = [UIColor lightGrayColor];
     if (sortBtn.selected) {
         sortBtn.selected = NO;
         orderTypeString = @"desc";   //降序
@@ -138,26 +133,22 @@
         sortBtn.selected = YES;
         orderTypeString = @"asc";   //升序
     }
-    tagBtn.selected = NO;
-    tagBtn.backgroundColor = [UIColor whiteColor];
+    priceBtn.selected = NO;
     currentpage = 0;
     [commodityArray removeAllObjects];
     [self requestGetCommodityList];
 }
 - (IBAction)valueAction:(id)sender {
-    xiangmuBtn.selected = NO;
-    xiangmuBtn.backgroundColor = [UIColor whiteColor];
+    xingjiBtn.selected = NO;
     sortBtn.selected = NO;
-    sortBtn.backgroundColor = [UIColor whiteColor];
     
     orderString = @"discount";     //按星级排序
-    tagBtn.backgroundColor = [UIColor lightGrayColor];
-    if (tagBtn.selected) {
-        tagBtn.selected = NO;
+    if (priceBtn.selected) {
+        priceBtn.selected = NO;
         orderTypeString = @"desc";   //降序
     }
     else {
-        tagBtn.selected = YES;
+        priceBtn.selected = YES;
         orderTypeString = @"asc";   //升序
     }
     currentpage = 0;
@@ -261,6 +252,7 @@
     }
     else {
         CommodityListCell *cell = (CommodityListCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityListCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dic = commodityArray [indexPath.section];
         [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
         cell.goodsNameL.text = dic [@"name"];

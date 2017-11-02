@@ -89,10 +89,6 @@ static CGFloat const scrollViewHeight = 220;
     scroll.hasNavigationBar = NO;
     scroll.showPageIndicator = NO;
     scroll.delegate = self;
-    imagesAry = @[@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",
-                  @"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",
-                  @"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png"];
-    scroll.images = imagesAry;
     
     __block typeof(self) bself = self;
     [scroll setTapImageHandle:^(NSInteger index) {
@@ -181,7 +177,7 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 - (void)addFootView{
-    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 59, Screen_wide, 59)];
+    self.settemntView = [[SettlementView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, Screen_wide, 64)];
     self.settemntView.number.text = @"0";
     [self.settemntView.settlement addTarget:self action:@selector(settlementClock) forControlEvents:UIControlEventTouchUpInside];
 //    [self.settemntView.shoppingCart addTarget:self action:@selector(shoppingCartClock) forControlEvents:UIControlEventTouchUpInside];
@@ -278,7 +274,7 @@ static CGFloat const scrollViewHeight = 220;
     
     weakSelf.settemntView.number.text  = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:datasArr]];
     weakSelf.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:datasArr]];
-    weakSelf.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:datasArr]];
+    weakSelf.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费:￥%.2f",[ShoppingCartModel shippingFeeShopingCart:datasArr]];
 //    [weakSelf.popTableView.rightTableView reloadData];
 }
 
@@ -383,7 +379,7 @@ static CGFloat const scrollViewHeight = 220;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 4) {
-            return 60;
+            return 100;
         }
         else {
             return 44;
@@ -396,7 +392,9 @@ static CGFloat const scrollViewHeight = 220;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return 40;
+        if (tjListAry.count) {
+            return 40;
+        }
     }
     return 1;
 }
@@ -482,7 +480,7 @@ static CGFloat const scrollViewHeight = 220;
                 }
                 case 4: {
                     CommodityDetailContentCell *cell = (CommodityDetailContentCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailContentCell"];
-                    cell.remarkL.text = commodityDic[@"remark"];
+                    cell.remarkL.text = commodityDic[@"shortContent"];
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                     break;
@@ -515,15 +513,17 @@ static CGFloat const scrollViewHeight = 220;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
      if (section == 1) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 40)];
-//        view.backgroundColor = RGBCOLOR(249, 250, 251);
-         view.backgroundColor = [UIColor whiteColor];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, 100, 20)];
-        label.font = [UIFont systemFontOfSize:15];
-        label.backgroundColor = [UIColor clearColor];
-        label.text = @"向您推荐";
-        [view addSubview:label];
-        return view;
+         if (tjListAry.count) {
+             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 40)];
+             //        view.backgroundColor = RGBCOLOR(249, 250, 251);
+             view.backgroundColor = [UIColor whiteColor];
+             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, 100, 20)];
+             label.font = [UIFont systemFontOfSize:15];
+             label.backgroundColor = [UIColor clearColor];
+             label.text = @"向您推荐";
+             [view addSubview:label];
+             return view;
+         }
      }
     return nil;
 }
@@ -584,7 +584,7 @@ static CGFloat const scrollViewHeight = 220;
         //设置商品价格
         self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
         //设置配送费
-        self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
+        self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费:￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
         
         _networkConditionHUD.labelText = @"已添加至购物车";
         [_networkConditionHUD show:YES];
@@ -797,6 +797,15 @@ static CGFloat const scrollViewHeight = 220;
             NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
             [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
             [commoditymulArray addObject:dic];  //重组后商品数组
+            
+            NSMutableArray *images = [NSMutableArray array];
+            NSArray *minorImages = commodityDic[@"minorImages"];
+            for (NSDictionary *dic in minorImages) {
+                [images addObject:UrlPrefix(dic[@"relativePath"])];
+            }
+            imagesAry = images;
+            scroll.images = imagesAry;
+            
             
             [self requestPostCommoditytjListWithId:commodityDic[@"commodityTerm"][@"id"] commId:commodityDic[@"id"]];
 //            [self.myTableView reloadData];

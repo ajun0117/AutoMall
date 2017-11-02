@@ -29,7 +29,7 @@
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
 
-#define Red_BtnColor           RGBCOLOR(234, 33, 45)
+#define Red_BtnColor           RGBCOLOR(237, 28, 36)
 #define Gray_Color              RGBCOLOR(170, 170, 170)
 #define Orange_Color           RGBCOLOR(234, 33, 45)
 #define Cell_sepLineColor       RGBCOLOR(200, 199, 204)     //tablecell间隔线颜色
@@ -163,6 +163,7 @@
 #define MallOrderAdd                             @"/api/order/add"             //新增订单
 #define MallOrderChoosePayMode           @"/api/order/choosePayMode"     //选择支付方式
 #define MallOrderPaySuccess                  @"/order/paySuccess"                 //支付成功回调
+#define GetIntegralAs1Yuan                    @"/api/integral/getIntegralAs1Yuan"       //获取一元对应的积分数
 
 //登录、注册、找回密码
 #define GetSMS                                      @"/api/sms/send"                    //获取短信验证码
@@ -198,6 +199,7 @@
 #define DiscountEdit                               @"/api/discount/edit"             //编辑优惠
 #define MessageList                                @"/api/message/list"              //消息列表
 #define AgreementInfo                           @"http://119.23.227.246/carupkeep/api/agreement/info"         //免责声明
+#define GetPhoneInfo                              @"/api/phone/getPhoneInfo"      //获取官网联系电话
 #define ChangeNickName                         @"/api/user/changeNickname"     //修改昵称和微信
 #define GetApprovalStatus                      @"/api/store/getApprovalStatus"     //获取门店的审批状态
 #define UserChangeImage                       @"/api/user/changeImage"        //修改个人头像

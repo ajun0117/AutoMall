@@ -57,13 +57,14 @@
         negativeSpacer.width = -6;
         
         UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        searchBtn.frame = CGRectMake(0, 0, 44, 44);
+        searchBtn.frame = CGRectMake(0, 0, 30, 30);
         [searchBtn setImage:[UIImage imageNamed:@"baoyang_history"] forState:UIControlStateNormal];
-        [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//        [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
         [searchBtn addTarget:self action:@selector(toHistoryList) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
         self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
         
+        carImgUrl = self.carDic[@"image"];
         [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"default")];
         self.mileageTF.text = NSStringWithNumber(self.carDic[@"mileage"]);
         self.fuelAmountTF.text = NSStringWithNumber(self.carDic[@"fuelAmount"]);
@@ -261,12 +262,20 @@
 
 - (IBAction)saveAction:(id)sender {
     isAutoSelect = NO;
-    [self requestPostAddCar];
+    if (self.carDic) {
+        [self requestPostUpdateCar];
+    } else {
+        [self requestPostAddCar];
+    }
 }
 
 - (IBAction)selectAction:(id)sender {
     isAutoSelect = YES;
-    [self requestPostAddCar];
+    if (self.carDic) {
+        [self requestPostUpdateCar];
+    } else {
+        [self requestPostAddCar];
+    }
 }
 
 -(void)selectThePhotoOrCamera {
@@ -404,6 +413,16 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }
 
+-(void)requestPostUpdateCar { //更新车辆
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpdate object:nil];
+    
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpdate, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",self.mileageTF.text,@"mileage",self.fuelAmountTF.text,@"fuelAmount",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",self.wechatTF.text,@"wechat",self.genderTF.text,@"gender",self.birthdayTF.text,@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",self.purchaseDateTF.text,@"purchaseDate",STRING_Nil(carImgUrl),@"image",self.engineNoTF.text,@"engineNo",self.vinTF.text,@"vin", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpdate) delegate:nil params:pram info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -416,10 +435,27 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"responseObject: %@",responseObject);
+    
     if ([notification.name isEqualToString:CarAdd]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarAdd object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+        NSLog(@"CarAdd: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CarUpdate]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpdate object:nil];
+        NSLog(@"CarUpdate: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
@@ -434,7 +470,6 @@
     
     if ([notification.name isEqualToString:UploadImgFile]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
-//        [self.carImgView setCircleProgressViewHidden:YES];
         if ([responseObject[@"result"] boolValue]) {
             carImgUrl = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
         }
@@ -449,9 +484,14 @@
 - (void)toPopVC:(NSString *)carId {
     if (isAutoSelect) {
         NSDictionary *car = @{@"id":carId,@"plateNumber":self.plateNumberTF.text};
-        self.GoBackSelectCarDic(car);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:car];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+//        self.GoBackSelectCarDic(car);   //返回刷新并选择
+    } else {
+        self.GoBackAddedCarDic();       //仅返回刷新
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 

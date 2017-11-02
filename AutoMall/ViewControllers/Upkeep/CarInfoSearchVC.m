@@ -32,18 +32,18 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = -6;
-    
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    addBtn.frame = CGRectMake(0, 0, 28, 28);
-    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
-//    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, addBtnBarBtn, nil];
+//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+//                                       target:nil action:nil];
+//    negativeSpacer.width = -6;
+//    
+//    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    addBtn.frame = CGRectMake(0, 0, 28, 28);
+//    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+////    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, addBtnBarBtn, nil];
     
     [self.searchTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
     self.searchTableView.tableFooterView = [UIView new];
@@ -73,9 +73,9 @@
 
 -(void) toRegisterNewCarInfo {
     CarInfoAddVC *addVC = [[CarInfoAddVC alloc] init];
-    addVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
-        self.GoBackSelectCarDic(carDic);
-    };
+//    addVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+//        self.GoBackSelectCarDic(carDic);
+//    };
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
@@ -128,6 +128,7 @@
     CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = carArray[indexPath.row];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
     cell.plateNumberL.text = dic[@"plateNumber"];
     cell.ownerL.text = dic[@"owner"];
     NSDateFormatter* formater = [[NSDateFormatter alloc] init];
@@ -147,9 +148,13 @@
     NSDictionary *dic = carArray[indexPath.row];
     CarInfoAddVC *editVC = [[CarInfoAddVC alloc] init];
     editVC.carDic = dic;
-    editVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
-        self.GoBackSelectCarDic(carDic);
-    };
+//    editVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+//        self.GoBackSelectCarDic(carDic);
+//    };
+//    editVC.GoBackAddedCarDic = ^{
+//        self.GoBackSelectCarDic(nil);
+//    };
+    
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
@@ -157,7 +162,8 @@
     btn.selected = YES;
     NSInteger row = btn.tag - 100;
     NSDictionary *dic = carArray[row];
-    self.GoBackSelectCarDic(dic);
+//    self.GoBackSelectCarDic(dic);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:dic];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

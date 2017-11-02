@@ -48,7 +48,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = -6;
+    negativeSpacer.width = -16;
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -92,12 +92,15 @@
 -(void)toCarOwner:(UIButton *)btn {
     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if (mobileUserType.length > 0) {    //已登录用户
+        //注册选择车辆通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedCar:) name:@"DidSelectedCar" object:nil];
+        
         CarInfoListVC *listVC = [[CarInfoListVC alloc] init];
-        listVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
-            selectedCarDic = carDic;
-            self.title = carDic[@"plateNumber"];
-            NSLog(@"selectedCarDic: %@",selectedCarDic);
-        };
+//        listVC.GoBackSelectCarDic = ^(NSDictionary *carDic) {
+//            selectedCarDic = carDic;
+//            self.title = carDic[@"plateNumber"]; 
+//            NSLog(@"selectedCarDic: %@",selectedCarDic);
+//        };
         listVC.carId = selectedCarDic[@"id"];
         listVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listVC animated:YES];
@@ -113,6 +116,14 @@
         nav.navigationBar.barTintColor = [UIColor whiteColor];
         [self presentViewController:nav animated:YES completion:nil];
     }
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didSelectedCar:(NSNotification *)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DidSelectedCar" object:nil];
+    selectedCarDic = notification.userInfo;
+    self.title = selectedCarDic[@"plateNumber"];
+    NSLog(@"selectedCarDic: %@",selectedCarDic);
 }
 
 #pragma mark - UICollectionViewDelegate

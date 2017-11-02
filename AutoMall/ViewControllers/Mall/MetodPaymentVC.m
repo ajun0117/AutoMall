@@ -253,9 +253,16 @@
 //        //        [alert show];
 //    }
     
-}
+} 
 
 #pragma mark - 发送请求
+-(void)requestGetIntegralAs1Yuan {
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetIntegralAs1Yuan object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetIntegralAs1Yuan, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetIntegralAs1Yuan) delegate:nil params:nil info:infoDic];
+}
 -(void)getChoosePayMode {       //发起支付方式选择请求
     [_hud show:YES];
     //注册通知

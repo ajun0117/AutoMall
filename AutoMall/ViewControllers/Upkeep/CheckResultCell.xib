@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="219.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yag-WQ-fHB">
@@ -45,7 +45,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="h2K-eV-htb">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jaince" translatesAutoresizingMaskIntoConstraints="NO" id="h2K-eV-htb">
                         <rect key="frame" x="8" y="57.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Dpf-YL-YIj"/>
@@ -139,7 +139,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="ngL-q1-kOU">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yichang" translatesAutoresizingMaskIntoConstraints="NO" id="ngL-q1-kOU">
                         <rect key="frame" x="170" y="58" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="giT-x7-Uxf"/>
@@ -346,5 +346,7 @@
     </objects>
     <resources>
         <image name="default" width="512" height="512"/>
+        <image name="jaince" width="34" height="34"/>
+        <image name="yichang" width="34" height="34"/>
     </resources>
 </document>

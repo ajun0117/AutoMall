@@ -15,4 +15,6 @@
  */
 @property (copy, nonatomic) void((^GoBackUpdate)(NSMutableArray *array));
 
+@property (strong, nonatomic) NSArray *localImgsArray;
+
 @end

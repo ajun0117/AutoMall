@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="505"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="504.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="505"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eb5-Xh-FgM">
@@ -218,7 +218,7 @@
                 </subviews>
                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="yXO-eO-lb6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="7fS-7c-npy"/>
+                    <constraint firstItem="yXO-eO-lb6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="7fS-7c-npy"/>
                     <constraint firstItem="ixW-pR-Els" firstAttribute="top" secondItem="Eb5-Xh-FgM" secondAttribute="bottom" constant="6" id="8Fx-ko-VnT"/>
                     <constraint firstItem="ixW-pR-Els" firstAttribute="width" secondItem="Eb5-Xh-FgM" secondAttribute="width" id="8ft-54-nem"/>
                     <constraint firstItem="yXO-eO-lb6" firstAttribute="height" secondItem="Eb5-Xh-FgM" secondAttribute="height" id="CR7-Tc-CCy"/>
@@ -230,7 +230,7 @@
                     <constraint firstItem="ixW-pR-Els" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Q9w-Vw-0gR"/>
                     <constraint firstItem="Eb5-Xh-FgM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ezm-9z-FwE"/>
                     <constraint firstItem="9Ys-aF-O2T" firstAttribute="top" secondItem="yXO-eO-lb6" secondAttribute="bottom" constant="6" id="h1g-yJ-i0L"/>
-                    <constraint firstItem="Eb5-Xh-FgM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ijB-C8-2Ea"/>
+                    <constraint firstItem="Eb5-Xh-FgM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ijB-C8-2Ea"/>
                     <constraint firstItem="9Ys-aF-O2T" firstAttribute="height" secondItem="Eb5-Xh-FgM" secondAttribute="height" id="l85-Z5-WwH"/>
                     <constraint firstItem="9Ys-aF-O2T" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="trailing" constant="6" id="qpe-Eu-Wmk"/>
                     <constraint firstItem="yXO-eO-lb6" firstAttribute="leading" secondItem="Eb5-Xh-FgM" secondAttribute="trailing" constant="6" id="vyQ-dx-2aX"/>

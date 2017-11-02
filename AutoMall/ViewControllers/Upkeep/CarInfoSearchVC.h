@@ -10,6 +10,6 @@
 
 @interface CarInfoSearchVC : UIViewController
 
-@property (copy, nonatomic) void((^GoBackSelectCarDic)(NSDictionary *carDic));
+//@property (copy, nonatomic) void((^GoBackSelectCarDic)(NSDictionary *carDic));
 
 @end

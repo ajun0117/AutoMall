@@ -180,7 +180,7 @@
 //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
 //    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 //    return height + 1;
-    return 90;
+    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -215,14 +215,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"adfasdfasdfasdf");
     WebViewController *webVC = [[WebViewController alloc] init];
     if (tableView == self.zixunTV) {
         webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(InformationDetail),zixunArray[indexPath.section][@"id"]];
-        webVC.titleStr = @"资讯详情";
+        webVC.titleStr = STRING(jiaochengArray[indexPath.section][@"title"]);
     } else {
         webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CourseDetail),jiaochengArray[indexPath.section][@"id"]];
-        webVC.titleStr = @"教程详情";
+        webVC.titleStr = STRING(jiaochengArray[indexPath.section][@"title"]);
     }
     webVC.canShare = NO;
     webVC.hidesBottomBarWhenPushed = YES;

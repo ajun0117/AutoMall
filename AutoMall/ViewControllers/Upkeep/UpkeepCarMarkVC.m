@@ -39,7 +39,8 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toReset:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(toReset:)];
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
     //1添加 UIScrollView
     //设置 UIScrollView的位置与屏幕大小相同

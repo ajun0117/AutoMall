@@ -22,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-Kn-mjA">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-Kn-mjA">
+                    <rect key="frame" x="10" y="0.0" width="355" height="517"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="scrollIndicatorInsets" minX="10" minY="20" maxX="10" maxY="10"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="NaQ-cc-vH7">
@@ -61,26 +61,23 @@
                             </variation>
                         </label>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VD3-16-XgQ">
-                            <rect key="frame" x="10" y="5" width="160" height="30"/>
+                            <rect key="frame" x="10" y="5" width="209" height="30"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="8v5-cW-NFy"/>
-                                <constraint firstAttribute="width" constant="160" id="aJh-go-CzH"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="添加图片（最多3张）">
+                            <state key="normal" title="添加图片（一次最多上传3张）">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="8v5-cW-NFy"/>
-                                    <exclude reference="aJh-go-CzH"/>
                                 </mask>
                             </variation>
                             <variation key="widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="8v5-cW-NFy"/>
-                                    <include reference="aJh-go-CzH"/>
                                 </mask>
                             </variation>
                         </button>
@@ -245,11 +242,11 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Kjc-gC-1VK" secondAttribute="trailing" id="0zd-yc-gD4"/>
-                <constraint firstItem="qA4-Kn-mjA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4L1-nk-HZD"/>
+                <constraint firstItem="qA4-Kn-mjA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="4L1-nk-HZD"/>
                 <constraint firstItem="Kjc-gC-1VK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4eq-qo-2tR"/>
                 <constraint firstItem="qA4-Kn-mjA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7dR-2n-aNH"/>
                 <constraint firstAttribute="bottom" secondItem="Kjc-gC-1VK" secondAttribute="bottom" id="V3L-Y2-NeJ"/>
-                <constraint firstAttribute="trailing" secondItem="qA4-Kn-mjA" secondAttribute="trailing" id="dRY-Ci-PlK"/>
+                <constraint firstAttribute="trailing" secondItem="qA4-Kn-mjA" secondAttribute="trailing" constant="10" id="dRY-Ci-PlK"/>
                 <constraint firstAttribute="bottom" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="oBP-mO-00P"/>
                 <constraint firstItem="Kjc-gC-1VK" firstAttribute="top" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="uec-Jf-2Vt"/>
             </constraints>
@@ -285,7 +282,7 @@
                     <include reference="uec-Jf-2Vt"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="68" y="-136"/>
+            <point key="canvasLocation" x="47" y="-378"/>
         </view>
     </objects>
 </document>

@@ -168,7 +168,7 @@
         _footView = [SettlementFootView initFootView];
         _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
         _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-        _footView.yunfeiL.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:self.datasArr]];
+        _footView.yunfeiL.text = [NSString stringWithFormat:@"配送费:￥%.2f",[ShoppingCartModel shippingFeeShopingCart:self.datasArr]];
         return _footView;
      }
     return nil;
@@ -186,7 +186,7 @@
 }
 
 #pragma mark -- confirmOrderClock
-- (IBAction)confirmOrderClock:(id)sender {
+- (IBAction)confirmOrderClick:(id)sender {
     [self requestPostAddOrder]; //提交订单
 }
 
@@ -221,7 +221,7 @@
     
     _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
     _footView.numbers.text = [NSString stringWithFormat:@"共计%ld件",(long)[ShoppingCartModel orderShoppingCartr:self.datasArr]];
-    _footView.yunfeiL.text = [NSString stringWithFormat:@"配送费：￥%.2f",[ShoppingCartModel shippingFeeShopingCart:self.datasArr]];
+    _footView.yunfeiL.text = [NSString stringWithFormat:@"配送费:￥%.2f",[ShoppingCartModel shippingFeeShopingCart:self.datasArr]];
     
 }
 

@@ -29,6 +29,7 @@
 #import "UpkeepOrderVC.h"
 #import "EmployeeEditIntroduceVC.h"
 #import "EmployeeSkillListVC.h"
+#import "AboutUsVC.h"
 
 @interface PersonalCenterVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -63,13 +64,13 @@
                                        target:nil action:nil];
     negativeSpacer.width = -16;
     
-//    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    setBtn.frame = CGRectMake(0, 0, 44, 44);
-//    [setBtn setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
-//    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-//    [setBtn addTarget:self action:@selector(toSet) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
-//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, setBtnBarBtn, nil];
+    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    setBtn.frame = CGRectMake(0, 0, 44, 44);
+    [setBtn setImage:[UIImage imageNamed:@"usInfo"] forState:UIControlStateNormal];
+    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [setBtn addTarget:self action:@selector(toAboutUs) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *setBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:setBtn];
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, setBtnBarBtn, nil];
     
     UIButton *msgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     msgBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -120,10 +121,10 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
--(void) toSet {
-//    LoginViewController *loginVC = [[LoginViewController alloc] init];
-//    loginVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:loginVC animated:YES];
+-(void) toAboutUs {
+    AboutUsVC *aboutVC = [[AboutUsVC alloc] init];
+    aboutVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:aboutVC animated:YES];
 }
 
 -(void) toMessage {
@@ -367,11 +368,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 10;
+    }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1286,6 +1290,14 @@
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:url,@"image", nil];
     NSLog(@"pram:    %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserChangeImage) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestGetPhoneInfo {     //获取官网联系电话
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetPhoneInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetPhoneInfo,@"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetPhoneInfo) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) NSString *carId;
 
-@property (copy, nonatomic) void((^GoBackSelectCarDic)(NSDictionary *carDic));
+//@property (copy, nonatomic) void((^GoBackSelectCarDic)(NSDictionary *carDic));
 
 @end

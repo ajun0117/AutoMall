@@ -28,35 +28,32 @@
                         <outlet property="delegate" destination="-1" id="g5G-pV-BUZ"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc5-3X-KhN">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ah0-mb-deh">
                     <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="49" id="L38-VV-d5K"/>
+                        <constraint firstAttribute="height" constant="49" id="Uup-GU-hnp"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="确认订单">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="confirmOrderClock:" destination="-1" eventType="touchUpInside" id="15O-dm-u2Q"/>
+                        <action selector="confirmOrderClick:" destination="-1" eventType="touchUpInside" id="EIc-fh-tog"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="vc5-3X-KhN" secondAttribute="trailing" id="0Pf-1p-dX3"/>
-                <constraint firstAttribute="bottom" secondItem="vc5-3X-KhN" secondAttribute="bottom" id="2Bb-me-Abc"/>
                 <constraint firstItem="r0R-DL-45S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8m5-MP-98z"/>
-                <constraint firstItem="vc5-3X-KhN" firstAttribute="top" secondItem="r0R-DL-45S" secondAttribute="bottom" id="DJw-O7-cLt"/>
                 <constraint firstAttribute="trailing" secondItem="r0R-DL-45S" secondAttribute="trailing" id="Jps-1C-dpE"/>
-                <constraint firstItem="vc5-3X-KhN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h1L-h5-yYM"/>
+                <constraint firstAttribute="bottom" secondItem="Ah0-mb-deh" secondAttribute="bottom" id="LwU-9T-HDa"/>
+                <constraint firstItem="Ah0-mb-deh" firstAttribute="top" secondItem="r0R-DL-45S" secondAttribute="bottom" id="bWf-js-abZ"/>
+                <constraint firstItem="Ah0-mb-deh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hDv-Zu-ldt"/>
+                <constraint firstAttribute="trailing" secondItem="Ah0-mb-deh" secondAttribute="trailing" id="rtq-Ex-mjf"/>
                 <constraint firstItem="r0R-DL-45S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yIQ-Md-nxU"/>
             </constraints>
-            <point key="canvasLocation" x="-203" y="-35"/>
+            <point key="canvasLocation" x="-482" y="-65"/>
         </view>
     </objects>
 </document>

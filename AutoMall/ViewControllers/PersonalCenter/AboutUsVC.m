@@ -1,27 +1,25 @@
 //
-//  AutoCheckPhotoVC.m
+//  AboutUsVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/10/18.
+//  Created by LYD on 2017/11/2.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "AutoCheckPhotoVC.h"
+#import "AboutUsVC.h"
 
-@interface AutoCheckPhotoVC ()
+@interface AboutUsVC ()
 
 @end
 
-@implementation AutoCheckPhotoVC
+@implementation AboutUsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
-
--(void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    self.GoBackUpdate(@[@{@"relativePath":@"1"},@{@"relativePath":@"2"},@{@"relativePath":@"3"}]);
+    self.title = @"关于我们";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
 }
 
 - (void)didReceiveMemoryWarning {
