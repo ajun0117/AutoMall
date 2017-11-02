@@ -103,6 +103,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CommodityListCell *cell = (CommodityListCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityListCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = resultArray [indexPath.section];
     [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
     cell.goodsNameL.text = dic [@"name"];

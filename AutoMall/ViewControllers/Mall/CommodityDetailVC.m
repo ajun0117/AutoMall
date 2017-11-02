@@ -386,7 +386,7 @@ static CGFloat const scrollViewHeight = 220;
         }
     }
     else {
-        return 80;
+        return 85;
     }
 }
 
@@ -400,7 +400,7 @@ static CGFloat const scrollViewHeight = 220;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 3;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -499,8 +499,14 @@ static CGFloat const scrollViewHeight = 220;
             NSDictionary *dic = tjListAry [indexPath.row];
             [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
             cell.goodsNameL.text = dic [@"name"];
-            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+                cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            } else {
+                cell.moneyL.text = @"￥--";
+                cell.costPriceStrikeL.text = @"￥--";
+            }
             return cell;
             break;
         }

@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "CommodityListCell.h"
 #import "CommodityDetailVC.h"
+#import "MailSearchVC.h"
 
 @interface CommodityListVC ()
 {
@@ -98,8 +99,10 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
--(void) toSearch {      //搜索
-    
+-(void) toSearch {  //搜索商品列表
+    MailSearchVC *searchVC = [[MailSearchVC alloc] init];
+    searchVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 -(void) toFilter {      //筛选项目

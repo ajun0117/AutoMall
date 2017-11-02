@@ -157,7 +157,7 @@ static CGFloat const scrollViewHeight = 220;
 //    [self initHeadScrollViewWithArray:arr];
 //}
 
--(void) toSearch {  //搜索车辆保养记录
+-(void) toSearch {  //搜索商品列表
     MailSearchVC *searchVC = [[MailSearchVC alloc] init];
     searchVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:searchVC animated:YES];

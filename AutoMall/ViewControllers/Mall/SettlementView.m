@@ -47,20 +47,20 @@
 //    _number.layer.cornerRadius = 8;
 //    [bgView addSubview:_number];
     
-    _money = [[UILabel alloc]initWithFrame:CGRectMake(70, 12, 100, 28)];
+    _money = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, 100, 28)];
     _money.text = @"￥0.00";
     _money.font =  [UIFont boldSystemFontOfSize:16];
     _money.textColor = [UIColor blackColor];
     [bgView addSubview:_money];
     
-    _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100 - 130, 13, 100, 28)];
+    _peisongMoney = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 110, 10, 90, 28)];
     _peisongMoney.text = @"配送费:￥0.00";
     _peisongMoney.font = FONT(10);
     _peisongMoney.textColor = [UIColor darkGrayColor];
     [bgView addSubview:_peisongMoney];
     
     _settlement =[UIButton buttonWithType:UIButtonTypeCustom];
-    _settlement.frame =CGRectMake(SCREEN_WIDTH - 120, -0.5, 120, 50);
+    _settlement.frame =CGRectMake(SCREEN_WIDTH - 100, -0.5, 100, 50);
     _settlement.backgroundColor = RRGB;
     _settlement.titleLabel.font = [UIFont boldSystemFontOfSize:17];;
     [_settlement setTitle:@"结算" forState:UIControlStateNormal];
@@ -69,7 +69,7 @@
     self.shoppingCart = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.shoppingCart setImage:[UIImage imageNamed:@"cart_exist"] forState:UIControlStateNormal];
     [self.shoppingCart addTarget:self action:@selector(shoppingCartClokc) forControlEvents:UIControlEventTouchUpInside];
-    self.shoppingCart.frame = CGRectMake(10, 0, 53, 59);
+    self.shoppingCart.frame = CGRectMake(10, -1, 53, 59);
     [self addSubview:self.shoppingCart];
 }
 

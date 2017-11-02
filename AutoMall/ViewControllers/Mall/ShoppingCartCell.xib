@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="灰喜力" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93X-3K-y7q">
-                        <rect key="frame" x="18" y="13" width="118" height="17"/>
+                        <rect key="frame" x="18" y="13" width="43" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -52,27 +52,27 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDF-Q8-u2u">
-                        <rect key="frame" x="146" y="14" width="29.5" height="17"/>
+                        <rect key="frame" x="171.5" y="14" width="29.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.90588235289999997" green="0.38431372549999998" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="RDF-Q8-u2u" firstAttribute="leading" secondItem="93X-3K-y7q" secondAttribute="trailing" constant="10" id="4Bt-A4-uco"/>
                     <constraint firstItem="5rX-ib-g9m" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4ml-3W-pvu"/>
                     <constraint firstItem="7O0-9G-Rll" firstAttribute="width" secondItem="5rX-ib-g9m" secondAttribute="width" id="BDa-h9-dsT"/>
+                    <constraint firstItem="RDF-Q8-u2u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="93X-3K-y7q" secondAttribute="trailing" constant="10" id="BPK-aY-RgH"/>
                     <constraint firstItem="93X-3K-y7q" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Q4N-aK-6NK"/>
                     <constraint firstItem="7O0-9G-Rll" firstAttribute="centerY" secondItem="5rX-ib-g9m" secondAttribute="centerY" id="R92-Gs-UZy"/>
                     <constraint firstItem="5rX-ib-g9m" firstAttribute="leading" secondItem="ufN-ny-S8V" secondAttribute="trailing" constant="-18" id="RP5-QF-rzS"/>
                     <constraint firstAttribute="trailing" secondItem="5rX-ib-g9m" secondAttribute="trailing" constant="8" id="Xut-YI-bSU"/>
                     <constraint firstItem="93X-3K-y7q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="bsv-SK-6XS"/>
+                    <constraint firstItem="7O0-9G-Rll" firstAttribute="leading" secondItem="RDF-Q8-u2u" secondAttribute="trailing" constant="15" id="ceH-rO-INe"/>
                     <constraint firstItem="7O0-9G-Rll" firstAttribute="height" secondItem="5rX-ib-g9m" secondAttribute="height" id="eBv-Hn-mI8"/>
                     <constraint firstItem="ufN-ny-S8V" firstAttribute="leading" secondItem="7O0-9G-Rll" secondAttribute="trailing" constant="-18" id="jci-N8-HET"/>
                     <constraint firstItem="RDF-Q8-u2u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="l5d-iS-Isu"/>
                     <constraint firstItem="ufN-ny-S8V" firstAttribute="height" secondItem="5rX-ib-g9m" secondAttribute="height" id="m28-Bo-mgW"/>
                     <constraint firstItem="ufN-ny-S8V" firstAttribute="width" secondItem="5rX-ib-g9m" secondAttribute="width" id="nOg-NZ-GoX"/>
-                    <constraint firstItem="RDF-Q8-u2u" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="pPg-fP-1El"/>
                     <constraint firstItem="ufN-ny-S8V" firstAttribute="centerY" secondItem="5rX-ib-g9m" secondAttribute="centerY" id="sKx-kb-54G"/>
                 </constraints>
             </tableViewCellContentView>

@@ -385,6 +385,7 @@
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"default")];
+                
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
                 
@@ -458,7 +459,16 @@
                 [cell.shopNameBtn setTitle:shopDic[@"name"] forState:UIControlStateNormal];
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopLevelIM.hidden= NO;
-                cell.shopLevelIM.image = IMG(@"bronzeBadge");
+                int rankLevel = [shopDic[@"rankLevel"] intValue];
+                if (rankLevel == 1) {
+                    cell.shopLevelIM.image = IMG(@"bronzeBadge");
+                }
+                else if(rankLevel == 2) {
+                    cell.shopLevelIM.image = IMG(@"silverBadge");
+                }
+                else if(rankLevel == 3) {
+                    cell.shopLevelIM.image = IMG(@"goldBadge");
+                }
                 cell.jifenL.hidden = NO;
                 cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
                 return cell;
@@ -635,7 +645,16 @@
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
 //                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 cell.shopLevelIM.hidden= NO;
-                cell.shopLevelIM.image = IMG(@"bronzeBadge");
+                int rankLevel = [shopDic[@"rankLevel"] intValue];
+                if (rankLevel == 1) {
+                    cell.shopLevelIM.image = IMG(@"bronzeBadge");
+                }
+                else if(rankLevel == 2) {
+                    cell.shopLevelIM.image = IMG(@"silverBadge");
+                }
+                else if(rankLevel == 3) {
+                    cell.shopLevelIM.image = IMG(@"goldBadge");
+                }
                 cell.jifenL.hidden = YES;
                 return cell;
                 break;

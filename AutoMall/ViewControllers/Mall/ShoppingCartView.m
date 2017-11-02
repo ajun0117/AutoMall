@@ -103,7 +103,7 @@
     [vc addSubview:lable];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(SCREEN_WIDTH - 40 - 8, 5, 30, 30);
+    btn.frame = CGRectMake(SCREEN_WIDTH - 40 - 8, 8, 24, 24);
     [btn setImage:IMG(@"cart_delete") forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clearCart) forControlEvents:UIControlEventTouchUpInside];
     [vc addSubview:btn];

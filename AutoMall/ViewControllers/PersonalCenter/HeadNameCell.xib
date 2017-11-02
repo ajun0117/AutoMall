@@ -79,13 +79,6 @@
                             <constraint firstAttribute="width" constant="10" id="lf9-ix-zTr"/>
                         </constraints>
                     </imageView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="Lt5-4s-Kwx">
-                        <rect key="frame" x="184" y="47" width="10" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="10" id="JFO-Cp-J1E"/>
-                            <constraint firstAttribute="height" constant="18" id="cDZ-Vh-KU8"/>
-                        </constraints>
-                    </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWA-yT-KfU">
                         <rect key="frame" x="84" y="24.5" width="35" height="30"/>
                         <constraints>
@@ -97,8 +90,6 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Lt5-4s-Kwx" firstAttribute="leading" secondItem="cpc-Qw-hH1" secondAttribute="trailing" constant="8" id="1Vz-gl-plS"/>
-                    <constraint firstItem="Lt5-4s-Kwx" firstAttribute="centerY" secondItem="cpc-Qw-hH1" secondAttribute="centerY" id="3FC-JO-qbr"/>
                     <constraint firstItem="4EI-uQ-Kdu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="5p3-zT-2Z0"/>
                     <constraint firstItem="cpc-Qw-hH1" firstAttribute="leading" secondItem="4EI-uQ-Kdu" secondAttribute="trailing" constant="16" id="7DL-Tw-R7T"/>
                     <constraint firstItem="vHE-Dm-wg9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="8Wy-9t-TTj"/>

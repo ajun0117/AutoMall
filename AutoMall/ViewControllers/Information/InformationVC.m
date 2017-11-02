@@ -52,7 +52,7 @@
     self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
     
-    self.zixunTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49) style:UITableViewStyleGrouped];
+    self.zixunTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49) style:UITableViewStylePlain];
     [self.mainScrollView addSubview:self.zixunTV];
     self.zixunTV.delegate = self;
     self.zixunTV.dataSource = self;
@@ -61,7 +61,7 @@
     [self.zixunTV addHeaderWithTarget:self action:@selector(zixunHeaderRefreshing)];
     [self.zixunTV addFooterWithTarget:self action:@selector(zixunFooterLoadData)];
     
-    self.jiaochengTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49) style:UITableViewStyleGrouped];
+    self.jiaochengTV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44 - 49) style:UITableViewStylePlain];
     [self.mainScrollView addSubview:self.jiaochengTV];
     self.jiaochengTV.delegate = self;
     self.jiaochengTV.dataSource = self;
@@ -180,19 +180,19 @@
 //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
 //    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 //    return height + 1;
-    return 100;
+    return 90;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 5;
-    }
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    if (section == 0) {
+//        return 5;
+//    }
+//    return 1;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 5;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.zixunTV) {
