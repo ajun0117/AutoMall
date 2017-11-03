@@ -61,6 +61,10 @@
 //    _imageview.contentMode = UIViewContentModeScaleAspectFit;
 //    _imageview.userInteractionEnabled = YES;
     
+    if (self.imgUrl) {
+        [self.imageV sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.imgUrl)] placeholderImage:IMG(@"default")];
+    }
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toMark:)];
     [self.imageV addGestureRecognizer:tap];
      //调用initWithImage:方法，它创建出来的imageview的宽高和图片的宽高一样
@@ -68,7 +72,7 @@
      self.scrollV.contentSize = self.imageV.image.size;
      //设置实现缩放
      //设置最大伸缩比例
-     self.scrollV.maximumZoomScale = 2.0;
+     self.scrollV.maximumZoomScale = 3.0;
      //设置最小伸缩比例
      self.scrollV.minimumZoomScale = 1.0;
 

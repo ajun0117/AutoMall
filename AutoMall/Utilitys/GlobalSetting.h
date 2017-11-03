@@ -227,6 +227,9 @@
 -(void)setmHead:(id)mHead;
 -(id)mHead;
 
+-(void)setCartMulArray:(NSMutableArray *)mulArray;
+-(id)cartMulArray;
+
 /**
  *  养老金金额
  *

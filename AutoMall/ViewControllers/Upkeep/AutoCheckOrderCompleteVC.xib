@@ -26,6 +26,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Zr-oJ-4dj">
                     <rect key="frame" x="0.0" y="64" width="375" height="90"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3x-Ma-agM">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="VXq-4l-A6H" customClass="NSLayoutConstraintOnePixelLine"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmd-z6-JU2">
                             <rect key="frame" x="8" y="8" width="65.5" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -70,9 +80,9 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTe-aS-KDd">
                             <rect key="frame" x="0.0" y="89" width="375" height="1"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="vPu-L9-76P"/>
+                                <constraint firstAttribute="height" constant="1" id="vPu-L9-76P" customClass="NSLayoutConstraintOnePixelLine"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -88,6 +98,7 @@
                         <constraint firstItem="Tof-On-KJM" firstAttribute="centerY" secondItem="9aF-Ce-o5l" secondAttribute="centerY" id="6D9-q4-ZLW"/>
                         <constraint firstItem="Bms-Wc-MFa" firstAttribute="leading" secondItem="Zmd-z6-JU2" secondAttribute="trailing" id="CNn-wg-q0A"/>
                         <constraint firstAttribute="bottom" secondItem="gTe-aS-KDd" secondAttribute="bottom" id="CTd-dP-sQ1"/>
+                        <constraint firstAttribute="trailing" secondItem="Y3x-Ma-agM" secondAttribute="trailing" id="CcP-Cj-knH"/>
                         <constraint firstAttribute="trailing" secondItem="k0h-P8-3cf" secondAttribute="trailing" constant="8" id="DSv-ba-MJx"/>
                         <constraint firstItem="k0h-P8-3cf" firstAttribute="centerY" secondItem="Zmd-z6-JU2" secondAttribute="centerY" id="HNK-Wn-mwP"/>
                         <constraint firstItem="Tof-On-KJM" firstAttribute="leading" secondItem="9aF-Ce-o5l" secondAttribute="trailing" id="HoX-c1-Scw"/>
@@ -99,16 +110,18 @@
                         <constraint firstAttribute="height" constant="90" id="dlH-NS-Q0n"/>
                         <constraint firstItem="gTe-aS-KDd" firstAttribute="leading" secondItem="7Zr-oJ-4dj" secondAttribute="leading" id="h2f-Wi-Ydz"/>
                         <constraint firstItem="Zmd-z6-JU2" firstAttribute="top" secondItem="7Zr-oJ-4dj" secondAttribute="top" constant="8" id="hha-AY-PlU"/>
+                        <constraint firstItem="Y3x-Ma-agM" firstAttribute="top" secondItem="7Zr-oJ-4dj" secondAttribute="top" id="tHr-8X-2D4"/>
+                        <constraint firstItem="Y3x-Ma-agM" firstAttribute="leading" secondItem="7Zr-oJ-4dj" secondAttribute="leading" id="wCt-kI-hqg"/>
                         <constraint firstItem="k0h-P8-3cf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bms-Wc-MFa" secondAttribute="trailing" constant="10" id="xW2-49-p8Q"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2g-5K-GCJ">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="WUC-rT-509"/>
+                        <constraint firstAttribute="height" constant="49" id="WUC-rT-509"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="确定"/>
                     <connections>
                         <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="NjJ-N4-ZA8"/>

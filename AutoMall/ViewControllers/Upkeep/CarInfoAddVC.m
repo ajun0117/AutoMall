@@ -261,6 +261,24 @@
 }
 
 - (IBAction)saveAction:(id)sender {
+    if (! self.ownerTF.text || self.ownerTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车主姓名必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! self.plateNumberTF.text || self.plateNumberTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车牌号必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! self.brandTF.text || self.brandTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车辆品牌必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
     isAutoSelect = NO;
     if (self.carDic) {
         [self requestPostUpdateCar];
@@ -270,6 +288,24 @@
 }
 
 - (IBAction)selectAction:(id)sender {
+    if (! self.ownerTF.text || self.ownerTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车主姓名必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! self.plateNumberTF.text || self.plateNumberTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车牌号必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! self.brandTF.text || self.brandTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车辆品牌必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
     isAutoSelect = YES;
     if (self.carDic) {
         [self requestPostUpdateCar];
@@ -420,6 +456,7 @@
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpdate, @"op", nil];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",self.mileageTF.text,@"mileage",self.fuelAmountTF.text,@"fuelAmount",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",self.wechatTF.text,@"wechat",self.genderTF.text,@"gender",self.birthdayTF.text,@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",self.purchaseDateTF.text,@"purchaseDate",STRING_Nil(carImgUrl),@"image",self.engineNoTF.text,@"engineNo",self.vinTF.text,@"vin", nil];
+    NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpdate) delegate:nil params:pram info:infoDic];
 }
 

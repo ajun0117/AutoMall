@@ -218,7 +218,7 @@
     WebViewController *webVC = [[WebViewController alloc] init];
     if (tableView == self.zixunTV) {
         webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(InformationDetail),zixunArray[indexPath.section][@"id"]];
-        webVC.titleStr = STRING(jiaochengArray[indexPath.section][@"title"]);
+        webVC.titleStr = STRING(zixunArray[indexPath.section][@"title"]);
     } else {
         webVC.webUrlStr = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CourseDetail),jiaochengArray[indexPath.section][@"id"]];
         webVC.titleStr = STRING(jiaochengArray[indexPath.section][@"title"]);

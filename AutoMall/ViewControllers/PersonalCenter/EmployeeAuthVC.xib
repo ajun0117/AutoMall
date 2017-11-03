@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -56,7 +56,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbT-nk-Pgc">
-                            <rect key="frame" x="16" y="36" width="343" height="1"/>
+                            <rect key="frame" x="16" y="36" width="359" height="1"/>
                             <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="abV-kE-RWX" customClass="NSLayoutConstraintOnePixelLine"/>
@@ -66,7 +66,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHq-YH-geM">
-                            <rect key="frame" x="16" y="110" width="343" height="1"/>
+                            <rect key="frame" x="16" y="110" width="359" height="1"/>
                             <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="A9V-jJ-y4u" customClass="NSLayoutConstraintOnePixelLine"/>
@@ -89,9 +89,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="JaD-qZ-pMX" firstAttribute="top" secondItem="dVE-l9-JkU" secondAttribute="top" id="5P0-WC-SAj"/>
-                        <constraint firstAttribute="trailing" secondItem="dHq-YH-geM" secondAttribute="trailing" constant="16" id="ACR-PU-NMI"/>
+                        <constraint firstAttribute="trailing" secondItem="dHq-YH-geM" secondAttribute="trailing" id="ACR-PU-NMI"/>
                         <constraint firstItem="dHq-YH-geM" firstAttribute="top" secondItem="aNB-V5-pmV" secondAttribute="bottom" constant="10" id="F21-cE-HTy"/>
-                        <constraint firstAttribute="trailing" secondItem="KbT-nk-Pgc" secondAttribute="trailing" constant="16" id="HvJ-Mf-jna"/>
+                        <constraint firstAttribute="trailing" secondItem="KbT-nk-Pgc" secondAttribute="trailing" id="HvJ-Mf-jna"/>
                         <constraint firstItem="dHq-YH-geM" firstAttribute="leading" secondItem="dVE-l9-JkU" secondAttribute="leading" constant="16" id="IvV-Yi-6cP"/>
                         <constraint firstItem="Reu-0c-JDw" firstAttribute="top" secondItem="aNB-V5-pmV" secondAttribute="bottom" constant="20" id="LD8-sg-DKN"/>
                         <constraint firstAttribute="trailing" secondItem="JaD-qZ-pMX" secondAttribute="trailing" id="MTh-RO-te9"/>

@@ -23,14 +23,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-Kn-mjA">
-                    <rect key="frame" x="10" y="0.0" width="355" height="517"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="453"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="scrollIndicatorInsets" minX="10" minY="20" maxX="10" maxY="10"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="NaQ-cc-vH7">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="NaQ-cc-vH7">
                         <size key="itemSize" width="60" height="60"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="20"/>
                     </collectionViewFlowLayout>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="aZt-R0-cro"/>
@@ -242,11 +242,11 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Kjc-gC-1VK" secondAttribute="trailing" id="0zd-yc-gD4"/>
-                <constraint firstItem="qA4-Kn-mjA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="4L1-nk-HZD"/>
+                <constraint firstItem="qA4-Kn-mjA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4L1-nk-HZD"/>
                 <constraint firstItem="Kjc-gC-1VK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4eq-qo-2tR"/>
-                <constraint firstItem="qA4-Kn-mjA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7dR-2n-aNH"/>
+                <constraint firstItem="qA4-Kn-mjA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="7dR-2n-aNH"/>
                 <constraint firstAttribute="bottom" secondItem="Kjc-gC-1VK" secondAttribute="bottom" id="V3L-Y2-NeJ"/>
-                <constraint firstAttribute="trailing" secondItem="qA4-Kn-mjA" secondAttribute="trailing" constant="10" id="dRY-Ci-PlK"/>
+                <constraint firstAttribute="trailing" secondItem="qA4-Kn-mjA" secondAttribute="trailing" id="dRY-Ci-PlK"/>
                 <constraint firstAttribute="bottom" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="oBP-mO-00P"/>
                 <constraint firstItem="Kjc-gC-1VK" firstAttribute="top" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="uec-Jf-2Vt"/>
             </constraints>

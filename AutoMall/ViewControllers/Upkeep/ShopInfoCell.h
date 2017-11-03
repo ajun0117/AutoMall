@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ShopInfoCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *storeNameL;
+@property (strong, nonatomic) IBOutlet UILabel *storePhoneL;
+@property (strong, nonatomic) IBOutlet UILabel *storeAddressL;
 
 @end

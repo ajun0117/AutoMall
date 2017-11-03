@@ -193,8 +193,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.imgsCollectionView) {
-        CGSize size = CGSizeMake(100, 100);
-        return size;
+        return CGSizeMake((SCREEN_WIDTH-20) / 3 - 4, (SCREEN_WIDTH-20) / 3 - 4);
     }
     return CGSizeMake(100, 100);
 }

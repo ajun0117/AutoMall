@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="4pK-wf-j1V">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderPictureSquare" translatesAutoresizingMaskIntoConstraints="NO" id="4pK-wf-j1V">
                         <rect key="frame" x="8" y="8" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="6AX-L9-owm"/>
@@ -28,10 +28,10 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="五菱汽车维修服务中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M4-fa-KUG">
                         <rect key="frame" x="30" y="7.5" width="153" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="n7W-zN-CyZ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="storeAddress" translatesAutoresizingMaskIntoConstraints="NO" id="n7W-zN-CyZ">
                         <rect key="frame" x="191" y="8" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="6l4-QD-C97"/>
@@ -41,10 +41,10 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="020-3400000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mU8-R2-ISD">
                         <rect key="frame" x="213" y="8" width="99" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="ocg-82-Hlu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderPictureSquare" translatesAutoresizingMaskIntoConstraints="NO" id="ocg-82-Hlu">
                         <rect key="frame" x="8" y="34.5" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="Zny-ZP-aMj"/>
@@ -54,7 +54,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="五菱汽车维修服务中心地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEC-EH-DDr">
                         <rect key="frame" x="30" y="35.5" width="159.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -73,10 +73,16 @@
                     <constraint firstItem="4pK-wf-j1V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zeB-yJ-J46"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="25" y="60"/>
+            <connections>
+                <outlet property="storeAddressL" destination="lEC-EH-DDr" id="g3z-el-Ujg"/>
+                <outlet property="storeNameL" destination="2M4-fa-KUG" id="HXf-5C-f40"/>
+                <outlet property="storePhoneL" destination="mU8-R2-ISD" id="HRv-k5-6ma"/>
+            </connections>
+            <point key="canvasLocation" x="-258" y="11"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="default" width="512" height="512"/>
+        <image name="placeholderPictureSquare" width="302" height="302"/>
+        <image name="storeAddress" width="40" height="40"/>
     </resources>
 </document>

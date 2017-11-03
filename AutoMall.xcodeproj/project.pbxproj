@@ -141,6 +141,8 @@
 		04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B141F3D969600053A98 /* CarInfoListVC.xib */; };
 		04A09B1A1F3DAFBE00053A98 /* CarInfoSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */; };
 		04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */; };
+		04A642891FAC003E00E52C0D /* MessageListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A642871FAC003E00E52C0D /* MessageListCell.m */; };
+		04A6428A1FAC003E00E52C0D /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A642881FAC003E00E52C0D /* MessageListCell.xib */; };
 		04A69F0E1F710D1300E966A0 /* UpkeepCarMarkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */; };
 		04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */; };
 		04ABFB321F9837CE0015EE78 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABFB301F9837CE0015EE78 /* GTMBase64.m */; };
@@ -711,6 +713,9 @@
 		04A09B171F3DAFBE00053A98 /* CarInfoSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoSearchVC.h; sourceTree = "<group>"; };
 		04A09B181F3DAFBE00053A98 /* CarInfoSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoSearchVC.m; sourceTree = "<group>"; };
 		04A09B191F3DAFBE00053A98 /* CarInfoSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoSearchVC.xib; sourceTree = "<group>"; };
+		04A642861FAC003E00E52C0D /* MessageListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListCell.h; sourceTree = "<group>"; };
+		04A642871FAC003E00E52C0D /* MessageListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListCell.m; sourceTree = "<group>"; };
+		04A642881FAC003E00E52C0D /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		04A69F0B1F710D1300E966A0 /* UpkeepCarMarkVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepCarMarkVC.h; sourceTree = "<group>"; };
 		04A69F0C1F710D1300E966A0 /* UpkeepCarMarkVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepCarMarkVC.m; sourceTree = "<group>"; };
 		04A69F0D1F710D1300E966A0 /* UpkeepCarMarkVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepCarMarkVC.xib; sourceTree = "<group>"; };
@@ -1971,6 +1976,9 @@
 				04C35D1A1F8B57BC00062014 /* MessageListVC.h */,
 				04C35D1B1F8B57BC00062014 /* MessageListVC.m */,
 				04C35D1C1F8B57BC00062014 /* MessageListVC.xib */,
+				04A642861FAC003E00E52C0D /* MessageListCell.h */,
+				04A642871FAC003E00E52C0D /* MessageListCell.m */,
+				04A642881FAC003E00E52C0D /* MessageListCell.xib */,
 			);
 			name = "消息列表";
 			sourceTree = "<group>";
@@ -2951,6 +2959,7 @@
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
 				04ABFB481F985AC90015EE78 /* AutoCheckOrderWorkingVC.xib in Resources */,
+				04A6428A1FAC003E00E52C0D /* MessageListCell.xib in Resources */,
 				04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */,
 				04B3EFE31F9460DC0056BF9B /* AutoCheckCarInfoVC.xib in Resources */,
 				F73CB9C31F893C9300936C7A /* AutoCheckGroupTitleCell.xib in Resources */,
@@ -3194,6 +3203,7 @@
 				04DCA17A1FA2F1AA004B1054 /* CheckResultTechnicianCell.m in Sources */,
 				0490FC091F58049600F77661 /* EditServicePackageVC.m in Sources */,
 				046B8DDD1F9A044300784AA8 /* RSADataSigner.m in Sources */,
+				04A642891FAC003E00E52C0D /* MessageListCell.m in Sources */,
 				04DC7D231F31C26500AA20A7 /* JFB.xcdatamodeld in Sources */,
 				F71245781F868DD20091816F /* CheckContentTool.m in Sources */,
 				042F4F1D1F7905150059B44E /* CarInfoAddVC.m in Sources */,
@@ -3498,7 +3508,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3540,7 +3550,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

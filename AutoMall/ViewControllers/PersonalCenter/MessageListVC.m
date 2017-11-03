@@ -7,7 +7,7 @@
 //
 
 #import "MessageListVC.h"
-#import "UpkeepPlanNormalCell.h"
+#import "MessageListCell.h"
 
 @interface MessageListVC ()
 {
@@ -28,6 +28,10 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    [self.myTableView registerNib:[UINib nibWithNibName:@"MessageListCell" bundle:nil] forCellReuseIdentifier:@"messageListCell"];
+    self.myTableView.tableFooterView = [UIView new];
+    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self requestPostMessageList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -45,12 +49,6 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-    
-//    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
-    self.myTableView.tableFooterView = [UIView new];
-    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    
-    [self.myTableView headerBeginRefreshing];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -81,14 +79,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = messageAry[indexPath.row];
-    
-//    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-//    cell.declareL.text = dic[@"title"];
-//    cell.contentL.text = dic[@"content"];
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"messageListCell"];
-    cell.textLabel.text = dic[@"title"];
-    cell.detailTextLabel.text = dic[@"content"];
-    cell.detailTextLabel.numberOfLines = 3;
+    MessageListCell *cell = (MessageListCell *)[tableView dequeueReusableCellWithIdentifier:@"messageListCell"];
+    cell.nameL.text = dic[@"title"];
+    cell.contentL.text = dic[@"content"];
     return cell;
 }
 

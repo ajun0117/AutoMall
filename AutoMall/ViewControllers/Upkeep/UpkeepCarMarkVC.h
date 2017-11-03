@@ -10,6 +10,8 @@
 
 @interface UpkeepCarMarkVC : UIViewController
 
+@property (strong, nonatomic) NSString *imgUrl;
+
 /**
  * 更新照片
  */

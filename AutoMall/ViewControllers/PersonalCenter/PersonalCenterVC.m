@@ -119,6 +119,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    if (! mobileUserType) {   //未登录状态监听登录事件
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
+    }
 }
 
 -(void) toAboutUs {
@@ -134,7 +138,7 @@
         [self.navigationController pushViewController:msgVC animated:YES];
     }
     else {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
@@ -391,7 +395,11 @@
                 
                 cell.loginL.hidden = YES;
                 cell.accountBtn.hidden = NO;
-                [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
+                if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
+                    [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
+                } else {
+                    [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
+                }
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden =NO;
                 [cell.applyBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
@@ -452,7 +460,11 @@
 
                 cell.loginL.hidden = YES;
                 cell.accountBtn.hidden = NO;
-                [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
+                if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
+                    [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
+                } else {
+                    [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
+                }
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
@@ -470,7 +482,7 @@
                     cell.shopLevelIM.image = IMG(@"goldBadge");
                 }
                 cell.jifenL.hidden = NO;
-                cell.jifenL.text = [NSString stringWithFormat:@"  积分：%@分  ",@"80"];
+                cell.jifenL.text = [NSString stringWithFormat:@"积分：%@分",@"80"];
                 return cell;
                 break;
             }
@@ -637,7 +649,11 @@
                 
                 cell.loginL.hidden = YES;
                 cell.accountBtn.hidden = NO;
-                [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
+                if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
+                    [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
+                } else {
+                    [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
+                }
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
@@ -829,7 +845,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (! mobileUserType && indexPath.section == 0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
@@ -1162,7 +1178,7 @@
         [self selectThePhotoOrCamera];
     }
     else {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         loginVC.isPresented = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];

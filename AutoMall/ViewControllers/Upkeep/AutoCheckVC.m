@@ -166,6 +166,7 @@
         carImageUrl = imageUrl;
         NSLog(@"carImageUrl: %@",carImageUrl);
     };
+    markVC.imgUrl = carImageUrl;    
     [self.navigationController pushViewController:markVC animated:YES];
 }
 
@@ -553,6 +554,7 @@
         UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 77, 20)];
         noticeL.font = [UIFont systemFontOfSize:15];
         noticeL.text = @"检查内容：";
+        noticeL.textColor = Gray_Color;
         [contentBgView addSubview:noticeL];
         UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(93, 5, CGRectGetWidth(contentBgView.frame) - 77 - 24 , 20)];
         contentL.font = [UIFont systemFontOfSize:15];

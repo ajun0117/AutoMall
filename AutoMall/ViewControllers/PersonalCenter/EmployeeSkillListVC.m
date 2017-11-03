@@ -43,6 +43,7 @@
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeSkillListCell" bundle:nil] forCellReuseIdentifier:@"employeeSkillListCell"];
+    self.myTableView.tableFooterView = [UIView new];
     
     [self requestGetStaffList];
 }
@@ -80,9 +81,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    return height + 1;
+//    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+//    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    return height + 1;
+    return 90;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

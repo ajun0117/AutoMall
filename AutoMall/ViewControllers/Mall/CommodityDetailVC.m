@@ -104,8 +104,14 @@ static CGFloat const scrollViewHeight = 220;
     [self requestGetCommodityDetail];
     
     goodsNum = 0;
-    commoditymulArray = [NSMutableArray array];
-    cartMulArray = [NSMutableArray array];
+    if (!commoditymulArray) {
+        commoditymulArray = [NSMutableArray array];
+    }
+
+//    cartMulArray = [[[GlobalSetting shareGlobalSettingInstance] cartMulArray] mutableCopy];
+    if (! cartMulArray) {
+        cartMulArray = [NSMutableArray array];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -582,6 +588,9 @@ static CGFloat const scrollViewHeight = 220;
         }
         
         NSLog(@"---%lu",(unsigned long)cartMulArray.count);
+        
+        //存储可变数组到本地
+ //       [[GlobalSetting shareGlobalSettingInstance] setCartMulArray:cartMulArray];
         
         [dic setObject:@(num) forKey:@"orderCont"];
         

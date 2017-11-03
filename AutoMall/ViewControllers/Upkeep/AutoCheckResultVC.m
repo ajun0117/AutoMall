@@ -25,6 +25,7 @@
     AJAdView *_adView;
     NSArray *_adArray;   //广告图数组
     NSDictionary *carUpkeepDic;     //检查单数据
+    NSMutableArray *checkResultArray;       //重组后的检查结果数组
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -67,6 +68,10 @@
     
     _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
     [_adView reloadData];
+    
+    checkResultArray = [NSMutableArray array];
+    
+    [self requestGetUpkeepInfo];
     
 }
 
@@ -214,13 +219,42 @@
         case 0: {
             ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.storeNameL.text = carUpkeepDic[@"storeName"];
+            cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
+            cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
             return cell;
             break;
         }
         case 1: {
             CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
-            [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
+                if ([dic[@"id"] intValue] == 1) { //车身
+                    cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+                    [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([dic[@"id"] intValue] == 2) { //车内
+                    cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+                    [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([dic[@"id"] intValue] == 3) { //底盘
+                    cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+                    [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([dic[@"id"] intValue] == 4) { //机舱
+                    cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+                    [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([dic[@"id"] intValue] == 5) { //尾箱
+                    cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+                    [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([dic[@"id"] intValue] == 6) { //轮胎刹车
+                    cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+                    [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+            
             return cell;
             break;
         }
@@ -272,7 +306,8 @@
             UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
             if (! carImg) {
                 UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 200 - 16)];
-                carImg.image = IMG(@"carMark");
+//                carImg.image = IMG(@"carMark");
+                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"default")];
                 carImg.contentMode = UIViewContentModeScaleAspectFit;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
@@ -352,6 +387,36 @@
     [self.navigationController pushViewController:problemVC animated:YES];
 }
 
+//车内检查结果
+-(void)inCarAction {
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    [self.navigationController pushViewController:problemVC animated:YES];
+}
+
+//底盘检查结果
+-(void)underpanAction {
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    [self.navigationController pushViewController:problemVC animated:YES];
+}
+
+//机舱检查结果
+-(void)engineAction {
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    [self.navigationController pushViewController:problemVC animated:YES];
+}
+
+//尾箱检查结果
+-(void)bootAction {
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    [self.navigationController pushViewController:problemVC animated:YES];
+}
+
+//轮胎刹车检查结果
+-(void)tyreAction {
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    [self.navigationController pushViewController:problemVC animated:YES];
+}
+
 
 //CarUpkeepInfo
 #pragma mark - 发送请求
@@ -360,7 +425,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepInfo object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepInfo, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepInfo),self.carUpkeepId];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepInfo),@"1"];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -379,6 +444,30 @@
         NSLog(@"CarListOrSearch: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             carUpkeepDic = responseObject[@"data"];
+            
+//            checkResultArray
+            NSArray *contentAry = responseObject[@"data"][@"carUpkeepCheckContents"];
+            NSMutableArray *ary1 = [NSMutableArray array];
+            for (NSDictionary *dic in contentAry) {
+                NSString *contentIdStr = dic[@"checkContent"][@"id"];
+                NSString *dPositionStr = dic[@"checkContent"];
+                if (dPositionStr.length > 0) {  //说明有多个位置
+                    NSDictionary *d = @{contentIdStr:dic};
+                    [ary1 addObject:d];
+                }
+            }
+    
+            NSMutableArray *keys = [NSMutableArray array];
+            NSMutableArray *valus = [NSMutableArray array];
+            for (NSDictionary *dicc in ary1) {
+                [keys addObject:[[dicc allKeys] firstObject]];
+                [valus addObject:[[dicc allValues] firstObject]];
+            }
+            
+            NSMutableArray *ary2 = [NSMutableArray array];
+            
+            
+            
             [self.myTableView reloadData];
         }
         else {

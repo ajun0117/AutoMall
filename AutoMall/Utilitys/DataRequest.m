@@ -263,7 +263,7 @@ static DataRequest *dataRequest;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [imageView_ setCurrentProgress:progress];
                 if (progress == 1.0) {
-                    [imageView setCircleProgressViewHidden:YES];
+                    [imageView_ setCircleProgressViewHidden:YES];
                 }
             });
         }];

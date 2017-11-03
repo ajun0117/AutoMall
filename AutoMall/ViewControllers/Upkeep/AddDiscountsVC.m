@@ -45,14 +45,20 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    if ([self checkCodeNumWithCode:self.discountsMoneyTF.text]) {
-        [self requestPostAddDiscount];
-    }
-    else {
-        _networkConditionHUD.labelText = @"输入的金额格式有误，请重新输入";
+    if (! self.discountsNameTF.text || self.discountsNameTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"优惠名称必须填写！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
     }
+//    if ([self checkCodeNumWithCode:self.discountsMoneyTF.text]) {
+        [self requestPostAddDiscount];
+//    }
+//    else {
+//        _networkConditionHUD.labelText = @"输入的金额格式有误，请重新输入";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//    }
 }
 
 #pragma mark -
@@ -88,7 +94,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountAdd object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountAdd, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"storeId",self.discountsNameTF.text,@"item",self.discountsMoneyTF.text,@"money", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"storeId", self.discountsNameTF.text,@"item", STRING_Nil(self.discountsMoneyTF.text), @"money", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountAdd) delegate:nil params:pram info:infoDic];
 }
 
