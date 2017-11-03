@@ -150,8 +150,8 @@
 
 //商城
 #define ComCategoryList                         @"/api/comCategory/list"    //商品分类
-//#define CommodityList                            @"/api/commodity/list"       //商品列表
-#define CommodityList                            @"/api/commodity/search"       //商品列表
+#define CommodityList                            @"/api/commodity/list"       //商品列表
+#define CommoditySearch                       @"/api/commodity/search"       //商品列表
 #define CommodityDetail                        @"/api/commodity/getInfo"   //商品详情
 #define CommodityGetDesInfo               @"/api/commodity/getDesInfo"    //获取商品描述url
 #define CommoditytjList                         @"/api/commodity/tjlist"  //商品详情推荐商品列表
@@ -164,6 +164,7 @@
 #define MallOrderChoosePayMode           @"/api/order/choosePayMode"     //选择支付方式
 #define MallOrderPaySuccess                  @"/order/paySuccess"                 //支付成功回调
 #define GetIntegralAs1Yuan                    @"/api/integral/getIntegralAs1Yuan"       //获取一元对应的积分数
+#define GetComtermList                                @"/api/comterm/list"        //获取商品项目列表
 
 //登录、注册、找回密码
 #define GetSMS                                      @"/api/sms/send"                    //获取短信验证码

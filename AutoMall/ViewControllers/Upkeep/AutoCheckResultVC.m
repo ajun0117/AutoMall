@@ -62,7 +62,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultTechnicianCell" bundle:nil] forCellReuseIdentifier:@"checkResultTechnicianCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultQRCell" bundle:nil] forCellReuseIdentifier:@"checkResultQRCell"];
     
-    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH/3)];
+    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
     _adView.delegate = self;
     self.myTableView.tableHeaderView = _adView;
     
@@ -168,11 +168,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-            return 60;
+            return 70;
             break;
         }
         case 1: {
-            return 220;
+            return 250;
             break;
         }
         case 2: {
@@ -183,7 +183,7 @@
             break;
         }
         case 3: {
-            return 200;
+            return 250;
             break;
         }
         case 4: {
@@ -191,9 +191,9 @@
                 return 44;
             }
             else if (indexPath.row == 3) {
-                return 44;
+                return 56;
             }
-            return 60;
+            return 70;
             break;
         }
         case 5: {
@@ -211,7 +211,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -219,9 +219,9 @@
         case 0: {
             ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.storeNameL.text = carUpkeepDic[@"storeName"];
-            cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
-            cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
+//            cell.storeNameL.text = carUpkeepDic[@"storeName"];
+//            cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
+//            cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
             return cell;
             break;
         }
@@ -271,9 +271,10 @@
                         position.textColor = [UIColor grayColor];
                         position.font = [UIFont systemFontOfSize:14];
                         
-                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 36*i , 80, 22)];
+                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18 - 80 - 20, 36*i , 80, 22)];
                         result.text = @"262kpa";
-                        result.textColor = [UIColor grayColor];
+                        result.textAlignment = NSTextAlignmentRight;
+                        result.textColor = RGBCOLOR(63, 63, 63);
                         result.font = [UIFont systemFontOfSize:14];
                         
                         UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18, 36*i , 50, 22)];
@@ -305,9 +306,9 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
             if (! carImg) {
-                UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 200 - 16)];
-//                carImg.image = IMG(@"carMark");
-                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"default")];
+                UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
+                carImg.image = IMG(@"carMark");
+//                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
                 carImg.contentMode = UIViewContentModeScaleAspectFit;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
@@ -329,7 +330,7 @@
                 if (! label) {
                     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
                     btn1.tag = 101;
-                    btn1.frame = CGRectMake(8, 2, (SCREEN_WIDTH - 16 - 10)/2, 40);
+                    btn1.frame = CGRectMake(8, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
                     [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                     [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
@@ -341,7 +342,7 @@
                     
                     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
                     btn2.tag = 102;
-                    btn2.frame = CGRectMake(VIEW_BX(btn1) + 5, 2, (SCREEN_WIDTH - 16 - 10)/2, 40);
+                    btn2.frame = CGRectMake(VIEW_BX(btn1) + 16, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
                     [btn2 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                     [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];

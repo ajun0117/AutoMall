@@ -115,13 +115,23 @@
     cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if ([mobileUserType isEqualToString:@"1"]) {    //老板
-        cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-        cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+        if ([dic[@"discount"] intValue] > 0) {
+            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+        } else {
+            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            cell.costPriceStrikeL.text = @"";
+        }
         cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
     }
     else {
-        cell.moneyL.text = @"￥--";
-        cell.costPriceStrikeL.text = @"￥--";
+        if ([dic[@"discount"] intValue] > 0) {
+            cell.moneyL.text = @"￥--";
+            cell.costPriceStrikeL.text = @"￥--";
+        } else {
+            cell.moneyL.text = @"￥--";
+            cell.costPriceStrikeL.text = @"";
+        }
         cell.yunfeiL.text = @"配送费--元";
     }
     return cell;
@@ -138,11 +148,11 @@
 -(void)requestSearchCommodityList { //搜索商品列表
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommoditySearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommoditySearch, @"op", nil];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",self.mySearchBar.text,@"tagOrName", nil];
     NSLog(@"pram: %@",pram);
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommoditySearch) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -157,8 +167,8 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    if ([notification.name isEqualToString:CommodityList]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:CommodityList object:nil];
+    if ([notification.name isEqualToString:CommoditySearch]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CommoditySearch object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {

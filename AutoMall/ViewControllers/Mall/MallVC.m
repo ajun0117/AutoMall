@@ -87,7 +87,7 @@ static CGFloat const scrollViewHeight = 220;
     
     __weak typeof(self) weakSelf = self;
     [scroll setTapImageHandle:^(NSInteger index) {
-//        [weakSelf toWebView:index];
+        [weakSelf toWebView:index];
     }];
     
     [scroll setDidScrollImageViewAtIndexHandle:^(NSInteger index) {
@@ -305,8 +305,14 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img1 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic1[@"image"])] placeholderImage:IMG(@"default")];
             cell.name1.text = dic1[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
-                cell.yuan1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
+                NSLog(@"discount： %@,name: %@",dic1[@"discount"],dic1[@"name"]);
+                 if ([dic1[@"discount"] intValue] > 0) {
+                    cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
+                    cell.yuan1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
+                 } else {
+                     cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
+                     cell.yuan1.text = @"";
+                 }
             }
             cell.btn1.tag = 101;
             [cell.btn1 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -315,8 +321,13 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img2 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic2[@"image"])] placeholderImage:IMG(@"default")];
             cell.name2.text = dic2[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
-                cell.yuan2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
+                if ([dic2[@"discount"] intValue] > 0) {
+                    cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
+                    cell.yuan2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
+                } else {
+                    cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
+                    cell.yuan2.text = @"";
+                }
             }
             cell.btn2.tag = 102;
             [cell.btn2 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -325,8 +336,13 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img3 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic3[@"image"])] placeholderImage:IMG(@"default")];
             cell.name3.text = dic3[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
-                cell.yuan3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
+                if ([dic3[@"discount"] intValue] > 0) {
+                    cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
+                    cell.yuan3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
+                } else {
+                    cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
+                    cell.yuan3.text = @"";
+                }
             }
             cell.btn3.tag = 103;
             [cell.btn3 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -335,8 +351,13 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img4 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic4[@"image"])] placeholderImage:IMG(@"default")];
             cell.name4.text = dic4[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
-                cell.yuan4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
+                if ([dic4[@"discount"] intValue] > 0) {
+                    cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
+                    cell.yuan4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
+                } else {
+                    cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
+                    cell.yuan4.text = @"";
+                }
             }
             cell.btn4.tag = 104;
             [cell.btn4 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];

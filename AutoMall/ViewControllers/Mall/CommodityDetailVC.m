@@ -21,6 +21,9 @@
 #import "ShoppingCartModel.h"
 #import "LoginViewController.h"
 #import "WebViewController.h"
+#import "CartItem.h"
+#import "CartTool.h"
+#import "JSONKit.h"
 
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
 static CGFloat const scrollViewHeight = 220;
@@ -108,10 +111,24 @@ static CGFloat const scrollViewHeight = 220;
         commoditymulArray = [NSMutableArray array];
     }
 
-//    cartMulArray = [[[GlobalSetting shareGlobalSettingInstance] cartMulArray] mutableCopy];
+    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
+    CartItem *item = [ary firstObject];
+    cartMulArray = [[item.cartMulAry objectFromJSONString] mutableCopy];
+
+    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
     if (! cartMulArray) {
         cartMulArray = [NSMutableArray array];
     }
+    
+    //存储可变数组到本数据库
+    CartItem *item1 = [[CartItem alloc] init];
+    NSError *err = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:cartMulArray options:NSJSONWritingPrettyPrinted error:&err];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"jsonStr: %@",jsonStr);
+    item1.cartMulAry = jsonStr;
+    item1.cartId = @"1";
+    [[CartTool sharedManager] insertRecordsWithItem:item1];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -436,13 +453,23 @@ static CGFloat const scrollViewHeight = 220;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
                     if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                        cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
-                        cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
+                        if ([commodityDic[@"discount"] intValue] > 0) {
+                            cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
+                            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
+                        } else {
+                            cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
+                            cell.costPriceStrikeL.text = @"";
+                        }
                         cell.shippingFeeL.text = [NSString stringWithFormat:@"配送费%@元",commodityDic[@"shippingFee"]];
                     }
                     else {
-                        cell.discountL.text = @"￥--";
-                        cell.costPriceStrikeL.text = @"￥--";
+                        if ([commodityDic[@"discount"] intValue] > 0) {
+                            cell.discountL.text = @"￥--";
+                            cell.costPriceStrikeL.text = @"￥--";
+                        } else {
+                            cell.discountL.text = @"￥--";
+                            cell.costPriceStrikeL.text = @"";
+                        }
                         cell.shippingFeeL.text = @"配送费--元";
                     }
                     [cell.addBtn addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
@@ -507,11 +534,21 @@ static CGFloat const scrollViewHeight = 220;
             cell.goodsNameL.text = dic [@"name"];
             NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-                cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                 if ([dic[@"discount"] intValue] > 0) {
+                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+                    cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                 } else {
+                     cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                     cell.costPriceStrikeL.text = @"";
+                 }
             } else {
-                cell.moneyL.text = @"￥--";
-                cell.costPriceStrikeL.text = @"￥--";
+                if ([dic[@"discount"] intValue] > 0) {
+                    cell.moneyL.text = @"￥--";
+                    cell.costPriceStrikeL.text = @"￥--";
+                } else {
+                    cell.moneyL.text = @"￥--";
+                    cell.costPriceStrikeL.text = @"";
+                }
             }
             return cell;
             break;
@@ -589,10 +626,17 @@ static CGFloat const scrollViewHeight = 220;
         
         NSLog(@"---%lu",(unsigned long)cartMulArray.count);
         
-        //存储可变数组到本地
- //       [[GlobalSetting shareGlobalSettingInstance] setCartMulArray:cartMulArray];
-        
         [dic setObject:@(num) forKey:@"orderCont"];
+        
+        //存储可变数组到本数据库
+        CartItem *item = [[CartItem alloc] init];
+        NSError *err = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:cartMulArray options:NSJSONWritingPrettyPrinted error:&err];
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"jsonStr: %@",jsonStr);
+        item.cartMulAry = jsonStr;
+        item.cartId = @"1";
+        [[CartTool sharedManager] UpdateContentItemWithItem:item];
         
         //设置商品数量
         self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];

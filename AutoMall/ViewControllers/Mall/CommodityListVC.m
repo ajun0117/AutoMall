@@ -12,7 +12,9 @@
 #import "CommodityDetailVC.h"
 #import "MailSearchVC.h"
 
-@interface CommodityListVC ()
+#define SelectView_Duration    0.3  //筛选视图动画时间
+
+@interface CommodityListVC () <UITableViewDelegate,UITableViewDataSource>
 {
     IBOutlet UIView *topView;
     IBOutlet UIButton *xingjiBtn;
@@ -23,9 +25,11 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *commodityArray;
+    NSArray *comtermAry;    //项目列表
     int currentpage;
     NSString *orderString;  //默认null        starLevel星级  salesVolume 销量  discount折后价
     NSString *orderTypeString;  //默认desc
+    NSString *commodityTermId;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -73,13 +77,34 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityListCell" bundle:nil] forCellReuseIdentifier:@"commodityListCell"];
     
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)]; 
+    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+    
+    if (! selectBgView) {
+        selectBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        selectBgView.backgroundColor = [UIColor blackColor];
+        selectBgView.alpha = 0.0;
+        [self.view insertSubview:selectBgView belowSubview:topView];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelect)];
+        [selectBgView addGestureRecognizer:tap];
+        
+        selectTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 39 - 300,SCREEN_WIDTH, 300) style:UITableViewStylePlain];
+        //        selectTableView.backgroundColor = RGBCOLOR(238, 238, 238);
+        selectTableView.delegate = self;
+        selectTableView.dataSource = self;
+        selectTableView.layer.borderColor = Cell_sepLineColor.CGColor;
+        selectTableView.layer.borderWidth = 1;
+        [self.view insertSubview:selectTableView belowSubview:topView];
+        
+        [self hiddenSelectView:YES];
+    }
     
     commodityArray = [NSMutableArray array];
     currentpage = 0;
     orderString = NULL;
     orderTypeString = @"desc";
     [self requestGetCommodityList];
+    [self requestGetComtermList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -99,6 +124,24 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void)cancelSelect {
+    [self hiddenSelectView:YES];
+}
+
+-(void)hiddenSelectView:(BOOL)hidden {
+    [UIView animateWithDuration:SelectView_Duration animations:^{
+        if (hidden) {
+            selectBgView.alpha = 0.0;
+            selectTableView.frame = CGRectMake(0, 39 - 300, SCREEN_WIDTH, 300);
+        }
+        else {
+            selectBgView.alpha = 0.3;
+            selectTableView.frame = CGRectMake(0, 104, SCREEN_WIDTH, 300);
+        }
+    }];
+}
+
+
 -(void) toSearch {  //搜索商品列表
     MailSearchVC *searchVC = [[MailSearchVC alloc] init];
     searchVC.hidesBottomBarWhenPushed = YES;
@@ -106,7 +149,11 @@
 }
 
 -(void) toFilter {      //筛选项目
-    
+    if (selectBgView.alpha > 0) {
+        [self hiddenSelectView:YES];
+    } else {
+        [self hiddenSelectView:NO];
+    }
 }
 
 - (IBAction)levelAction:(id)sender {
@@ -184,7 +231,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == selectTableView) {
-        return 2;
+        return comtermAry.count;
     }
     return 1;
 }
@@ -214,43 +261,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == selectTableView) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        //        cell.backgroundColor = RGBCOLOR(238, 238, 238);
+        NSDictionary *dic = comtermAry[indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
-//        if (pingfenBtn.selected) {
-//            if (indexPath.row == 0) {
-//                cell.textLabel.text = @"由低到高";
-//            }
-//            else {
-//                cell.textLabel.text = @"由高到低";
-//            }
-//        }
-//        else if (priceBtn.selected) {
-//            if (indexPath.row == 0) {
-//                cell.textLabel.text = @"由低到高";
-//            }
-//            else {
-//                cell.textLabel.text = @"由高到低";
-//            }
-//        }
-//        else if (distanceBtn.selected) {
-//            if (indexPath.row == 0) {
-//                cell.textLabel.text = @"5公里";
-//            }
-//            else if (indexPath.row == 1) {
-//                cell.textLabel.text = @"10公里";
-//            }
-//            else {
-//                cell.textLabel.text = @"全部";
-//            }
-//        }
-//        else if (youhuiBtn.selected) {
-//            if (indexPath.row == 0) {
-//                cell.textLabel.text = @"优惠商家";
-//            }
-//            else {
-//                cell.textLabel.text = @"全部";
-//            }
-//        }
+        cell.textLabel.text = dic[@"name"];
         return  cell;
     }
     else {
@@ -267,13 +280,24 @@
         cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if ([mobileUserType isEqualToString:@"1"]) {    //老板
-            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            if ([dic[@"discount"] intValue] > 0) {
+                cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+                cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            } else {
+                cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                cell.costPriceStrikeL.text = @"";
+            }
+
             cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
         }
         else {
-            cell.moneyL.text = @"￥--";
-            cell.costPriceStrikeL.text = @"￥--";
+            if ([dic[@"discount"] intValue] > 0) {
+                cell.moneyL.text = @"￥--";
+                cell.costPriceStrikeL.text = @"￥--";
+            } else {
+                cell.moneyL.text = @"￥--";
+                cell.costPriceStrikeL.text = @"";
+            }
             cell.yunfeiL.text = @"配送费--元";
         }
         return cell;
@@ -281,7 +305,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == selectTableView) {
 //        UITableViewCell *cell = [selectTableView cellForRowAtIndexPath:indexPath];
 //        if (pingfenBtn.selected) {
@@ -294,45 +317,15 @@
 //            [self adjustLeftBtnFrameWithTitle:cell.textLabel.text andButton:pingfenBtn];
 //            //            [pingfenBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
 //        }
-//        else if (priceBtn.selected) {
-//            if (indexPath.row == 0) {
-//                [sortDic setObject:@"asc" forKey:@"consumption"];
-//            }
-//            else {
-//                [sortDic setObject:@"desc" forKey:@"consumption"];
-//            }
-//            [self adjustLeftBtnFrameWithTitle:cell.textLabel.text andButton:priceBtn];
-//            //            [priceBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
-//        }
-//        else if (distanceBtn.selected) {
-//            if (indexPath.row == 0) {
-//                distanceStr = @"5";
-//            }
-//            else if (indexPath.row == 1) {
-//                distanceStr = @"10";
-//            }
-//            else {
-//                distanceStr = @"";
-//            }
-//            [self adjustLeftBtnFrameWithTitle:cell.textLabel.text andButton:distanceBtn];
-//            //            [distanceBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
-//        }
-//        else if (youhuiBtn.selected) {
-//            if (indexPath.row == 0) {
-//                isCoupons = @"1";
-//            }
-//            else {
-//                isCoupons = @"";
-//            }
-//            [self adjustLeftBtnFrameWithTitle:cell.textLabel.text andButton:youhuiBtn];
-//            //            [youhuiBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
-//        }
-//        
-//        [self cancelSelect];
-//        currentpage = 1;
-//        [self requestGetShopList];
+        NSDictionary *dic = comtermAry[indexPath.row];
+        commodityTermId = dic[@"id"];
+        [self cancelSelect];
+        currentpage = 0;
+        [commodityArray removeAllObjects];
+        [self requestGetCommodityList];
     }
     else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
         detailVC.commodityId = commodityArray[indexPath.section][@"id"];
         [self.navigationController pushViewController:detailVC animated:YES];
@@ -355,9 +348,17 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CommodityList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CommodityList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.categoryId,@"categoryId",[NSNumber numberWithInt:currentpage],@"pageNo",orderString,@"order",orderTypeString,@"orderType", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.categoryId,@"categoryId",[NSNumber numberWithInt:currentpage],@"pageNo",STRING_Nil(commodityTermId),@"commodityTermId",orderString,@"order",orderTypeString,@"orderType", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CommodityList) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestGetComtermList { //获取所有项目列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetComtermList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetComtermList, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(GetComtermList) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -374,11 +375,24 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:CommodityList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CommodityList object:nil];
-        NSLog(@"_responseObject: %@",responseObject);
-        
+        NSLog(@"CommodityList: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [commodityArray addObjectsFromArray:responseObject [@"data"]];
             [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetComtermList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetComtermList object:nil];
+        NSLog(@"GetComtermList: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            comtermAry = responseObject [@"data"];
+            [selectTableView reloadData];
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];

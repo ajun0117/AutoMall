@@ -20,8 +20,11 @@
 - (void)setData:(id)data{
     
     self.name.text = KSDIC(data, @"name");
-    
-    self.money.text = [NSString stringWithFormat:@"￥%@/件",KSDIC(data, @"discount")];
+    if (data[@"discount"]) {
+        self.money.text = [NSString stringWithFormat:@"￥%@/件",KSDIC(data, @"discount")];
+    } else {
+        self.money.text = [NSString stringWithFormat:@"￥%@/件",KSDIC(data, @"price")];
+    }
     self.number.text = [NSString stringWithFormat:@"%@",KSDIC(data, @"orderCont")];
 
 }

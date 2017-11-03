@@ -63,8 +63,11 @@
     __block double money = 0;
     
     [orderArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       
-        money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
+        if (obj[@"discount"]) {
+            money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
+        } else {
+            money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"price"] doubleValue];
+        }
     }];
     
     return money;
@@ -75,7 +78,11 @@
     __block double money = 0;
     __block double shippingFee = 0;
     [orderArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
+        if (obj[@"discount"]) {
+            money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
+        } else {
+            money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"price"] doubleValue];
+        }
         shippingFee = [[obj valueForKey:@"shippingFee"] doubleValue];
     }];
     if (money >= 500) {
