@@ -144,7 +144,8 @@
             break;
         }
         case 2: {
-            return 3;
+            NSArray *ary = carUpkeepDic[@"checkContents"];
+            return ary.count;
             break;
         }
         case 3: {
@@ -176,8 +177,11 @@
             break;
         }
         case 2: {
-            if (indexPath.row == 2) {
-                return  206;
+            NSArray *ary = carUpkeepDic[@"checkContents"];
+            NSDictionary *dic = ary[indexPath.row];
+            if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
+                return 43 + 30*entities.count;
             }
             return 44;
             break;
@@ -219,73 +223,90 @@
         case 0: {
             ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            cell.storeNameL.text = carUpkeepDic[@"storeName"];
-//            cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
-//            cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
+            cell.storeNameL.text = carUpkeepDic[@"storeName"];
+            cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
+            cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
             return cell;
             break;
         }
         case 1: {
             CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
-                if ([dic[@"id"] intValue] == 1) { //车身
+            cell.chepaiL.text = carUpkeepDic[@"carPlateNumber"];
+//            for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
+//                if ([dic[@"id"] intValue] == 1) { //车身
                     cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
                     [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else if ([dic[@"id"] intValue] == 2) { //车内
-                    cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
-                    [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else if ([dic[@"id"] intValue] == 3) { //底盘
-                    cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
-                    [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else if ([dic[@"id"] intValue] == 4) { //机舱
-                    cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
-                    [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else if ([dic[@"id"] intValue] == 5) { //尾箱
-                    cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
-                    [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else if ([dic[@"id"] intValue] == 6) { //轮胎刹车
-                    cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
-                    [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
-                }
-            }
+//                }
+//                else if ([dic[@"id"] intValue] == 2) { //车内
+//                    cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+//                    [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                else if ([dic[@"id"] intValue] == 3) { //底盘
+//                    cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+//                    [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                else if ([dic[@"id"] intValue] == 4) { //机舱
+//                    cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+//                    [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                else if ([dic[@"id"] intValue] == 5) { //尾箱
+//                    cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+//                    [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                else if ([dic[@"id"] intValue] == 6) { //轮胎刹车
+//                    cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",carUpkeepDic[@"unnormal"]];
+//                    [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//            }
             
             return cell;
             break;
         }
         case 2: {
-            if (indexPath.row == 2) {
+            NSArray *ary = carUpkeepDic[@"checkContents"];
+            NSDictionary *dic = ary[indexPath.row];
+            
+            if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
                 CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.positionL.text = dic[@"checkTerm"][@"checkCategory"][@"name"];
+                cell.checkContentL.text = dic[@"name"];
+                NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
                 UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
                 if (! label) {
-                    for (int i=0; i<4; ++i) {
-                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 36*i , 80, 22)];
-                        position.text = @"左前";
+                    for (int i=0; i < entities.count; ++i) {
+                        NSDictionary *dic1 = entities[i];
+                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                        position.text = STRING(dic1[@"dPosition"]);
                         position.tag = 100 + i;
                         position.textColor = [UIColor grayColor];
                         position.font = [UIFont systemFontOfSize:14];
                         
-                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18 - 80 - 20, 36*i , 80, 22)];
-                        result.text = @"262kpa";
-                        result.textAlignment = NSTextAlignmentRight;
-                        result.textColor = RGBCOLOR(63, 63, 63);
+                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 30*i , 80, 22)];
+                        result.text = STRING(dic1[@"remark"]);
+                        result.textColor = [UIColor grayColor];
                         result.font = [UIFont systemFontOfSize:14];
                         
-                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18, 36*i , 50, 22)];
-                        level.text = @"正常";
+                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18 - 22, 30*i , 50, 22)];
+                        level.text = STRING(dic1[@"result"]);
+                        level.minimumFontSize = 10;
                         level.textAlignment = NSTextAlignmentCenter;
                         level.textColor = [UIColor whiteColor];
                         level.backgroundColor = RGBCOLOR(0, 166, 59);
                         level.font = [UIFont systemFontOfSize:13];
                         level.layer.cornerRadius = 4;
                         level.clipsToBounds = YES;
-                        
+                        int levelInt = [dic1[@"level"] intValue];
+                        if (levelInt == 1) {
+                            level.backgroundColor = [UIColor redColor];
+                        }
+                        else if (levelInt == 2) {
+                            level.backgroundColor = [UIColor orangeColor];
+                        }
+                        else if (levelInt == 3) {
+                            level.backgroundColor = [UIColor greenColor];
+                        }
                         [cell.positionView addSubview:position];
                         [cell.positionView addSubview:result];
                         [cell.positionView addSubview:level];
@@ -296,9 +317,24 @@
             else {
                 CheckResultSingleCell *cell = (CheckResultSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultSingleCell"];
                 cell.levelL.layer.cornerRadius = 4;
+                cell.positionL.text = dic[@"checkTerm"][@"checkCategory"][@"name"];
+                cell.checkContentL.text = dic[@"name"];
+                cell.resultL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"remark"]);
+                int level = [[dic[@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
+                cell.levelL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"result"]);
+                if (level == 1) {
+                    cell.levelL.backgroundColor = [UIColor redColor];
+                }
+                else if (level == 2) {
+                    cell.levelL.backgroundColor = [UIColor orangeColor];
+                }
+                else if (level == 3) {
+                    cell.levelL.backgroundColor = [UIColor greenColor];
+                }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
             }
+            
             break;
         }
         case 3: {
@@ -442,30 +478,30 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:CarUpkeepInfo]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepInfo object:nil];
-        NSLog(@"CarListOrSearch: %@",responseObject);
+        NSLog(@"CarUpkeepInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             carUpkeepDic = responseObject[@"data"];
             
 //            checkResultArray
-            NSArray *contentAry = responseObject[@"data"][@"carUpkeepCheckContents"];
-            NSMutableArray *ary1 = [NSMutableArray array];
-            for (NSDictionary *dic in contentAry) {
-                NSString *contentIdStr = dic[@"checkContent"][@"id"];
-                NSString *dPositionStr = dic[@"checkContent"];
-                if (dPositionStr.length > 0) {  //说明有多个位置
-                    NSDictionary *d = @{contentIdStr:dic};
-                    [ary1 addObject:d];
-                }
-            }
-    
-            NSMutableArray *keys = [NSMutableArray array];
-            NSMutableArray *valus = [NSMutableArray array];
-            for (NSDictionary *dicc in ary1) {
-                [keys addObject:[[dicc allKeys] firstObject]];
-                [valus addObject:[[dicc allValues] firstObject]];
-            }
-            
-            NSMutableArray *ary2 = [NSMutableArray array];
+//            NSArray *contentAry = responseObject[@"data"][@"carUpkeepCheckContents"];
+//            NSMutableArray *ary1 = [NSMutableArray array];
+//            for (NSDictionary *dic in contentAry) {
+//                NSString *contentIdStr = dic[@"checkContent"][@"id"];
+//                NSString *dPositionStr = dic[@"checkContent"];
+//                if (dPositionStr.length > 0) {  //说明有多个位置
+//                    NSDictionary *d = @{contentIdStr:dic};
+//                    [ary1 addObject:d];
+//                }
+//            }
+//    
+//            NSMutableArray *keys = [NSMutableArray array];
+//            NSMutableArray *valus = [NSMutableArray array];
+//            for (NSDictionary *dicc in ary1) {
+//                [keys addObject:[[dicc allKeys] firstObject]];
+//                [valus addObject:[[dicc allValues] firstObject]];
+//            }
+//            
+//            NSMutableArray *ary2 = [NSMutableArray array];
             
             
             

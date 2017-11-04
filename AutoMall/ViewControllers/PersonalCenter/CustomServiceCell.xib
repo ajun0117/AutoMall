@@ -25,52 +25,52 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="300" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfj-fR-v2T">
-                        <rect key="frame" x="232" y="1" width="40" height="40"/>
+                        <rect key="frame" x="202" y="8.5" width="40" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="Gcb-Nz-nh6"/>
+                            <constraint firstAttribute="height" constant="25" id="Gcb-Nz-nh6"/>
                             <constraint firstAttribute="width" constant="40" id="mJG-ON-f1M"/>
                         </constraints>
-                        <color key="textColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="￥" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7A-Gh-gNr">
-                        <rect key="frame" x="216.5" y="12.5" width="15.5" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7A-Gh-gNr">
+                        <rect key="frame" x="185.5" y="12" width="16.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbf-A5-7HN">
-                        <rect key="frame" x="185.5" y="6" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="UdN-RX-J86"/>
-                            <constraint firstAttribute="height" constant="30" id="nLI-hF-YeO"/>
-                        </constraints>
-                        <inset key="imageEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
-                        <state key="normal" image="checkbox_no"/>
-                        <state key="selected" image="checkbox_yes"/>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/次" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKG-Qp-me9">
-                        <rect key="frame" x="272" y="12.5" width="40" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKG-Qp-me9">
+                        <rect key="frame" x="242" y="21" width="40" height="0.0"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="MYV-lW-yL7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbf-A5-7HN">
+                        <rect key="frame" x="282" y="6" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="UdN-RX-J86"/>
+                            <constraint firstAttribute="height" constant="30" id="nLI-hF-YeO"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                        <state key="normal" image="checkbox_no"/>
+                        <state key="selected" image="checkbox_yes"/>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="mKG-Qp-me9" secondAttribute="trailing" constant="8" id="1FZ-Nz-A0H"/>
                     <constraint firstItem="Yfj-fR-v2T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3fb-Xj-7RP"/>
                     <constraint firstItem="Yfj-fR-v2T" firstAttribute="leading" secondItem="c7A-Gh-gNr" secondAttribute="trailing" id="Eaj-Xe-2Ol"/>
                     <constraint firstItem="sbf-A5-7HN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GMz-DX-QNK"/>
                     <constraint firstItem="aQc-Fx-fCN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MzW-mq-4Tx"/>
+                    <constraint firstAttribute="trailing" secondItem="sbf-A5-7HN" secondAttribute="trailing" constant="8" id="bkB-44-T6B"/>
                     <constraint firstItem="aQc-Fx-fCN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="cqG-sv-xFp"/>
                     <constraint firstItem="mKG-Qp-me9" firstAttribute="leading" secondItem="Yfj-fR-v2T" secondAttribute="trailing" id="h5C-s5-ayv"/>
                     <constraint firstItem="mKG-Qp-me9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jeO-Ky-SyT"/>
-                    <constraint firstItem="c7A-Gh-gNr" firstAttribute="leading" secondItem="sbf-A5-7HN" secondAttribute="trailing" id="slW-xh-aSp"/>
                     <constraint firstItem="c7A-Gh-gNr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="upn-vU-c7D"/>
+                    <constraint firstItem="sbf-A5-7HN" firstAttribute="leading" secondItem="mKG-Qp-me9" secondAttribute="trailing" id="w7N-F9-yZs"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -79,11 +79,11 @@
                 <outlet property="radioBtn" destination="sbf-A5-7HN" id="yoA-SA-Bwt"/>
                 <outlet property="unitL" destination="mKG-Qp-me9" id="Vqp-cH-IsH"/>
             </connections>
-            <point key="canvasLocation" x="-39" y="-88"/>
+            <point key="canvasLocation" x="16" y="-93"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkbox_no" width="27" height="27"/>
-        <image name="checkbox_yes" width="27" height="27"/>
+        <image name="checkbox_no" width="90" height="90"/>
+        <image name="checkbox_yes" width="90" height="90"/>
     </resources>
 </document>

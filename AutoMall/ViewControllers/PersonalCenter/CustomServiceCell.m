@@ -13,6 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.moneyTF.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
+    self.moneyTF.layer.borderWidth = 1;
+    self.moneyTF.layer.cornerRadius = 4;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

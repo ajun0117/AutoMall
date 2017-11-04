@@ -18,17 +18,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="205.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="雨刮" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQh-Zo-rAt">
-                        <rect key="frame" x="8" y="8" width="60" height="19.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="排气管外观" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vQh-Zo-rAt">
+                        <rect key="frame" x="8" y="8" width="82" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="zaX-Qs-XwN"/>
+                            <constraint firstAttribute="width" constant="82" id="zaX-Qs-XwN"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="刮条老化" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4IM-QY-Rc4">
-                        <rect key="frame" x="76" y="9" width="61.5" height="18"/>
+                        <rect key="frame" x="98" y="9.5" width="61.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqZ-xn-Jxo">
-                        <rect key="frame" x="76" y="43" width="236" height="155"/>
+                        <rect key="frame" x="98" y="43.5" width="214" height="154.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -53,7 +53,7 @@
                     <constraint firstItem="4IM-QY-Rc4" firstAttribute="leading" secondItem="vQh-Zo-rAt" secondAttribute="trailing" constant="8" id="HIE-Fi-wmp"/>
                     <constraint firstItem="4IM-QY-Rc4" firstAttribute="centerY" secondItem="vQh-Zo-rAt" secondAttribute="centerY" id="LTE-b4-zHo"/>
                     <constraint firstAttribute="bottom" secondItem="jqZ-xn-Jxo" secondAttribute="bottom" constant="8" id="Pv9-Hh-5dR"/>
-                    <constraint firstItem="jqZ-xn-Jxo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="76" id="QMx-aW-X6f"/>
+                    <constraint firstItem="jqZ-xn-Jxo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="98" id="QMx-aW-X6f"/>
                     <constraint firstItem="vQh-Zo-rAt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="T0C-AE-Le7"/>
                     <constraint firstAttribute="trailing" secondItem="sVV-BI-hEO" secondAttribute="trailing" constant="8" id="znb-jr-dNa"/>
                 </constraints>

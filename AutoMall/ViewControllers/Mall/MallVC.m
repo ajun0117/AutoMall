@@ -22,7 +22,7 @@ static CGFloat const scrollViewHeight = 220;
 #define NAVBAR_COLORCHANGE_POINT (scrollViewHeight - NAV_HEIGHT)
 #define NAV_HEIGHT 64
 
-#define Head_ScrollView_Height      160
+#define Head_ScrollView_Height      170
 #define Head_PageControl_Width     80
 #define Head_PageControl_Height     30
 #define Head_button_Width           45

@@ -37,7 +37,7 @@
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
     //    searchBtn.contentMode = UIViewContentModeRight;
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+    [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [searchBtn setTitle:@"套餐" forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
@@ -156,27 +156,24 @@
 
 #pragma mark - tableVeiw delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [serviceArray count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [serviceArray count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 5;
-    }
-    return 1;
+    return 10;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 5;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomServiceCell *cell = (CustomServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"customServiceCell"];
@@ -184,12 +181,15 @@
     if (serviceArray.count == 0) {
         return cell;
     }
-    NSDictionary *dic = serviceArray[indexPath.section];
+    NSDictionary *dic = serviceArray[indexPath.row];
     cell.nameL.text = dic[@"name"];
 //    cell.nameL.text = @"机油更换";
     [self setTextFieldInputAccessoryViewWithCell:cell];
     cell.moneyTF.delegate = self;
-    cell.moneyTF.tag = indexPath.section + 100;
+    cell.moneyTF.tag = indexPath.row + 100;
+    if (dic[@"unit"]) {
+        cell.unitL.text = [NSString stringWithFormat:@"/%@",dic[@"unit"]];
+    }
     [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
     NSArray *keys = [selectDic allKeys];
     if ([keys containsObject:dic[@"id"]]) {
@@ -207,7 +207,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CustomServiceCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.radioBtn.selected = !cell.radioBtn.selected;
-    NSDictionary *dic = serviceArray[indexPath.section];
+    NSDictionary *dic = serviceArray[indexPath.row];
     if (cell.radioBtn.selected) {
         NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",cell.moneyTF.text,@"price", nil];
         [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key

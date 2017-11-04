@@ -455,13 +455,13 @@
 #pragma mark - 自定义pageControl
 -(void)makeCustomPageControl {
     NSInteger pageCount = _loopScroll ? _contents.count - 2 : _contents.count;
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(_scrollViewWidth - 50, _scrollViewHeight - 40, 35,25)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(_scrollViewWidth - 55, _scrollViewHeight - 40, 40,25)];
     bgView.backgroundColor = [UIColor clearColor];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35,25)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40,25)];
     view.backgroundColor = [UIColor blackColor];
     view.alpha = 0.5;
     view.layer.cornerRadius = 5;
-    pageL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 25)];
+    pageL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 25)];
     pageL.backgroundColor = [UIColor clearColor];
     pageL.textColor = [UIColor whiteColor];
     pageL.font = [UIFont systemFontOfSize:15];

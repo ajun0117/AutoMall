@@ -471,7 +471,7 @@
                 [cell.shopNameBtn setTitle:shopDic[@"name"] forState:UIControlStateNormal];
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopLevelIM.hidden= NO;
-                int rankLevel = [shopDic[@"rankLevel"] intValue];
+                int rankLevel = [shopDic[@"rankLevel"] intValue];
                 if (rankLevel == 1) {
                     cell.shopLevelIM.image = IMG(@"bronzeBadge");
                 }
@@ -661,7 +661,7 @@
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
 //                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 cell.shopLevelIM.hidden= NO;
-                int rankLevel = [shopDic[@"rankLevel"] intValue];
+                int rankLevel = [shopDic[@"rankLevel"] intValue];
                 if (rankLevel == 1) {
                     cell.shopLevelIM.image = IMG(@"bronzeBadge");
                 }

@@ -358,7 +358,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetComtermList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetComtermList, @"op", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(GetComtermList) delegate:nil params:nil info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.categoryId,@"categoryId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(GetComtermList) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

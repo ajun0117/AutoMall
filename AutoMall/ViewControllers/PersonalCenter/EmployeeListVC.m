@@ -33,7 +33,7 @@
     searchBtn.frame = CGRectMake(0, 0, 70, 44);
     //    searchBtn.contentMode = UIViewContentModeRight;
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+    [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [searchBtn setTitle:@"添加员工" forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toAddEmployee) forControlEvents:UIControlEventTouchUpInside];

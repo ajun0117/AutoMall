@@ -18,6 +18,7 @@
     MBProgressHUD *_networkConditionHUD;
     AJAdView *_adView;
     NSArray *_adArray;   //广告图数组
+    NSDictionary *contentResultDic;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -42,6 +43,8 @@
     
     _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
     [_adView reloadData];
+    
+    [self requestGetCarUpkeepCheckTerm];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -92,7 +95,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 5;
+        NSArray *ary = contentResultDic[@"carUpkeepCheckContentEntities"];
+        return ary.count + 2;
     }
     else if (section == 1) {
         return 1;
@@ -136,12 +140,28 @@
         }
         ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"resultCheckContentDetailCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSDictionary *dic = contentResultDic[@"carUpkeepCheckContentEntities"][indexPath.row-2];
+        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+            cell.checkContentL.text = STRING(dic[@"dPosition"]);
+            cell.resultL.text = STRING(dic[@"remark"]);
+            cell.levelL.text =  STRING(dic[@"result"]);
+            int levelInt = [dic[@"level"] intValue];
+            if (levelInt == 1) {
+                cell.levelL.backgroundColor = [UIColor redColor];
+            }
+            else if (levelInt == 2) {
+                cell.levelL.backgroundColor = [UIColor orangeColor];
+            }
+            else if (levelInt == 3) {
+                cell.levelL.backgroundColor = [UIColor greenColor];
+            }
+        }
         return cell;
     }
     else if (indexPath.section == 1){
         ResultDetailHazardCell *cell = (ResultDetailHazardCell *)[tableView dequeueReusableCellWithIdentifier:@"resultDetailHazardCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.hazardContentL.text = @"潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 潜在危害内容 ";
+        cell.hazardContentL.text = contentResultDic[@"risk"];
         cell.hazardContentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 24;
         return cell;
     }
@@ -153,6 +173,42 @@
     }
 }
 
+#pragma mark - 发送请求
+-(void)requestGetCarUpkeepCheckTerm { //检查单具体检查部位下检查结果详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepCheckTerm object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepCheckTerm, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTermId=%@&checkContentId=%@",UrlPrefix(CarUpkeepCheckTerm),@"1",@"1",@"3"];    //测试时固定传id=1的检查单
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:CarUpkeepCheckTerm]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepCheckTerm object:nil];
+        NSLog(@"CarUpkeepCategory: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            self.title = responseObject[@"data"][@"name"];
+            contentResultDic = [responseObject[@"data"][@"checkContentVos"] firstObject];
+            
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

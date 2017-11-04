@@ -61,7 +61,7 @@
     dateBtn.frame = CGRectMake(0, 0, 80, 44);
     //    searchBtn.contentMode = UIViewContentModeRight;
     dateBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [dateBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+    [dateBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
     dateBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     [dateBtn setTitle:@"2017-09-09" forState:UIControlStateNormal];
     [dateBtn addTarget:self action:@selector(toSelectDate) forControlEvents:UIControlEventTouchUpInside];

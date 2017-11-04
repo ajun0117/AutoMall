@@ -162,7 +162,7 @@
         cell.AlbumBtn.contentHorizontalAlignment= UIControlContentHorizontalAlignmentFill;
         cell.AlbumBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
         
-        [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"relativePath"])] forState:UIControlStateNormal placeholderImage:IMG(@"default")];
+        [cell.AlbumBtn sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"relativePath"])] forState:UIControlStateNormal placeholderImage:IMG(@"placeholderPictureSquare")];
         cell.AlbumBtn.tag = indexPath.item + 2000;
         
         [cell.AlbumBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

@@ -154,19 +154,23 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserRegister object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            _networkConditionHUD.labelText = @"恭喜！注册成功！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            for (UIViewController *vc in self.navigationController.viewControllers) {
-                if ([vc isKindOfClass:[LoginViewController class]]) {
-                    [self.navigationController popToViewController:vc animated:YES]; //返回登录页面
-                }
-            }
+            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+            
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
+        }
+    }
+}
+
+- (void)toPopVC:(NSString *)carId {
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[LoginViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES]; //返回登录页面
         }
     }
 }

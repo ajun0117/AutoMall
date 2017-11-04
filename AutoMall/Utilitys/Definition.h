@@ -187,7 +187,9 @@
 #define CarListOrSearch                         @"/api/car/search"                  //车辆列表及搜索
 #define CarUpkeepUpdate                       @"/api/carUpkeep/update"    //更新检查订单支付状态
 #define CarUpkeepSearch                       @"/api/carUpkeep/search"    //app车辆保养记录列表和app个人中心，不同状态下的检查单和保养记录列表
-#define CarUpkeepInfo                     @"/api/carUpkeep/info"      //获取检查单详情
+#define CarUpkeepInfo                           @"/api/carUpkeep/info"              //获取检查单详情
+#define CarUpkeepCategory                    @"/api/carUpkeep/category"      //检查单具体检查部位下检查结果详情
+#define CarUpkeepCheckTerm            @"/api/carUpkeep/checkTerm"     //检查单（具体检查内容下）检查结果详情
 
 //个人中心
 #define ListServiceContent                     @"/api/user/listServiceContent"     //获取服务内容

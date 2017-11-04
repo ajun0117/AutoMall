@@ -35,7 +35,7 @@
         searchBtn.frame = CGRectMake(0, 0, 44, 44);
         //    searchBtn.contentMode = UIViewContentModeRight;
         searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [searchBtn setTitleColor:RGBCOLOR(129, 129, 129) forState:UIControlStateNormal];
+        [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
         searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
         [searchBtn addTarget:self action:@selector(toAddDiscounts) forControlEvents:UIControlEventTouchUpInside];
@@ -110,14 +110,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
     NSDictionary *dic = discountArray[indexPath.row];
     cell.declareL.text = dic[@"item"];
-    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    if (dic[@"money"]) {
+        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    }
     return cell;
 }
 
