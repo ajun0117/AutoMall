@@ -151,13 +151,13 @@
             cell.levelL.layer.cornerRadius = 4;
             int levelInt = [dic[@"level"] intValue];
             if (levelInt == 1) {
-                cell.levelL.backgroundColor = [UIColor redColor];
+                cell.levelL.backgroundColor = RGBCOLOR(250, 69, 89);
             }
             else if (levelInt == 2) {
-                cell.levelL.backgroundColor = [UIColor orangeColor];
+                cell.levelL.backgroundColor = RGBCOLOR(249, 182, 48);
             }
             else if (levelInt == 3) {
-                cell.levelL.backgroundColor = [UIColor greenColor];
+                cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
             }
 //        }
         return cell;

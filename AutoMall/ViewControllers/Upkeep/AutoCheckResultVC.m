@@ -303,13 +303,13 @@
                     level.clipsToBounds = YES;
                     int levelInt = [dic1[@"level"] intValue];
                     if (levelInt == 1) {
-                        level.backgroundColor = [UIColor redColor];
+                        level.backgroundColor = RGBCOLOR(250, 69, 89);
                     }
                     else if (levelInt == 2) {
-                        level.backgroundColor = [UIColor orangeColor];
+                        level.backgroundColor = RGBCOLOR(249, 182, 48);
                     }
                     else if (levelInt == 3) {
-                        level.backgroundColor = [UIColor greenColor];
+                        level.backgroundColor = RGBCOLOR(71, 188, 92);
                     }
                     [cell.positionView addSubview:position];
                     [cell.positionView addSubview:result];
@@ -327,13 +327,13 @@
                 int level = [[dic[@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
                 cell.levelL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"result"]);
                 if (level == 1) {
-                    cell.levelL.backgroundColor = [UIColor redColor];
+                    cell.levelL.backgroundColor = RGBCOLOR(250, 69, 89);
                 }
                 else if (level == 2) {
-                    cell.levelL.backgroundColor = [UIColor orangeColor];
+                    cell.levelL.backgroundColor = RGBCOLOR(249, 182, 48);
                 }
                 else if (level == 3) {
-                    cell.levelL.backgroundColor = [UIColor greenColor];
+                    cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
                 }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;

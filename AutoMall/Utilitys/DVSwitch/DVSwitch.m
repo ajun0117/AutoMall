@@ -174,7 +174,7 @@
                 self.sliderView.tag = 5001;
                 break;
                 
-            case 1:
+            case 1: 
                 self.sliderView.backgroundColor = RGBCOLOR(249, 182, 48);
                 self.sliderView.tag = 5002;
                 break;

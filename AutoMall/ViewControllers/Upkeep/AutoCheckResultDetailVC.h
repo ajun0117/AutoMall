@@ -10,4 +10,6 @@
 
 @interface AutoCheckResultDetailVC : UIViewController
 
+@property (strong, nonatomic) NSString *checkContentId;
+
 @end

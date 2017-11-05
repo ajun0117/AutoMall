@@ -292,9 +292,11 @@
             case 0: {
                 switch (indexPath.row) {
                     case 0: {
-                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        cell.textLabel.text = self.carDic[@"plateNumber"];
+                        cell.accessoryType = UITableViewCellAccessoryNone;
+                        cell.declareL.text = @"车牌";
+                        cell.contentL.text = self.carDic[@"plateNumber"];
                         return cell;
                         break;
                     }
