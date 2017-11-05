@@ -53,6 +53,9 @@
         self.title = @"编辑技能";
         imgUrl = self.skillDic[@"image"];
         [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"default")];
+        if (self.imgView.image) {
+            self.imgL.hidden = YES;
+        }
         self.nameTF.text = self.skillDic[@"name"];
         self.contentTF.text = self.skillDic[@"remark"];
     }

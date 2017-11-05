@@ -113,7 +113,13 @@
     NSInteger ind = textField.tag - 100;
     NSDictionary *dic = serviceArray[ind];
     NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
-    [dicc setObject:textField.text forKey:@"price"];
+    if (textField.text.length > 0) {
+        [dicc setObject:textField.text forKey:@"price"];
+    }
+    else {
+        [dicc setObject:textField.placeholder forKey:@"price"];
+    }
+    
     NSLog(@"selectDicChange: %@",selectDic);
 }
 
@@ -186,6 +192,7 @@
 //    cell.nameL.text = @"机油更换";
     [self setTextFieldInputAccessoryViewWithCell:cell];
     cell.moneyTF.delegate = self;
+    cell.moneyTF.placeholder = [NSString stringWithFormat:@"%@",dic[@"price"]];
     cell.moneyTF.tag = indexPath.row + 100;
     if (dic[@"unit"]) {
         cell.unitL.text = [NSString stringWithFormat:@"/%@",dic[@"unit"]];
@@ -209,7 +216,12 @@
     cell.radioBtn.selected = !cell.radioBtn.selected;
     NSDictionary *dic = serviceArray[indexPath.row];
     if (cell.radioBtn.selected) {
-        NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",cell.moneyTF.text,@"price", nil];
+        NSMutableDictionary *dicc;
+        if (cell.moneyTF.text.length > 0) {
+           dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",cell.moneyTF.text,@"price", nil];
+        } else {
+            dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",cell.moneyTF.placeholder,@"price", nil];
+        }
         [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
     }
     else {
@@ -261,6 +273,14 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ListServiceContent object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [serviceArray addObjectsFromArray:responseObject [@"data"]];
+            
+            for (NSDictionary *dic in serviceArray) {
+                if ([dic[@"customized"] boolValue]) {   //已定制
+                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"price", nil];
+                    [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
+                }
+            }
+            
             [self.myTableView reloadData];
         }
         else {
@@ -276,6 +296,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -283,6 +304,10 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+- (void)toPopVC:(NSString *)carId {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

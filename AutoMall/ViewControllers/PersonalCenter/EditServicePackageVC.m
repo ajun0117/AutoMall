@@ -139,7 +139,12 @@
     NSIndexPath *ind = [self.myTableView indexPathForCell:cell];
     NSDictionary *dic = packageArray[ind.section];
     NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
-    [dicc setObject:textField.text forKey:@"price"];
+    if (textField.text.length > 0) {
+        [dicc setObject:textField.text forKey:@"price"];
+    }
+    else {
+        [dicc setObject:textField.placeholder forKey:@"price"];
+    }
     NSLog(@"selectDicChange: %@",selectDic);
 }
 
@@ -165,18 +170,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return 5;
+        return 10;
     }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
+    return 10;
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -280,6 +285,7 @@
         UpkeepPlanNormalHeadCell *cell = (UpkeepPlanNormalHeadCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanNormalHeadCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.nameL.text =  dic[@"name"];
+        cell.nameL.font = [UIFont boldSystemFontOfSize:15];
         [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
         NSArray *keys = [selectDic allKeys];
         if ([keys containsObject:dic[@"id"]]) {
@@ -299,6 +305,7 @@
         [cell.contentView addSubview:noticeL];
         UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
         priceTF.font = [UIFont systemFontOfSize:15];
+        priceTF.placeholder = [NSString stringWithFormat:@"%@",dic[@"price"]];
         priceTF.keyboardType = UIKeyboardTypeNumberPad;
         NSArray *keys = [selectDic allKeys];
         if ([keys containsObject:dic[@"id"]]) {
@@ -333,7 +340,15 @@
             NSArray *arr = dic[@"serviceContents"];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[arr count] + 1 inSection:indexPath.section]];
             UITextField *priceTF = (UITextField *)[cell.contentView viewWithTag:10];
-            NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",priceTF.text,@"price", nil];
+//            NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",priceTF.text,@"price", nil];
+//            [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
+            
+            NSMutableDictionary *dicc;
+            if (priceTF.text.length > 0) {
+                dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",priceTF.text,@"price", nil];
+            } else {
+                dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",priceTF.placeholder,@"price", nil];
+            }
             [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
         }
         else {
@@ -381,6 +396,14 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ListServicePackage object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [packageArray addObjectsFromArray:responseObject [@"data"]];
+            
+            for (NSDictionary *dic in packageArray) {
+                if ([dic[@"customized"] boolValue]) {   //已定制
+                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"price", nil];
+                    [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
+                }
+            }
+            
             [self.myTableView reloadData];
         }
         else {
@@ -396,6 +419,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -403,6 +427,10 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+- (void)toPopVC:(NSString *)carId {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

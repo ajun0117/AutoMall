@@ -30,7 +30,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"水箱水";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -100,8 +99,12 @@
     }
     else if (section == 1) {
         return 1;
+    }else if (section == 2) {
+        NSArray *ary = contentResultDic[@"serviceContents"];
+        return ary.count;
     }
-    return 4;
+    
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,7 +132,7 @@
         if (indexPath.row == 0) {
             UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.text = @"检查内容：冰点";
+            cell.textLabel.text = [NSString stringWithFormat:@"检查内容：%@",contentResultDic[@"name"]];
             return cell;
         }
         else if (indexPath.row == 1) {
@@ -141,10 +144,11 @@
         ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"resultCheckContentDetailCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dic = contentResultDic[@"carUpkeepCheckContentEntities"][indexPath.row-2];
-        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+//        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
             cell.checkContentL.text = STRING(dic[@"dPosition"]);
             cell.resultL.text = STRING(dic[@"remark"]);
             cell.levelL.text =  STRING(dic[@"result"]);
+            cell.levelL.layer.cornerRadius = 4;
             int levelInt = [dic[@"level"] intValue];
             if (levelInt == 1) {
                 cell.levelL.backgroundColor = [UIColor redColor];
@@ -155,7 +159,7 @@
             else if (levelInt == 3) {
                 cell.levelL.backgroundColor = [UIColor greenColor];
             }
-        }
+//        }
         return cell;
     }
     else if (indexPath.section == 1){
@@ -168,7 +172,8 @@
     else{
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = @"建议服务方案A";
+        NSArray *ary = contentResultDic[@"serviceContents"];
+        cell.textLabel.text = ary[indexPath.row][@"name"];
         return cell;
     }
 }

@@ -39,6 +39,9 @@
     if (self.infoDic) {
         self.title = @"门店信息";
         [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
+        if (self.shopImg.image) {
+            self.shopImgL.hidden = YES;
+        }
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
@@ -47,13 +50,31 @@
         self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
         
         [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])]];
+        if (self.licenseImg.image) {
+            self.licenseImg.hidden = YES;
+        }
         [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])]];
+        if (self.cardAImg.image) {
+            self.cardAImg.hidden = YES;
+        }
         [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])]];
+        if (self.cardBImg.image) {
+            self.cardBImg.hidden = YES;
+        }
 
         self.wechatNameTF.text = STRING(self.infoDic[@"wechatName"]);
         [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])]];
+        if (self.gongzhongImg.image) {
+            self.gongzhongImg.hidden = YES;
+        }
         [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])]];
+        if (self.aliPayCollectionImg.image) {
+            self.aliPayCollectionImg.hidden = YES;
+        }
         [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
+        if (self.wechatCollectionImg.image) {
+            self.wechatCollectionImg.hidden = YES;
+        }
     }
     else {
         self.title = @"申请认证";

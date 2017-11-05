@@ -172,15 +172,13 @@
 
 #pragma mark - 提交生成检查单
 - (IBAction)creatChecklistAction:(id)sender {
-//    if (lichengDic) {
-//        [self requestCarUpkeepAdd];
-//    } else {
-//        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//    }
-    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
-    [self.navigationController pushViewController:resultVC animated:YES];
+    if (lichengDic) {
+        [self requestCarUpkeepAdd];
+    } else {
+        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -758,8 +756,9 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CheckcategoryList object:nil];
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CheckcategoryList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&pageSize=%d",UrlPrefix(CheckcategoryList),self.checktypeID,20];
+    NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&storeId=%@&pageSize=%d",UrlPrefix(CheckcategoryList),self.checktypeID,storeId,20];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -767,8 +766,9 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktermList object:nil];
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktermList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&checkCategoryId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),self.checktypeID,idStr,0,50];
+    NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&checkCategoryId=%@&storeId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),self.checktypeID,idStr,storeId,0,50];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -822,14 +822,12 @@
         }
         
     }
-    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
-    
+//    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
     NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":lichengDic[@"mileage"],@"fuelAmount":lichengDic[@"fuelAmount"]};
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
-//    NSError *err = nil;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pram options:NSJSONWritingPrettyPrinted error:&err];
-//    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"jsonStr: %@",jsonStr);
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSDictionary *storeDic = @{@"id":storeId};
+    NSLog(@"storeDic: %@",storeDic);
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
@@ -845,7 +843,6 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
     if ([notification.name isEqualToString:CheckcategoryList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CheckcategoryList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
@@ -954,6 +951,29 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+    
+    if ([notification.name isEqualToString:CarUpkeepAdd]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepAdd object:nil];
+        NSLog(@"CarUpkeepAdd: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+            
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+}
+
+- (void)toPushVC:(NSString *)carId {
+    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+    resultVC.carUpkeepId = carId;
+    [self.navigationController pushViewController:resultVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

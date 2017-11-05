@@ -111,11 +111,11 @@ static CGFloat const scrollViewHeight = 220;
         commoditymulArray = [NSMutableArray array];
     }
 
-    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
-    CartItem *item = [ary firstObject];
-    cartMulArray = [[item.cartMulAry objectFromJSONString] mutableCopy];
-
-    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
+//    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
+//    CartItem *item = [ary firstObject];
+//    cartMulArray = [[item.cartMulAry objectFromJSONString] mutableCopy];
+//    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
+    
     if (! cartMulArray) {
         cartMulArray = [NSMutableArray array];
     }
@@ -540,6 +540,7 @@ static CGFloat const scrollViewHeight = 220;
                  } else {
                      cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                      cell.costPriceStrikeL.text = @"";
+                     cell.zhekouL.hidden = YES;
                  }
             } else {
                 if ([dic[@"discount"] intValue] > 0) {
@@ -548,6 +549,7 @@ static CGFloat const scrollViewHeight = 220;
                 } else {
                     cell.moneyL.text = @"￥--";
                     cell.costPriceStrikeL.text = @"";
+                    cell.zhekouL.hidden = YES;
                 }
             }
             return cell;

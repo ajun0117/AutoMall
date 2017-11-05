@@ -21,6 +21,7 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSDictionary *selectedCarDic;    //选择的保养车辆Dic
+    NSString *mobileUserType;     //登录用户类别 0：手机普通用户 1：门店老板 2: 门店员工
 }
 //@property (strong, nonatomic) IBOutlet UIButton *carOwnerBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *hairdressingBtn;
@@ -63,6 +64,8 @@
     [self.myCollectionView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     
     [self requestGetChecktypeList];
+    
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -80,6 +83,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    if (! mobileUserType) {   //未登录状态监听登录事件
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
+    }
 }
 
 #pragma mark - 下拉刷新
@@ -90,7 +97,7 @@
 
 #pragma mark - 选择车辆
 -(void)toCarOwner:(UIButton *)btn {
-    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if (mobileUserType.length > 0) {    //已登录用户
         //注册选择车辆通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedCar:) name:@"DidSelectedCar" object:nil];
@@ -160,7 +167,7 @@
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if (mobileUserType.length > 0) {    //已登录用户
         NSDictionary *dic = [typeAry objectAtIndex:indexPath.item];
         BOOL requireAuth = [dic[@"requireAuth"] boolValue];
@@ -186,11 +193,17 @@
         }
         else {
             if (selectedCarDic) {
-                AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-                checkVC.checktypeID = dic[@"id"];
-                checkVC.carDic = selectedCarDic;
-                checkVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:checkVC animated:YES];
+                if ([dic[@"id"] intValue] == 10) {
+                    _networkConditionHUD.labelText = @"暂未开放！";
+                    [_networkConditionHUD show:YES];
+                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                } else {
+                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                    checkVC.checktypeID = dic[@"id"];
+                    checkVC.carDic = selectedCarDic;
+                    checkVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:checkVC animated:YES];
+                }
             } else {
                 _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
                 [_networkConditionHUD show:YES];
@@ -217,6 +230,22 @@
     return CGSizeMake((SCREEN_WIDTH-20) / 3 - 4, ((SCREEN_WIDTH-20) / 3 - 4)*349/221);
 }
 
+-(void)LoginSuccess {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginSuccess" object:nil];
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+        [self requestPostStoreGetInfo];     //请求门店详情数据
+    }
+    else if ([mobileUserType isEqualToString:@"2"]) {
+        [self requestPostUserGetStoreInfo];     //员工请求门店详情数据
+    }
+//    else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
+//        [self requestGetApprovalStatus];     //请求门店审批状态
+//    }
+    
+    [self requestPostUserGetInfo];      //刷新用户信息
+}
+
 #pragma mark - 发送请求
 -(void)requestGetChecktypeList { //获取分类列表
     [_hud show:YES];
@@ -226,6 +255,30 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktypeList, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?pageSize=20",UrlPrefix(ChecktypeList)];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestPostStoreGetInfo { //获取门店详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreGetInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreGetInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreGetInfo) delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestPostUserGetStoreInfo { //员工获取门店详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserGetStoreInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserGetStoreInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserGetStoreInfo) delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -249,6 +302,53 @@
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"GetUserInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *userInfoDic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",userInfoDic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmName:[NSString stringWithFormat:@"%@",STRING(userInfoDic[@"nickname"])]];
+            [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(userInfoDic[@"image"])];
+            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",userInfoDic[@"mobileUserType"]]];
+
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:StoreGetInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreGetInfo object:nil];
+        NSLog(@"StoreGetInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *shopDic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UserGetStoreInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserGetStoreInfo object:nil];
+        NSLog(@"UserGetStoreInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *shopDic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

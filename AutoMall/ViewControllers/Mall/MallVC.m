@@ -22,7 +22,7 @@ static CGFloat const scrollViewHeight = 220;
 #define NAVBAR_COLORCHANGE_POINT (scrollViewHeight - NAV_HEIGHT)
 #define NAV_HEIGHT 64
 
-#define Head_ScrollView_Height      170
+#define Head_ScrollView_Height      175
 #define Head_PageControl_Width     80
 #define Head_PageControl_Height     30
 #define Head_button_Width           45
@@ -408,10 +408,10 @@ static CGFloat const scrollViewHeight = 220;
                     button.frame = CGRectMake(15 + n * (40 + margin) + a * SCREEN_WIDTH , 10 + m * (60 + rowMargin), Head_button_Width, Head_button_Height);
                     button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, Head_button_Height - Head_button_Width, 0);
                     button.tag = p + 1000;
-                    [button sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] forState:UIControlStateNormal placeholderImage:IMG(@"defaultCircle")];
+                    [button sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] forState:UIControlStateNormal placeholderImage:IMG(@"placeholderPictureSquare")];
 //                    [button setImage:IMG(@"add_carInfo") forState:UIControlStateNormal];
                     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                    UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-5, 40, 60, 20)];
+                    UILabel *subtitleL = [[UILabel alloc] initWithFrame:CGRectMake(-5, 44, 60, 20)];
                     subtitleL.textAlignment = NSTextAlignmentCenter;
                     subtitleL.font = [UIFont systemFontOfSize:13];
                     subtitleL.text = dic[@"name"];

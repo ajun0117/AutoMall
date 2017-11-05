@@ -10,4 +10,8 @@
 
 @interface ServicePackageVC : UIViewController
 
+@property (strong, nonatomic) NSDictionary *selectedDic;
+//更新用户资料
+@property (copy, nonatomic) void((^SelecteServicePackage)(NSMutableDictionary *packageDic));
+
 @end

@@ -239,10 +239,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_yes" translatesAutoresizingMaskIntoConstraints="NO" id="7T5-en-u41">
-                            <rect key="frame" x="341" y="59" width="18" height="18"/>
+                            <rect key="frame" x="335" y="56" width="24" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="18" id="94t-WI-29U"/>
-                                <constraint firstAttribute="height" constant="18" id="Dfm-Ew-0z6"/>
+                                <constraint firstAttribute="width" constant="24" id="94t-WI-29U"/>
+                                <constraint firstAttribute="height" constant="24" id="Dfm-Ew-0z6"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alipay" translatesAutoresizingMaskIntoConstraints="NO" id="4JZ-yg-nyw">
@@ -265,10 +265,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_no" translatesAutoresizingMaskIntoConstraints="NO" id="kxG-mm-eQ9">
-                            <rect key="frame" x="341" y="111" width="18" height="18"/>
+                            <rect key="frame" x="335" y="108" width="24" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="18" id="EMR-0W-4bv"/>
-                                <constraint firstAttribute="width" constant="18" id="aAc-qE-uHX"/>
+                                <constraint firstAttribute="height" constant="24" id="EMR-0W-4bv"/>
+                                <constraint firstAttribute="width" constant="24" id="aAc-qE-uHX"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-ad-bts">
@@ -291,10 +291,10 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_no" translatesAutoresizingMaskIntoConstraints="NO" id="5NA-nd-7Fn">
-                            <rect key="frame" x="341" y="163" width="18" height="18"/>
+                            <rect key="frame" x="335" y="160" width="24" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="18" id="85Q-ay-zhJ"/>
-                                <constraint firstAttribute="height" constant="18" id="Seh-EI-W9U"/>
+                                <constraint firstAttribute="width" constant="24" id="85Q-ay-zhJ"/>
+                                <constraint firstAttribute="height" constant="24" id="Seh-EI-W9U"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1W-p7-7wZ">
@@ -477,8 +477,8 @@
     </objects>
     <resources>
         <image name="alipay" width="512" height="512"/>
-        <image name="checkbox_no" width="27" height="27"/>
-        <image name="checkbox_yes" width="27" height="27"/>
+        <image name="checkbox_no" width="90" height="90"/>
+        <image name="checkbox_yes" width="90" height="90"/>
         <image name="jifenpay" width="512" height="512"/>
         <image name="success" width="512" height="512"/>
         <image name="wxPay" width="512" height="512"/>

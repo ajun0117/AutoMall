@@ -125,6 +125,7 @@
 
 - (IBAction)upkeepPlanAction:(id)sender {
     UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+    planVC.carDic = carUpkeepDic[@"car"];
     [self.navigationController pushViewController:planVC animated:YES];
 }
 
@@ -183,7 +184,7 @@
                 NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
                 return 43 + 30*entities.count;
             }
-            return 44;
+            return 50;
             break;
         }
         case 3: {
@@ -270,54 +271,57 @@
             if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
                 CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.positionL.text = dic[@"checkTerm"][@"checkCategory"][@"name"];
+                cell.positionL.text = dic[@"checkTerm"][@"name"];
                 cell.checkContentL.text = dic[@"name"];
                 NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
-                UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
-                if (! label) {
-                    for (int i=0; i < entities.count; ++i) {
-                        NSDictionary *dic1 = entities[i];
-                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
-                        position.text = STRING(dic1[@"dPosition"]);
-                        position.tag = 100 + i;
-                        position.textColor = [UIColor grayColor];
-                        position.font = [UIFont systemFontOfSize:14];
-                        
-                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 30*i , 80, 22)];
-                        result.text = STRING(dic1[@"remark"]);
-                        result.textColor = [UIColor grayColor];
-                        result.font = [UIFont systemFontOfSize:14];
-                        
-                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18 - 22, 30*i , 50, 22)];
-                        level.text = STRING(dic1[@"result"]);
-                        level.minimumFontSize = 10;
-                        level.textAlignment = NSTextAlignmentCenter;
-                        level.textColor = [UIColor whiteColor];
-                        level.backgroundColor = RGBCOLOR(0, 166, 59);
-                        level.font = [UIFont systemFontOfSize:13];
-                        level.layer.cornerRadius = 4;
-                        level.clipsToBounds = YES;
-                        int levelInt = [dic1[@"level"] intValue];
-                        if (levelInt == 1) {
-                            level.backgroundColor = [UIColor redColor];
-                        }
-                        else if (levelInt == 2) {
-                            level.backgroundColor = [UIColor orangeColor];
-                        }
-                        else if (levelInt == 3) {
-                            level.backgroundColor = [UIColor greenColor];
-                        }
-                        [cell.positionView addSubview:position];
-                        [cell.positionView addSubview:result];
-                        [cell.positionView addSubview:level];
-                    }
+                
+                for (UIView *subViews in cell.positionView.subviews) {
+                    [subViews removeFromSuperview];
                 }
+                
+                for (int i=0; i < entities.count; ++i) {
+                    NSDictionary *dic1 = entities[i];
+                    UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                    position.text = STRING(dic1[@"dPosition"]);
+                    position.tag = 100 + i;
+                    position.textColor = [UIColor grayColor];
+                    position.font = [UIFont systemFontOfSize:14];
+                    
+                    UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 30*i , 80, 22)];
+                    result.text = STRING(dic1[@"remark"]);
+                    result.textColor = [UIColor grayColor];
+                    result.font = [UIFont systemFontOfSize:14];
+                    
+                    UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 55 - 18 - 22, 30*i , 55, 22)];
+                    level.text = STRING(dic1[@"result"]);
+                    level.minimumFontSize = 8;
+                    level.textAlignment = NSTextAlignmentCenter;
+                    level.textColor = [UIColor whiteColor];
+                    level.backgroundColor = RGBCOLOR(0, 166, 59);
+                    level.font = [UIFont systemFontOfSize:13];
+                    level.layer.cornerRadius = 4;
+                    level.clipsToBounds = YES;
+                    int levelInt = [dic1[@"level"] intValue];
+                    if (levelInt == 1) {
+                        level.backgroundColor = [UIColor redColor];
+                    }
+                    else if (levelInt == 2) {
+                        level.backgroundColor = [UIColor orangeColor];
+                    }
+                    else if (levelInt == 3) {
+                        level.backgroundColor = [UIColor greenColor];
+                    }
+                    [cell.positionView addSubview:position];
+                    [cell.positionView addSubview:result];
+                    [cell.positionView addSubview:level];
+                }
+
                 return cell;
             }
             else {
                 CheckResultSingleCell *cell = (CheckResultSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultSingleCell"];
                 cell.levelL.layer.cornerRadius = 4;
-                cell.positionL.text = dic[@"checkTerm"][@"checkCategory"][@"name"];
+                cell.positionL.text = dic[@"checkTerm"][@"name"];
                 cell.checkContentL.text = dic[@"name"];
                 cell.resultL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"remark"]);
                 int level = [[dic[@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
@@ -481,30 +485,7 @@
         NSLog(@"CarUpkeepInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             carUpkeepDic = responseObject[@"data"];
-            
-//            checkResultArray
-//            NSArray *contentAry = responseObject[@"data"][@"carUpkeepCheckContents"];
-//            NSMutableArray *ary1 = [NSMutableArray array];
-//            for (NSDictionary *dic in contentAry) {
-//                NSString *contentIdStr = dic[@"checkContent"][@"id"];
-//                NSString *dPositionStr = dic[@"checkContent"];
-//                if (dPositionStr.length > 0) {  //说明有多个位置
-//                    NSDictionary *d = @{contentIdStr:dic};
-//                    [ary1 addObject:d];
-//                }
-//            }
-//    
-//            NSMutableArray *keys = [NSMutableArray array];
-//            NSMutableArray *valus = [NSMutableArray array];
-//            for (NSDictionary *dicc in ary1) {
-//                [keys addObject:[[dicc allKeys] firstObject]];
-//                [valus addObject:[[dicc allValues] firstObject]];
-//            }
-//            
-//            NSMutableArray *ary2 = [NSMutableArray array];
-            
-            
-            
+    
             [self.myTableView reloadData];
         }
         else {

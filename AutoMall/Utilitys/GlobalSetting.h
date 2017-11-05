@@ -227,6 +227,9 @@
 -(void)setmHead:(id)mHead;
 -(id)mHead;
 
+-(void)setStoreId:(id)sId;
+-(id)storeId;
+
 -(void)setCartMulArray:(NSMutableArray *)mulArray;
 -(id)cartMulArray;
 

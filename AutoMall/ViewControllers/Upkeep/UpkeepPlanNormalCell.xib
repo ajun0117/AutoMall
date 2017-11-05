@@ -47,7 +47,7 @@
                 <outlet property="contentL" destination="PRY-Io-3A4" id="TcL-se-UMf"/>
                 <outlet property="declareL" destination="jZD-0v-VtY" id="Wrw-Xr-Urv"/>
             </connections>
-            <point key="canvasLocation" x="-149" y="2"/>
+            <point key="canvasLocation" x="-467" y="-39"/>
         </tableViewCell>
     </objects>
 </document>

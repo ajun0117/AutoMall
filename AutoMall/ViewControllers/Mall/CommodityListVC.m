@@ -286,6 +286,7 @@
             } else {
                 cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 cell.costPriceStrikeL.text = @"";
+                cell.zhekouL.hidden = YES;
             }
 
             cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
@@ -297,6 +298,7 @@
             } else {
                 cell.moneyL.text = @"￥--";
                 cell.costPriceStrikeL.text = @"";
+                cell.zhekouL.hidden = YES;
             }
             cell.yunfeiL.text = @"配送费--元";
         }

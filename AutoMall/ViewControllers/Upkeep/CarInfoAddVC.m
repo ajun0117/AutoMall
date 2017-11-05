@@ -65,7 +65,11 @@
         self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
         
         carImgUrl = self.carDic[@"image"];
+        
         [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"default")];
+        if (carImgUrl) {
+            self.carImgL.hidden = YES;
+        }
         self.mileageTF.text = NSStringWithNumber(self.carDic[@"mileage"]);
         self.fuelAmountTF.text = NSStringWithNumber(self.carDic[@"fuelAmount"]);
         self.ownerTF.text = NSStringWithNumber(self.carDic[@"owner"]);

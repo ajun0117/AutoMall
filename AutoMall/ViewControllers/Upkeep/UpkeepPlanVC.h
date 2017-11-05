@@ -10,4 +10,6 @@
 
 @interface UpkeepPlanVC : UIViewController
 
+@property (strong, nonatomic) NSDictionary *carDic;
+
 @end

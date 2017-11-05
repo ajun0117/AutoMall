@@ -19,40 +19,40 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store_name" translatesAutoresizingMaskIntoConstraints="NO" id="4pK-wf-j1V">
-                        <rect key="frame" x="8" y="12" width="17" height="17"/>
+                        <rect key="frame" x="16" y="12" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="6AX-L9-owm"/>
                             <constraint firstAttribute="width" constant="17" id="hq5-t7-2xh"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="五菱汽车维修服务中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M4-fa-KUG">
-                        <rect key="frame" x="30" y="11.5" width="153" height="18"/>
+                        <rect key="frame" x="38" y="11.5" width="153" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="storeAddress" translatesAutoresizingMaskIntoConstraints="NO" id="n7W-zN-CyZ">
-                        <rect key="frame" x="191" y="12" width="17" height="17"/>
+                        <rect key="frame" x="183" y="12" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="6l4-QD-C97"/>
                             <constraint firstAttribute="width" constant="17" id="R8U-UF-Zx1"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="020-3400000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mU8-R2-ISD">
-                        <rect key="frame" x="213" y="12" width="99" height="18"/>
+                        <rect key="frame" x="205" y="12" width="99" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store_phone" translatesAutoresizingMaskIntoConstraints="NO" id="ocg-82-Hlu">
-                        <rect key="frame" x="8" y="40.5" width="17" height="17"/>
+                        <rect key="frame" x="16" y="40.5" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="Zny-ZP-aMj"/>
                             <constraint firstAttribute="height" constant="17" id="bDb-7o-10r"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="五菱汽车维修服务中心地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEC-EH-DDr">
-                        <rect key="frame" x="30" y="41.5" width="159.5" height="16"/>
+                        <rect key="frame" x="38" y="41.5" width="159.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -62,15 +62,15 @@
                     <constraint firstAttribute="bottom" secondItem="ocg-82-Hlu" secondAttribute="bottom" constant="12" id="5e2-17-wft"/>
                     <constraint firstItem="lEC-EH-DDr" firstAttribute="leading" secondItem="ocg-82-Hlu" secondAttribute="trailing" constant="5" id="Lk1-YT-8e8"/>
                     <constraint firstItem="mU8-R2-ISD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="PYm-19-Gbx"/>
-                    <constraint firstItem="ocg-82-Hlu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="QyB-aU-uGH"/>
-                    <constraint firstAttribute="trailing" secondItem="mU8-R2-ISD" secondAttribute="trailing" constant="8" id="WKw-LX-k1e"/>
+                    <constraint firstItem="ocg-82-Hlu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QyB-aU-uGH"/>
+                    <constraint firstAttribute="trailing" secondItem="mU8-R2-ISD" secondAttribute="trailing" constant="16" id="WKw-LX-k1e"/>
                     <constraint firstItem="2M4-fa-KUG" firstAttribute="centerY" secondItem="4pK-wf-j1V" secondAttribute="centerY" id="gtC-mP-4Aa"/>
                     <constraint firstItem="mU8-R2-ISD" firstAttribute="leading" secondItem="n7W-zN-CyZ" secondAttribute="trailing" constant="5" id="mQI-RH-zM0"/>
                     <constraint firstItem="mU8-R2-ISD" firstAttribute="centerY" secondItem="n7W-zN-CyZ" secondAttribute="centerY" id="pHt-DY-Kcj"/>
                     <constraint firstItem="4pK-wf-j1V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="r93-LG-yGh"/>
                     <constraint firstItem="2M4-fa-KUG" firstAttribute="leading" secondItem="4pK-wf-j1V" secondAttribute="trailing" constant="5" id="uop-MB-h46"/>
                     <constraint firstItem="lEC-EH-DDr" firstAttribute="centerY" secondItem="ocg-82-Hlu" secondAttribute="centerY" id="wbZ-7I-B7c"/>
-                    <constraint firstItem="4pK-wf-j1V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zeB-yJ-J46"/>
+                    <constraint firstItem="4pK-wf-j1V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zeB-yJ-J46"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

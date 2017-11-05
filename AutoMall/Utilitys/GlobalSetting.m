@@ -579,6 +579,18 @@ static GlobalSetting *globalSetting;
     return [userDefaults valueForKey:@"mHead"];
 }
 
+-(void)setStoreId:(id)sId {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:sId forKey:@"storeId"];
+    [userDefaults synchronize];
+}
+
+-(id)storeId {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:@"storeId"];
+}
+
+
 //存储购物车的可变数组
 -(void)setCartMulArray:(NSMutableArray *)mulArray {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

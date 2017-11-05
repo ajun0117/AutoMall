@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpkeepPlanVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckDisountsVC">
             <connections>
-                <outlet property="myTableView" destination="KZ0-4I-1KH" id="bzR-fp-2nr"/>
+                <outlet property="myTableView" destination="B3R-PW-lts" id="9g7-RV-LbE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,39 +20,39 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KZ0-4I-1KH">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="B3R-PW-lts">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <color key="separatorColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="Auo-VX-XTa"/>
-                        <outlet property="delegate" destination="-1" id="SSZ-DP-sPe"/>
+                        <outlet property="dataSource" destination="-1" id="A08-CF-45S"/>
+                        <outlet property="delegate" destination="-1" id="fyC-wl-IpC"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjy-4X-reG">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXI-XH-GrB">
                     <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="49" id="scM-Ns-UvE"/>
+                        <constraint firstAttribute="height" constant="49" id="vLf-Lr-pui"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="确认"/>
                     <connections>
-                        <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="ZTo-US-p8X"/>
+                        <action selector="affirmAction:" destination="-1" eventType="touchUpInside" id="2lh-GC-YfN"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Sjy-4X-reG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EdI-kw-ntM"/>
-                <constraint firstItem="KZ0-4I-1KH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Lv8-SS-bTS"/>
-                <constraint firstItem="KZ0-4I-1KH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ope-wH-I2w"/>
-                <constraint firstAttribute="trailing" secondItem="Sjy-4X-reG" secondAttribute="trailing" id="R3K-2f-v62"/>
-                <constraint firstAttribute="trailing" secondItem="KZ0-4I-1KH" secondAttribute="trailing" id="RYz-2I-NFC"/>
-                <constraint firstItem="Sjy-4X-reG" firstAttribute="top" secondItem="KZ0-4I-1KH" secondAttribute="bottom" id="VTp-Mf-68N"/>
-                <constraint firstAttribute="bottom" secondItem="Sjy-4X-reG" secondAttribute="bottom" id="n2l-za-5Rv"/>
+                <constraint firstAttribute="trailing" secondItem="UXI-XH-GrB" secondAttribute="trailing" id="1nA-YW-w6N"/>
+                <constraint firstItem="B3R-PW-lts" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Cva-Sj-zQF"/>
+                <constraint firstItem="UXI-XH-GrB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GSK-dd-mNX"/>
+                <constraint firstItem="UXI-XH-GrB" firstAttribute="top" secondItem="B3R-PW-lts" secondAttribute="bottom" id="RFn-pN-Ak6"/>
+                <constraint firstAttribute="trailing" secondItem="B3R-PW-lts" secondAttribute="trailing" id="bug-6Z-GU4"/>
+                <constraint firstAttribute="bottom" secondItem="UXI-XH-GrB" secondAttribute="bottom" id="u5J-Qn-WIE"/>
+                <constraint firstItem="B3R-PW-lts" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yYc-ji-p4b"/>
             </constraints>
-            <point key="canvasLocation" x="-295.5" y="60.5"/>
+            <point key="canvasLocation" x="-114" y="42"/>
         </view>
     </objects>
 </document>

@@ -403,6 +403,12 @@
 		F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73CB9BC1F893B2600936C7A /* AutoCheckGroupCell.xib */; };
 		F73CB9C21F893C9300936C7A /* AutoCheckGroupTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CB9C01F893C9300936C7A /* AutoCheckGroupTitleCell.m */; };
 		F73CB9C31F893C9300936C7A /* AutoCheckGroupTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73CB9C11F893C9300936C7A /* AutoCheckGroupTitleCell.xib */; };
+		F7650B5A1FAF344900C0FCD2 /* ServiceContentDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7650B581FAF344900C0FCD2 /* ServiceContentDetailVC.m */; };
+		F7650B5B1FAF344900C0FCD2 /* ServiceContentDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7650B591FAF344900C0FCD2 /* ServiceContentDetailVC.xib */; };
+		F7650B601FAF732300C0FCD2 /* AutoCheckDisountsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7650B5E1FAF732300C0FCD2 /* AutoCheckDisountsVC.m */; };
+		F7650B611FAF732300C0FCD2 /* AutoCheckDisountsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7650B5F1FAF732300C0FCD2 /* AutoCheckDisountsVC.xib */; };
+		F7650B651FAF757200C0FCD2 /* AutoCheckDiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7650B631FAF757200C0FCD2 /* AutoCheckDiscountCell.m */; };
+		F7650B661FAF757200C0FCD2 /* AutoCheckDiscountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7650B641FAF757200C0FCD2 /* AutoCheckDiscountCell.xib */; };
 		F76E78671FAC98720029505F /* CartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F76E78661FAC98720029505F /* CartItem.m */; };
 		F76E786A1FAC98820029505F /* CartTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F76E78691FAC98820029505F /* CartTool.m */; };
 		F789EF0B1F7D571E003A127C /* EmployeeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF091F7D571E003A127C /* EmployeeDetailCell.m */; };
@@ -1163,6 +1169,15 @@
 		F73CB9BF1F893C9300936C7A /* AutoCheckGroupTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckGroupTitleCell.h; sourceTree = "<group>"; };
 		F73CB9C01F893C9300936C7A /* AutoCheckGroupTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckGroupTitleCell.m; sourceTree = "<group>"; };
 		F73CB9C11F893C9300936C7A /* AutoCheckGroupTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckGroupTitleCell.xib; sourceTree = "<group>"; };
+		F7650B571FAF344900C0FCD2 /* ServiceContentDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceContentDetailVC.h; sourceTree = "<group>"; };
+		F7650B581FAF344900C0FCD2 /* ServiceContentDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceContentDetailVC.m; sourceTree = "<group>"; };
+		F7650B591FAF344900C0FCD2 /* ServiceContentDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceContentDetailVC.xib; sourceTree = "<group>"; };
+		F7650B5D1FAF732300C0FCD2 /* AutoCheckDisountsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckDisountsVC.h; sourceTree = "<group>"; };
+		F7650B5E1FAF732300C0FCD2 /* AutoCheckDisountsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckDisountsVC.m; sourceTree = "<group>"; };
+		F7650B5F1FAF732300C0FCD2 /* AutoCheckDisountsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckDisountsVC.xib; sourceTree = "<group>"; };
+		F7650B621FAF757200C0FCD2 /* AutoCheckDiscountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckDiscountCell.h; sourceTree = "<group>"; };
+		F7650B631FAF757200C0FCD2 /* AutoCheckDiscountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckDiscountCell.m; sourceTree = "<group>"; };
+		F7650B641FAF757200C0FCD2 /* AutoCheckDiscountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckDiscountCell.xib; sourceTree = "<group>"; };
 		F76E78651FAC98720029505F /* CartItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartItem.h; sourceTree = "<group>"; };
 		F76E78661FAC98720029505F /* CartItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartItem.m; sourceTree = "<group>"; };
 		F76E78681FAC98820029505F /* CartTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTool.h; sourceTree = "<group>"; };
@@ -1352,6 +1367,7 @@
 			children = (
 				0453D3AC1F693469004F79C8 /* 车主信息 */,
 				04AD1FD91F43ECD400247819 /* 订单页 */,
+				F7650B5C1FAF72EF00C0FCD2 /* 选择优惠项目 */,
 				04EB16271F42F90D00974972 /* 优惠项目 */,
 				04EB16211F42F04200974972 /* 服务套餐 */,
 				049EA1651FAB04020081940F /* 服务方案 */,
@@ -1755,6 +1771,7 @@
 		049EA1651FAB04020081940F /* 服务方案 */ = {
 			isa = PBXGroup;
 			children = (
+				F7650B561FAF33AB00C0FCD2 /* 服务方案详细介绍 */,
 				042E5D1A1F419C3500F5F324 /* UpkeepPlanVC.h */,
 				042E5D1B1F419C3500F5F324 /* UpkeepPlanVC.m */,
 				042E5D1C1F419C3500F5F324 /* UpkeepPlanVC.xib */,
@@ -2839,6 +2856,29 @@
 			name = "检查页数据库模型";
 			sourceTree = "<group>";
 		};
+		F7650B561FAF33AB00C0FCD2 /* 服务方案详细介绍 */ = {
+			isa = PBXGroup;
+			children = (
+				F7650B571FAF344900C0FCD2 /* ServiceContentDetailVC.h */,
+				F7650B581FAF344900C0FCD2 /* ServiceContentDetailVC.m */,
+				F7650B591FAF344900C0FCD2 /* ServiceContentDetailVC.xib */,
+			);
+			name = "服务方案详细介绍";
+			sourceTree = "<group>";
+		};
+		F7650B5C1FAF72EF00C0FCD2 /* 选择优惠项目 */ = {
+			isa = PBXGroup;
+			children = (
+				F7650B5D1FAF732300C0FCD2 /* AutoCheckDisountsVC.h */,
+				F7650B5E1FAF732300C0FCD2 /* AutoCheckDisountsVC.m */,
+				F7650B5F1FAF732300C0FCD2 /* AutoCheckDisountsVC.xib */,
+				F7650B621FAF757200C0FCD2 /* AutoCheckDiscountCell.h */,
+				F7650B631FAF757200C0FCD2 /* AutoCheckDiscountCell.m */,
+				F7650B641FAF757200C0FCD2 /* AutoCheckDiscountCell.xib */,
+			);
+			name = "选择优惠项目";
+			sourceTree = "<group>";
+		};
 		F76E78641FAC97F20029505F /* 购物车数据模型 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2971,6 +3011,7 @@
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
+				F7650B5B1FAF344900C0FCD2 /* ServiceContentDetailVC.xib in Resources */,
 				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
 				0459C6B31F614C870040501E /* AddressTableViewCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
@@ -3037,8 +3078,10 @@
 				04DC7D201F31C26500AA20A7 /* JFB.sqlite in Resources */,
 				046B8DBF1F99F76400784AA8 /* AlipaySDK.bundle in Resources */,
 				04F7D86F1F5EA9C5004945ED /* ShopGradeVC.xib in Resources */,
+				F7650B661FAF757200C0FCD2 /* AutoCheckDiscountCell.xib in Resources */,
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
 				F70A509A1FA220640047D804 /* ShopInfoCell.xib in Resources */,
+				F7650B611FAF732300C0FCD2 /* AutoCheckDisountsVC.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */,
@@ -3290,10 +3333,12 @@
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
 				04D1078F1F62998D007D9F57 /* ZFPolygon.m in Sources */,
 				0459C6B01F614C870040501E /* UIView+Frame.m in Sources */,
+				F7650B5A1FAF344900C0FCD2 /* ServiceContentDetailVC.m in Sources */,
 				04ABFB471F985AC90015EE78 /* AutoCheckOrderWorkingVC.m in Sources */,
 				04D107881F62998D007D9F57 /* ZFHorizontalBarChart.m in Sources */,
 				04D1071A1F6296A1007D9F57 /* UpkeepStatementVC.m in Sources */,
 				042E5D0A1F4195C700F5F324 /* BaoyangHistoryCell.m in Sources */,
+				F7650B651FAF757200C0FCD2 /* AutoCheckDiscountCell.m in Sources */,
 				04D107751F62998D007D9F57 /* UIBezierPath+Zirkfied.m in Sources */,
 				047ADFF11F4A86EF00AEAE8E /* UIButton+CMWebCache.m in Sources */,
 				04BA1C861F4D8E1D00704A9E /* ShoppingCartModel.m in Sources */,
@@ -3389,6 +3434,7 @@
 				04DC7DBD1F31C28300AA20A7 /* ImageCollectionViewCell.m in Sources */,
 				04DC7DE61F31C28300AA20A7 /* UITabBarItem+Universal.m in Sources */,
 				04EB16251F42F0CD00974972 /* ServicePackageVC.m in Sources */,
+				F7650B601FAF732300C0FCD2 /* AutoCheckDisountsVC.m in Sources */,
 				047ADFEA1F4A86EF00AEAE8E /* CMSDWebImageDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

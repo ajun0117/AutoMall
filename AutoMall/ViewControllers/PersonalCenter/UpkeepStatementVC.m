@@ -80,6 +80,7 @@
     self.barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, _height)];
     self.barChart.dataSource = self;
     self.barChart.delegate = self;
+    self.barChart.isShadow = NO;
 //    self.barChart.topicLabel.text = @"xx汽修店美容保养项目报表";
     self.barChart.topicLabel.text = @"";
     self.barChart.unit = @"台次";

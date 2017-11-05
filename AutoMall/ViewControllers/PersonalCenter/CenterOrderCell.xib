@@ -25,29 +25,29 @@
                         <constraints>
                             <constraint firstAttribute="width" secondItem="UNW-A2-61t" secondAttribute="height" multiplier="1:1" id="eHg-0f-UGr"/>
                         </constraints>
-                        <inset key="imageEdgeInsets" minX="18" minY="5" maxX="16" maxY="24"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="5" maxX="20" maxY="26"/>
                         <state key="normal" image="center_inProgress">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKC-Eb-3FB">
                         <rect key="frame" x="81" y="1" width="67.5" height="68"/>
-                        <inset key="imageEdgeInsets" minX="18" minY="5" maxX="16" maxY="28"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="5" maxX="18" maxY="28"/>
                         <state key="normal" image="center_servicesConfirmed"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-aO-BSg">
                         <rect key="frame" x="153.5" y="1" width="68" height="68"/>
-                        <inset key="imageEdgeInsets" minX="18" minY="5" maxX="18" maxY="28"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="5" maxX="20" maxY="28"/>
                         <state key="normal" image="center_workDone"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-IZ-ood">
                         <rect key="frame" x="226.5" y="1" width="67.5" height="68"/>
-                        <inset key="imageEdgeInsets" minX="18" minY="5" maxX="18" maxY="28"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="5" maxX="20" maxY="28"/>
                         <state key="normal" image="center_paid-checkup"/>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7A-mf-o4S">
                         <rect key="frame" x="299" y="1" width="68" height="68"/>
-                        <inset key="imageEdgeInsets" minX="18" minY="5" maxX="18" maxY="26"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="5" maxX="20" maxY="26"/>
                         <state key="normal" image="center_finished"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检查完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-WV-12j">

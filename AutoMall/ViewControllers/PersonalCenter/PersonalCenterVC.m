@@ -91,7 +91,7 @@
     NSLog(@"mobileUserType: %@",mobileUserType);
     
     if (mobileUserType) {   //登录状态
-        if ([mobileUserType isEqualToString:@"1"]) {   //门店老板和员工
+        if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
             [self requestPostStoreGetInfo];     //请求门店详情数据
         }
         else if ([mobileUserType isEqualToString:@"2"]) {
@@ -1190,7 +1190,7 @@
 -(void)LoginSuccess {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginSuccess" object:nil];
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板和员工
+    if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
         [self requestPostStoreGetInfo];     //请求门店详情数据
     }
     else if ([mobileUserType isEqualToString:@"2"]) {
@@ -1375,6 +1375,7 @@
         NSLog(@"StoreGetInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             shopDic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
             [self.myTableView reloadData];
         }
         else {
@@ -1389,6 +1390,7 @@
         NSLog(@"UserGetStoreInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             shopDic = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
             [self.myTableView reloadData];
         }
         else {

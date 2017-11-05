@@ -8,8 +8,17 @@
 
 #import "ServicePackageVC.h"
 #import "UpkeepPlanNormalCell.h"
+#import "UpkeepPlanNormalHeadCell.h"
+//#import "JSONKit.h"
 
 @interface ServicePackageVC ()
+{
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
+    NSArray *packageArray; 
+    int currentpage;
+    NSMutableDictionary *selectDic;     //已选择的服务数组
+}
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
@@ -19,136 +28,173 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"服务套餐";
+    self.title = @"选择服务套餐";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalHeadCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanNormalHeadCell"];
     self.myTableView.tableFooterView = [UIView new];
+    
+    [self requestGetServicepackageList];
+    
+    selectDic = [NSMutableDictionary dictionary];
+    [selectDic setValuesForKeysWithDictionary:self.selectedDic];
 }
-- (IBAction)confirmAction:(id)sender {
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+- (IBAction)confirmAction:(id)sender {      //传递到上个界面
+    self.SelecteServicePackage(selectDic);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return [packageArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return 3;
-            break;
-            
-        case 1:
-            return 4;
-            break;
-            
-        default:
-            return 1;
-            break;
-    }
+    NSDictionary *dic = packageArray[section];
+    return [dic[@"serviceContents"] count] + 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
+    if (section == 0) {
+        return 10;
+    }
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 54;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:{
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-            view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:15];
-            label.backgroundColor = [UIColor clearColor];
-            label.text = @"套餐A";
-            [view addSubview:label];
-            return view;
-            break;
-        }
-            
-        case 1: {
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-            view.backgroundColor = RGBCOLOR(249, 250, 251);
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
-            label.font = [UIFont systemFontOfSize:15];
-            label.backgroundColor = [UIColor clearColor];
-            label.text = @"套餐B";
-            [view addSubview:label];
-            return view;
-            break;
-        }
-            
-        default:
-            return nil;
-            break;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    switch (section) {
-        case 0:{
-            UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
-            bgView.backgroundColor = [UIColor clearColor];
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-            view.backgroundColor = RGBCOLOR(249, 250, 251);
-            [bgView addSubview:view];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(view.bounds) - 16 - 100, 12, 100, 20)];
-            label.textAlignment = NSTextAlignmentRight;
-            label.font = [UIFont systemFontOfSize:15];
-            label.text = @"￥2200";
-            [view addSubview:label];
-            return bgView;
-            break;
-        }
-            
-        case 1: {
-            UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
-            bgView.backgroundColor = [UIColor clearColor];
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-            view.backgroundColor = RGBCOLOR(249, 250, 251);
-            [bgView addSubview:view];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(view.bounds) - 16 - 100, 12, 100, 20)];
-            label.textAlignment = NSTextAlignmentRight;
-            label.font = [UIFont systemFontOfSize:15];
-            label.backgroundColor = [UIColor clearColor];
-            label.text = @"￥3000";
-            [view addSubview:label];
-            return bgView;
-            break;
-        }
-            
-        default:
-            return nil;
-            break;
-    }
-
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-        UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    NSDictionary *dic = packageArray[indexPath.section];
+    NSArray *arr = dic[@"serviceContents"];
+    if (indexPath.row == 0) {
+        UpkeepPlanNormalHeadCell *cell = (UpkeepPlanNormalHeadCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanNormalHeadCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.nameL.text =  dic[@"name"];
+        [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
+        NSArray *keys = [selectDic allKeys];
+        if ([keys containsObject:dic[@"id"]]) {
+            cell.radioBtn.selected = YES;
+        } else {
+            cell.radioBtn.selected = NO;
+        }
         return cell;
+    }
+    else if (indexPath.row == [arr count] + 1) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //        cell.textLabel.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+        UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(12, 7, 20, 30)];
+        noticeL.font = [UIFont systemFontOfSize:15];
+        noticeL.text = @"￥";
+        [cell.contentView addSubview:noticeL];
+        UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
+        priceTF.font = [UIFont systemFontOfSize:15];
+        NSArray *keys = [selectDic allKeys];
+        if ([keys containsObject:dic[@"id"]]) {
+            NSMutableDictionary *diccc = selectDic[dic[@"id"]];
+            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"price"]];
+        } else {
+            priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+        }
+        priceTF.tag = 10;
+        priceTF.userInteractionEnabled = NO;
+        [cell.contentView addSubview:priceTF];
+        return cell;
+    }
+    else {
+        UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSDictionary *dicc = arr[indexPath.row - 1];
+        cell.declareL.text = dicc[@"name"];
+        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        UpkeepPlanNormalHeadCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.radioBtn.selected = !cell.radioBtn.selected;
+        NSDictionary *dic = packageArray[indexPath.section];
+        if (cell.radioBtn.selected) {
+            [selectDic setObject:dic forKey:dic[@"id"]];     //以id为key
+        }
+        else {
+            [selectDic removeObjectForKey:dic[@"id"]];
+        }
+        NSLog(@"selectDic: %@",selectDic);
+    }
+}
+
+#pragma mark - 发起网络请求
+-(void)requestGetServicepackageList { //检查单相关的服务套餐
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ServicepackageList object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ServicepackageList, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(ServicepackageList),@"1",@"1",@"2"];    //测试时固定传id=1的检查单
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+} 
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    [self.myTableView headerEndRefreshing];
+    [self.myTableView footerEndRefreshing];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:ServicepackageList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ServicepackageList object:nil];
+        NSLog(@"ServicepackageList: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            packageArray = responseObject [@"data"];
+            
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+
+}
+
+- (void)toPopVC:(NSString *)carId {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

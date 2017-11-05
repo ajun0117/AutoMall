@@ -92,9 +92,9 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountAdd object:nil];
-    
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountAdd, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"storeId", self.discountsNameTF.text,@"item", STRING_Nil(self.discountsMoneyTF.text), @"money", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:storeId, @"storeId", self.discountsNameTF.text,@"item", STRING_Nil(self.discountsMoneyTF.text), @"money", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountAdd) delegate:nil params:pram info:infoDic];
 }
 
@@ -117,6 +117,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
@@ -124,6 +125,11 @@
         }
     }
     
+}
+
+
+- (void)toPopVC:(NSString *)carId {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

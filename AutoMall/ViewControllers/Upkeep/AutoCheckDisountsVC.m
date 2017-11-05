@@ -1,55 +1,44 @@
 //
-//  BaoyangDiscountsVC.m
+//  AutoCheckDisountsVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/8/15.
+//  Created by 李俊阳 on 2017/11/6.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "BaoyangDiscountsVC.h"
-#import "UpkeepPlanNormalCell.h"
-#import "AddDiscountsVC.h"
+#import "AutoCheckDisountsVC.h"
+#import "AutoCheckDiscountCell.h"
 
-@interface BaoyangDiscountsVC ()
+@interface AutoCheckDisountsVC ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *discountArray;
-    int currentpage; 
+    int currentpage;
+    NSMutableDictionary *selectedDis;
 }
-@property (strong, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
-@implementation BaoyangDiscountsVC
+@implementation AutoCheckDisountsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"优惠";
+    self.title = @"选择优惠";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    if (self.canEdit) {
-        UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        searchBtn.frame = CGRectMake(0, 0, 44, 44);
-        //    searchBtn.contentMode = UIViewContentModeRight;
-        searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
-        searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
-        [searchBtn addTarget:self action:@selector(toAddDiscounts) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-        self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
-    }
-    
-    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"AutoCheckDiscountCell" bundle:nil] forCellReuseIdentifier:@"autoCheckDiscountCell"];
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
     currentpage = 0;
     discountArray = [NSMutableArray array];
+    selectedDis = [NSMutableDictionary dictionary];
+    [selectedDis setValuesForKeysWithDictionary:self.selectedDic];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -67,7 +56,13 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self.myTableView headerBeginRefreshing];
+    currentpage = 0;
+    [discountArray removeAllObjects];
+    [self requestPostDiscountList];
+}
+- (IBAction)affirmAction:(id)sender {
+    self.SelecteDiscount(selectedDis);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -83,17 +78,6 @@
     currentpage ++;
     [self requestPostDiscountList];
 }
-
-
--(void) toAddDiscounts {
-    AddDiscountsVC *addVC = [[AddDiscountsVC alloc] init];
-    addVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:addVC animated:YES];
-}
-
-//- (IBAction)saveAction:(id)sender {
-//
-//}
 
 #pragma mark - UITableViewDataSource
 
@@ -114,37 +98,37 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+    AutoCheckDiscountCell *cell = (AutoCheckDiscountCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckDiscountCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = discountArray[indexPath.row];
-    cell.declareL.text = dic[@"item"];
+    cell.nameL.text = dic[@"item"];
     if (dic[@"money"]) {
-        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+        cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    }
+    [cell.radioBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    NSArray *keys = [selectedDis allKeys];
+    if ([keys containsObject:dic[@"id"]]) {
+        cell.radioBtn.selected = YES;
+    } else {
+        cell.radioBtn.selected = NO;
     }
     return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-     if (self.canEdit) {
-            return YES;
-     }
-    return NO;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [dataArray removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    AutoCheckDiscountCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.radioBtn.selected = !cell.radioBtn.selected;
+    NSDictionary *dic = discountArray[indexPath.row];
+    if (cell.radioBtn.selected) {
+        [selectedDis setObject:dic forKey:dic[@"id"]];     //以id为key
+    }
+    else {
+        [selectedDis removeObjectForKey:dic[@"id"]];
+    }
+    NSLog(@"selectedDis: %@",selectedDis);
+
 }
 
 #pragma mark - 发送请求
@@ -185,6 +169,7 @@
     }
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

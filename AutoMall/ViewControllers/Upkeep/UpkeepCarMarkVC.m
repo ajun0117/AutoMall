@@ -62,7 +62,7 @@
 //    _imageview.userInteractionEnabled = YES;
     
     if (self.imgUrl) {
-        [self.imageV sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.imgUrl)] placeholderImage:IMG(@"default")];
+        [self.imageV sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.imgUrl)] placeholderImage:IMG(@"CommplaceholderPicture")];
     }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toMark:)];
@@ -107,6 +107,7 @@
             [btn removeFromSuperview];
         }
     }
+    self.imageV.image = IMG(@"carMark");
 }
 
 //告诉scrollview要缩放的是哪个子控件

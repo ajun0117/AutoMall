@@ -102,7 +102,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    return 85;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -139,13 +139,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
-//        detailVC.userID = userArray[indexPath.section][@"id"];
-//        detailVC.isDrink = self.isDrink;
-//        detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    detailVC.commodityId = collectArray[indexPath.section][@"resourceId"];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    NSDictionary *dic = collectArray[indexPath.section];
+    if ([dic[@"resource"][@"approvalStatus"] intValue] == 11) {
+        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+        detailVC.commodityId = dic[@"resourceId"];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    } else {
+        _networkConditionHUD.labelText = @"抱歉，该商品已下架！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark - 发送请求
