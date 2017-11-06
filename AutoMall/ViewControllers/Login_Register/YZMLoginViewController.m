@@ -79,7 +79,7 @@
     self.sendMSMBtn.layer.masksToBounds = YES;
     
     //登录
-    self.loginBtn.layer.cornerRadius = 20; //半圆角
+    self.loginBtn.layer.cornerRadius = 5;
     self.loginBtn.layer.masksToBounds = YES;
 }
 

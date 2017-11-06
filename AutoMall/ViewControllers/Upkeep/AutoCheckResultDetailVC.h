@@ -10,6 +10,8 @@
 
 @interface AutoCheckResultDetailVC : UIViewController
 
-@property (strong, nonatomic) NSString *checkContentId;
+@property (strong, nonatomic) NSString *checkId;    //检查单id
+@property (strong, nonatomic) NSString *checkTermId;    //位置id
+@property (strong, nonatomic) NSString *checkContentId;     //检查内容id
 
 @end

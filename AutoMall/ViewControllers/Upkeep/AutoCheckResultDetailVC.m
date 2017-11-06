@@ -39,8 +39,7 @@
     _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH/3)];
     _adView.delegate = self;
     self.myTableView.tableHeaderView = _adView;
-    
-    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
+    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""}];
     [_adView reloadData];
     
     [self requestGetCarUpkeepCheckTerm];
@@ -60,6 +59,9 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
+    [_adView reloadData];
 }
 
 #pragma mark - AJAdViewDelegate
@@ -144,7 +146,7 @@
         ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"resultCheckContentDetailCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dic = contentResultDic[@"carUpkeepCheckContentEntities"][indexPath.row-2];
-//        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
             cell.checkContentL.text = STRING(dic[@"dPosition"]);
             cell.resultL.text = STRING(dic[@"remark"]);
             cell.levelL.text =  STRING(dic[@"result"]);
@@ -159,7 +161,22 @@
             else if (levelInt == 3) {
                 cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
             }
-//        }
+        }
+        else {
+            cell.checkContentL.text = STRING(contentResultDic[@"name"]);
+            cell.levelL.text =  STRING(dic[@"result"]);
+            cell.levelL.layer.cornerRadius = 4;
+            int levelInt = [dic[@"level"] intValue];
+            if (levelInt == 1) {
+                cell.levelL.backgroundColor = RGBCOLOR(250, 69, 89);
+            }
+            else if (levelInt == 2) {
+                cell.levelL.backgroundColor = RGBCOLOR(249, 182, 48);
+            }
+            else if (levelInt == 3) {
+                cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
+            }
+        }
         return cell;
     }
     else if (indexPath.section == 1){
@@ -184,7 +201,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepCheckTerm object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepCheckTerm, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTermId=%@&checkContentId=%@",UrlPrefix(CarUpkeepCheckTerm),@"1",@"1",@"3"];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTermId=%@&checkContentId=%@",UrlPrefix(CarUpkeepCheckTerm),self.checkId,self.checkTermId,self.checkContentId];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

@@ -160,6 +160,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = categoryAry[indexPath.row];
     AutoCheckResultDetailVC *detailVC = [[AutoCheckResultDetailVC alloc] init];
+    detailVC.checkId = self.carUpkeepId;
+    detailVC.checkTermId = dic[@"id"];
     detailVC.checkContentId = dic[@"checkContentVos"][@"id"];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
@@ -171,7 +173,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepCategory object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepCategory, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&categoryId=%@",UrlPrefix(CarUpkeepCategory),@"1",@"1"];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&categoryId=%@",UrlPrefix(CarUpkeepCategory),self.carUpkeepId,self.categoryId];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -198,7 +200,7 @@
                 NSArray *checkContentVos = dic1[@"checkContentVos"];
                 for (NSDictionary *dic2 in checkContentVos) {
                     NSLog(@"dic1name%@",dic1[@"name"]);
-                    NSDictionary *dic3 = @{@"name":dic1[@"name"],@"checkContentVos":dic2};
+                    NSDictionary *dic3 = @{@"id":dic1[@"id"],@"name":dic1[@"name"],@"checkContentVos":dic2};
                     [checkContentVosAry addObject:dic3];
                 }
                 [categoryAry addObjectsFromArray:checkContentVosAry];

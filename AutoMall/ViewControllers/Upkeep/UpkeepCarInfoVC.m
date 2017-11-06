@@ -22,14 +22,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"粤A88888";
+    self.title = self.carDic[@"plateNumber"];
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     self.myTableView.tableFooterView = [UIView new];
-    
-    arr = @[@{@"name":@"车主",@"content":@"孙先生"},@{@"name":@"品牌",@"content":@"奔驰"},@{@"name":@"车型",@"content":@"S300L"}, @{@"name":@"车龄",@"content":@"2年"}, @{@"name":@"行驶里程",@"content":@"30000km"}, @{@"name":@"燃油量",@"content":@"300L"}, @{@"name":@"进店时间",@"content":@"2017.7.17"}, @{@"name":@"上次保养时间",@"content":@"2017.1.17"}, @{@"name":@"上次保养里程",@"content":@"25000km"}];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -52,9 +51,70 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-    NSDictionary *dic = arr[indexPath.row];
-    cell.declareL.text = dic[@"name"];
-    cell.contentL.text = dic[@"content"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    switch (indexPath.row) {
+        case 0: {
+            cell.declareL.text = @"车主";
+            cell.contentL.text = STRING(self.carDic[@"owner"]);
+            break;
+        }
+        case 1: {
+            cell.declareL.text = @"品牌";
+            cell.contentL.text = STRING(self.carDic[@"brand"]);
+            break;
+        }
+        case 2: {
+            cell.declareL.text = @"车型";
+            cell.contentL.text = STRING(self.carDic[@"model"]);
+            break;
+        }
+        case 3: {
+            cell.declareL.text = @"购车时间";
+            cell.contentL.text = STRING(self.carDic[@"purchaseDate"]);
+            break;
+        }
+        case 4: {
+            cell.declareL.text = @"行驶里程";
+            cell.contentL.text = STRING(self.carDic[@"mileage"]);
+            break;
+        }
+        case 5: {
+            cell.declareL.text = @"燃油量";
+            cell.contentL.text = STRING(self.carDic[@"fuelAmount"]);
+            break;
+        }
+        case 6: {
+            cell.declareL.text = @"进店时间";
+            NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+            [formater setDateFormat:@"yyyy-MM-dd"];
+            NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"createTime"] doubleValue]/1000];
+            NSString *string = [formater stringFromDate:creatDate];
+            cell.contentL.text = string;
+            break;
+        }
+        case 7: {
+            cell.declareL.text = @"上次保养时间";
+            if (self.carDic[@"updateTime"] && ! [self.carDic[@"updateTime"] isKindOfClass:[NSNull class]]) {
+                NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+                [formater setDateFormat:@"yyyy-MM-dd"];
+                NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"updateTime"] doubleValue]/1000];
+                NSString *string = [formater stringFromDate:creatDate];
+                cell.contentL.text = string;
+            } else {
+                cell.contentL.text = @"";
+            }
+            break;
+        }
+        case 8: {
+            cell.declareL.text = @"上次保养里程";
+            cell.contentL.text = STRING(self.carDic[@""]);
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
     return cell;
 }
 

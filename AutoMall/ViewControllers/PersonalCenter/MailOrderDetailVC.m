@@ -232,7 +232,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray *goodsAry = orderDetailDic[@"orderDetails"];
             NSDictionary *dic = goodsAry[indexPath.row];
-            [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"commodityImage"])] placeholderImage:IMG(@"default")];
+            [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.nameL.text = dic[@"commodityName"];
             cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", dic[@"actualPrice"]];
             cell.numL.text = [NSString stringWithFormat:@"x%@", dic[@"commodityAmount"]];

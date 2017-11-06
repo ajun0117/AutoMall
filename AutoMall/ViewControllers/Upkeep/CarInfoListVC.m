@@ -144,7 +144,7 @@
     CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = carArray[indexPath.row];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.plateNumberL.text = dic[@"plateNumber"];
     cell.ownerL.text = dic[@"owner"];
     NSDateFormatter* formater = [[NSDateFormatter alloc] init];

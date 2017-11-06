@@ -179,6 +179,8 @@
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
+//    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+//    [self.navigationController pushViewController:resultVC animated:YES];
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {

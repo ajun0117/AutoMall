@@ -32,7 +32,7 @@
     
     self.nameL.text = self.skillDic[@"name"];
     self.introduceL.text = self.skillDic[@"remark"];;
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"default")];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     
     if (self.isReviewed) {
         self.revieweView.hidden = YES;

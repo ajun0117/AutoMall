@@ -198,7 +198,7 @@
     if (tableView == self.zixunTV) {
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = zixunArray[indexPath.section];
-        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"default")];
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"placeholderPictureSquare")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
         return cell;
@@ -206,7 +206,7 @@
     else {
         InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"inforCell"];
         NSDictionary *dic = jiaochengArray[indexPath.section];
-        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"default")];
+        [cell.zixunIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage: IMG(@"placeholderPictureSquare")];
         cell.zixunTitle.text = STRING(dic[@"title"]);
         cell.zixunContent.text = STRING(dic[@"shortContent"]);
         return cell;

@@ -150,7 +150,7 @@
         int amount = 0;
         for (int i = 0; i < goodsAry.count; ++i) {
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i*(60+10), 0, 60, 60)];
-            [img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(goodsAry[i][@"commodityImage"])] placeholderImage:IMG(@"default")];
+            [img sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(goodsAry[i][@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             [cell.picScrollView addSubview:img];
             amount += [goodsAry[i][@"commodityAmount"] intValue];
         }
@@ -173,7 +173,7 @@
     
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
     NSDictionary *detailDic = [goodsAry firstObject];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"default")];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = detailDic[@"commodityName"];
     cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"actualPrice"]];
     cell.numL.text = [NSString stringWithFormat:@"x%@", detailDic[@"commodityAmount"]];

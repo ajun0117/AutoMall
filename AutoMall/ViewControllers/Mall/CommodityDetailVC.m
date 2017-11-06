@@ -530,7 +530,7 @@ static CGFloat const scrollViewHeight = 220;
             CommodityDetailTuijianCell *cell = (CommodityDetailTuijianCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTuijianCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSDictionary *dic = tjListAry [indexPath.row];
-            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+            [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.goodsNameL.text = dic [@"name"];
             NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板

@@ -39,6 +39,9 @@
     
     NSLog(@"phoneStr:   %@",self.phoneStr);
     [self requestGetSMS];  //发送验证码
+    
+    self.checkBtn.layer.cornerRadius = 5;
+    self.checkBtn.layer.masksToBounds = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated {

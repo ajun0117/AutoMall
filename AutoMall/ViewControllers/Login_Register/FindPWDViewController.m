@@ -30,6 +30,14 @@
     self.title = @"找回密码";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    //登录
+    self.sendCodeBtn.layer.cornerRadius = 5;
+    self.sendCodeBtn.layer.masksToBounds = YES;
+    self.checkBtn.layer.cornerRadius = 5;
+    self.checkBtn.layer.masksToBounds = YES;
+    self.confirmBtn.layer.cornerRadius = 5;
+    self.confirmBtn.layer.masksToBounds = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated {

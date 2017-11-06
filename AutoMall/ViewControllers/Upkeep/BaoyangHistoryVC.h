@@ -10,6 +10,6 @@
 
 @interface BaoyangHistoryVC : UIViewController
 
-@property (strong, nonatomic) NSString *carId;
+@property (strong, nonatomic) NSDictionary *carDic;
 
 @end

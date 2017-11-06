@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSDictionary *carDic;
 
+@property (strong, nonatomic) NSString *carUpkeepId;    //检查单id
+
 @end

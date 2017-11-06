@@ -98,7 +98,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = skillAry[indexPath.section];
     EmployeeSkillListCell *cell = (EmployeeSkillListCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeSkillListCell"];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = dic[@"name"];
     cell.introduceL.text = dic[@"remark"];
     cell.introduceL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 84;

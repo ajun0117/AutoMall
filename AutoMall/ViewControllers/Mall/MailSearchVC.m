@@ -105,7 +105,7 @@
     CommodityListCell *cell = (CommodityListCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityListCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = resultArray [indexPath.section];
-    [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+    [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.goodsNameL.text = dic [@"name"];
     //        cell.baokuanL.text =
     //        cell.tuijianL.text =

@@ -21,12 +21,13 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSArray *serviceContentAry;
-    NSMutableArray *packageAry;
     NSArray *selectedPackageAry;
-    NSMutableArray *removeAry;  //去除重复的方案
-    NSMutableDictionary *thePackageDic;
+    NSMutableArray *removeAry;      //去除重复的方案
+     NSMutableArray *lineationAry;     //记录划线的方案数组
+    NSDictionary *thePackageDic;    //存储下级页面已选择的套餐
     NSArray *selectedDiscounts;    //选择的优惠
-    NSDictionary *theDiscountDic;
+    NSDictionary *theDiscountDic;   //存储下级页面已选择的优惠
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -56,10 +57,8 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     self.myTableView.tableFooterView = [UIView new];
 
-    packageAry = [NSMutableArray array];
     removeAry = [NSMutableArray array];
-    thePackageDic = [NSMutableDictionary dictionary];
-//    theDiscountDic =  [NSMutableDictionary dictionary];
+    lineationAry = [NSMutableArray array];
     
     [self requestGetCarUpkeepServiceContent];   //请求服务方案列表
 }
@@ -84,15 +83,17 @@
     ServicePackageVC *serviceVC = [[ServicePackageVC alloc] init];
     serviceVC.selectedDic = thePackageDic;
     serviceVC.SelecteServicePackage = ^(NSMutableDictionary *packageDic) {
-        [thePackageDic setValuesForKeysWithDictionary: packageDic];
+        thePackageDic = [NSDictionary dictionaryWithDictionary:packageDic];
         selectedPackageAry = [packageDic allValues];
+        [removeAry removeAllObjects];       //重置removeAry数组
+        [removeAry addObjectsFromArray:serviceContentAry];
+        
         NSLog(@"selectedPackageAry: %@",selectedPackageAry);
-        NSArray * array = [NSArray arrayWithArray: removeAry];
         for (NSDictionary *dic1 in selectedPackageAry) {
             NSArray *serviceContents = dic1[@"serviceContents"];
             for (NSDictionary *dic2 in serviceContents) {
                 int serviceId = [dic2[@"id"] intValue];
-                for (NSDictionary *dic3 in array) {
+                for (NSDictionary *dic3 in serviceContentAry) {
                     if ([dic3[@"id"] intValue] == serviceId) {
                         [removeAry removeObject:dic3];
                     }
@@ -200,7 +201,7 @@
                 label.text = @"车辆信息";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 24, 15, 8, 13);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -244,7 +245,7 @@
                 label.text = @"服务套餐";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 24, 15, 8, 13);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -267,7 +268,7 @@
                 label.text = @"优惠";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 24, 15, 8, 13);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -295,8 +296,10 @@
                         UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.accessoryType = UITableViewCellAccessoryNone;
+                        cell.declareL.strikeThroughEnabled = NO;
                         cell.declareL.text = @"车牌";
-                        cell.contentL.text = self.carDic[@"plateNumber"];
+                        cell.declareL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.text = STRING(self.carDic[@"plateNumber"]);
                         return cell;
                         break;
                     }
@@ -304,8 +307,10 @@
                         UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.accessoryType = UITableViewCellAccessoryNone;
+                        cell.declareL.strikeThroughEnabled = NO;
                         cell.declareL.text = @"车主";
-                        cell.contentL.text = self.carDic[@"owner"];
+                        cell.declareL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.text = STRING(self.carDic[@"owner"]);
                         return cell;
                         break;
                     }
@@ -313,8 +318,10 @@
                         UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.accessoryType = UITableViewCellAccessoryNone;
+                        cell.declareL.strikeThroughEnabled = NO;
                         cell.declareL.text = @"品牌";
-                        cell.contentL.text = self.carDic[@"brand"];;
+                        cell.declareL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.text = STRING(self.carDic[@"brand"]);
                         return cell;
                         break;
                     }
@@ -322,7 +329,9 @@
                         UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.accessoryType = UITableViewCellAccessoryNone;
+                        cell.declareL.strikeThroughEnabled = NO;
                         cell.declareL.text = @"车型";
+                        cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"model"]);
                         return cell;
                         break;
@@ -341,7 +350,15 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 NSDictionary *dic = removeAry[indexPath.row];
+
+                if ([lineationAry containsObject:dic]) {    //如果包含，则不划线
+                    cell.declareL.strikeThroughEnabled = NO;
+                } else {
+                    cell.declareL.strikeThroughEnabled = YES;
+                }
+                
                 cell.declareL.text = dic[@"name"];
+                cell.declareL.font = [UIFont systemFontOfSize:15];
                 cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 return cell;
                 break;
@@ -351,8 +368,10 @@
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
                 NSDictionary *dic = selectedPackageAry[indexPath.row];
                 cell.declareL.text = dic[@"name"];
+                cell.declareL.font = [UIFont systemFontOfSize:15];
                 cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 return cell;
                 break;
@@ -362,7 +381,9 @@
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"总价";
+                cell.declareL.font = [UIFont boldSystemFontOfSize:15];
                 cell.contentL.text = @"￥6000";
                 return cell;
                 break;
@@ -372,10 +393,14 @@
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
                 NSDictionary *dic = selectedDiscounts[indexPath.row];
                 cell.declareL.text = dic[@"item"];
+                cell.declareL.font = [UIFont systemFontOfSize:15];
                 if (dic[@"money"]) {
                     cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+                } else {
+                    cell.contentL.text = @"";
                 }
                 return cell;
                 break;
@@ -385,7 +410,9 @@
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"折后价";
+                cell.declareL.font = [UIFont boldSystemFontOfSize:15];
                 cell.contentL.text = @"￥5500";
                 return cell;
                 break;
@@ -431,11 +458,15 @@
     
     UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"添加" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         cell.declareL.strikeThroughEnabled = NO;
+        NSDictionary *dic = removeAry[indexPath.row];
+        [lineationAry addObject:dic];
         tableView.editing = NO;
     }];
     
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         cell.declareL.strikeThroughEnabled = YES;
+        NSDictionary *dic = removeAry[indexPath.row];
+        [lineationAry removeObject:dic];
         tableView.editing = NO;
     }];
     
@@ -497,7 +528,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepServiceContent, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),@"1",@"1",@"2"];    //测试时固定传id=1的检查单
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,storeId];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -520,9 +552,13 @@
         [servicePackages addObject:dicc1];
     }
     
-    NSArray *discounts = @[@{@"id":@"8",@"item":@"2",@"price":@"10"}];
+//    NSArray *discounts = @[@{@"id":@"8",@"item":@"2",@"price":@"10"}];
     
-    
+    NSMutableArray *discounts = [NSMutableArray array];
+    for (NSDictionary *dic2 in selectedDiscounts) {
+        NSDictionary *dicc2 = [NSDictionary dictionaryWithObjectsAndKeys:dic2[@"id"],@"id",dic2[@"item"],@"item",dic2[@"money"],@"price", nil];
+        [discounts addObject:dicc2];
+    }
     
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", @"3000",@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts", nil];
     
@@ -546,7 +582,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             serviceContentAry = responseObject[@"data"];
             [removeAry addObjectsFromArray:serviceContentAry];
-            
+            [lineationAry addObjectsFromArray:removeAry];
             [self.myTableView reloadData];
         }
         else {

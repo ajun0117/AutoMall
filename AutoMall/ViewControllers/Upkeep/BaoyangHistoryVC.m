@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"粤A55555";
+    self.title = self.carDic[@"plateNumber"];
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -100,8 +100,13 @@
     NSDictionary *dic = historyArray[indexPath.row];
     cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"car"][@"mileage"])];
     cell.ranyouL.text = [NSString stringWithFormat:@"%@L",STRING(dic[@"car"][@"fuelAmount"])];
-    cell.ownerL.text = dic[@"carOwnerName"];
-    cell.dateL.text = STRING(dic[@"endTime"]);
+    cell.ownerL.text = dic[@"car"][@"owner"];
+    
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
+    NSString *string = [formater stringFromDate:creatDate];
+    cell.dateL.text = string;
     return cell;
 }
 
@@ -121,7 +126,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=0",UrlPrefix(CarUpkeepSearch),self.carId, currentpage];
+    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=0",UrlPrefix(CarUpkeepSearch),self.carDic[@"id"], currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

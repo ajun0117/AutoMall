@@ -52,7 +52,7 @@
     if (self.skillDic) {
         self.title = @"编辑技能";
         imgUrl = self.skillDic[@"image"];
-        [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"default")];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
         if (self.imgView.image) {
             self.imgL.hidden = YES;
         }

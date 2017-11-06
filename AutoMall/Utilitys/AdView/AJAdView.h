@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#define HomeDefineAdImage @"default"
-#define ListDefineAdImage @"default"
+#define HomeDefineAdImage @"CommplaceholderPicture"
+#define ListDefineAdImage @"CommplaceholderPicture"
 #define DefineAdTime  4
 
 @class AJAdView;

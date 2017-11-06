@@ -103,7 +103,7 @@
         NSDictionary *dic = skillAry[indexPath.row];
         EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
         cell.nameL.text = dic[@"name"];
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"default")];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
         switch ([dic[@"approvalStatus"] intValue]) {
             case 0:{
                 cell.daishenBtn.hidden = NO;
