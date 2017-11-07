@@ -58,10 +58,9 @@
     [self.infoTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.infoTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
-    currentpage = 0;
-    carArray = [NSMutableArray array];
-    
-    [self requestGetCarList];
+//    currentpage = 0;
+//    carArray = [NSMutableArray array];
+//    [self requestGetCarList];
 //    [self.infoTableView headerBeginRefreshing];
 }
 
@@ -79,6 +78,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    currentpage = 0;
+    carArray = [NSMutableArray array];
+    [self requestGetCarList];
 }
 
 -(void) toRegisterNewCarInfo {
@@ -88,9 +91,9 @@
 //        self.carId = carDic[@"id"];
 //        [self.infoTableView headerBeginRefreshing];
 //    };
-    addVC.GoBackAddedCarDic = ^{
-        [self.infoTableView headerBeginRefreshing];
-    };
+//    addVC.GoBackAddedCarDic = ^{
+//        [self.infoTableView headerBeginRefreshing];
+//    };
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
@@ -175,9 +178,9 @@
 //        self.carId = carDic[@"id"];
 //        [self.infoTableView reloadData];
 //    };
-    editVC.GoBackAddedCarDic = ^{
-        [self.infoTableView headerBeginRefreshing];
-    };
+//    editVC.GoBackAddedCarDic = ^{
+//        [self.infoTableView headerBeginRefreshing];
+//    };
     [self.navigationController pushViewController:editVC animated:YES];
 }
 

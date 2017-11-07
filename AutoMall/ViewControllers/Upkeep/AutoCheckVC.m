@@ -153,6 +153,7 @@
 
 -(void)toFillLicheng {
     AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
+    infoVC.mileageAndfuelAmountDic = lichengDic;
     infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
         lichengDic = dic;
         NSLog(@"lichengDic: %@",lichengDic);

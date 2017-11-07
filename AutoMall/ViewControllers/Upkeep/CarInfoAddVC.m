@@ -67,7 +67,7 @@
         carImgUrl = self.carDic[@"image"];
         
         [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
-        if (carImgUrl) {
+        if (carImgUrl.length > 0) {
             self.carImgL.hidden = YES;
         }
         self.mileageTF.text = NSStringWithNumber(self.carDic[@"mileage"]);
@@ -211,9 +211,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == self.plateNumberTF) {      //字母转大写
-        self.plateNumberTF.text = [self.plateNumberTF.text uppercaseString];
-    }
     NSInteger textFieldIndex = textField.tag;
     [textField resignFirstResponder];
     if (textFieldIndex < [textFieldArray count] - 1)
@@ -222,6 +219,12 @@
         [nextTextField becomeFirstResponder];
     }
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == self.plateNumberTF) {      //字母转大写
+        self.plateNumberTF.text = [self.plateNumberTF.text uppercaseString];
+    }
 }
 
 #pragma mark - 日期选择
@@ -566,7 +569,7 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
 //        self.GoBackSelectCarDic(car);   //返回刷新并选择
     } else {
-        self.GoBackAddedCarDic();       //仅返回刷新
+//        self.GoBackAddedCarDic();       //仅返回刷新
         [self.navigationController popViewControllerAnimated:YES];
     }
     

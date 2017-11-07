@@ -884,7 +884,10 @@
                     webVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:webVC animated:YES];
                 }
-                NSLog(@"联系我们");
+                if (indexPath.row == 1) {
+                    NSLog(@"联系我们");
+                    [self requestGetPhoneInfo];
+                }
                 break;
             }
             default:
@@ -973,7 +976,10 @@
                     webVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:webVC animated:YES];
                 }
-                NSLog(@"联系我们");
+                if (indexPath.row == 1) {
+                    NSLog(@"联系我们");
+                    [self requestGetPhoneInfo];
+                }
                 break;
             }
             default:
@@ -1045,7 +1051,10 @@
                     webVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:webVC animated:YES];
                 }
-                NSLog(@"联系我们");
+                if (indexPath.row == 1) {
+                    NSLog(@"联系我们");
+                    [self requestGetPhoneInfo];
+                }
                 break;
             }
             default:
@@ -1070,7 +1079,11 @@
                     webVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:webVC animated:YES];
                 }
-                NSLog(@"联系我们");
+                if (indexPath.row == 1) {
+                    NSLog(@"联系我们");
+                    [self requestGetPhoneInfo];
+                }
+                
                 break;
             }
                 
@@ -1431,8 +1444,27 @@
     if ([notification.name isEqualToString:UserChangeImage]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserChangeImage object:nil];
         NSLog(@"UserChangeImage: %@",responseObject);
-        if ([responseObject[@"result"] boolValue]) {
-            NSLog(@"头像修改成功");
+         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetPhoneInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetPhoneInfo object:nil];
+        NSLog(@"GetPhoneInfo: %@",responseObject);
+         if ([responseObject[@"success"] isEqualToString:@"y"]) {    //拨打电话
+            NSString *phoneStr = responseObject[@"data"];
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",phoneStr];
+            UIWebView * callWebview = [[UIWebView alloc] init];
+            [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+            [self.view addSubview:callWebview];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

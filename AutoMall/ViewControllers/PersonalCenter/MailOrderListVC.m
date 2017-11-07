@@ -146,6 +146,7 @@
     NSArray *goodsAry = dic[@"orderDetails"];
     if (goodsAry.count > 1) {   //多商品订单
         MailOrderMultiCell *cell = (MailOrderMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderMultiCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.picScrollView.contentSize = CGSizeMake((60+10) * 3, 60);
         int amount = 0;
         for (int i = 0; i < goodsAry.count; ++i) {
@@ -172,6 +173,7 @@
     }
     
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *detailDic = [goodsAry firstObject];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = detailDic[@"commodityName"];

@@ -190,6 +190,11 @@
 //    }
 }
 
+
+-(void)doWxPay {
+    
+}
+
 #pragma mark - 支付完成后回调通知
 -(void) completePayNotification:(NSNotification *)notification{
     if ([notification.name isEqualToString:@"AliPayNotification"]) {

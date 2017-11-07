@@ -10,6 +10,7 @@
 
 @interface AutoCheckCarInfoVC : UIViewController
 
+@property (strong ,nonatomic) NSDictionary *mileageAndfuelAmountDic;
 /**
  * 提交里程油量
  */

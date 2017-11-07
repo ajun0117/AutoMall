@@ -21,7 +21,7 @@
     NSString *licenseImgUrl;
     NSString *cardAImgUrl;
     NSString *cardBImgUrl;
-    NSString *gongzhongImgUrl;
+    NSString *gongzhongImgUrl; 
     NSString *aliPayCollectionImgUrl;
     NSString *wechatCollectionImgUrl;
     NSArray *textFieldArray;
@@ -550,34 +550,36 @@
     
     if ([notification.name isEqualToString:UploadImgFile]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+        
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
         if ([responseObject[@"result"] boolValue]) {
             switch (whichImg) {
                 case 0: {
-                    shopImgUrl = responseObject[@"url"];
+                    shopImgUrl = urlStr;
                     break;
                 }
                 case 1: {
-                    licenseImgUrl = responseObject[@"url"];
+                    licenseImgUrl = urlStr;
                     break;
                 }
                 case 2: {
-                    cardAImgUrl = responseObject[@"url"];
+                    cardAImgUrl = urlStr;
                     break;
                 }
                 case 3: {
-                    cardBImgUrl = responseObject[@"url"];
+                    cardBImgUrl = urlStr;
                     break;
                 }
                 case 4: {
-                    gongzhongImgUrl = responseObject[@"url"];
+                    gongzhongImgUrl = urlStr;
                     break;
                 }
-                case 5: {
-                    aliPayCollectionImgUrl = responseObject[@"url"];
+                case 5: { 
+                    aliPayCollectionImgUrl = urlStr;
                     break;
                 }
                 case 6: {
-                    wechatCollectionImgUrl = responseObject[@"url"];
+                    wechatCollectionImgUrl = urlStr;
                     break;
                 }
                     

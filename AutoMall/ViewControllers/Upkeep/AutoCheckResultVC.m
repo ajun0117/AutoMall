@@ -416,9 +416,14 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
                 if (! carImg) {
-                    UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
+                    NSString *img = carUpkeepDic[@"image"];
+                    if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
+                        [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+                    } else {
+                        UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
                     carImg.image = IMG(@"carMark");
-    //                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+                    }
+
                     carImg.contentMode = UIViewContentModeScaleAspectFit;
                     carImg.tag = 101;
                     [cell.contentView addSubview:carImg];
