@@ -114,6 +114,7 @@
         myTableView.delegate = self;
         myTableView.dataSource = self;
         myTableView.allowsSelection = NO;
+//        myTableView.pagingEnabled = YES;
         myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         //    [self.carBodyTV registerNib:[UINib nibWithNibName:@"AutoCheckSingleCell" bundle:nil] forCellReuseIdentifier:@"autoCheckSingleCell"];
         [myTableView registerNib:[UINib nibWithNibName:@"AutoCheckMultiCell" bundle:nil] forCellReuseIdentifier:@"autoCheckMultiCell"];
@@ -192,8 +193,8 @@
 -(void)toFillTip:(UIButton *)btn {  //填写检查结果文本
     UITableViewCell *cell = (UITableViewCell  *)btn.superview.superview;
     UITableView *tableV;
-    if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
-        tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
+    if ([[self.mainScrollView viewWithTag:1000 + currentSelectIndex] isKindOfClass:[UITableView class]]) {
+        tableV = [self.mainScrollView viewWithTag:1000 + currentSelectIndex];
     }
     NSIndexPath *ind = [tableV indexPathForCell:cell];
     NSArray *array = contentAry[ind.section][@"checkContents"];
@@ -204,6 +205,22 @@
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     UITextField *nameField = [alert textFieldAtIndex:0];
     nameField.placeholder = @"请输入检查结果";
+    
+//    int keyType = [dicc[@"tip"] intValue];
+//    switch (keyType) {
+//        case 0:
+//            nameField.keyboardType = UIKeyboardTypeNumberPad;
+//            break;
+//            
+//        case 1:
+//            nameField.keyboardType = UIKeyboardTypeNamePhonePad;
+//            break;
+//            
+//        default:
+//            nameField.keyboardType = UIKeyboardTypeDefault;
+//            break;
+//    }
+
     [alert show];
 }
 

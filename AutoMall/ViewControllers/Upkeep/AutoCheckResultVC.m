@@ -620,12 +620,12 @@
     if (sections == 5) {
         sections = 6;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
-//        [self.myTableView reloadData];
+        [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {
         sections = 5;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
-//        [self.myTableView reloadData];
+        [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
 }
 

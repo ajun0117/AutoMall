@@ -99,7 +99,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 #pragma mark UITableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

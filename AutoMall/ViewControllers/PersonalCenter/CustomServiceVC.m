@@ -177,9 +177,9 @@
     return 10;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 5;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomServiceCell *cell = (CustomServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"customServiceCell"];

@@ -104,6 +104,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self requestDelStaffWithID:NSStringWithNumber(dic[@"id"])];
         [listArray removeObjectAtIndex:indexPath.row];
+//        if (listArray.count == 0) {
+//             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+//        }
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }

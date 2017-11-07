@@ -100,7 +100,11 @@
     [searchBar resignFirstResponder];
 }
 
-
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    currentpage = 0;
+    [carArray removeAllObjects];
+    [self requestSearchCarList];
+}
 
 #pragma mark - UITableViewDataSource
 

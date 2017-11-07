@@ -211,6 +211,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    if (textField == self.plateNumberTF) {      //字母转大写
+        self.plateNumberTF.text = [self.plateNumberTF.text uppercaseString];
+    }
     NSInteger textFieldIndex = textField.tag;
     [textField resignFirstResponder];
     if (textFieldIndex < [textFieldArray count] - 1)
@@ -253,6 +256,27 @@
     self.myScrollV.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height -64 - 80);
 }
 
+
+#pragma mark - 手机号码及验证码格式初步验证
+-(BOOL) checkplateNumberTFWithPlateNumer:(NSString *)plateNumber {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:plateNumber]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [plateNumber length] == 7) {
+        return YES;
+    }
+    return NO;
+}
+
 -(void) toHistoryList {
     BaoyangHistoryVC *historyVC = [[BaoyangHistoryVC alloc] init];
     historyVC.carDic = self.carDic;
@@ -273,6 +297,12 @@
     }
     if (! self.plateNumberTF.text || self.plateNumberTF.text.length == 0) {
         _networkConditionHUD.labelText = @"车牌号必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! [self checkplateNumberTFWithPlateNumer:self.plateNumberTF.text]) {
+        _networkConditionHUD.labelText = @"车牌号格式不正确，请重新输入！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
@@ -300,6 +330,12 @@
     }
     if (! self.plateNumberTF.text || self.plateNumberTF.text.length == 0) {
         _networkConditionHUD.labelText = @"车牌号必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! [self checkplateNumberTFWithPlateNumer:self.plateNumberTF.text]) {
+        _networkConditionHUD.labelText = @"车牌号格式不正确，请重新输入！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;

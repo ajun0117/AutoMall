@@ -27,7 +27,9 @@
     NSDictionary *thePackageDic;    //存储下级页面已选择的套餐
     NSArray *selectedDiscounts;    //选择的优惠
     NSDictionary *theDiscountDic;   //存储下级页面已选择的优惠
-    
+    float serVicePrice;            //方案总价
+    float packagePrice;     //套餐价
+    float discountPrice;    //优惠的价格（实际需要减掉的价格）
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -88,8 +90,10 @@
         [removeAry removeAllObjects];       //重置removeAry数组
         [removeAry addObjectsFromArray:serviceContentAry];
         
-        NSLog(@"selectedPackageAry: %@",selectedPackageAry);
+        packagePrice = 0;
         for (NSDictionary *dic1 in selectedPackageAry) {
+            packagePrice += [dic1[@"price"] floatValue];
+            NSLog(@"packagePrice: %.2f",packagePrice);
             NSArray *serviceContents = dic1[@"serviceContents"];
             for (NSDictionary *dic2 in serviceContents) {
                 int serviceId = [dic2[@"id"] intValue];
@@ -100,11 +104,45 @@
                 }
             }
         }
-
+        [lineationAry removeAllObjects];
+        [lineationAry addObjectsFromArray:removeAry];
+        serVicePrice = 0;     //初始化价格
+        for (NSDictionary *dic in lineationAry) {
+            serVicePrice += [dic[@"price"] floatValue];
+        }
+        
         [self.myTableView reloadData];
     };
     [self.navigationController pushViewController:serviceVC animated:YES];
 }
+
+-(void)carInfo {
+    UpkeepCarInfoVC *infoVC = [[UpkeepCarInfoVC alloc] init];
+    infoVC.carDic = self.carDic;
+    infoVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:infoVC animated:YES];
+}
+
+-(void)carDiscounts {
+    AutoCheckDisountsVC *discountsVC = [[AutoCheckDisountsVC alloc] init];
+    discountsVC.selectedDic = theDiscountDic;
+    discountsVC.SelecteDiscount = ^(NSMutableDictionary *discountDic) {
+        theDiscountDic = [NSDictionary dictionaryWithDictionary:discountDic];
+        selectedDiscounts = [discountDic allValues];
+        
+        discountPrice = 0;
+        for (NSDictionary *dic in selectedDiscounts) {
+            if (dic[@"money"]) {
+                discountPrice += [dic[@"money"] floatValue];
+            }
+        }
+        NSLog(@"discountPrice: %.2f",discountPrice);
+        [self.myTableView reloadData];
+    };
+    discountsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:discountsVC animated:YES];
+}
+
 
 - (IBAction)confirmAction:(id)sender {
     [self requestPostCarUpkeepConfirm];
@@ -384,7 +422,7 @@
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"总价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                cell.contentL.text = @"￥6000";
+                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice];
                 return cell;
                 break;
             }
@@ -413,7 +451,8 @@
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"折后价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                cell.contentL.text = @"￥5500";
+                NSLog(@"serVicePrice + packagePrice + discountPrice:  %.2f",serVicePrice + packagePrice + discountPrice);
+                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + discountPrice];
                 return cell;
                 break;
             }
@@ -461,6 +500,10 @@
         NSDictionary *dic = removeAry[indexPath.row];
         [lineationAry addObject:dic];
         tableView.editing = NO;
+        
+        serVicePrice += [dic[@"price"] floatValue];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
     }];
     
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
@@ -468,31 +511,17 @@
         NSDictionary *dic = removeAry[indexPath.row];
         [lineationAry removeObject:dic];
         tableView.editing = NO;
+        
+        serVicePrice -= [dic[@"price"] floatValue];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3,5)] withRowAnimation:UITableViewRowAnimationFade];
     }];
     
     if (cell.declareL.strikeThroughEnabled) {
         return @[action0];
     }
     return @[action1];
-}
-
--(void)carInfo {
-    UpkeepCarInfoVC *infoVC = [[UpkeepCarInfoVC alloc] init];
-    infoVC.carDic = self.carDic;
-    infoVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:infoVC animated:YES];
-}
-
--(void)carDiscounts {
-    AutoCheckDisountsVC *discountsVC = [[AutoCheckDisountsVC alloc] init];
-    discountsVC.selectedDic = theDiscountDic;
-    discountsVC.SelecteDiscount = ^(NSMutableDictionary *discountDic) {
-        theDiscountDic = [NSDictionary dictionaryWithDictionary:discountDic];
-        selectedDiscounts = [discountDic allValues];
-        [self.myTableView reloadData];
-    };
-    discountsVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:discountsVC animated:YES];
 }
 
 
@@ -541,7 +570,7 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepConfirm, @"op", nil];
     
     NSMutableArray *serviceContents = [NSMutableArray array];
-    for (NSDictionary *dic in removeAry) {
+    for (NSDictionary *dic in lineationAry) {   //只提交没有划线的
         NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"price"],@"price", nil];
         [serviceContents addObject:dicc];
     }
@@ -552,15 +581,13 @@
         [servicePackages addObject:dicc1];
     }
     
-//    NSArray *discounts = @[@{@"id":@"8",@"item":@"2",@"price":@"10"}];
-    
     NSMutableArray *discounts = [NSMutableArray array];
     for (NSDictionary *dic2 in selectedDiscounts) {
         NSDictionary *dicc2 = [NSDictionary dictionaryWithObjectsAndKeys:dic2[@"id"],@"id",dic2[@"item"],@"item",dic2[@"money"],@"price", nil];
         [discounts addObject:dicc2];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", @"3000",@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice + discountPrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
@@ -583,6 +610,10 @@
             serviceContentAry = responseObject[@"data"];
             [removeAry addObjectsFromArray:serviceContentAry];
             [lineationAry addObjectsFromArray:removeAry];
+            serVicePrice = 0;     //初始化价格
+            for (NSDictionary *dic in lineationAry) {
+                serVicePrice += [dic[@"price"] floatValue];
+            }
             [self.myTableView reloadData];
         }
         else {

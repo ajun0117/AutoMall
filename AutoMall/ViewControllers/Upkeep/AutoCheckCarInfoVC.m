@@ -36,6 +36,10 @@
 //    [super viewDidDisappear:animated];
 //    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"fuelAmount":self.fuelAmountTF.text});
 //}
+- (IBAction)mileagePhoto:(id)sender {
+}
+- (IBAction)fuelAmountPhoto:(id)sender {
+}
 
 #pragma mark - 添加完成按钮的toolBar工具栏
 - (void)setTextFieldInputAccessoryViewWithTF:(UITextField *)field{

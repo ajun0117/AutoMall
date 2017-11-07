@@ -1368,7 +1368,6 @@
 				0453D3AC1F693469004F79C8 /* 车主信息 */,
 				04AD1FD91F43ECD400247819 /* 订单页 */,
 				F7650B5C1FAF72EF00C0FCD2 /* 选择优惠项目 */,
-				04EB16271F42F90D00974972 /* 优惠项目 */,
 				04EB16211F42F04200974972 /* 服务套餐 */,
 				049EA1651FAB04020081940F /* 服务方案 */,
 			);
@@ -1397,6 +1396,16 @@
 			name = cells;
 			sourceTree = "<group>";
 		};
+		044218EA1FB1B84B00844B3F /* 填写里程燃油量照片 */ = {
+			isa = PBXGroup;
+			children = (
+				04B3EFDF1F9460DC0056BF9B /* AutoCheckCarInfoVC.h */,
+				04B3EFE01F9460DC0056BF9B /* AutoCheckCarInfoVC.m */,
+				04B3EFE11F9460DC0056BF9B /* AutoCheckCarInfoVC.xib */,
+			);
+			name = "填写里程燃油量照片";
+			sourceTree = "<group>";
+		};
 		044A24141F3326CF009720DE /* 汽车检查页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1404,15 +1413,13 @@
 				04ABFB331F984B340015EE78 /* 添加检查图片 */,
 				F712456F1F868AE30091816F /* 检查页数据库模型 */,
 				04A69F0A1F710CCA00E966A0 /* 车图标记 */,
+				044218EA1FB1B84B00844B3F /* 填写里程燃油量照片 */,
 				0453D3A61F692AB0004F79C8 /* 检查页Cell */,
 				04C6563D1F96F68F00611AFF /* MyAlertView.h */,
 				04C6563E1F96F68F00611AFF /* MyAlertView.m */,
 				044A24151F3326F9009720DE /* AutoCheckVC.h */,
 				044A24161F3326F9009720DE /* AutoCheckVC.m */,
 				044A24171F3326F9009720DE /* AutoCheckVC.xib */,
-				04B3EFDF1F9460DC0056BF9B /* AutoCheckCarInfoVC.h */,
-				04B3EFE01F9460DC0056BF9B /* AutoCheckCarInfoVC.m */,
-				04B3EFE11F9460DC0056BF9B /* AutoCheckCarInfoVC.xib */,
 			);
 			name = "汽车检查页";
 			sourceTree = "<group>";
@@ -2266,6 +2273,7 @@
 			children = (
 				F7D87A221FA5BF9E009EB53F /* 账户管理 */,
 				04D035891FA727480013AD6F /* 保养服务订单 */,
+				04F7D85A1F5EA4E2004945ED /* 添加操作员 */,
 				F7AC8DA91FA7961900B284DA /* 员工编辑技能介绍 */,
 				040BC8BD1FA8844F009AD3BA /* 员工查看自己的技能列表 */,
 				F7D87A1C1FA4E5D9009EB53F /* 员工修改技能认证 */,
@@ -2275,8 +2283,8 @@
 				04F7D8701F5EAC46004945ED /* 商城订单 */,
 				04EFEC741F5FE977004D9188 /* 商品收藏 */,
 				04F7D86A1F5EA969004945ED /* 门店等级 */,
-				04F7D85A1F5EA4E2004945ED /* 添加操作员 */,
 				04E4107F1F5D52170097E0A6 /* 申请认证 */,
+				04EB16271F42F90D00974972 /* 优惠项目 */,
 				0490FBFB1F57F67100F77661 /* 定制服务 */,
 				041076E91F5423FB003CB740 /* 中心首页cell */,
 				04DC7CF61F31C24000AA20A7 /* PersonalCenterVC.h */,
@@ -2671,6 +2679,7 @@
 				04EB162F1F43005F00974972 /* AddDiscountsVC.xib */,
 			);
 			name = "优惠项目";
+			path = ../Upkeep;
 			sourceTree = "<group>";
 		};
 		04EFEC741F5FE977004D9188 /* 商品收藏 */ = {
