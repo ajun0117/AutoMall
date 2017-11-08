@@ -9,13 +9,14 @@
 #import "AppDelegate.h"
 #import "BPush.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
 
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
 static BOOL isBackGroundActivateApplication;
 
-@interface AppDelegate ()
+@interface AppDelegate () <WXApiDelegate>
 
 @end
 
@@ -198,11 +199,11 @@ static BOOL isBackGroundActivateApplication;
     }
 }
 
-//- (BOOL)application:(UIApplication *)application
-//      handleOpenURL:(NSURL *)url
-//{
-//    return  [WXApi handleOpenURL:url delegate:self];
-//}
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return  [WXApi handleOpenURL:url delegate:self];
+}
 
 
 - (BOOL)application:(UIApplication *)application
@@ -240,8 +241,19 @@ static BOOL isBackGroundActivateApplication;
 //        }];
     }
 //
-//    return  [WXApi handleOpenURL:url delegate:self];
-    return YES;
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+#pragma - 微信回调
+-(void) onResp:(BaseResp*)resp
+{
+    if([resp isKindOfClass:[PayResp class]]){
+        PayResp *respp = (PayResp *)resp;
+        //发送微信支付完成通知
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult", respp, @"RespData",nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WechatPayNotification" object:nil userInfo:userInfo];
+    }
+    
 }
 
 // NOTE: 9.0以后使用新API接口

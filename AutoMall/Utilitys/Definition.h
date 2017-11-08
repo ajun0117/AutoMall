@@ -202,6 +202,7 @@
 #define MallOrderList                             @"/api/order/list"                    //商城订单列表
 #define MallOrderGetInfo                      @"/api/order/getInfo"               //商城订单详情
 #define DiscountAdd                               @"/api/discount/add"              //新增优惠
+#define DiscountDel                                @"/api/discount/del"            //删除优惠
 #define DiscountEdit                               @"/api/discount/edit"             //编辑优惠
 #define MessageList                                @"/api/message/list"              //消息列表
 #define AgreementInfo                           @"http://119.23.227.246/carupkeep/api/agreement/info"         //免责声明

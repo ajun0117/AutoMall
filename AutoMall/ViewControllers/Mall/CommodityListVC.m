@@ -261,6 +261,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == selectTableView) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.selectedBackgroundView.backgroundColor = RGBCOLOR(246, 246, 246);
         NSDictionary *dic = comtermAry[indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.textLabel.text = dic[@"name"];
@@ -277,7 +278,10 @@
 //        cell.zhekouL.text =
         cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
         cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
-        cell.jifenL.text =  [NSString stringWithFormat:@"%@积分",dic[@"integral"]];
+        if ([dic[@"integral"] intValue] > 0) {
+        } else {
+            cell.jifenL.text = @"该优惠商品不累计积分";
+        }
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if ([mobileUserType isEqualToString:@"1"]) {    //老板
             if ([dic[@"discount"] intValue] > 0) {

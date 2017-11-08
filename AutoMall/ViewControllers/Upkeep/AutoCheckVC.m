@@ -843,7 +843,7 @@
         
     }
 //    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
-    NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":lichengDic[@"mileage"],@"fuelAmount":lichengDic[@"fuelAmount"]};
+    NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":lichengDic[@"mileage"],@"mileageImage":lichengDic[@"mileageImg"],@"fuelAmount":lichengDic[@"fuelAmount"],@"fuelImage":lichengDic[@"fuelAmountImg"]};
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);

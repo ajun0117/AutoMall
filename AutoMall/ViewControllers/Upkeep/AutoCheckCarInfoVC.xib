@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,10 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckCarInfoVC">
             <connections>
                 <outlet property="fuelAmountImgView" destination="qas-OM-hJF" id="mw2-n3-gIe"/>
-                <outlet property="fuelAmountL" destination="knq-dr-74N" id="XRc-Cu-EqP"/>
                 <outlet property="fuelAmountTF" destination="Pxp-m4-1Lf" id="f3N-eg-tnO"/>
                 <outlet property="mileageImgView" destination="NeO-8O-4vF" id="34Z-az-NNt"/>
-                <outlet property="mileageL" destination="Kbx-vD-Whr" id="kqA-dH-sds"/>
                 <outlet property="mileageTF" destination="dPe-n0-ed7" id="TbA-wo-ac5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -75,7 +73,7 @@
                                             <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-8O-4vF" customClass="WPImageView">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-8O-4vF" customClass="WPImageView">
                                             <rect key="frame" x="0.0" y="45" width="375" height="174"/>
                                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
@@ -87,12 +85,6 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击上传照片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbx-vD-Whr">
-                                            <rect key="frame" x="141" y="124" width="92" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -113,12 +105,10 @@
                                         <constraint firstAttribute="trailing" secondItem="yWh-F4-TTz" secondAttribute="trailing" id="e1V-Dp-Tet"/>
                                         <constraint firstItem="ecz-K0-UNC" firstAttribute="top" secondItem="yWh-F4-TTz" secondAttribute="bottom" constant="11.5" id="eK9-fm-CHf"/>
                                         <constraint firstItem="NeO-8O-4vF" firstAttribute="top" secondItem="7Vz-bC-h5i" secondAttribute="bottom" id="iYh-4z-1cN"/>
-                                        <constraint firstItem="Kbx-vD-Whr" firstAttribute="centerX" secondItem="NeO-8O-4vF" secondAttribute="centerX" id="nAm-m7-0M3"/>
                                         <constraint firstAttribute="trailing" secondItem="dPe-n0-ed7" secondAttribute="trailing" constant="16" id="olv-Tv-3d4"/>
                                         <constraint firstItem="7Vz-bC-h5i" firstAttribute="top" secondItem="H4e-j4-KlP" secondAttribute="top" constant="44" id="qhl-Yx-5Ax"/>
                                         <constraint firstItem="NeO-8O-4vF" firstAttribute="leading" secondItem="H4e-j4-KlP" secondAttribute="leading" id="uoF-Xt-aH0"/>
                                         <constraint firstItem="yWh-F4-TTz" firstAttribute="top" secondItem="H4e-j4-KlP" secondAttribute="top" id="wIp-E4-fec"/>
-                                        <constraint firstItem="Kbx-vD-Whr" firstAttribute="centerY" secondItem="NeO-8O-4vF" secondAttribute="centerY" constant="1" id="xqf-sh-krn"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lus-NB-t83">
@@ -175,16 +165,10 @@
                                                 <outlet property="delegate" destination="-1" id="pZF-tn-GLR"/>
                                             </connections>
                                         </textField>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qas-OM-hJF" customClass="WPImageView">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="qas-OM-hJF" customClass="WPImageView">
                                             <rect key="frame" x="0.0" y="45" width="375" height="175"/>
                                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击上传照片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knq-dr-74N">
-                                            <rect key="frame" x="141" y="124.5" width="92" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -194,14 +178,12 @@
                                         <constraint firstAttribute="bottom" secondItem="Ti0-Dc-frD" secondAttribute="bottom" id="AHb-Q2-hK2"/>
                                         <constraint firstItem="qas-OM-hJF" firstAttribute="leading" secondItem="Lus-NB-t83" secondAttribute="leading" id="HGO-4P-2dF"/>
                                         <constraint firstAttribute="height" constant="220" id="HK0-aV-xlF"/>
-                                        <constraint firstItem="knq-dr-74N" firstAttribute="centerX" secondItem="qas-OM-hJF" secondAttribute="centerX" id="HXI-xm-iOP"/>
                                         <constraint firstItem="ecs-Kg-qVs" firstAttribute="top" secondItem="Lus-NB-t83" secondAttribute="top" id="LZh-LG-77b"/>
                                         <constraint firstAttribute="bottom" secondItem="qas-OM-hJF" secondAttribute="bottom" id="Mmr-wA-lXH"/>
                                         <constraint firstItem="Pxp-m4-1Lf" firstAttribute="leading" secondItem="z4r-yx-mbs" secondAttribute="trailing" constant="8" id="Sdh-mO-Jx7"/>
                                         <constraint firstAttribute="trailing" secondItem="Pxp-m4-1Lf" secondAttribute="trailing" constant="16" id="Tqe-BV-XQh"/>
                                         <constraint firstItem="qas-OM-hJF" firstAttribute="top" secondItem="1o8-jz-spk" secondAttribute="bottom" id="VNN-64-WRt"/>
                                         <constraint firstItem="ecs-Kg-qVs" firstAttribute="leading" secondItem="Lus-NB-t83" secondAttribute="leading" id="VQi-cL-6zb"/>
-                                        <constraint firstItem="knq-dr-74N" firstAttribute="centerY" secondItem="qas-OM-hJF" secondAttribute="centerY" constant="1" id="W1z-lm-lT2"/>
                                         <constraint firstItem="1o8-jz-spk" firstAttribute="top" secondItem="Lus-NB-t83" secondAttribute="top" constant="44" id="buZ-Dd-0TO"/>
                                         <constraint firstAttribute="trailing" secondItem="qas-OM-hJF" secondAttribute="trailing" id="eWJ-ZX-aUk"/>
                                         <constraint firstItem="Ti0-Dc-frD" firstAttribute="leading" secondItem="Lus-NB-t83" secondAttribute="leading" id="gGn-TI-koc"/>
@@ -258,4 +240,7 @@
             <point key="canvasLocation" x="-604" y="-9"/>
         </view>
     </objects>
+    <resources>
+        <image name="uploadImgWT" width="1125" height="633"/>
+    </resources>
 </document>

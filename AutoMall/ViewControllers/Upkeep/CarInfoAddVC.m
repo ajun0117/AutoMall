@@ -30,7 +30,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *genderTF;
 @property (strong, nonatomic) IBOutlet UITextField *birthdayTF;
 @property (weak, nonatomic) IBOutlet WPImageView *carImgView;
-@property (weak, nonatomic) IBOutlet UILabel *carImgL;
+//@property (weak, nonatomic) IBOutlet UILabel *carImgL;
 @property (strong, nonatomic) IBOutlet UITextField *plateNumberTF;
 @property (strong, nonatomic) IBOutlet UITextField *brandTF;
 @property (strong, nonatomic) IBOutlet UITextField *modelTF;
@@ -66,9 +66,9 @@
         
         carImgUrl = self.carDic[@"image"];
         
-        [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
         if (carImgUrl.length > 0) {
-            self.carImgL.hidden = YES;
+            [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+//            self.carImgL.hidden = YES;
         }
         self.mileageTF.text = NSStringWithNumber(self.carDic[@"mileage"]);
         self.fuelAmountTF.text = NSStringWithNumber(self.carDic[@"fuelAmount"]);
@@ -419,7 +419,7 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
     self.carImgView.image = image;
-    self.carImgL.hidden = YES;
+//    self.carImgL.hidden = YES;
     [self requestUploadImgFile:self.carImgView]; 
     
     [self dismissViewControllerAnimated:YES completion:nil];

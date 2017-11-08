@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,27 +14,20 @@
             <connections>
                 <outlet property="addressTF" destination="f08-p1-t8w" id="aUM-ip-Vl8"/>
                 <outlet property="aliPayCollectionImg" destination="pEg-k3-aPT" id="4iO-Iw-WId"/>
-                <outlet property="aliPayImgL" destination="ump-2g-4Sv" id="8Z5-rn-Xx0"/>
                 <outlet property="cardAImg" destination="UGJ-Y5-cHI" id="Fka-Ib-Epn"/>
-                <outlet property="cardAImgL" destination="4WK-0r-wlA" id="tMY-01-kRF"/>
                 <outlet property="cardBImg" destination="HbI-zE-PSu" id="ImG-r0-8VE"/>
-                <outlet property="cardBImgL" destination="hYV-BP-nqC" id="Oxu-CK-Dxt"/>
                 <outlet property="detailAddressTF" destination="6Cp-nV-zmk" id="nOQ-PI-PQF"/>
                 <outlet property="gongzhongImg" destination="gXp-Zz-elE" id="Kwk-rK-jUY"/>
-                <outlet property="gongzhongImgL" destination="KQP-yd-28W" id="9Q2-4C-KHS"/>
                 <outlet property="licenseImg" destination="0pW-ky-RzV" id="X5u-0e-bYT"/>
-                <outlet property="licenseImgL" destination="wm0-RL-Nc6" id="rb0-1X-sIg"/>
                 <outlet property="myScrollView" destination="fPB-cF-lHZ" id="jfp-X1-j0o"/>
                 <outlet property="nameTF" destination="ed3-aZ-xMV" id="Fro-qn-tjk"/>
                 <outlet property="phoneTF" destination="zoI-Ps-qei" id="VAL-ZI-3vw"/>
                 <outlet property="recommendCodeTF" destination="bR6-a8-SI1" id="DzA-9a-Hrg"/>
                 <outlet property="replayBtn" destination="Ggi-so-8Bg" id="VkR-Cf-CZu"/>
                 <outlet property="shopImg" destination="wN7-8K-50T" id="9Z6-T3-E0u"/>
-                <outlet property="shopImgL" destination="Kub-Fj-6rd" id="POO-Nm-Ijf"/>
                 <outlet property="shortNameTF" destination="I1v-8m-l3O" id="tRC-Tb-ZFj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wechatCollectionImg" destination="p4D-RQ-vRo" id="ayN-np-vzN"/>
-                <outlet property="wechatImgL" destination="tmo-EP-I0V" id="fGf-23-IcY"/>
                 <outlet property="wechatNameTF" destination="qJa-dT-JIA" id="D93-Q3-zwD"/>
             </connections>
         </placeholder>
@@ -66,26 +59,18 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RP6-2c-xfz">
                             <rect key="frame" x="0.0" y="44" width="375" height="211"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wN7-8K-50T" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="wN7-8K-50T" customClass="WPImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传门店图片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-Fj-6rd">
-                                    <rect key="frame" x="141.5" y="96" width="92" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="wN7-8K-50T" secondAttribute="bottom" id="FGQ-4v-Z4m"/>
                                 <constraint firstAttribute="width" secondItem="RP6-2c-xfz" secondAttribute="height" multiplier="16:9" id="NMq-OY-jPQ"/>
-                                <constraint firstItem="Kub-Fj-6rd" firstAttribute="centerY" secondItem="wN7-8K-50T" secondAttribute="centerY" id="Pvu-Ga-1rI"/>
                                 <constraint firstItem="wN7-8K-50T" firstAttribute="top" secondItem="RP6-2c-xfz" secondAttribute="top" id="bCR-LJ-uwa"/>
                                 <constraint firstAttribute="trailing" secondItem="wN7-8K-50T" secondAttribute="trailing" id="dno-Hi-Eqg"/>
                                 <constraint firstItem="wN7-8K-50T" firstAttribute="leading" secondItem="RP6-2c-xfz" secondAttribute="leading" id="mST-2f-pTo"/>
-                                <constraint firstItem="Kub-Fj-6rd" firstAttribute="centerX" secondItem="wN7-8K-50T" secondAttribute="centerX" id="ueX-BE-8UB"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpk-gP-QiI">
@@ -303,70 +288,36 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pW-ky-RzV" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="0pW-ky-RzV" customClass="WPImageView">
                                     <rect key="frame" x="16" y="281" width="161.5" height="200"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="200" id="elC-zj-Adi"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传营业执照" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm0-RL-Nc6">
-                                    <rect key="frame" x="36" y="341.5" width="120" height="80"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="120" id="cSP-DB-xHW"/>
-                                        <constraint firstAttribute="height" constant="80" id="ruQ-on-qL5"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsX-8J-TZ0">
                                     <rect key="frame" x="197.5" y="281" width="161.5" height="200"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UGJ-Y5-cHI" customClass="WPImageView">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="UGJ-Y5-cHI" customClass="WPImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="161.5" height="90"/>
                                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传名片正面" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4WK-0r-wlA">
-                                            <rect key="frame" x="21" y="4.5" width="120" height="80"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="JVd-Lk-vqo"/>
-                                                <constraint firstAttribute="width" constant="120" id="Ll0-a7-V7M"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-zE-PSu" customClass="WPImageView">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-zE-PSu" customClass="WPImageView">
                                             <rect key="frame" x="0.0" y="110" width="161.5" height="89.5"/>
                                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传名片反面" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYV-BP-nqC">
-                                            <rect key="frame" x="21" y="114" width="120" height="80"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="JZ0-dD-0Cr"/>
-                                                <constraint firstAttribute="width" constant="120" id="e1m-f7-fzf"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="UGJ-Y5-cHI" secondAttribute="trailing" id="Glb-U3-3w9"/>
                                         <constraint firstItem="UGJ-Y5-cHI" firstAttribute="top" secondItem="dsX-8J-TZ0" secondAttribute="top" id="Jt0-Oc-TTI"/>
                                         <constraint firstItem="HbI-zE-PSu" firstAttribute="height" secondItem="UGJ-Y5-cHI" secondAttribute="height" id="OOW-R8-DN1"/>
-                                        <constraint firstItem="4WK-0r-wlA" firstAttribute="centerX" secondItem="UGJ-Y5-cHI" secondAttribute="centerX" id="QkT-tm-bZM"/>
-                                        <constraint firstItem="hYV-BP-nqC" firstAttribute="centerY" secondItem="HbI-zE-PSu" secondAttribute="centerY" id="XaG-tG-dYc"/>
                                         <constraint firstItem="HbI-zE-PSu" firstAttribute="top" secondItem="UGJ-Y5-cHI" secondAttribute="bottom" constant="20" id="ZSb-1W-Hvf"/>
                                         <constraint firstItem="UGJ-Y5-cHI" firstAttribute="leading" secondItem="dsX-8J-TZ0" secondAttribute="leading" id="aQv-b0-1n8"/>
                                         <constraint firstItem="HbI-zE-PSu" firstAttribute="leading" secondItem="dsX-8J-TZ0" secondAttribute="leading" id="aRQ-cJ-Ms6"/>
                                         <constraint firstAttribute="bottom" secondItem="HbI-zE-PSu" secondAttribute="bottom" id="atY-CX-Hoa"/>
                                         <constraint firstItem="HbI-zE-PSu" firstAttribute="width" secondItem="UGJ-Y5-cHI" secondAttribute="width" id="azN-k2-EVI"/>
                                         <constraint firstAttribute="trailing" secondItem="HbI-zE-PSu" secondAttribute="trailing" id="fQR-tq-zxh"/>
-                                        <constraint firstItem="hYV-BP-nqC" firstAttribute="centerX" secondItem="HbI-zE-PSu" secondAttribute="centerX" id="kOa-zF-dwU"/>
-                                        <constraint firstItem="4WK-0r-wlA" firstAttribute="centerY" secondItem="UGJ-Y5-cHI" secondAttribute="centerY" id="ti6-cs-deY"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iy4-hP-VPb">
@@ -450,20 +401,10 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-Zz-elE" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-Zz-elE" customClass="WPImageView">
                                     <rect key="frame" x="16" y="592.5" width="161.5" height="200"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传公众号二维码图片（可选）" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-yd-28W">
-                                    <rect key="frame" x="57" y="652.5" width="80" height="80"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="eap-ZX-7hH"/>
-                                        <constraint firstAttribute="height" constant="80" id="kHn-cu-mXU"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIU-vm-wDT">
                                     <rect key="frame" x="0.0" y="804.5" width="375" height="1"/>
                                     <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
@@ -513,37 +454,17 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-k3-aPT" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-k3-aPT" customClass="WPImageView">
                                     <rect key="frame" x="16" y="857.5" width="161.5" height="200"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="200" id="hsk-VD-Nip"/>
                                     </constraints>
                                 </imageView>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p4D-RQ-vRo" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="p4D-RQ-vRo" customClass="WPImageView">
                                     <rect key="frame" x="197.5" y="857.5" width="161.5" height="200"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传微信 收款码  （可选）" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmo-EP-I0V">
-                                    <rect key="frame" x="238" y="917.5" width="80" height="80"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="eS6-Vb-DMU"/>
-                                        <constraint firstAttribute="height" constant="80" id="h4E-as-3Pw"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传支付宝收款码（ 可选）" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ump-2g-4Sv">
-                                    <rect key="frame" x="57" y="917.5" width="80" height="80"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="KgN-XJ-ukl"/>
-                                        <constraint firstAttribute="height" constant="80" id="h5h-zn-vEm"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-Av-oS8">
                                     <rect key="frame" x="0.0" y="1099" width="375" height="1"/>
                                     <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
@@ -567,7 +488,6 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="tmo-EP-I0V" firstAttribute="centerY" secondItem="p4D-RQ-vRo" secondAttribute="centerY" id="0Nw-4G-ass"/>
                                 <constraint firstAttribute="trailing" secondItem="bR6-a8-SI1" secondAttribute="trailing" constant="16" id="0Ta-SZ-m11"/>
                                 <constraint firstAttribute="trailing" secondItem="zIU-vm-wDT" secondAttribute="trailing" id="19r-51-KSF"/>
                                 <constraint firstItem="ZDs-8Q-bo0" firstAttribute="top" secondItem="zIU-vm-wDT" secondAttribute="bottom" constant="7" id="1Ja-6w-w9D"/>
@@ -575,9 +495,7 @@
                                 <constraint firstAttribute="trailing" secondItem="jsB-hT-qKM" secondAttribute="trailing" constant="16" id="1YH-yT-dmQ"/>
                                 <constraint firstItem="BtE-Gh-dWb" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="28g-Uh-8Tv"/>
                                 <constraint firstAttribute="trailing" secondItem="mys-Bq-48v" secondAttribute="trailing" constant="16" id="2cQ-ik-cmC"/>
-                                <constraint firstItem="ump-2g-4Sv" firstAttribute="centerX" secondItem="pEg-k3-aPT" secondAttribute="centerX" id="4gN-oi-dEd"/>
                                 <constraint firstItem="gXp-Zz-elE" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="5hU-i2-E1q"/>
-                                <constraint firstItem="tmo-EP-I0V" firstAttribute="centerX" secondItem="p4D-RQ-vRo" secondAttribute="centerX" id="5qo-Xi-dY2"/>
                                 <constraint firstItem="Iy4-hP-VPb" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" id="602-Dq-vu6"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="top" secondItem="0pW-ky-RzV" secondAttribute="top" id="6Oi-Jd-aDX"/>
                                 <constraint firstAttribute="trailing" secondItem="fhf-U4-61W" secondAttribute="trailing" constant="16" id="6gH-vO-OOO"/>
@@ -594,10 +512,8 @@
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="width" secondItem="0pW-ky-RzV" secondAttribute="width" id="GJZ-X7-1j1"/>
                                 <constraint firstItem="zIU-vm-wDT" firstAttribute="top" secondItem="gXp-Zz-elE" secondAttribute="bottom" constant="12" id="GfE-x9-U9z"/>
                                 <constraint firstItem="ed3-aZ-xMV" firstAttribute="top" secondItem="zpk-gP-QiI" secondAttribute="top" constant="10" id="IVO-O0-bw5"/>
-                                <constraint firstItem="KQP-yd-28W" firstAttribute="centerY" secondItem="gXp-Zz-elE" secondAttribute="centerY" id="KDn-GH-eXA"/>
                                 <constraint firstItem="PUR-xc-T2b" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="LVP-HP-RtR"/>
                                 <constraint firstAttribute="trailing" secondItem="zoI-Ps-qei" secondAttribute="trailing" constant="16" id="NJf-r7-J1G"/>
-                                <constraint firstItem="wm0-RL-Nc6" firstAttribute="centerX" secondItem="0pW-ky-RzV" secondAttribute="centerX" id="NaT-at-r0R"/>
                                 <constraint firstAttribute="trailing" secondItem="6Cp-nV-zmk" secondAttribute="trailing" constant="16" id="O0I-Yk-iac"/>
                                 <constraint firstItem="pEg-k3-aPT" firstAttribute="height" secondItem="gXp-Zz-elE" secondAttribute="height" id="O4m-h5-OQV"/>
                                 <constraint firstItem="qiI-ND-qXz" firstAttribute="top" secondItem="BtE-Gh-dWb" secondAttribute="bottom" constant="7" id="Phl-zn-dvK"/>
@@ -616,7 +532,6 @@
                                 <constraint firstAttribute="bottom" secondItem="OLi-Av-oS8" secondAttribute="bottom" id="Vwn-Wl-UZi"/>
                                 <constraint firstItem="BtE-Gh-dWb" firstAttribute="top" secondItem="Iy4-hP-VPb" secondAttribute="bottom" constant="7" id="W59-Pa-V7s"/>
                                 <constraint firstItem="jsB-hT-qKM" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="WY9-PU-Qya"/>
-                                <constraint firstItem="ump-2g-4Sv" firstAttribute="centerY" secondItem="pEg-k3-aPT" secondAttribute="centerY" id="WgQ-U7-Ecm"/>
                                 <constraint firstItem="PUR-xc-T2b" firstAttribute="top" secondItem="I1v-8m-l3O" secondAttribute="bottom" constant="7" id="WtT-EQ-2Dl"/>
                                 <constraint firstItem="mys-Bq-48v" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="XcF-SV-Rt5"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="leading" secondItem="0pW-ky-RzV" secondAttribute="trailing" constant="20" id="Yte-I2-hub"/>
@@ -633,7 +548,6 @@
                                 <constraint firstItem="VuP-LU-TBT" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="iNw-YV-1O8"/>
                                 <constraint firstAttribute="trailing" secondItem="OLi-Av-oS8" secondAttribute="trailing" id="iT9-Er-gAL"/>
                                 <constraint firstItem="fhf-U4-61W" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="jJ5-Qw-yQJ"/>
-                                <constraint firstItem="KQP-yd-28W" firstAttribute="centerX" secondItem="gXp-Zz-elE" secondAttribute="centerX" id="jb2-VU-t4Q"/>
                                 <constraint firstItem="OK6-Bd-rfK" firstAttribute="top" secondItem="zpk-gP-QiI" secondAttribute="top" id="kL8-tK-YZA"/>
                                 <constraint firstItem="jsB-hT-qKM" firstAttribute="top" secondItem="qJa-dT-JIA" secondAttribute="bottom" constant="7" id="kVS-C0-t8U"/>
                                 <constraint firstAttribute="trailing" secondItem="uI8-Y2-ccd" secondAttribute="trailing" constant="16" id="kj9-Sw-FjA"/>
@@ -647,7 +561,6 @@
                                 <constraint firstItem="0pW-ky-RzV" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="q3Y-aa-P6t"/>
                                 <constraint firstItem="ZDs-8Q-bo0" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="q4p-ZW-7eJ"/>
                                 <constraint firstItem="qiI-ND-qXz" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" constant="16" id="s0K-31-EfO"/>
-                                <constraint firstItem="wm0-RL-Nc6" firstAttribute="centerY" secondItem="0pW-ky-RzV" secondAttribute="centerY" id="sVM-M9-84F"/>
                                 <constraint firstAttribute="trailing" secondItem="a4I-j8-CCc" secondAttribute="trailing" constant="16" id="t0u-KV-pZz"/>
                                 <constraint firstItem="OLi-Av-oS8" firstAttribute="leading" secondItem="zpk-gP-QiI" secondAttribute="leading" id="tIA-fk-l03"/>
                                 <constraint firstItem="0pW-ky-RzV" firstAttribute="top" secondItem="h5r-6T-JAx" secondAttribute="bottom" constant="8" id="uO8-Yy-wBe"/>
@@ -703,4 +616,7 @@
             <point key="canvasLocation" x="-193.5" y="428.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="uploadImgWT" width="1125" height="633"/>
+    </resources>
 </document>

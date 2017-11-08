@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameTF;
 @property (strong, nonatomic) IBOutlet UITextField *contentTF;
 @property (strong, nonatomic) IBOutlet WPImageView *imgView;
-@property (weak, nonatomic) IBOutlet UILabel *imgL;
+//@property (weak, nonatomic) IBOutlet UILabel *imgL;
 
 @end
 
@@ -52,9 +52,8 @@
     if (self.skillDic) {
         self.title = @"编辑技能";
         imgUrl = self.skillDic[@"image"];
-        [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
-        if (self.imgView.image) {
-            self.imgL.hidden = YES;
+        if (imgUrl.length > 0) {
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
         }
         self.nameTF.text = self.skillDic[@"name"];
         self.contentTF.text = self.skillDic[@"remark"];
@@ -142,7 +141,6 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
     self.imgView.image = image;
-    self.imgL.hidden = YES;
     [self requestUploadImgFile:self.imgView];
     
     [self dismissViewControllerAnimated:YES completion:nil];

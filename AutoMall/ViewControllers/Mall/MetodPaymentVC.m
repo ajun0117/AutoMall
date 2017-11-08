@@ -10,6 +10,7 @@
 #import "Order.h"
 #import "RSADataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
 
 @interface MetodPaymentVC ()
 {
@@ -17,6 +18,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSString *payModeStr;   //支付方式
     NSDictionary *aliPayDic;    //支付宝参数字典
+    NSDictionary *weChatPayDic;    //微信参数字典
 }
 @property (weak, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (weak, nonatomic) IBOutlet UILabel *moneyL;
@@ -34,7 +36,7 @@
     
     payModeStr = @"2";   //默认使用微信
     self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号：%@",self.orderNumber];
-    self.moneyL.text = [NSString stringWithFormat:@"应付金额：￥%.2f",self.money];
+    self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",self.money];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -192,7 +194,26 @@
 
 
 -(void)doWxPay {
-    
+    //============================================================
+    // V3&V4支付流程实现
+    // 注意:参数配置请查看服务器端Demo
+    // 更新时间：2015年11月20日
+    //============================================================
+    if(weChatPayDic != nil){
+        NSMutableString *stamp  = [weChatPayDic objectForKey:@"timestamp"];
+        
+        //调起微信支付
+        PayReq* req             = [[PayReq alloc] init];
+        req.partnerId           = [weChatPayDic objectForKey:@"partnerid"];
+        req.prepayId            = [weChatPayDic objectForKey:@"prepayid"];
+        req.nonceStr            = [weChatPayDic objectForKey:@"noncestr"];
+        req.timeStamp           = stamp.intValue;
+        req.package             = [weChatPayDic objectForKey:@"package"];
+        req.sign                = [weChatPayDic objectForKey:@"sign"];
+        [WXApi sendReq:req];
+        //日志输出
+        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[weChatPayDic objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+    }
 }
 
 #pragma mark - 支付完成后回调通知
@@ -226,37 +247,32 @@
             payresultStr = @"failure";
         }
     }
-//    if ([notification.name isEqualToString:WxPayNotification]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:WxPayNotification object:nil];
-//        
-//        PayResp *resp = [notification.userInfo objectForKey:@"RespData"];
-//        
-//        //        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
-//        //        NSString *strTitle;
-//        //支付返回结果，实际支付结果需要去微信服务器端查询
-//        //        strTitle = [NSString stringWithFormat:@"支付结果"];
-//        
-//        switch (resp.errCode) {
-//            case WXSuccess:
-//                //                strMsg = @"支付结果：成功！";
-//                //                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
-//                
-//                [self performSelectorOnMainThread:@selector(wxpayBack:) withObject:@"success" waitUntilDone:NO];
-//                
-//                break;
-//                
-//            default:
-//                //                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
-//                //                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
-//                
-//                [self performSelectorOnMainThread:@selector(wxpayBack:) withObject:@"failure" waitUntilDone:NO];
-//                
-//                break;
-//        }
-//        /***调试信息***/
-//        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        //        [alert show];
-//    }
+    if ([notification.name isEqualToString:@"WechatPayNotification"]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"WechatPayNotification" object:nil];
+        
+        PayResp *resp = [notification.userInfo objectForKey:@"RespData"];
+
+        switch (resp.errCode) {
+            case WXSuccess:
+                //                strMsg = @"支付结果：成功！";
+                //                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                [self requestOrderPaySuccess];
+                
+                break;
+                
+            default:
+                //                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                //                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+        }
+        /***调试信息***/
+        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+        NSString *strTitle;
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        strTitle = [NSString stringWithFormat:@"支付结果"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
     
 } 
 
@@ -273,8 +289,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:MallOrderChoosePayMode object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:MallOrderChoosePayMode, @"op", nil];
-        NSString *urlString = [NSString stringWithFormat:@"%@?code=%@&payMode=%@",UrlPrefix(MallOrderChoosePayMode),self.orderNumber,payModeStr];
-        [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    NSString *urlString = [NSString stringWithFormat:@"%@?code=%@&payMode=%@",UrlPrefix(MallOrderChoosePayMode),self.orderNumber,payModeStr];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 -(void)requestOrderPaySuccess {     //支付成功回调
@@ -301,10 +317,13 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {   //支付宝
             if ([payModeStr isEqualToString:@"1"]) {
                 aliPayDic = responseObject[@"data"];
-                [self doAlipayPay];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"AliPayNotification" object:nil];
+                [self doAlipayPay];
             }else if ([payModeStr isEqualToString:@"2"]) {    //微信
-                
+                NSLog(@"weChatPayDic: %@",weChatPayDic);
+                weChatPayDic = responseObject[@"data"];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"WechatPayNotification" object:nil];
+                [self doWxPay];
             }
         }
         else {

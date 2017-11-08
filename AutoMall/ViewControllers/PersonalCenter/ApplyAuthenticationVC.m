@@ -38,9 +38,9 @@
     // Do any additional setup after loading the view from its nib.
     if (self.infoDic) {
         self.title = @"门店信息";
-        [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
-        if (self.shopImg.image) {
-            self.shopImgL.hidden = YES;
+        shopImgUrl = self.infoDic[@"image"];
+        if (shopImgUrl.length > 0) {
+            [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
         }
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
@@ -49,31 +49,36 @@
         self.phoneTF.text = STRING(self.infoDic[@"phone"]);
         self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
         
-        [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])]];
-        if (self.licenseImg.image) {
-            self.licenseImg.hidden = YES;
+        licenseImgUrl = self.infoDic[@"licenseImg"];
+        if (licenseImgUrl.length > 0) {
+            [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])]];
         }
-        [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])]];
-        if (self.cardAImg.image) {
-            self.cardAImg.hidden = YES;
+        
+        cardAImgUrl = self.infoDic[@"cardImgA"];
+        if (cardAImgUrl.length > 0) {
+            [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])]];
         }
-        [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])]];
-        if (self.cardBImg.image) {
-            self.cardBImg.hidden = YES;
+        
+        cardBImgUrl = self.infoDic[@"cardImgB"];
+        if (cardBImgUrl.length > 0) {
+            [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])]];
         }
 
         self.wechatNameTF.text = STRING(self.infoDic[@"wechatName"]);
-        [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])]];
-        if (self.gongzhongImg.image) {
-            self.gongzhongImg.hidden = YES;
+        
+        gongzhongImgUrl = self.infoDic[@"wechatImg"];
+        if (gongzhongImgUrl.length > 0) {
+            [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])]];
         }
-        [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])]];
-        if (self.aliPayCollectionImg.image) {
-            self.aliPayCollectionImg.hidden = YES;
+        
+        aliPayCollectionImgUrl = self.infoDic[@"alipayImg"];
+        if (aliPayCollectionImgUrl.length > 0) {
+            [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])]];
         }
-        [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
-        if (self.wechatCollectionImg.image) {
-            self.wechatCollectionImg.hidden = YES;
+        
+        wechatCollectionImgUrl = self.infoDic[@"wechatpayImg"];
+        if (wechatCollectionImgUrl.length > 0) {
+            [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
         }
     }
     else {
@@ -425,37 +430,31 @@
         }
         case 1: {
             self.licenseImg.image = image;
-            self.licenseImgL.hidden = YES;
             [self requestUploadImgFile:self.licenseImg];
             break;
         }
         case 2: {
             self.cardAImg.image = image;
-            self.cardAImgL.hidden = YES;
             [self requestUploadImgFile:self.cardAImg];
             break;
         }
         case 3: {
             self.cardBImg.image = image;
-            self.cardBImgL.hidden = YES;
             [self requestUploadImgFile:self.cardBImg];
             break;
         }
         case 4: {
             self.gongzhongImg.image = image;
-            self.gongzhongImgL.hidden = YES;
             [self requestUploadImgFile:self.gongzhongImg];
             break;
         }
         case 5: {
             self.aliPayCollectionImg.image = image;
-            self.aliPayImgL.hidden = YES;
             [self requestUploadImgFile:self.aliPayCollectionImg];
             break;
         }
         case 6: {
             self.wechatCollectionImg.image = image;
-            self.wechatImgL.hidden = YES;
             [self requestUploadImgFile:self.wechatCollectionImg];
             break;
         }

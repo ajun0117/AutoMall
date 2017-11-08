@@ -127,10 +127,10 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     cell.addressL.text = [NSString stringWithFormat:@"%@-%@-%@-%@",pro,city,county,dic [@"address"]];
     BOOL preferred = [dic [@"preferred"] boolValue];
     if (preferred) {
-        cell.defaultIM.hidden = NO;
+        cell.defaultL.hidden = NO;
     }
     else {
-         cell.defaultIM.hidden = YES;
+         cell.defaultL.hidden = YES;
     }
     return cell;
 }

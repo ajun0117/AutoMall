@@ -154,6 +154,9 @@
     if (indexPath.section == 0) {
         return 80;
     }
+    else if (indexPath.section == 2) {
+        return 60;
+    }
     return KS_H(44);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

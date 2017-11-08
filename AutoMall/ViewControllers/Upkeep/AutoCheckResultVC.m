@@ -17,6 +17,7 @@
 #import "CheckResultQRCell.h"
 #import "UpkeepPlanVC.h"
 #import "AutoCheckResultProblemVC.h"
+#import "AutoCheckResultDetailVC.h"
 
 @interface AutoCheckResultVC () <AJAdViewDelegate>
 {
@@ -354,7 +355,7 @@
                         UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
                         position.text = STRING(dic1[@"dPosition"]);
                         position.tag = 100 + i;
-                        position.textColor = [UIColor grayColor];
+                        position.textColor = [UIColor grayColor]; 
                         position.font = [UIFont systemFontOfSize:14];
                         
                         UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 30*i , 80, 22)];
@@ -619,12 +620,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (sections == 6) {
+        if (indexPath.section == 2) {
+            NSArray *ary = carUpkeepDic[@"checkContents"];
+            NSDictionary *dic = ary[indexPath.row];
+            AutoCheckResultDetailVC *detailVC = [[AutoCheckResultDetailVC alloc] init];
+            detailVC.checkId = self.carUpkeepId;
+            detailVC.checkTermId = dic[@"checkTerm"][@"id"];
+            detailVC.checkContentId = dic[@"id"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+    }
 }
 
 -(void)fullReport:(UIButton *)btn {
     if (sections == 5) {
         sections = 6;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
+        [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {

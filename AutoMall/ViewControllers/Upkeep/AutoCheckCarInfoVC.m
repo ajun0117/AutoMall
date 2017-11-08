@@ -21,9 +21,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
 @property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
 @property (weak, nonatomic) IBOutlet WPImageView *mileageImgView;
-@property (weak, nonatomic) IBOutlet UILabel *mileageL;
+//@property (weak, nonatomic) IBOutlet UILabel *mileageL;
 @property (weak, nonatomic) IBOutlet WPImageView *fuelAmountImgView;
-@property (weak, nonatomic) IBOutlet UILabel *fuelAmountL;
+//@property (weak, nonatomic) IBOutlet UILabel *fuelAmountL;
 
 @end
 
@@ -45,23 +45,20 @@
     
     if (self.mileageAndfuelAmountDic) {
         self.mileageTF.text = self.mileageAndfuelAmountDic[@"mileage"];
-        [self.mileageImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"mileageImg"])]];
-        
         self.fuelAmountTF.text = self.mileageAndfuelAmountDic[@"fuelAmount"];
-        [self.fuelAmountImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"fuelAmountImg"])]];
+        if (mileageImgUrl.length > 0) {
+            [self.mileageImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"mileageImg"])]];
+        }
+        if (fuelAmountImgUrl.length > 0) {
+            [self.fuelAmountImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"fuelAmountImg"])]];
+        }
     }
     
     UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mileagePhotoAction)];
     [self.mileageImgView addGestureRecognizer:tap0];
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fuelAmountPhotoAction)];
     [self.fuelAmountImgView addGestureRecognizer:tap1];
-    
-    if (mileageImgUrl.length > 0) {
-        self.mileageL.hidden = YES;
-    }
-    if (fuelAmountImgUrl.length > 0) {
-        self.fuelAmountL.hidden = YES;
-    }
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -83,13 +80,25 @@
 
 - (IBAction)saveAction:(id)sender {
     if (self.mileageTF.text == nil || [self.mileageTF.text isEqualToString:@""]) {
-        _networkConditionHUD.labelText = @"总里程数必须填写！";
+        _networkConditionHUD.labelText = @"总里程表必须填写！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
     if (self.fuelAmountTF.text == nil || [self.fuelAmountTF.text isEqualToString:@""]) {
         _networkConditionHUD.labelText = @"燃油量必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (mileageImgUrl==nil || mileageImgUrl.length == 0) {
+        _networkConditionHUD.labelText = @"总里程表图片必须上传！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (fuelAmountImgUrl==nil || fuelAmountImgUrl.length == 0) {
+        _networkConditionHUD.labelText = @"燃油量图片必须上传！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
@@ -244,13 +253,13 @@
     switch (whichImg) {
         case 0: {
             self.mileageImgView.image = image;
-            self.mileageL.hidden = YES;
+//            self.mileageL.hidden = YES;
             [self requestUploadImgFile:self.mileageImgView];
             break;
         }
         case 1: {
             self.fuelAmountImgView.image = image;
-            self.fuelAmountL.hidden = YES;
+//            self.fuelAmountL.hidden = YES;
             [self requestUploadImgFile:self.fuelAmountImgView];
             break;
         }

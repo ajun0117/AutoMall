@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *unameL;
 @property (weak, nonatomic) IBOutlet UILabel *phoneL;
 @property (weak, nonatomic) IBOutlet UILabel *addressL;
-@property (weak, nonatomic) IBOutlet UIImageView *defaultIM;
+@property (strong, nonatomic) IBOutlet UILabel *defaultL;
 
 @end

@@ -132,6 +132,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSDictionary *dic = discountArray[indexPath.row];
+        [self deleteDiscountWithId:dic[@"id"]];
         [discountArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -158,6 +160,18 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountList) delegate:nil params:pram info:infoDic];
 }
 
+-(void)deleteDiscountWithId:(NSString *)did {     //删除优惠
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountDel object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountDel, @"op", nil];
+    //    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",aid,@"id", nil];
+    //    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeDele) delegate:nil params:pram info:infoDic];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(DiscountDel),did];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -171,19 +185,34 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
     if ([notification.name isEqualToString:DiscountList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+        NSLog(@"DiscountList: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [discountArray addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];
         }
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-            [alert show];
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
     
+    if ([notification.name isEqualToString:DiscountDel]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountDel object:nil];
+        NSLog(@"DiscountDel: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

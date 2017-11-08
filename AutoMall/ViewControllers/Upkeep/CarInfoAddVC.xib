@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="birthdayTF" destination="EER-RJ-YNF" id="TjX-10-ufW"/>
                 <outlet property="brandTF" destination="UJs-q1-lkf" id="GeE-xm-7hb"/>
-                <outlet property="carImgL" destination="3Zv-Rc-t0m" id="E0X-OB-Lfy"/>
                 <outlet property="carImgView" destination="Enp-ue-Yd0" id="O9v-n7-zzO"/>
                 <outlet property="engineNoTF" destination="pLB-Qb-syT" id="wgE-4Q-Owf"/>
                 <outlet property="fuelAmountTF" destination="wfu-Uv-do7" id="XA4-UI-TyE"/>
@@ -42,16 +41,10 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vej-6b-N6E">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Enp-ue-Yd0" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="Enp-ue-Yd0" customClass="WPImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传车辆图片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zv-Rc-t0m">
-                                    <rect key="frame" x="141.5" y="96" width="92" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -59,8 +52,6 @@
                                 <constraint firstAttribute="bottom" secondItem="Enp-ue-Yd0" secondAttribute="bottom" id="auL-Hq-qTS"/>
                                 <constraint firstAttribute="width" secondItem="vej-6b-N6E" secondAttribute="height" multiplier="16:9" id="gGF-fQ-eHP"/>
                                 <constraint firstAttribute="trailing" secondItem="Enp-ue-Yd0" secondAttribute="trailing" id="gcO-ag-yja"/>
-                                <constraint firstItem="3Zv-Rc-t0m" firstAttribute="centerX" secondItem="Enp-ue-Yd0" secondAttribute="centerX" id="jfq-3S-9EB"/>
-                                <constraint firstItem="3Zv-Rc-t0m" firstAttribute="centerY" secondItem="Enp-ue-Yd0" secondAttribute="centerY" id="qiG-4v-RAB"/>
                                 <constraint firstItem="Enp-ue-Yd0" firstAttribute="leading" secondItem="vej-6b-N6E" secondAttribute="leading" id="sMz-cm-fnC"/>
                             </constraints>
                         </view>
@@ -773,4 +764,7 @@
             <point key="canvasLocation" x="-781" y="345"/>
         </view>
     </objects>
+    <resources>
+        <image name="uploadImgWT" width="1125" height="633"/>
+    </resources>
 </document>
