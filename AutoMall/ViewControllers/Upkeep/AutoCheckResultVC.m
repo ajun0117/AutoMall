@@ -208,7 +208,7 @@
                 break;
             }
             case 1: {
-                return 250;
+                return 251;
                 break;
             }
             case 2: {
@@ -251,7 +251,7 @@
                 break;
             }
             case 1: {
-                return 250;
+                return 251;
                 break;
             }
             case 2: {
@@ -330,6 +330,7 @@
                         [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
                     }
                 }
+                cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"normal"]];
                 cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
                 
                 return cell;
@@ -419,7 +420,7 @@
                 if (! carImg) {
                     NSString *img = carUpkeepDic[@"image"];
                     if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
-                        [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+                        [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                     } else {
                         UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
                     carImg.image = IMG(@"carMark");

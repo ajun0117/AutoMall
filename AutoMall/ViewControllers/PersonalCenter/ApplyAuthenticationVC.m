@@ -37,9 +37,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if (self.infoDic) {
-        self.title = @"门店信息";
+        self.title = @"编辑门店信息";
         shopImgUrl = self.infoDic[@"image"];
-        if (shopImgUrl.length > 0) {
+        if (! [shopImgUrl isKindOfClass:[NSNull class]] && shopImgUrl.length > 0) {
             [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
         }
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
@@ -50,34 +50,34 @@
         self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
         
         licenseImgUrl = self.infoDic[@"licenseImg"];
-        if (licenseImgUrl.length > 0) {
+        if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0) {
             [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])]];
         }
         
         cardAImgUrl = self.infoDic[@"cardImgA"];
-        if (cardAImgUrl.length > 0) {
+        if (! [cardAImgUrl isKindOfClass:[NSNull class]] && cardAImgUrl.length > 0) {
             [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])]];
         }
         
         cardBImgUrl = self.infoDic[@"cardImgB"];
-        if (cardBImgUrl.length > 0) {
+        if (! [cardBImgUrl isKindOfClass:[NSNull class]] && cardBImgUrl.length > 0) {
             [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])]];
         }
 
         self.wechatNameTF.text = STRING(self.infoDic[@"wechatName"]);
         
         gongzhongImgUrl = self.infoDic[@"wechatImg"];
-        if (gongzhongImgUrl.length > 0) {
+        if (! [gongzhongImgUrl isKindOfClass:[NSNull class]] && gongzhongImgUrl.length > 0) {
             [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])]];
         }
         
         aliPayCollectionImgUrl = self.infoDic[@"alipayImg"];
-        if (aliPayCollectionImgUrl.length > 0) {
+        if (! [aliPayCollectionImgUrl isKindOfClass:[NSNull class]] && aliPayCollectionImgUrl.length > 0) {
             [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])]];
         }
         
         wechatCollectionImgUrl = self.infoDic[@"wechatpayImg"];
-        if (wechatCollectionImgUrl.length > 0) {
+        if (! [wechatCollectionImgUrl isKindOfClass:[NSNull class]] && wechatCollectionImgUrl.length > 0) {
             [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
         }
     }
