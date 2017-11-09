@@ -136,7 +136,7 @@
         }
         else {
             selectBgView.alpha = 0.3;
-            selectTableView.frame = CGRectMake(0, 104, SCREEN_WIDTH, 300);
+            selectTableView.frame = CGRectMake(0, 103, SCREEN_WIDTH, 300);
         }
     }];
 }
@@ -231,7 +231,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == selectTableView) {
-        return comtermAry.count;
+        return comtermAry.count + 1;
     }
     return 1;
 }
@@ -261,10 +261,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == selectTableView) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.selectedBackgroundView.backgroundColor = RGBCOLOR(246, 246, 246);
-        NSDictionary *dic = comtermAry[indexPath.row];
+        UIView* selectedBGView = [[UIView alloc] initWithFrame:cell.bounds];
+        selectedBGView.backgroundColor = RGBCOLOR(246, 246, 246);
+        cell.selectedBackgroundView = selectedBGView;
+//        cell.selectedBackgroundView.backgroundColor = RGBCOLOR(246, 246, 246);
+        if (indexPath.row == comtermAry.count) {
+            cell.textLabel.text = @"全部";
+        } else {
+            NSDictionary *dic = comtermAry[indexPath.row];
+            cell.textLabel.text = dic[@"name"];
+        }
         cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.text = dic[@"name"];
         return  cell;
     }
     else {
@@ -312,19 +319,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == selectTableView) {
-//        UITableViewCell *cell = [selectTableView cellForRowAtIndexPath:indexPath];
-//        if (pingfenBtn.selected) {
-//            if (indexPath.row == 0) {
-//                [sortDic setObject:@"asc" forKey:@"score"];
-//            }
-//            else {
-//                [sortDic setObject:@"desc" forKey:@"score"];
-//            }
-//            [self adjustLeftBtnFrameWithTitle:cell.textLabel.text andButton:pingfenBtn];
-//            //            [pingfenBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
-//        }
-        NSDictionary *dic = comtermAry[indexPath.row];
-        commodityTermId = dic[@"id"];
+        if (indexPath.row == comtermAry.count) {
+            commodityTermId = @"";
+        } else {
+            NSDictionary *dic = comtermAry[indexPath.row];
+            commodityTermId = dic[@"id"];
+        }
         [self cancelSelect];
         currentpage = 0;
         [commodityArray removeAllObjects];

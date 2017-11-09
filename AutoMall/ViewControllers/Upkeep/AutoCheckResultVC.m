@@ -18,8 +18,9 @@
 #import "UpkeepPlanVC.h"
 #import "AutoCheckResultProblemVC.h"
 #import "AutoCheckResultDetailVC.h"
+#import "HZPhotoBrowser.h"
 
-@interface AutoCheckResultVC () <AJAdViewDelegate>
+@interface AutoCheckResultVC () <AJAdViewDelegate, HZPhotoBrowserDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -28,6 +29,7 @@
     NSDictionary *carUpkeepDic;     //检查单数据
     NSMutableArray *checkResultArray;       //重组后的检查结果数组
     int sections;   //块数
+    NSArray *images;
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -66,12 +68,8 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultTechnicianCell" bundle:nil] forCellReuseIdentifier:@"checkResultTechnicianCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultQRCell" bundle:nil] forCellReuseIdentifier:@"checkResultQRCell"];
     
-    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
-    _adView.delegate = self;
-    self.myTableView.tableHeaderView = _adView;
-    
-    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""}];
-    [_adView reloadData];
+//    _adArray = @[@{@"image":UrlPrefix(carUpkeepDic[@"store"][@"image"]),@"content":@"广告1",@"thirdPartyUrl":@""}];
+//    [_adView reloadData];
     
     checkResultArray = [NSMutableArray array];
     
@@ -92,12 +90,51 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-    
-    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
-    [_adView reloadData];
 }
 
 -(void)toShare {
+}
+
+-(void)clickImageWithIndex:(NSInteger)index {
+    //启动图片浏览器
+    HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
+    browserVC.sourceImagesContainerView = self.view; // 原图的父控件
+    images = @[UrlPrefix(carUpkeepDic[@"image"])];
+    browserVC.imageCount = 1; // 图片总数 imagesAry.count
+    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageTitle = @"";
+    browserVC.delegate = self;
+    [browserVC show];
+}
+
+-(void)headClickImageWithIndex:(NSInteger)index {
+    //启动图片浏览器
+    HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
+    browserVC.sourceImagesContainerView = self.view; // 原图的父控件
+    images = @[UrlPrefix(carUpkeepDic[@"store"][@"image"])];
+    browserVC.imageCount = 1; // 图片总数 imagesAry.count
+    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageTitle = @"";
+    browserVC.delegate = self;
+    [browserVC show];
+}
+
+#pragma mark - photobrowser代理方法
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    return IMG(@"whiteplaceholder");
+}
+
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSString *urlStr = images[index];
+    return [NSURL URLWithString:urlStr];
+}
+
+- (NSString *)photoBrowser:(HZPhotoBrowser *)browser titleStringForIndex:(NSInteger)index {
+    //    NSDictionary *dic = _typeImgsArray [index];
+    //    NSString *titleStr = dic [@"content"];
+    return @"";
 }
 
 #pragma mark - AJAdViewDelegate
@@ -115,16 +152,9 @@
 
 - (void)adView:(AJAdView *)adView didSelectIndex:(NSInteger)index{
     NSLog(@"--%ld--",(long)index);
-    NSDictionary *dic = _adArray [index];
-    if (dic[@"thirdPartyUrl"] && [dic[@"thirdPartyUrl"] length]>0) {
-        WebViewController *web = [[WebViewController alloc] init];
-        web.webUrlStr = dic [@"thirdPartyUrl"];     //跳转链接
-        web.titleStr = dic [@"content"];
-        web.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:web animated:YES];
-    }
+//    NSDictionary *dic = _adArray [index];
+    [self headClickImageWithIndex:index];
 }
-
 
 - (IBAction)upkeepPlanAction:(id)sender {
     UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
@@ -330,7 +360,7 @@
                         [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
                     }
                 }
-                cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"normal"]];
+                cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"inspectionItemsInTotal"]];
                 cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
                 
                 return cell;
@@ -418,18 +448,19 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
                 if (! carImg) {
-                    NSString *img = carUpkeepDic[@"image"];
-                    if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
-                        [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
-                    } else {
-                        UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
-                    carImg.image = IMG(@"carMark");
-                    }
-
-                    carImg.contentMode = UIViewContentModeScaleAspectFit;
-                    carImg.tag = 101;
-                    [cell.contentView addSubview:carImg];
+                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
+                    carImg.clipsToBounds = YES;
+                    carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
+                NSString *img = carUpkeepDic[@"image"];
+                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
+                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
+                } else {
+                    carImg.image = IMG(@"CommplaceholderPicture");
+                }
+                carImg.contentMode = UIViewContentModeScaleAspectFit;
+                carImg.tag = 101;
+                [cell.contentView addSubview:carImg];
                 return cell;
                 break;
             }
@@ -535,6 +566,7 @@
                         [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
                     }
                 }
+                cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"inspectionItemsInTotal"]];
                 cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
                 
                 return cell;
@@ -545,13 +577,19 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
                 if (! carImg) {
-                    UIImageView *carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
-                    carImg.image = IMG(@"carMark");
-                    //                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
-                    carImg.contentMode = UIViewContentModeScaleAspectFit;
-                    carImg.tag = 101;
-                    [cell.contentView addSubview:carImg];
+                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
+                    carImg.clipsToBounds = YES;
+                    carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
+                NSString *img = carUpkeepDic[@"image"];
+                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
+                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
+                } else {
+                    carImg.image = IMG(@"CommplaceholderPicture");
+                }
+                carImg.contentMode = UIViewContentModeScaleAspectFit;
+                carImg.tag = 101;
+                [cell.contentView addSubview:carImg];
                 return cell;
                 break;
             }
@@ -630,6 +668,14 @@
             detailVC.checkTermId = dic[@"checkTerm"][@"id"];
             detailVC.checkContentId = dic[@"id"];
             [self.navigationController pushViewController:detailVC animated:YES];
+        }
+        else if (indexPath.section == 3) {
+            [self clickImageWithIndex:0];
+        }
+    }
+    else if (sections == 5) {
+        if (indexPath.section == 2) {
+            [self clickImageWithIndex:0];
         }
     }
 }
@@ -727,7 +773,19 @@
         NSLog(@"CarUpkeepInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             carUpkeepDic = responseObject[@"data"];
-    
+            NSString *imageUrl = carUpkeepDic[@"store"][@"image"];
+            if (! [imageUrl isKindOfClass:[NSNull class]]) {
+                if (imageUrl.length > 0) {
+                    if (! _adView) {
+                        _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
+                        _adView.delegate = self;
+                        self.myTableView.tableHeaderView = _adView;
+                    }
+                    _adArray = @[@{@"image":UrlPrefix(imageUrl),@"content":@"广告1",@"thirdPartyUrl":@""}];
+                    [_adView reloadData];
+                }
+            }
+            
             [self.myTableView reloadData];
         }
         else {

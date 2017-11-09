@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *wechatTF;
 @property (weak, nonatomic) IBOutlet UILabel *jifenL;
 @property (weak, nonatomic) IBOutlet UILabel *expireJifenL;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *viewHeightCon;
 
 @end
 
@@ -46,8 +47,16 @@
     self.accountL.text = self.infoDic[@"phone"];
     self.nickNameTF.text = STRING(self.infoDic[@"nickname"]);
     self.wechatTF.text = STRING(self.infoDic[@"wechat"]);
-    self.jifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"integral"])];
-    self.expireJifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
+    
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"1"]) {  //门店老板
+        self.viewHeightCon.constant = 225;
+        self.jifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"integral"])];
+        self.expireJifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
+    }
+    else {
+        self.viewHeightCon.constant = 135;
+    }
     
     [self setTextFieldInputAccessoryViewWithTF:self.nickNameTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatTF];

@@ -481,8 +481,8 @@
                 else if(rankLevel == 3) {
                     cell.shopLevelIM.image = IMG(@"goldBadge");
                 }
-                cell.jifenL.hidden = NO;
-                cell.jifenL.text = [NSString stringWithFormat:@"积分：%@分",@"80"];
+                cell.jifenL.hidden = YES;
+//                cell.jifenL.text = [NSString stringWithFormat:@"积分：%@分",@"80"];
                 return cell;
                 break;
             }

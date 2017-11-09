@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *checkContentL;
 @property (strong, nonatomic) IBOutlet UILabel *resultL;
 @property (strong, nonatomic) IBOutlet UILabel *levelL;
+@property (strong, nonatomic) IBOutlet UIButton *photoBtn;
 
 @end

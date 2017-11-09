@@ -16,6 +16,7 @@
                 <outlet property="jifenL" destination="KB5-wV-Jdu" id="3uT-o5-lpo"/>
                 <outlet property="nickNameTF" destination="MCz-Uq-FYF" id="7CX-dI-XZH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewHeightCon" destination="xx0-s9-w0I" id="tdy-4y-hUk"/>
                 <outlet property="wechatTF" destination="TYr-ty-5td" id="3km-al-olU"/>
             </connections>
         </placeholder>
@@ -27,8 +28,8 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlV-AI-o9I">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7e7-rb-sSs">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7e7-rb-sSs">
+                            <rect key="frame" x="0.0" y="10" width="375" height="225"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQn-Tz-LMx">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
@@ -245,7 +246,7 @@
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="7e7-rb-sSs" secondAttribute="trailing" id="77M-cy-1ML"/>
-                        <constraint firstItem="7e7-rb-sSs" firstAttribute="top" secondItem="tlV-AI-o9I" secondAttribute="top" id="VkA-k5-yCD"/>
+                        <constraint firstItem="7e7-rb-sSs" firstAttribute="top" secondItem="tlV-AI-o9I" secondAttribute="top" constant="10" id="VkA-k5-yCD"/>
                         <constraint firstAttribute="bottom" secondItem="7e7-rb-sSs" secondAttribute="bottom" id="X8V-Sn-WY8"/>
                         <constraint firstItem="7e7-rb-sSs" firstAttribute="leading" secondItem="tlV-AI-o9I" secondAttribute="leading" id="eka-n1-aDb"/>
                     </constraints>

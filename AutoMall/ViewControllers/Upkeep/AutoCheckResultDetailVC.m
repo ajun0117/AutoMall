@@ -11,14 +11,16 @@
 #import "ResultDetailHazardCell.h"
 #import "AJAdView.h"
 #import "WebViewController.h"
+#import "HZPhotoBrowser.h"
 
-@interface AutoCheckResultDetailVC () <AJAdViewDelegate>
+@interface AutoCheckResultDetailVC () <AJAdViewDelegate, HZPhotoBrowserDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     AJAdView *_adView;
     NSArray *_adArray;   //广告图数组
     NSDictionary *contentResultDic;
+    NSArray *images;        //图片数组
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -36,11 +38,12 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"ResultCheckContentDetailCell" bundle:nil] forCellReuseIdentifier:@"resultCheckContentDetailCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"ResultDetailHazardCell" bundle:nil] forCellReuseIdentifier:@"resultDetailHazardCell"];
     
-    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH/3)];
-    _adView.delegate = self;
-    self.myTableView.tableHeaderView = _adView;
-    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""}];
-    [_adView reloadData];
+    
+//    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH/3)];
+//    _adView.delegate = self;
+//    self.myTableView.tableHeaderView = _adView;
+//    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""}];
+//    [_adView reloadData];
     
     [self requestGetCarUpkeepCheckTerm];
 }
@@ -60,8 +63,8 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
-    [_adView reloadData];
+//    _adArray = @[@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/57381ddf-052a-4eba-928e-0b54bd6d12e1.png",@"content":@"广告1",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep/uploads/2017/09/5abeb351-d881-4f08-b582-fa73fd8a509e.jpg",@"content":@"广告2",@"thirdPartyUrl":@""},@{@"image":@"http://119.23.227.246/carupkeep//uploads/2017/09/093d2e04-7040-4d9d-afe4-4739c1674c40.png",@"content":@"广告3",@"thirdPartyUrl":@""}];
+//    [_adView reloadData];
 }
 
 #pragma mark - AJAdViewDelegate
@@ -177,6 +180,7 @@
                 cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
             }
         }
+        [cell.photoBtn addTarget:self action:@selector(toPhoto:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if (indexPath.section == 1){
@@ -193,6 +197,55 @@
         cell.textLabel.text = ary[indexPath.row][@"name"];
         return cell;
     }
+}
+
+-(void)toPhoto:(UIButton *)btn {
+    ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)btn.superview.superview;
+    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
+    NSArray *ary = contentResultDic[@"carUpkeepCheckContentEntities"];
+    NSDictionary *dic = ary[index.row - 2];
+    images = dic[@"minorImages"];
+    if (images.count > 0) {
+        [self clickImageWithIndex:index.row - 2];
+    }
+    else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+}
+
+-(void)clickImageWithIndex:(NSInteger)index {
+    //启动图片浏览器
+    HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
+    browserVC.sourceImagesContainerView = self.view; // 原图的父控件
+    NSArray *ary = contentResultDic[@"carUpkeepCheckContentEntities"];
+    NSDictionary *dic = ary[index];
+    images = dic[@"minorImages"];
+    browserVC.imageCount = images.count; // 图片总数 imagesAry.count
+    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageTitle = @"";
+    browserVC.delegate = self;
+    [browserVC show];
+}
+
+#pragma mark - photobrowser代理方法
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    return IMG(@"whiteplaceholder");
+}
+
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSDictionary *dic = images[index];
+    NSString *urlStr = UrlPrefix(dic[@"image"]);
+    return [NSURL URLWithString:urlStr];
+}
+
+- (NSString *)photoBrowser:(HZPhotoBrowser *)browser titleStringForIndex:(NSInteger)index {
+    //    NSDictionary *dic = _typeImgsArray [index];
+    //    NSString *titleStr = dic [@"content"];
+    return @"";
 }
 
 #pragma mark - 发送请求
@@ -221,6 +274,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             self.title = responseObject[@"data"][@"name"];
             contentResultDic = [responseObject[@"data"][@"checkContentVos"] firstObject];
+            
             
             [self.myTableView reloadData];
         }

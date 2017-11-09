@@ -189,7 +189,7 @@ static CGFloat const scrollViewHeight = 220;
 
 - (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
 {
-    NSString *urlStr = imagesAry[index];
+    NSString *urlStr = imagesAry[index]; 
     return [NSURL URLWithString:urlStr];
 }
 

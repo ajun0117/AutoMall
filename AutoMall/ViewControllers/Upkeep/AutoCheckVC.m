@@ -207,20 +207,20 @@
     UITextField *nameField = [alert textFieldAtIndex:0];
     nameField.placeholder = @"请输入检查结果";
     
-//    int keyType = [dicc[@"tip"] intValue];
-//    switch (keyType) {
-//        case 0:
-//            nameField.keyboardType = UIKeyboardTypeNumberPad;
-//            break;
-//            
-//        case 1:
-//            nameField.keyboardType = UIKeyboardTypeNamePhonePad;
-//            break;
-//            
-//        default:
-//            nameField.keyboardType = UIKeyboardTypeDefault;
-//            break;
-//    }
+    int keyType = [dicc[@"tipType"] intValue];
+    switch (keyType) {
+        case 0:     //文字
+            nameField.keyboardType = UIKeyboardTypeDefault;
+            break;
+            
+        case 1:     //数字
+            nameField.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+            
+        default:
+            nameField.keyboardType = UIKeyboardTypeDefault;
+            break;
+    }
 
     [alert show];
 }
@@ -847,7 +847,7 @@
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"image",carDic,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",carDic,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
