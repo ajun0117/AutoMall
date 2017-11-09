@@ -310,7 +310,7 @@
         NSArray *keys = [selectDic allKeys];
         if ([keys containsObject:dic[@"id"]]) {
             NSMutableDictionary *diccc = selectDic[dic[@"id"]];
-            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"price"]];
+            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"customizedPrice"]];
         } else {
             priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
         }
@@ -364,7 +364,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ListServicePackage object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ListServicePackage, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20",@"pageSize", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20000",@"pageSize", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ListServicePackage) delegate:nil params:pram info:infoDic];
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -206,6 +206,7 @@
                                 <constraint firstItem="KB5-wV-Jdu" firstAttribute="top" secondItem="IuN-zh-tpN" secondAttribute="bottom" constant="7" id="6qf-pB-nQL"/>
                                 <constraint firstAttribute="trailing" secondItem="TYr-ty-5td" secondAttribute="trailing" constant="16" id="7CV-ib-sat"/>
                                 <constraint firstAttribute="trailing" secondItem="IuN-zh-tpN" secondAttribute="trailing" id="Bfd-yp-4ec"/>
+                                <constraint firstItem="bDI-Ms-EvJ" firstAttribute="top" secondItem="NLI-Cd-7mn" secondAttribute="bottom" constant="8.5" id="C8f-fa-j5f"/>
                                 <constraint firstItem="MCz-Uq-FYF" firstAttribute="centerY" secondItem="sY1-Bu-y48" secondAttribute="centerY" id="CGh-pb-fBN"/>
                                 <constraint firstItem="TYr-ty-5td" firstAttribute="centerY" secondItem="CWL-q2-JGL" secondAttribute="centerY" id="DXU-XK-yUj"/>
                                 <constraint firstItem="NLI-Cd-7mn" firstAttribute="leading" secondItem="wvc-Kz-LAB" secondAttribute="trailing" constant="8" id="GzD-gk-sKL"/>
@@ -223,7 +224,6 @@
                                 <constraint firstItem="2eQ-M0-vCs" firstAttribute="centerY" secondItem="c5t-gv-7Fr" secondAttribute="centerY" id="XsS-Tr-xqB"/>
                                 <constraint firstItem="CWL-q2-JGL" firstAttribute="leading" secondItem="7e7-rb-sSs" secondAttribute="leading" constant="16" id="Zyx-5l-OOh"/>
                                 <constraint firstItem="2eQ-M0-vCs" firstAttribute="leading" secondItem="c5t-gv-7Fr" secondAttribute="trailing" constant="8" id="cwU-fr-fRy"/>
-                                <constraint firstAttribute="bottom" secondItem="bDI-Ms-EvJ" secondAttribute="bottom" id="e1Z-Bi-Fnw"/>
                                 <constraint firstItem="9oO-ox-wiV" firstAttribute="leading" secondItem="7e7-rb-sSs" secondAttribute="leading" constant="16" id="elE-9Q-5AL"/>
                                 <constraint firstItem="bDI-Ms-EvJ" firstAttribute="leading" secondItem="7e7-rb-sSs" secondAttribute="leading" id="ent-MZ-Hge"/>
                                 <constraint firstAttribute="trailing" secondItem="2eQ-M0-vCs" secondAttribute="trailing" constant="16" id="fdz-g6-w3e"/>

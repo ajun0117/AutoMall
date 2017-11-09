@@ -91,9 +91,9 @@
                                         <constraint firstItem="yWh-F4-TTz" firstAttribute="top" secondItem="H4e-j4-KlP" secondAttribute="top" id="wIp-E4-fec"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-8O-4vF" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-8O-4vF" customClass="WPImageView">
                                     <rect key="frame" x="0.0" y="55" width="375" height="211"/>
-                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="NeO-8O-4vF" secondAttribute="height" multiplier="16:9" id="ozm-Yr-EuI"/>
                                     </constraints>
@@ -159,9 +159,9 @@
                                         <constraint firstAttribute="bottom" secondItem="1o8-jz-spk" secondAttribute="bottom" id="u6e-cO-c3c"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="qas-OM-hJF" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="qas-OM-hJF" customClass="WPImageView">
                                     <rect key="frame" x="0.0" y="321" width="375" height="211"/>
-                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="qas-OM-hJF" secondAttribute="height" multiplier="16:9" id="t94-Vm-txC"/>
                                     </constraints>
@@ -220,6 +220,6 @@
         </view>
     </objects>
     <resources>
-        <image name="uploadImgWT" width="1125" height="633"/>
+        <image name="uploadImgWT" width="512" height="512"/>
     </resources>
 </document>

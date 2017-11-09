@@ -9,6 +9,7 @@
 #import "BaoyangDiscountsVC.h"
 #import "UpkeepPlanNormalCell.h"
 #import "AddDiscountsVC.h"
+#import "UpKeepPlanServiceCell.h"
 
 @interface BaoyangDiscountsVC ()
 {
@@ -43,7 +44,7 @@
         self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
     }
     
-    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpKeepPlanServiceCell" bundle:nil] forCellReuseIdentifier:@"upKeepPlanServiceCell"];
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
@@ -114,7 +115,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+    UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"UpKeepPlanServiceCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = discountArray[indexPath.row];
     cell.declareL.text = dic[@"item"];
     if (dic[@"money"]) {

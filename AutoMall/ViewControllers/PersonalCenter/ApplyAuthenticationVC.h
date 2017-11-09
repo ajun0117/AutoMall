@@ -10,8 +10,8 @@
 
 @interface ApplyAuthenticationVC : UIViewController
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (weak, nonatomic) IBOutlet WPImageView *shopImg;
-@property (weak, nonatomic) IBOutlet UILabel *shopImgL;
+//@property (weak, nonatomic) IBOutlet WPImageView *shopImg;
+//@property (weak, nonatomic) IBOutlet UILabel *shopImgL;
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
 @property (weak, nonatomic) IBOutlet UITextField *shortNameTF;
 @property (weak, nonatomic) IBOutlet UITextField *addressTF;

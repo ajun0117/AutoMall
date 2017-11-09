@@ -993,6 +993,7 @@
 - (void)toPushVC:(NSString *)carId {
     AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
     resultVC.carUpkeepId = carId;
+    resultVC.checktypeID = self.checktypeID;
     [self.navigationController pushViewController:resultVC animated:YES];
 }
 

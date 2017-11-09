@@ -160,6 +160,7 @@
     UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
     planVC.carDic = carUpkeepDic[@"car"];
     planVC.carUpkeepId = self.carUpkeepId;
+    planVC.checktypeID = self.checktypeID;
     [self.navigationController pushViewController:planVC animated:YES];
 }
 

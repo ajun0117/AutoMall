@@ -41,9 +41,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vej-6b-N6E">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="Enp-ue-Yd0" customClass="WPImageView">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImgWT" translatesAutoresizingMaskIntoConstraints="NO" id="Enp-ue-Yd0" customClass="WPImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
-                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -765,6 +765,6 @@
         </view>
     </objects>
     <resources>
-        <image name="uploadImgWT" width="1125" height="633"/>
+        <image name="uploadImgWT" width="512" height="512"/>
     </resources>
 </document>

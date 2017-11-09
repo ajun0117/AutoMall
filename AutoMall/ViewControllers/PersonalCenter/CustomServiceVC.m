@@ -201,7 +201,7 @@
     NSArray *keys = [selectDic allKeys];
     if ([keys containsObject:dic[@"id"]]) {
         NSMutableDictionary *dicc = selectDic[dic[@"id"]];
-        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"price"]];
+        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"customizedPrice"]];
         cell.radioBtn.selected = YES;
     } else {
         cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
@@ -240,7 +240,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ListServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ListServiceContent, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20",@"pageSize", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20000",@"pageSize", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ListServiceContent) delegate:nil params:pram info:infoDic];
 }
 
@@ -276,7 +276,7 @@
             
             for (NSDictionary *dic in serviceArray) {
                 if ([dic[@"customized"] boolValue]) {   //已定制
-                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"price", nil];
+                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"customizedPrice", nil];      //存储定制的价格
                     [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
                 }
             }

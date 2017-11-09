@@ -15,6 +15,7 @@
 #import "AutoCheckOrderPayModeVC.h"
 #import "ServiceContentDetailVC.h"
 #import "AutoCheckDisountsVC.h"
+#import "UpKeepPlanServiceCell.h"
 
 @interface UpkeepPlanVC ()
 {
@@ -57,6 +58,7 @@
     
 //    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanInfoCell" bundle:nil] forCellReuseIdentifier:@"planInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpKeepPlanServiceCell" bundle:nil] forCellReuseIdentifier:@"upKeepPlanServiceCell"];
     self.myTableView.tableFooterView = [UIView new];
 
     removeAry = [NSMutableArray array];
@@ -83,6 +85,8 @@
 
 - (void) toPackage {
     ServicePackageVC *serviceVC = [[ServicePackageVC alloc] init];
+    serviceVC.carUpkeepId = serviceVC.carUpkeepId;
+    serviceVC.checktypeID = self.checktypeID;
     serviceVC.selectedDic = thePackageDic;
     serviceVC.SelecteServicePackage = ^(NSMutableDictionary *packageDic) {
         thePackageDic = [NSDictionary dictionaryWithDictionary:packageDic];
@@ -232,7 +236,8 @@
         switch (section) {
             case 0:{
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-                view.backgroundColor = RGBCOLOR(249, 250, 251);
+//                view.backgroundColor = RGBCOLOR(249, 250, 251);
+                view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
@@ -254,7 +259,7 @@
                 
             case 1: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-                view.backgroundColor = RGBCOLOR(249, 250, 251);
+                view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
@@ -276,7 +281,7 @@
                 
             case 2: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-                view.backgroundColor = RGBCOLOR(249, 250, 251);
+                view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
@@ -298,7 +303,7 @@
                 
             case 4: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
-                view.backgroundColor = RGBCOLOR(249, 250, 251);
+                view.backgroundColor = [UIColor whiteColor];
 //                view.backgroundColor = RGBCOLOR(239, 239, 239);
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
@@ -384,7 +389,7 @@
             }
                 
             case 1: {
-                UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upKeepPlanServiceCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 NSDictionary *dic = removeAry[indexPath.row];
@@ -558,7 +563,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepServiceContent, @"op", nil];
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,storeId];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,storeId];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

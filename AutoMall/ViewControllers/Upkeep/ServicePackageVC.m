@@ -158,7 +158,8 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ServicepackageList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ServicepackageList, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(ServicepackageList),@"1",@"1",@"2"];    //测试时固定传id=1的检查单
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(ServicepackageList),self.carUpkeepId,self.checktypeID,storeId];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 } 
 

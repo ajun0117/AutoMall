@@ -425,6 +425,8 @@
 		F7D87A211FA4E6A1009EB53F /* CenterEmployeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D87A1F1FA4E6A1009EB53F /* CenterEmployeeCell.xib */; };
 		F7D87A261FA5BFC6009EB53F /* CenterAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D87A241FA5BFC6009EB53F /* CenterAccountVC.m */; };
 		F7D87A271FA5BFC6009EB53F /* CenterAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D87A251FA5BFC6009EB53F /* CenterAccountVC.xib */; };
+		F7F9C78F1FB4C38200EB46EE /* UpKeepPlanServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F9C78D1FB4C38200EB46EE /* UpKeepPlanServiceCell.m */; };
+		F7F9C7901FB4C38200EB46EE /* UpKeepPlanServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F9C78E1FB4C38200EB46EE /* UpKeepPlanServiceCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1203,6 +1205,9 @@
 		F7D87A231FA5BFC6009EB53F /* CenterAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterAccountVC.h; sourceTree = "<group>"; };
 		F7D87A241FA5BFC6009EB53F /* CenterAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterAccountVC.m; sourceTree = "<group>"; };
 		F7D87A251FA5BFC6009EB53F /* CenterAccountVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterAccountVC.xib; sourceTree = "<group>"; };
+		F7F9C78C1FB4C38200EB46EE /* UpKeepPlanServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpKeepPlanServiceCell.h; sourceTree = "<group>"; };
+		F7F9C78D1FB4C38200EB46EE /* UpKeepPlanServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpKeepPlanServiceCell.m; sourceTree = "<group>"; };
+		F7F9C78E1FB4C38200EB46EE /* UpKeepPlanServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpKeepPlanServiceCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1788,6 +1793,9 @@
 				042E5D241F41A0CA00F5F324 /* UpkeepPlanNormalCell.h */,
 				042E5D251F41A0CA00F5F324 /* UpkeepPlanNormalCell.m */,
 				042E5D261F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib */,
+				F7F9C78C1FB4C38200EB46EE /* UpKeepPlanServiceCell.h */,
+				F7F9C78D1FB4C38200EB46EE /* UpKeepPlanServiceCell.m */,
+				F7F9C78E1FB4C38200EB46EE /* UpKeepPlanServiceCell.xib */,
 				0490FC0B1F580CB900F77661 /* UpkeepPlanNormalHeadCell.h */,
 				0490FC0C1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m */,
 				0490FC0D1F580CB900F77661 /* UpkeepPlanNormalHeadCell.xib */,
@@ -3091,6 +3099,7 @@
 				04AD1FED1F44417A00247819 /* LoginViewController.xib in Resources */,
 				F70A509A1FA220640047D804 /* ShopInfoCell.xib in Resources */,
 				F7650B611FAF732300C0FCD2 /* AutoCheckDisountsVC.xib in Resources */,
+				F7F9C7901FB4C38200EB46EE /* UpKeepPlanServiceCell.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
 				04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */,
@@ -3340,6 +3349,7 @@
 				04DC7DC81F31C28300AA20A7 /* QBImagePickerThumbnailView.m in Sources */,
 				042CFCE31F8CEDB90080D720 /* README.md in Sources */,
 				042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */,
+				F7F9C78F1FB4C38200EB46EE /* UpKeepPlanServiceCell.m in Sources */,
 				04D1078F1F62998D007D9F57 /* ZFPolygon.m in Sources */,
 				0459C6B01F614C870040501E /* UIView+Frame.m in Sources */,
 				F7650B5A1FAF344900C0FCD2 /* ServiceContentDetailVC.m in Sources */,
@@ -3583,7 +3593,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3625,7 +3635,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

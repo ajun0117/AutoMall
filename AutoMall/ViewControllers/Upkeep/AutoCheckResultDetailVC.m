@@ -129,7 +129,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -238,7 +238,7 @@
 - (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
 {
     NSDictionary *dic = images[index];
-    NSString *urlStr = UrlPrefix(dic[@"image"]);
+    NSString *urlStr = UrlPrefix(dic[@"relativePath"]);
     return [NSURL URLWithString:urlStr];
 }
 
@@ -274,7 +274,6 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             self.title = responseObject[@"data"][@"name"];
             contentResultDic = [responseObject[@"data"][@"checkContentVos"] firstObject];
-            
             
             [self.myTableView reloadData];
         }

@@ -11,13 +11,14 @@
 #import "CitiesDataTool.h"
 #import "GTMBase64.h"
 #import "openssl_wrapper.h"
+#import "AddPicViewController.h"
 
 @interface ApplyAuthenticationVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     int whichImg;   //标识是哪个图片
-    NSString *shopImgUrl;
+//    NSString *shopImgUrl;
     NSString *licenseImgUrl;
     NSString *cardAImgUrl;
     NSString *cardBImgUrl;
@@ -25,6 +26,7 @@
     NSString *aliPayCollectionImgUrl;
     NSString *wechatCollectionImgUrl;
     NSArray *textFieldArray;
+    NSArray *shopImgAry;        //商铺图片数组
 }
 @property (nonatomic,strong) ChooseLocationView *chooseLocationView;
 @property (nonatomic,strong) UIView  *cover;
@@ -37,11 +39,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if (self.infoDic) {
-        self.title = @"编辑门店信息";
-        shopImgUrl = self.infoDic[@"image"];
-        if (! [shopImgUrl isKindOfClass:[NSNull class]] && shopImgUrl.length > 0) {
-            [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
-        }
+        self.title = @"门店信息";
+//        shopImgUrl = self.infoDic[@"image"];
+//        if (! [shopImgUrl isKindOfClass:[NSNull class]] && shopImgUrl.length > 0) {
+//            [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
+//        }
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
@@ -100,8 +102,8 @@
     [self setTextFieldInputAccessoryViewWithTF:self.recommendCodeTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatNameTF];
     
-    UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapShopHead:)];
-    [self.shopImg addGestureRecognizer:tap0];
+//    UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapShopHead:)];
+//    [self.shopImg addGestureRecognizer:tap0];
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLicense:)];
     [self.licenseImg addGestureRecognizer:tap1];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCardA:)];
@@ -143,11 +145,19 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
-
--(void)tapShopHead:(UITapGestureRecognizer *)tap {
-    whichImg = 0;
-    [self selectThePhotoOrCamera];
+- (IBAction)toAddPic:(id)sender {
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+        shopImgAry = array;
+    };
+    photoVC.localImgsArray = shopImgAry;
+    [self.navigationController pushViewController:photoVC animated:YES];
 }
+
+//-(void)tapShopHead:(UITapGestureRecognizer *)tap {
+//    whichImg = 0;
+//    [self selectThePhotoOrCamera];
+//}
 
 -(void)tapLicense:(UITapGestureRecognizer *)tap {
     whichImg = 1;
@@ -422,12 +432,12 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
     switch (whichImg) {
-        case 0: {
-            self.shopImg.image = image;
-            self.shopImgL.hidden = YES;
-            [self requestUploadImgFile:self.shopImg];
-            break;
-        }
+//        case 0: {
+//            self.shopImg.image = image;
+//            self.shopImgL.hidden = YES;
+//            [self requestUploadImgFile:self.shopImg];
+//            break;
+//        }
         case 1: {
             self.licenseImg.image = image;
             [self requestUploadImgFile:self.licenseImg];
@@ -529,7 +539,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreRegister object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreRegister, @"op", nil];
     NSArray *addrAry = [self.addressTF.text componentsSeparatedByString:@" "];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",shopImgUrl,@"image",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",shopImgAry,@"image",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(StoreRegister) delegate:nil params:pram info:infoDic];
 }
@@ -553,10 +563,10 @@
         NSString *urlStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
         if ([responseObject[@"result"] boolValue]) {
             switch (whichImg) {
-                case 0: {
-                    shopImgUrl = urlStr;
-                    break;
-                }
+//                case 0: {
+//                    shopImgUrl = urlStr;
+//                    break;
+//                }
                 case 1: {
                     licenseImgUrl = urlStr;
                     break;
