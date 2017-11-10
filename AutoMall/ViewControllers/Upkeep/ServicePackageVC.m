@@ -114,13 +114,13 @@
         [cell.contentView addSubview:noticeL];
         UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
         priceTF.font = [UIFont systemFontOfSize:15];
-        NSArray *keys = [selectDic allKeys];
-        if ([keys containsObject:dic[@"id"]]) {
-            NSMutableDictionary *diccc = selectDic[dic[@"id"]];
-            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"price"]];
+
+        if ([dic[@"customized"] boolValue]) {
+            priceTF.text = [NSString stringWithFormat:@"%@",STRING(dic[@"customizedPrice"])];
         } else {
             priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
         }
+    
         priceTF.tag = 10;
         priceTF.userInteractionEnabled = NO;
         [cell.contentView addSubview:priceTF];
@@ -131,7 +131,12 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dicc = arr[indexPath.row - 1];
         cell.declareL.text = dicc[@"name"];
-        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
+        if ([dicc[@"customized"] boolValue]) {
+            cell.contentL.text = [NSString stringWithFormat:@"￥%@",STRING(dicc[@"customizedPrice"])];
+        } else {
+            cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
+        }
+        
         return cell;
     }
 }

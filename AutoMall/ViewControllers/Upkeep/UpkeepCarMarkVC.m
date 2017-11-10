@@ -230,7 +230,8 @@
 //获得屏幕图像
 - (UIImage *)imageFromView: (UIView *) theView
 {
-    UIGraphicsBeginImageContext(theView.frame.size);
+//    UIGraphicsBeginImageContext(theView.frame.size);
+    UIGraphicsBeginImageContextWithOptions(theView.bounds.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [theView.layer renderInContext:context];
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();

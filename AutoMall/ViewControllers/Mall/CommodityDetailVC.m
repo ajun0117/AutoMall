@@ -212,6 +212,19 @@ static CGFloat const scrollViewHeight = 220;
 
 #pragma mark -- 去结算
 - (void)settlementClock{
+    if (self.isShopping)
+    {
+        [UIView animateWithDuration:.3 animations:^{
+            UIView * v = [self.view viewWithTag:111];
+            v.alpha = 0;
+            self.shoppingCartView.frame = CGRectMake(0, Screen_heigth, Screen_wide,SCREEN_HEIGHT-CGRectGetHeight(self.settemntView.frame) + 15);
+        } completion:^(BOOL finished)
+         {
+             [self.shoppingCartView removeSubView:self];
+         }];
+        self.isShopping = !self.isShopping;
+    }
+    
     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if ([mobileUserType isEqualToString:@"1"]) {    //老板
         if (cartMulArray.count > 0) {

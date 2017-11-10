@@ -36,7 +36,23 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200, Screen_wide, 200) style:UITableViewStylePlain];
+        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200, Screen_wide, 40)];
+        vc.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        UILabel *lable =[[UILabel alloc]initWithFrame:CGRectMake(18, 0, 100, 40)];
+        lable.text = @"购物车";
+        lable.textAlignment = NSTextAlignmentLeft;
+        lable.textColor = [UIColor blackColor];
+        lable.font = [UIFont systemFontOfSize:16];
+        [vc addSubview:lable];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(SCREEN_WIDTH - 24 - 18, 8, 24, 24);
+        [btn setImage:IMG(@"cart_delete") forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(clearCart) forControlEvents:UIControlEventTouchUpInside];
+        [vc addSubview:btn];
+        [self addSubview:vc];
+        
+        _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200 + 40, Screen_wide, 200 - 40) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         [_myTableView registerNib:[UINib nibWithNibName:@"ShoppingCartCell" bundle:nil] forCellReuseIdentifier:@"ShoppingCartCell"];
@@ -86,30 +102,30 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return 40;
-}
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    UIView *vc = [UIView new];
-    vc.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    UILabel *lable =[[UILabel alloc]initWithFrame:CGRectMake(8, 0, 100, 40)];
-    lable.text = @"购物车";
-    lable.textAlignment = NSTextAlignmentLeft;
-    lable.textColor = [UIColor blackColor];
-    lable.font = [UIFont systemFontOfSize:16];
-    [vc addSubview:lable];
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(SCREEN_WIDTH - 40 - 8, 8, 24, 24);
-    [btn setImage:IMG(@"cart_delete") forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(clearCart) forControlEvents:UIControlEventTouchUpInside];
-    [vc addSubview:btn];
-    
-    return vc;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    
+//    return 40;
+//}
+//
+//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//    UIView *vc = [UIView new];
+//    vc.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    UILabel *lable =[[UILabel alloc]initWithFrame:CGRectMake(8, 0, 100, 40)];
+//    lable.text = @"购物车";
+//    lable.textAlignment = NSTextAlignmentLeft;
+//    lable.textColor = [UIColor blackColor];
+//    lable.font = [UIFont systemFontOfSize:16];
+//    [vc addSubview:lable];
+//    
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.frame = CGRectMake(SCREEN_WIDTH - 40 - 8, 8, 24, 24);
+//    [btn setImage:IMG(@"cart_delete") forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(clearCart) forControlEvents:UIControlEventTouchUpInside];
+//    [vc addSubview:btn];
+//    
+//    return vc;
+//}
 
 -(void)clearCart {
     for (NSMutableDictionary * data in self.datasArr) {

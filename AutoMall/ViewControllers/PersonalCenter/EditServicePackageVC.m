@@ -310,9 +310,14 @@
         NSArray *keys = [selectDic allKeys];
         if ([keys containsObject:dic[@"id"]]) {
             NSMutableDictionary *diccc = selectDic[dic[@"id"]];
-            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"customizedPrice"]];
+            priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"price"]];
         } else {
-            priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+            if ([dic[@"customized"] boolValue]) {
+                priceTF.text = [NSString stringWithFormat:@"%@",dic[@"customizedPrice"]];
+            } else {
+                priceTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+            }
+            
         }
         priceTF.tag = 10;
         priceTF.delegate = self;
@@ -325,7 +330,12 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dicc = arr[indexPath.row - 1];
         cell.declareL.text = dicc[@"name"];
-        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
+        if ([dicc[@"customized"] boolValue]) {
+            cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"customizedPrice"]];
+        } else {
+            cell.contentL.text = [NSString stringWithFormat:@"￥%@",dicc[@"price"]];
+        }
+       
         return cell;
     }
 }
@@ -399,7 +409,7 @@
             
             for (NSDictionary *dic in packageArray) {
                 if ([dic[@"customized"] boolValue]) {   //已定制
-                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"price", nil];
+                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"customizedPrice"],@"price", nil];
                     [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
                 }
             }
@@ -430,7 +440,7 @@
 }
 
 - (void)toPopVC:(NSString *)carId {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

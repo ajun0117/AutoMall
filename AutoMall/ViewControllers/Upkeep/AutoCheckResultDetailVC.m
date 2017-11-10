@@ -125,11 +125,64 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 1;
+    switch (section) {
+        case 0:
+            return 10;
+            break;
+            
+        case 1:
+            return 44;
+            break;
+            
+        case 2:
+            return 44;
+            break;
+            
+        default:
+            return 1;
+            break;
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    switch (section) {
+            
+        case 1: {
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+            view.backgroundColor = [UIColor whiteColor];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 150, 20)];
+            label.font = [UIFont boldSystemFontOfSize:15];
+            label.backgroundColor = [UIColor clearColor];
+            label.text = @"潜在问题与危害";
+            
+            [view addSubview:label];
+            return view;
+            break;
+        }
+            
+        case 2: {
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+            view.backgroundColor = [UIColor whiteColor];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 100, 20)];
+            label.font = [UIFont boldSystemFontOfSize:15];
+            label.backgroundColor = [UIColor clearColor];
+            label.text = @"服务内容";
+            
+            [view addSubview:label];
+            return view;
+            break;
+        }
+            
+        default:
+            return nil;
+            break;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -137,12 +190,14 @@
         if (indexPath.row == 0) {
             UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
             cell.textLabel.text = [NSString stringWithFormat:@"检查内容：%@",contentResultDic[@"name"]];
             return cell;
         }
         else if (indexPath.row == 1) {
             UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.font = [UIFont systemFontOfSize:15];
             cell.textLabel.text = @"检查结果：";
             return cell;
         }
@@ -151,7 +206,7 @@
         NSDictionary *dic = contentResultDic[@"carUpkeepCheckContentEntities"][indexPath.row-2];
         if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
             cell.checkContentL.text = STRING(dic[@"dPosition"]);
-            cell.resultL.text = STRING(dic[@"remark"]);
+            cell.resultL.text = STRING(dic[@"describe"]);
             cell.levelL.text =  STRING(dic[@"result"]);
             cell.levelL.layer.cornerRadius = 4;
             int levelInt = [dic[@"level"] intValue];
@@ -180,6 +235,7 @@
                 cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
             }
         }
+        cell.photoBtn.tag = 100 + indexPath.row;
         [cell.photoBtn addTarget:self action:@selector(toPhoto:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
@@ -193,6 +249,7 @@
     else{
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
         NSArray *ary = contentResultDic[@"serviceContents"];
         cell.textLabel.text = ary[indexPath.row][@"name"];
         return cell;
@@ -200,13 +257,14 @@
 }
 
 -(void)toPhoto:(UIButton *)btn {
-    ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)btn.superview.superview;
-    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
+//    ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)btn.superview.superview;
+//    NSIndexPath *index = [self.myTableView indexPathForCell:cell];
+    int row = (int)btn.tag - 100;
     NSArray *ary = contentResultDic[@"carUpkeepCheckContentEntities"];
-    NSDictionary *dic = ary[index.row - 2];
+    NSDictionary *dic = ary[row - 2];
     images = dic[@"minorImages"];
     if (images.count > 0) {
-        [self clickImageWithIndex:index.row - 2];
+        [self clickImageWithIndex:row - 2];
     }
     else {
         _networkConditionHUD.labelText = @"没有相关图片";
@@ -223,7 +281,7 @@
     NSDictionary *dic = ary[index];
     images = dic[@"minorImages"];
     browserVC.imageCount = images.count; // 图片总数 imagesAry.count
-    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageIndex = 0;
     browserVC.currentImageTitle = @"";
     browserVC.delegate = self;
     [browserVC show];

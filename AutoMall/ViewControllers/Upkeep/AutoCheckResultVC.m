@@ -101,7 +101,7 @@
     browserVC.sourceImagesContainerView = self.view; // 原图的父控件
     images = @[UrlPrefix(carUpkeepDic[@"image"])];
     browserVC.imageCount = 1; // 图片总数 imagesAry.count
-    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageIndex = 0;
     browserVC.currentImageTitle = @"";
     browserVC.delegate = self;
     [browserVC show];
@@ -113,7 +113,7 @@
     browserVC.sourceImagesContainerView = self.view; // 原图的父控件
     images = @[UrlPrefix(carUpkeepDic[@"store"][@"image"])];
     browserVC.imageCount = 1; // 图片总数 imagesAry.count
-    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageIndex = 0;
     browserVC.currentImageTitle = @"";
     browserVC.delegate = self;
     [browserVC show];
@@ -253,7 +253,7 @@
                 break;
             }
             case 3: {
-                return 250;
+                return 270;
                 break;
             }
             case 4: {
@@ -286,7 +286,7 @@
                 break;
             }
             case 2: {
-                return 250;
+                return 270;
                 break;
             }
             case 3: {
@@ -390,12 +390,13 @@
                         position.textColor = [UIColor grayColor]; 
                         position.font = [UIFont systemFontOfSize:14];
                         
-                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 30*i , 80, 22)];
-                        result.text = STRING(dic1[@"remark"]);
+                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 - 15 - 80, 30*i , 80, 22)];
+                        result.textAlignment = NSTextAlignmentRight;
+                        result.text = STRING(dic1[@"describe"]);
                         result.textColor = [UIColor grayColor];
                         result.font = [UIFont systemFontOfSize:14];
                         
-                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 55 - 18 - 22, 30*i , 55, 22)];
+                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 , 30*i , 55, 22)];
                         level.text = STRING(dic1[@"result"]);
                         level.minimumFontSize = 8;
                         level.textAlignment = NSTextAlignmentCenter;
@@ -426,7 +427,7 @@
                     cell.levelL.layer.cornerRadius = 4;
                     cell.positionL.text = dic[@"checkTerm"][@"name"];
                     cell.checkContentL.text = dic[@"name"];
-                    cell.resultL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"remark"]);
+                    cell.resultL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"describe"]);
                     int level = [[dic[@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
                     cell.levelL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"result"]);
                     if (level == 1) {
@@ -449,7 +450,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
                 if (! carImg) {
-                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
+                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 270 - 16)];
                     carImg.clipsToBounds = YES;
                     carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
@@ -457,9 +458,9 @@
                 if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
                     [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                 } else {
-                    carImg.image = IMG(@"CommplaceholderPicture");
+                    carImg.image = IMG(@"carMark");;
                 }
-                carImg.contentMode = UIViewContentModeScaleAspectFit;
+                carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
                 return cell;
@@ -578,7 +579,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
                 if (! carImg) {
-                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 250 - 16)];
+                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 270 - 16)];
                     carImg.clipsToBounds = YES;
                     carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
@@ -586,9 +587,9 @@
                 if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
                     [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                 } else {
-                    carImg.image = IMG(@"CommplaceholderPicture");
+                    carImg.image = IMG(@"carMark");
                 }
-                carImg.contentMode = UIViewContentModeScaleAspectFit;
+                carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
                 return cell;

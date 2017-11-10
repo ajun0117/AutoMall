@@ -73,11 +73,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 1;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,12 +102,12 @@
             position.textColor = [UIColor grayColor];
             position.font = [UIFont systemFontOfSize:14];
             
-            UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(90, 30*i , 80, 22)];
-            result.text = STRING(dic1[@"remark"]);
+            UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 - 15 - 80, 30*i , 80, 22)];
+            result.text = STRING(dic1[@"describe"]);
             result.textColor = [UIColor grayColor];
             result.font = [UIFont systemFontOfSize:14];
             
-            UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 84 - 50 - 18 - 22, 30*i , 50, 22)];
+            UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 , 30*i , 55, 22)];
             level.text = STRING(dic1[@"result"]);
             level.minimumFontSize = 8;
             level.textAlignment = NSTextAlignmentCenter;
@@ -138,7 +138,7 @@
         cell.levelL.layer.cornerRadius = 4;
         cell.positionL.text = dic[@"name"];
         cell.checkContentL.text = dic[@"checkContentVos"][@"name"];
-        cell.resultL.text = STRING([dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"remark"]);
+        cell.resultL.text = STRING([dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"describe"]);
         int level = [[dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
         cell.levelL.text = STRING([dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"result"]);
         if (level == 1) {

@@ -24,14 +24,22 @@
     
     NSString *moneyStr;
     if ([self.serviceDic[@"unit"] isKindOfClass:[NSNull class]]) {
-        moneyStr = [NSString stringWithFormat:@"￥%@",self.serviceDic[@"price"]];
+        if ([self.serviceDic[@"customized"] boolValue]) {
+            moneyStr = [NSString stringWithFormat:@"￥%@",STRING(self.serviceDic[@"customizedPrice"])];
+        } else {
+            moneyStr = [NSString stringWithFormat:@"￥%@",self.serviceDic[@"price"]];
+        }
     }  else {
-        moneyStr = [NSString stringWithFormat:@"￥%@/%@",self.serviceDic[@"price"],STRING(self.serviceDic[@"unit"])];
+        if ([self.serviceDic[@"customized"] boolValue]) {
+            moneyStr = [NSString stringWithFormat:@"￥%@/%@",STRING(self.serviceDic[@"customizedPrice"]),STRING(self.serviceDic[@"unit"])];
+        } else {
+            moneyStr = [NSString stringWithFormat:@"￥%@/%@",self.serviceDic[@"price"],STRING(self.serviceDic[@"unit"])];
+        }
     }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:moneyStr style:UIBarButtonItemStylePlain target:self action:@selector(save)];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-    self.navigationItem.rightBarButtonItem.tintColor = NavBarTintColor;
+//    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem.tintColor = Gray_Color;
     
     self.contentL.text = self.serviceDic[@"notice"];
 }

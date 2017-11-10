@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sM-TC-f1i">
-                        <rect key="frame" x="18" y="22" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <rect key="frame" x="22" y="22" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQC-Kd-0YE">
-                        <rect key="frame" x="29.5" y="22" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <rect key="frame" x="33.5" y="22" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -47,11 +47,12 @@
                             <constraint firstAttribute="width" constant="40" id="9G8-PU-fG5"/>
                             <constraint firstAttribute="height" constant="40" id="Aqe-5u-68T"/>
                         </constraints>
-                        <state key="normal" image="photoBtn"/>
+                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                        <state key="normal" image="lookPhoto"/>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6sM-TC-f1i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="3ud-8v-JhG"/>
+                    <constraint firstItem="6sM-TC-f1i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="3ud-8v-JhG"/>
                     <constraint firstAttribute="trailing" secondItem="3RM-3u-v7v" secondAttribute="trailing" constant="8" id="61i-Y2-snw"/>
                     <constraint firstItem="3RM-3u-v7v" firstAttribute="leading" secondItem="YLe-2d-4RG" secondAttribute="trailing" constant="8" id="FE8-y3-HH5"/>
                     <constraint firstItem="YLe-2d-4RG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NMF-gh-ml8"/>
@@ -71,6 +72,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="photoBtn" width="20" height="20"/>
+        <image name="lookPhoto" width="40" height="40"/>
     </resources>
 </document>

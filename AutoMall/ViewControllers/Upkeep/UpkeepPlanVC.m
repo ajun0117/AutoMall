@@ -85,7 +85,7 @@
 
 - (void) toPackage {
     ServicePackageVC *serviceVC = [[ServicePackageVC alloc] init];
-    serviceVC.carUpkeepId = serviceVC.carUpkeepId;
+    serviceVC.carUpkeepId = self.carUpkeepId;
     serviceVC.checktypeID = self.checktypeID;
     serviceVC.selectedDic = thePackageDic;
     serviceVC.SelecteServicePackage = ^(NSMutableDictionary *packageDic) {
@@ -96,7 +96,12 @@
         
         packagePrice = 0;
         for (NSDictionary *dic1 in selectedPackageAry) {
-            packagePrice += [dic1[@"price"] floatValue];
+            if ([dic1[@"customized"] boolValue])  {
+                packagePrice += [dic1[@"customizedPrice"] floatValue];
+            } else {
+                packagePrice += [dic1[@"price"] floatValue];
+            }
+            
             NSLog(@"packagePrice: %.2f",packagePrice);
             NSArray *serviceContents = dic1[@"serviceContents"];
             for (NSDictionary *dic2 in serviceContents) {
@@ -112,7 +117,12 @@
         [lineationAry addObjectsFromArray:removeAry];
         serVicePrice = 0;     //初始化价格
         for (NSDictionary *dic in lineationAry) {
-            serVicePrice += [dic[@"price"] floatValue];
+            if ([dic[@"customized"] boolValue]) {
+                serVicePrice += [dic[@"customizedPrice"] floatValue];
+            } else {
+                serVicePrice += [dic[@"price"] floatValue];
+            }
+            
         }
         
         [self.myTableView reloadData];
@@ -206,7 +216,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
         switch (section) {
             case 0:
-                return 44;
+                return 54;
                 break;
                 
             case 1:
@@ -235,7 +245,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
         switch (section) {
             case 0:{
-                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+                UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
+                bgView.backgroundColor = [UIColor clearColor];
+                
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds), 44)];
 //                view.backgroundColor = RGBCOLOR(249, 250, 251);
                 view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
@@ -253,7 +266,8 @@
                 [view addSubview:label];
                 [view addSubview:img];
                 [view addSubview:btn];
-                return view;
+                [bgView addSubview:view];
+                return bgView;
                 break;
             }
                 
@@ -343,6 +357,7 @@
                         cell.declareL.text = @"车牌";
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"plateNumber"]);
+                        cell.contentL.font = [UIFont systemFontOfSize:15];
                         return cell;
                         break;
                     }
@@ -354,6 +369,7 @@
                         cell.declareL.text = @"车主";
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"owner"]);
+                        cell.contentL.font = [UIFont systemFontOfSize:15];
                         return cell;
                         break;
                     }
@@ -365,6 +381,7 @@
                         cell.declareL.text = @"品牌";
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"brand"]);
+                        cell.contentL.font = [UIFont systemFontOfSize:15];
                         return cell;
                         break;
                     }
@@ -376,6 +393,7 @@
                         cell.declareL.text = @"车型";
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"model"]);
+                        cell.contentL.font = [UIFont systemFontOfSize:15];
                         return cell;
                         break;
                     }
@@ -402,7 +420,12 @@
                 
                 cell.declareL.text = dic[@"name"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
-                cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                if ([dic[@"customized"] boolValue]) {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",STRING(dic[@"customizedPrice"])];
+                } else {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                }
+                
                 return cell;
                 break;
             }
@@ -415,7 +438,12 @@
                 NSDictionary *dic = selectedPackageAry[indexPath.row];
                 cell.declareL.text = dic[@"name"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
-                cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                if ([dic[@"customized"] boolValue]) {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",STRING(dic[@"customizedPrice"])];
+                } else {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                }
+                
                 return cell;
                 break;
             }
@@ -428,6 +456,7 @@
                 cell.declareL.text = @"总价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
                 cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice];
+                cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 return cell;
                 break;
             }
@@ -445,6 +474,7 @@
                 } else {
                     cell.contentL.text = @"";
                 }
+                cell.contentL.font = [UIFont boldSystemFontOfSize:15];
                 return cell;
                 break;
             }
@@ -458,6 +488,7 @@
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
                 NSLog(@"serVicePrice + packagePrice + discountPrice:  %.2f",serVicePrice + packagePrice + discountPrice);
                 cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + discountPrice];
+                cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 return cell;
                 break;
             }
@@ -506,7 +537,12 @@
         [lineationAry addObject:dic];
         tableView.editing = NO;
         
-        serVicePrice += [dic[@"price"] floatValue];
+        if ([dic[@"customized"] boolValue])  {
+            serVicePrice += [dic[@"customizedPrice"] floatValue];
+        } else {
+            serVicePrice += [dic[@"price"] floatValue];
+        }
+        
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationLeft];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
     }];
@@ -517,7 +553,12 @@
         [lineationAry removeObject:dic];
         tableView.editing = NO;
         
-        serVicePrice -= [dic[@"price"] floatValue];
+        if ([dic[@"customized"] boolValue])  {
+            serVicePrice -= [dic[@"customizedPrice"] floatValue];
+        } else {
+            serVicePrice -= [dic[@"price"] floatValue];
+        }
+        
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationLeft];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
 //        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3,5)] withRowAnimation:UITableViewRowAnimationFade];
@@ -563,11 +604,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepServiceContent, @"op", nil];
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,storeId];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,self.checktypeID,storeId];    //测试时固定传id=1的检查单
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
--(void)requestPostCarUpkeepConfirm { //检查单相关的服务方案
+-(void)requestPostCarUpkeepConfirm { //确认服务方案
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepConfirm object:nil];
@@ -576,13 +617,24 @@
     
     NSMutableArray *serviceContents = [NSMutableArray array];
     for (NSDictionary *dic in lineationAry) {   //只提交没有划线的
-        NSDictionary *dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"price"],@"price", nil];
+        NSDictionary *dicc;
+        if ([dic[@"customized"] boolValue])  {
+            dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"customizedPrice"],@"price", nil];
+        } else {
+            dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"price"],@"price", nil];
+        }
         [serviceContents addObject:dicc];
     }
     
     NSMutableArray *servicePackages = [NSMutableArray array];
     for (NSDictionary *dic1 in selectedPackageAry) {
-        NSDictionary *dicc1 = [NSDictionary dictionaryWithObjectsAndKeys:dic1[@"id"],@"id",dic1[@"name"],@"name",dic1[@"price"],@"price", nil];
+        NSDictionary *dicc1;
+        if ([dic1[@"customized"] boolValue])  {
+            dicc1 = [NSDictionary dictionaryWithObjectsAndKeys:dic1[@"id"],@"id",dic1[@"name"],@"name",dic1[@"customizedPrice"],@"price", nil];
+        } else {
+            dicc1 = [NSDictionary dictionaryWithObjectsAndKeys:dic1[@"id"],@"id",dic1[@"name"],@"name",dic1[@"price"],@"price", nil];
+        }
+        
         [servicePackages addObject:dicc1];
     }
     
@@ -617,7 +669,12 @@
             [lineationAry addObjectsFromArray:removeAry];
             serVicePrice = 0;     //初始化价格
             for (NSDictionary *dic in lineationAry) {
-                serVicePrice += [dic[@"price"] floatValue];
+                if ([dic[@"customized"] boolValue]) {
+                    serVicePrice += [dic[@"customizedPrice"] floatValue];
+                } else {
+                    serVicePrice += [dic[@"price"] floatValue];
+                }
+                
             }
             [self.myTableView reloadData];
         }

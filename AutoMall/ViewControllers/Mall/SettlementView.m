@@ -35,7 +35,7 @@
     [self addSubview:bgView];
     
     UIView *lineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0.5)];
-    lineV.backgroundColor = [UIColor colorWithRed:158/255.0 green:158/255.0 blue:158/255.0 alpha:1];
+    lineV.backgroundColor = Gray_Color;
     [bgView addSubview:lineV];
     
 //    _number = [[UILabel alloc]initWithFrame:CGRectMake(59, 0, 16, 16)];

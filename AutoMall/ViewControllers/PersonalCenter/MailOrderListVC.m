@@ -177,7 +177,12 @@
     NSDictionary *detailDic = [goodsAry firstObject];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = detailDic[@"commodityName"];
-    cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"actualPrice"]];
+    if ([detailDic[@"actualPrice"] intValue] > 0) {
+        cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"actualPrice"]];
+    } else {
+        cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"commodityPrice"]];
+    }
+    
     cell.numL.text = [NSString stringWithFormat:@"x%@", detailDic[@"commodityAmount"]];
     int amount = 0;
     for (int i = 0; i < goodsAry.count; ++i) {

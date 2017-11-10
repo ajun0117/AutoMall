@@ -213,8 +213,8 @@
             nameField.keyboardType = UIKeyboardTypeDefault;
             break;
             
-        case 1:     //数字
-            nameField.keyboardType = UIKeyboardTypeNumberPad;
+        case 1:     //数字带小数点
+            nameField.keyboardType = UIKeyboardTypeDecimalPad;
             break;
             
         default:

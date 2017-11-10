@@ -115,7 +115,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"UpKeepPlanServiceCell"];
+    UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upKeepPlanServiceCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = discountArray[indexPath.row];
     cell.declareL.text = dic[@"item"];

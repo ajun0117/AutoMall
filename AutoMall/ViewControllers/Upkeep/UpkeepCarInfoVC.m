@@ -70,17 +70,21 @@
         }
         case 3: {
             cell.declareL.text = @"购车时间";
-            cell.contentL.text = STRING(self.carDic[@"purchaseDate"]);
+            NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+            [formater setDateFormat:@"yyyy-MM-dd"];
+            NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[NSStringWithNumberNULL(self.carDic[@"purchaseDate"]) doubleValue]/1000];
+            NSString *string = [formater stringFromDate:creatDate];
+            cell.contentL.text = string;
             break;
         }
         case 4: {
             cell.declareL.text = @"行驶里程";
-            cell.contentL.text = STRING(self.carDic[@"mileage"]);
+            cell.contentL.text = NSStringWithNumberNULL(self.carDic[@"mileage"]);
             break;
         }
         case 5: {
             cell.declareL.text = @"燃油量";
-            cell.contentL.text = STRING(self.carDic[@"fuelAmount"]);
+            cell.contentL.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
             break;
         }
         case 6: {

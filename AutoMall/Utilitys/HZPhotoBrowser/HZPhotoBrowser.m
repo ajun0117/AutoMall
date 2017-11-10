@@ -377,7 +377,7 @@
 {
     int index = (scrollView.contentOffset.x + _scrollView.bounds.size.width * 0.5) / _scrollView.bounds.size.width;
     
-    _indexLabel.text = [NSString stringWithFormat:@"%d/%ld", index + 1, (long)self.imageCount];
+    _indexLabel.text = [NSString stringWithFormat:@"%d / %ld", index + 1, (long)self.imageCount];
     
     if ([self titleStringForIndex:index]) {
         _titleL.text = [self titleStringForIndex:index];

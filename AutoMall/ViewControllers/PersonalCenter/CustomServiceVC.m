@@ -201,10 +201,15 @@
     NSArray *keys = [selectDic allKeys];
     if ([keys containsObject:dic[@"id"]]) {
         NSMutableDictionary *dicc = selectDic[dic[@"id"]];
-        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"customizedPrice"]];
+        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"price"]];
         cell.radioBtn.selected = YES;
     } else {
-        cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+        if ([dic[@"customized"] boolValue]) {
+            cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"customizedPrice"]];
+        } else {
+            cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"price"]];
+        }
+        
         cell.radioBtn.selected = NO;
     }
     return cell;
@@ -276,7 +281,7 @@
             
             for (NSDictionary *dic in serviceArray) {
                 if ([dic[@"customized"] boolValue]) {   //已定制
-                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"price"],@"customizedPrice", nil];      //存储定制的价格
+                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"customizedPrice"],@"price", nil];
                     [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
                 }
             }
