@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,6 +18,7 @@
                 <outlet property="firstL" destination="ckZ-hZ-OGa" id="GCu-Ul-YpV"/>
                 <outlet property="firstView" destination="hHn-gi-czP" id="UBh-Hh-JP2"/>
                 <outlet property="passwordTF" destination="hIe-O9-LGv" id="rkR-a8-FNO"/>
+                <outlet property="phoneBtn" destination="x31-28-kps" id="zlH-zU-PeS"/>
                 <outlet property="phoneTF" destination="6P0-71-AnM" id="bfo-wk-hCd"/>
                 <outlet property="reSendBtn" destination="4Ml-YG-XRU" id="ucG-Wy-Zd8"/>
                 <outlet property="secondL" destination="l1a-gp-Pdi" id="rbe-e9-LjU"/>
@@ -576,25 +577,6 @@
                                 </mask>
                             </variation>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系客服电话：400-6999-226" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Q5-SH-3v2">
-                            <rect key="frame" x="8" y="185" width="359" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="UCY-lU-2pI"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="UCY-lU-2pI"/>
-                                </mask>
-                            </variation>
-                            <variation key="widthClass=compact">
-                                <mask key="constraints">
-                                    <include reference="UCY-lU-2pI"/>
-                                </mask>
-                            </variation>
-                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKm-rk-L7L">
                             <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                             <subviews>
@@ -658,51 +640,53 @@
                                 </mask>
                             </variation>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x31-28-kps">
+                            <rect key="frame" x="0.0" y="185" width="375" height="33"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <state key="normal" title="联系客服电话:400-6999-226">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="phoneAction:" destination="-1" eventType="touchUpInside" id="7eM-AQ-CYP"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="dKm-rk-L7L" firstAttribute="top" secondItem="hHn-gi-czP" secondAttribute="top" constant="20" id="02P-QF-nSi"/>
-                        <constraint firstAttribute="trailing" secondItem="3Q5-SH-3v2" secondAttribute="trailing" constant="8" id="2jk-CV-Ymj"/>
-                        <constraint firstItem="3Q5-SH-3v2" firstAttribute="leading" secondItem="hHn-gi-czP" secondAttribute="leading" constant="8" id="3Xo-X2-Ck0"/>
+                        <constraint firstItem="x31-28-kps" firstAttribute="top" secondItem="ry3-AI-Upq" secondAttribute="bottom" constant="10" id="DQH-g2-u5K"/>
                         <constraint firstAttribute="trailing" secondItem="l1O-E3-LTJ" secondAttribute="trailing" constant="8" id="HPs-gK-4yX"/>
-                        <constraint firstItem="3Q5-SH-3v2" firstAttribute="top" secondItem="ry3-AI-Upq" secondAttribute="bottom" constant="10" id="HWz-t2-yd2"/>
                         <constraint firstItem="ry3-AI-Upq" firstAttribute="top" secondItem="l1O-E3-LTJ" secondAttribute="bottom" constant="30" id="W90-9u-eky"/>
                         <constraint firstItem="l1O-E3-LTJ" firstAttribute="leading" secondItem="hHn-gi-czP" secondAttribute="leading" constant="8" id="Zul-B6-dNw"/>
                         <constraint firstItem="ry3-AI-Upq" firstAttribute="leading" secondItem="hHn-gi-czP" secondAttribute="leading" constant="8" id="fIO-93-NP2"/>
                         <constraint firstAttribute="trailing" secondItem="dKm-rk-L7L" secondAttribute="trailing" id="i0D-Mk-spg"/>
                         <constraint firstItem="l1O-E3-LTJ" firstAttribute="top" secondItem="dKm-rk-L7L" secondAttribute="bottom" constant="20" id="k0m-hU-SmT"/>
                         <constraint firstItem="dKm-rk-L7L" firstAttribute="leading" secondItem="hHn-gi-czP" secondAttribute="leading" id="kia-DL-SvJ"/>
+                        <constraint firstItem="x31-28-kps" firstAttribute="leading" secondItem="hHn-gi-czP" secondAttribute="leading" id="qre-AJ-E9w"/>
+                        <constraint firstAttribute="trailing" secondItem="x31-28-kps" secondAttribute="trailing" id="w9b-8w-5Mu"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
                             <exclude reference="l1O-E3-LTJ"/>
                             <exclude reference="ry3-AI-Upq"/>
-                            <exclude reference="3Q5-SH-3v2"/>
                         </mask>
                         <mask key="constraints">
                             <exclude reference="HPs-gK-4yX"/>
                             <exclude reference="Zul-B6-dNw"/>
                             <exclude reference="W90-9u-eky"/>
                             <exclude reference="fIO-93-NP2"/>
-                            <exclude reference="2jk-CV-Ymj"/>
-                            <exclude reference="3Xo-X2-Ck0"/>
-                            <exclude reference="HWz-t2-yd2"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
                         <mask key="subviews">
                             <include reference="l1O-E3-LTJ"/>
                             <include reference="ry3-AI-Upq"/>
-                            <include reference="3Q5-SH-3v2"/>
                         </mask>
                         <mask key="constraints">
                             <include reference="HPs-gK-4yX"/>
                             <include reference="Zul-B6-dNw"/>
                             <include reference="W90-9u-eky"/>
                             <include reference="fIO-93-NP2"/>
-                            <include reference="2jk-CV-Ymj"/>
-                            <include reference="3Xo-X2-Ck0"/>
-                            <include reference="HWz-t2-yd2"/>
                         </mask>
                     </variation>
                 </view>
@@ -775,7 +759,7 @@
                     <include reference="l9O-58-qGO"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-14.5" y="109.5"/>
+            <point key="canvasLocation" x="-193.5" y="102.5"/>
         </view>
     </objects>
     <resources>

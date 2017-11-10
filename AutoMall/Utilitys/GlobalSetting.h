@@ -230,6 +230,9 @@
 -(void)setStoreId:(id)sId;
 -(id)storeId;
 
+-(void)setOfficialPhone:(id)phone;
+-(id)officialPhone;
+
 -(void)setCartMulArray:(NSMutableArray *)mulArray;
 -(id)cartMulArray;
 

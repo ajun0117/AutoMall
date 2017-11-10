@@ -193,17 +193,17 @@
         }
         else {
             if (selectedCarDic) {
-                if ([dic[@"id"] intValue] == 10) {
-                    _networkConditionHUD.labelText = @"暂未开放！";
-                    [_networkConditionHUD show:YES];
-                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-                } else {
+//                if ([dic[@"id"] intValue] == 10) {
+//                    _networkConditionHUD.labelText = @"暂未开放！";
+//                    [_networkConditionHUD show:YES];
+//                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//                } else {
                     AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
                     checkVC.checktypeID = dic[@"id"];
                     checkVC.carDic = selectedCarDic;
                     checkVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:checkVC animated:YES];
-                }
+//                }
             } else {
                 _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
                 [_networkConditionHUD show:YES];
@@ -281,6 +281,14 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserGetStoreInfo) delegate:nil params:nil info:infoDic];
 }
 
+-(void)requestGetPhoneInfo {     //获取官网联系电话
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetPhoneInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetPhoneInfo,@"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetPhoneInfo) delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -346,6 +354,25 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *shopDic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetPhoneInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetPhoneInfo object:nil];
+        NSLog(@"GetPhoneInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {    //拨打电话
+            NSString *phoneStr = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setOfficialPhone:phoneStr];
+//            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",phoneStr];
+//            UIWebView * callWebview = [[UIWebView alloc] init];
+//            [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+//            [self.view addSubview:callWebview];
+            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

@@ -18,6 +18,7 @@
     
     NSInteger leftTime;
     NSTimer *_timer;
+    __weak IBOutlet UIButton *phoneBtn;
 }
 
 @end
@@ -38,6 +39,9 @@
     self.checkBtn.layer.masksToBounds = YES;
     self.confirmBtn.layer.cornerRadius = 5;
     self.confirmBtn.layer.masksToBounds = YES;
+    
+    NSString *phoneStr = [[GlobalSetting shareGlobalSettingInstance] officialPhone];
+    [phoneBtn setTitle:[NSString stringWithFormat:@"联系客服电话:%@",phoneStr] forState:UIControlStateNormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -83,6 +87,13 @@
 
 - (IBAction)confirmAction:(id)sender {
     [self requestForgotPwd];
+}
+- (IBAction)phoneAction:(id)sender {
+    NSString *phoneStr = [[GlobalSetting shareGlobalSettingInstance] officialPhone];
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",phoneStr];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
 }
 
 /**

@@ -1461,6 +1461,7 @@
         NSLog(@"GetPhoneInfo: %@",responseObject);
          if ([responseObject[@"success"] isEqualToString:@"y"]) {    //拨打电话
             NSString *phoneStr = responseObject[@"data"];
+            [[GlobalSetting shareGlobalSettingInstance] setOfficialPhone:phoneStr];    //存储平台电话
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",phoneStr];
             UIWebView * callWebview = [[UIWebView alloc] init];
             [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];

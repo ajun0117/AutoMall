@@ -590,6 +590,17 @@ static GlobalSetting *globalSetting;
     return [userDefaults valueForKey:@"storeId"];
 }
 
+-(void)setOfficialPhone:(id)phone {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:phone forKey:@"officialPhone"];
+    [userDefaults synchronize];
+}
+
+-(id)officialPhone {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:@"officialPhone"];
+}
+
 
 //存储购物车的可变数组
 -(void)setCartMulArray:(NSMutableArray *)mulArray {

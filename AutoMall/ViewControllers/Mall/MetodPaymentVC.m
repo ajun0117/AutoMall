@@ -35,7 +35,7 @@
     [self wr_setNavBarTintColor:NavBarTintColor];
     
     payModeStr = @"2";   //默认使用微信
-    self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号：%@",self.orderNumber];
+    self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号:%@",self.orderNumber];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",self.money];
 }
 
