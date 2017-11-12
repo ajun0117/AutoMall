@@ -113,7 +113,7 @@
         noticeL.text = @"￥";
         [cell.contentView addSubview:noticeL];
         UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
-        priceTF.font = [UIFont systemFontOfSize:15];
+        priceTF.font = [UIFont boldSystemFontOfSize:15];
 
         if ([dic[@"customized"] boolValue]) {
             priceTF.text = [NSString stringWithFormat:@"%@",STRING(dic[@"customizedPrice"])];

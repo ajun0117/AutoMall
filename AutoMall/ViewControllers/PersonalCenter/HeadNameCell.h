@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *jifenL;
 @property (weak, nonatomic) IBOutlet UIButton *applyBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loginL;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowsIM;
 
 @end

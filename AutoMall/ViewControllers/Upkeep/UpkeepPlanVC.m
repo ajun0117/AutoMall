@@ -704,8 +704,9 @@
 
 
 - (void)toPopVC:(NSString *)carId {
-        AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
-        [self.navigationController pushViewController:orderVC animated:YES];
+    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
+    orderVC.checkOrderId = self.carUpkeepId;
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 

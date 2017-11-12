@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -146,10 +146,10 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ak3-WM-Taa">
-                    <rect key="frame" x="8" y="174" width="359" height="40"/>
+                    <rect key="frame" x="20" y="174" width="335" height="44"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="d8c-Uo-Cul"/>
+                        <constraint firstAttribute="height" constant="44" id="d8c-Uo-Cul"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="下一步">
@@ -176,16 +176,16 @@
                 <constraint firstItem="Ak3-WM-Taa" firstAttribute="top" secondItem="2l3-d4-gSD" secondAttribute="bottom" constant="20" id="5Lw-8k-Fs0"/>
                 <constraint firstItem="Dyd-XI-Uv9" firstAttribute="centerY" secondItem="k8L-Nd-yQk" secondAttribute="centerY" id="Fds-nv-LOX"/>
                 <constraint firstItem="2l3-d4-gSD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HXY-Kp-rEb"/>
-                <constraint firstAttribute="trailing" secondItem="Ak3-WM-Taa" secondAttribute="trailing" constant="8" id="I1O-80-0Jo"/>
+                <constraint firstAttribute="trailing" secondItem="Ak3-WM-Taa" secondAttribute="trailing" constant="20" id="I1O-80-0Jo"/>
                 <constraint firstItem="Wag-H5-BaI" firstAttribute="leading" secondItem="k8L-Nd-yQk" secondAttribute="trailing" constant="8" id="QnA-zn-ak1"/>
                 <constraint firstItem="k8L-Nd-yQk" firstAttribute="centerY" secondItem="Wag-H5-BaI" secondAttribute="centerY" id="XIS-cA-wUn"/>
                 <constraint firstItem="k8L-Nd-yQk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ZLv-TD-s8Z"/>
                 <constraint firstAttribute="trailing" secondItem="Dyd-XI-Uv9" secondAttribute="trailing" constant="8" id="Zyd-kc-v2h"/>
                 <constraint firstItem="k8L-Nd-yQk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="gku-Zr-0WG"/>
-                <constraint firstItem="Ak3-WM-Taa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="jSR-q2-twK"/>
+                <constraint firstItem="Ak3-WM-Taa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="jSR-q2-twK"/>
                 <constraint firstAttribute="trailing" secondItem="2l3-d4-gSD" secondAttribute="trailing" id="zjT-oY-Sdg"/>
             </constraints>
-            <point key="canvasLocation" x="-220" y="93"/>
+            <point key="canvasLocation" x="-614" y="76"/>
         </view>
     </objects>
 </document>

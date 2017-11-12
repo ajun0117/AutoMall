@@ -35,7 +35,12 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultMultiCell" bundle:nil] forCellReuseIdentifier:@"checkResultMultiCell"];
     
     categoryAry = [NSMutableArray array];
-    [self requestGetCarUpkeepCategory];
+    
+    if (self.isUnnormal) {      //所有异常项目
+        [self requestGetAllUnnormal];
+    } else {
+        [self requestGetCarUpkeepCategory];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -177,6 +182,17 @@
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
+-(void)requestGetAllUnnormal { //获取所有异常，或轮胎刹车相关
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUnnormal object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUnnormal, @"op", nil];
+//    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&condition=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId,self.categoryId];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId];    //测试时固定传id=1的检查单
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -190,6 +206,34 @@
     if ([notification.name isEqualToString:CarUpkeepCategory]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepCategory object:nil];
         NSLog(@"CarUpkeepCategory: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            self.title = responseObject[@"data"][@"name"];
+            NSArray *checkTermVos = responseObject[@"data"][@"checkTermVos"];
+            
+            for (NSDictionary *dic1 in checkTermVos) {
+                NSMutableArray *checkContentVosAry = [NSMutableArray array];
+                NSLog(@"dic1: %@",dic1);
+                NSArray *checkContentVos = dic1[@"checkContentVos"];
+                for (NSDictionary *dic2 in checkContentVos) {
+                    NSLog(@"dic1name%@",dic1[@"name"]);
+                    NSDictionary *dic3 = @{@"id":dic1[@"id"],@"name":dic1[@"name"],@"checkContentVos":dic2};
+                    [checkContentVosAry addObject:dic3];
+                }
+                [categoryAry addObjectsFromArray:checkContentVosAry];
+            }
+            NSLog(@"categoryAry: %@",categoryAry);
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CarUpkeepUnnormal]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUnnormal object:nil];
+        NSLog(@"CarUpkeepUnnormal: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             self.title = responseObject[@"data"][@"name"];
             NSArray *checkTermVos = responseObject[@"data"][@"checkTermVos"];

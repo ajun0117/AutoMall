@@ -78,11 +78,11 @@
     }
 //    else if (status == 1) {
 //    }
-    else {
-        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
-        detailVC.commodityId = orderDetailDic[@"orderDetails"][@"id"];
-        [self.navigationController pushViewController:detailVC animated:YES];
-    }
+//    else {
+//        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+//       detailVC.commodityId = orderDetailDic[@"orderDetails"][@"id"];
+//        [self.navigationController pushViewController:detailVC animated:YES];
+//    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -222,6 +222,9 @@
                 else if (indexPath.row == 3) {
                     MailOrderDetailReceiverInfoCell *cell = (MailOrderDetailReceiverInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailReceiverInfoCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.nameL.text = orderDetailDic[@"consigneeName"];
+                    cell.phoneL.text = NSStringWithNumber(orderDetailDic[@"consigneePhone"]);
+                    cell.addressL.text = [NSString stringWithFormat:@"%@%@%@%@",orderDetailDic[@"consigneeProvince"],orderDetailDic[@"consigneeCity"],orderDetailDic[@"consigneeCounty"],orderDetailDic[@"consigneeAddress"]];
                     return cell;
                 }
             }

@@ -103,7 +103,7 @@ static NSString *const AddressCellIdentify = @"addressListCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 1;
+    return 10;
 }
 #pragma mark -
 #pragma mark UITableViewDataSource

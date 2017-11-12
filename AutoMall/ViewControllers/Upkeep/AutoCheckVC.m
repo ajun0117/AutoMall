@@ -207,21 +207,23 @@
     UITextField *nameField = [alert textFieldAtIndex:0];
     nameField.placeholder = @"请输入检查结果";
     
-    int keyType = [dicc[@"tipType"] intValue];
-    switch (keyType) {
-        case 0:     //文字
-            nameField.keyboardType = UIKeyboardTypeDefault;
-            break;
-            
-        case 1:     //数字带小数点
-            nameField.keyboardType = UIKeyboardTypeDecimalPad;
-            break;
-            
-        default:
-            nameField.keyboardType = UIKeyboardTypeDefault;
-            break;
+    if (! [dicc[@"tipType"] isKindOfClass:[NSNull class]]) {
+        int keyType = [dicc[@"tipType"] intValue];
+        switch (keyType) {
+            case 0:     //文字
+                nameField.keyboardType = UIKeyboardTypeDefault;
+                break;
+                
+            case 1:     //数字带小数点
+                nameField.keyboardType = UIKeyboardTypeDecimalPad;
+                break;
+                
+            default:
+                nameField.keyboardType = UIKeyboardTypeDefault;
+                break;
+        }
     }
-
+    
     [alert show];
 }
 

@@ -155,7 +155,7 @@
         case 1: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = [UIColor whiteColor];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 150, 20)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(18, 12, 150, 20)];
             label.font = [UIFont boldSystemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
             label.text = @"潜在问题与危害";
@@ -168,7 +168,7 @@
         case 2: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = [UIColor whiteColor];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 100, 20)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(18, 12, 100, 20)];
             label.font = [UIFont boldSystemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
             label.text = @"服务内容";

@@ -147,8 +147,8 @@
     NSDictionary *dic = orderAry[indexPath.row];
     cell.lichengL.text = [NSString stringWithFormat:@"%@公里",dic[@""]];
     cell.ranyouL.text = [NSString stringWithFormat:@"%@L",dic[@""]];
-    cell.ownerL.text = dic[@"carOwnerName"];
-    cell.dateL.text = dic[@"endTime"];
+    cell.ownerL.text = STRING(dic[@"carOwnerName"]);
+    cell.dateL.text = STRING(dic[@"endTime"]);
     return cell;
 }
 

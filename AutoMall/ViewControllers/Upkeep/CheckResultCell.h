@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bootCenterCon;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tyreCenterCon;
 
+@property (weak, nonatomic) IBOutlet UIButton *unnormalBtn;
 @property (strong, nonatomic) IBOutlet UIButton *carBodybtn;
 @property (strong, nonatomic) IBOutlet UIButton *inCarBtn;
 @property (strong, nonatomic) IBOutlet UIButton *engineBtn;

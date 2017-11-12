@@ -810,6 +810,7 @@
             [cell.headIMG addGestureRecognizer:tap];
             
             cell.loginL.hidden = NO;
+            cell.arrowsIM.hidden = YES;
             cell.accountBtn.hidden = YES;
             cell.applyBtn.hidden = YES;
             cell.shopNameBtn.hidden = YES;

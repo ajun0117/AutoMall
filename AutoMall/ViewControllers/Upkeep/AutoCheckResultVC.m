@@ -325,16 +325,16 @@
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.storeNameL.text = carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
                 return cell;
                 break;
             }
             case 1: {
                 CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.chepaiL.text = carUpkeepDic[@"carPlateNumber"];
+                cell.chepaiL.text = STRING_Nil(carUpkeepDic[@"carPlateNumber"]);
                 for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
                     if ([dic[@"id"] intValue] == 1) { //车身
                         cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
@@ -361,8 +361,9 @@
                         [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
                     }
                 }
-                cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"inspectionItemsInTotal"]];
-                cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
+                cell.allNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"inspectionItemsInTotal"])];
+                cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"unnormal"])];
+//                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
                 break;
@@ -570,6 +571,7 @@
                 }
                 cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"inspectionItemsInTotal"]];
                 cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
+//                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
                 break;
@@ -702,6 +704,16 @@
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
+}
+
+
+//所有异常检查项目
+-(void)unnormalAction {
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    problemVC.isUnnormal = YES;
+    problemVC.carUpkeepId = self.carUpkeepId;
+    problemVC.categoryId = @"1";
+    [self.navigationController pushViewController:problemVC animated:YES];
 }
 
 //车身检查结果

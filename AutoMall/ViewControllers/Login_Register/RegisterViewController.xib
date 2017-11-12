@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -248,12 +248,12 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBE-qg-xAN">
-                    <rect key="frame" x="20" y="214" width="335" height="40"/>
+                    <rect key="frame" x="20" y="214" width="335" height="44"/>
                     <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="UWt-6j-uXL"/>
+                        <constraint firstAttribute="height" constant="44" id="UWt-6j-uXL"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="注册">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -273,7 +273,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已阅读并同意" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsV-ge-kZs">
-                    <rect key="frame" x="48" y="290" width="108" height="21"/>
+                    <rect key="frame" x="48" y="294" width="108" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="UQh-Jg-IAG"/>
                     </constraints>
@@ -292,7 +292,7 @@
                     </variation>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UD-mc-Hga">
-                    <rect key="frame" x="19" y="289" width="24" height="24"/>
+                    <rect key="frame" x="19" y="293" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="27" id="ITx-GL-Av4">
                             <variation key="widthClass=compact" constant="24"/>
@@ -319,7 +319,7 @@
                     </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahM-zy-pf3">
-                    <rect key="frame" x="161" y="286" width="199" height="30"/>
+                    <rect key="frame" x="161" y="290" width="199" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="HvZ-d5-XYj"/>
                     </constraints>
