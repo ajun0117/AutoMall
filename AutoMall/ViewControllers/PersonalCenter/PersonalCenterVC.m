@@ -389,7 +389,7 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"default")];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"center_profile")];
                 
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
@@ -455,7 +455,7 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"default")];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"center_profile")];
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
 
@@ -652,7 +652,7 @@
             case 0: {
                 HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"default")];
+                [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"center_profile")];
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
                 [cell.headIMG addGestureRecognizer:tap];
                 
@@ -814,7 +814,7 @@
         case 0: {
             HeadNameCell *cell = (HeadNameCell *)[tableView dequeueReusableCellWithIdentifier:@"headNameCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"default")];
+            [cell.headIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(userInfoDic[@"image"]))] placeholderImage:IMG(@"center_profile")];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserHead:)];
             [cell.headIMG addGestureRecognizer:tap];
             
@@ -941,6 +941,13 @@
                         break;
                     }
                     case 5: {
+                        BaoyangDiscountsVC *disVC = [[BaoyangDiscountsVC alloc] init];
+                        disVC.canEdit = YES;
+                        disVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:disVC animated:YES];
+                        break;
+                    }
+                    case 6: {
                         EmployeeListVC *listVC = [[EmployeeListVC alloc] init];
                         listVC.hidesBottomBarWhenPushed = YES;
                         [self.navigationController pushViewController:listVC animated:YES];

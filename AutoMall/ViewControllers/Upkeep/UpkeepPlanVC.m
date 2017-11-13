@@ -494,7 +494,11 @@
                 cell.declareL.text = @"折后价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
                 NSLog(@"serVicePrice + packagePrice - discountPrice:  %.2f",serVicePrice + packagePrice - discountPrice);
-                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice];
+                if (serVicePrice + packagePrice - discountPrice < 0) {
+                    cell.contentL.text = @"￥0";
+                } else {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice];
+                }
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 cell.contentL.textColor = [UIColor blackColor];
                 return cell;

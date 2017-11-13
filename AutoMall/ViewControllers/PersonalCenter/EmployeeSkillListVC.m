@@ -45,7 +45,6 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeSkillListCell" bundle:nil] forCellReuseIdentifier:@"employeeSkillListCell"];
     self.myTableView.tableFooterView = [UIView new];
     
-    [self requestGetStaffList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -63,6 +62,8 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [self requestGetStaffList];
 }
 
 -(void)toAddSkill {

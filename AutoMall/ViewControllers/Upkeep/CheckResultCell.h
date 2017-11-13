@@ -10,6 +10,12 @@
 
 @interface CheckResultCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *chepaiL;
+@property (weak, nonatomic) IBOutlet UIButton *carImageBtn;
+@property (weak, nonatomic) IBOutlet UILabel *mileageL;
+@property (weak, nonatomic) IBOutlet UIButton *mileageImageBtn;
+@property (weak, nonatomic) IBOutlet UILabel *fuelAmountL;
+@property (weak, nonatomic) IBOutlet UIButton *fuelAmountImageBtn;
+
 @property (strong, nonatomic) IBOutlet UILabel *allNumL;
 @property (strong, nonatomic) IBOutlet UILabel *unusualNumL;
 @property (strong, nonatomic) IBOutlet UILabel *carBodyNumL;

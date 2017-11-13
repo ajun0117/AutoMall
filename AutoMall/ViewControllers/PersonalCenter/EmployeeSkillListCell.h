@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *nameL;
 @property (weak, nonatomic) IBOutlet UILabel *introduceL;
+@property (weak, nonatomic) IBOutlet UIButton *statusBtn;
 
 @end

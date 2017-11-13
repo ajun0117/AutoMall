@@ -82,10 +82,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 54;
-    }
-    return 1;
+    return 54;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -93,24 +90,43 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
-    bgView.backgroundColor = [UIColor clearColor];
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds), 44)];
-    //                view.backgroundColor = RGBCOLOR(249, 250, 251);
-    view.backgroundColor = [UIColor whiteColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
-    label.font = [UIFont boldSystemFontOfSize:15];
-    label.backgroundColor = [UIColor clearColor];
-    label.text = @"特长介绍";
-    [view addSubview:label];
-    [bgView addSubview:view];
-    return bgView;
+    if (section == 0) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
+        bgView.backgroundColor = [UIColor clearColor];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds), 44)];
+        //                view.backgroundColor = RGBCOLOR(249, 250, 251);
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = @"特长介绍";
+        [view addSubview:label];
+        [bgView addSubview:view];
+        return bgView;
+    }
+    else {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
+        bgView.backgroundColor = [UIColor clearColor];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds), 44)];
+        //                view.backgroundColor = RGBCOLOR(249, 250, 251);
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = @"技能认证";
+        [view addSubview:label];
+        [bgView addSubview:view];
+        return bgView;
+    }
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailTopCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.contentL.text = STRING(self.staffDic[@"remark"]);
         cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 24;
         return cell;

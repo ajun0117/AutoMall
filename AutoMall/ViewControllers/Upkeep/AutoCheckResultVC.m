@@ -98,11 +98,12 @@
 -(void)toShare {
 }
 
--(void)clickImageWithIndex:(NSInteger)index {
+-(void)clickImageWithImageUrl:(NSString *)url {
     //启动图片浏览器
     HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
     browserVC.sourceImagesContainerView = self.view; // 原图的父控件
-    images = @[UrlPrefix(carUpkeepDic[@"image"])];
+//    images = @[UrlPrefix(carUpkeepDic[@"image"])];
+    images = @[UrlPrefix(url)];
     browserVC.imageCount = 1; // 图片总数 imagesAry.count
     browserVC.currentImageIndex = 0;
     browserVC.currentImageTitle = @"";
@@ -250,7 +251,7 @@
                 break;
             }
             case 1: {
-                return 251;
+                return 301;
                 break;
             }
             case 2: {
@@ -297,7 +298,7 @@
                 break;
             }
             case 1: {
-                return 251;
+                return 301;
                 break;
             }
             case 2: {
@@ -354,35 +355,52 @@
                 CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.chepaiL.text = STRING_Nil(carUpkeepDic[@"carPlateNumber"]);
+                [cell.carImageBtn  addTarget:self action:@selector(carImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"mileage"])];
+                [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"fuelAmount"])];
+                [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
                 for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
                     if ([dic[@"id"] intValue] == 1) { //车身
-                        cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 2) { //车内
-                        cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 3) { //底盘
-                        cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 4) { //机舱
-                        cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 5) { //尾箱
-                        cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
-                    else if ([dic[@"id"] intValue] == 6) { //轮胎刹车
-                        cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+                    else if ([dic[@"id"] intValue] == 0) { //轮胎刹车
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                 }
                 cell.allNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"inspectionItemsInTotal"])];
                 cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"unnormal"])];
-//                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
+                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
                 break;
@@ -599,35 +617,52 @@
                 CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.chepaiL.text = carUpkeepDic[@"carPlateNumber"];
+                [cell.carImageBtn  addTarget:self action:@selector(carImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"mileage"])];
+                [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"fuelAmount"])];
+                [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
                 for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
                     if ([dic[@"id"] intValue] == 1) { //车身
-                        cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 2) { //车内
-                        cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 3) { //底盘
-                        cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 4) { //机舱
-                        cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                     else if ([dic[@"id"] intValue] == 5) { //尾箱
-                        cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
-                    else if ([dic[@"id"] intValue] == 6) { //轮胎刹车
-                        cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
-                        [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+                    else if ([dic[@"id"] intValue] == 0) { //轮胎刹车
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
                     }
                 }
                 cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"inspectionItemsInTotal"]];
                 cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
-//                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
+                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
                 break;
@@ -766,12 +801,12 @@
             [self.navigationController pushViewController:detailVC animated:YES];
         }
         else if (indexPath.section == 3) {
-            [self clickImageWithIndex:0];
+            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
         }
     }
     else if (sections == 5) {
         if (indexPath.section == 2) {
-            [self clickImageWithIndex:0];
+            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
         }
     }
 }
@@ -798,14 +833,25 @@
     [self.view addSubview:callWebview];
 }
 
+-(void) carImageAction {
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"image"])];
+}
+
+-(void) mileageImageAction {
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"mileageImage"])];
+}
+
+-(void) fuelAmountImageAction {
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"fuelImage"])];
+}
 
 //所有异常检查项目
 -(void)unnormalAction {
-    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
-    problemVC.isUnnormal = YES;
-    problemVC.carUpkeepId = self.carUpkeepId;
-    problemVC.categoryId = @"1";
-    [self.navigationController pushViewController:problemVC animated:YES];
+//    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+//    problemVC.isUnnormal = YES;
+//    problemVC.carUpkeepId = self.carUpkeepId;
+//    problemVC.categoryId = @"1";
+//    [self.navigationController pushViewController:problemVC animated:YES];
 }
 
 //车身检查结果
