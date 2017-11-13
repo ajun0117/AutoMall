@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString *checkOrderId;    //检查单id
 
+@property (strong, nonatomic) NSDictionary *infoDic;    //字典
+
 @end

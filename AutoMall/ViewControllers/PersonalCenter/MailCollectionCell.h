@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StrikeThroughLabel.h"
 
 @interface MailCollectionCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *goodsIMG;
 @property (strong, nonatomic) IBOutlet UILabel *goodsName;
 @property (strong, nonatomic) IBOutlet UILabel *goodsprice;
+@property (strong, nonatomic) IBOutlet StrikeThroughLabel *costPriceStrikeL;
 
 @end

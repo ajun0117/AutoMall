@@ -8,7 +8,8 @@
 
 #import "UpkeepOrderVC.h"
 #import "AJSegmentedControl.h"
-#import "BaoyangHistoryCell.h"
+//#import "BaoyangHistoryCell.h"
+#import "UpkeepOrderListCell.h"
 
 @interface UpkeepOrderVC () <AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
@@ -31,7 +32,7 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    [self.myTableView registerNib:[UINib nibWithNibName:@"BaoyangHistoryCell" bundle:nil] forCellReuseIdentifier:@"historyCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepOrderListCell" bundle:nil] forCellReuseIdentifier:@"upkeepOrderListCell"];
     self.myTableView.tableFooterView = [UIView new];
     
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
@@ -45,7 +46,7 @@
     }
     [self requestGetHistoryList];
     
-    [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"订单确认"}, @{@"name":@"施工完成"}, @{@"name":@"已付款"}, @{@"name":@"已完成"}]];
+    [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"订单确认"}, @{@"name":@"施工完成"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -109,10 +110,10 @@
             self.orderStatus = @"4";
             break;
         }
-//        case 5: {
-//            self.orderStatus = @"";
-//            break;
-//        }
+        case 5: {
+            self.orderStatus = @"";
+            break;
+        }
             
         default:
             break;
@@ -123,43 +124,73 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return orderAry.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 10;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 1;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 180;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
-    NSDictionary *dic = orderAry[indexPath.row];
-    cell.lichengL.text = [NSString stringWithFormat:@"%@公里",dic[@""]];
-    cell.ranyouL.text = [NSString stringWithFormat:@"%@L",dic[@""]];
-    cell.ownerL.text = STRING(dic[@"carOwnerName"]);
-    cell.dateL.text = STRING(dic[@"endTime"]);
+    UpkeepOrderListCell *cell = (UpkeepOrderListCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepOrderListCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    NSDictionary *dic = orderAry[indexPath.section];
+
+    int status = [dic[@"paymentStatus"] intValue];
+    if (status == 0) {
+        cell.statusL.text = @"待确认";
+        [cell.btn setTitle:@"去确认" forState:UIControlStateNormal];
+    } else if (status == 1) {
+        cell.statusL.text = @"已确认";
+        [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
+    }else if (status == 2) {
+        cell.statusL.text = @"已完工";
+        [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
+    }else if (status == 3) {
+        cell.statusL.text = @"已付款";
+        [cell.btn setTitle:@"去施工" forState:UIControlStateNormal];
+    }else if (status == 4) {
+        cell.statusL.text = @"已完成";
+        [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
+    }
+    else {
+        cell.statusL.text = @"已完成";
+        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+    }
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"car"][@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+    cell.orderNumberL.text = [NSString stringWithFormat:@"订单号: %@",dic[@"code"]];
+    
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
+    NSString *string = [formater stringFromDate:creatDate];
+    cell.dateL.text = string;
+
+    cell.plateNumberL.text = STRING(dic[@"car"][@"plateNumber"]);
+    cell.ownerL.text = STRING(dic[@"car"][@"owner"]);
+    cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+//    MailOrderDetailVC *detailVC = [[MailOrderDetailVC alloc] init];
+//    detailVC.orderId = orderArray[indexPath.section][@"id"];
+//    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 发送请求

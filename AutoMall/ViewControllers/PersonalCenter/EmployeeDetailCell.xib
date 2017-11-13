@@ -31,8 +31,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkP-Ya-ngP">
-                        <rect key="frame" x="252" y="17.5" width="60" height="25"/>
+                    <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkP-Ya-ngP">
+                        <rect key="frame" x="244" y="17.5" width="60" height="25"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.0" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="7ZH-ZQ-6jJ"/>
@@ -43,7 +43,7 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="DkP-Ya-ngP" secondAttribute="trailing" constant="8" id="0YB-jY-lZZ"/>
+                    <constraint firstAttribute="trailing" secondItem="DkP-Ya-ngP" secondAttribute="trailing" constant="16" id="0YB-jY-lZZ"/>
                     <constraint firstItem="d1p-tQ-tdd" firstAttribute="centerY" secondItem="4a3-F3-tPo" secondAttribute="centerY" id="Acg-gn-vGw"/>
                     <constraint firstItem="DkP-Ya-ngP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d1p-tQ-tdd" secondAttribute="trailing" constant="10" id="M8z-EE-ZdQ"/>
                     <constraint firstItem="DkP-Ya-ngP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MPt-yu-RlE"/>

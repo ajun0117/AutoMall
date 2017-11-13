@@ -161,7 +161,6 @@
         }];
     }
     
-    
     if (self.delegate && [self.delegate respondsToSelector:@selector(ajSegmentedControlSelectAtIndex:)]) {
         [self.delegate ajSegmentedControlSelectAtIndex:btn.tag - 1000];
     }

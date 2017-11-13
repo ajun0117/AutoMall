@@ -31,6 +31,12 @@
     self.title = @"订单";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+//    NSDictionary *dic = @{@"orderId":orderId,@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
+    self.orderNumberL.text = self.infoDic[@"orderId"];
+    self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
+    self.chepaiL.text = self.infoDic[@"plateNumber"];
+    self.ownerL.text = self.infoDic[@"owner"];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -55,6 +61,7 @@
     AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
     orderVC.statusFlow = statusFlow;
     orderVC.checkOrderId = self.checkOrderId;
+    orderVC.infoDic = self.infoDic;
     [self.navigationController pushViewController:orderVC animated:YES];
 }
 
@@ -97,12 +104,14 @@
                 AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
                 orderVC.statusFlow = statusFlow;
                 orderVC.checkOrderId = self.checkOrderId;
+                orderVC.infoDic = self.infoDic;
                 [self.navigationController pushViewController:orderVC animated:YES];
             }
             else if ([statusFlow isEqualToString:@"0"]) {   //先施工
                 AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
                 workingVC.statusFlow = statusFlow;
                 workingVC.checkOrderId = self.checkOrderId;
+                workingVC.infoDic = self.infoDic;
                 [self.navigationController pushViewController:workingVC animated:YES];
             }
         }

@@ -7,7 +7,7 @@
 //
 
 #import "ServicePackageVC.h"
-#import "UpkeepPlanNormalCell.h"
+#import "ServicePackageCell.h"
 #import "UpkeepPlanNormalHeadCell.h"
 //#import "JSONKit.h"
 
@@ -32,7 +32,7 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"ServicePackageCell" bundle:nil] forCellReuseIdentifier:@"servicePackageCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalHeadCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanNormalHeadCell"];
     self.myTableView.tableFooterView = [UIView new];
     
@@ -109,7 +109,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //        cell.textLabel.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
         UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(12, 7, 20, 30)];
-        noticeL.font = [UIFont systemFontOfSize:15];
+        noticeL.font = [UIFont boldSystemFontOfSize:15];
         noticeL.text = @"￥";
         [cell.contentView addSubview:noticeL];
         UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
@@ -127,7 +127,7 @@
         return cell;
     }
     else {
-        UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+        ServicePackageCell *cell = (ServicePackageCell *)[tableView dequeueReusableCellWithIdentifier:@"servicePackageCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dicc = arr[indexPath.row - 1];
         cell.declareL.text = dicc[@"name"];

@@ -38,7 +38,8 @@
     NSString *mobileUserType;     //登录用户类别 0：手机普通用户 1：门店老板 2: 门店员工
     NSDictionary *shopDic;  //店铺信息
     NSDictionary *userInfoDic;  //用户信息字典
-    int approvalStatus;
+//    int approvalStatus;
+    NSDictionary *approvalStatusDic;    //审核状态字典
     WPImageView *head;      //头像
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -153,7 +154,7 @@
         return 4;
     }
     else if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
-        return 5;
+        return 6;
     }
     else if ([mobileUserType isEqualToString:@"2"]) {    //门店员工
         return 6;
@@ -192,7 +193,7 @@
                 break;
             }
             case 1: {
-                return 6;
+                return 7;
                 break;
             }
             case 2: {
@@ -542,13 +543,21 @@
                     }
                     case 4: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                        cell.img.image = IMG(@"center_service");
+                        cell.nameL.text = @"门店服务";
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        return cell;
+                        break;
+                    }
+                    case 5: {
+                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                         cell.img.image = IMG(@"center_discount");
                         cell.nameL.text = @"优惠管理";
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
                         break;
                     }
-                    case 5: {
+                    case 6: {
                         CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                         cell.img.image = IMG(@"center_staff");
                         cell.nameL.text = @"员工管理";
@@ -887,7 +896,7 @@
                 }
                 if (indexPath.row == 1) {
                     NSLog(@"联系我们");
-                    [self requestGetPhoneInfo];
+                    [self toTel];
                 }
                 break;
             }
@@ -979,7 +988,7 @@
                 }
                 if (indexPath.row == 1) {
                     NSLog(@"联系我们");
-                    [self requestGetPhoneInfo];
+                    [self toTel];
                 }
                 break;
             }
@@ -998,7 +1007,7 @@
             case 1: {
                 if (indexPath.row == 0) {
                     EmployeeEditIntroduceVC *editVC = [[EmployeeEditIntroduceVC alloc] init];
-                    editVC.introduceStr = userInfoDic[@"remark"];
+                    editVC.introduceStr = STRING(userInfoDic[@"remark"]);
                     editVC.UpdateUserInfo = ^{
                         [self requestPostUserGetInfo];      //刷新用户信息
                     };
@@ -1054,7 +1063,7 @@
                 }
                 if (indexPath.row == 1) {
                     NSLog(@"联系我们");
-                    [self requestGetPhoneInfo];
+                    [self toTel];
                 }
                 break;
             }
@@ -1082,7 +1091,7 @@
                 }
                 if (indexPath.row == 1) {
                     NSLog(@"联系我们");
-                    [self requestGetPhoneInfo];
+                    [self toTel];
                 }
                 
                 break;
@@ -1165,14 +1174,14 @@
         return;
     }
     else if ([mobileUserType isEqualToString:@"0"]) {    //普通注册用户
-        if ([userInfoDic[@"storeApprovalStatus"] intValue] == 0) {
-            _networkConditionHUD.labelText = @"您申请的门店还在审核中";
+        if ([approvalStatusDic[@"approvalStatus"] intValue] == 0) {
+            _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             return;
         }
-        else if ([userInfoDic[@"storeApprovalStatus"] intValue] == -1) {
-            _networkConditionHUD.labelText = @"您申请的门店已被拒绝！";
+        else if ([approvalStatusDic[@"storeApprovalStatus"] intValue] == -1) {
+            _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             return;
@@ -1289,7 +1298,20 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
- 
+
+-(void)toTel {
+    NSString *phoneStr = [[GlobalSetting shareGlobalSettingInstance] officialPhone];
+    if (! phoneStr) {
+        [self requestGetPhoneInfo];
+    }
+    else {
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",phoneStr];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+    }
+}
+
 #pragma mark - 发起网络请求
 -(void)requestPostUserGetInfo { //获取登录用户信息
     [_hud show:YES];
@@ -1419,6 +1441,7 @@
         NSLog(@"GetApprovalStatus: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
 //            approvalStatus = [responseObject[@"data"][@"approvalStatus"] intValue];
+            approvalStatusDic = responseObject[@"data"];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

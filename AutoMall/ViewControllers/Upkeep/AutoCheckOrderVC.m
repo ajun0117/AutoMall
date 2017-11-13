@@ -39,6 +39,11 @@
     }
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    self.orderNumberL.text = self.infoDic[@"orderId"];
+    self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
+    self.chepaiL.text = self.infoDic[@"plateNumber"];
+    self.ownerL.text = self.infoDic[@"owner"];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -63,12 +68,14 @@
         AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
         workingVC.statusFlow = self.statusFlow;
         workingVC.checkOrderId = self.checkOrderId;
+        workingVC.infoDic = self.infoDic;
         [self.navigationController pushViewController:workingVC animated:YES];
     }
     else if ([self.statusFlow isEqualToString:@"1"]) {      //先施工，付款完成，至完工页
         AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
         completeVC.statusFlow = self.statusFlow;
         completeVC.checkOrderId = self.checkOrderId;
+        completeVC.infoDic = self.infoDic;
         [self.navigationController pushViewController:completeVC animated:YES];
     }
 }
@@ -103,12 +110,14 @@
                 AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
                 workingVC.statusFlow = self.statusFlow;
                 workingVC.checkOrderId = self.checkOrderId;
+                workingVC.infoDic = self.infoDic;
                 [self.navigationController pushViewController:workingVC animated:YES];
             }
             else if ([self.statusFlow isEqualToString:@"1"]) {      //先施工，付款完成，至完工页
                 AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
                 completeVC.statusFlow = self.statusFlow;
                 completeVC.checkOrderId = self.checkOrderId;
+                completeVC.infoDic = self.infoDic;
                 [self.navigationController pushViewController:completeVC animated:YES];
             }
         }

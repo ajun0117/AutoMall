@@ -27,19 +27,19 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="ADy-rA-bOI" customClass="StrikeThroughLabel">
-                        <rect key="frame" x="260" y="11" width="60" height="21"/>
+                        <rect key="frame" x="258" y="11" width="60" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="gcI-ia-n8l"/>
                             <constraint firstAttribute="width" constant="60" id="psH-fy-tRw"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ROG-aw-OuP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="12H-9g-Kzi"/>
                     <constraint firstItem="ROG-aw-OuP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Kbk-hE-1fu"/>
-                    <constraint firstAttribute="trailing" secondItem="ADy-rA-bOI" secondAttribute="trailing" id="t69-N1-Q2q"/>
+                    <constraint firstAttribute="trailing" secondItem="ADy-rA-bOI" secondAttribute="trailing" constant="2" id="t69-N1-Q2q"/>
                     <constraint firstItem="ADy-rA-bOI" firstAttribute="centerY" secondItem="ROG-aw-OuP" secondAttribute="centerY" id="v6q-fd-rFr"/>
                 </constraints>
             </tableViewCellContentView>
@@ -47,7 +47,7 @@
                 <outlet property="contentL" destination="ADy-rA-bOI" id="Xyh-dG-mnx"/>
                 <outlet property="declareL" destination="ROG-aw-OuP" id="iJD-W2-32I"/>
             </connections>
-            <point key="canvasLocation" x="-175" y="-8"/>
+            <point key="canvasLocation" x="-170" y="3"/>
         </tableViewCell>
     </objects>
 </document>

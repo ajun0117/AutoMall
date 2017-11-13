@@ -55,7 +55,7 @@
         self.expireJifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
     }
     else {
-        self.viewHeightCon.constant = 135;
+        self.viewHeightCon.constant = 133;
     }
     
     [self setTextFieldInputAccessoryViewWithTF:self.nickNameTF];

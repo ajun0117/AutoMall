@@ -18,21 +18,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a18-z5-v9l">
-                        <rect key="frame" x="262" y="11" width="0.0" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="MAs-zB-FeX"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机油更换" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="Cd4-Is-XqN">
-                        <rect key="frame" x="16" y="11" width="61.5" height="21"/>
+                        <rect key="frame" x="16" y="11" width="57.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Qhn-tT-wMU"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a18-z5-v9l">
+                        <rect key="frame" x="220" y="11" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="CcF-A1-fZe"/>
+                            <constraint firstAttribute="height" constant="21" id="MAs-zB-FeX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWt-Tq-8tc">
@@ -49,7 +50,7 @@
                 <constraints>
                     <constraint firstItem="Cd4-Is-XqN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1d4-Ro-Edq"/>
                     <constraint firstItem="Cd4-Is-XqN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2lT-Dk-Moz"/>
-                    <constraint firstItem="JWt-Tq-8tc" firstAttribute="leading" secondItem="a18-z5-v9l" secondAttribute="trailing" constant="20" id="KY9-XS-JgC"/>
+                    <constraint firstItem="JWt-Tq-8tc" firstAttribute="leading" secondItem="a18-z5-v9l" secondAttribute="trailing" constant="2" id="KY9-XS-JgC"/>
                     <constraint firstItem="JWt-Tq-8tc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lhw-Uk-7DB"/>
                     <constraint firstItem="a18-z5-v9l" firstAttribute="centerY" secondItem="Cd4-Is-XqN" secondAttribute="centerY" id="eB1-nq-Nyu"/>
                     <constraint firstAttribute="trailing" secondItem="JWt-Tq-8tc" secondAttribute="trailing" constant="8" id="vPu-Wy-KLs"/>

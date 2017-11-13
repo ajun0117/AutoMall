@@ -10,5 +10,6 @@
 
 @interface CommodityDetailNormalCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *nameL;
+@property (strong, nonatomic) IBOutlet UILabel *zhekouL;
 
 @end

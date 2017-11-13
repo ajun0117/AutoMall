@@ -66,6 +66,8 @@
     [self requestGetChecktypeList];
     
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    
+    [self requestGetPhoneInfo];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

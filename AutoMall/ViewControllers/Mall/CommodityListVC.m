@@ -294,6 +294,7 @@
             if ([dic[@"discount"] intValue] > 0) {
                 cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
                 cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                cell.zhekouL.hidden = NO;
             } else {
                 cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 cell.costPriceStrikeL.text = @"";
@@ -306,6 +307,7 @@
             if ([dic[@"discount"] intValue] > 0) {
                 cell.moneyL.text = @"￥--";
                 cell.costPriceStrikeL.text = @"￥--";
+                cell.zhekouL.hidden = NO;
             } else {
                 cell.moneyL.text = @"￥--";
                 cell.costPriceStrikeL.text = @"";

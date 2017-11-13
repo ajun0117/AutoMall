@@ -358,6 +358,7 @@
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"plateNumber"]);
                         cell.contentL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.textColor = [UIColor blackColor];
                         return cell;
                         break;
                     }
@@ -370,6 +371,7 @@
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"owner"]);
                         cell.contentL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.textColor = [UIColor blackColor];
                         return cell;
                         break;
                     }
@@ -382,6 +384,7 @@
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"brand"]);
                         cell.contentL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.textColor = [UIColor blackColor];
                         return cell;
                         break;
                     }
@@ -394,6 +397,7 @@
                         cell.declareL.font = [UIFont systemFontOfSize:15];
                         cell.contentL.text = STRING(self.carDic[@"model"]);
                         cell.contentL.font = [UIFont systemFontOfSize:15];
+                        cell.contentL.textColor = [UIColor blackColor];
                         return cell;
                         break;
                     }
@@ -443,6 +447,7 @@
                 } else {
                     cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 }
+                cell.contentL.textColor = [UIColor blackColor];
                 
                 return cell;
                 break;
@@ -457,6 +462,7 @@
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
                 cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice];
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
+                cell.contentL.textColor = [UIColor blackColor];
                 return cell;
                 break;
             }
@@ -470,11 +476,12 @@
                 cell.declareL.text = dic[@"item"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
                 if (dic[@"money"]) {
-                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+                    cell.contentL.text = [NSString stringWithFormat:@"-￥%@",dic[@"money"]];
                 } else {
                     cell.contentL.text = @"";
                 }
-                cell.contentL.font = [UIFont boldSystemFontOfSize:15];
+                cell.contentL.textColor = RGBCOLOR(251, 68, 89);
+                cell.contentL.font = [UIFont systemFontOfSize:15];
                 return cell;
                 break;
             }
@@ -486,9 +493,10 @@
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"折后价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                NSLog(@"serVicePrice + packagePrice + discountPrice:  %.2f",serVicePrice + packagePrice + discountPrice);
-                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + discountPrice];
+                NSLog(@"serVicePrice + packagePrice - discountPrice:  %.2f",serVicePrice + packagePrice - discountPrice);
+                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice];
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
+                cell.contentL.textColor = [UIColor blackColor];
                 return cell;
                 break;
             }
@@ -644,7 +652,7 @@
         [discounts addObject:dicc2];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice + discountPrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
@@ -703,9 +711,12 @@
 }
 
 
-- (void)toPopVC:(NSString *)carId {
+- (void)toPopVC:(NSString *)orderId {
     AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
     orderVC.checkOrderId = self.carUpkeepId;
+    NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice];
+    NSDictionary *dic = @{@"orderId":[NSString stringWithFormat:@"%@",orderId],@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
+    orderVC.infoDic = dic;
     [self.navigationController pushViewController:orderVC animated:YES];
 }
 

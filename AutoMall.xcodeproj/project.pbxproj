@@ -56,6 +56,8 @@
 		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
+		045335E81FB98BC4008FB56F /* UpkeepOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045335E61FB98BC4008FB56F /* UpkeepOrderListCell.m */; };
+		045335E91FB98BC5008FB56F /* UpkeepOrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045335E71FB98BC4008FB56F /* UpkeepOrderListCell.xib */; };
 		0453D3B01F69349A004F79C8 /* UpkeepCarInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453D3AE1F69349A004F79C8 /* UpkeepCarInfoVC.m */; };
 		0453D3B11F69349A004F79C8 /* UpkeepCarInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0453D3AF1F69349A004F79C8 /* UpkeepCarInfoVC.xib */; };
 		0459C6871F61392E0040501E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF11F31C72900AA20A7 /* libsqlite3.0.tbd */; };
@@ -125,6 +127,8 @@
 		0486E8CC1F8F667700FB746E /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486E8C91F8F667700FB746E /* libBPush.a */; };
 		0486E8CD1F8F667700FB746E /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0486E8CA1F8F667700FB746E /* test.caf */; };
 		0486E8CF1F8F669E00FB746E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486E8CE1F8F669E00FB746E /* Foundation.framework */; };
+		0490C7D51FB92EE9006F173D /* ServicePackageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490C7D31FB92EE9006F173D /* ServicePackageCell.m */; };
+		0490C7D61FB92EE9006F173D /* ServicePackageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0490C7D41FB92EE9006F173D /* ServicePackageCell.xib */; };
 		0490FBFF1F57F6CA00F77661 /* CustomServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490FBFD1F57F6CA00F77661 /* CustomServiceVC.m */; };
 		0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0490FBFE1F57F6CA00F77661 /* CustomServiceVC.xib */; };
 		0490FC041F57F97700F77661 /* CustomServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490FC021F57F97700F77661 /* CustomServiceCell.m */; };
@@ -506,6 +510,9 @@
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
 		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
 		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
+		045335E51FB98BC4008FB56F /* UpkeepOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepOrderListCell.h; sourceTree = "<group>"; };
+		045335E61FB98BC4008FB56F /* UpkeepOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepOrderListCell.m; sourceTree = "<group>"; };
+		045335E71FB98BC4008FB56F /* UpkeepOrderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepOrderListCell.xib; sourceTree = "<group>"; };
 		0453D3AD1F69349A004F79C8 /* UpkeepCarInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepCarInfoVC.h; sourceTree = "<group>"; };
 		0453D3AE1F69349A004F79C8 /* UpkeepCarInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepCarInfoVC.m; sourceTree = "<group>"; };
 		0453D3AF1F69349A004F79C8 /* UpkeepCarInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepCarInfoVC.xib; sourceTree = "<group>"; };
@@ -699,6 +706,9 @@
 		0486E8CA1F8F667700FB746E /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
 		0486E8CE1F8F669E00FB746E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0486E8D01F8F6C4900FB746E /* AutoMall.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutoMall.entitlements; sourceTree = "<group>"; };
+		0490C7D21FB92EE9006F173D /* ServicePackageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePackageCell.h; sourceTree = "<group>"; };
+		0490C7D31FB92EE9006F173D /* ServicePackageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePackageCell.m; sourceTree = "<group>"; };
+		0490C7D41FB92EE9006F173D /* ServicePackageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicePackageCell.xib; sourceTree = "<group>"; };
 		0490FBFC1F57F6CA00F77661 /* CustomServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomServiceVC.h; sourceTree = "<group>"; };
 		0490FBFD1F57F6CA00F77661 /* CustomServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomServiceVC.m; sourceTree = "<group>"; };
 		0490FBFE1F57F6CA00F77661 /* CustomServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomServiceVC.xib; sourceTree = "<group>"; };
@@ -2028,6 +2038,9 @@
 				04D0358A1FA7279D0013AD6F /* UpkeepOrderVC.h */,
 				04D0358B1FA7279D0013AD6F /* UpkeepOrderVC.m */,
 				04D0358C1FA7279D0013AD6F /* UpkeepOrderVC.xib */,
+				045335E51FB98BC4008FB56F /* UpkeepOrderListCell.h */,
+				045335E61FB98BC4008FB56F /* UpkeepOrderListCell.m */,
+				045335E71FB98BC4008FB56F /* UpkeepOrderListCell.xib */,
 			);
 			name = "保养服务订单";
 			sourceTree = "<group>";
@@ -2672,6 +2685,9 @@
 				04EB16221F42F0CD00974972 /* ServicePackageVC.h */,
 				04EB16231F42F0CD00974972 /* ServicePackageVC.m */,
 				04EB16241F42F0CD00974972 /* ServicePackageVC.xib */,
+				0490C7D21FB92EE9006F173D /* ServicePackageCell.h */,
+				0490C7D31FB92EE9006F173D /* ServicePackageCell.m */,
+				0490C7D41FB92EE9006F173D /* ServicePackageCell.xib */,
 			);
 			name = "服务套餐";
 			sourceTree = "<group>";
@@ -3107,6 +3123,7 @@
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
 				042AF2081F4C3D0A00EA5E5F /* CommodityDetailPriceCell.xib in Resources */,
 				04F7D87F1F5EAD79004945ED /* MailOrderMultiCell.xib in Resources */,
+				0490C7D61FB92EE9006F173D /* ServicePackageCell.xib in Resources */,
 				042AF2121F4C408F00EA5E5F /* CommodityDetailContentCell.xib in Resources */,
 				044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */,
 				0453D3B11F69349A004F79C8 /* UpkeepCarInfoVC.xib in Resources */,
@@ -3129,6 +3146,7 @@
 				F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
+				045335E91FB98BC5008FB56F /* UpkeepOrderListCell.xib in Resources */,
 				0490FC051F57F97700F77661 /* CustomServiceCell.xib in Resources */,
 				04C35D1E1F8B57BC00062014 /* MessageListVC.xib in Resources */,
 				042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */,
@@ -3266,6 +3284,7 @@
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
 				046B8DDC1F9A044300784AA8 /* openssl_wrapper.m in Sources */,
 				F70A50931FA212B70047D804 /* AutoCheckResultVC.m in Sources */,
+				045335E81FB98BC4008FB56F /* UpkeepOrderListCell.m in Sources */,
 				04DC7DE71F31C28300AA20A7 /* DJQRateView.m in Sources */,
 				04DC7D121F31C25000AA20A7 /* WebViewController.m in Sources */,
 				04DCA1851FA33BBF004B1054 /* AutoCheckResultProblemVC.m in Sources */,
@@ -3452,6 +3471,7 @@
 				04D107731F62998D007D9F57 /* NSNumber+Zirkfied.m in Sources */,
 				04DC7DBD1F31C28300AA20A7 /* ImageCollectionViewCell.m in Sources */,
 				04DC7DE61F31C28300AA20A7 /* UITabBarItem+Universal.m in Sources */,
+				0490C7D51FB92EE9006F173D /* ServicePackageCell.m in Sources */,
 				04EB16251F42F0CD00974972 /* ServicePackageVC.m in Sources */,
 				F7650B601FAF732300C0FCD2 /* AutoCheckDisountsVC.m in Sources */,
 				047ADFEA1F4A86EF00AEAE8E /* CMSDWebImageDecoder.m in Sources */,
@@ -3593,7 +3613,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3635,7 +3655,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

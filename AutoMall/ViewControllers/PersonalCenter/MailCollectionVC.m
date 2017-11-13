@@ -120,8 +120,32 @@
     NSDictionary *dic = collectArray[indexPath.section][@"resource"];
     MailCollectionCell *cell = (MailCollectionCell *)[tableView dequeueReusableCellWithIdentifier:@"mailCollectionCell"];
     [cell.goodsIMG sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
-    cell.goodsName.text = dic[@"name"];
-    cell.goodsprice.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+    cell.goodsName.text = dic[@"name"]; 
+    
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"1"]) {    //老板
+        if ([dic[@"discount"] intValue] > 0) {
+            cell.goodsprice.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+//            cell.zhekouL.hidden = NO;
+        } else {
+            cell.goodsprice.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+            cell.costPriceStrikeL.text = @"";
+//            cell.zhekouL.hidden = YES;
+        }
+    }
+    else {
+        if ([dic[@"discount"] intValue] > 0) {
+            cell.goodsprice.text = @"￥--";
+            cell.costPriceStrikeL.text = @"￥--";
+//            cell.zhekouL.hidden = NO;
+        } else {
+            cell.goodsprice.text = @"￥--";
+            cell.costPriceStrikeL.text = @"";
+//            cell.zhekouL.hidden = YES;
+        }
+    }
+    
     return cell;
 }
 

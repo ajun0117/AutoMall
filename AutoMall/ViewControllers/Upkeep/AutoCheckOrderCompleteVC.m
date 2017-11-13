@@ -28,6 +28,11 @@
     self.title = @"订单已完成";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    self.orderNumberL.text = self.infoDic[@"orderId"];
+    self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
+    self.chepaiL.text = self.infoDic[@"plateNumber"];
+    self.ownerL.text = self.infoDic[@"owner"];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

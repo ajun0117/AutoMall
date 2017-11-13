@@ -162,7 +162,7 @@
             
             [view addSubview:label];
             return view;
-            break;
+            break; 
         }
             
         case 2: {

@@ -29,7 +29,7 @@
     self.title = @"技能介绍";
     
     self.jieshaoTV.layer.cornerRadius = 2;
-    self.jieshaoTV.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
+    self.jieshaoTV.layer.borderColor = RGBCOLOR(200, 200, 204).CGColor;
     self.jieshaoTV.layer.borderWidth = 0.5;
     self.jieshaoTV.text = self.introduceStr;
     [self setTextViewInputAccessoryViewWithTV:self.jieshaoTV];

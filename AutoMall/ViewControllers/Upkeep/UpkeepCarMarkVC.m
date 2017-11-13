@@ -8,12 +8,15 @@
 
 #import "UpkeepCarMarkVC.h"
 #import "WPImageView.h"
+#import "AddPicViewController.h"
 
 @interface UpkeepCarMarkVC ()
 {
 //    UIScrollView *_scrollview;
 //    UIImageView *_imageview;
     UIImage *chooseImg;
+    NSArray *shopImgAry;        //车身图片数组
+    
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
 }
@@ -35,9 +38,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"车身标记";
+//    self.title = @"车身标记";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+//                                       target:nil action:nil];
+//    negativeSpacer.width = -6;
+//    
+//    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    addBtn.frame = CGRectMake(0, 0, 28, 28);
+//    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+//    //    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+//    
+//    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    searchBtn.frame = CGRectMake(0, 0, 30, 30);
+//    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
+//    //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, addBtnBarBtn, searchBtnBarBtn, nil];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    UILabel *titleL = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 110, 40)];
+    titleL.text = @"车身标记";
+    titleL.font = [UIFont boldSystemFontOfSize:17];
+    titleL.textAlignment = NSTextAlignmentRight;
+    [view addSubview:titleL];
+    
+    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    photoBtn.frame = CGRectMake(110, 2, 40, 40);
+    [photoBtn setImage:[UIImage imageNamed:@"photoBtn"] forState:UIControlStateNormal];
+//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [photoBtn addTarget:self action:@selector(toPhoto) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:photoBtn];
+    
+    self.navigationItem.titleView = view;
+    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(toReset:)];
     self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
@@ -111,14 +153,18 @@
 }
 
 //告诉scrollview要缩放的是哪个子控件
--(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
          return self.imageV;
 }
 
--(void) toChoose:(UIButton *)btn {
-    chooseImg = btn.currentImage;
-//    NSLog(@"theView.frame.size:  %@",NSStringFromCGSize(_imageview.frame.size));
+-(void)toPhoto {
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+        shopImgAry = array;
+        NSLog(@"shopImgAry: %@",shopImgAry);
+    };
+    photoVC.localImgsArray = shopImgAry;
+    [self.navigationController pushViewController:photoVC animated:YES];
 }
 
 - (IBAction)dent:(id)sender {

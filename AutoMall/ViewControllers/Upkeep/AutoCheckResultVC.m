@@ -30,6 +30,7 @@
     NSMutableArray *checkResultArray;       //重组后的检查结果数组
     int sections;   //块数
     NSArray *images;
+    NSString *mobileUserType;   //用户类别
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -59,6 +60,8 @@
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, shareBtnBarBtn, nil];
     
+    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+        
     sections = 5;
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"ShopInfoCell" bundle:nil] forCellReuseIdentifier:@"shopInfoCell"];
@@ -190,7 +193,11 @@
                 break;
             }
             case 4: {
-                return 4;
+                if ([mobileUserType isEqualToString:@"1"]) {
+                    return 1;
+                } else {
+                    return 4;
+                }
                 break;
             }
             case 5: {
@@ -217,7 +224,11 @@
                 break;
             }
             case 3: {
-                return 4;
+                if ([mobileUserType isEqualToString:@"1"]) {
+                    return 1;
+                } else {
+                    return 4;
+                }
                 break;
             }
             case 4: {
@@ -257,13 +268,17 @@
                 break;
             }
             case 4: {
-                if (indexPath.row == 0) {
-                    return 44;
-                }
-                else if (indexPath.row == 3) {
+                if ([mobileUserType isEqualToString:@"1"]) {
                     return 56;
+                } else {
+                    if (indexPath.row == 0) {
+                        return 44;
+                    }
+                    else if (indexPath.row == 3) {
+                        return 56;
+                    }
+                    return 70;
                 }
-                return 70;
                 break;
             }
             case 5: {
@@ -290,13 +305,17 @@
                 break;
             }
             case 3: {
-                if (indexPath.row == 0) {
-                    return 44;
-                }
-                else if (indexPath.row == 3) {
+                if ([mobileUserType isEqualToString:@"1"]) {
                     return 56;
+                } else {
+                    if (indexPath.row == 0) {
+                        return 44;
+                    }
+                    else if (indexPath.row == 3) {
+                        return 56;
+                    }
+                    return 70;
                 }
-                return 70;
                 break;
             }
             case 4: {
@@ -468,14 +487,7 @@
                 break;
             }
             case 4: {
-                if (indexPath.row == 0) {
-                    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
-                    cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
-                    return cell;
-                }
-                else if(indexPath.row == 3) {
+                if ([mobileUserType isEqualToString:@"1"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -485,7 +497,7 @@
                         btn1.frame = CGRectMake(8, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
                         [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                         [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                        //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
                         [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
                         btn1.layer.cornerRadius = 5;
                         btn1.clipsToBounds = YES;
@@ -497,7 +509,7 @@
                         btn2.frame = CGRectMake(VIEW_BX(btn1) + 16, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
                         [btn2 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                         [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];
+                        //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];
                         [btn2 setTitle:@"专家解读报告" forState:UIControlStateNormal];
                         btn2.layer.cornerRadius = 5;
                         btn2.clipsToBounds = YES;
@@ -508,12 +520,56 @@
                         [cell.contentView addSubview:btn2];
                     }
                     return cell;
+                    
+                } else {
+                    if (indexPath.row == 0) {
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                        cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
+                        return cell;
+                    }
+                    else if(indexPath.row == 3) {
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
+                        if (! label) {
+                            UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+                            btn1.tag = 101;
+                            btn1.frame = CGRectMake(8, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                            [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                            [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                            //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                            [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                            btn1.layer.cornerRadius = 5;
+                            btn1.clipsToBounds = YES;
+                            btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                            [btn1 addTarget:self action:@selector(fullReport:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+                            btn2.tag = 102;
+                            btn2.frame = CGRectMake(VIEW_BX(btn1) + 16, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                            [btn2 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                            [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                            //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];
+                            [btn2 setTitle:@"专家解读报告" forState:UIControlStateNormal];
+                            btn2.layer.cornerRadius = 5;
+                            btn2.clipsToBounds = YES;
+                            btn2.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                            [btn2 addTarget:self action:@selector(unscramble:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            [cell.contentView addSubview:btn1];
+                            [cell.contentView addSubview:btn2];
+                        }
+                        return cell;
+                    }
+                    else {
+                        CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        return cell;
+                    }
                 }
-                else {
-                    CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
-                }
+
                 break;
             }
             case 5: {
@@ -598,14 +654,7 @@
                 break;
             }
             case 3: {
-                if (indexPath.row == 0) {
-                    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
-                    cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
-                    return cell;
-                }
-                else if(indexPath.row == 3) {
+                if ([mobileUserType isEqualToString:@"1"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -638,11 +687,54 @@
                         [cell.contentView addSubview:btn2];
                     }
                     return cell;
-                }
-                else {
-                    CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
+                    
+                } else {
+                    if (indexPath.row == 0) {
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                        cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
+                        return cell;
+                    }
+                    else if(indexPath.row == 3) {
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
+                        if (! label) {
+                            UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+                            btn1.tag = 101;
+                            btn1.frame = CGRectMake(8, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                            [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                            [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                            //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                            [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                            btn1.layer.cornerRadius = 5;
+                            btn1.clipsToBounds = YES;
+                            btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                            [btn1 addTarget:self action:@selector(fullReport:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+                            btn2.tag = 102;
+                            btn2.frame = CGRectMake(VIEW_BX(btn1) + 16, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                            [btn2 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                            [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                            //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];
+                            [btn2 setTitle:@"专家解读报告" forState:UIControlStateNormal];
+                            btn2.layer.cornerRadius = 5;
+                            btn2.clipsToBounds = YES;
+                            btn2.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                            [btn2 addTarget:self action:@selector(unscramble:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            [cell.contentView addSubview:btn1];
+                            [cell.contentView addSubview:btn2];
+                        }
+                        return cell;
+                    }
+                    else {
+                        CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        return cell;
+                    }
                 }
                 break;
             }
@@ -696,7 +788,7 @@
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
         [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
-}
+} 
 
 -(void)unscramble:(UIButton *)btn {
     NSString *phoneStr = [[GlobalSetting shareGlobalSettingInstance] officialPhone];

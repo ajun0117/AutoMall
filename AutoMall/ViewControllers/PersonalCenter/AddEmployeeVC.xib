@@ -39,7 +39,7 @@
                     <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bon-gX-IyM">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
+                            <rect key="frame" x="0.0" y="10" width="375" height="165"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fux-fB-Wr7">
                                     <rect key="frame" x="16" y="8" width="343" height="35"/>
@@ -60,7 +60,7 @@
                                         <constraint firstAttribute="height" constant="1" id="50y-7x-fUV" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -92,7 +92,7 @@
                                         <constraint firstAttribute="height" constant="1" id="jEZ-hX-spF" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -124,7 +124,7 @@
                                         <constraint firstAttribute="height" constant="1" id="uBG-5C-x8n" customClass="NSLayoutConstraintOnePixelLine"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -182,7 +182,7 @@
                         <constraint firstAttribute="bottom" secondItem="Bon-gX-IyM" secondAttribute="bottom" id="Oef-h8-7we"/>
                         <constraint firstItem="Bon-gX-IyM" firstAttribute="leading" secondItem="GYz-QW-KlO" secondAttribute="leading" id="YE1-UV-iZP"/>
                         <constraint firstAttribute="trailing" secondItem="Bon-gX-IyM" secondAttribute="trailing" id="oBN-wq-kT4"/>
-                        <constraint firstItem="Bon-gX-IyM" firstAttribute="top" secondItem="GYz-QW-KlO" secondAttribute="top" id="qK4-dO-dK5"/>
+                        <constraint firstItem="Bon-gX-IyM" firstAttribute="top" secondItem="GYz-QW-KlO" secondAttribute="top" constant="10" id="qK4-dO-dK5"/>
                     </constraints>
                 </scrollView>
             </subviews>

@@ -39,7 +39,7 @@
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
     orderArray = [NSMutableArray array];
-    currentpage = 0;
+    currentpage = 0; 
     
     if ([self.orderStatus isEqualToString:@"0"]) {
         [self daifuAction:self.daifuBtn];

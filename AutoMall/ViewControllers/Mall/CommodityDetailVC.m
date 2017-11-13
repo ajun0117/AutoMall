@@ -448,6 +448,11 @@ static CGFloat const scrollViewHeight = 220;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
                     cell.nameL.text = commodityDic[@"name"];
+                    if ([commodityDic[@"discount"] intValue] > 0) {
+                        cell.zhekouL.hidden = NO;
+                    } else {
+                        cell.zhekouL.hidden = YES;
+                    }
                     return cell;
                     break;
                 }
@@ -553,6 +558,7 @@ static CGFloat const scrollViewHeight = 220;
                  if ([dic[@"discount"] intValue] > 0) {
                     cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
                     cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                    cell.zhekouL.hidden = NO;
                  } else {
                      cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                      cell.costPriceStrikeL.text = @"";
@@ -562,6 +568,7 @@ static CGFloat const scrollViewHeight = 220;
                 if ([dic[@"discount"] intValue] > 0) {
                     cell.moneyL.text = @"￥--";
                     cell.costPriceStrikeL.text = @"￥--";
+                    cell.zhekouL.hidden = NO;
                 } else {
                     cell.moneyL.text = @"￥--";
                     cell.costPriceStrikeL.text = @"";

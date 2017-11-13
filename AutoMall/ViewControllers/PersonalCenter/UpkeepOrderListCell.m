@@ -1,19 +1,21 @@
 //
-//  EmployeeDetailCell.m
+//  UpkeepOrderListCell.m
 //  AutoMall
 //
-//  Created by 李俊阳 on 2017/9/29.
+//  Created by LYD on 2017/11/13.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "EmployeeDetailCell.h"
+#import "UpkeepOrderListCell.h"
 
-@implementation EmployeeDetailCell
+@implementation UpkeepOrderListCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.daishenBtn.layer.cornerRadius = 4;
+    self.btn.layer.cornerRadius = 2;
+    self.btn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.btn.layer.borderWidth = 1;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
