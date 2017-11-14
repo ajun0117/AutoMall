@@ -29,6 +29,9 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(popToRootVC)];
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
     self.orderNumberL.text = self.infoDic[@"orderId"];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
     self.chepaiL.text = self.infoDic[@"plateNumber"];
@@ -51,6 +54,10 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 - (IBAction)confirmAction:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void) popToRootVC {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

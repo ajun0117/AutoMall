@@ -30,6 +30,7 @@
 #import "EmployeeEditIntroduceVC.h"
 #import "EmployeeSkillListVC.h"
 #import "AboutUsVC.h"
+#import "StoreServiceVC.h"
 
 @interface PersonalCenterVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -934,15 +935,13 @@
                         break;
                     }
                     case 4: {
-                        BaoyangDiscountsVC *disVC = [[BaoyangDiscountsVC alloc] init];
-                        disVC.canEdit = YES;
-                        disVC.hidesBottomBarWhenPushed = YES;
-                        [self.navigationController pushViewController:disVC animated:YES];
+                        StoreServiceVC *serviceVC = [[StoreServiceVC alloc] init];
+                        serviceVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:serviceVC animated:YES];
                         break;
                     }
                     case 5: {
                         BaoyangDiscountsVC *disVC = [[BaoyangDiscountsVC alloc] init];
-                        disVC.canEdit = YES;
                         disVC.hidesBottomBarWhenPushed = YES;
                         [self.navigationController pushViewController:disVC animated:YES];
                         break;

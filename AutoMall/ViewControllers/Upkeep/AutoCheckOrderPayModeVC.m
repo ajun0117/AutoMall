@@ -32,6 +32,9 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(popToRootVC)];
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
 //    NSDictionary *dic = @{@"orderId":orderId,@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
     self.orderNumberL.text = self.infoDic[@"orderId"];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
@@ -72,6 +75,10 @@
 //    workingVC.statusFlow = statusFlow;
 //    workingVC.checkOrderId = self.checkOrderId;
 //    [self.navigationController pushViewController:workingVC animated:YES];
+}
+
+-(void) popToRootVC {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 发送请求

@@ -50,7 +50,7 @@
     
     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if ([mobileUserType isEqualToString:@"1"]) {  //门店老板
-        self.viewHeightCon.constant = 225;
+        self.viewHeightCon.constant = 223;
         self.jifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"integral"])];
         self.expireJifenL.text = [NSString stringWithFormat:@"%@分",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
     }

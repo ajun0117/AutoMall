@@ -327,7 +327,7 @@
 
 #pragma mark - 发起网络请求
 -(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
-    [_hud show:YES];
+//    [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];

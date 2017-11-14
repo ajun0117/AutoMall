@@ -79,6 +79,10 @@
 		0459C6BD1F614C870040501E /* CitiesDataTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6AF1F614C870040501E /* CitiesDataTool.m */; };
 		0459C6C11F614CCA0040501E /* AddressInfoEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459C6BF1F614CCA0040501E /* AddressInfoEditVC.m */; };
 		0459C6C21F614CCA0040501E /* AddressInfoEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0459C6C01F614CCA0040501E /* AddressInfoEditVC.xib */; };
+		045B06CC1FBAD4A100FDCE78 /* StoreServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 045B06CA1FBAD4A100FDCE78 /* StoreServiceVC.m */; };
+		045B06CD1FBAD4A100FDCE78 /* StoreServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045B06CB1FBAD4A100FDCE78 /* StoreServiceVC.xib */; };
+		045B06D11FBAD61D00FDCE78 /* AddStoreServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 045B06CF1FBAD61D00FDCE78 /* AddStoreServiceVC.m */; };
+		045B06D21FBAD61D00FDCE78 /* AddStoreServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045B06D01FBAD61D00FDCE78 /* AddStoreServiceVC.xib */; };
 		046B8DBF1F99F76400784AA8 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 046B8DBD1F99F76400784AA8 /* AlipaySDK.bundle */; };
 		046B8DC01F99F76400784AA8 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046B8DBE1F99F76400784AA8 /* AlipaySDK.framework */; };
 		046B8DC21F99F7AF00784AA8 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 046B8DC11F99F7AF00784AA8 /* libc++.tbd */; };
@@ -548,6 +552,12 @@
 		0459C6BE1F614CCA0040501E /* AddressInfoEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoEditVC.h; sourceTree = "<group>"; };
 		0459C6BF1F614CCA0040501E /* AddressInfoEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoEditVC.m; sourceTree = "<group>"; };
 		0459C6C01F614CCA0040501E /* AddressInfoEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressInfoEditVC.xib; sourceTree = "<group>"; };
+		045B06C91FBAD4A100FDCE78 /* StoreServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreServiceVC.h; sourceTree = "<group>"; };
+		045B06CA1FBAD4A100FDCE78 /* StoreServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreServiceVC.m; sourceTree = "<group>"; };
+		045B06CB1FBAD4A100FDCE78 /* StoreServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreServiceVC.xib; sourceTree = "<group>"; };
+		045B06CE1FBAD61D00FDCE78 /* AddStoreServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStoreServiceVC.h; sourceTree = "<group>"; };
+		045B06CF1FBAD61D00FDCE78 /* AddStoreServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddStoreServiceVC.m; sourceTree = "<group>"; };
+		045B06D01FBAD61D00FDCE78 /* AddStoreServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddStoreServiceVC.xib; sourceTree = "<group>"; };
 		046B8DBD1F99F76400784AA8 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		046B8DBE1F99F76400784AA8 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		046B8DC11F99F7AF00784AA8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -1546,6 +1556,20 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		045B06C31FBAD40300FDCE78 /* 门店服务 */ = {
+			isa = PBXGroup;
+			children = (
+				045B06C91FBAD4A100FDCE78 /* StoreServiceVC.h */,
+				045B06CA1FBAD4A100FDCE78 /* StoreServiceVC.m */,
+				045B06CB1FBAD4A100FDCE78 /* StoreServiceVC.xib */,
+				045B06CE1FBAD61D00FDCE78 /* AddStoreServiceVC.h */,
+				045B06CF1FBAD61D00FDCE78 /* AddStoreServiceVC.m */,
+				045B06D01FBAD61D00FDCE78 /* AddStoreServiceVC.xib */,
+			);
+			name = "门店服务";
+			path = ../Upkeep;
+			sourceTree = "<group>";
+		};
 		046B8DBC1F99F76400784AA8 /* 支付宝蚂蚁金服支付 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2305,6 +2329,7 @@
 				04EFEC741F5FE977004D9188 /* 商品收藏 */,
 				04F7D86A1F5EA969004945ED /* 门店等级 */,
 				04E4107F1F5D52170097E0A6 /* 申请认证 */,
+				045B06C31FBAD40300FDCE78 /* 门店服务 */,
 				04EB16271F42F90D00974972 /* 优惠项目 */,
 				0490FBFB1F57F67100F77661 /* 定制服务 */,
 				041076E91F5423FB003CB740 /* 中心首页cell */,
@@ -3030,6 +3055,7 @@
 				04EB16311F43005F00974972 /* AddDiscountsVC.xib in Resources */,
 				04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */,
 				047ADFFC1F4A86EF00AEAE8E /* MXScrollView.bundle in Resources */,
+				045B06CD1FBAD4A100FDCE78 /* StoreServiceVC.xib in Resources */,
 				04A09B161F3D969600053A98 /* CarInfoListVC.xib in Resources */,
 				041076EE1F54243C003CB740 /* HeadNameCell.xib in Resources */,
 				04DC7DDA1F31C28300AA20A7 /* UMShareEditViewController.xib in Resources */,
@@ -3091,6 +3117,7 @@
 				042E5D1E1F419C3500F5F324 /* UpkeepPlanVC.xib in Resources */,
 				04F7D85F1F5EA52E004945ED /* AddEmployeeVC.xib in Resources */,
 				04ADD6EE1F5F979400075FE9 /* MailOrderDetailSendStyleCell.xib in Resources */,
+				045B06D21FBAD61D00FDCE78 /* AddStoreServiceVC.xib in Resources */,
 				04ABFB4D1F9887630015EE78 /* AutoCheckOrderCompleteVC.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */,
@@ -3268,6 +3295,7 @@
 				F70A50991FA220640047D804 /* ShopInfoCell.m in Sources */,
 				04D107811F62998D007D9F57 /* ZFBarChart.m in Sources */,
 				04DC7DCE1F31C28300AA20A7 /* MJRefreshBaseView.m in Sources */,
+				045B06D11FBAD61D00FDCE78 /* AddStoreServiceVC.m in Sources */,
 				042AF2161F4C40DD00EA5E5F /* CommodityDetailTuijianCell.m in Sources */,
 				04DC7DB31F31C28300AA20A7 /* NSString+Check.m in Sources */,
 				04D107741F62998D007D9F57 /* NSString+Zirkfied.m in Sources */,
@@ -3360,6 +3388,7 @@
 				040BC8C11FA88482009AD3BA /* EmployeeSkillListVC.m in Sources */,
 				04EFEC681F5FA254004D9188 /* MailOrderDetailReceiverInfoCell.m in Sources */,
 				04D1077F1F62998D007D9F57 /* ZFMethod.m in Sources */,
+				045B06CC1FBAD4A100FDCE78 /* StoreServiceVC.m in Sources */,
 				047ADFEE1F4A86EF00AEAE8E /* CMSDWebImagePrefetcher.m in Sources */,
 				04DC7DAD1F31C28300AA20A7 /* AJAdView.m in Sources */,
 				04AE98121F2ED46500C2D158 /* main.m in Sources */,
@@ -3613,7 +3642,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3655,7 +3684,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

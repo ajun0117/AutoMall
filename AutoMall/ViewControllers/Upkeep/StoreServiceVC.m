@@ -1,32 +1,32 @@
 //
-//  BaoyangDiscountsVC.m
+//  StoreServiceVC.m
 //  AutoMall
 //
-//  Created by LYD on 2017/8/15.
+//  Created by LYD on 2017/11/14.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
-#import "BaoyangDiscountsVC.h"
-#import "AddDiscountsVC.h"
+#import "StoreServiceVC.h"
 #import "UpKeepPlanServiceCell.h"
+#import "AddStoreServiceVC.h"
 
-@interface BaoyangDiscountsVC ()
+@interface StoreServiceVC ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSMutableArray *discountArray;
-    int currentpage; 
+    NSMutableArray *serviceArray;
+    int currentpage;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
-@implementation BaoyangDiscountsVC
+@implementation StoreServiceVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"优惠";
+    self.title = @"门店服务";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -40,14 +40,14 @@
     [searchBtn addTarget:self action:@selector(toAddDiscounts) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
-
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpKeepPlanServiceCell" bundle:nil] forCellReuseIdentifier:@"upKeepPlanServiceCell"];
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
     currentpage = 0;
-    discountArray = [NSMutableArray array];
+    serviceArray = [NSMutableArray array];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -65,26 +65,26 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self.myTableView headerBeginRefreshing];
+//    [self.myTableView headerBeginRefreshing];
 }
 
 #pragma mark - 下拉刷新,上拉加载
 -(void)headerRefreshing {
     NSLog(@"下拉刷新个人信息");
     currentpage = 0;
-    [discountArray removeAllObjects];
-    [self requestPostDiscountList];
+    [serviceArray removeAllObjects];
+//    [self requestPostDiscountList];
 }
 
 -(void)footerLoadData {
     NSLog(@"上拉加载数据");
     currentpage ++;
-    [self requestPostDiscountList];
+//    [self requestPostDiscountList];
 }
 
 
 -(void) toAddDiscounts {
-    AddDiscountsVC *addVC = [[AddDiscountsVC alloc] init];
+    AddStoreServiceVC *addVC = [[AddStoreServiceVC alloc] init];
     addVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addVC animated:YES];
 }
@@ -100,7 +100,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return discountArray.count;
+    return serviceArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,7 +114,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upKeepPlanServiceCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dic = discountArray[indexPath.row];
+    NSDictionary *dic = serviceArray[indexPath.row];
     cell.declareL.text = dic[@"item"];
     if (dic[@"money"]) {
         cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
@@ -128,9 +128,9 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSDictionary *dic = discountArray[indexPath.row];
+        NSDictionary *dic = serviceArray[indexPath.row];
         [self deleteDiscountWithId:dic[@"id"]];
-        [discountArray removeObjectAtIndex:indexPath.row];
+        [serviceArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -185,7 +185,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
         NSLog(@"DiscountList: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [discountArray addObjectsFromArray:responseObject[@"data"]];
+            [serviceArray addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];
         }
         else {
@@ -210,6 +210,8 @@
         }
     }
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

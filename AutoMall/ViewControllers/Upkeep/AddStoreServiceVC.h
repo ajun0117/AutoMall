@@ -1,14 +1,13 @@
 //
-//  BaoyangDiscountsVC.h
+//  AddStoreServiceVC.h
 //  AutoMall
 //
-//  Created by LYD on 2017/8/15.
+//  Created by LYD on 2017/11/14.
 //  Copyright © 2017年 redRay. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface BaoyangDiscountsVC : UIViewController
-
+@interface AddStoreServiceVC : UIViewController
 
 @end

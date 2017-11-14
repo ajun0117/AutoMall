@@ -10,4 +10,8 @@
 
 @interface CheckResultTechnicianCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageV;
+@property (strong, nonatomic) IBOutlet UILabel *nameL;
+@property (strong, nonatomic) IBOutlet UILabel *contentL;
+
 @end

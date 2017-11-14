@@ -111,13 +111,14 @@
     [browserVC show];
 }
 
--(void)headClickImageWithIndex:(NSInteger)index {
+-(void)clickImageWithImagesArray:(NSArray *)imageAry andIndex:(NSInteger)index {
     //启动图片浏览器
     HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
     browserVC.sourceImagesContainerView = self.view; // 原图的父控件
-    images = @[UrlPrefix(carUpkeepDic[@"store"][@"image"])];
-    browserVC.imageCount = 1; // 图片总数 imagesAry.count
-    browserVC.currentImageIndex = 0;
+//    images = @[UrlPrefix(carUpkeepDic[@"store"][@"image"])];
+    images = imageAry;
+    browserVC.imageCount = images.count; // 图片总数 imagesAry.count
+    browserVC.currentImageIndex = (int)index;
     browserVC.currentImageTitle = @"";
     browserVC.delegate = self;
     [browserVC show];
@@ -157,7 +158,7 @@
 - (void)adView:(AJAdView *)adView didSelectIndex:(NSInteger)index{
     NSLog(@"--%ld--",(long)index);
 //    NSDictionary *dic = _adArray [index];
-    [self headClickImageWithIndex:index];
+    [self clickImageWithImagesArray:@[UrlPrefix(carUpkeepDic[@"store"][@"image"])] andIndex:index];
 }
 
 - (IBAction)upkeepPlanAction:(id)sender {
@@ -197,7 +198,9 @@
                 if ([mobileUserType isEqualToString:@"1"]) {
                     return 1;
                 } else {
-                    return 4;
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
+                    return staffSkillEntities.count + 2;
                 }
                 break;
             }
@@ -228,7 +231,9 @@
                 if ([mobileUserType isEqualToString:@"1"]) {
                     return 1;
                 } else {
-                    return 4;
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
+                    return staffSkillEntities.count + 2;
                 }
                 break;
             }
@@ -540,14 +545,15 @@
                     return cell;
                     
                 } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
                     if (indexPath.row == 0) {
                         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
                         cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
                         return cell;
                     }
-                    else if(indexPath.row == 3) {
+                    else if(indexPath.row == staffSkillEntities.count + 1) {
                         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -584,6 +590,10 @@
                     else {
                         CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        NSDictionary *staffSkillEntityDic = staffSkillEntities[indexPath.row - 1];
+                        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(staffSkillEntityDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+                        cell.nameL.text = STRING(staffSkillEntityDic[@"name"]);
+                        cell.contentL.text = STRING(staffSkillEntityDic[@"remark"]);
                         return cell;
                     }
                 }
@@ -724,14 +734,15 @@
                     return cell;
                     
                 } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
                     if (indexPath.row == 0) {
                         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
                         cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
                         return cell;
                     }
-                    else if(indexPath.row == 3) {
+                    else if(indexPath.row == staffSkillEntities.count + 1) {
                         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -768,9 +779,14 @@
                     else {
                         CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        NSDictionary *staffSkillEntityDic = staffSkillEntities[indexPath.row - 1];
+                        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(staffSkillEntityDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+                        cell.nameL.text = STRING(staffSkillEntityDic[@"name"]);
+                        cell.contentL.text = STRING(staffSkillEntityDic[@"remark"]);
                         return cell;
                     }
                 }
+                
                 break;
             }
             case 4: {
@@ -834,7 +850,12 @@
 }
 
 -(void) carImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"image"])];
+//    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"image"])];
+    NSMutableArray *ary = [NSMutableArray array];
+    for (NSDictionary *dic in carUpkeepDic[@"carUpkeepImages"]) {
+        [ary addObject:UrlPrefix(dic[@"image"])];
+    }
+    [self clickImageWithImagesArray:ary andIndex:0];
 }
 
 -(void) mileageImageAction {
@@ -847,11 +868,11 @@
 
 //所有异常检查项目
 -(void)unnormalAction {
-//    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
-//    problemVC.isUnnormal = YES;
-//    problemVC.carUpkeepId = self.carUpkeepId;
-//    problemVC.categoryId = @"1";
-//    [self.navigationController pushViewController:problemVC animated:YES];
+    AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    problemVC.isUnnormal = YES;
+    problemVC.carUpkeepId = self.carUpkeepId;
+    problemVC.categoryId = @"1";
+    [self.navigationController pushViewController:problemVC animated:YES];
 }
 
 //车身检查结果
@@ -898,7 +919,7 @@
 -(void)tyreAction {
     AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
     problemVC.carUpkeepId = self.carUpkeepId;
-    problemVC.categoryId = @"6";
+    problemVC.categoryId = @"0";
     [self.navigationController pushViewController:problemVC animated:YES];
 }
 

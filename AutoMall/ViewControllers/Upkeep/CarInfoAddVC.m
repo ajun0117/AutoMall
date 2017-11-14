@@ -8,6 +8,7 @@
 
 #import "CarInfoAddVC.h"
 #import "BaoyangHistoryVC.h"
+#import "AddPicViewController.h"
 
 @interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -20,6 +21,8 @@
     NSArray *textFieldArray;
     NSString *carImgUrl;    //车图url
     BOOL isAutoSelect;      //自动选择
+    NSArray *enginePhotos;
+    NSArray *vinPhotos;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
@@ -34,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *plateNumberTF;
 @property (strong, nonatomic) IBOutlet UITextField *brandTF;
 @property (strong, nonatomic) IBOutlet UITextField *modelTF;
+@property (strong, nonatomic) IBOutlet UITextField *engineModelTF;
 @property (strong, nonatomic) IBOutlet UITextField *purchaseDateTF;
 @property (strong, nonatomic) IBOutlet UITextField *engineNoTF;
 @property (strong, nonatomic) IBOutlet UITextField *vinTF;
@@ -56,13 +60,21 @@
                                            target:nil action:nil];
         negativeSpacer.width = -6;
         
+        UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        addBtn.frame = CGRectMake(0, 0, 28, 28);
+        [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+        //    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+        [addBtn addTarget:self action:@selector(toEdit) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+        
         UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         searchBtn.frame = CGRectMake(0, 0, 28, 28);
         [searchBtn setImage:[UIImage imageNamed:@"baoyang_history"] forState:UIControlStateNormal];
 //        [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
         [searchBtn addTarget:self action:@selector(toHistoryList) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
+        
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, addBtnBarBtn, nil];
         
         carImgUrl = self.carDic[@"image"];
         
@@ -79,10 +91,11 @@
         self.birthdayTF.text = NSStringWithNumber(self.carDic[@"birthday"]);
         self.plateNumberTF.text = NSStringWithNumber(self.carDic[@"plateNumber"]);
         self.brandTF.text = NSStringWithNumber(self.carDic[@"brand"]);
-        self.modelTF.text = NSStringWithNumber(self.carDic[@"purchaseDate"]);
-        self.purchaseDateTF.text = NSStringWithNumber(self.carDic[@""]);
+        self.modelTF.text = NSStringWithNumber(self.carDic[@"model"]);
+        self.engineModelTF.text = NSStringWithNumber(self.carDic[@"engineModel"]);
+        self.purchaseDateTF.text = NSStringWithNumber(self.carDic[@"purchaseDate"]);
         self.engineNoTF.text = NSStringWithNumber(self.carDic[@"engineNo"]);
-        self.vinTF.text = NSStringWithNumber(self.carDic[@"cjh123456"]);
+        self.vinTF.text = NSStringWithNumber(self.carDic[@"vin"]);
     }
     else {
         self.title = @"新增车辆";
@@ -246,6 +259,25 @@
 - (void)dealKeyboardHide {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
+- (IBAction)enginePhoto:(id)sender {
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+        enginePhotos = array;
+        NSLog(@"enginePhotos: %@",enginePhotos);
+    };
+    photoVC.localImgsArray = enginePhotos;
+    [self.navigationController pushViewController:photoVC animated:YES];
+}
+
+- (IBAction)vinPhoto:(id)sender {
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+        vinPhotos = array;
+        NSLog(@"vinPhotos: %@",vinPhotos);
+    };
+    photoVC.localImgsArray = vinPhotos;
+    [self.navigationController pushViewController:photoVC animated:YES];
+}
 
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
@@ -278,6 +310,10 @@
         return YES;
     }
     return NO;
+}
+
+-(void) toEdit {
+    NSLog(@"编辑按钮");
 }
 
 -(void) toHistoryList {

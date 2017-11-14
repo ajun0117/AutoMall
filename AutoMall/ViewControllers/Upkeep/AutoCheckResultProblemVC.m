@@ -235,8 +235,8 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUnnormal object:nil];
         NSLog(@"CarUpkeepUnnormal: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
-            self.title = responseObject[@"data"][@"name"];
-            NSArray *checkTermVos = responseObject[@"data"][@"checkTermVos"];
+            self.title = @"所有异常项";
+            NSArray *checkTermVos = responseObject[@"data"];
             
             for (NSDictionary *dic1 in checkTermVos) {
                 NSMutableArray *checkContentVosAry = [NSMutableArray array];
