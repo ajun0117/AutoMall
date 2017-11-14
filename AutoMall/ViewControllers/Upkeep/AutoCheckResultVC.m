@@ -855,7 +855,14 @@
     for (NSDictionary *dic in carUpkeepDic[@"carUpkeepImages"]) {
         [ary addObject:UrlPrefix(dic[@"image"])];
     }
-    [self clickImageWithImagesArray:ary andIndex:0];
+    if (ary.count > 0) {
+        [self clickImageWithImagesArray:ary andIndex:0];
+    } else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    
 }
 
 -(void) mileageImageAction {
@@ -918,6 +925,8 @@
 //轮胎刹车检查结果
 -(void)tyreAction {
     AutoCheckResultProblemVC *problemVC = [[AutoCheckResultProblemVC alloc] init];
+    problemVC.isUnnormal = YES;
+    problemVC.isTyre = YES;
     problemVC.carUpkeepId = self.carUpkeepId;
     problemVC.categoryId = @"0";
     [self.navigationController pushViewController:problemVC animated:YES];

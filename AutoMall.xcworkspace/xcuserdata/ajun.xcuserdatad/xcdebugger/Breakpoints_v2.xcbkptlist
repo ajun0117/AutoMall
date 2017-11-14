@@ -121,12 +121,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/Upkeep/UpkeepPlanVC.m"
-            timestampString = "532285287.938882"
+            filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckResultVC.m"
+            timestampString = "532368050.897121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "612"
-            endingLineNumber = "612"
+            startingLineNumber = "944"
+            endingLineNumber = "944"
+            landmarkName = "-requestGetUpkeepInfo"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckResultProblemVC.m"
+            timestampString = "532361771.940901"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "-requestGetCarUpkeepCategory"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoMall/ViewControllers/Upkeep/UpkeepPlanVC.m"
+            timestampString = "532361984.098067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "619"
+            endingLineNumber = "619"
             landmarkName = "-requestGetCarUpkeepServiceContent"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckResultProblemVC.m"
-            timestampString = "532198473.864425"
+            timestampString = "532368146.469499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "-requestGetAllUnnormal"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,12 +186,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckResultProblemVC.m"
-            timestampString = "532198474.312102"
+            timestampString = "532368147.185881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "-requestGetAllUnnormal"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckResultProblemVC.m"
+            timestampString = "532368161.253593"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "-requestGetAllUnnormal"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

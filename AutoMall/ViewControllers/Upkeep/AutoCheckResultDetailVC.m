@@ -191,7 +191,7 @@
             UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
-            cell.textLabel.text = [NSString stringWithFormat:@"检查内容：%@",contentResultDic[@"name"]];
+            cell.textLabel.text = [NSString stringWithFormat:@"检查内容：%@",STRING(contentResultDic[@"name"])];
             return cell;
         }
         else if (indexPath.row == 1) {

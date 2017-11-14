@@ -178,17 +178,21 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepCategory object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepCategory, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&categoryId=%@",UrlPrefix(CarUpkeepCategory),self.carUpkeepId,self.categoryId];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&categoryId=%@",UrlPrefix(CarUpkeepCategory),self.carUpkeepId,self.categoryId];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
--(void)requestGetAllUnnormal { //获取所有异常，或轮胎刹车相关
+-(void)requestGetAllUnnormal { //获取所有异常，或轮胎刹车片相关
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUnnormal object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUnnormal, @"op", nil];
-//    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&condition=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId,self.categoryId];    //测试时固定传id=1的检查单
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId];    //测试时固定传id=1的检查单
+    NSString *urlString;
+    if (self.isTyre) {
+        urlString = [NSString stringWithFormat:@"%@?id=%@&condition=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId,@"0"];
+    } else {
+        urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId];
+    }
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -235,7 +239,12 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUnnormal object:nil];
         NSLog(@"CarUpkeepUnnormal: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
-            self.title = @"所有异常项";
+            if (self.isTyre) {
+                self.title = @"轮胎刹车盘";
+            } else {
+                self.title = @"所有异常项";
+            }
+            
             NSArray *checkTermVos = responseObject[@"data"];
             
             for (NSDictionary *dic1 in checkTermVos) {
