@@ -76,13 +76,13 @@
         pay.money = [orderDetailDic[@"actualPrice"] floatValue];
         [self.navigationController pushViewController:pay animated:YES];
     }
-//    else if (status == 1) {
-//    }
-//    else {
-//        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
-//       detailVC.commodityId = orderDetailDic[@"orderDetails"][@"id"];
-//        [self.navigationController pushViewController:detailVC animated:YES];
-//    }
+    else if (status == 1) {
+    }
+    else {
+        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+       detailVC.commodityId = orderDetailDic[@"orderDetails"][@"id"];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource

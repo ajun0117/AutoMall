@@ -325,6 +325,10 @@
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"WechatPayNotification" object:nil];
                 [self doWxPay];
             }
+            else if ([payModeStr isEqualToString:@"3"]) {    //积分
+                NSLog(@"积分支付成功");
+                [self requestOrderPaySuccess];  //回调
+            }
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -335,11 +339,11 @@
     
     if ([notification.name isEqualToString:MallOrderPaySuccess]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderPaySuccess object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {   //支付宝
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {    //回调成功
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self performSelector:@selector(toPopVC) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -347,6 +351,10 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+- (void)toPopVC {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

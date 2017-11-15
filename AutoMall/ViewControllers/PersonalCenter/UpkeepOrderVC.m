@@ -118,6 +118,8 @@
         default:
             break;
     }
+    currentpage = 0;
+    [orderAry removeAllObjects];
     [self requestGetHistoryList];
 }
 

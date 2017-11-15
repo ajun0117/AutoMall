@@ -489,7 +489,7 @@
  //    NSString *str = [NSString stringWithString:_nameArray[row]];
  //    return str;
  //}
- */// <???>不知道有什么用?
+ */
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     if (!view) {
         view = [[UIView alloc] init];

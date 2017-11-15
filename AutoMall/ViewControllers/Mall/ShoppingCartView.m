@@ -67,7 +67,7 @@
     
     if (!_lableText) {
         _lableText = [[UILabel alloc]init];
-        _lableText.frame = CGRectMake(0, CGRectGetHeight(self.myTableView.frame)/2, Screen_wide, 40);
+        _lableText.frame = CGRectMake(0, CGRectGetHeight(self.myTableView.frame)/2 - 40, Screen_wide, 40);
         _lableText.textAlignment = NSTextAlignmentCenter;
         _lableText.textColor = [UIColor lightGrayColor];
         _lableText.font = [UIFont systemFontOfSize:12];

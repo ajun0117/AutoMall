@@ -40,11 +40,15 @@
     // Do any additional setup after loading the view from its nib.
     if (self.infoDic) {
         self.title = @"门店信息";
+        
 //        shopImgUrl = self.infoDic[@"image"];
 //        if (! [shopImgUrl isKindOfClass:[NSNull class]] && shopImgUrl.length > 0) {
 //            [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
 //        }
+        
+        shopImgAry = self.infoDic[@"minorImages"];
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
+        self.nameTF.enabled = NO;
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
@@ -82,9 +86,11 @@
         if (! [wechatCollectionImgUrl isKindOfClass:[NSNull class]] && wechatCollectionImgUrl.length > 0) {
             [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
         }
+        [self.replayBtn setTitle:@"保存修改" forState:UIControlStateNormal];
     }
     else {
         self.title = @"申请认证";
+        [self.replayBtn setTitle:@"提交申请" forState:UIControlStateNormal];
     }
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
@@ -275,13 +281,25 @@
 }
 
 - (IBAction)replayAction:(id)sender {
-    if (licenseImgUrl && cardAImgUrl && cardBImgUrl) {
-        [self requestPostStoreRegister];
-    }  else {
-        _networkConditionHUD.labelText = @"请将证件上传齐全，否则将影响您的审核！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    if (self.infoDic) {     //编辑
+        if (licenseImgUrl && cardAImgUrl && cardBImgUrl) {
+            [self requestPostStoreUpdate];
+        }  else {
+            _networkConditionHUD.labelText = @"请将证件上传齐全，否则将影响您的审核！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    } else {
+        if (licenseImgUrl && cardAImgUrl && cardBImgUrl) {
+            [self requestPostStoreRegister];
+        }  else {
+            _networkConditionHUD.labelText = @"请将证件上传齐全，否则将影响您的审核！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
+    
+
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -539,9 +557,30 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreRegister object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreRegister, @"op", nil];
     NSArray *addrAry = [self.addressTF.text componentsSeparatedByString:@" "];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",shopImgAry,@"image",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSMutableArray *minorImages = [NSMutableArray array];
+    for (NSDictionary *imageDic in shopImgAry) {
+        [minorImages addObject:imageDic[@"relativePath"]];
+    }
+    NSString *minorImagesStr = [minorImages componentsJoinedByString:@","];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(StoreRegister) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestPostStoreUpdate { //修改门店信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreInfoUpdate object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreInfoUpdate, @"op", nil];
+    NSArray *addrAry = [self.addressTF.text componentsSeparatedByString:@" "];
+    NSMutableArray *minorImages = [NSMutableArray array];
+    for (NSDictionary *imageDic in shopImgAry) {
+        [minorImages addObject:imageDic[@"relativePath"]];
+    }
+    NSString *minorImagesStr = [minorImages componentsJoinedByString:@","];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSLog(@"pram: %@",pram);
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(StoreInfoUpdate) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -555,13 +594,12 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"responseObject: %@",responseObject);
     
     if ([notification.name isEqualToString:UploadImgFile]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
-        
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
+        NSLog(@"UploadImgFile: %@",responseObject);
         if ([responseObject[@"result"] boolValue]) {
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
             switch (whichImg) {
 //                case 0: {
 //                    shopImgUrl = urlStr;
@@ -605,6 +643,7 @@
     
     if ([notification.name isEqualToString:StoreRegister]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreRegister object:nil];
+        NSLog(@"StoreRegister: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
@@ -620,6 +659,23 @@
         }
     }
 
+    if ([notification.name isEqualToString:StoreInfoUpdate]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreInfoUpdate object:nil];
+        NSLog(@"StoreInfoUpdate: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            
+            self.replayBtn.enabled = NO;
+            [self.replayBtn setTitle:@"审核中..." forState:UIControlStateDisabled];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -20,7 +20,7 @@
     IBOutlet UIButton *xingjiBtn;
     IBOutlet UIButton *sortBtn;
     IBOutlet UIButton *priceBtn;
-    UIView *selectBgView;
+    UIView *selectBgView; 
     UITableView *selectTableView;
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;

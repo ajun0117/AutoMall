@@ -479,7 +479,7 @@
                 } else {
                     cell.contentL.text = @"";
                 }
-                cell.contentL.textColor = RGBCOLOR(251, 68, 89);
+                cell.contentL.textColor = RGBCOLOR(234, 33, 45);
                 cell.contentL.font = [UIFont systemFontOfSize:15];
                 return cell;
                 break;

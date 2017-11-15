@@ -17,15 +17,27 @@
 #define HeaderViewHeight 30
 #define WeekViewHeight 40
 
-@interface UpkeepStatementVC () <UICollectionViewDelegate, UICollectionViewDataSource,ZFGenericChartDataSource, ZFBarChartDelegate>
+#define SelectView_Duration    0.3  //筛选视图动画时间
+
+@interface UpkeepStatementVC () <UICollectionViewDelegate, UICollectionViewDataSource,ZFGenericChartDataSource, ZFBarChartDelegate,UITableViewDelegate,UITableViewDataSource>
 {
+    MBProgressHUD *_hud;
+    MBProgressHUD *_networkConditionHUD;
     UIButton *dateBtn;  //选择日期按钮
+//    UIPickerView *typePicker;  //报表类别选择
+    NSArray *typeArray;
+    UIView *selectBgView;
+    UITableView *selectTableView;
+    UIButton *titleBtn;
 }
 
 @property (nonatomic, strong) ZFBarChart * barChart;
 
 @property (nonatomic, assign) CGFloat height;
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (strong, nonatomic) IBOutlet UIButton *weekBtn;
+@property (strong, nonatomic) IBOutlet UIButton *monthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *yearBtn;
 
 @property (strong, nonatomic) IBOutlet UIView *calendarBgView;
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -52,10 +64,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @" 服务项目统计";
+//    self.title = @" 服务项目统计";
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    titleBtn.frame = CGRectMake(0, 2, 150, 40);
+    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    titleBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    titleBtn.titleLabel.minimumFontSize = 10;
+    [titleBtn setTitle:@"检查台次" forState:UIControlStateNormal];
+    [titleBtn setImage:[UIImage imageNamed:@"subject_expand_n"] forState:UIControlStateNormal];
+    [titleBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected];
+    [titleBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 140, 0, 0)];
+//    [titleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+    [titleBtn addTarget:self action:@selector(toSelect:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:titleBtn];
+    
+    self.navigationItem.titleView = view;
+    
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    typeArray = @[@{@"title":@"检查台次",@"unit":@"台次"},@{@"title":@"成交金额",@"unit":@"元"},@{@"title":@"客单价",@"unit":@"元"},@{@"title":@"技师单数",@"unit":@"台次"},@{@"title":@"服务项目金额",@"unit":@"元"},@{@"title":@"服务项目台次",@"unit":@"台次"},@{@"title":@"技师的成交金额",@"unit":@"元"},@{@"title":@"技师的客单价",@"unit":@"元"}];
+//    typePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
+//    typePicker.delegate = self;
+//    typePicker.dataSource = self;
     
     dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     dateBtn.frame = CGRectMake(0, 0, 80, 44);
@@ -105,6 +141,123 @@
 //    [self.view addSubview:self.barChart];
     [self.view insertSubview:self.barChart belowSubview:self.topView];
     [self.barChart strokePath];
+    
+    if (! selectBgView) {
+        selectBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        selectBgView.backgroundColor = [UIColor blackColor];
+        selectBgView.alpha = 0.0;
+        [self.view insertSubview:selectBgView belowSubview:self.topView];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelect)];
+        [selectBgView addGestureRecognizer:tap];
+        
+        selectTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 39 - 300,SCREEN_WIDTH, 300) style:UITableViewStylePlain];
+        //        selectTableView.backgroundColor = RGBCOLOR(238, 238, 238);
+        selectTableView.delegate = self;
+        selectTableView.dataSource = self;
+        selectTableView.layer.borderColor = Cell_sepLineColor.CGColor;
+        selectTableView.layer.borderWidth = 1;
+        [self.view insertSubview:selectTableView belowSubview:self.topView];
+        
+        [self hiddenSelectView:YES];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (! _hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void)cancelSelect {
+    titleBtn.selected = NO;
+    [self hiddenSelectView:YES];
+}
+
+-(void)hiddenSelectView:(BOOL)hidden {
+    [UIView animateWithDuration:SelectView_Duration animations:^{
+        if (hidden) {
+            selectBgView.alpha = 0.0;
+            selectTableView.frame = CGRectMake(0, 39 - 300, SCREEN_WIDTH, 300);
+        }
+        else {
+            selectBgView.alpha = 0.3;
+            selectTableView.frame = CGRectMake(0, 103, SCREEN_WIDTH, 300);
+        }
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return typeArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UIView* selectedBGView = [[UIView alloc] initWithFrame:cell.bounds];
+    selectedBGView.backgroundColor = RGBCOLOR(246, 246, 246);
+    cell.selectedBackgroundView = selectedBGView;
+    NSDictionary *dic = typeArray[indexPath.row];
+    cell.textLabel.text = dic[@"title"];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    return  cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = typeArray[indexPath.row];
+    [titleBtn setTitle:dic[@"title"] forState:UIControlStateNormal];
+    self.barChart.unit = dic[@"unit"];
+    [self.barChart strokePath];
+    [self cancelSelect];
+}
+
+-(void) toSelect:(UIButton *)btn {
+    if (selectBgView.alpha > 0) {
+        titleBtn.selected = NO;
+        [self hiddenSelectView:YES];
+    } else {
+        titleBtn.selected = YES;
+        [self hiddenSelectView:NO];
+    }
+}
+
+- (IBAction)weekAction:(id)sender {
+}
+
+- (IBAction)monthAction:(id)sender {
+}
+
+- (IBAction)yearAction:(id)sender {
 }
 
 -(void)toSelectDate {
@@ -161,6 +314,8 @@
     }
     [self.collectionView reloadData];
 }
+
+
 
 #pragma mark - ZFGenericChartDataSource
 

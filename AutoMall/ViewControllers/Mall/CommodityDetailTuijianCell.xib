@@ -33,7 +33,7 @@
                             <constraint firstAttribute="height" constant="21" id="yjx-2O-oZI"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                        <color key="textColor" red="0.98431372549999996" green="0.2666666667" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥250" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="H2O-ip-ERu" customClass="StrikeThroughLabel">
