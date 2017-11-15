@@ -15,6 +15,8 @@
 #import "ServiceContentDetailVC.h"
 #import "AutoCheckDisountsVC.h"
 #import "UpKeepPlanServiceCell.h"
+#import "CheckResultSingleCell.h"
+#import "CheckResultMultiCell.h"
 
 @interface UpkeepPlanVC ()
 {
@@ -30,6 +32,7 @@
     float serVicePrice;            //方案总价
     float packagePrice;     //套餐价
     float discountPrice;    //优惠的价格（实际需要减掉的价格）
+    NSMutableArray *unnormalAry;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -58,11 +61,15 @@
 //    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanInfoCell" bundle:nil] forCellReuseIdentifier:@"planInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpKeepPlanServiceCell" bundle:nil] forCellReuseIdentifier:@"upKeepPlanServiceCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultSingleCell" bundle:nil] forCellReuseIdentifier:@"checkResultSingleCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultMultiCell" bundle:nil] forCellReuseIdentifier:@"checkResultMultiCell"];
     self.myTableView.tableFooterView = [UIView new];
 
     removeAry = [NSMutableArray array];
     lineationAry = [NSMutableArray array];
+    unnormalAry = [NSMutableArray array];
     
+    [self requestGetAllUnnormal];
     [self requestGetCarUpkeepServiceContent];   //请求服务方案列表
 }
 
@@ -163,7 +170,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-        return 6;
+        return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -173,22 +180,26 @@
                 break;
                 
             case 1:
-                return removeAry.count;
+                return unnormalAry.count;
                 break;
                 
             case 2:
-                return selectedPackageAry.count;
+                return removeAry.count;
                 break;
                 
             case 3:
-                return 1;
+                return selectedPackageAry.count;
                 break;
                 
             case 4:
-                return selectedDiscounts.count;
+                return 1;
                 break;
                 
             case 5:
+                return selectedDiscounts.count;
+                break;
+                
+            case 6:
                 return 1;
                 break;
                 
@@ -202,6 +213,16 @@
             switch (indexPath.section) {
                 case 0: {
                     return 44;
+                    break;
+                }
+                    
+                case 1: {
+                    NSDictionary *dic = unnormalAry[indexPath.row];
+                    if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                        NSArray *entities = dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"];
+                        return 43 + 30*entities.count;
+                    }
+                    return 50;
                     break;
                 }
                     
@@ -226,7 +247,11 @@
                 return 44;
                 break;
                 
-            case 4:
+            case 3:
+                return 44;
+                break;
+                
+            case 5:
                 return 44;
                 break;
                 
@@ -276,6 +301,19 @@
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
+                label.text = @"检查结果";
+                
+                [view addSubview:label];
+                return view;
+                break;
+            }
+                
+            case 2: {
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+                view.backgroundColor = [UIColor whiteColor];
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+                label.font = [UIFont boldSystemFontOfSize:15];
+                label.backgroundColor = [UIColor clearColor];
                 label.text = @"方案明细";
                 
 //                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
@@ -292,7 +330,7 @@
                 break;
             }
                 
-            case 2: {
+            case 3: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
@@ -314,7 +352,7 @@
                 break;
             }
                 
-            case 4: {
+            case 5: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
 //                view.backgroundColor = RGBCOLOR(239, 239, 239);
@@ -410,6 +448,82 @@
             }
                 
             case 1: {
+                NSDictionary *dic = unnormalAry[indexPath.row];
+
+                if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                    CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.positionL.text = dic[@"name"];
+                    cell.checkContentL.text = dic[@"checkContentVos"][@"name"];
+                    NSArray *entities = dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"];
+                    
+                    for (UIView *subViews in cell.positionView.subviews) {
+                        [subViews removeFromSuperview];
+                    }
+                    
+                    for (int i=0; i < entities.count; ++i) {
+                        NSDictionary *dic1 = entities[i];
+                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                        position.text = STRING(dic1[@"dPosition"]);
+                        position.tag = 100 + i;
+                        position.textColor = [UIColor grayColor];
+                        position.font = [UIFont systemFontOfSize:14];
+                        
+                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 - 15 - 80, 30*i , 80, 22)];
+                        result.text = STRING(dic1[@"describe"]);
+                        result.textColor = [UIColor grayColor];
+                        result.font = [UIFont systemFontOfSize:14];
+                        
+                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 , 30*i , 55, 22)];
+                        level.text = STRING(dic1[@"result"]);
+                        level.minimumFontSize = 8;
+                        level.textAlignment = NSTextAlignmentCenter;
+                        level.textColor = [UIColor whiteColor];
+                        level.backgroundColor = RGBCOLOR(0, 166, 59);
+                        level.font = [UIFont systemFontOfSize:13];
+                        level.layer.cornerRadius = 4;
+                        level.clipsToBounds = YES;
+                        int levelInt = [dic1[@"level"] intValue];
+                        if (levelInt == 1) {
+                            level.backgroundColor = RGBCOLOR(250, 69, 89);
+                        }
+                        else if (levelInt == 2) {
+                            level.backgroundColor = RGBCOLOR(249, 182, 48);
+                        }
+                        else if (levelInt == 3) {
+                            level.backgroundColor = RGBCOLOR(71, 188, 92);
+                        }
+                        [cell.positionView addSubview:position];
+                        [cell.positionView addSubview:result];
+                        [cell.positionView addSubview:level];
+                    }
+                    
+                    return cell;
+                }
+                else {
+                    CheckResultSingleCell *cell = (CheckResultSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultSingleCell"];
+                    cell.levelL.layer.cornerRadius = 4;
+                    cell.positionL.text = dic[@"name"];
+                    cell.checkContentL.text = dic[@"checkContentVos"][@"name"];
+                    cell.resultL.text = STRING([dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"describe"]);
+                    int level = [[dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
+                    cell.levelL.text = STRING([dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"] firstObject][@"result"]);
+                    if (level == 1) {
+                        cell.levelL.backgroundColor = RGBCOLOR(250, 69, 89);
+                    }
+                    else if (level == 2) {
+                        cell.levelL.backgroundColor = RGBCOLOR(249, 182, 48);
+                    }
+                    else if (level == 3) {
+                        cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
+                    }
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
+                break;
+            }
+                
+            case 2: {
                 UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upKeepPlanServiceCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -433,7 +547,7 @@
                 break;
             }
                 
-            case 2: {
+            case 3: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -452,7 +566,7 @@
                 break;
             }
                 
-            case 3: {
+            case 4: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -466,7 +580,7 @@
                 break;
             }
                 
-            case 4: {
+            case 5: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -485,7 +599,7 @@
                 break;
             }
                 
-            case 5: {
+            case 6: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -515,7 +629,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
         switch (indexPath.section) {
                 
-            case 1: {
+            case 2: {
                 ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
                 detailVC.serviceDic = removeAry[indexPath.row];
                 [self.navigationController pushViewController:detailVC animated:YES];
@@ -529,7 +643,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         return YES;
     }
     return NO;
@@ -609,6 +723,15 @@
 //}
 
 #pragma mark - 发送请求
+-(void)requestGetAllUnnormal { //获取所有异常
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUnnormal object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUnnormal, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
 -(void)requestGetCarUpkeepServiceContent { //检查单相关的服务方案
     [_hud show:YES];
     //注册通知
@@ -671,6 +794,34 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    
+    if ([notification.name isEqualToString:CarUpkeepUnnormal]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUnnormal object:nil];
+        NSLog(@"CarUpkeepUnnormal: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            NSArray *checkTermVos = responseObject[@"data"];
+            
+            for (NSDictionary *dic1 in checkTermVos) {
+                NSMutableArray *checkContentVosAry = [NSMutableArray array];
+                NSLog(@"dic1: %@",dic1);
+                NSArray *checkContentVos = dic1[@"checkContentVos"];
+                for (NSDictionary *dic2 in checkContentVos) {
+                    NSLog(@"dic1name%@",dic1[@"name"]);
+                    NSDictionary *dic3 = @{@"id":dic1[@"id"],@"name":dic1[@"name"],@"checkContentVos":dic2};
+                    [checkContentVosAry addObject:dic3];
+                }
+                [unnormalAry addObjectsFromArray:checkContentVosAry];
+            }
+            NSLog(@"unnormalAry: %@",unnormalAry);
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
     if ([notification.name isEqualToString:CarUpkeepServiceContent]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepServiceContent object:nil];
         NSLog(@"CarUpkeepCategory: %@",responseObject);

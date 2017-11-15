@@ -10,6 +10,8 @@
 
 @interface AddPicViewController : UIViewController
 
+@property (assign, nonatomic) int maxCount; //最大照片数量
+
 /**
  * 更新照片
  */

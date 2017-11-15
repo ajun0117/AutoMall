@@ -18,7 +18,7 @@
 #import "ExtendCollectionView.h"
 
 #define AlbumListCell      @"AlbumListCell"
-#define UpLoafImagesCount     3 //最允许上传图片张数
+//#define UpLoafImagesCount     3 //最允许上传图片张数
 
 @interface AddPicViewController () <HZPhotoBrowserDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,QBImagePickerControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, ImageCollectionViewCellDelegate, ExtendCollectionViewDelegate>
 {
@@ -69,8 +69,12 @@
         [_imgsArray addObjectsFromArray:self.localImgsArray];
     }
     self.imageDataArr = [[NSMutableArray alloc] init];
+    
+    if (! self.maxCount) {
+        self.maxCount = 3;
+    }
     //图片占位
-    for (int i = 0; i < UpLoafImagesCount; i ++) {
+    for (int i = 0; i < self.maxCount; i ++) {
         UIImageView *dashView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 100 + 10, 10, 80, 80)];
         dashView.image = IMG(@"Add_Pic");
         [self.upImageView addSubview:dashView];
@@ -370,7 +374,7 @@
                 obj.imageUrl = assetURL;
                 obj.imageStorePath = nil;
                 obj.uploadStatus = ImageUploadingStatusDefault;
-                if (self.imageDataArr.count >= UpLoafImagesCount) {
+                if (self.imageDataArr.count >= self.maxCount) {
                     [self.imageDataArr removeObjectAtIndex:0];
                     //[self.myCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:0]]];
                 }
@@ -414,7 +418,7 @@
     imagePickerController.selectedAssetURLs = orderedSet;
     imagePickerController.delegate = self;
     imagePickerController.allowsMultipleSelection = 1;
-    imagePickerController.maximumNumberOfSelection = UpLoafImagesCount;
+    imagePickerController.maximumNumberOfSelection = self.maxCount;
     imagePickerController.minimumNumberOfSelection = 0;
     
     self.imagePickerNavC = [[UINavigationController alloc] initWithRootViewController:imagePickerController];

@@ -46,7 +46,7 @@
     }
     [self requestGetHistoryList];
     
-    [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"订单确认"}, @{@"name":@"施工完成"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
+    [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"已确认"}, @{@"name":@"已完工"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

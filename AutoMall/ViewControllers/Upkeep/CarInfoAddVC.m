@@ -259,8 +259,10 @@
 - (void)dealKeyboardHide {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
+
 - (IBAction)enginePhoto:(id)sender {
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.maxCount = 1;
     photoVC.GoBackUpdate = ^(NSMutableArray *array) {
         enginePhotos = array;
         NSLog(@"enginePhotos: %@",enginePhotos);
@@ -271,6 +273,7 @@
 
 - (IBAction)vinPhoto:(id)sender {
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.maxCount = 1;
     photoVC.GoBackUpdate = ^(NSMutableArray *array) {
         vinPhotos = array;
         NSLog(@"vinPhotos: %@",vinPhotos);

@@ -66,11 +66,11 @@
     // Do any additional setup after loading the view from its nib.
 //    self.title = @" 服务项目统计";
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 175, 44)];
     view.backgroundColor = [UIColor clearColor];
     
     titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    titleBtn.frame = CGRectMake(0, 2, 150, 40);
+    titleBtn.frame = CGRectMake(0, 2, 175, 40);
     [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     titleBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     titleBtn.titleLabel.minimumFontSize = 10;
@@ -78,7 +78,9 @@
     [titleBtn setImage:[UIImage imageNamed:@"subject_expand_n"] forState:UIControlStateNormal];
     [titleBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected];
     [titleBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 140, 0, 0)];
+    NSString *defaultStr = @"检查台次";
+    CGSize textSize = [defaultStr sizeWithAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16]}];
+    [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, textSize.width + 50, 0, 0)];
 //    [titleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
     [titleBtn addTarget:self action:@selector(toSelect:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:titleBtn];
@@ -236,6 +238,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = typeArray[indexPath.row];
     [titleBtn setTitle:dic[@"title"] forState:UIControlStateNormal];
+    NSString *defaultStr = dic[@"title"];
+    CGSize textSize = [defaultStr sizeWithAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16]}];
+    if (indexPath.row == 2) {
+        [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, textSize.width + 66, 0, 0)];
+    } else if (indexPath.row == 6) {
+        [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, textSize.width + 40, 0, 0)];
+    } else {
+        [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, textSize.width + 50, 0, 0)];
+    }
     self.barChart.unit = dic[@"unit"];
     [self.barChart strokePath];
     [self cancelSelect];
@@ -324,7 +335,7 @@
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"汽油燃烧喷射系统润滑清洁汽油燃烧喷射", @"机油更换", @"轮胎更换", @"四轮动平衡", @"冷却液更换", @"节气门清洗", @"电瓶更换", @"内饰清洗", @"车辆清洗", @"火花塞更换", @"钣金/喷漆", @"火花塞更换", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗",];
+    return @[@"汽油燃烧喷射系统润滑清洁", @"机油更换", @"轮胎更换", @"四轮动平衡", @"冷却液更换", @"节气门清洗", @"电瓶更换", @"内饰清洗", @"车辆清洗", @"火花塞更换", @"钣金/喷漆", @"火花塞更换", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗",];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{

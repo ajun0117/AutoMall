@@ -277,10 +277,12 @@
                 if ([mobileUserType isEqualToString:@"1"]) {
                     return 56;
                 } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
                     if (indexPath.row == 0) {
                         return 44;
                     }
-                    else if (indexPath.row == 3) {
+                    else if (indexPath.row == staffSkillEntities.count + 1) {
                         return 56;
                     }
                     return 70;
@@ -314,10 +316,12 @@
                 if ([mobileUserType isEqualToString:@"1"]) {
                     return 56;
                 } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
                     if (indexPath.row == 0) {
                         return 44;
                     }
-                    else if (indexPath.row == 3) {
+                    else if (indexPath.row == staffSkillEntities.count + 1) {
                         return 56;
                     }
                     return 70;
