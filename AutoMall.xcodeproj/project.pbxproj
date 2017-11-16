@@ -127,6 +127,8 @@
 		047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE0091F4A904400AEAE8E /* picture_1.png */; };
 		047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE00A1F4A904400AEAE8E /* picture_2.png */; };
 		047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE00B1F4A904400AEAE8E /* picture_3.png */; };
+		048646751FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048646731FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m */; };
+		048646761FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048646741FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib */; };
 		0486E8CB1F8F667700FB746E /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0486E8C81F8F667700FB746E /* BPushCerResource.bundle */; };
 		0486E8CC1F8F667700FB746E /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486E8C91F8F667700FB746E /* libBPush.a */; };
 		0486E8CD1F8F667700FB746E /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0486E8CA1F8F667700FB746E /* test.caf */; };
@@ -710,6 +712,9 @@
 		047AE0091F4A904400AEAE8E /* picture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_1.png; sourceTree = "<group>"; };
 		047AE00A1F4A904400AEAE8E /* picture_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_2.png; sourceTree = "<group>"; };
 		047AE00B1F4A904400AEAE8E /* picture_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_3.png; sourceTree = "<group>"; };
+		048646721FBD87010047BE44 /* UpkeepPlanSelectServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanSelectServiceCell.h; sourceTree = "<group>"; };
+		048646731FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanSelectServiceCell.m; sourceTree = "<group>"; };
+		048646741FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepPlanSelectServiceCell.xib; sourceTree = "<group>"; };
 		0486E8C71F8F667700FB746E /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		0486E8C81F8F667700FB746E /* BPushCerResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BPushCerResource.bundle; sourceTree = "<group>"; };
 		0486E8C91F8F667700FB746E /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
@@ -1830,6 +1835,9 @@
 				F7F9C78C1FB4C38200EB46EE /* UpKeepPlanServiceCell.h */,
 				F7F9C78D1FB4C38200EB46EE /* UpKeepPlanServiceCell.m */,
 				F7F9C78E1FB4C38200EB46EE /* UpKeepPlanServiceCell.xib */,
+				048646721FBD87010047BE44 /* UpkeepPlanSelectServiceCell.h */,
+				048646731FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m */,
+				048646741FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib */,
 				0490FC0B1F580CB900F77661 /* UpkeepPlanNormalHeadCell.h */,
 				0490FC0C1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m */,
 				0490FC0D1F580CB900F77661 /* UpkeepPlanNormalHeadCell.xib */,
@@ -3188,6 +3196,7 @@
 				04AE981E1F2ED46500C2D158 /* Main.storyboard in Resources */,
 				047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */,
 				04F7D8691F5EA59F004945ED /* EmployeeDetailVC.xib in Resources */,
+				048646761FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib in Resources */,
 				04A09B1B1F3DAFBE00053A98 /* CarInfoSearchVC.xib in Resources */,
 				04ABFB431F9858EB0015EE78 /* AutoCheckOrderPayModeVC.xib in Resources */,
 				0490FC0F1F580CB900F77661 /* UpkeepPlanNormalHeadCell.xib in Resources */,
@@ -3343,6 +3352,7 @@
 				04DC7DC71F31C28300AA20A7 /* QBImagePickerGroupCell.m in Sources */,
 				04052C691F7E5790004E6188 /* EmployeeDetailTopCell.m in Sources */,
 				042AF20C1F4C3EA100EA5E5F /* CommodityDetailTapCell.m in Sources */,
+				048646751FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m in Sources */,
 				04C6563F1F96F68F00611AFF /* MyAlertView.m in Sources */,
 				04D1078B1F62998D007D9F57 /* ZFLineChart.m in Sources */,
 				04D396491F6621110077BFB3 /* SettlementBeizhuCell.m in Sources */,

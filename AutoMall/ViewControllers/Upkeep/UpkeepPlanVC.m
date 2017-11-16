@@ -14,7 +14,8 @@
 #import "AutoCheckOrderPayModeVC.h"
 #import "ServiceContentDetailVC.h"
 #import "AutoCheckDisountsVC.h"
-#import "UpKeepPlanServiceCell.h"
+//#import "UpKeepPlanServiceCell.h"
+#import "UpkeepPlanSelectServiceCell.h"
 #import "CheckResultSingleCell.h"
 #import "CheckResultMultiCell.h"
 
@@ -60,7 +61,7 @@
     
 //    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanInfoCell" bundle:nil] forCellReuseIdentifier:@"planInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
-    [self.myTableView registerNib:[UINib nibWithNibName:@"UpKeepPlanServiceCell" bundle:nil] forCellReuseIdentifier:@"upKeepPlanServiceCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanSelectServiceCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanSelectServiceCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultSingleCell" bundle:nil] forCellReuseIdentifier:@"checkResultSingleCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultMultiCell" bundle:nil] forCellReuseIdentifier:@"checkResultMultiCell"];
     self.myTableView.tableFooterView = [UIView new];
@@ -161,6 +162,32 @@
     };
     discountsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:discountsVC animated:YES];
+}
+
+-(void)checkService:(UIButton *)btn {
+    int row = (int)btn.tag - 100;
+    NSDictionary *dic = removeAry[row];
+    btn.selected = ! btn.selected;
+    if (btn.selected) {
+        [lineationAry addObject:dic];
+        if ([dic[@"customized"] boolValue])  {
+            serVicePrice += [dic[@"customizedPrice"] floatValue];
+        } else {
+            serVicePrice += [dic[@"price"] floatValue];
+        }
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
+    }
+    else {
+        [lineationAry removeObject:dic];
+        if ([dic[@"customized"] boolValue])  {
+            serVicePrice -= [dic[@"customizedPrice"] floatValue];
+        } else {
+            serVicePrice -= [dic[@"price"] floatValue];
+        }
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
+    }
 }
 
 
@@ -524,23 +551,24 @@
             }
                 
             case 2: {
-                UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upKeepPlanServiceCell"];
+                UpkeepPlanSelectServiceCell *cell = (UpkeepPlanSelectServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSelectServiceCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 NSDictionary *dic = removeAry[indexPath.row];
 
-                if ([lineationAry containsObject:dic]) {    //如果包含，则不划线
-                    cell.declareL.strikeThroughEnabled = NO;
+                if ([lineationAry containsObject:dic]) {    //如果包含，则勾选
+                    cell.checkBtn.selected = YES;
                 } else {
-                    cell.declareL.strikeThroughEnabled = YES;
+                    cell.checkBtn.selected = NO;
                 }
-                
+                cell.checkBtn.tag = indexPath.row + 100;
+                [cell.checkBtn addTarget:self action:@selector(checkService:) forControlEvents:UIControlEventTouchUpInside];
                 cell.declareL.text = dic[@"name"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
                 if ([dic[@"customized"] boolValue]) {
-                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",STRING(dic[@"customizedPrice"])];
+                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@",STRING(dic[@"customizedPrice"])];
                 } else {
-                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 }
                 
                 return cell;
@@ -642,58 +670,58 @@
  
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
-        return YES;
-    }
-    return NO;
-}
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.section == 2) {
+//        return YES;
+//    }
+//    return NO;
+//}
 
-/**
- *  左滑cell时出现什么按钮
- */
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
-    UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"添加" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        cell.declareL.strikeThroughEnabled = NO;
-        NSDictionary *dic = removeAry[indexPath.row];
-        [lineationAry addObject:dic];
-        tableView.editing = NO;
-        
-        if ([dic[@"customized"] boolValue])  {
-            serVicePrice += [dic[@"customizedPrice"] floatValue];
-        } else {
-            serVicePrice += [dic[@"price"] floatValue];
-        }
-        
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
-    }];
-    
-    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        cell.declareL.strikeThroughEnabled = YES;
-        NSDictionary *dic = removeAry[indexPath.row];
-        [lineationAry removeObject:dic];
-        tableView.editing = NO;
-        
-        if ([dic[@"customized"] boolValue])  {
-            serVicePrice -= [dic[@"customizedPrice"] floatValue];
-        } else {
-            serVicePrice -= [dic[@"price"] floatValue];
-        }
-        
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3,5)] withRowAnimation:UITableViewRowAnimationFade];
-    }];
-    
-    if (cell.declareL.strikeThroughEnabled) {
-        return @[action0];
-    }
-    return @[action1];
-}
+///**
+// *  左滑cell时出现什么按钮
+// */
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    
+//    UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"添加" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        cell.declareL.strikeThroughEnabled = NO;
+//        NSDictionary *dic = removeAry[indexPath.row];
+//        [lineationAry addObject:dic];
+//        tableView.editing = NO;
+//        
+//        if ([dic[@"customized"] boolValue])  {
+//            serVicePrice += [dic[@"customizedPrice"] floatValue];
+//        } else {
+//            serVicePrice += [dic[@"price"] floatValue];
+//        }
+//        
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
+//    }];
+//    
+//    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        cell.declareL.strikeThroughEnabled = YES;
+//        NSDictionary *dic = removeAry[indexPath.row];
+//        [lineationAry removeObject:dic];
+//        tableView.editing = NO;
+//        
+//        if ([dic[@"customized"] boolValue])  {
+//            serVicePrice -= [dic[@"customizedPrice"] floatValue];
+//        } else {
+//            serVicePrice -= [dic[@"price"] floatValue];
+//        }
+//        
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
+////        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3,5)] withRowAnimation:UITableViewRowAnimationFade];
+//    }];
+//    
+//    if (cell.declareL.strikeThroughEnabled) {
+//        return @[action0];
+//    }
+//    return @[action1];
+//}
 
 
 ////指定编辑模式，插入，删除

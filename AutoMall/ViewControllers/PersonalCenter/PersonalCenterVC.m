@@ -396,6 +396,7 @@
                 [cell.headIMG addGestureRecognizer:tap];
                 
                 cell.loginL.hidden = YES;
+                cell.arrowsIM.hidden = NO;
                 cell.accountBtn.hidden = NO;
                 if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
@@ -461,6 +462,7 @@
                 [cell.headIMG addGestureRecognizer:tap];
 
                 cell.loginL.hidden = YES;
+                cell.arrowsIM.hidden = NO;
                 cell.accountBtn.hidden = NO;
                 if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
@@ -658,6 +660,7 @@
                 [cell.headIMG addGestureRecognizer:tap];
                 
                 cell.loginL.hidden = YES;
+                cell.arrowsIM.hidden = NO;
                 cell.accountBtn.hidden = NO;
                 if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
