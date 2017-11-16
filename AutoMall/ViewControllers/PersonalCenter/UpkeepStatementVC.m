@@ -153,13 +153,13 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelect)];
         [selectBgView addGestureRecognizer:tap];
         
-        selectTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 39 - 300,SCREEN_WIDTH, 300) style:UITableViewStylePlain];
+        selectTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, - 350,SCREEN_WIDTH, 350) style:UITableViewStylePlain];
         //        selectTableView.backgroundColor = RGBCOLOR(238, 238, 238);
         selectTableView.delegate = self;
         selectTableView.dataSource = self;
         selectTableView.layer.borderColor = Cell_sepLineColor.CGColor;
         selectTableView.layer.borderWidth = 1;
-        [self.view insertSubview:selectTableView belowSubview:self.topView];
+        [self.view insertSubview:selectTableView aboveSubview:self.topView];
         
         [self hiddenSelectView:YES];
     }
@@ -191,11 +191,11 @@
     [UIView animateWithDuration:SelectView_Duration animations:^{
         if (hidden) {
             selectBgView.alpha = 0.0;
-            selectTableView.frame = CGRectMake(0, 39 - 300, SCREEN_WIDTH, 300);
+            selectTableView.frame = CGRectMake(0, - 350, SCREEN_WIDTH, 350);
         }
         else {
             selectBgView.alpha = 0.3;
-            selectTableView.frame = CGRectMake(0, 103, SCREEN_WIDTH, 300);
+            selectTableView.frame = CGRectMake(0, 64, SCREEN_WIDTH, 350);
         }
     }];
 }

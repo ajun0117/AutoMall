@@ -1435,7 +1435,7 @@
 			isa = PBXGroup;
 			children = (
 				04DCA1811FA33B2F004B1054 /* 检查结果页详细 */,
-				04ABFB331F984B340015EE78 /* 添加检查图片 */,
+				04ABFB331F984B340015EE78 /* 添加图片 */,
 				F712456F1F868AE30091816F /* 检查页数据库模型 */,
 				04A69F0A1F710CCA00E966A0 /* 车图标记 */,
 				044218EA1FB1B84B00844B3F /* 填写里程燃油量照片 */,
@@ -1875,7 +1875,7 @@
 			path = GTMBase64;
 			sourceTree = "<group>";
 		};
-		04ABFB331F984B340015EE78 /* 添加检查图片 */ = {
+		04ABFB331F984B340015EE78 /* 添加图片 */ = {
 			isa = PBXGroup;
 			children = (
 				04ABFB341F984B510015EE78 /* AddPicViewController.h */,
@@ -1885,7 +1885,7 @@
 				04ABFB3B1F984BE00015EE78 /* AlbumListCollectionViewCell.m */,
 				04ABFB3C1F984BE00015EE78 /* AlbumListCollectionViewCell.xib */,
 			);
-			name = "添加检查图片";
+			name = "添加图片";
 			sourceTree = "<group>";
 		};
 		04AD1FD91F43ECD400247819 /* 订单页 */ = {
@@ -3642,7 +3642,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3684,7 +3684,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

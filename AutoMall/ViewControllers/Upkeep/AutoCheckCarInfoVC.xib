@@ -130,8 +130,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="燃油量" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pxp-m4-1Lf">
-                                            <rect key="frame" x="70" y="7" width="289" height="30"/>
+                                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="燃油量(百分比)" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pxp-m4-1Lf">
+                                            <rect key="frame" x="70" y="7" width="269" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="OkF-h9-dWN"/>
                                             </constraints>
@@ -142,16 +142,27 @@
                                                 <outlet property="delegate" destination="-1" id="pZF-tn-GLR"/>
                                             </connections>
                                         </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d27-Qb-aXY">
+                                            <rect key="frame" x="347" y="12" width="12" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="7h5-Df-TAg"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="Pxp-m4-1Lf" firstAttribute="centerY" secondItem="z4r-yx-mbs" secondAttribute="centerY" id="5Ay-AK-OJA"/>
                                         <constraint firstAttribute="trailing" secondItem="1o8-jz-spk" secondAttribute="trailing" id="5dJ-ql-5S9"/>
                                         <constraint firstItem="z4r-yx-mbs" firstAttribute="leading" secondItem="Lus-NB-t83" secondAttribute="leading" constant="16" id="8T2-Gf-Ghc"/>
+                                        <constraint firstAttribute="trailing" secondItem="d27-Qb-aXY" secondAttribute="trailing" constant="16" id="AQH-Tl-MrT"/>
+                                        <constraint firstItem="d27-Qb-aXY" firstAttribute="centerY" secondItem="z4r-yx-mbs" secondAttribute="centerY" id="ELA-OE-44b"/>
                                         <constraint firstAttribute="height" constant="45" id="HK0-aV-xlF"/>
+                                        <constraint firstItem="d27-Qb-aXY" firstAttribute="leading" secondItem="Pxp-m4-1Lf" secondAttribute="trailing" constant="8" id="IJK-Gu-Qae"/>
                                         <constraint firstItem="ecs-Kg-qVs" firstAttribute="top" secondItem="Lus-NB-t83" secondAttribute="top" id="LZh-LG-77b"/>
                                         <constraint firstItem="Pxp-m4-1Lf" firstAttribute="leading" secondItem="z4r-yx-mbs" secondAttribute="trailing" constant="8" id="Sdh-mO-Jx7"/>
-                                        <constraint firstAttribute="trailing" secondItem="Pxp-m4-1Lf" secondAttribute="trailing" constant="16" id="Tqe-BV-XQh"/>
                                         <constraint firstItem="ecs-Kg-qVs" firstAttribute="leading" secondItem="Lus-NB-t83" secondAttribute="leading" id="VQi-cL-6zb"/>
                                         <constraint firstItem="1o8-jz-spk" firstAttribute="leading" secondItem="Lus-NB-t83" secondAttribute="leading" id="jKP-RR-Wy8"/>
                                         <constraint firstItem="z4r-yx-mbs" firstAttribute="top" secondItem="ecs-Kg-qVs" secondAttribute="bottom" constant="11.5" id="lg0-0L-Q4f"/>
@@ -216,7 +227,7 @@
                 <constraint firstItem="Odr-Gp-dLx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qve-PK-XVa"/>
                 <constraint firstAttribute="bottom" secondItem="Odr-Gp-dLx" secondAttribute="bottom" id="rMY-iF-L1h"/>
             </constraints>
-            <point key="canvasLocation" x="-604" y="-9"/>
+            <point key="canvasLocation" x="-604.5" y="-9.5"/>
         </view>
     </objects>
     <resources>

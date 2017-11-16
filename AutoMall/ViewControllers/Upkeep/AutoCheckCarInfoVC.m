@@ -91,6 +91,12 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
+    if ([self.fuelAmountTF.text intValue] > 100) {
+        _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
     if (mileageImgUrl==nil || mileageImgUrl.length == 0) {
         _networkConditionHUD.labelText = @"总里程表图片必须上传！";
         [_networkConditionHUD show:YES];
@@ -105,6 +111,17 @@
     }
     self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":self.fuelAmountTF.text,@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField == self.fuelAmountTF) {
+        if ([textField.text intValue] > 100) {
+            _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    return YES;
 }
 
 
