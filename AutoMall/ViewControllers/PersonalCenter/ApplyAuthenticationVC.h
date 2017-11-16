@@ -35,4 +35,7 @@
 
 @property (strong, nonatomic) NSDictionary *infoDic;    //门店信息
 
+//更新用户资料
+@property (copy, nonatomic) void((^UpdateStoreInfo)());
+
 @end

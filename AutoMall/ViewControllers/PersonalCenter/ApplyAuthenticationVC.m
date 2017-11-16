@@ -49,6 +49,7 @@
         shopImgAry = self.infoDic[@"minorImages"];
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.nameTF.enabled = NO;
+        self.licenseImg.userInteractionEnabled = NO;
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
@@ -57,34 +58,34 @@
         
         licenseImgUrl = self.infoDic[@"licenseImg"];
         if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0) {
-            [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"licenseImg"])]];
+            [self.licenseImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"licenseImg"]))]];
         }
         
         cardAImgUrl = self.infoDic[@"cardImgA"];
         if (! [cardAImgUrl isKindOfClass:[NSNull class]] && cardAImgUrl.length > 0) {
-            [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgA"])]];
+            [self.cardAImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"cardImgA"]))]];
         }
         
         cardBImgUrl = self.infoDic[@"cardImgB"];
         if (! [cardBImgUrl isKindOfClass:[NSNull class]] && cardBImgUrl.length > 0) {
-            [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"cardImgB"])]];
+            [self.cardBImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"cardImgB"]))]];
         }
 
         self.wechatNameTF.text = STRING(self.infoDic[@"wechatName"]);
         
         gongzhongImgUrl = self.infoDic[@"wechatImg"];
         if (! [gongzhongImgUrl isKindOfClass:[NSNull class]] && gongzhongImgUrl.length > 0) {
-            [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatImg"])]];
+            [self.gongzhongImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"wechatImg"]))]];
         }
         
         aliPayCollectionImgUrl = self.infoDic[@"alipayImg"];
         if (! [aliPayCollectionImgUrl isKindOfClass:[NSNull class]] && aliPayCollectionImgUrl.length > 0) {
-            [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"alipayImg"])]];
+            [self.aliPayCollectionImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"alipayImg"]))]];
         }
         
         wechatCollectionImgUrl = self.infoDic[@"wechatpayImg"];
         if (! [wechatCollectionImgUrl isKindOfClass:[NSNull class]] && wechatCollectionImgUrl.length > 0) {
-            [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"wechatpayImg"])]];
+            [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"wechatpayImg"]))]];
         }
         [self.replayBtn setTitle:@"保存修改" forState:UIControlStateNormal];
     }
@@ -578,7 +579,7 @@
         [minorImages addObject:imageDic[@"relativePath"]];
     }
     NSString *minorImagesStr = [minorImages componentsJoinedByString:@","];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreInfoUpdate) delegate:nil params:pram info:infoDic];
 }
@@ -651,6 +652,7 @@
             
             self.replayBtn.enabled = NO;
             [self.replayBtn setTitle:@"审核中..." forState:UIControlStateDisabled];
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -667,8 +669,7 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            self.replayBtn.enabled = NO;
-            [self.replayBtn setTitle:@"审核中..." forState:UIControlStateDisabled];
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -676,6 +677,12 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+
+- (void)toPopVC:(NSString *)string {
+    self.UpdateStoreInfo();
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

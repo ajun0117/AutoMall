@@ -472,7 +472,7 @@
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
-                [cell.shopNameBtn setTitle:shopDic[@"name"] forState:UIControlStateNormal];
+                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopLevelIM.hidden= NO;
                 int rankLevel = [shopDic[@"rankLevel"] intValue];
@@ -670,7 +670,7 @@
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
-                [cell.shopNameBtn setTitle:shopDic[@"name"] forState:UIControlStateNormal];
+                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
 //                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 cell.shopLevelIM.hidden= NO;
@@ -1200,6 +1200,18 @@
      if ([mobileUserType isEqualToString:@"1"]) {    //门店老板
         applyVC.infoDic = shopDic;
      }
+    applyVC.UpdateStoreInfo = ^{
+        mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+        if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+            [self requestPostStoreGetInfo];     //请求门店详情数据
+        }
+        else if ([mobileUserType isEqualToString:@"2"]) {
+            [self requestPostUserGetStoreInfo];     //员工请求门店详情数据
+        }
+        else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
+            [self requestGetApprovalStatus];     //请求门店审批状态
+        }
+    };
     applyVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:applyVC animated:YES];
 }
