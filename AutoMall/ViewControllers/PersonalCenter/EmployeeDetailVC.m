@@ -32,8 +32,7 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailTopCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailTopCell"];
-     
-    [self requestGetStaffList];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -51,13 +50,14 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [self requestGetStaffList];
 }
 
--(void) toCheck {   //进行审核操作
-    EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
-    authVC.isReviewed = NO;
-    [self.navigationController pushViewController:authVC animated:YES];
-}
+//-(void) toCheck {   //进行审核操作
+//    EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
+//    [self.navigationController pushViewController:authVC animated:YES];
+//}
 
 #pragma mark - UITableViewDataSource
 
@@ -138,17 +138,14 @@
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
         switch ([dic[@"approvalStatus"] intValue]) {
             case 0:{
-                cell.daishenBtn.hidden = NO;
                 [cell.daishenBtn setTitle:@"等待审核" forState:UIControlStateNormal];
                 break;
             }
             case 1:{
-                cell.daishenBtn.hidden = YES;
-//                [cell.daishenBtn setTitle:@"已通过" forState:UIControlStateNormal];
+                [cell.daishenBtn setTitle:@"已通过" forState:UIControlStateNormal];
                 break;
             }
             case -1:{
-                cell.daishenBtn.hidden = NO;
                 [cell.daishenBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
                 break;
             }
@@ -156,7 +153,7 @@
             default:
                 break;
         }
-        [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.daishenBtn addTarget:self action:@selector(toCheck) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
@@ -165,7 +162,8 @@
     if (indexPath.section == 1) {
         NSDictionary *dic = skillAry[indexPath.row];
         EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
-        authVC.isReviewed = NO;
+        int approvalStatus = [dic[@"approvalStatus"] intValue];
+        authVC.approvalStatus = approvalStatus;
         authVC.skillDic = dic;      //技能字典
         [self.navigationController pushViewController:authVC animated:YES];
     }

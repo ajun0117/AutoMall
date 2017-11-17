@@ -46,14 +46,14 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-//    if (! self.servicesNameTF.text || self.servicesNameTF.text.length == 0) {
-//        _networkConditionHUD.labelText = @"服务名称必须填写！";
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//        return;
-//    }
-//
-//    [self requestPostAddDiscount];
+    if (! self.servicesNameTF.text || self.servicesNameTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"服务名称必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+
+    [self requestPostAddService];
 }
 
 #pragma mark -
@@ -83,14 +83,15 @@
 }
 
 #pragma mark - 发起网络请求
--(void)requestPostAddDiscount { //新增优惠
+-(void)requestPostAddService { //新增服务
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountAdd object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreserviceAdd object:nil];
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountAdd, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:storeId, @"storeId", self.servicesNameTF.text,@"item", STRING_Nil(self.servicesMoneyTF.text), @"money", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountAdd) delegate:nil params:pram info:infoDic];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreserviceAdd, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?storeId=%@",UrlPrefix(StoreserviceAdd),storeId];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.servicesNameTF.text,@"item", STRING_Nil(self.servicesMoneyTF.text), @"money", nil];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:urlString delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -105,9 +106,9 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
-    if ([notification.name isEqualToString:DiscountAdd]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountAdd object:nil];
+    if ([notification.name isEqualToString:StoreserviceAdd]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreserviceAdd object:nil];
+        NSLog(@"StoreserviceAdd: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

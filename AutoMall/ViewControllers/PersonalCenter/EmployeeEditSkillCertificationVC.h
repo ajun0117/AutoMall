@@ -10,6 +10,8 @@
 
 @interface EmployeeEditSkillCertificationVC : UIViewController
 
+@property (assign , nonatomic) int approvalStatus;  //认证状态
+
 @property (strong , nonatomic) NSDictionary *skillDic;  //技能数据
 
 @end

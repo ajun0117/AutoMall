@@ -30,7 +30,7 @@
     NSArray *contentAry;    //检查内容列表
     NSInteger currentSelectIndex;  //当前选中的位置
     NSIndexPath *currentPhotoIndexPath;     //记录当前拍照按钮对应的cell位置
-    NSDictionary *lichengDic;    //里程油量数据
+//    NSDictionary *lichengDic;    //里程油量数据
     NSString *carImageUrl;  //车图的url
 }
 
@@ -60,13 +60,13 @@
                                        target:nil action:nil];
     negativeSpacer.width = -6;
 
-    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    infoBtn.frame = CGRectMake(0, 0, 30, 30);
-//    [infoBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
-    [infoBtn setImage:[UIImage imageNamed:@"carInfo"] forState:UIControlStateNormal];
-    [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
+//    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    infoBtn.frame = CGRectMake(0, 0, 30, 30);
+////    [infoBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
+//    [infoBtn setImage:[UIImage imageNamed:@"carInfo"] forState:UIControlStateNormal];
+//    [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 30, 30);
@@ -75,7 +75,7 @@
     [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, nil];
     
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49 - 20)];
     self.mainScrollView.pagingEnabled = YES;
@@ -151,16 +151,16 @@
     }
 }
 
--(void)toFillLicheng {
-    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
-    infoVC.mileageAndfuelAmountDic = lichengDic;
-    infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
-        lichengDic = dic;
-        NSLog(@"lichengDic: %@",lichengDic);
-    };
-    infoVC.carDic = self.carDic;
-    [self.navigationController pushViewController:infoVC animated:YES];
-}
+//-(void)toFillLicheng {
+//    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
+//    infoVC.mileageAndfuelAmountDic = lichengDic;
+//    infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
+//        lichengDic = dic;
+//        NSLog(@"lichengDic: %@",lichengDic);
+//    };
+//    infoVC.carDic = self.carDic;
+//    [self.navigationController pushViewController:infoVC animated:YES];
+//}
 
 -(void)toMark {
     UpkeepCarMarkVC *markVC = [[UpkeepCarMarkVC alloc] init];
@@ -174,13 +174,13 @@
 
 #pragma mark - 提交生成检查单
 - (IBAction)creatChecklistAction:(id)sender {
-    if (lichengDic) {
+//    if (self.lichengDic) {
         [self requestCarUpkeepAdd];
-    } else {
-        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-    }
+//    } else {
+//        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//    }
 //    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
 //    [self.navigationController pushViewController:resultVC animated:YES];
 }
@@ -845,7 +845,7 @@
         
     }
 //    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
-    NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":lichengDic[@"mileage"],@"mileageImage":lichengDic[@"mileageImg"],@"fuelAmount":lichengDic[@"fuelAmount"],@"fuelImage":lichengDic[@"fuelAmountImg"]};
+    NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":self.lichengDic[@"mileage"],@"mileageImage":self.lichengDic[@"mileageImg"],@"fuelAmount":self.lichengDic[@"fuelAmount"],@"fuelImage":self.lichengDic[@"fuelAmountImg"]};
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);

@@ -34,11 +34,22 @@
     self.introduceL.text = self.skillDic[@"remark"];;
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     
-    if (self.isReviewed) {
-        self.revieweView.hidden = YES;
-    }
-    else {
-        self.revieweView.hidden = NO;
+    switch (self.approvalStatus) {
+        case 0:{
+            self.revieweView.hidden = NO;
+            break;
+        }
+        case 1:{
+            self.revieweView.hidden = YES;
+            break;
+        }
+        case -1:{
+            self.revieweView.hidden = YES;
+            break;
+        }
+            
+        default:
+            break;
     }
 }
 
@@ -68,7 +79,7 @@
 }
 
 #pragma mark - 发起请求
--(void)requestApprovalStatus:(NSString *)approvalStatus { //员工技能列表
+-(void)requestApprovalStatus:(NSString *)approvalStatus { //审核员工技能
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreApproveSkill object:nil];
@@ -95,7 +106,7 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -105,7 +116,10 @@
     }
 }
 
-//StoreApproveSkill
+
+- (void)toPopVC:(NSString *)string {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

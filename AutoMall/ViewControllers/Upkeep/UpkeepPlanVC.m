@@ -18,6 +18,7 @@
 #import "UpkeepPlanSelectServiceCell.h"
 #import "CheckResultSingleCell.h"
 #import "CheckResultMultiCell.h"
+#import "AutoCheckResultDetailVC.h"
 
 @interface UpkeepPlanVC ()
 {
@@ -479,7 +480,7 @@
 
                 if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
                     CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
                     cell.positionL.text = dic[@"name"];
                     cell.checkContentL.text = dic[@"checkContentVos"][@"name"];
                     NSArray *entities = dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"];
@@ -529,6 +530,7 @@
                 }
                 else {
                     CheckResultSingleCell *cell = (CheckResultSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultSingleCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
                     cell.levelL.layer.cornerRadius = 4;
                     cell.positionL.text = dic[@"name"];
                     cell.checkContentL.text = dic[@"checkContentVos"][@"name"];
@@ -544,7 +546,7 @@
                     else if (level == 3) {
                         cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
                     }
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
                     return cell;
                 }
                 break;
@@ -656,6 +658,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
         switch (indexPath.section) {
+                
+            case 1: {
+                NSDictionary *dic = unnormalAry[indexPath.row];
+                AutoCheckResultDetailVC *detailVC = [[AutoCheckResultDetailVC alloc] init];
+                detailVC.checkId = self.carUpkeepId;
+                detailVC.checkTermId = dic[@"id"];
+                detailVC.checkContentId = dic[@"checkContentVos"][@"id"];
+                [self.navigationController pushViewController:detailVC animated:YES];
+                break;
+            }
                 
             case 2: {
                 ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];

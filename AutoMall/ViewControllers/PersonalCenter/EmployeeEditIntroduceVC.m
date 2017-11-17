@@ -26,7 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"技能介绍";
+    self.title = @"技能特长介绍";
+    // 设置导航栏按钮和标题颜色
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
     self.jieshaoTV.layer.cornerRadius = 2;
     self.jieshaoTV.layer.borderColor = RGBCOLOR(200, 200, 204).CGColor;

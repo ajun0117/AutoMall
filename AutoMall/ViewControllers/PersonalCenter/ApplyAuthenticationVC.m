@@ -41,15 +41,9 @@
     if (self.infoDic) {
         self.title = @"门店信息";
         
-//        shopImgUrl = self.infoDic[@"image"];
-//        if (! [shopImgUrl isKindOfClass:[NSNull class]] && shopImgUrl.length > 0) {
-//            [self.shopImg sd_setImageWithURL:[NSURL URLWithString:STRING(self.infoDic[@"image"])]];
-//        }
-        
         shopImgAry = self.infoDic[@"minorImages"];
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.nameTF.enabled = NO;
-        self.licenseImg.userInteractionEnabled = NO;
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
@@ -167,8 +161,14 @@
 //}
 
 -(void)tapLicense:(UITapGestureRecognizer *)tap {
-    whichImg = 1;
-    [self selectThePhotoOrCamera];
+    if (self.infoDic) {
+        _networkConditionHUD.labelText = @"营业执照不可更改";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    } else {
+        whichImg = 1;
+        [self selectThePhotoOrCamera];
+    }
 }
 
 -(void)tapCardA:(UITapGestureRecognizer *)tap {
@@ -283,24 +283,35 @@
 
 - (IBAction)replayAction:(id)sender {
     if (self.infoDic) {     //编辑
-        if (licenseImgUrl && cardAImgUrl && cardBImgUrl) {
+        if (self.addressTF.text == nil || [self.addressTF.text isEqualToString:@""]) {
+            _networkConditionHUD.labelText = @"请选择您的门店地址，否则将影响您的审核！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0 && ! [cardAImgUrl isKindOfClass:[NSNull class]] && cardAImgUrl.length > 0 && ! [cardBImgUrl isKindOfClass:[NSNull class]] && cardBImgUrl.length > 0) {
             [self requestPostStoreUpdate];
-        }  else {
+        }
+        else {
             _networkConditionHUD.labelText = @"请将证件上传齐全，否则将影响您的审核！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     } else {
-        if (licenseImgUrl && cardAImgUrl && cardBImgUrl) {
+        if (self.addressTF.text == nil || [self.addressTF.text isEqualToString:@""]) {
+            _networkConditionHUD.labelText = @"请选择您的门店地址，否则将影响您的审核！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0 && ! [cardAImgUrl isKindOfClass:[NSNull class]] && cardAImgUrl.length > 0 && ! [cardBImgUrl isKindOfClass:[NSNull class]] && cardBImgUrl.length > 0) {
             [self requestPostStoreRegister];
-        }  else {
+        }
+        else {
             _networkConditionHUD.labelText = @"请将证件上传齐全，否则将影响您的审核！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
     
-
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

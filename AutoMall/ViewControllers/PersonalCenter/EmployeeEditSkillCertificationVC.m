@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameTF;
 @property (strong, nonatomic) IBOutlet UITextField *contentTF;
 @property (strong, nonatomic) IBOutlet WPImageView *imgView;
+@property (strong, nonatomic) IBOutlet UIButton *statusBtn;
 //@property (weak, nonatomic) IBOutlet UILabel *imgL;
 
 @end
@@ -57,6 +58,25 @@
         }
         self.nameTF.text = self.skillDic[@"name"];
         self.contentTF.text = self.skillDic[@"remark"];
+        
+        if (self.approvalStatus == 0) {
+            [self.statusBtn setTitle:@"审批中，不能修改" forState:UIControlStateNormal];
+            self.nameTF.enabled = NO;
+            self.contentTF.enabled = NO;
+            self.imgView.userInteractionEnabled = NO;
+        }
+        else if (self.approvalStatus == 1) {
+            [self.statusBtn setTitle:@"审批通过" forState:UIControlStateNormal];
+            self.nameTF.enabled = YES;
+            self.contentTF.enabled = YES;
+            self.imgView.userInteractionEnabled = YES;
+        }
+        else if (self.approvalStatus == -1) {
+            [self.statusBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+            self.nameTF.enabled = YES;
+            self.contentTF.enabled = YES;
+            self.imgView.userInteractionEnabled = YES;
+        }
     }
 }
 
@@ -87,7 +107,7 @@
 
 - (IBAction)toSubmitSkillAction:(id)sender {
     if (self.nameTF.text.length > 0 && self.contentTF.text.length > 0 && imgUrl.length > 0) {
-        [self requestPostStoreUpdateStaffSkill];
+        [self requestPostUserAddOrChangeSkill];
     }
     else {
         _networkConditionHUD.labelText = @"请填写完所有信息！";
@@ -254,15 +274,15 @@
     [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
 }
 
--(void)requestPostStoreUpdateStaffSkill { //修改技能
+-(void)requestPostUserAddOrChangeSkill { //修改单个技能
     [_hud show:YES];
     //注册通知
      if (self.skillDic) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreUpdateStaffSkill object:nil];
-        NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreUpdateStaffSkill, @"op", nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserChangeSkill object:nil];
+        NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserChangeSkill, @"op", nil];
         NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.skillDic[@"id"],@"skillId",self.nameTF.text,@"skillName",self.contentTF.text,@"skillRemark", imgUrl, @"skillImage", nil];
          NSLog(@"pram: %@",pram);
-        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreUpdateStaffSkill) delegate:nil params:pram info:infoDic];
+        [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UserChangeSkill) delegate:nil params:pram info:infoDic];
     }
     else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserAppendSkill object:nil];
@@ -295,9 +315,9 @@
         }
     }
 
-    if ([notification.name isEqualToString:StoreUpdateStaffSkill]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreUpdateStaffSkill object:nil];
-        NSLog(@"StoreUpdateStaffSkill: %@",responseObject);
+    if ([notification.name isEqualToString:UserChangeSkill]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserChangeSkill object:nil];
+        NSLog(@"UserChangeSkill: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
@@ -329,7 +349,6 @@
         }
     }
 }
-
 
 - (void)toPopVC:(NSString *)string {
     [self.navigationController popViewControllerAnimated:YES];

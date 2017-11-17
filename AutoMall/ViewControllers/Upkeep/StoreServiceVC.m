@@ -65,7 +65,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-//    [self.myTableView headerBeginRefreshing];
+    [self.myTableView headerBeginRefreshing];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -73,13 +73,13 @@
     NSLog(@"下拉刷新个人信息");
     currentpage = 0;
     [serviceArray removeAllObjects];
-//    [self requestPostDiscountList];
+    [self requestPostServiceList];
 }
 
 -(void)footerLoadData {
     NSLog(@"上拉加载数据");
     currentpage ++;
-//    [self requestPostDiscountList];
+    [self requestPostServiceList];
 }
 
 
@@ -129,7 +129,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSDictionary *dic = serviceArray[indexPath.row];
-        [self deleteDiscountWithId:dic[@"id"]];
+        [self deleteServiceWithId:dic[@"id"]];
         [serviceArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -146,25 +146,25 @@
 }
 
 #pragma mark - 发送请求
--(void)requestPostDiscountList { //优惠列表
+-(void)requestPostServiceList { //服务列表
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountList object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreserviceList object:nil];
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountList, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:storeId,@"storeId",[NSNumber numberWithInt:currentpage],@"pageNo", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(DiscountList) delegate:nil params:pram info:infoDic];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreserviceList, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:storeId,@"storeId",[NSNumber numberWithInt:currentpage],@"pageNo",@"100",@"pageSize", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreserviceList) delegate:nil params:pram info:infoDic];
 }
 
--(void)deleteDiscountWithId:(NSString *)did {     //删除优惠
+-(void)deleteServiceWithId:(NSString *)did {     //删除服务
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DiscountDel object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DiscountDel, @"op", nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreserviceDel object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreserviceDel, @"op", nil];
     //    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",aid,@"id", nil];
     //    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ConsigneeDele) delegate:nil params:pram info:infoDic];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(DiscountDel),did];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(StoreserviceDel),did];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -181,9 +181,9 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    if ([notification.name isEqualToString:DiscountList]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
-        NSLog(@"DiscountList: %@",responseObject);
+    if ([notification.name isEqualToString:StoreserviceList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreserviceList object:nil];
+        NSLog(@"StoreserviceList: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [serviceArray addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];
@@ -195,9 +195,9 @@
         }
     }
     
-    if ([notification.name isEqualToString:DiscountDel]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountDel object:nil];
-        NSLog(@"DiscountDel: %@",responseObject);
+    if ([notification.name isEqualToString:StoreserviceDel]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreserviceDel object:nil];
+        NSLog(@"StoreserviceDel: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];

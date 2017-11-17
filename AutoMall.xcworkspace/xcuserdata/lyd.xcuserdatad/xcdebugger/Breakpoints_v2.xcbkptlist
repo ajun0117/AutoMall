@@ -79,8 +79,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1307"
             endingLineNumber = "1307"
-            landmarkName = "-imagePickerControllerDidCancel:"
-            landmarkType = "7">
+            landmarkName = "@implementation PersonalCenterVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,8 +95,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1310"
             endingLineNumber = "1310"
-            landmarkName = "-toTel"
-            landmarkType = "7">
+            landmarkName = "@implementation PersonalCenterVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/ApplyAuthenticationVC.m"
-            timestampString = "532427145.571374"
+            timestampString = "532604950.373766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "565"
-            endingLineNumber = "565"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
             landmarkName = "-requestPostStoreRegister"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/ApplyAuthenticationVC.m"
-            timestampString = "532427145.571374"
+            timestampString = "532604950.373766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
+            startingLineNumber = "592"
+            endingLineNumber = "592"
             landmarkName = "-requestPostStoreUpdate"
             landmarkType = "7">
          </BreakpointContent>
@@ -153,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "532512608.55321"
+            filePath = "AutoMall/Utilitys/DataRequest.m"
+            timestampString = "532603681.177265"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1338"
-            endingLineNumber = "1338"
-            landmarkName = "-requestPostStoreGetInfo"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-uploadImageWithUrl:params:target:delegate:info:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

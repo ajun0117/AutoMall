@@ -7,6 +7,7 @@
 //
 
 #import "AutoCheckCarInfoVC.h"
+#import "AutoCheckVC.h"
 
 @interface AutoCheckCarInfoVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -40,19 +41,19 @@
     [self setTextFieldInputAccessoryViewWithTF:self.fuelAmountTF];
     textFieldArray = @[self.mileageTF, self.fuelAmountTF];
     
-    mileageImgUrl = self.mileageAndfuelAmountDic[@"mileageImg"];
-    fuelAmountImgUrl = self.mileageAndfuelAmountDic[@"fuelAmountImg"];
-    
-    if (self.mileageAndfuelAmountDic) {
-        self.mileageTF.text = self.mileageAndfuelAmountDic[@"mileage"];
-        self.fuelAmountTF.text = self.mileageAndfuelAmountDic[@"fuelAmount"];
-        if (mileageImgUrl.length > 0) {
-            [self.mileageImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"mileageImg"])]];
-        }
-        if (fuelAmountImgUrl.length > 0) {
-            [self.fuelAmountImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"fuelAmountImg"])]];
-        }
-    }
+//    mileageImgUrl = self.mileageAndfuelAmountDic[@"mileageImg"];
+//    fuelAmountImgUrl = self.mileageAndfuelAmountDic[@"fuelAmountImg"];
+//    
+//    if (self.mileageAndfuelAmountDic) {
+//        self.mileageTF.text = self.mileageAndfuelAmountDic[@"mileage"];
+//        self.fuelAmountTF.text = self.mileageAndfuelAmountDic[@"fuelAmount"];
+//        if (mileageImgUrl.length > 0) {
+//            [self.mileageImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"mileageImg"])]];
+//        }
+//        if (fuelAmountImgUrl.length > 0) {
+//            [self.fuelAmountImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"fuelAmountImg"])]];
+//        }
+//    }
     
     UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mileagePhotoAction)];
     [self.mileageImgView addGestureRecognizer:tap0];
@@ -109,14 +110,20 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":self.fuelAmountTF.text,@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
-    [self.navigationController popViewControllerAnimated:YES];
+//    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":self.fuelAmountTF.text,@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+    checkVC.checktypeID = self.checktypeID;
+    checkVC.carDic = self.carDic;
+    checkVC.lichengDic = @{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":self.fuelAmountTF.text,@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)};
+    [self.navigationController pushViewController:checkVC animated:YES];
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (textField == self.fuelAmountTF) {
         if ([textField.text intValue] > 100) {
-            _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
+            _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！"; 
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

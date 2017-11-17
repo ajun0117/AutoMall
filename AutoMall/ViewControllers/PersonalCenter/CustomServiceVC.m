@@ -49,10 +49,6 @@
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
-    
-    serviceArray = [NSMutableArray array];
-    currentpage = 0;
-    [self requestPostListServiceContent];
 
     selectDic = [NSMutableDictionary dictionary];
     
@@ -75,6 +71,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    serviceArray = [NSMutableArray array];
+    currentpage = 0;
+    [self requestPostListServiceContent];
 }
 
 #pragma mark - 下拉刷新,上拉加载

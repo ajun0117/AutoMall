@@ -103,6 +103,16 @@
     cell.nameL.text = dic[@"name"];
     cell.introduceL.text = dic[@"remark"];
     cell.introduceL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 84;
+    int approvalStatus = [dic[@"approvalStatus"] intValue];
+    if (approvalStatus == 0) {
+        [cell.statusBtn setTitle:@"未审批" forState:UIControlStateNormal];
+    }
+    else if (approvalStatus == 1) {
+        [cell.statusBtn setTitle:@"审批通过" forState:UIControlStateNormal];
+    }
+    else if (approvalStatus == -1) {
+        [cell.statusBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+    }
     return cell;
 }
 
@@ -111,6 +121,8 @@
 
     NSDictionary *dic = skillAry[indexPath.section];
     EmployeeEditSkillCertificationVC *editVC = [[EmployeeEditSkillCertificationVC alloc] init];
+    int approvalStatus = [dic[@"approvalStatus"] intValue];
+    editVC.approvalStatus = approvalStatus;
     editVC.skillDic = dic;
     [self.navigationController pushViewController:editVC animated:YES];
 }

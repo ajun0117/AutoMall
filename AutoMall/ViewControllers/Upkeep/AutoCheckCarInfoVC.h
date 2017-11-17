@@ -10,12 +10,14 @@
 
 @interface AutoCheckCarInfoVC : UIViewController
 
-@property (strong ,nonatomic) NSDictionary *mileageAndfuelAmountDic;
+//@property (strong ,nonatomic) NSDictionary *mileageAndfuelAmountDic;
 /**
  * 提交里程油量
  */
-@property (copy, nonatomic) void((^GoBackSubmitLicheng)(NSDictionary *dic));
+//@property (copy, nonatomic) void((^GoBackSubmitLicheng)(NSDictionary *dic));
 
+@property (strong, nonatomic) NSString *checktypeID;
 @property (strong, nonatomic) NSDictionary *carDic;
+
 
 @end

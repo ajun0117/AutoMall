@@ -15,6 +15,7 @@
                 <outlet property="contentTF" destination="cvm-Ou-jQg" id="ws2-my-6Hn"/>
                 <outlet property="imgView" destination="woS-Rp-xld" id="Jpc-ej-2oI"/>
                 <outlet property="nameTF" destination="rYU-l2-pHd" id="nrJ-7Q-hOz"/>
+                <outlet property="statusBtn" destination="l2D-gV-WMt" id="uLu-iC-T78"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -159,7 +160,7 @@
                 <constraint firstItem="RdN-hZ-cr2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bZs-rj-maS"/>
                 <constraint firstItem="4cE-3n-sOg" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="eFv-5b-zZE"/>
             </constraints>
-            <point key="canvasLocation" x="10" y="14"/>
+            <point key="canvasLocation" x="-314" y="8"/>
         </view>
     </objects>
     <resources>

@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7AC-UH-ST6">
-                    <rect key="frame" x="0.0" y="84" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="74" width="375" height="44"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写优惠内容" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Xv-lz-04c">
                             <rect key="frame" x="16" y="7" width="166" height="30"/>
@@ -84,7 +84,7 @@
                 <constraint firstAttribute="trailing" secondItem="juc-gu-p4W" secondAttribute="trailing" id="bwd-PD-MJ0"/>
                 <constraint firstItem="7AC-UH-ST6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="g5g-da-Iq1"/>
                 <constraint firstAttribute="bottom" secondItem="juc-gu-p4W" secondAttribute="bottom" id="hUx-rU-nyb"/>
-                <constraint firstItem="7AC-UH-ST6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="uVI-ge-Ok1"/>
+                <constraint firstItem="7AC-UH-ST6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="uVI-ge-Ok1"/>
                 <constraint firstItem="juc-gu-p4W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yQT-Kg-MSw"/>
             </constraints>
             <point key="canvasLocation" x="-15.5" y="54.5"/>

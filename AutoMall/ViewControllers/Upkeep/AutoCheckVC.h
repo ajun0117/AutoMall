@@ -20,4 +20,6 @@
 //@property (strong, nonatomic) UITableView *chassisTV;
 //@property (strong, nonatomic) UITableView *trunkTV;
 
+@property (strong, nonatomic) NSDictionary *lichengDic;    //里程油量数据
+
 @end

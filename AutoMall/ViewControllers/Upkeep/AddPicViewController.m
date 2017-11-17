@@ -512,6 +512,7 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     } else {
         [_hud show:YES];
+        [_imgsArray removeAllObjects];      //清空之前的图片
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
         for (int i = 0; i < self.imageDataArr.count; i++) {
             ImageObject *obj = self.imageDataArr[i];
