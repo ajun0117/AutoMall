@@ -1183,17 +1183,19 @@
         return;
     }
     else if ([mobileUserType isEqualToString:@"0"]) {    //普通注册用户
-        if ([approvalStatusDic[@"approvalStatus"] intValue] == 0) {
-            _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            return;
-        }
-        else if ([approvalStatusDic[@"storeApprovalStatus"] intValue] == -1) {
-            _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            return;
+        if ([userInfoDic[@"registeredStore"] intValue] != 0) {   //申请过
+            if ([approvalStatusDic[@"approvalStatus"] intValue] == 0) {
+                _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                return;
+            }
+            else if ([approvalStatusDic[@"storeApprovalStatus"] intValue] == -1) {
+                _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                return;
+            }
         }
     }
     ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];

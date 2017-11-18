@@ -56,8 +56,10 @@
 //    frame1.origin.y = 0;
 //    frame1.size.height -=0;
 //    frame1.size.width -=0;
+    
     self.circleProgressView = [[CircleProgressView alloc] initWithFrame:CGRectMake(0, 0, 60, 60) backColor:[UIColor colorWithWhite:0.603 alpha:0.390] progressColor:[UIColor greenColor] lineWidth:2];
-    self.circleProgressView.center = self.center;
+    self.circleProgressView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    NSLog(@"self.circleProgressView.center:  %@",NSStringFromCGPoint(self.circleProgressView.center));
     self.circleProgressView.hidden = YES;
     [self addSubview:self.circleProgressView];
 }

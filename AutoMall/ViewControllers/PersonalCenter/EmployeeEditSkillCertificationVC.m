@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *contentTF;
 @property (strong, nonatomic) IBOutlet WPImageView *imgView;
 @property (strong, nonatomic) IBOutlet UIButton *statusBtn;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 //@property (weak, nonatomic) IBOutlet UILabel *imgL;
 
 @end
@@ -31,6 +32,8 @@
     self.title = @"添加技能认证";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    self.editBtn.hidden = YES;
     
 //    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    searchBtn.frame = CGRectMake(0, 0, 70, 44);
@@ -51,7 +54,6 @@
     [self.imgView addGestureRecognizer:tap0];
     
     if (self.skillDic) {
-        self.title = @"编辑技能";
         imgUrl = self.skillDic[@"image"];
         if (imgUrl.length > 0) {
             [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
@@ -60,21 +62,32 @@
         self.contentTF.text = self.skillDic[@"remark"];
         
         if (self.approvalStatus == 0) {
+            self.title = @"审批中";
+            self.editBtn.hidden = YES;
+            self.statusBtn.enabled = NO;
+            [self.statusBtn setBackgroundColor:[UIColor grayColor]];
             [self.statusBtn setTitle:@"审批中，不能修改" forState:UIControlStateNormal];
             self.nameTF.enabled = NO;
             self.contentTF.enabled = NO;
             self.imgView.userInteractionEnabled = NO;
         }
         else if (self.approvalStatus == 1) {
-            [self.statusBtn setTitle:@"审批通过" forState:UIControlStateNormal];
-            self.nameTF.enabled = YES;
-            self.contentTF.enabled = YES;
+            self.title = @"认证信息";
+            self.editBtn.hidden = NO;
+            self.statusBtn.enabled = YES;
+            self.nameTF.enabled = NO;
+            self.contentTF.enabled = NO;
             self.imgView.userInteractionEnabled = YES;
         }
         else if (self.approvalStatus == -1) {
-            [self.statusBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
-            self.nameTF.enabled = YES;
-            self.contentTF.enabled = YES;
+            self.title = @"已拒绝";
+            _networkConditionHUD.labelText = @"审核不通过";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            self.editBtn.hidden = NO;
+            self.statusBtn.enabled = YES;
+            self.nameTF.enabled = NO;
+            self.contentTF.enabled = NO;
             self.imgView.userInteractionEnabled = YES;
         }
     }
@@ -104,6 +117,11 @@
 //-(void)toSubmitSkill {
 //    
 //}
+- (IBAction)editAction:(id)sender {
+    self.editBtn.hidden = YES;
+    self.nameTF.enabled = YES;
+    self.contentTF.enabled = YES;
+}
 
 - (IBAction)toSubmitSkillAction:(id)sender {
     if (self.nameTF.text.length > 0 && self.contentTF.text.length > 0 && imgUrl.length > 0) {

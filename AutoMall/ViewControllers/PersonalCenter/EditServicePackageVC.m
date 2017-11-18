@@ -303,8 +303,11 @@
         noticeL.font = [UIFont boldSystemFontOfSize:15];
         noticeL.text = @"￥";
         [cell.contentView addSubview:noticeL];
-        UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 200, 30)];
+        UITextField *priceTF = [[UITextField alloc] initWithFrame:CGRectMake(32, 7, 80, 30)];
         priceTF.font = [UIFont boldSystemFontOfSize:15];
+        priceTF.layer.borderColor = RGBCOLOR(239, 239, 239).CGColor;
+        priceTF.layer.borderWidth = 1;
+        priceTF.layer.cornerRadius = 4;
         priceTF.placeholder = [NSString stringWithFormat:@"%@",dic[@"price"]];
         priceTF.keyboardType = UIKeyboardTypeNumberPad;
         NSArray *keys = [selectDic allKeys];

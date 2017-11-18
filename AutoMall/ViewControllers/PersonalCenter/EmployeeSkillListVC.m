@@ -27,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"我的技能认证";
+    self.title = @"技能认证";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
@@ -105,12 +105,15 @@
     cell.introduceL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 84;
     int approvalStatus = [dic[@"approvalStatus"] intValue];
     if (approvalStatus == 0) {
+        [cell.statusBtn setBackgroundColor:RGBCOLOR(234, 0, 24)];
         [cell.statusBtn setTitle:@"未审批" forState:UIControlStateNormal];
     }
     else if (approvalStatus == 1) {
+        [cell.statusBtn setBackgroundColor:RGBCOLOR(234, 0, 24)];
         [cell.statusBtn setTitle:@"审批通过" forState:UIControlStateNormal];
     }
     else if (approvalStatus == -1) {
+        [cell.statusBtn setBackgroundColor:[UIColor grayColor]];
         [cell.statusBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
     }
     return cell;

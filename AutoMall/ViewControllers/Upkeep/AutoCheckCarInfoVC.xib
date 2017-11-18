@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -91,9 +91,13 @@
                                         <constraint firstItem="yWh-F4-TTz" firstAttribute="top" secondItem="H4e-j4-KlP" secondAttribute="top" id="wIp-E4-fec"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImg-mileage" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-8O-4vF" customClass="WPImageView">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload-plusSS" translatesAutoresizingMaskIntoConstraints="NO" id="NRZ-Gz-Icy">
                                     <rect key="frame" x="0.0" y="55" width="375" height="211"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-8O-4vF" customClass="WPImageView">
+                                    <rect key="frame" x="0.0" y="55" width="375.5" height="211"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="NeO-8O-4vF" secondAttribute="height" multiplier="16:9" id="ozm-Yr-EuI"/>
                                     </constraints>
@@ -170,9 +174,13 @@
                                         <constraint firstAttribute="bottom" secondItem="1o8-jz-spk" secondAttribute="bottom" id="u6e-cO-c3c"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImg-mileage" translatesAutoresizingMaskIntoConstraints="NO" id="qas-OM-hJF" customClass="WPImageView">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload-plusSS" translatesAutoresizingMaskIntoConstraints="NO" id="sFF-6u-Kl5">
                                     <rect key="frame" x="0.0" y="321" width="375" height="211"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qas-OM-hJF" customClass="WPImageView">
+                                    <rect key="frame" x="0.0" y="321" width="375" height="211"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="qas-OM-hJF" secondAttribute="height" multiplier="16:9" id="t94-Vm-txC"/>
                                     </constraints>
@@ -180,19 +188,30 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="qas-OM-hJF" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="1Au-jv-oSe"/>
+                                <constraint firstAttribute="trailing" secondItem="sFF-6u-Kl5" secondAttribute="trailing" id="1es-E7-npj"/>
                                 <constraint firstItem="qas-OM-hJF" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="1gB-nE-JfX"/>
+                                <constraint firstItem="sFF-6u-Kl5" firstAttribute="width" secondItem="sFF-6u-Kl5" secondAttribute="height" multiplier="16:9" id="7sX-C8-ZoA"/>
                                 <constraint firstItem="NeO-8O-4vF" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="8o7-iX-d9V"/>
+                                <constraint firstItem="NRZ-Gz-Icy" firstAttribute="width" secondItem="NRZ-Gz-Icy" secondAttribute="height" multiplier="16:9" id="9em-Dc-bph"/>
+                                <constraint firstItem="sFF-6u-Kl5" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="Afg-CD-VVy"/>
                                 <constraint firstItem="qas-OM-hJF" firstAttribute="top" secondItem="Lus-NB-t83" secondAttribute="bottom" id="CVP-27-Bzf"/>
                                 <constraint firstItem="NeO-8O-4vF" firstAttribute="top" secondItem="H4e-j4-KlP" secondAttribute="bottom" id="Cag-y0-jxI"/>
+                                <constraint firstItem="qas-OM-hJF" firstAttribute="top" secondItem="Lus-NB-t83" secondAttribute="bottom" id="E2m-zY-I72"/>
                                 <constraint firstItem="Lus-NB-t83" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="OIy-d9-ORi"/>
                                 <constraint firstAttribute="trailing" secondItem="NeO-8O-4vF" secondAttribute="trailing" id="Ypv-sP-TeN"/>
                                 <constraint firstAttribute="height" constant="650" id="ZE6-cV-E0g"/>
                                 <constraint firstItem="Lus-NB-t83" firstAttribute="top" secondItem="NeO-8O-4vF" secondAttribute="bottom" constant="10" id="bKy-M5-ChI"/>
+                                <constraint firstItem="NRZ-Gz-Icy" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="bV8-Ku-thT"/>
                                 <constraint firstAttribute="trailing" secondItem="qas-OM-hJF" secondAttribute="trailing" id="duf-T4-pqo"/>
+                                <constraint firstAttribute="trailing" secondItem="NRZ-Gz-Icy" secondAttribute="trailing" id="f0Q-nG-31s"/>
+                                <constraint firstItem="sFF-6u-Kl5" firstAttribute="top" secondItem="Lus-NB-t83" secondAttribute="bottom" id="jaq-kf-hgD"/>
+                                <constraint firstAttribute="trailing" secondItem="qas-OM-hJF" secondAttribute="trailing" id="kOz-cC-NRL"/>
                                 <constraint firstAttribute="trailing" secondItem="Lus-NB-t83" secondAttribute="trailing" id="nKD-ak-Ubo"/>
                                 <constraint firstItem="H4e-j4-KlP" firstAttribute="top" secondItem="h5W-oG-lQh" secondAttribute="top" constant="10" id="nR7-G1-0bZ"/>
                                 <constraint firstItem="H4e-j4-KlP" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="sRy-Lg-wrk"/>
                                 <constraint firstAttribute="trailing" secondItem="H4e-j4-KlP" secondAttribute="trailing" id="sXE-Yt-m4N"/>
+                                <constraint firstItem="NRZ-Gz-Icy" firstAttribute="top" secondItem="H4e-j4-KlP" secondAttribute="bottom" id="w2U-eK-cxB"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -210,7 +229,7 @@
                         <constraint firstAttribute="height" constant="49" id="gEa-Ix-xdg"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <state key="normal" title="保存"/>
+                    <state key="normal" title="下一步"/>
                     <connections>
                         <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="4cA-bC-5zX"/>
                     </connections>
@@ -231,6 +250,6 @@
         </view>
     </objects>
     <resources>
-        <image name="uploadImg-mileage" width="512" height="512"/>
+        <image name="upload-plusSS" width="515" height="515"/>
     </resources>
 </document>

@@ -92,6 +92,18 @@
     NSDictionary *dic = listArray[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.text = STRING(dic[@"nickname"]);
+    
+    UILabel *phone = [(UILabel *)cell.contentView viewWithTag:1000];
+    if (! phone) {
+        phone = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 16 - 150, 12, 150, 20)];
+        phone.tag = 1000;
+        phone.font = [UIFont systemFontOfSize:15];
+        phone.textColor = Gray_Color;
+        phone.textAlignment = NSTextAlignmentRight;
+        [cell.contentView addSubview:phone];
+    }
+    phone.text = STRING(dic[@"phone"]);
+    
     return cell;
 }
 

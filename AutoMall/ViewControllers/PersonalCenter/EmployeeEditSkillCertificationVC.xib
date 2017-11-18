@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmployeeEditSkillCertificationVC">
             <connections>
                 <outlet property="contentTF" destination="cvm-Ou-jQg" id="ws2-my-6Hn"/>
+                <outlet property="editBtn" destination="zWQ-sA-Y1S" id="5ci-SH-VSE"/>
                 <outlet property="imgView" destination="woS-Rp-xld" id="Jpc-ej-2oI"/>
                 <outlet property="nameTF" destination="rYU-l2-pHd" id="nrJ-7Q-hOz"/>
                 <outlet property="statusBtn" destination="l2D-gV-WMt" id="uLu-iC-T78"/>
@@ -94,9 +95,17 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload-plusSS" translatesAutoresizingMaskIntoConstraints="NO" id="woS-Rp-xld" customClass="WPImageView">
-                                    <rect key="frame" x="45.5" y="99.5" width="284" height="160"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload-plusSS" translatesAutoresizingMaskIntoConstraints="NO" id="dRb-D6-yjq">
+                                    <rect key="frame" x="45" y="100" width="284" height="160"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="160" id="I32-eo-gzS"/>
+                                        <constraint firstAttribute="width" secondItem="dRb-D6-yjq" secondAttribute="height" multiplier="16:9" id="cUR-gD-rwa"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="woS-Rp-xld" customClass="WPImageView">
+                                    <rect key="frame" x="45.5" y="99.5" width="284" height="160"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="woS-Rp-xld" secondAttribute="height" multiplier="16:9" id="ARo-DY-nB1"/>
                                         <constraint firstAttribute="height" constant="160" id="clL-DR-IHd"/>
@@ -112,8 +121,10 @@
                                 <constraint firstItem="cvm-Ou-jQg" firstAttribute="leading" secondItem="Hpq-9B-IT9" secondAttribute="trailing" constant="8" id="9v2-d8-Uzi"/>
                                 <constraint firstAttribute="trailing" secondItem="rYU-l2-pHd" secondAttribute="trailing" constant="16" id="I0Q-Vh-MzQ"/>
                                 <constraint firstAttribute="height" constant="270" id="MSM-2E-g8i"/>
+                                <constraint firstItem="dRb-D6-yjq" firstAttribute="centerX" secondItem="4cE-3n-sOg" secondAttribute="centerX" id="Oge-1u-ceT"/>
                                 <constraint firstItem="ubr-ZL-UPX" firstAttribute="leading" secondItem="4cE-3n-sOg" secondAttribute="leading" constant="16" id="P2z-NB-KOk"/>
                                 <constraint firstAttribute="trailing" secondItem="jBH-NF-gsl" secondAttribute="trailing" id="UYh-gb-y73"/>
+                                <constraint firstItem="dRb-D6-yjq" firstAttribute="top" secondItem="ff9-Mu-92y" secondAttribute="bottom" constant="10" id="bsR-oo-V4N"/>
                                 <constraint firstItem="ubr-ZL-UPX" firstAttribute="top" secondItem="4cE-3n-sOg" secondAttribute="top" constant="12" id="ciJ-EZ-gpZ"/>
                                 <constraint firstItem="rYU-l2-pHd" firstAttribute="leading" secondItem="ubr-ZL-UPX" secondAttribute="trailing" constant="8" id="dL0-TJ-ta9"/>
                                 <constraint firstItem="Hpq-9B-IT9" firstAttribute="leading" secondItem="4cE-3n-sOg" secondAttribute="leading" constant="16" id="eY4-ul-u6e"/>
@@ -148,6 +159,18 @@
                         <action selector="toSubmitSkillAction:" destination="-1" eventType="touchUpInside" id="xit-wI-WXG"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWQ-sA-Y1S">
+                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="COj-Vt-TJL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="编辑"/>
+                    <connections>
+                        <action selector="editAction:" destination="-1" eventType="touchUpInside" id="tV5-dV-3Jn"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -156,11 +179,14 @@
                 <constraint firstAttribute="trailing" secondItem="RdN-hZ-cr2" secondAttribute="trailing" id="Dmt-HE-dk0"/>
                 <constraint firstAttribute="trailing" secondItem="l2D-gV-WMt" secondAttribute="trailing" id="JvD-zA-s2m"/>
                 <constraint firstAttribute="bottom" secondItem="l2D-gV-WMt" secondAttribute="bottom" id="KF1-Oj-Moq"/>
+                <constraint firstItem="zWQ-sA-Y1S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MUW-4X-jew"/>
                 <constraint firstItem="l2D-gV-WMt" firstAttribute="top" secondItem="RdN-hZ-cr2" secondAttribute="bottom" id="ZKv-cH-WzS"/>
+                <constraint firstAttribute="bottom" secondItem="zWQ-sA-Y1S" secondAttribute="bottom" id="ajs-sG-OAh"/>
                 <constraint firstItem="RdN-hZ-cr2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bZs-rj-maS"/>
                 <constraint firstItem="4cE-3n-sOg" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="eFv-5b-zZE"/>
+                <constraint firstAttribute="trailing" secondItem="zWQ-sA-Y1S" secondAttribute="trailing" id="lh2-4U-cgo"/>
             </constraints>
-            <point key="canvasLocation" x="-314" y="8"/>
+            <point key="canvasLocation" x="5.5" y="-104.5"/>
         </view>
     </objects>
     <resources>

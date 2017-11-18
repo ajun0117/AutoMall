@@ -62,11 +62,11 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 0 || section == 1) {
         return 1;
     }
     return [skillAry count];
@@ -74,10 +74,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        return 44;
+    }
+    else if (indexPath.section == 1) {
         EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         return height + 1;
     }
+    
     return 66;
 }
 
@@ -91,6 +95,21 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
+        bgView.backgroundColor = [UIColor clearColor];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.myTableView.bounds), 44)];
+        //                view.backgroundColor = RGBCOLOR(249, 250, 251);
+        view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = @"账号";
+        [view addSubview:label];
+        [bgView addSubview:view];
+        return bgView;
+    }
+    else if (section == 1) {
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 54)];
         bgView.backgroundColor = [UIColor clearColor];
         
@@ -125,12 +144,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"employeeListCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.text = STRING(self.staffDic[@"phone"]);
+        return cell;
+    }
+    else if (indexPath.section == 1) {
         EmployeeDetailTopCell *cell = (EmployeeDetailTopCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailTopCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.contentL.text = STRING(self.staffDic[@"remark"]);
+        if ([self.staffDic[@"remark"] isKindOfClass:[NSNull class]] || [self.staffDic[@"remark"] isEqualToString:@""]) {
+            cell.contentL.text = @"员工还未填写特长介绍";
+        } else {
+            cell.contentL.text = STRING(self.staffDic[@"remark"]);
+        }
         cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 24;
         return cell;
     }
+    
     else {
         NSDictionary *dic = skillAry[indexPath.row];
         EmployeeDetailCell *cell = (EmployeeDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"employeeDetailCell"];
@@ -138,14 +169,18 @@
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
         switch ([dic[@"approvalStatus"] intValue]) {
             case 0:{
+                 [cell.daishenBtn setBackgroundColor:RGBCOLOR(234, 0, 24)];
                 [cell.daishenBtn setTitle:@"等待审核" forState:UIControlStateNormal];
                 break;
             }
             case 1:{
+                 [cell.daishenBtn setBackgroundColor:RGBCOLOR(234, 0, 24)];
                 [cell.daishenBtn setTitle:@"已通过" forState:UIControlStateNormal];
                 break;
             }
             case -1:{
+               
+                [cell.daishenBtn setBackgroundColor:[UIColor grayColor]];
                 [cell.daishenBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
                 break;
             }
@@ -159,7 +194,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         NSDictionary *dic = skillAry[indexPath.row];
         EmployeeAuthVC *authVC = [[EmployeeAuthVC alloc] init];
         int approvalStatus = [dic[@"approvalStatus"] intValue];

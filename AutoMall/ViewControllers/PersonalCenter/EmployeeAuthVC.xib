@@ -14,6 +14,7 @@
                 <outlet property="imgView" destination="Reu-0c-JDw" id="Ng9-mc-lbz"/>
                 <outlet property="introduceL" destination="aNB-V5-pmV" id="Dpe-7N-DKy"/>
                 <outlet property="nameL" destination="kf0-a0-1G2" id="K8j-z3-fru"/>
+                <outlet property="rejectBtn" destination="hbs-sC-q0V" id="tPf-LH-i5q"/>
                 <outlet property="revieweView" destination="yej-wI-WzM" id="HkU-We-EvC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -145,13 +146,25 @@
                         <constraint firstAttribute="height" constant="49" id="uEx-9X-eMP"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbs-sC-q0V">
+                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="97q-Z5-5r8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="已拒绝"/>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="hbs-sC-q0V" secondAttribute="trailing" id="7qp-SF-aqJ"/>
                 <constraint firstItem="yej-wI-WzM" firstAttribute="leading" secondItem="dVE-l9-JkU" secondAttribute="leading" id="Ay3-um-b0N"/>
                 <constraint firstAttribute="bottom" secondItem="yej-wI-WzM" secondAttribute="bottom" id="Gqk-P9-2HI"/>
+                <constraint firstAttribute="bottom" secondItem="hbs-sC-q0V" secondAttribute="bottom" id="I1i-9M-Djt"/>
                 <constraint firstItem="yej-wI-WzM" firstAttribute="trailing" secondItem="dVE-l9-JkU" secondAttribute="trailing" id="UHb-0r-DSo"/>
                 <constraint firstItem="dVE-l9-JkU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xtu-ik-NIb"/>
+                <constraint firstItem="hbs-sC-q0V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aWY-Q5-RHx"/>
                 <constraint firstItem="dVE-l9-JkU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="fVi-mA-ofB"/>
                 <constraint firstAttribute="trailing" secondItem="dVE-l9-JkU" secondAttribute="trailing" id="xOG-wC-hdA"/>
             </constraints>

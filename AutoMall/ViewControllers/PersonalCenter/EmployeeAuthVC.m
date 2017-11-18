@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *introduceL;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UIView *revieweView;
+@property (weak, nonatomic) IBOutlet UIButton *rejectBtn;
 
 @end
 
@@ -36,14 +37,21 @@
     
     switch (self.approvalStatus) {
         case 0:{
+            self.rejectBtn.hidden = YES;
             self.revieweView.hidden = NO;
             break;
         }
         case 1:{
+            [self.rejectBtn setTitle:@"已通过" forState:UIControlStateNormal];
+            [self.rejectBtn setBackgroundColor:[UIColor grayColor]];
+            self.rejectBtn.hidden = NO;
             self.revieweView.hidden = YES;
             break;
         }
         case -1:{
+            [self.rejectBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+            [self.rejectBtn setBackgroundColor:[UIColor grayColor]];
+            self.rejectBtn.hidden = NO;
             self.revieweView.hidden = YES;
             break;
         }

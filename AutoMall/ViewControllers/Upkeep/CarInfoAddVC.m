@@ -628,7 +628,7 @@
 //        mileageUrl = [vinPhotos firstObject][@"relativePath"];
 //    }
 
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.mileageTF.text,@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.fuelAmountTF.text,@"fuelAmount",STRING_Nil(fuelAmountUrl),@"fuelImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",self.wechatTF.text,@"wechat",self.genderTF.text,@"gender",self.birthdayTF.text,@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",self.purchaseDateTF.text,@"purchaseDate",STRING_Nil(carImgUrl),@"image",self.engineNoTF.text,@"engineNo",self.vinTF.text,@"vin", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",STRING_Nil(self.fuelAmountTF.text),@"fuelAmount",STRING_Nil(fuelAmountUrl),@"fuelImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.engineModelTF.text),@"engineModel",STRING_Nil(self.vinTF.text),@"vin", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }
