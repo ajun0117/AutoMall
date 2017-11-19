@@ -196,6 +196,9 @@
 #define CarUpkeepConfirm                       @"/api/carUpkeep/confirm"   //服务方案确认
 
 //个人中心
+#define AllCheckcategorySearch            @"/api/checkcategory/search"        //平台所有部位列表
+#define ChecktermSearch                      @"/api/checkterm/search"                //指定部位下，平台所有位置列表
+
 #define ListServiceContent                     @"/api/user/listServiceContent"     //获取服务内容
 #define CustomizeServiceContent           @"/api/user/customizeServiceContent"     //提交定制服务内容
 #define ListServicePackage                     @"/api/user/listServicePackage"     //服务套餐列表

@@ -409,6 +409,8 @@
 		F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */; };
 		F71245751F868B590091816F /* CheckContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245741F868B590091816F /* CheckContentItem.m */; };
 		F71245781F868DD20091816F /* CheckContentTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245771F868DD20091816F /* CheckContentTool.m */; };
+		F71D0D011FC1C155000BB47C /* MultiTablesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F71D0CFE1FC1C155000BB47C /* MultiTablesView.m */; };
+		F71D0D021FC1C155000BB47C /* UITableView+FixedTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F71D0D001FC1C155000BB47C /* UITableView+FixedTableHeaderView.m */; };
 		F73CB9BD1F893B2600936C7A /* AutoCheckGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CB9BB1F893B2600936C7A /* AutoCheckGroupCell.m */; };
 		F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73CB9BC1F893B2600936C7A /* AutoCheckGroupCell.xib */; };
 		F73CB9C21F893C9300936C7A /* AutoCheckGroupTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CB9C01F893C9300936C7A /* AutoCheckGroupTitleCell.m */; };
@@ -1190,6 +1192,10 @@
 		F71245741F868B590091816F /* CheckContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentItem.m; sourceTree = "<group>"; };
 		F71245761F868DD20091816F /* CheckContentTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentTool.h; sourceTree = "<group>"; };
 		F71245771F868DD20091816F /* CheckContentTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentTool.m; sourceTree = "<group>"; };
+		F71D0CFD1FC1C155000BB47C /* UITableView+FixedTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FixedTableHeaderView.h"; sourceTree = "<group>"; };
+		F71D0CFE1FC1C155000BB47C /* MultiTablesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiTablesView.m; sourceTree = "<group>"; };
+		F71D0CFF1FC1C155000BB47C /* MultiTablesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiTablesView.h; sourceTree = "<group>"; };
+		F71D0D001FC1C155000BB47C /* UITableView+FixedTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FixedTableHeaderView.m"; sourceTree = "<group>"; };
 		F73CB9BA1F893B2600936C7A /* AutoCheckGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckGroupCell.h; sourceTree = "<group>"; };
 		F73CB9BB1F893B2600936C7A /* AutoCheckGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckGroupCell.m; sourceTree = "<group>"; };
 		F73CB9BC1F893B2600936C7A /* AutoCheckGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckGroupCell.xib; sourceTree = "<group>"; };
@@ -2414,6 +2420,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				F71D0CFC1FC1C155000BB47C /* MultiTablesView */,
 				040E6EA01FA9750500C2FA9A /* NSLayoutConstraintOnePixelLine */,
 				046B8DBC1F99F76400784AA8 /* 支付宝蚂蚁金服支付 */,
 				04ABFB2E1F9837CE0015EE78 /* GTMBase64 */,
@@ -2922,6 +2929,17 @@
 			name = "检查页数据库模型";
 			sourceTree = "<group>";
 		};
+		F71D0CFC1FC1C155000BB47C /* MultiTablesView */ = {
+			isa = PBXGroup;
+			children = (
+				F71D0CFD1FC1C155000BB47C /* UITableView+FixedTableHeaderView.h */,
+				F71D0CFE1FC1C155000BB47C /* MultiTablesView.m */,
+				F71D0CFF1FC1C155000BB47C /* MultiTablesView.h */,
+				F71D0D001FC1C155000BB47C /* UITableView+FixedTableHeaderView.m */,
+			);
+			path = MultiTablesView;
+			sourceTree = "<group>";
+		};
 		F7650B561FAF33AB00C0FCD2 /* 服务方案详细介绍 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3285,6 +3303,7 @@
 				0459C6BA1F614C870040501E /* FMDatabaseQueue.m in Sources */,
 				04D107801F62998D007D9F57 /* ZFBar.m in Sources */,
 				04DC7DC91F31C28300AA20A7 /* WPImageView.m in Sources */,
+				F71D0D021FC1C155000BB47C /* UITableView+FixedTableHeaderView.m in Sources */,
 				0459C6B21F614C870040501E /* AddressTableViewCell.m in Sources */,
 				F76E78671FAC98720029505F /* CartItem.m in Sources */,
 				04D107861F62998D007D9F57 /* ZFHorizontalAxis.m in Sources */,
@@ -3473,6 +3492,7 @@
 				04DC7DB11F31C28300AA20A7 /* DashedBoxView.m in Sources */,
 				04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */,
 				04D107911F62998D007D9F57 /* ZFRadarChart.m in Sources */,
+				F71D0D011FC1C155000BB47C /* MultiTablesView.m in Sources */,
 				04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */,
 				04EFEC7D1F5FEA16004D9188 /* MailCollectionVC.m in Sources */,
 				04DC7DC01F31C28300AA20A7 /* QBAssetsCollectionFooterView.m in Sources */,

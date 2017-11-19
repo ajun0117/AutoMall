@@ -10,8 +10,11 @@
 #import "CustomServiceCell.h"
 #import "EditServicePackageVC.h"
 #import "JSONKit.h"
+#import "MultiTablesView.h"
 
-@interface CustomServiceVC () <UITextFieldDelegate>
+#define SelectView_Duration    0.3  //筛选视图动画时间
+
+@interface CustomServiceVC () <UITextFieldDelegate,MultiTablesViewDataSource,MultiTablesViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -19,8 +22,18 @@
     int currentpage;
     NSMutableDictionary *selectDic;     //已选择的服务数组
 //    NSMutableArray *selectArry;     //已选择的服务数组
+    
+//    UIView *selectBgView;
+    MultiTablesView *positionSelectView;
+    NSString *checkcategoryId; //部位Id
+    NSString *checktermStr; //位置
+    NSString *checkContentStr; //检查内容
+    NSArray *allCheckcategoryAry;       //所有检查部位
+    NSArray *checktermAry;       //指定部位下，平台所有位置列表
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @end
 
@@ -55,6 +68,27 @@
     //监听键盘出现和消失
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+//    if (! selectBgView) {
+//        selectBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//        selectBgView.backgroundColor = [UIColor blackColor];
+//        selectBgView.alpha = 0.0;
+//        [self.view addSubview:selectBgView];
+        
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelect)];
+//        [selectBgView addGestureRecognizer:tap];
+        
+        positionSelectView = [[MultiTablesView alloc]initWithFrame:CGRectMake(0, 40 - (SCREEN_HEIGHT - 64), SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 40)];
+        positionSelectView.delegate = self;
+        positionSelectView.dataSource = self;
+        [self.view insertSubview:positionSelectView belowSubview:self.topView];
+        
+        [self hiddenSelectView:YES];
+//    }
+    
+
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -72,9 +106,9 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    serviceArray = [NSMutableArray array];
-    currentpage = 0;
-    [self requestPostListServiceContent];
+//    serviceArray = [NSMutableArray array];
+//    currentpage = 0;
+//    [self requestPostListServiceContent];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -91,13 +125,35 @@
     [self requestPostListServiceContent];
 }
 
+-(void)cancelSelect {
+    [self hiddenSelectView:YES];
+}
+
+
 - (void) toPackage {
     EditServicePackageVC *editVC = [[EditServicePackageVC alloc] init];
     [self.navigationController pushViewController:editVC animated:YES];
 }
+- (IBAction)positionAction:(id)sender {
+    [self hiddenSelectView:NO];
+    [self requestGetAllCheckcategorySearch];
+}
 
 - (IBAction)saveAction:(id)sender {
     [self requestPostCustomizeServiceContent];
+}
+
+-(void)hiddenSelectView:(BOOL)hidden {
+    [UIView animateWithDuration:SelectView_Duration animations:^{
+        if (hidden) {
+//            selectBgView.alpha = 0.0;
+            positionSelectView.frame = CGRectMake(0,  40 - (SCREEN_HEIGHT - 64 - 40), SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 40);
+        }
+        else {
+//            selectBgView.alpha = 0.3;
+            positionSelectView.frame = CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 40);
+        }
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -235,11 +291,115 @@
     NSLog(@"selectDic: %@",selectDic);
 }
 
+
+
+#pragma mark - MultiTablesViewDataSource
+#pragma mark Levels
+
+- (NSInteger)numberOfLevelsInMultiTablesView:(MultiTablesView *)multiTablesView {
+    return 2;
+}
+
+#pragma mark Sections
+- (NSInteger)multiTablesView:(MultiTablesView *)multiTablesView numberOfSectionsAtLevel:(NSInteger)level {
+    return 1;
+}
+
+#pragma mark Rows
+- (NSInteger)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level numberOfRowsInSection:(NSInteger)section {
+    if (level == 0) {
+        
+        return [allCheckcategoryAry count];
+    }
+    else{
+        return [checktermAry count];
+    }
+}
+
+- (UITableViewCell *)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [multiTablesView dequeueReusableCellForLevel:level withIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = Gray_Color;
+    }
+    if (level == 0) {
+        NSDictionary *dic = allCheckcategoryAry[indexPath.row];
+        
+        cell.textLabel.text = [dic objectForKey:@"name"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 10, 15)];
+//        view.image = [UIImage imageNamed:@"ic_arrow.png"];
+//        cell.accessoryView = view;
+    }
+    else if (level == 1){
+        NSDictionary *dic = [checktermAry objectAtIndex:indexPath.row];
+        cell.textLabel.text = [dic objectForKey:@"name"];
+    }
+    return cell;
+}
+
+#pragma mark - MultiTablesViewDelegate
+#pragma mark Levels
+- (void)multiTablesView:(MultiTablesView *)multiTablesView levelDidChange:(NSInteger)level {
+    if (multiTablesView.currentTableViewIndex == level) {
+        [multiTablesView.currentTableView deselectRowAtIndexPath:[multiTablesView.currentTableView indexPathForSelectedRow] animated:YES];
+    }
+    NSLog(@"lev 变化了！");
+}
+#pragma mark Rows
+- (void)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"11111111");
+}
+- (void)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (level == 0) {
+        NSLog(@"加载相应数据！");
+        NSDictionary *dic = allCheckcategoryAry[indexPath.row];
+        [self requestGetChecktermSearchWithId:dic[@"id"]]; //请求2级列表
+    }
+    else if (level == 1) {
+        NSDictionary *dic = checktermAry[indexPath.row];
+        NSLog(@"name: %@",dic[@"name"]);
+        [self hiddenSelectView:YES];
+    }
+}
+
+/*
+#pragma mark Sections Headers & Footers
+- (CGFloat)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level heightForFooterInSection:(NSInteger)section {
+    return 0.0;
+}
+
+- (CGFloat)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level heightForHeaderInSection:(NSInteger)section {
+        return 0.0;
+}
+*/
+
+
 -(void)checkService:(UIButton *)btn {
     btn.selected = !btn.selected;
 }
 
 #pragma mark - 发起网络请求
+-(void)requestGetAllCheckcategorySearch { //平台所有部位列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:AllCheckcategorySearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:AllCheckcategorySearch, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:0],@"pageNo",@"20000",@"pageSize", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(AllCheckcategorySearch) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestGetChecktermSearchWithId:(NSString *)categoryId { //指定部位下，平台所有位置列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktermSearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktermSearch, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:0],@"pageNo",@"20000",@"pageSize",categoryId,@"checkCategoryId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ChecktermSearch) delegate:nil params:pram info:infoDic];
+}
+                
 -(void)requestPostListServiceContent { //定制服务内容
     [_hud show:YES];
     //注册通知
@@ -273,9 +433,9 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
     if ([notification.name isEqualToString:ListServiceContent]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ListServiceContent object:nil];
+        NSLog(@"ListServiceContent: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [serviceArray addObjectsFromArray:responseObject [@"data"]];
             
@@ -297,11 +457,40 @@
     
     if ([notification.name isEqualToString:CustomizeServiceContent]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CustomizeServiceContent object:nil];
+        NSLog(@"CustomizeServiceContent: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:AllCheckcategorySearch]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AllCheckcategorySearch object:nil];
+        NSLog(@"AllCheckcategorySearch: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            allCheckcategoryAry = responseObject[@"data"];
+            [positionSelectView reloadDataLevel:0]; //刷新第一级
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:ChecktermSearch]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ChecktermSearch object:nil];
+        NSLog(@"ChecktermSearch: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            checktermAry = responseObject[@"data"];
+            [positionSelectView reloadDataLevel:1]; //刷新第二级
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

@@ -139,7 +139,7 @@
             selectTableView.frame = CGRectMake(0, 103, SCREEN_WIDTH, 300);
         }
     }];
-}
+} 
 
 
 -(void) toSearch {  //搜索商品列表
