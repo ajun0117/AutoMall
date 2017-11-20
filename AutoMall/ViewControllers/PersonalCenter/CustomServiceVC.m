@@ -30,7 +30,8 @@
     NSString *checkContentStr; //检查内容
     NSArray *allCheckcategoryAry;       //所有检查部位
     NSArray *checktermAry;       //指定部位下，平台所有位置列表
-    
+    NSString *checkTermId;  //检车位置id
+    IBOutlet UIButton *positionBtn;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -106,9 +107,9 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-//    serviceArray = [NSMutableArray array];
-//    currentpage = 0;
-//    [self requestPostListServiceContent];
+    serviceArray = [NSMutableArray array];
+    currentpage = 0;
+    [self requestPostListServiceContent];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -309,10 +310,10 @@
 - (NSInteger)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level numberOfRowsInSection:(NSInteger)section {
     if (level == 0) {
         
-        return [allCheckcategoryAry count];
+        return [allCheckcategoryAry count] + 1;
     }
     else{
-        return [checktermAry count];
+        return [checktermAry count] + 1;
     }
 }
 
@@ -323,19 +324,23 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.textLabel.textColor = Gray_Color;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     if (level == 0) {
-        NSDictionary *dic = allCheckcategoryAry[indexPath.row];
-        
-        cell.textLabel.text = [dic objectForKey:@"name"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 10, 15)];
-//        view.image = [UIImage imageNamed:@"ic_arrow.png"];
-//        cell.accessoryView = view;
+        if (indexPath.row == [allCheckcategoryAry count]) {
+            cell.textLabel.text = @"全部";
+        } else {
+            NSDictionary *dic = allCheckcategoryAry[indexPath.row];
+            cell.textLabel.text = [dic objectForKey:@"name"];
+        }
     }
     else if (level == 1){
-        NSDictionary *dic = [checktermAry objectAtIndex:indexPath.row];
-        cell.textLabel.text = [dic objectForKey:@"name"];
+        if (indexPath.row == [checktermAry count]) {
+            cell.textLabel.text = @"全部";
+        } else {
+            NSDictionary *dic = [checktermAry objectAtIndex:indexPath.row];
+            cell.textLabel.text = [dic objectForKey:@"name"];
+        }
     }
     return cell;
 }
@@ -355,13 +360,29 @@
 - (void)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (level == 0) {
         NSLog(@"加载相应数据！");
-        NSDictionary *dic = allCheckcategoryAry[indexPath.row];
-        [self requestGetChecktermSearchWithId:dic[@"id"]]; //请求2级列表
+        if (indexPath.row == [allCheckcategoryAry count]) {
+            [self requestGetChecktermSearchWithId:nil]; //请求2级列表
+//            [positionBtn setTitle:@"全部部位" forState:UIControlStateNormal];
+        } else {
+            NSDictionary *dic = allCheckcategoryAry[indexPath.row];
+            [self requestGetChecktermSearchWithId:dic[@"id"]]; //请求2级列表
+//            [positionBtn setTitle:dic[@"name"] forState:UIControlStateNormal];
+        }
+        
     }
     else if (level == 1) {
-        NSDictionary *dic = checktermAry[indexPath.row];
-        NSLog(@"name: %@",dic[@"name"]);
-        [self hiddenSelectView:YES];
+        if (indexPath.row == [checktermAry count]) {
+            [self hiddenSelectView:YES];
+            checkTermId = nil;
+            [positionBtn setTitle:@"全部位置" forState:UIControlStateNormal];
+        } else {
+            NSDictionary *dic = checktermAry[indexPath.row];
+            [self hiddenSelectView:YES];
+            checkTermId = dic[@"id"];
+//            NSString *titleStr = [NSString stringWithFormat:@"%@-%@",positionBtn.currentTitle,dic[@"name"]];
+            [positionBtn setTitle:dic[@"name"] forState:UIControlStateNormal];
+        }
+        [self requestPostListServiceContent];
     }
 }
 
@@ -405,7 +426,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ListServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ListServiceContent, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20000",@"pageSize", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20000",@"pageSize",checkTermId,@"checkTermId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ListServiceContent) delegate:nil params:pram info:infoDic];
 }
 

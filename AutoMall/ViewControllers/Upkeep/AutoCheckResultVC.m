@@ -19,6 +19,7 @@
 #import "AutoCheckResultProblemVC.h"
 #import "AutoCheckResultDetailVC.h"
 #import "HZPhotoBrowser.h"
+#import "CheckResultOtherCell.h"
 
 @interface AutoCheckResultVC () <AJAdViewDelegate, HZPhotoBrowserDelegate>
 {
@@ -70,6 +71,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultMultiCell" bundle:nil] forCellReuseIdentifier:@"checkResultMultiCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultTechnicianCell" bundle:nil] forCellReuseIdentifier:@"checkResultTechnicianCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultQRCell" bundle:nil] forCellReuseIdentifier:@"checkResultQRCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultOtherCell" bundle:nil] forCellReuseIdentifier:@"checkResultOtherCell"];
     
 //    _adArray = @[@{@"image":UrlPrefix(carUpkeepDic[@"store"][@"image"]),@"content":@"广告1",@"thirdPartyUrl":@""}];
 //    [_adView reloadData];
@@ -175,7 +177,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (sections == 6) {
+    if (sections == 7) {
         switch (section) {
             case 0: {
                 return 1;
@@ -195,6 +197,10 @@
                 break;
             }
             case 4: {
+                return 1;
+                break;
+            }
+            case 5: {
                 if ([mobileUserType isEqualToString:@"1"]) {
                     return 1;
                 } else {
@@ -204,7 +210,7 @@
                 }
                 break;
             }
-            case 5: {
+            case 6: {
                 return 1;
                 break;
             }
@@ -249,14 +255,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (sections == 6) {
+    if (sections == 7) {
         switch (indexPath.section) {
             case 0: {
                 return 70;
                 break;
             }
             case 1: {
-                return 301;
+                return 251;
                 break;
             }
             case 2: {
@@ -273,7 +279,12 @@
                 return 270;
                 break;
             }
+                
             case 4: {
+                return 212;
+                break;
+            }
+            case 5: {
                 if ([mobileUserType isEqualToString:@"1"]) {
                     return 56;
                 } else {
@@ -289,7 +300,7 @@
                 }
                 break;
             }
-            case 5: {
+            case 6: {
                 return 200;
                 break;
             }
@@ -305,7 +316,7 @@
                 break;
             }
             case 1: {
-                return 301;
+                return 251;
                 break;
             }
             case 2: {
@@ -349,7 +360,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (sections == 6) {
+    if (sections == 7) {
         switch (indexPath.section) {
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
@@ -365,10 +376,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.chepaiL.text = STRING_Nil(carUpkeepDic[@"carPlateNumber"]);
                 [cell.carImageBtn  addTarget:self action:@selector(carImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"mileage"])];
-                [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"fuelAmount"])];
-                [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
+                
                 for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
                     if ([dic[@"id"] intValue] == 1) { //车身
                         if ([dic[@"unnormal"] intValue] > 0) {
@@ -492,6 +500,7 @@
                 
                 break;
             }
+                
             case 3: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -513,7 +522,19 @@
                 return cell;
                 break;
             }
+                
             case 4: {
+                CheckResultOtherCell *cell = (CheckResultOtherCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultOtherCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"mileage"])];
+                [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"fuelAmount"])];
+                [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
+                return cell;
+                break;
+            }
+                
+            case 5: {
                 if ([mobileUserType isEqualToString:@"1"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -604,7 +625,7 @@
 
                 break;
             }
-            case 5: {
+            case 6: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
@@ -810,7 +831,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (sections == 6) {
+    if (sections == 7) {
         if (indexPath.section == 2) {
             NSArray *ary = carUpkeepDic[@"checkContents"];
             NSDictionary *dic = ary[indexPath.row];
@@ -833,14 +854,16 @@
 
 -(void)fullReport:(UIButton *)btn {
     if (sections == 5) {
-        sections = 6;
+        sections = 7;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
+        [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
         [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {
         sections = 5;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
+        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
         [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
 } 

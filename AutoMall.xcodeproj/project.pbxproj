@@ -394,6 +394,8 @@
 		04F7D87F1F5EAD79004945ED /* MailOrderMultiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D87D1F5EAD79004945ED /* MailOrderMultiCell.xib */; };
 		04F7D8851F5EBAA1004945ED /* MailOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D8831F5EBAA1004945ED /* MailOrderDetailVC.m */; };
 		04F7D8861F5EBAA1004945ED /* MailOrderDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F7D8841F5EBAA1004945ED /* MailOrderDetailVC.xib */; };
+		04FCC4E71FC2BA9E00740D77 /* CheckResultOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC4E51FC2BA9E00740D77 /* CheckResultOtherCell.m */; };
+		04FCC4E81FC2BA9F00740D77 /* CheckResultOtherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCC4E61FC2BA9E00740D77 /* CheckResultOtherCell.xib */; };
 		04FD55D31F552A8300104D6B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55D11F552A8300104D6B /* RegisterViewController.m */; };
 		04FD55D41F552A8300104D6B /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD55D21F552A8300104D6B /* RegisterViewController.xib */; };
 		04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD55D61F552DB200104D6B /* RegisterYZMViewController.m */; };
@@ -1167,6 +1169,9 @@
 		04F7D8821F5EBAA1004945ED /* MailOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailOrderDetailVC.h; sourceTree = "<group>"; };
 		04F7D8831F5EBAA1004945ED /* MailOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailOrderDetailVC.m; sourceTree = "<group>"; };
 		04F7D8841F5EBAA1004945ED /* MailOrderDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailOrderDetailVC.xib; sourceTree = "<group>"; };
+		04FCC4E41FC2BA9E00740D77 /* CheckResultOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultOtherCell.h; sourceTree = "<group>"; };
+		04FCC4E51FC2BA9E00740D77 /* CheckResultOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultOtherCell.m; sourceTree = "<group>"; };
+		04FCC4E61FC2BA9E00740D77 /* CheckResultOtherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultOtherCell.xib; sourceTree = "<group>"; };
 		04FD55D01F552A8300104D6B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		04FD55D11F552A8300104D6B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		04FD55D21F552A8300104D6B /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -2908,6 +2913,9 @@
 				04DCA1721FA2E316004B1054 /* CheckResultMultiCell.h */,
 				04DCA1731FA2E316004B1054 /* CheckResultMultiCell.m */,
 				04DCA1741FA2E316004B1054 /* CheckResultMultiCell.xib */,
+				04FCC4E41FC2BA9E00740D77 /* CheckResultOtherCell.h */,
+				04FCC4E51FC2BA9E00740D77 /* CheckResultOtherCell.m */,
+				04FCC4E61FC2BA9E00740D77 /* CheckResultOtherCell.xib */,
 				04DCA1771FA2F1AA004B1054 /* CheckResultTechnicianCell.h */,
 				04DCA1781FA2F1AA004B1054 /* CheckResultTechnicianCell.m */,
 				04DCA1791FA2F1AA004B1054 /* CheckResultTechnicianCell.xib */,
@@ -3096,6 +3104,7 @@
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
+				04FCC4E81FC2BA9F00740D77 /* CheckResultOtherCell.xib in Resources */,
 				F7650B5B1FAF344900C0FCD2 /* ServiceContentDetailVC.xib in Resources */,
 				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
 				0459C6B31F614C870040501E /* AddressTableViewCell.xib in Resources */,
@@ -3395,6 +3404,7 @@
 				04F7D8631F5EA584004945ED /* EmployeeListVC.m in Sources */,
 				04D1077A1F62998D007D9F57 /* ZFXAxisLine.m in Sources */,
 				04FD55D81F552DB200104D6B /* RegisterYZMViewController.m in Sources */,
+				04FCC4E71FC2BA9E00740D77 /* CheckResultOtherCell.m in Sources */,
 				041556E31F7F915900686016 /* AJSegmentedControl.m in Sources */,
 				046B8DDA1F9A044300784AA8 /* base64.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
@@ -3672,7 +3682,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3714,7 +3724,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

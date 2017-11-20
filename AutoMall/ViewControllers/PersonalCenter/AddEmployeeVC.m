@@ -192,8 +192,9 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self.navigationController popViewControllerAnimated:YES];
+            [_networkConditionHUD hide:YES afterDelay:2.0f];
+            
+            [self performSelector:@selector(toPopVC:) withObject:nil afterDelay:2.0f];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -201,6 +202,11 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+}
+
+
+- (void)toPopVC:(NSString *)string {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
