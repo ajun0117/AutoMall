@@ -83,8 +83,8 @@
     for (int i = 0 ; i<3; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.width, 0, self.width, self.height)];
         [self.scrollView addSubview:imageView];
-//        imageView.clipsToBounds = YES;
-//        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.tag = i+10;
         imageView.userInteractionEnabled = YES;
         
