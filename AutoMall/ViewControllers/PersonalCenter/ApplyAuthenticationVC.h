@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *addressTF;
 @property (weak, nonatomic) IBOutlet UITextField *detailAddressTF;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (strong, nonatomic) IBOutlet UILabel *recommendL;
 @property (weak, nonatomic) IBOutlet UITextField *recommendCodeTF;
 @property (weak, nonatomic) IBOutlet WPImageView *licenseImg;
 //@property (weak, nonatomic) IBOutlet UILabel *licenseImgL;

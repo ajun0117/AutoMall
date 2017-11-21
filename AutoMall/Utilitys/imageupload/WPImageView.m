@@ -50,18 +50,26 @@
 
 -(void)awakeFromNib {
     [super awakeFromNib];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 //    self.userInteractionEnabled = YES;
 //    CGRect frame1 = self.frame;
 //    frame1.origin.x = 0;
 //    frame1.origin.y = 0;
 //    frame1.size.height -=0;
 //    frame1.size.width -=0;
-    
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    // 这里可以提前获得autolayout完成后适配后的子控件的真实frame
     self.circleProgressView = [[CircleProgressView alloc] initWithFrame:CGRectMake(0, 0, 60, 60) backColor:[UIColor colorWithWhite:0.603 alpha:0.390] progressColor:[UIColor greenColor] lineWidth:2];
     self.circleProgressView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     NSLog(@"self.circleProgressView.center:  %@",NSStringFromCGPoint(self.circleProgressView.center));
     self.circleProgressView.hidden = YES;
     [self addSubview:self.circleProgressView];
+    
 }
 
 //-(void)setImage:(UIImage *)image{

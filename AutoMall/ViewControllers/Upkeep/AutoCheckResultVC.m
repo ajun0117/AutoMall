@@ -159,8 +159,13 @@
 
 - (void)adView:(AJAdView *)adView didSelectIndex:(NSInteger)index{
     NSLog(@"--%ld--",(long)index);
-//    NSDictionary *dic = _adArray [index];
-    [self clickImageWithImagesArray:@[UrlPrefix(carUpkeepDic[@"store"][@"image"])] andIndex:index];
+
+    NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
+    NSMutableArray *mulAry = [NSMutableArray array];
+    for (NSDictionary * dic in imageUrlAry) {
+        [mulAry addObject:UrlPrefix(dic[@"relativePath"])];
+    }
+    [self clickImageWithImagesArray:mulAry andIndex:index];
 }
 
 - (IBAction)upkeepPlanAction:(id)sender {
@@ -526,10 +531,24 @@
             case 4: {
                 CheckResultOtherCell *cell = (CheckResultOtherCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultOtherCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"mileage"])];
+                NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+                [formater setDateFormat:@"yyyy-MM-dd"];
+                NSDate *checkDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"endTime"] doubleValue]/1000];
+                NSString *checkDateString = [formater stringFromDate:checkDate];
+                
+                NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
+                NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
+                
+                cell.checkDateL.text = checkDateString;
+                cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"mileage"])];
                 [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"fuelAmount"])];
+                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"fuelAmount"])];
                 [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.lastTimeMileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastMileage"])];
+                [cell.lastTimeMileageImageBtn  addTarget:self action:@selector(lastMileageImageAction) forControlEvents:UIControlEventTouchUpInside];
+                cell.lastTimeFuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastFuelAmount"])];
+                [cell.lastTimeFuelAmountImageBtn  addTarget:self action:@selector(lastFuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
                 return cell;
                 break;
             }
@@ -893,11 +912,19 @@
 }
 
 -(void) mileageImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"mileageImage"])];
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"mileageImage"])];
 }
 
 -(void) fuelAmountImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"fuelImage"])];
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"fuelImage"])];
+}
+
+-(void) lastMileageImageAction {
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"lastMileageImage"])];
+}
+
+-(void) lastFuelAmountImageAction {
+    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"lastFuelImage"])];
 }
 
 //所有异常检查项目
@@ -986,17 +1013,21 @@
         NSLog(@"CarUpkeepInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             carUpkeepDic = responseObject[@"data"];
-            NSString *imageUrl = carUpkeepDic[@"store"][@"image"];
-            if (! [imageUrl isKindOfClass:[NSNull class]]) {
-                if (imageUrl.length > 0) {
-                    if (! _adView) {
-                        _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
-                        _adView.delegate = self;
-                        self.myTableView.tableHeaderView = _adView;
-                    }
-                    _adArray = @[@{@"image":UrlPrefix(imageUrl),@"content":@"广告1",@"thirdPartyUrl":@""}];
-                    [_adView reloadData];
+            NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
+            if (! [imageUrlAry isKindOfClass:[NSNull class]] && imageUrlAry.count > 0) {
+                if (! _adView) {
+                    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
+                    _adView.delegate = self;
+                    self.myTableView.tableHeaderView = _adView;
                 }
+                NSMutableArray *mulAry = [NSMutableArray array];
+                for (NSDictionary * dic in imageUrlAry) {
+                    NSDictionary *dicc = @{@"image":UrlPrefix(dic[@"relativePath"])};
+                    [mulAry addObject:dicc];
+                }
+                _adArray = [NSArray arrayWithArray:mulAry];
+                [_adView reloadData];
+
             }
             
             [self.myTableView reloadData];

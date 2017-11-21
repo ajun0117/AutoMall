@@ -44,11 +44,17 @@
         shopImgAry = self.infoDic[@"minorImages"];
         self.nameTF.text =  STRING(self.infoDic[@"name"]);
         self.nameTF.enabled = NO;
+        self.nameTF.textColor = RGBCOLOR(104, 104, 104);
         self.shortNameTF.text = STRING(self.infoDic[@"shortName"]);
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
         self.phoneTF.text = STRING(self.infoDic[@"phone"]);
-        self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
+        self.recommendL.text = @"我的邀请码";
+        self.recommendCodeTF.enabled = NO;
+        self.recommendCodeTF.textColor = RGBCOLOR(104, 104, 104);
+        if ([self.infoDic[@"codeEntity"] isKindOfClass:[NSDictionary class]]) {
+            self.recommendCodeTF.text = STRING(self.infoDic[@"codeEntity"][@"code"]);
+        }
         
         licenseImgUrl = self.infoDic[@"licenseImg"];
         if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0) {
@@ -590,7 +596,7 @@
         [minorImages addObject:imageDic[@"relativePath"]];
     }
     NSString *minorImagesStr = [minorImages componentsJoinedByString:@","];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.infoDic[@"recommendCode"]),@"presenter.recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreInfoUpdate) delegate:nil params:pram info:infoDic];
 }

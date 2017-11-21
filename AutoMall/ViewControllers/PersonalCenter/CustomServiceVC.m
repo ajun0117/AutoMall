@@ -374,11 +374,15 @@
         if (indexPath.row == [checktermAry count]) {
             [self hiddenSelectView:YES];
             checkTermId = nil;
+            currentpage = 0;
+            [serviceArray removeAllObjects];
             [positionBtn setTitle:@"全部位置" forState:UIControlStateNormal];
         } else {
             NSDictionary *dic = checktermAry[indexPath.row];
             [self hiddenSelectView:YES];
             checkTermId = dic[@"id"];
+            currentpage = 0;
+            [serviceArray removeAllObjects];
 //            NSString *titleStr = [NSString stringWithFormat:@"%@-%@",positionBtn.currentTitle,dic[@"name"]];
             [positionBtn setTitle:dic[@"name"] forState:UIControlStateNormal];
         }

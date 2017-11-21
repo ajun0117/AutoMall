@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,6 +22,7 @@
                 <outlet property="nameTF" destination="ed3-aZ-xMV" id="Fro-qn-tjk"/>
                 <outlet property="phoneTF" destination="zoI-Ps-qei" id="VAL-ZI-3vw"/>
                 <outlet property="recommendCodeTF" destination="bR6-a8-SI1" id="DzA-9a-Hrg"/>
+                <outlet property="recommendL" destination="3DZ-Zk-hVw" id="EE3-kO-4Dl"/>
                 <outlet property="replayBtn" destination="Ggi-so-8Bg" id="VkR-Cf-CZu"/>
                 <outlet property="shortNameTF" destination="I1v-8m-l3O" id="tRC-Tb-ZFj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -934,7 +935,7 @@
                 <constraint firstItem="mXp-n9-uLY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="ycI-p8-0QA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-368.5" y="438.5"/>
+            <point key="canvasLocation" x="-716" y="433"/>
         </view>
     </objects>
     <resources>
