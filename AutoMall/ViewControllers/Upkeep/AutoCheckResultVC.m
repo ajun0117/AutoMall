@@ -49,7 +49,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = -6;
+    negativeSpacer.width = - 16;
     
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     shareBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -224,6 +224,44 @@
                 break;
         }
     }
+    else if (sections == 6) {
+        switch (section) {
+            case 0: {
+                return 1;
+                break;
+            }
+            case 1: {
+                return 1;
+                break;
+            }
+            case 2: {
+                NSArray *ary = carUpkeepDic[@"checkContents"];
+                return ary.count;
+                break;
+            }
+            case 3: {
+                return 1;
+                break;
+            }
+            case 4: {
+                if ([mobileUserType isEqualToString:@"1"]) {
+                    return 1;
+                } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
+                    return staffSkillEntities.count + 2;
+                }
+                break;
+            }
+            case 5: {
+                return 1;
+                break;
+            }
+            default:
+                return 0;
+                break;
+        }
+    }
     else {
         switch (section) {
             case 0: {
@@ -306,6 +344,55 @@
                 break;
             }
             case 6: {
+                return 200;
+                break;
+            }
+            default:
+                return 0;
+                break;
+        }
+    }
+    else if (sections == 6) {
+        switch (indexPath.section) {
+            case 0: {
+                return 70;
+                break;
+            }
+            case 1: {
+                return 251;
+                break;
+            }
+            case 2: {
+                NSArray *ary = carUpkeepDic[@"checkContents"];
+                NSDictionary *dic = ary[indexPath.row];
+                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                    NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
+                    return 43 + 30*entities.count;
+                }
+                return 50;
+                break;
+            }
+            case 3: {
+                return 270;
+                break;
+            }
+            case 4: {
+                if ([mobileUserType isEqualToString:@"1"]) {
+                    return 56;
+                } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
+                    if (indexPath.row == 0) {
+                        return 44;
+                    }
+                    else if (indexPath.row == staffSkillEntities.count + 1) {
+                        return 56;
+                    }
+                    return 70;
+                }
+                break;
+            }
+            case 5: {
                 return 200;
                 break;
             }
@@ -533,14 +620,17 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
                 [formater setDateFormat:@"yyyy-MM-dd"];
-                NSDate *checkDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"endTime"] doubleValue]/1000];
-                NSString *checkDateString = [formater stringFromDate:checkDate];
-                
-                NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
-                NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
-                
-                cell.checkDateL.text = checkDateString;
-                cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                if (! [carUpkeepDic[@"endTime"] isKindOfClass:[NSNull class]]) {
+                    NSDate *checkDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"endTime"] doubleValue]/1000];
+                    NSString *checkDateString = [formater stringFromDate:checkDate];
+                    cell.checkDateL.text = checkDateString;
+                }
+                if (! [carUpkeepDic[@"lastEndTime"] isKindOfClass:[NSNull class]]) {
+                    NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
+                    NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
+                    cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                }
+       
                 cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"mileage"])];
                 [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
                 cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"fuelAmount"])];
@@ -656,26 +746,24 @@
                 break;
         }
     }
-    else {
+    
+    else if (sections == 6) {
         switch (indexPath.section) {
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.storeNameL.text = carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
                 return cell;
                 break;
             }
             case 1: {
                 CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.chepaiL.text = carUpkeepDic[@"carPlateNumber"];
+                cell.chepaiL.text = STRING_Nil(carUpkeepDic[@"carPlateNumber"]);
                 [cell.carImageBtn  addTarget:self action:@selector(carImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"mileage"])];
-                [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"car"][@"fuelAmount"])];
-                [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
+                
                 for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
                     if ([dic[@"id"] intValue] == 1) { //车身
                         if ([dic[@"unnormal"] intValue] > 0) {
@@ -714,8 +802,274 @@
                         }
                     }
                 }
-                cell.allNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"inspectionItemsInTotal"]];
-                cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",carUpkeepDic[@"unnormal"]];
+                cell.allNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"inspectionItemsInTotal"])];
+                cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"unnormal"])];
+                [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
+                
+                return cell;
+                break;
+            }
+            case 2: {
+                NSArray *ary = carUpkeepDic[@"checkContents"];
+                NSDictionary *dic = ary[indexPath.row];
+                
+                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                    CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.positionL.text = dic[@"checkTerm"][@"name"];
+                    cell.checkContentL.text = dic[@"name"];
+                    NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
+                    
+                    for (UIView *subViews in cell.positionView.subviews) {
+                        [subViews removeFromSuperview];
+                    }
+                    
+                    for (int i=0; i < entities.count; ++i) {
+                        NSDictionary *dic1 = entities[i];
+                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                        position.text = STRING(dic1[@"dPosition"]);
+                        position.tag = 100 + i;
+                        position.textColor = [UIColor grayColor];
+                        position.font = [UIFont systemFontOfSize:14];
+                        
+                        UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 - 15 - 80, 30*i , 80, 22)];
+                        result.textAlignment = NSTextAlignmentRight;
+                        result.text = STRING(dic1[@"describe"]);
+                        result.textColor = [UIColor grayColor];
+                        result.font = [UIFont systemFontOfSize:14];
+                        
+                        UILabel *level = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 , 30*i , 55, 22)];
+                        level.text = STRING(dic1[@"result"]);
+                        level.minimumFontSize = 8;
+                        level.textAlignment = NSTextAlignmentCenter;
+                        level.textColor = [UIColor whiteColor];
+                        level.backgroundColor = RGBCOLOR(0, 166, 59);
+                        level.font = [UIFont systemFontOfSize:13];
+                        level.layer.cornerRadius = 4;
+                        level.clipsToBounds = YES;
+                        int levelInt = [dic1[@"level"] intValue];
+                        if (levelInt == 1) {
+                            level.backgroundColor = RGBCOLOR(250, 69, 89);
+                        }
+                        else if (levelInt == 2) {
+                            level.backgroundColor = RGBCOLOR(249, 182, 48);
+                        }
+                        else if (levelInt == 3) {
+                            level.backgroundColor = RGBCOLOR(71, 188, 92);
+                        }
+                        [cell.positionView addSubview:position];
+                        [cell.positionView addSubview:result];
+                        [cell.positionView addSubview:level];
+                    }
+                    
+                    return cell;
+                }
+                else {
+                    CheckResultSingleCell *cell = (CheckResultSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultSingleCell"];
+                    cell.levelL.layer.cornerRadius = 4;
+                    cell.positionL.text = dic[@"checkTerm"][@"name"];
+                    cell.checkContentL.text = dic[@"name"];
+                    cell.resultL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"describe"]);
+                    int level = [[dic[@"carUpkeepCheckContentEntities"] firstObject][@"level"] intValue];
+                    cell.levelL.text = STRING([dic[@"carUpkeepCheckContentEntities"] firstObject][@"result"]);
+                    if (level == 1) {
+                        cell.levelL.backgroundColor = RGBCOLOR(250, 69, 89);
+                    }
+                    else if (level == 2) {
+                        cell.levelL.backgroundColor = RGBCOLOR(249, 182, 48);
+                    }
+                    else if (level == 3) {
+                        cell.levelL.backgroundColor = RGBCOLOR(71, 188, 92);
+                    }
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
+                
+                break;
+            }
+                
+            case 3: {
+                UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                UIImageView *carImg = (UIImageView *)[cell.contentView viewWithTag:101];
+                if (! carImg) {
+                    carImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH - 16, 270 - 16)];
+                    carImg.clipsToBounds = YES;
+                    carImg.contentMode = UIViewContentModeScaleAspectFill;
+                }
+                NSString *img = carUpkeepDic[@"image"];
+                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
+                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
+                } else {
+                    carImg.image = IMG(@"carMark");;
+                }
+                carImg.contentMode = UIViewContentModeScaleAspectFill;
+                carImg.tag = 101;
+                [cell.contentView addSubview:carImg];
+                return cell;
+                break;
+            }
+            case 5: {
+                if ([mobileUserType isEqualToString:@"1"]) {
+                    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
+                    if (! label) {
+                        UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+                        btn1.tag = 101;
+                        btn1.frame = CGRectMake(8, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                        [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                        [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                        //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                        [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                        btn1.layer.cornerRadius = 5;
+                        btn1.clipsToBounds = YES;
+                        btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                        [btn1 addTarget:self action:@selector(fullReport:) forControlEvents:UIControlEventTouchUpInside];
+                        
+                        UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+                        btn2.tag = 102;
+                        btn2.frame = CGRectMake(VIEW_BX(btn1) + 16, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                        [btn2 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                        [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                        //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];
+                        [btn2 setTitle:@"专家解读报告" forState:UIControlStateNormal];
+                        btn2.layer.cornerRadius = 5;
+                        btn2.clipsToBounds = YES;
+                        btn2.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                        [btn2 addTarget:self action:@selector(unscramble:) forControlEvents:UIControlEventTouchUpInside];
+                        
+                        [cell.contentView addSubview:btn1];
+                        [cell.contentView addSubview:btn2];
+                    }
+                    return cell;
+                    
+                } else {
+                    NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
+                    NSArray *staffSkillEntities = dic[@"staffSkillEntities"];
+                    if (indexPath.row == 0) {
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.textLabel.text = [NSString stringWithFormat:@"技师:%@",dic[@"nickname"]];
+                        return cell;
+                    }
+                    else if(indexPath.row == staffSkillEntities.count + 1) {
+                        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
+                        if (! label) {
+                            UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+                            btn1.tag = 101;
+                            btn1.frame = CGRectMake(8, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                            [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                            [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                            //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
+                            [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                            btn1.layer.cornerRadius = 5;
+                            btn1.clipsToBounds = YES;
+                            btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                            [btn1 addTarget:self action:@selector(fullReport:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+                            btn2.tag = 102;
+                            btn2.frame = CGRectMake(VIEW_BX(btn1) + 16, 8, (SCREEN_WIDTH - 16 - 16)/2, 40);
+                            [btn2 setBackgroundColor:RGBCOLOR(253, 182, 49)];
+                            [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                            //                    [btn2 setImage:IMG(@"center_contact") forState:UIControlStateNormal];
+                            [btn2 setTitle:@"专家解读报告" forState:UIControlStateNormal];
+                            btn2.layer.cornerRadius = 5;
+                            btn2.clipsToBounds = YES;
+                            btn2.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+                            [btn2 addTarget:self action:@selector(unscramble:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            [cell.contentView addSubview:btn1];
+                            [cell.contentView addSubview:btn2];
+                        }
+                        return cell;
+                    }
+                    else {
+                        CheckResultTechnicianCell *cell = (CheckResultTechnicianCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultTechnicianCell"];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        NSDictionary *staffSkillEntityDic = staffSkillEntities[indexPath.row - 1];
+                        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(staffSkillEntityDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+                        cell.nameL.text = STRING(staffSkillEntityDic[@"name"]);
+                        cell.contentL.text = STRING(staffSkillEntityDic[@"remark"]);
+                        return cell;
+                    }
+                }
+                
+                break;
+            }
+            case 6: {
+                CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                return cell;
+                break;
+            }
+                
+            default:
+                return nil;
+                break;
+        }
+    }
+    
+    else {
+        switch (indexPath.section) {
+            case 0: {
+                ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+                return cell;
+                break;
+            }
+            case 1: {
+                CheckResultCell *cell = (CheckResultCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.chepaiL.text = STRING_Nil(carUpkeepDic[@"carPlateNumber"]);
+                [cell.carImageBtn  addTarget:self action:@selector(carImageAction) forControlEvents:UIControlEventTouchUpInside];
+                
+                for (NSDictionary *dic in carUpkeepDic[@"categories"]) {
+                    if ([dic[@"id"] intValue] == 1) { //车身
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.carBodyNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.carBodybtn addTarget:self action:@selector(carBodyAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                    }
+                    else if ([dic[@"id"] intValue] == 2) { //车内
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.inCarNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.inCarBtn addTarget:self action:@selector(inCarAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                    }
+                    else if ([dic[@"id"] intValue] == 3) { //底盘
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.underpanNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.underpanBtn addTarget:self action:@selector(underpanAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                    }
+                    else if ([dic[@"id"] intValue] == 4) { //机舱
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.engineNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.engineBtn addTarget:self action:@selector(engineAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                    }
+                    else if ([dic[@"id"] intValue] == 5) { //尾箱
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.bootNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.bootBtn addTarget:self action:@selector(bootAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                    }
+                    else if ([dic[@"id"] intValue] == 0) { //轮胎刹车
+                        if ([dic[@"unnormal"] intValue] > 0) {
+                            cell.tyreNumL.text = [NSString stringWithFormat:@"(%@)",dic[@"unnormal"]];
+                            [cell.tyreBtn addTarget:self action:@selector(tyreAction) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                    }
+                }
+                cell.allNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"inspectionItemsInTotal"])];
+                cell.unusualNumL.text = [NSString stringWithFormat:@"%@项",STRING_Nil(carUpkeepDic[@"unnormal"])];
                 [cell.unnormalBtn addTarget:self action:@selector(unnormalAction) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
@@ -864,6 +1218,20 @@
             [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
         }
     }
+    else if (sections == 6) {
+        if (indexPath.section == 2) {
+            NSArray *ary = carUpkeepDic[@"checkContents"];
+            NSDictionary *dic = ary[indexPath.row];
+            AutoCheckResultDetailVC *detailVC = [[AutoCheckResultDetailVC alloc] init];
+            detailVC.checkId = self.carUpkeepId;
+            detailVC.checkTermId = dic[@"checkTerm"][@"id"];
+            detailVC.checkContentId = dic[@"id"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+        else if (indexPath.section == 3) {
+            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
+        }
+    }
     else if (sections == 5) {
         if (indexPath.section == 2) {
             [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
@@ -873,16 +1241,18 @@
 
 -(void)fullReport:(UIButton *)btn {
     if (sections == 5) {
-        sections = 7;
+        sections = 6;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
+        sections = 7;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
         [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {
+        sections = 6;
+        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationBottom];
         sections = 5;
-        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationTop];
-        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
+        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationBottom];
         [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
 } 

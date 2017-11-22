@@ -91,9 +91,9 @@
         [formater setDateFormat:@"yyyy-MM-dd"];
     
         self.mileageTF.enabled = NO;
-        self.mileageTF.text = NSStringWithNumber(self.carDic[@"mileage"]);
+        self.mileageTF.text = STRING(self.carDic[@"mileage"]);
         self.fuelAmountTF.enabled = NO;
-        self.fuelAmountTF.text = NSStringWithNumber(self.carDic[@"fuelAmount"]);
+        self.fuelAmountTF.text = STRING(self.carDic[@"fuelAmount"]);
         self.ownerTF.enabled = NO;
         self.ownerTF.textColor = RGBCOLOR(104, 104, 104);
         self.ownerTF.text = STRING(self.carDic[@"owner"]);

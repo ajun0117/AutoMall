@@ -32,6 +32,7 @@
     NSIndexPath *currentPhotoIndexPath;     //记录当前拍照按钮对应的cell位置
 //    NSDictionary *lichengDic;    //里程油量数据
     NSString *carImageUrl;  //车图的url
+    NSArray *carImagesAry;  //车图的拍照照片
 }
 
 @end
@@ -167,6 +168,10 @@
     markVC.GoBackGet = ^(NSString *imageUrl) {
         carImageUrl = imageUrl;
         NSLog(@"carImageUrl: %@",carImageUrl);
+    };
+    markVC.imgs = carImagesAry;
+    markVC.GoBackCarPhoto = ^(NSArray *carImages) {
+        carImagesAry = carImages;
     };
     markVC.imgUrl = carImageUrl;    
     [self.navigationController pushViewController:markVC animated:YES];
@@ -846,10 +851,16 @@
     }
 //    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
     NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":self.lichengDic[@"mileage"],@"mileageImage":self.lichengDic[@"mileageImg"],@"fuelAmount":self.lichengDic[@"fuelAmount"],@"fuelImage":self.lichengDic[@"fuelAmountImg"]};
+    
+//    NSMutableArray *carImages = [NSMutableArray array];
+//    for (NSDictionary *imageDic in carImagesAry) {
+//        [carImages addObject:imageDic[@"relativePath"]];
+//    }
+//    NSString *carImagesStr = [carImages componentsJoinedByString:@","];
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",carDic,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",self.lichengDic[@"mileage"],@"mileage",self.lichengDic[@"mileageImg"],@"mileageImage",self.lichengDic[@"fuelAmount"],@"fuelAmount",self.lichengDic[@"fuelAmountImg"],@"fuelAmountImg",carDic,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }

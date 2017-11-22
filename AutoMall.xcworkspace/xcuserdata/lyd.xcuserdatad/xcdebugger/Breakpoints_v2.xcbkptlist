@@ -118,7 +118,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/ApplyAuthenticationVC.m"
@@ -153,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "532947711.009666"
+            filePath = "AutoMall/ViewControllers/PersonalCenter/MessageListVC.m"
+            timestampString = "533014905.348644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1246"
-            endingLineNumber = "1246"
-            landmarkName = "-LoginSuccess"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-didFinishedRequestData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

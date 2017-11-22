@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) NSString *imgUrl;
 
+@property (strong, nonatomic) NSArray *imgs;    //车身图片数组
+
+@property (copy, nonatomic) void((^GoBackCarPhoto)(NSArray *carImages));
 /**
  * 更新照片
  */

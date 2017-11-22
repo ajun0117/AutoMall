@@ -15,7 +15,6 @@
 //    UIScrollView *_scrollview;
 //    UIImageView *_imageview;
     UIImage *chooseImg;
-    NSArray *shopImgAry;        //车身图片数组
     
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -160,10 +159,10 @@
 -(void)toPhoto {
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-        shopImgAry = array;
-        NSLog(@"shopImgAry: %@",shopImgAry);
+        self.imgs = array;
+        NSLog(@"self.imgs: %@",self.imgs);
     };
-    photoVC.localImgsArray = shopImgAry;
+    photoVC.localImgsArray = self.imgs;
     [self.navigationController pushViewController:photoVC animated:YES];
 }
 
@@ -229,6 +228,7 @@
     self.imageV.image = image;
     [self requestUploadImgFile:self.imageV];
 //    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    self.GoBackCarPhoto(self.imgs);     //车图照片传递到上页
 }
 
 -(void) toMark:(UITapGestureRecognizer *)tap {
@@ -327,7 +327,7 @@
 
 #pragma mark - 发起网络请求
 -(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
-//    [_hud show:YES];
+    [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];
