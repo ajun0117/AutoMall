@@ -1190,7 +1190,7 @@
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 return;
             }
-            else if ([approvalStatusDic[@"storeApprovalStatus"] intValue] == -1) {
+            else if ([approvalStatusDic[@"approvalStatus"] intValue] == -1) {
                 _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
                 [_networkConditionHUD show:YES];
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
