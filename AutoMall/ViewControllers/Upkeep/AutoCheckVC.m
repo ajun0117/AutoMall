@@ -850,17 +850,12 @@
         
     }
 //    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
-    NSDictionary *carDic = @{@"id":self.carDic[@"id"],@"mileage":self.lichengDic[@"mileage"],@"mileageImage":self.lichengDic[@"mileageImg"],@"fuelAmount":self.lichengDic[@"fuelAmount"],@"fuelImage":self.lichengDic[@"fuelAmountImg"]};
     
-//    NSMutableArray *carImages = [NSMutableArray array];
-//    for (NSDictionary *imageDic in carImagesAry) {
-//        [carImages addObject:imageDic[@"relativePath"]];
-//    }
-//    NSString *carImagesStr = [carImages componentsJoinedByString:@","];
+    NSDictionary *carDicc = @{@"id":self.carDic[@"id"],@"mileage":self.carDic[@"mileage"],@"fuelAmount":self.carDic[@"fuelAmount"]};
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",self.lichengDic[@"mileage"],@"mileage",self.lichengDic[@"mileageImg"],@"mileageImage",self.lichengDic[@"fuelAmount"],@"fuelAmount",self.lichengDic[@"fuelAmountImg"],@"fuelAmountImg",carDic,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",self.lichengDic[@"mileage"],@"mileage",self.lichengDic[@"mileageImg"],@"mileageImage",self.lichengDic[@"fuelAmount"],@"fuelAmount",self.lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",carImagesAry,@"carUpkeepImages", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }

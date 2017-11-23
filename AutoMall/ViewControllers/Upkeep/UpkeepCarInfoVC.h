@@ -11,5 +11,7 @@
 @interface UpkeepCarInfoVC : UIViewController
 
 @property (strong, nonatomic) NSDictionary *carDic;
+@property (strong, nonatomic) NSString *mileage;
+@property (strong, nonatomic) NSString *fuelAmount;
 
 @end

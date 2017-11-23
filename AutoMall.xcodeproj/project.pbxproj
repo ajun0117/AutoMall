@@ -83,6 +83,8 @@
 		045B06CD1FBAD4A100FDCE78 /* StoreServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045B06CB1FBAD4A100FDCE78 /* StoreServiceVC.xib */; };
 		045B06D11FBAD61D00FDCE78 /* AddStoreServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 045B06CF1FBAD61D00FDCE78 /* AddStoreServiceVC.m */; };
 		045B06D21FBAD61D00FDCE78 /* AddStoreServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045B06D01FBAD61D00FDCE78 /* AddStoreServiceVC.xib */; };
+		046B7AE51FC6B1220014B024 /* AutoCheckServicesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046B7AE31FC6B1220014B024 /* AutoCheckServicesVC.m */; };
+		046B7AE61FC6B1220014B024 /* AutoCheckServicesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046B7AE41FC6B1220014B024 /* AutoCheckServicesVC.xib */; };
 		046B8DBF1F99F76400784AA8 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 046B8DBD1F99F76400784AA8 /* AlipaySDK.bundle */; };
 		046B8DC01F99F76400784AA8 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046B8DBE1F99F76400784AA8 /* AlipaySDK.framework */; };
 		046B8DC21F99F7AF00784AA8 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 046B8DC11F99F7AF00784AA8 /* libc++.tbd */; };
@@ -564,6 +566,9 @@
 		045B06CE1FBAD61D00FDCE78 /* AddStoreServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStoreServiceVC.h; sourceTree = "<group>"; };
 		045B06CF1FBAD61D00FDCE78 /* AddStoreServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddStoreServiceVC.m; sourceTree = "<group>"; };
 		045B06D01FBAD61D00FDCE78 /* AddStoreServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddStoreServiceVC.xib; sourceTree = "<group>"; };
+		046B7AE21FC6B1220014B024 /* AutoCheckServicesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckServicesVC.h; sourceTree = "<group>"; };
+		046B7AE31FC6B1220014B024 /* AutoCheckServicesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckServicesVC.m; sourceTree = "<group>"; };
+		046B7AE41FC6B1220014B024 /* AutoCheckServicesVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckServicesVC.xib; sourceTree = "<group>"; };
 		046B8DBD1F99F76400784AA8 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		046B8DBE1F99F76400784AA8 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		046B8DC11F99F7AF00784AA8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -1408,6 +1413,7 @@
 			children = (
 				0453D3AC1F693469004F79C8 /* 车主信息 */,
 				04AD1FD91F43ECD400247819 /* 订单页 */,
+				046B7AE11FC6B0870014B024 /* 选择门店服务 */,
 				F7650B5C1FAF72EF00C0FCD2 /* 选择优惠项目 */,
 				04EB16211F42F04200974972 /* 服务套餐 */,
 				049EA1651FAB04020081940F /* 服务方案 */,
@@ -1584,6 +1590,16 @@
 			);
 			name = "门店服务";
 			path = ../Upkeep;
+			sourceTree = "<group>";
+		};
+		046B7AE11FC6B0870014B024 /* 选择门店服务 */ = {
+			isa = PBXGroup;
+			children = (
+				046B7AE21FC6B1220014B024 /* AutoCheckServicesVC.h */,
+				046B7AE31FC6B1220014B024 /* AutoCheckServicesVC.m */,
+				046B7AE41FC6B1220014B024 /* AutoCheckServicesVC.xib */,
+			);
+			name = "选择门店服务";
 			sourceTree = "<group>";
 		};
 		046B8DBC1F99F76400784AA8 /* 支付宝蚂蚁金服支付 */ = {
@@ -3124,6 +3140,7 @@
 				04DC7DD81F31C28300AA20A7 /* UMSCommentInputController.xib in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
 				040BC8BC1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib in Resources */,
+				046B7AE61FC6B1220014B024 /* AutoCheckServicesVC.xib in Resources */,
 				04DC7DD91F31C28300AA20A7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				04EB162C1F42F95200974972 /* BaoyangDiscountsVC.xib in Resources */,
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
@@ -3285,6 +3302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046B7AE51FC6B1220014B024 /* AutoCheckServicesVC.m in Sources */,
 				F7AC8DAD1FA7965F00B284DA /* EmployeeEditIntroduceVC.m in Sources */,
 				04D107781F62998D007D9F57 /* ZFLabel.m in Sources */,
 				04EFEC781F5FE9FD004D9188 /* MailCollectionCell.m in Sources */,
@@ -3682,7 +3700,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3724,7 +3742,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

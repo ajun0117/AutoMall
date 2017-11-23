@@ -83,22 +83,24 @@
         
         carImgUrl = self.carDic[@"image"];
         
-        if (carImgUrl.length > 0) {
-            [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.carDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+        if ([carImgUrl isKindOfClass:[NSString class]]) {
+            if (carImgUrl.length > 0) {
+                [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carImgUrl)] placeholderImage:IMG(@"CommplaceholderPicture")];
+            }
 //            self.carImgL.hidden = YES;
         }
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];
     
         self.mileageTF.enabled = NO;
-        self.mileageTF.text = STRING(self.carDic[@"mileage"]);
+        self.mileageTF.text = NSStringWithNumberNULL(self.carDic[@"mileage"]);
         self.fuelAmountTF.enabled = NO;
-        self.fuelAmountTF.text = STRING(self.carDic[@"fuelAmount"]);
+        self.fuelAmountTF.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
         self.ownerTF.enabled = NO;
         self.ownerTF.textColor = RGBCOLOR(104, 104, 104);
         self.ownerTF.text = STRING(self.carDic[@"owner"]);
         self.phoneTF.enabled = NO;
-        self.phoneTF.text = NSStringWithNumber(self.carDic[@"phone"]);
+        self.phoneTF.text = NSStringWithNumberNULL(self.carDic[@"phone"]);
         self.wechatTF.enabled = NO;
         self.wechatTF.text = NSStringWithNumber(self.carDic[@"wechat"]);
         self.genderTF.enabled = NO;
@@ -111,7 +113,7 @@
         }
         self.plateNumberTF.enabled = NO;
         self.plateNumberTF.textColor = RGBCOLOR(104, 104, 104);
-        self.plateNumberTF.text = STRING(self.carDic[@"plateNumber"]);
+        self.plateNumberTF.text = NSStringWithNumberNULL(self.carDic[@"plateNumber"]);
         self.brandTF.enabled = NO;
         self.brandTF.textColor = RGBCOLOR(104, 104, 104);
         self.brandTF.text = STRING(self.carDic[@"brand"]);
@@ -127,9 +129,9 @@
             self.purchaseDateTF.text = purchaseStr;
         }
         self.engineNoTF.enabled = NO;
-        self.engineNoTF.text = NSStringWithNumber(self.carDic[@"engineNo"]);
+        self.engineNoTF.text = NSStringWithNumberNULL(self.carDic[@"engineNo"]);
         self.vinTF.enabled = NO;
-        self.vinTF.text = NSStringWithNumber(self.carDic[@"vin"]);
+        self.vinTF.text = NSStringWithNumberNULL(self.carDic[@"vin"]);
         
         if ([self.carDic[@"mileageImage"] isKindOfClass:[NSString class]]) {
             if ([self.carDic[@"mileageImage"] length] > 0) {

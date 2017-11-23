@@ -81,12 +81,12 @@
         }
         case 4: {
             cell.declareL.text = @"行驶里程";
-            cell.contentL.text = NSStringWithNumberNULL(self.carDic[@"mileage"]);
+            cell.contentL.text = NSStringWithNumber(self.mileage);
             break;
         }
         case 5: {
             cell.declareL.text = @"燃油量";
-            cell.contentL.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
+            cell.contentL.text = NSStringWithNumber(self.fuelAmount);
             break;
         }
         case 6: {

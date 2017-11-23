@@ -165,7 +165,9 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreListStaff object:nil];
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [listArray addObjectsFromArray:responseObject [@"data"]];
+            if ([responseObject [@"data"] isKindOfClass:[NSArray class]]) {
+                [listArray addObjectsFromArray:responseObject [@"data"]];
+            }
             [self.myTableView reloadData];
         }
         else {

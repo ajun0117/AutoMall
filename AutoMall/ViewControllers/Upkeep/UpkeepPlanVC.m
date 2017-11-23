@@ -19,6 +19,7 @@
 #import "CheckResultSingleCell.h"
 #import "CheckResultMultiCell.h"
 #import "AutoCheckResultDetailVC.h"
+#import "AutoCheckServicesVC.h"
 
 @interface UpkeepPlanVC ()
 {
@@ -29,11 +30,14 @@
     NSMutableArray *removeAry;      //去除重复的方案
      NSMutableArray *lineationAry;     //记录划线的方案数组
     NSDictionary *thePackageDic;    //存储下级页面已选择的套餐
+    NSArray *selectedServices;    //选择的门店服务
+    NSDictionary *theServicesDic;   //存储下级页面已选择的门店服务
     NSArray *selectedDiscounts;    //选择的优惠
     NSDictionary *theDiscountDic;   //存储下级页面已选择的优惠
     float serVicePrice;            //方案总价
     float packagePrice;     //套餐价
     float discountPrice;    //优惠的价格（实际需要减掉的价格）
+    float selectedServicePrice;    //门店服务的价格（实际需要加上的价格）
     NSMutableArray *unnormalAry;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -141,11 +145,34 @@
 -(void)carInfo {
     UpkeepCarInfoVC *infoVC = [[UpkeepCarInfoVC alloc] init];
     infoVC.carDic = self.carDic;
+    infoVC.mileage = self.mileage;
+    infoVC.fuelAmount = self.fuelAmount;
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 
--(void)carDiscounts {
+-(void)toSelectServices {  //选择门店服务
+    AutoCheckServicesVC *servicesVC = [[AutoCheckServicesVC alloc] init];
+    servicesVC.selectedDic = theServicesDic;
+    servicesVC.SelecteSerices = ^(NSMutableDictionary *servicesDic) {
+        theServicesDic = [NSDictionary dictionaryWithDictionary:servicesDic];
+        selectedServices = [servicesDic allValues];
+
+        selectedServicePrice = 0;
+        for (NSDictionary *dic in selectedServices) {
+            if (dic[@"money"]) {
+                selectedServicePrice += [dic[@"money"] floatValue];
+            }
+        }
+        NSLog(@"selectedServicePrice: %.2f",selectedServicePrice);
+        [self.myTableView reloadData];
+    };
+    servicesVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:servicesVC animated:YES];
+}
+
+
+-(void)carDiscounts {       //选择优惠
     AutoCheckDisountsVC *discountsVC = [[AutoCheckDisountsVC alloc] init];
     discountsVC.selectedDic = theDiscountDic;
     discountsVC.SelecteDiscount = ^(NSMutableDictionary *discountDic) {
@@ -177,7 +204,7 @@
             serVicePrice += [dic[@"price"] floatValue];
         }
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
     }
     else {
         [lineationAry removeObject:dic];
@@ -187,7 +214,7 @@
             serVicePrice -= [dic[@"price"] floatValue];
         }
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
     }
 }
 
@@ -198,7 +225,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-        return 7;
+        return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -224,10 +251,14 @@
                 break;
                 
             case 5:
-                return selectedDiscounts.count;
+                return selectedServices.count;
                 break;
                 
             case 6:
+                return selectedDiscounts.count;
+                break;
+                
+            case 7:
                 return 1;
                 break;
                 
@@ -280,6 +311,10 @@
                 break;
                 
             case 5:
+                return 44;
+                break;
+                
+            case 6:
                 return 44;
                 break;
                 
@@ -383,6 +418,29 @@
             case 5: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
+                //                view.backgroundColor = RGBCOLOR(239, 239, 239);
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+                label.font = [UIFont boldSystemFontOfSize:15];
+                label.backgroundColor = [UIColor clearColor];
+                label.text = @"门店服务";
+                
+                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+                
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
+                [btn addTarget:self action:@selector(toSelectServices) forControlEvents:UIControlEventTouchUpInside];
+                
+                [view addSubview:label];
+                [view addSubview:img];
+                [view addSubview:btn];
+                return view;
+                break;
+            }
+                
+            case 6: {
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+                view.backgroundColor = [UIColor whiteColor];
 //                view.backgroundColor = RGBCOLOR(239, 239, 239);
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
@@ -390,7 +448,7 @@
                 label.text = @"优惠";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -615,6 +673,25 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.declareL.strikeThroughEnabled = NO;
+                NSDictionary *dic = selectedServices[indexPath.row];
+                cell.declareL.text = dic[@"item"];
+                cell.declareL.font = [UIFont systemFontOfSize:15];
+                if (dic[@"money"]) {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+                } else {
+                    cell.contentL.text = @"";
+                }
+                cell.contentL.textColor = [UIColor blackColor];
+                cell.contentL.font = [UIFont systemFontOfSize:15];
+                return cell;
+                break;
+            }
+                
+            case 6: {
+                UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
                 NSDictionary *dic = selectedDiscounts[indexPath.row];
                 cell.declareL.text = dic[@"item"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
@@ -629,18 +706,18 @@
                 break;
             }
                 
-            case 6: {
+            case 7: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"折后价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                NSLog(@"serVicePrice + packagePrice - discountPrice:  %.2f",serVicePrice + packagePrice - discountPrice);
-                if (serVicePrice + packagePrice - discountPrice < 0) {
+                NSLog(@"serVicePrice + packagePrice - discountPrice + selectedServicePrice:  %.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice);
+                if (serVicePrice + packagePrice - discountPrice + selectedServicePrice < 0) {
                     cell.contentL.text = @"￥0";
                 } else {
-                    cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice];
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice];
                 }
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 cell.contentL.textColor = [UIColor blackColor];
@@ -786,7 +863,6 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepConfirm object:nil];
-    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepConfirm, @"op", nil];
     
     NSMutableArray *serviceContents = [NSMutableArray array];
@@ -818,7 +894,13 @@
         [discounts addObject:dicc2];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts", nil];
+    NSMutableArray *servicesMul = [NSMutableArray array];
+    for (NSDictionary *dic3 in selectedServices) {
+        NSDictionary *dicc3 = [NSDictionary dictionaryWithObjectsAndKeys:dic3[@"id"],@"id",dic3[@"item"],@"item",dic3[@"money"],@"price", nil];
+        [servicesMul addObject:dicc3];
+    }
+    
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts",servicesMul,@"services", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
@@ -894,7 +976,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -905,10 +987,10 @@
 }
 
 
-- (void)toPopVC:(NSString *)orderId {
+- (void)toPushVC:(NSString *)orderId {
     AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
     orderVC.checkOrderId = self.carUpkeepId;
-    NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice];
+    NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice + selectedServicePrice];
     NSDictionary *dic = @{@"orderId":[NSString stringWithFormat:@"%@",orderId],@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
     orderVC.infoDic = dic;
     [self.navigationController pushViewController:orderVC animated:YES];

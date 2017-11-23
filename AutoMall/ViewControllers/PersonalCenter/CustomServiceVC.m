@@ -32,6 +32,7 @@
     NSArray *checktermAry;       //指定部位下，平台所有位置列表
     NSString *checkTermId;  //检车位置id
     IBOutlet UIButton *positionBtn;
+    NSString *lev1String;   //1级文字
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -362,11 +363,13 @@
         NSLog(@"加载相应数据！");
         if (indexPath.row == [allCheckcategoryAry count]) {
             [self requestGetChecktermSearchWithId:nil]; //请求2级列表
-//            [positionBtn setTitle:@"全部部位" forState:UIControlStateNormal];
+            lev1String = @"全部部位";
+            [positionBtn setTitle:lev1String forState:UIControlStateNormal];
         } else {
             NSDictionary *dic = allCheckcategoryAry[indexPath.row];
             [self requestGetChecktermSearchWithId:dic[@"id"]]; //请求2级列表
-//            [positionBtn setTitle:dic[@"name"] forState:UIControlStateNormal];
+            lev1String = dic[@"name"];
+            [positionBtn setTitle:lev1String forState:UIControlStateNormal];
         }
         
     }
@@ -376,15 +379,16 @@
             checkTermId = nil;
             currentpage = 0;
             [serviceArray removeAllObjects];
-            [positionBtn setTitle:@"全部位置" forState:UIControlStateNormal];
+            NSString *titleStr = [NSString stringWithFormat:@"%@-%@",lev1String,@"全部位置"];
+            [positionBtn setTitle:titleStr forState:UIControlStateNormal];
         } else {
             NSDictionary *dic = checktermAry[indexPath.row];
             [self hiddenSelectView:YES];
             checkTermId = dic[@"id"];
             currentpage = 0;
             [serviceArray removeAllObjects];
-//            NSString *titleStr = [NSString stringWithFormat:@"%@-%@",positionBtn.currentTitle,dic[@"name"]];
-            [positionBtn setTitle:dic[@"name"] forState:UIControlStateNormal];
+            NSString *titleStr = [NSString stringWithFormat:@"%@-%@",lev1String,dic[@"name"]];
+            [positionBtn setTitle:titleStr forState:UIControlStateNormal];
         }
         [self requestPostListServiceContent];
     }

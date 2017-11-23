@@ -50,8 +50,10 @@
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
         self.phoneTF.text = STRING(self.infoDic[@"phone"]);
         self.recommendL.text = @"我的邀请码";
+        self.recommendCodeTF.placeholder = @"我的邀请码";
         self.recommendCodeTF.enabled = NO;
         self.recommendCodeTF.textColor = RGBCOLOR(104, 104, 104);
+        NSLog(@"class: %@",NSStringFromClass([self.infoDic[@"codeEntity"] class]));
         if ([self.infoDic[@"codeEntity"] isKindOfClass:[NSDictionary class]]) {
             self.recommendCodeTF.text = STRING(self.infoDic[@"codeEntity"][@"code"]);
         }

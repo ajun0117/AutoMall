@@ -405,6 +405,12 @@
                 }
                 [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden =NO;
+                if ([approvalStatusDic[@"approvalStatus"] intValue] == 0) {
+                    [cell.applyBtn setTitle:@"门店等待审核中..." forState:UIControlStateNormal];
+                }
+                else if ([approvalStatusDic[@"approvalStatus"] intValue] == -1) {
+                    [cell.applyBtn setTitle:@"申请门店认证被拒绝，点击重新申请" forState:UIControlStateNormal];
+                }
                 [cell.applyBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopNameBtn.hidden = YES;
                 cell.shopLevelIM.hidden= YES;
@@ -1194,6 +1200,7 @@
                 _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
                 [_networkConditionHUD show:YES];
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                [self performSelector:@selector(toPushVC) withObject:nil afterDelay:HUDDelay];
                 return;
             }
         }
@@ -1465,6 +1472,7 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
 //            approvalStatus = [responseObject[@"data"][@"approvalStatus"] intValue];
             approvalStatusDic = responseObject[@"data"];
+            [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -1521,6 +1529,28 @@
         }
     }
 
+}
+
+
+- (void)toPushVC {
+    ApplyAuthenticationVC *applyVC = [[ApplyAuthenticationVC alloc] init];
+//    if ([mobileUserType isEqualToString:@"1"]) {    //门店老板
+//        applyVC.infoDic = shopDic;
+//    }
+    applyVC.UpdateStoreInfo = ^{
+        mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+//        if ([mobileUserType isEqualToString:@"1"]) {   //门店老板
+//            [self requestPostStoreGetInfo];     //请求门店详情数据
+//        }
+//        else if ([mobileUserType isEqualToString:@"2"]) {
+//            [self requestPostUserGetStoreInfo];     //员工请求门店详情数据
+//        }
+//        else if ([mobileUserType isEqualToString:@"0"]) {   //普通用户
+            [self requestGetApprovalStatus];     //请求门店审批状态
+//        }
+    };
+    applyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:applyVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

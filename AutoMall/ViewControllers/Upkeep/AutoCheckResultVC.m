@@ -171,6 +171,8 @@
 - (IBAction)upkeepPlanAction:(id)sender {
     UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
     planVC.carDic = carUpkeepDic[@"car"];
+    planVC.mileage = carUpkeepDic[@"mileage"];
+    planVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
     planVC.carUpkeepId = self.carUpkeepId;
     planVC.checktypeID = self.checktypeID;
     [self.navigationController pushViewController:planVC animated:YES];
@@ -655,7 +657,7 @@
                         [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                         [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                         //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
-                        [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                        [btn1 setTitle:@"收起完整报告" forState:UIControlStateNormal];
                         btn1.layer.cornerRadius = 5;
                         btn1.clipsToBounds = YES;
                         btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -698,7 +700,7 @@
                             [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                             [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                             //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
-                            [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                            [btn1 setTitle:@"收起完整报告" forState:UIControlStateNormal];
                             btn1.layer.cornerRadius = 5;
                             btn1.clipsToBounds = YES;
                             btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -921,7 +923,7 @@
                         [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                         [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                         //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
-                        [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                        [btn1 setTitle:@"收起完整报告" forState:UIControlStateNormal];
                         btn1.layer.cornerRadius = 5;
                         btn1.clipsToBounds = YES;
                         btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -964,7 +966,7 @@
                             [btn1 setBackgroundColor:RGBCOLOR(253, 182, 49)];
                             [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                             //                    [btn1 setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
-                            [btn1 setTitle:@"查看完整报告" forState:UIControlStateNormal];
+                            [btn1 setTitle:@"收起完整报告" forState:UIControlStateNormal];
                             btn1.layer.cornerRadius = 5;
                             btn1.clipsToBounds = YES;
                             btn1.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -1246,14 +1248,14 @@
         sections = 7;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
         [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
+//        [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {
         sections = 6;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationBottom];
         sections = 5;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationBottom];
-        [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
+//        [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
 } 
 
@@ -1269,7 +1271,7 @@
 //    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"car"][@"image"])];
     NSMutableArray *ary = [NSMutableArray array];
     for (NSDictionary *dic in carUpkeepDic[@"carUpkeepImages"]) {
-        [ary addObject:UrlPrefix(dic[@"image"])];
+        [ary addObject:UrlPrefix(dic[@"relativePath"])];
     }
     if (ary.count > 0) {
         [self clickImageWithImagesArray:ary andIndex:0];
@@ -1282,19 +1284,45 @@
 }
 
 -(void) mileageImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"mileageImage"])];
+    if ([carUpkeepDic[@"mileageImage"] isKindOfClass:[NSString class]]) {
+        [self clickImageWithImageUrl:carUpkeepDic[@"mileageImage"]];
+    } else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void) fuelAmountImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"fuelImage"])];
+    if ([carUpkeepDic[@"fuelImage"] isKindOfClass:[NSString class]]) {
+        [self clickImageWithImageUrl:carUpkeepDic[@"fuelImage"]];
+    } else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void) lastMileageImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"lastMileageImage"])];
+    if ([carUpkeepDic[@"lastMileageImage"] isKindOfClass:[NSString class]]) {
+        [self clickImageWithImageUrl:carUpkeepDic[@"lastMileageImage"]];
+    } else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    
 }
 
 -(void) lastFuelAmountImageAction {
-    [self clickImageWithImageUrl:STRING(carUpkeepDic[@"lastFuelImage"])];
+    if ([carUpkeepDic[@"lastFuelImage"] isKindOfClass:[NSString class]]) {
+        [self clickImageWithImageUrl:carUpkeepDic[@"lastFuelImage"]];
+    } else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
+    
 }
 
 //所有异常检查项目

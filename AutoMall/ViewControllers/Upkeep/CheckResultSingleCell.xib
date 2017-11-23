@@ -34,13 +34,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数值" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmA-Pj-htw">
-                        <rect key="frame" x="197" y="13.5" width="29" height="17"/>
+                        <rect key="frame" x="199" y="13.5" width="29" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正常" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ME0-0V-oMV">
-                        <rect key="frame" x="241" y="11" width="55" height="22"/>
+                        <rect key="frame" x="243" y="11" width="55" height="22"/>
                         <color key="backgroundColor" red="0.0" green="0.65098039220000004" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="MCK-xU-aqr"/>
@@ -51,10 +51,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="Ltq-wW-zlb">
-                        <rect key="frame" x="304" y="15.5" width="8" height="13"/>
+                        <rect key="frame" x="306" y="16.5" width="6" height="11"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="8" id="P8m-IJ-161"/>
-                            <constraint firstAttribute="height" constant="13" id="hoa-Fi-CUl"/>
+                            <constraint firstAttribute="width" constant="6" id="P8m-IJ-161"/>
+                            <constraint firstAttribute="height" constant="11" id="hoa-Fi-CUl"/>
                         </constraints>
                     </imageView>
                 </subviews>
