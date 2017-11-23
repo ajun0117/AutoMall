@@ -37,9 +37,6 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    NSLog(@"phoneStr:   %@",self.phoneStr);
-    [self requestGetSMS];  //发送验证码
-    
     self.checkBtn.layer.cornerRadius = 5;
     self.checkBtn.layer.masksToBounds = YES;
 }
@@ -61,6 +58,9 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    NSLog(@"phoneStr:   %@",self.phoneStr);
+    [self requestGetSMS];  //发送验证码
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -90,6 +90,7 @@
 }
 
 - (IBAction)nextAction:(id)sender {
+    [self.codeNumTF resignFirstResponder];
     [self requestRegister];
 }
 
@@ -136,6 +137,7 @@
     
     if ([notification.name isEqualToString:GetSMS]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:GetSMS object:nil];
+        NSLog(@"GetSMS: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
@@ -155,6 +157,7 @@
     
     if ([notification.name isEqualToString:UserRegister]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserRegister object:nil];
+        NSLog(@"UserRegister: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
