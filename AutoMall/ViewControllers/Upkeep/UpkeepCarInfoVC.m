@@ -86,7 +86,7 @@
         }
         case 5: {
             cell.declareL.text = @"燃油量";
-            cell.contentL.text = NSStringWithNumber(self.fuelAmount);
+            cell.contentL.text = [NSString stringWithFormat:@"%@%%",self.fuelAmount];
             break;
         }
         case 6: {

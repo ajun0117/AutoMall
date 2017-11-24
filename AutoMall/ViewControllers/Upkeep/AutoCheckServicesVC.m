@@ -155,9 +155,9 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
-    if ([notification.name isEqualToString:DiscountList]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
+    NSLog(@"StoreserviceList: %@",responseObject);
+    if ([notification.name isEqualToString:StoreserviceList]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreserviceList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
             [serviceArray addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];

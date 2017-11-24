@@ -155,7 +155,7 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
-    NSLog(@"GetMerchantList_responseObject: %@",responseObject);
+    NSLog(@"DiscountList: %@",responseObject);
     if ([notification.name isEqualToString:DiscountList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:DiscountList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确

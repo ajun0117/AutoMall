@@ -19,20 +19,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="2ej-f0-h2k">
-                        <rect key="frame" x="8" y="12.5" width="45" height="45"/>
+                        <rect key="frame" x="18" y="12.5" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="cxN-ge-Zko"/>
                             <constraint firstAttribute="width" constant="45" id="lwv-eQ-3F9"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高级技师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7X-Wb-dTv">
-                        <rect key="frame" x="61" y="12" width="65.5" height="19.5"/>
+                        <rect key="frame" x="71" y="12" width="65.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5年汽车修理经验，熟悉汽车原理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbL-68-8lT">
-                        <rect key="frame" x="61" y="37.5" width="208.5" height="17"/>
+                        <rect key="frame" x="71" y="37.5" width="208.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                 <constraints>
                     <constraint firstItem="JbL-68-8lT" firstAttribute="top" secondItem="j7X-Wb-dTv" secondAttribute="bottom" constant="6" id="APB-zN-djW"/>
                     <constraint firstItem="j7X-Wb-dTv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="DkW-DA-XU2"/>
-                    <constraint firstItem="2ej-f0-h2k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="cJh-jP-DKs"/>
+                    <constraint firstItem="2ej-f0-h2k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="cJh-jP-DKs"/>
                     <constraint firstItem="j7X-Wb-dTv" firstAttribute="leading" secondItem="2ej-f0-h2k" secondAttribute="trailing" constant="8" id="dew-EL-JX6"/>
                     <constraint firstItem="JbL-68-8lT" firstAttribute="leading" secondItem="2ej-f0-h2k" secondAttribute="trailing" constant="8" id="fiu-Fi-Nwi"/>
                     <constraint firstItem="2ej-f0-h2k" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vt7-5X-i0D"/>

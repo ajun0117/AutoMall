@@ -159,7 +159,7 @@
          dvc.isShopping = NO;
      }];
 }
-#pragma markl -- 加加
+#pragma mark -- 加加
 - (void)addBtn:(UIButton *)sender{
     
     [self updatesContNumber:sender addAndDele:YES];
@@ -188,11 +188,9 @@
     if (num == 0) {
         [self.datasArr removeObject:data];
         [self.myTableView deleteRowsAtIndexPaths:@[indx] withRowAnimation:0];
-    }
-    
-    if (self.datasArr.count == 0) {
         self.lableText.text = @"当前购物车为空，快去选购吧！";
     }
+
     _block(self.datasArr);
 }
 

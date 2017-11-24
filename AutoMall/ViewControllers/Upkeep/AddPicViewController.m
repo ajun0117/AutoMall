@@ -532,7 +532,7 @@
 
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
-    [_hud hide:YES];
+//    [_hud hide:YES];
     NSIndexPath *indexPath = [notification.userInfo objectForKey:@"indexPath"];
     ImageCollectionViewCell *cell = nil;
     if (indexPath) {
@@ -571,7 +571,6 @@
         }
         if (isComplete) {
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
-            [_hud hide:YES];
             
             NSLog(@"jj:%@",self.imageDataArr.description);
             
@@ -583,6 +582,8 @@
             NSLog(@"_imgsArray: %@",_imgsArray);
             [self.imgsCollectionView reloadData];
             [self.myCollectionView reloadData];
+            
+            [_hud hide:YES];
         }
     }
 

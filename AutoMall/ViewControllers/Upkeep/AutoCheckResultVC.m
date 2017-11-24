@@ -1248,6 +1248,7 @@
         sections = 7;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
         [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationNone];
 //        [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {
@@ -1255,6 +1256,7 @@
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationBottom];
         sections = 5;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationBottom];
+//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
 //        [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
 } 

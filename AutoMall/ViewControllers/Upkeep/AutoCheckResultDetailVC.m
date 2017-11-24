@@ -251,7 +251,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         NSArray *ary = contentResultDic[@"serviceContents"];
-        cell.textLabel.text = ary[indexPath.row][@"name"];
+        NSString *contentStr = [NSString stringWithFormat:@"■ %@",ary[indexPath.row][@"name"]];
+        cell.textLabel.text = contentStr;
         return cell;
     }
 }

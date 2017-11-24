@@ -11,7 +11,8 @@
 @interface CartItem : NSObject
 
 @property (nonatomic,copy) NSString *cartId;                        //购物车商品数组id
-@property (nonatomic,copy) NSString *cartMulAry;                  //购物车商品数组
+@property (nonatomic,copy) NSString *cartDic;                       //购物车商品数据
+@property (nonatomic, copy) NSString *orderCont;                    //数量
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 

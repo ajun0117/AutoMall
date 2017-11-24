@@ -661,7 +661,7 @@
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"总价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice];
+                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + selectedServicePrice];
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 cell.contentL.textColor = [UIColor blackColor];
                 return cell;

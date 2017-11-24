@@ -110,25 +110,31 @@ static CGFloat const scrollViewHeight = 220;
     if (!commoditymulArray) {
         commoditymulArray = [NSMutableArray array];
     }
-
-//    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
-//    CartItem *item = [ary firstObject];
-//    cartMulArray = [[item.cartMulAry objectFromJSONString] mutableCopy];
-//    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
     
     if (! cartMulArray) {
         cartMulArray = [NSMutableArray array];
     }
     
-    //存储可变数组到本数据库
-    CartItem *item1 = [[CartItem alloc] init];
-    NSError *err = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:cartMulArray options:NSJSONWritingPrettyPrinted error:&err];
-    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"jsonStr: %@",jsonStr);
-    item1.cartMulAry = jsonStr;
-    item1.cartId = @"1";
-    [[CartTool sharedManager] insertRecordsWithItem:item1];
+    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
+//    CartItem *item = [ary firstObject];
+//    [cartMulArray addObjectsFromArray:[item.cartMulAry objectFromJSONString]];
+    for (CartItem *item in ary) {
+        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:[item.cartDic objectFromJSONString]];
+        [dic setObject:item.orderCont forKey:@"orderCont"];       //字典中加入已选商品数量字段
+        [cartMulArray addObject:dic];  //重组后商品数组
+    }
+//    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
+    NSLog(@"----cartMulArray: %@",cartMulArray);
+    
+//    //存储可变数组到本地数据库
+//    CartItem *item1 = [[CartItem alloc] init];
+//    NSError *err = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:cartMulArray options:NSJSONWritingPrettyPrinted error:&err];
+//    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"jsonStr: %@",jsonStr);
+//    item1.cartMulAry = jsonStr;
+//    item1.cartId = @"1";
+//    [[CartTool sharedManager] insertRecordsWithItem:item1];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -629,6 +635,15 @@ static CGFloat const scrollViewHeight = 220;
         int num = [dic[@"orderCont"] intValue];
         num ++ ;    //已选商品数量+1
         
+        CartItem *item = [[CartItem alloc] init];
+        NSError *err = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&err];
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"jsonStr: %@",jsonStr);
+        item.cartDic = jsonStr;
+        item.orderCont = [NSString stringWithFormat:@"%d",num];
+        item.cartId = [NSString stringWithFormat:@"%@",dic[@"id"]];
+        
         if (cartMulArray.count != 0)
         {
             BOOL flage = YES;
@@ -637,31 +652,27 @@ static CGFloat const scrollViewHeight = 220;
                 if (dicc[@"id"]==dic[@"id"])
                 {
                     flage = NO; //有重复，只增加数量，不增加数组个数
+                    //更新可变数组到本数据库
+                    [[CartTool sharedManager] UpdateContentItemWithItem:item];
                     break;
                 }
             }
             if (flage)
             {
                 [cartMulArray addObject:dic];
+                //存储可变数组到本数据库
+                [[CartTool sharedManager] insertRecordsWithItem:item];
             }
         }
         else{
             [cartMulArray addObject:dic];
+            //存储可变数组到本数据库
+            [[CartTool sharedManager] insertRecordsWithItem:item];
         }
         
         NSLog(@"---%lu",(unsigned long)cartMulArray.count);
         
         [dic setObject:@(num) forKey:@"orderCont"];
-        
-        //存储可变数组到本数据库
-        CartItem *item = [[CartItem alloc] init];
-        NSError *err = nil;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:cartMulArray options:NSJSONWritingPrettyPrinted error:&err];
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSLog(@"jsonStr: %@",jsonStr);
-        item.cartMulAry = jsonStr;
-        item.cartId = @"1";
-        [[CartTool sharedManager] UpdateContentItemWithItem:item];
         
         //设置商品数量
         self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];
