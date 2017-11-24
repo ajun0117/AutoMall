@@ -115,19 +115,7 @@ static CGFloat const scrollViewHeight = 220;
         cartMulArray = [NSMutableArray array];
     }
     
-    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
-//    CartItem *item = [ary firstObject];
-//    [cartMulArray addObjectsFromArray:[item.cartMulAry objectFromJSONString]];
-    for (CartItem *item in ary) {
-        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:[item.cartDic objectFromJSONString]];
-        [dic setObject:item.orderCont forKey:@"orderCont"];       //字典中加入已选商品数量字段
-        [cartMulArray addObject:dic];  //重组后商品数组
-    }
-//    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
-    NSLog(@"----cartMulArray: %@",cartMulArray);
-    
-    //设置商品数量
-    [self updateShoppingCart:cartMulArray];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -143,6 +131,16 @@ static CGFloat const scrollViewHeight = 220;
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [cartMulArray removeAllObjects];    //先清空数组
+    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
+    for (CartItem *item in ary) {
+        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:[item.cartDic objectFromJSONString]];
+        [dic setObject:item.orderCont forKey:@"orderCont"];       //字典中加入已选商品数量字段
+        [cartMulArray addObject:dic];  //重组后商品数组
+    }
+    //设置商品数量
+    [self updateShoppingCart:cartMulArray];
 }
 
 -(void)toCollectFavour {        //收藏

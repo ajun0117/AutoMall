@@ -322,7 +322,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderAdd object:nil];
         NSLog(@"MallOrderAdd_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [[CartTool sharedManager] removeAllCartItems];
+            [[CartTool sharedManager] removeAllCartItems];      //清空本地购物车数据
             
             MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
             pay.orderNumber = responseObject[@"data"];

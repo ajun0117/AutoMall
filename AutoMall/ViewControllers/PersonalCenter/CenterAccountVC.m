@@ -7,6 +7,7 @@
 //
 
 #import "CenterAccountVC.h"
+#import "CartTool.h"
 
 @interface CenterAccountVC () <UIAlertViewDelegate>
 {
@@ -90,6 +91,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1 && alertView.tag == 1001) {
         [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
+        [[CartTool sharedManager] removeAllCartItems];      //清空本地购物车数据
         self.UpdateLoginStatus();
         [self.navigationController popViewControllerAnimated:YES];
     }

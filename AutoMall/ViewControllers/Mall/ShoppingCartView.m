@@ -130,11 +130,9 @@
 //}
 
 -(void)clearCart {
-    for (NSMutableDictionary * data in self.datasArr) {
-        [data setObject:@(0) forKey:@"orderCont"];
-    }
     [self.datasArr removeAllObjects];
     [self.myTableView reloadData];
+    [[CartTool sharedManager] removeAllCartItems];      //清空本地购物车数据
     self.lableText.text = @"当前购物车为空，快去选购吧！";
     _block(self.datasArr);
 }
