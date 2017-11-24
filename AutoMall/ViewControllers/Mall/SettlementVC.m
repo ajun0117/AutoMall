@@ -13,6 +13,8 @@
 #import "ReceiveAddressViewController.h"
 #import "MetodPaymentVC.h"
 #import "JSONKit.h"
+#import "CartItem.h"
+#import "CartTool.h"
 
 @interface SettlementVC () <SelectAddress,UITextFieldDelegate>
 {
@@ -147,9 +149,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
     return 10;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 2) {
+        return 75;
+    }
+    return 1;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 80;
@@ -157,14 +166,9 @@
     else if (indexPath.section == 2) {
         return 60;
     }
-    return KS_H(44);
+    return 55;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 2) {
-        KS_H(55);
-    }
-    return 1;
-}
+
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
      if (section == 2) {
@@ -213,13 +217,28 @@
     }
     else{
         num --;
-    }
+    } 
     cell.number.text = [NSString stringWithFormat:@"%d",num];
     NSMutableDictionary * data  = self.datasArr[indx.row];
-    [data setObject:@(num) forKey:@"orderCont"];
+    [data setObject:[NSString stringWithFormat:@"%d",num] forKey:@"orderCont"];
+    
+    //更新本地数据库
+    CartItem *item = [[CartItem alloc] init];
+    NSError *err = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&err];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"jsonStr: %@",jsonStr);
+    item.cartDic = jsonStr;
+    item.cartId = [NSString stringWithFormat:@"%@",data[@"id"]];
+    //更新可变数组到本数据库
+    item.orderCont = [NSString stringWithFormat:@"%d",num];
+    [[CartTool sharedManager] UpdateContentItemWithItem:item];
+    
     if (num == 0) {
         [self.datasArr removeObject:data];
         [self.myTableView deleteRowsAtIndexPaths:@[indx] withRowAnimation:0];
+        
+        [[CartTool sharedManager] deleteItemWithId:item.cartId];
     }
     
     _footView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:self.datasArr]];
@@ -303,6 +322,8 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderAdd object:nil];
         NSLog(@"MallOrderAdd_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [[CartTool sharedManager] removeAllCartItems];
+            
             MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
             pay.orderNumber = responseObject[@"data"];
             pay.money = [ShoppingCartModel moneyOrderShoopingCart:self.datasArr] + [ShoppingCartModel shippingFeeShopingCart:self.datasArr];

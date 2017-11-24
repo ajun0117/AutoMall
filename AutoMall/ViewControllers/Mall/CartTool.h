@@ -18,6 +18,7 @@
 //查询出所有
 - (NSMutableArray *)queryAllCart;
 -(void)UpdateContentItemWithItem:(CartItem *)item;     //修改购物车数组
+-(void)deleteItemWithId:(NSString *)cid;    //删除数据
 //删除表中所有数据
 -(void)removeAllCartItems;
 

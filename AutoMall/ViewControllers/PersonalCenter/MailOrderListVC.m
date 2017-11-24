@@ -147,7 +147,7 @@
     if (goodsAry.count > 1) {   //多商品订单
         MailOrderMultiCell *cell = (MailOrderMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderMultiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.picScrollView.contentSize = CGSizeMake((60+10) * 3, 60);
+        cell.picScrollView.contentSize = CGSizeMake((60+10) * goodsAry.count, 60);
         int amount = 0;
         for (int i = 0; i < goodsAry.count; ++i) {
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i*(60+10), 0, 60, 60)];

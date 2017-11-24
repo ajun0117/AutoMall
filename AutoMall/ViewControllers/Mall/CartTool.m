@@ -125,11 +125,11 @@ static CartTool *shareInstance = nil;
             BOOL a = [self.fmdb executeUpdate:insertSql];
             if (!a)
             {
-                NSLog(@"插入地址信息数据失败");
+                NSLog(@"插入购物车数据失败");
             }
             else
             {
-                NSLog(@"批量插入地址信息数据成功！");
+                NSLog(@"批量插入购物车数据成功！");
             }
             NSDate *endTime = [NSDate date];
             NSTimeInterval a1 = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
@@ -235,7 +235,44 @@ static CartTool *shareInstance = nil;
     }
 }
 
--(void)removeAllContentItems {
+-(void)deleteItemWithId:(NSString *)cid {   //删除数据
+    // 开启事务
+    if ([self.fmdb open] && [self.fmdb beginTransaction]) {
+        
+        BOOL isRollBack = NO;
+        @try
+        {
+            NSString *updateSql = [NSString stringWithFormat:@"DELETE  FROM %@ WHERE cartId = '%@'",locationTabbleName, cid];
+            BOOL a = [self.fmdb executeUpdate:updateSql];
+            if (!a)
+            {
+                NSLog(@"删除数据失败");
+            }
+            else
+            {
+                NSLog(@"删除数据成功！");
+            }
+        }
+        @catch (NSException *exception)
+        {
+            isRollBack = YES;
+            [self.fmdb rollback];
+        }
+        @finally
+        {
+            if (!isRollBack)
+            {
+                [self.fmdb commit];
+            }
+        }
+        [self.fmdb close];
+        
+    } else {
+        NSLog(@"删除数据时数据库打开失败");
+    }
+}
+
+-(void)removeAllCartItems {
     // 开启事务
     if ([self.fmdb open] && [self.fmdb beginTransaction]) {
         

@@ -8,6 +8,8 @@
 
 #import "ShoppingCartView.h"
 #import "CommodityDetailVC.h"
+#import "CartItem.h"
+#import "CartTool.h"
 
 @implementation ShoppingCartView
 
@@ -29,7 +31,7 @@
     _datasArr = datasArr;
     if (_datasArr.count == 0) {
         
-        self.lableText.text = @"购物车为空";
+        self.lableText.text = @"当前购物车为空，快去选购吧！";
     }
     [self.myTableView reloadData];
 }
@@ -182,15 +184,34 @@
     else{
         num --;
     }
+
     cell.number.text = [NSString stringWithFormat:@"%d",num];
     NSMutableDictionary * data  = self.datasArr[indx.row];
-    [data setObject:@(num) forKey:@"orderCont"];
+    [data setObject:[NSString stringWithFormat:@"%d",num] forKey:@"orderCont"];
+    
+    //更新本地数据库
+    CartItem *item = [[CartItem alloc] init];
+    NSError *err = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&err];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"jsonStr: %@",jsonStr);
+    item.cartDic = jsonStr;
+    item.cartId = [NSString stringWithFormat:@"%@",data[@"id"]];
+    //更新可变数组到本数据库
+    item.orderCont = [NSString stringWithFormat:@"%d",num];
+    [[CartTool sharedManager] UpdateContentItemWithItem:item];
+    
     if (num == 0) {
         [self.datasArr removeObject:data];
         [self.myTableView deleteRowsAtIndexPaths:@[indx] withRowAnimation:0];
-        self.lableText.text = @"当前购物车为空，快去选购吧！";
+        
+        if (self.datasArr.count == 0) {
+            self.lableText.text = @"当前购物车为空，快去选购吧！";
+        }
+        
+        [[CartTool sharedManager] deleteItemWithId:item.cartId];
     }
-
+    
     _block(self.datasArr);
 }
 

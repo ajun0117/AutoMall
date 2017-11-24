@@ -43,9 +43,9 @@ static CGFloat const scrollViewHeight = 220;
     NSDictionary *commodityDic;   //详情字典
     NSArray *tjListAry; //推荐商品列表
     UIButton *collectBtn;   //收藏按钮
-    NSMutableArray *commoditymulArray;  //重组的商品数组
+//    NSMutableArray *commoditymulArray;  //重组的商品数组
     NSMutableArray *cartMulArray;  //购物车中商品数据
-    int goodsNum;           //商品数量
+//    int goodsNum;           //商品数量
     NSString *collectId;   //收藏id
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -106,10 +106,10 @@ static CGFloat const scrollViewHeight = 220;
     
     [self requestGetCommodityDetail];
     
-    goodsNum = 0;
-    if (!commoditymulArray) {
-        commoditymulArray = [NSMutableArray array];
-    }
+//    goodsNum = 0;
+//    if (!commoditymulArray) {
+//        commoditymulArray = [NSMutableArray array];
+//    }
     
     if (! cartMulArray) {
         cartMulArray = [NSMutableArray array];
@@ -126,15 +126,8 @@ static CGFloat const scrollViewHeight = 220;
 //    NSLog(@"item.cartMulAry: %@",item.cartMulAry);
     NSLog(@"----cartMulArray: %@",cartMulArray);
     
-//    //存储可变数组到本地数据库
-//    CartItem *item1 = [[CartItem alloc] init];
-//    NSError *err = nil;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:cartMulArray options:NSJSONWritingPrettyPrinted error:&err];
-//    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"jsonStr: %@",jsonStr);
-//    item1.cartMulAry = jsonStr;
-//    item1.cartId = @"1";
-//    [[CartTool sharedManager] insertRecordsWithItem:item1];
+    //设置商品数量
+    [self updateShoppingCart:cartMulArray];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -631,9 +624,7 @@ static CGFloat const scrollViewHeight = 220;
 -(void)addToCart:(UIButton *)btn {
     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if ([mobileUserType isEqualToString:@"1"]) {    //老板
-         NSMutableDictionary *dic = [commoditymulArray firstObject];
-        int num = [dic[@"orderCont"] intValue];
-        num ++ ;    //已选商品数量+1
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
         
         CartItem *item = [[CartItem alloc] init];
         NSError *err = nil;
@@ -641,45 +632,44 @@ static CGFloat const scrollViewHeight = 220;
         NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         NSLog(@"jsonStr: %@",jsonStr);
         item.cartDic = jsonStr;
-        item.orderCont = [NSString stringWithFormat:@"%d",num];
         item.cartId = [NSString stringWithFormat:@"%@",dic[@"id"]];
         
-        if (cartMulArray.count != 0)
-        {
+        if (cartMulArray.count > 0) {
             BOOL flage = YES;
-            for (NSDictionary *dicc in cartMulArray)
+            for (NSMutableDictionary *dicc in cartMulArray)
             {
-                if (dicc[@"id"]==dic[@"id"])
+                if (dicc[@"id"] == dic[@"id"])
                 {
                     flage = NO; //有重复，只增加数量，不增加数组个数
+                    int number = [dicc[@"orderCont"] intValue];
+                    number ++;
+                    [dicc setObject:[NSString stringWithFormat:@"%d",number] forKey:@"orderCont"];
                     //更新可变数组到本数据库
+                    item.orderCont = [NSString stringWithFormat:@"%d",number];
                     [[CartTool sharedManager] UpdateContentItemWithItem:item];
                     break;
                 }
             }
-            if (flage)
-            {
+            if (flage) {
+                [dic setObject:@"1" forKey:@"orderCont"];
                 [cartMulArray addObject:dic];
                 //存储可变数组到本数据库
+                item.orderCont = @"1";
                 [[CartTool sharedManager] insertRecordsWithItem:item];
             }
         }
-        else{
+        else {
+            [dic setObject:@"1" forKey:@"orderCont"];
             [cartMulArray addObject:dic];
             //存储可变数组到本数据库
+            item.orderCont = @"1";
             [[CartTool sharedManager] insertRecordsWithItem:item];
         }
         
         NSLog(@"---%lu",(unsigned long)cartMulArray.count);
         
-        [dic setObject:@(num) forKey:@"orderCont"];
-        
         //设置商品数量
-        self.settemntView.number.text = [NSString stringWithFormat:@"%ld",(long)[ShoppingCartModel orderShoppingCartr:cartMulArray]];
-        //设置商品价格
-        self.settemntView.money.text = [NSString stringWithFormat:@"￥%.2f",[ShoppingCartModel moneyOrderShoopingCart:cartMulArray]];
-        //设置配送费
-        self.settemntView.peisongMoney.text = [NSString stringWithFormat:@"配送费:￥%.2f",[ShoppingCartModel shippingFeeShopingCart:cartMulArray]];
+        [self updateShoppingCart:cartMulArray];
         
         _networkConditionHUD.labelText = @"已添加至购物车";
         [_networkConditionHUD show:YES];
@@ -889,9 +879,9 @@ static CGFloat const scrollViewHeight = 220;
                 collectBtn.selected = YES;  //如果已被收藏过，则收藏按钮按下
                 collectId = commodityDic[@"favEntity"][@"id"];
             }
-            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
-            [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
-            [commoditymulArray addObject:dic];  //重组后商品数组
+//            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:commodityDic];
+//            [dic setObject:@"0" forKey:@"orderCont"];       //字典中加入已选商品数量字段
+//            [commoditymulArray addObject:dic];  //重组后商品数组
             
             NSMutableArray *images = [NSMutableArray array];
             NSArray *minorImages = commodityDic[@"minorImages"];
