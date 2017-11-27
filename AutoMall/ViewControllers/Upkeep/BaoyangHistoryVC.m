@@ -97,16 +97,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     NSDictionary *dic = historyArray[indexPath.row];
     cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"car"][@"mileage"])];
     cell.ranyouL.text = [NSString stringWithFormat:@"%@L",STRING(dic[@"car"][@"fuelAmount"])];
     cell.ownerL.text = dic[@"car"][@"owner"];
     
-    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-    [formater setDateFormat:@"yyyy-MM-dd"];
-    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
-    NSString *string = [formater stringFromDate:creatDate];
-    cell.dateL.text = string;
+    if (! [dic[@"enterTime"] isKindOfClass:[NSNull class]]) {
+        NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd"];
+        NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
+        NSString *string = [formater stringFromDate:creatDate];
+        cell.dateL.text = string;
+    }
+    
     return cell;
 }
 
