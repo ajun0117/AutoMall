@@ -59,11 +59,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowsIM" destination="sVV-BI-hEO" id="5M1-ug-qFG"/>
                 <outlet property="checkContentL" destination="4IM-QY-Rc4" id="Upo-jh-HAj"/>
                 <outlet property="positionL" destination="vQh-Zo-rAt" id="NLL-j9-I4x"/>
                 <outlet property="positionView" destination="jqZ-xn-Jxo" id="pny-fC-j6E"/>
             </connections>
-            <point key="canvasLocation" x="-20" y="52"/>
+            <point key="canvasLocation" x="-338" y="32"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -313,7 +313,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepCheckTerm object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepCheckTerm, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTermId=%@&checkContentId=%@",UrlPrefix(CarUpkeepCheckTerm),self.checkId,self.checkTermId,self.checkContentId];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTermId=%@&checkContentId=%@",UrlPrefix(CarUpkeepCheckTerm),self.checkId,self.checkTermId,self.checkContentId];   
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

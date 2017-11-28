@@ -218,6 +218,7 @@
 #define GetApprovalStatus                      @"/api/store/getApprovalStatus"     //获取门店的审批状态
 #define UserChangeImage                       @"/api/user/changeImage"        //修改个人头像
 #define UserChangeRemark                     @"/api/user/changeRemark"       //员工修改个人特长
+#define ReportSum                                   @"/api/report/sum"      //统计报表
 
 #define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
 #define UserGetStoreInfo                      @"/api/user/getStore"           //员工获取门店详情

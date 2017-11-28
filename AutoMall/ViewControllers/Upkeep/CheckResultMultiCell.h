@@ -15,5 +15,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *positionView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *positionViewHeightCon;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowsIM;
 
 @end

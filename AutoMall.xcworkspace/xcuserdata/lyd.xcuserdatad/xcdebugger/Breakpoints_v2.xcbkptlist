@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "533099862.608431"
+            timestampString = "533538799.24045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1314"
-            endingLineNumber = "1314"
+            startingLineNumber = "1318"
+            endingLineNumber = "1318"
             landmarkName = "-actionSheet:clickedButtonAtIndex:"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "533099862.608431"
+            timestampString = "533538799.24045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1317"
-            endingLineNumber = "1317"
+            startingLineNumber = "1321"
+            endingLineNumber = "1321"
             landmarkName = "@implementation PersonalCenterVC"
             landmarkType = "3">
          </BreakpointContent>
@@ -138,28 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "533099862.608431"
+            timestampString = "533538799.24045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1221"
-            endingLineNumber = "1221"
+            startingLineNumber = "1225"
+            endingLineNumber = "1225"
             landmarkName = "-toApplyView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/PersonalCenter/MessageListVC.m"
-            timestampString = "533014905.348644"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "-didFinishedRequestData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "533099862.608431"
+            timestampString = "533538799.24045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1218"
-            endingLineNumber = "1218"
+            startingLineNumber = "1222"
+            endingLineNumber = "1222"
             landmarkName = "-toApplyView"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "533098052.117286"
+            timestampString = "533538799.24045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1204"
-            endingLineNumber = "1204"
+            startingLineNumber = "1208"
+            endingLineNumber = "1208"
             landmarkName = "-toApplyView"
             landmarkType = "7">
          </BreakpointContent>
@@ -256,6 +240,22 @@
             startingLineNumber = "127"
             endingLineNumber = "127"
             landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoMall/ViewControllers/PersonalCenter/UpkeepStatementVC.m"
+            timestampString = "533553910.699676"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
+            landmarkName = "-requestPostReportSum"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

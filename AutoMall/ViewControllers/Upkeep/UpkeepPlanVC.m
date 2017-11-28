@@ -22,7 +22,7 @@
 #import "AutoCheckServicesVC.h"
 
 @interface UpkeepPlanVC ()
-{
+{ 
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSArray *serviceContentAry;
@@ -855,7 +855,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepServiceContent, @"op", nil];
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,self.checktypeID,storeId];    //测试时固定传id=1的检查单
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,self.checktypeID,storeId];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

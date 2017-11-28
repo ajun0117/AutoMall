@@ -417,6 +417,7 @@
                 [cell.applyBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopNameBtn.hidden = YES;
                 cell.shopLevelIM.hidden= YES;
+                cell.shopNameIM.hidden = NO;
                 cell.jifenL.hidden = YES;
                 return cell;
                 break;
@@ -494,6 +495,7 @@
                 else if(rankLevel == 3) {
                     cell.shopLevelIM.image = IMG(@"goldBadge");
                 }
+                cell.shopNameIM.hidden = NO;
                 cell.jifenL.hidden = YES;
 //                cell.jifenL.text = [NSString stringWithFormat:@"积分：%@分",@"80"];
                 return cell;
@@ -693,6 +695,7 @@
                 else if(rankLevel == 3) {
                     cell.shopLevelIM.image = IMG(@"goldBadge");
                 }
+                cell.shopNameIM.hidden = YES;
                 cell.jifenL.hidden = YES;
                 return cell;
                 break;
@@ -837,6 +840,7 @@
             cell.applyBtn.hidden = YES;
             cell.shopNameBtn.hidden = YES;
             cell.shopLevelIM.hidden= YES;
+            cell.shopNameIM.hidden = YES;
             cell.jifenL.hidden = YES;
             return cell;
             break;

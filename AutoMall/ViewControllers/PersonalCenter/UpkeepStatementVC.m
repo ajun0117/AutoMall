@@ -29,15 +29,22 @@
     UIView *selectBgView;
     UITableView *selectTableView;
     UIButton *titleBtn;
+    NSString *itemStr;     //需要统计的项目
+    NSString *toStr;       //统计的方式
 }
 
 @property (nonatomic, strong) ZFBarChart * barChart;
 
 @property (nonatomic, assign) CGFloat height;
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (strong, nonatomic) IBOutlet UIButton *dayBtn;
+@property (strong, nonatomic) IBOutlet UIView *dayView;
 @property (strong, nonatomic) IBOutlet UIButton *weekBtn;
+@property (strong, nonatomic) IBOutlet UIView *weekView;
 @property (strong, nonatomic) IBOutlet UIButton *monthBtn;
+@property (strong, nonatomic) IBOutlet UIView *monthView;
 @property (strong, nonatomic) IBOutlet UIButton *yearBtn;
+@property (strong, nonatomic) IBOutlet UIView *yearView;
 
 @property (strong, nonatomic) IBOutlet UIView *calendarBgView;
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -163,6 +170,11 @@
         
         [self hiddenSelectView:YES];
     }
+    
+    self.selectDate = [NSDate date];
+    itemStr = @"1";
+    toStr = @"2";
+    [self requestPostReportSum];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -248,7 +260,32 @@
         [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, textSize.width + 50, 0, 0)];
     }
     self.barChart.unit = dic[@"unit"];
-    [self.barChart strokePath];
+    if ([dic[@"title"] isEqualToString:@"检查台次"]) {
+        itemStr = @"1";
+    }
+    else if ([dic[@"title"] isEqualToString:@"成交金额"]) {
+        itemStr = @"2";
+    }
+    else if ([dic[@"title"] isEqualToString:@"客单价"]) {
+        itemStr = @"3";
+    }
+    else if ([dic[@"title"] isEqualToString:@"技师单数"]) {
+        itemStr = @"41";
+    }
+    else if ([dic[@"title"] isEqualToString:@"技师的成交金额"]) {
+        itemStr = @"42";
+    }
+    else if ([dic[@"title"] isEqualToString:@"技师的客单价"]) {
+        itemStr = @"43";
+    }
+    else if ([dic[@"title"] isEqualToString:@"服务项目台次"]) {
+        itemStr = @"51";
+    }
+    else if ([dic[@"title"] isEqualToString:@"服务项目金额"]) {
+        itemStr = @"52";
+    }
+    [self requestPostReportSum];
+//    [self.barChart strokePath];
     [self cancelSelect];
 }
 
@@ -262,13 +299,56 @@
     }
 }
 
+- (IBAction)dayAction:(id)sender {
+    self.dayBtn.selected = YES;
+    self.weekBtn.selected = NO;
+    self.monthBtn.selected = NO;
+    self.yearBtn.selected = NO;
+    self.dayView.backgroundColor = RGBCOLOR(237, 28, 36);
+    self.weekView.backgroundColor = [UIColor clearColor];
+    self.monthView.backgroundColor = [UIColor clearColor];
+    self.yearView.backgroundColor = [UIColor clearColor];
+    toStr = @"1";
+    [self requestPostReportSum];
+}
+
 - (IBAction)weekAction:(id)sender {
+    self.dayBtn.selected = NO;
+    self.weekBtn.selected = YES;
+    self.monthBtn.selected = NO;
+    self.yearBtn.selected = NO;
+    self.dayView.backgroundColor = [UIColor clearColor];
+    self.weekView.backgroundColor = RGBCOLOR(237, 28, 36);
+    self.monthView.backgroundColor = [UIColor clearColor];
+    self.yearView.backgroundColor = [UIColor clearColor];
+    toStr = @"2";
+    [self requestPostReportSum];
 }
 
 - (IBAction)monthAction:(id)sender {
+    self.dayBtn.selected = NO;
+    self.weekBtn.selected = NO;
+    self.monthBtn.selected = YES;
+    self.yearBtn.selected = NO;
+    self.dayView.backgroundColor = [UIColor clearColor];
+    self.weekView.backgroundColor = [UIColor clearColor];
+    self.monthView.backgroundColor = RGBCOLOR(237, 28, 36);
+    self.yearView.backgroundColor = [UIColor clearColor];
+    toStr = @"3";
+    [self requestPostReportSum];
 }
 
 - (IBAction)yearAction:(id)sender {
+    self.dayBtn.selected = NO;
+    self.weekBtn.selected = NO;
+    self.monthBtn.selected = NO;
+    self.yearBtn.selected = YES;
+    self.dayView.backgroundColor = [UIColor clearColor];
+    self.weekView.backgroundColor = [UIColor clearColor];
+    self.monthView.backgroundColor = [UIColor clearColor];
+    self.yearView.backgroundColor = RGBCOLOR(237, 28, 36);
+    toStr = @"4";
+    [self requestPostReportSum];
 }
 
 -(void)toSelectDate {
@@ -466,6 +546,7 @@
         //        cell.dayLabel.backgroundColor = [UIColor redColor];
         //        cell.dayLabel.textColor = [UIColor whiteColor];
     }
+    [self requestPostReportSum];
 }
 
 - (UICollectionView *)collectionView{
@@ -549,6 +630,39 @@
                                fromDate:self.tempDate];
     comps.day = day;
     return [greCalendar dateFromComponents:comps];
+}
+
+#pragma mark - 发送请求
+-(void)requestPostReportSum { //统计报表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ReportSum object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ReportSum, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.selectDate.yyyyMMddByLineWithDate,@"from",itemStr,@"item",toStr,@"to", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ReportSum) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 网络请求结果数据
+-(void) didFinishedRequestData:(NSNotification *)notification{
+    [_hud hide:YES];
+    if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
+        
+        _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    if ([notification.name isEqualToString:ReportSum]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ReportSum object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            [self.barChart strokePath];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
