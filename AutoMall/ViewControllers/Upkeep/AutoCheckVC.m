@@ -855,7 +855,7 @@
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",self.lichengDic[@"mileage"],@"mileage",self.lichengDic[@"mileageImg"],@"mileageImage",self.lichengDic[@"fuelAmount"],@"fuelAmount",self.lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",carImagesAry,@"carUpkeepImages", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",self.lichengDic[@"mileage"],@"mileage",self.lichengDic[@"mileageImg"],@"mileageImage",self.lichengDic[@"fuelAmount"],@"fuelAmount",self.lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",carImagesAry,@"carUpkeepImages",self.checktypeID,@"checkTypeId", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
@@ -987,7 +987,8 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+            NSDictionary *dic = responseObject[@"data"];
+            [self performSelector:@selector(toPushVC:) withObject:dic[@"id"] afterDelay:HUDDelay];
             
         }
         else {

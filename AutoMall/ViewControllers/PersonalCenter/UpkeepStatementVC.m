@@ -30,7 +30,8 @@
     UITableView *selectTableView;
     UIButton *titleBtn;
     NSString *itemStr;     //需要统计的项目
-    NSString *toStr;       //统计的方式
+    NSString *wayStr;       //统计的方式
+    NSArray *dataAry;     //统计数据
 }
 
 @property (nonatomic, strong) ZFBarChart * barChart;
@@ -131,7 +132,7 @@
     self.barChart.unit = @"台次";
     //    self.barChart.isAnimated = NO;
     //    self.barChart.isResetAxisLineMinValue = YES;
-    self.barChart.isResetAxisLineMaxValue = YES;
+//    self.barChart.isResetAxisLineMaxValue = YES;
     //    self.barChart.isShowAxisLineValue = NO;
     //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
     //    self.barChart.isShowXLineSeparate = YES;
@@ -173,7 +174,7 @@
     
     self.selectDate = [NSDate date];
     itemStr = @"1";
-    toStr = @"2";
+    wayStr = @"2";
     [self requestPostReportSum];
 }
 
@@ -308,7 +309,7 @@
     self.weekView.backgroundColor = [UIColor clearColor];
     self.monthView.backgroundColor = [UIColor clearColor];
     self.yearView.backgroundColor = [UIColor clearColor];
-    toStr = @"1";
+    wayStr = @"1";
     [self requestPostReportSum];
 }
 
@@ -321,7 +322,7 @@
     self.weekView.backgroundColor = RGBCOLOR(237, 28, 36);
     self.monthView.backgroundColor = [UIColor clearColor];
     self.yearView.backgroundColor = [UIColor clearColor];
-    toStr = @"2";
+    wayStr = @"2";
     [self requestPostReportSum];
 }
 
@@ -334,7 +335,7 @@
     self.weekView.backgroundColor = [UIColor clearColor];
     self.monthView.backgroundColor = RGBCOLOR(237, 28, 36);
     self.yearView.backgroundColor = [UIColor clearColor];
-    toStr = @"3";
+    wayStr = @"3";
     [self requestPostReportSum];
 }
 
@@ -347,7 +348,7 @@
     self.weekView.backgroundColor = [UIColor clearColor];
     self.monthView.backgroundColor = [UIColor clearColor];
     self.yearView.backgroundColor = RGBCOLOR(237, 28, 36);
-    toStr = @"4";
+    wayStr = @"4";
     [self requestPostReportSum];
 }
 
@@ -411,11 +412,48 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490"];
+    if ([itemStr intValue]  < 4)  {
+        NSMutableArray *mulAry = [NSMutableArray array];
+        for (NSArray *ary in dataAry) {
+            if (ary.count == 2) {
+                [mulAry addObject:[NSString stringWithFormat:@"%@",ary[1]]];
+            }
+        }
+        return mulAry;
+    }
+    else {
+        NSMutableArray *mulAry = [NSMutableArray array];
+        for (NSArray *ary in dataAry) {
+            if (ary.count == 3) {
+                [mulAry addObject:[NSString stringWithFormat:@"%@",STRINGZero(ary[2])]];
+            }
+        }
+        return mulAry;
+    }
+//    return @[@"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"汽油燃烧喷射系统润滑清洁", @"机油更换", @"轮胎更换", @"四轮动平衡", @"冷却液更换", @"节气门清洗", @"电瓶更换", @"内饰清洗", @"车辆清洗", @"火花塞更换", @"钣金/喷漆", @"火花塞更换", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗",];
+    if ([itemStr intValue]  < 4)  {
+        NSMutableArray *mulAry = [NSMutableArray array];
+        for (NSArray *ary in dataAry) {
+            if (ary.count == 2) {
+                [mulAry addObject:[NSString stringWithFormat:@"%@",ary[0]]];
+            }
+        }
+        return mulAry;
+    }
+    else if ([itemStr intValue]  > 4) {
+        NSMutableArray *mulAry = [NSMutableArray array];
+        for (NSArray *ary in dataAry) {
+            if (ary.count == 3) {
+                [mulAry addObject:[NSString stringWithFormat:@"%@",ary[0]]];
+            }
+        }
+        return mulAry;
+    }
+    return nil;
+//    return @[@"汽油燃烧喷射系统润滑清洁", @"机油更换", @"轮胎更换", @"四轮动平衡", @"冷却液更换", @"节气门清洗", @"电瓶更换", @"内饰清洗", @"车辆清洗", @"火花塞更换", @"钣金/喷漆", @"火花塞更换", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗", @"车辆清洗",];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
@@ -638,7 +676,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ReportSum object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ReportSum, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.selectDate.yyyyMMddByLineWithDate,@"from",itemStr,@"item",toStr,@"to", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.selectDate.yyyyMMddByLineWithDate,@"from",itemStr,@"item",wayStr,@"way", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ReportSum) delegate:nil params:pram info:infoDic];
 }
 
@@ -655,7 +693,9 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:ReportSum]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ReportSum object:nil];
+        NSLog(@"ReportSum: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            dataAry = responseObject[@"data"];
             [self.barChart strokePath];
         }
         else {

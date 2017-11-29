@@ -10,6 +10,11 @@
 #import "AJSegmentedControl.h"
 //#import "BaoyangHistoryCell.h"
 #import "UpkeepOrderListCell.h"
+#import "AutoCheckResultVC.h"
+#import "AutoCheckOrderPayModeVC.h"
+#import "AutoCheckOrderVC.h"
+#import "AutoCheckOrderCompleteVC.h"
+#import "AutoCheckOrderWorkingVC.h"
 
 @interface UpkeepOrderVC () <AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
@@ -190,13 +195,76 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    MailOrderDetailVC *detailVC = [[MailOrderDetailVC alloc] init];
-//    detailVC.orderId = orderArray[indexPath.section][@"id"];
-//    [self.navigationController pushViewController:detailVC animated:YES];
+    NSDictionary *dic = orderAry[indexPath.section];
+    
+    if ([self.orderStatus isEqualToString:@"0"]) {   //检查完成
+        if (! [dic[@"checkTypeId"] isKindOfClass:[NSNull class]]) {
+            AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+            resultVC.carUpkeepId = dic[@"id"];
+            resultVC.checktypeID = dic[@"checkTypeId"];
+            [self.navigationController pushViewController:resultVC animated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = @"此订单是老数据，因数据不全，不能跳转！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    else if ([self.orderStatus isEqualToString:@"1"]) {   //已确认订单
+        AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
+        orderVC.checkOrderId = dic[@"id"];
+        NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+        orderVC.infoDic = dicc;
+        [self.navigationController pushViewController:orderVC animated:YES];
+    }
+    
+    else if ([self.orderStatus isEqualToString:@"2"]) {   //已完工
+        if (! [dic[@"statusFlow"] isKindOfClass:[NSNull class]]) {
+            if ([dic[@"statusFlow"] intValue] == 0) {  //已完工，付款中
+                AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
+                orderVC.statusFlow = @"0";
+                orderVC.checkOrderId = dic[@"id"];
+                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+                orderVC.infoDic = dicc;
+                [self.navigationController pushViewController:orderVC animated:YES];
+            }
+            else if ([dic[@"statusFlow"] intValue] == 1) {  //已完成页面
+                AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
+                completeVC.statusFlow = @"1";
+                completeVC.checkOrderId = dic[@"id"];
+                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+                completeVC.infoDic = dicc;
+                [self.navigationController pushViewController:completeVC animated:YES];
+            }
+        }
+    }
+    
+    else if ([self.orderStatus isEqualToString:@"3"]) {   //已付款
+        if (! [dic[@"statusFlow"] isKindOfClass:[NSNull class]]) {
+            if ([dic[@"statusFlow"] intValue] == 1) {  //已付款，施工中
+                AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
+                workingVC.statusFlow = @"1";
+                workingVC.checkOrderId = dic[@"id"];
+                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+                workingVC.infoDic = dicc;
+                [self.navigationController pushViewController:workingVC animated:YES];
+            }
+            else if ([dic[@"statusFlow"] intValue] == 0) {  //已完成页面
+                AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
+                completeVC.statusFlow = @"1";
+                completeVC.checkOrderId = dic[@"id"];
+                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+                completeVC.infoDic = dicc;
+                [self.navigationController pushViewController:completeVC animated:YES];
+            }
+        }
+    }
+
 }
 
 #pragma mark - 发送请求
--(void)requestGetHistoryList { //获取车辆保养历史信息记录
+-(void)requestGetHistoryList { //获取员工保养订单列表
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
