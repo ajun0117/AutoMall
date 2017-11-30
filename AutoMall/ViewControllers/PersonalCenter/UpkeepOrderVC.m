@@ -43,7 +43,7 @@
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
-    currentpage = 0;
+    currentpage = 25;
     orderAry = [NSMutableArray array];
     
     if (! self.orderStatus) {

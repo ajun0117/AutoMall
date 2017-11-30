@@ -84,7 +84,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    return 66;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -101,8 +101,14 @@
     
     NSDictionary *dic = historyArray[indexPath.row];
     cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"car"][@"mileage"])];
-    cell.technicianName.text = [NSString stringWithFormat:@"%@",STRING(dic[@"technicians"][@"nickname"])];
-    cell.moneyL.text = [NSString stringWithFormat:@"%@元",STRING(dic[@"money"])];
+    NSArray  *ary = dic[@"technicians"];
+    if ([ary isKindOfClass:[NSArray class]] && ary.count > 0) {
+        cell.technicianName.text = [NSString stringWithFormat:@"%@",STRING([ary firstObject][@"nickname"])];
+    }
+    else {
+        cell.technicianName.text = @"无数据";
+    }
+    cell.moneyL.text = [NSString stringWithFormat:@"%@ 元",STRING(dic[@"money"])];
     
     if (! [dic[@"enterTime"] isKindOfClass:[NSNull class]]) {
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
@@ -131,7 +137,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=0",UrlPrefix(CarUpkeepSearch),self.carDic[@"id"], currentpage];
+    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=4",UrlPrefix(CarUpkeepSearch),self.carDic[@"id"], currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 

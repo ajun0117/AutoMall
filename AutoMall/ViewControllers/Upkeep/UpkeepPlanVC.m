@@ -890,17 +890,17 @@
     
     NSMutableArray *discounts = [NSMutableArray array];
     for (NSDictionary *dic2 in selectedDiscounts) {
-        NSDictionary *dicc2 = [NSDictionary dictionaryWithObjectsAndKeys:dic2[@"id"],@"id",dic2[@"item"],@"item",dic2[@"money"],@"price", nil];
+        NSDictionary *dicc2 = [NSDictionary dictionaryWithObjectsAndKeys:dic2[@"id"],@"id",dic2[@"item"],@"item",dic2[@"money"],@"money", nil];
         [discounts addObject:dicc2];
     }
     
     NSMutableArray *servicesMul = [NSMutableArray array];
     for (NSDictionary *dic3 in selectedServices) {
-        NSDictionary *dicc3 = [NSDictionary dictionaryWithObjectsAndKeys:dic3[@"id"],@"id",dic3[@"item"],@"item",dic3[@"money"],@"price", nil];
+        NSDictionary *dicc3 = [NSDictionary dictionaryWithObjectsAndKeys:dic3[@"id"],@"id",dic3[@"item"],@"item",dic3[@"money"],@"money", nil];
         [servicesMul addObject:dicc3];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts",servicesMul,@"services", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts",servicesMul,@"services", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
@@ -976,7 +976,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"][@"code"] afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

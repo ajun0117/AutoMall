@@ -70,11 +70,12 @@
 
 - (IBAction)upkeepFirstAction:(id)sender {
     statusFlow = @"0";          //先施工
-    [self requestPostUpdateStatus];
-//    AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
-//    workingVC.statusFlow = statusFlow;
-//    workingVC.checkOrderId = self.checkOrderId;
-//    [self.navigationController pushViewController:workingVC animated:YES];
+//    [self requestPostUpdateStatus];
+    AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
+    workingVC.statusFlow = statusFlow;
+    workingVC.checkOrderId = self.checkOrderId;
+    workingVC.infoDic = self.infoDic;
+    [self.navigationController pushViewController:workingVC animated:YES];
 }
 
 -(void) popToRootVC {

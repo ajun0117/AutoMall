@@ -66,21 +66,21 @@
 }
 
 - (IBAction)verifyPaidAction:(id)sender {
-//    [self requestPostUpdateStatus];
-    if ([self.statusFlow isEqualToString:@"0"]) {   //先付款，付款完成，至施工
-        AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
-        workingVC.statusFlow = self.statusFlow;
-        workingVC.checkOrderId = self.checkOrderId;
-        workingVC.infoDic = self.infoDic;
-        [self.navigationController pushViewController:workingVC animated:YES];
-    }
-    else if ([self.statusFlow isEqualToString:@"1"]) {      //先施工，付款完成，至完工页
-        AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
-        completeVC.statusFlow = self.statusFlow;
-        completeVC.checkOrderId = self.checkOrderId;
-        completeVC.infoDic = self.infoDic;
-        [self.navigationController pushViewController:completeVC animated:YES];
-    }
+    [self requestPostUpdateStatus];
+//    if ([self.statusFlow isEqualToString:@"1"]) {   //先付款，付款完成，至施工
+//        AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
+//        workingVC.statusFlow = self.statusFlow;
+//        workingVC.checkOrderId = self.checkOrderId;
+//        workingVC.infoDic = self.infoDic;
+//        [self.navigationController pushViewController:workingVC animated:YES];
+//    }
+//    else if ([self.statusFlow isEqualToString:@"0"]) {      //先施工，付款完成，至完工页
+//        AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
+//        completeVC.statusFlow = self.statusFlow;
+//        completeVC.checkOrderId = self.checkOrderId;
+//        completeVC.infoDic = self.infoDic;
+//        [self.navigationController pushViewController:completeVC animated:YES];
+//    }
 }
 
 -(void) popToRootVC {
@@ -113,14 +113,14 @@
     if ([notification.name isEqualToString:CarUpkeepUpdate]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUpdate object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //接口正确
-            if ([self.statusFlow isEqualToString:@"0"]) {   //先付款，付款完成，至施工
+            if ([self.statusFlow isEqualToString:@"1"]) {   //先付款，付款完成，至施工
                 AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
                 workingVC.statusFlow = self.statusFlow;
                 workingVC.checkOrderId = self.checkOrderId;
                 workingVC.infoDic = self.infoDic;
                 [self.navigationController pushViewController:workingVC animated:YES];
             }
-            else if ([self.statusFlow isEqualToString:@"1"]) {      //先施工，付款完成，至完工页
+            else if ([self.statusFlow isEqualToString:@"0"]) {      //先施工，付款完成，至完工页
                 AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
                 completeVC.statusFlow = self.statusFlow;
                 completeVC.checkOrderId = self.checkOrderId;
