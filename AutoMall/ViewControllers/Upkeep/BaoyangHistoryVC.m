@@ -101,8 +101,8 @@
     
     NSDictionary *dic = historyArray[indexPath.row];
     cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"car"][@"mileage"])];
-    cell.ranyouL.text = [NSString stringWithFormat:@"%@L",STRING(dic[@"car"][@"fuelAmount"])];
-    cell.ownerL.text = dic[@"car"][@"owner"];
+    cell.technicianName.text = [NSString stringWithFormat:@"%@",STRING(dic[@"technicians"][@"nickname"])];
+    cell.moneyL.text = [NSString stringWithFormat:@"%@元",STRING(dic[@"money"])];
     
     if (! [dic[@"enterTime"] isKindOfClass:[NSNull class]]) {
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
