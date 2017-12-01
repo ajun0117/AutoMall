@@ -842,7 +842,7 @@
 #pragma mark - 发送请求
 -(void)requestGetAllUnnormal { //获取所有异常
     [_hud show:YES];
-    //注册通知
+    //注册通知 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUnnormal object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUnnormal, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId];

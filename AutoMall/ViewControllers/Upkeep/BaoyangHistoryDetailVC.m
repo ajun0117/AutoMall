@@ -25,15 +25,14 @@
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
+    
+    NSDictionary *carUpkeepDic;     //检查单详情数据
+    
     NSArray *serviceContentAry;
     NSArray *selectedPackageAry;
     NSMutableArray *removeAry;      //去除重复的方案
-    NSMutableArray *lineationAry;     //记录划线的方案数组
-    NSDictionary *thePackageDic;    //存储下级页面已选择的套餐
     NSArray *selectedServices;    //选择的门店服务
-    NSDictionary *theServicesDic;   //存储下级页面已选择的门店服务
     NSArray *selectedDiscounts;    //选择的优惠
-    NSDictionary *theDiscountDic;   //存储下级页面已选择的优惠
     float serVicePrice;            //方案总价
     float packagePrice;     //套餐价
     float discountPrice;    //优惠的价格（实际需要减掉的价格）
@@ -53,17 +52,6 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-    //    searchBtn.contentMode = UIViewContentModeRight;
-    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
-    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [searchBtn setTitle:@"套餐" forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
-    
     //    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanInfoCell" bundle:nil] forCellReuseIdentifier:@"planInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanSelectServiceCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanSelectServiceCell"];
@@ -72,11 +60,10 @@
     self.myTableView.tableFooterView = [UIView new];
     
     removeAry = [NSMutableArray array];
-    lineationAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
     
+    [self requestGetUpkeepInfo];
     [self requestGetAllUnnormal];
-    [self requestGetCarUpkeepServiceContent];   //请求服务方案列表
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -95,53 +82,6 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
-- (void) toPackage {
-    ServicePackageVC *serviceVC = [[ServicePackageVC alloc] init];
-    serviceVC.carUpkeepId = self.carUpkeepId;
-    serviceVC.checktypeID = self.checktypeID;
-    serviceVC.selectedDic = thePackageDic;
-    serviceVC.SelecteServicePackage = ^(NSMutableDictionary *packageDic) {
-        thePackageDic = [NSDictionary dictionaryWithDictionary:packageDic];
-        selectedPackageAry = [packageDic allValues];
-        [removeAry removeAllObjects];       //重置removeAry数组
-        [removeAry addObjectsFromArray:serviceContentAry];
-        
-        packagePrice = 0;
-        for (NSDictionary *dic1 in selectedPackageAry) {
-            if ([dic1[@"customized"] boolValue])  {
-                packagePrice += [dic1[@"customizedPrice"] floatValue];
-            } else {
-                packagePrice += [dic1[@"price"] floatValue];
-            }
-            
-            NSLog(@"packagePrice: %.2f",packagePrice);
-            NSArray *serviceContents = dic1[@"serviceContents"];
-            for (NSDictionary *dic2 in serviceContents) {
-                int serviceId = [dic2[@"id"] intValue];
-                for (NSDictionary *dic3 in serviceContentAry) {
-                    if ([dic3[@"id"] intValue] == serviceId) {
-                        [removeAry removeObject:dic3];
-                    }
-                }
-            }
-        }
-        [lineationAry removeAllObjects];
-        [lineationAry addObjectsFromArray:removeAry];
-        serVicePrice = 0;     //初始化价格
-        for (NSDictionary *dic in lineationAry) {
-            if ([dic[@"customized"] boolValue]) {
-                serVicePrice += [dic[@"customizedPrice"] floatValue];
-            } else {
-                serVicePrice += [dic[@"price"] floatValue];
-            }
-            
-        }
-        
-        [self.myTableView reloadData];
-    };
-    [self.navigationController pushViewController:serviceVC animated:YES];
-}
-
 -(void)carInfo {
     UpkeepCarInfoVC *infoVC = [[UpkeepCarInfoVC alloc] init];
     infoVC.carDic = self.carDic;
@@ -150,73 +90,6 @@
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:YES];
 }
-
-//-(void)toSelectServices {  //选择门店服务
-//    AutoCheckServicesVC *servicesVC = [[AutoCheckServicesVC alloc] init];
-//    servicesVC.selectedDic = theServicesDic;
-//    servicesVC.SelecteSerices = ^(NSMutableDictionary *servicesDic) {
-//        theServicesDic = [NSDictionary dictionaryWithDictionary:servicesDic];
-//        selectedServices = [servicesDic allValues];
-//        
-//        selectedServicePrice = 0;
-//        for (NSDictionary *dic in selectedServices) {
-//            if (dic[@"money"]) {
-//                selectedServicePrice += [dic[@"money"] floatValue];
-//            }
-//        }
-//        NSLog(@"selectedServicePrice: %.2f",selectedServicePrice);
-//        [self.myTableView reloadData];
-//    };
-//    servicesVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:servicesVC animated:YES];
-//}
-//
-//
-//-(void)carDiscounts {       //选择优惠
-//    AutoCheckDisountsVC *discountsVC = [[AutoCheckDisountsVC alloc] init];
-//    discountsVC.selectedDic = theDiscountDic;
-//    discountsVC.SelecteDiscount = ^(NSMutableDictionary *discountDic) {
-//        theDiscountDic = [NSDictionary dictionaryWithDictionary:discountDic];
-//        selectedDiscounts = [discountDic allValues];
-//        
-//        discountPrice = 0;
-//        for (NSDictionary *dic in selectedDiscounts) {
-//            if (dic[@"money"]) {
-//                discountPrice += [dic[@"money"] floatValue];
-//            }
-//        }
-//        NSLog(@"discountPrice: %.2f",discountPrice);
-//        [self.myTableView reloadData];
-//    };
-//    discountsVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:discountsVC animated:YES];
-//}
-//
-//-(void)checkService:(UIButton *)btn {
-//    int row = (int)btn.tag - 100;
-//    NSDictionary *dic = removeAry[row];
-//    btn.selected = ! btn.selected;
-//    if (btn.selected) {
-//        [lineationAry addObject:dic];
-//        if ([dic[@"customized"] boolValue])  {
-//            serVicePrice += [dic[@"customizedPrice"] floatValue];
-//        } else {
-//            serVicePrice += [dic[@"price"] floatValue];
-//        }
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
-//    }
-//    else {
-//        [lineationAry removeObject:dic];
-//        if ([dic[@"customized"] boolValue])  {
-//            serVicePrice -= [dic[@"customizedPrice"] floatValue];
-//        } else {
-//            serVicePrice -= [dic[@"price"] floatValue];
-//        }
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
-//    }
-//}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -338,15 +211,15 @@
             label.backgroundColor = [UIColor clearColor];
             label.text = @"车辆信息";
             
-            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+//            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
             [btn addTarget:self action:@selector(carInfo) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:label];
-            [view addSubview:img];
+//            [view addSubview:img];
             [view addSubview:btn];
             [bgView addSubview:view];
             return bgView;
@@ -374,16 +247,7 @@
             label.backgroundColor = [UIColor clearColor];
             label.text = @"方案明细";
             
-            //                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-            //                img.frame = CGRectMake(SCREEN_WIDTH - 24, 15, 8, 13);
-            //
-            //                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            //                btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-            //                [btn addTarget:self action:@selector(carInfo) forControlEvents:UIControlEventTouchUpInside];
-            
             [view addSubview:label];
-            //                [view addSubview:img];
-            //                [view addSubview:btn];
             return view;
             break;
         }
@@ -396,15 +260,14 @@
             label.backgroundColor = [UIColor clearColor];
             label.text = @"服务套餐";
             
-            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+//            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-            [btn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:label];
-            [view addSubview:img];
+//            [view addSubview:img];
             [view addSubview:btn];
             return view;
             break;
@@ -419,15 +282,14 @@
             label.backgroundColor = [UIColor clearColor];
             label.text = @"门店服务";
             
-            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+//            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-            [btn addTarget:self action:@selector(toSelectServices) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:label];
-            [view addSubview:img];
+//            [view addSubview:img];
             [view addSubview:btn];
             return view;
             break;
@@ -442,15 +304,14 @@
             label.backgroundColor = [UIColor clearColor];
             label.text = @"优惠";
             
-            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+//            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-            [btn addTarget:self action:@selector(carDiscounts) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:label];
-            [view addSubview:img];
+//            [view addSubview:img];
             [view addSubview:btn];
             return view;
             break;
@@ -547,7 +408,6 @@
                     NSDictionary *dic1 = entities[i];
                     UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
                     position.text = STRING(dic1[@"dPosition"]);
-                    position.tag = 100 + i;
                     position.textColor = [UIColor grayColor];
                     position.font = [UIFont systemFontOfSize:14];
                     
@@ -613,13 +473,13 @@
 //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             NSDictionary *dic = removeAry[indexPath.row];
             
-            if ([lineationAry containsObject:dic]) {    //如果包含，则勾选
-                cell.checkBtn.selected = YES;
-            } else {
-                cell.checkBtn.selected = NO;
-            }
-            cell.checkBtn.tag = indexPath.row + 100;
-            [cell.checkBtn addTarget:self action:@selector(checkService:) forControlEvents:UIControlEventTouchUpInside];
+//            if ([dic[@""] intValue] == ) {    //如果包含，则勾选
+//                cell.checkBtn.selected = YES;
+//            } else {
+//                cell.checkBtn.selected = NO;
+//            }
+//            cell.checkBtn.tag = indexPath.row + 100;
+//            [cell.checkBtn addTarget:self action:@selector(checkService:) forControlEvents:UIControlEventTouchUpInside];
             cell.declareL.text = dic[@"name"];
             cell.declareL.font = [UIFont systemFontOfSize:15];
             if ([dic[@"customized"] boolValue]) {
@@ -710,11 +570,11 @@
             cell.declareL.strikeThroughEnabled = NO;
             cell.declareL.text = @"折后价";
             cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-            NSLog(@"serVicePrice + packagePrice - discountPrice + selectedServicePrice:  %.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice);
-            if (serVicePrice + packagePrice - discountPrice + selectedServicePrice < 0) {
+//            NSLog(@"serVicePrice + packagePrice - discountPrice + selectedServicePrice:  %.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice);
+            if ([carUpkeepDic[@"money"] intValue] < 0) {
                 cell.contentL.text = @"￥0";
             } else {
-                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice];
+                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",[carUpkeepDic[@"money"] floatValue]];
             }
             cell.contentL.font = [UIFont boldSystemFontOfSize:16];
             cell.contentL.textColor = [UIColor blackColor];
@@ -837,22 +697,21 @@
 //}
 
 #pragma mark - 发送请求
+-(void)requestGetUpkeepInfo { //获取检查单详情
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepInfo, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepInfo),self.carUpkeepId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
 -(void)requestGetAllUnnormal { //获取所有异常
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUnnormal object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUnnormal, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepUnnormal),self.carUpkeepId];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-}
-
--(void)requestGetCarUpkeepServiceContent { //检查单相关的服务方案
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepServiceContent object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepServiceContent, @"op", nil];
-    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@&checkTypeId=%@&storeId=%@",UrlPrefix(CarUpkeepServiceContent),self.carUpkeepId,self.checktypeID,storeId];   
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -866,6 +725,34 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    
+    if ([notification.name isEqualToString:CarUpkeepInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepInfo object:nil];
+        NSLog(@"CarUpkeepInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            carUpkeepDic = responseObject[@"data"];
+
+            //推荐的服务列表
+            removeAry = carUpkeepDic[@"serviceContents"];
+            
+            selectedPackageAry = carUpkeepDic[@"servicePackages"];
+            
+            selectedServices = carUpkeepDic[@"services"];
+
+            selectedDiscounts = carUpkeepDic[@"discounts"];
+            
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    
+    
+    
     
     if ([notification.name isEqualToString:CarUpkeepUnnormal]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUnnormal object:nil];
@@ -894,46 +781,31 @@
         }
     }
     
-    if ([notification.name isEqualToString:CarUpkeepServiceContent]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepServiceContent object:nil];
-        NSLog(@"CarUpkeepCategory: %@",responseObject);
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
-            serviceContentAry = responseObject[@"data"];
-            [removeAry addObjectsFromArray:serviceContentAry];
-            [lineationAry addObjectsFromArray:removeAry];
-            serVicePrice = 0;     //初始化价格
-            for (NSDictionary *dic in lineationAry) {
-                if ([dic[@"customized"] boolValue]) {
-                    serVicePrice += [dic[@"customizedPrice"] floatValue];
-                } else {
-                    serVicePrice += [dic[@"price"] floatValue];
-                }
-                
-            }
-            [self.myTableView reloadData];
-        }
-        else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        }
-    }
-    
-    if ([notification.name isEqualToString:CarUpkeepConfirm]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepConfirm object:nil];
-        NSLog(@"CarUpkeepConfirm: %@",responseObject);
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
-        }
-        else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        }
-    }
+//    if ([notification.name isEqualToString:CarUpkeepServiceContent]) {
+//        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepServiceContent object:nil];
+//        NSLog(@"CarUpkeepCategory: %@",responseObject);
+//        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+//            serviceContentAry = responseObject[@"data"];
+//            [removeAry addObjectsFromArray:serviceContentAry];
+//            [lineationAry addObjectsFromArray:removeAry];
+//            serVicePrice = 0;     //初始化价格
+//            for (NSDictionary *dic in lineationAry) {
+//                if ([dic[@"customized"] boolValue]) {
+//                    serVicePrice += [dic[@"customizedPrice"] floatValue];
+//                } else {
+//                    serVicePrice += [dic[@"price"] floatValue];
+//                }
+//                
+//            }
+//            [self.myTableView reloadData];
+//        }
+//        else {
+//            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+//            [_networkConditionHUD show:YES];
+//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//        }
+//    }
+
 }
 
 

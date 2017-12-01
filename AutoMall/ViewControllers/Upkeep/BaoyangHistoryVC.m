@@ -8,6 +8,7 @@
 
 #import "BaoyangHistoryVC.h"
 #import "BaoyangHistoryCell.h"
+#import "BaoyangHistoryDetailVC.h"
 
 @interface BaoyangHistoryVC ()
 {
@@ -124,11 +125,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    NSDictionary *dic = historyArray[indexPath.row];
+    
+    if (! [dic[@"checkTypeId"] isKindOfClass:[NSNull class]]) {
+        BaoyangHistoryDetailVC *detailVC = [[BaoyangHistoryDetailVC alloc] init];
+        detailVC.carDic = dic[@"car"];
+        detailVC.mileage = dic[@"mileage"];
+        detailVC.fuelAmount = dic[@"fuelAmount"];
+        detailVC.carUpkeepId = dic[@"id"];
+        detailVC.checktypeID = dic[@"checkTypeId"];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 #pragma mark - 发送请求
@@ -137,7 +144,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=4",UrlPrefix(CarUpkeepSearch),self.carDic[@"id"], currentpage];
+    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=1",UrlPrefix(CarUpkeepSearch),self.carDic[@"id"], currentpage];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
