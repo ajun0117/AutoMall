@@ -80,7 +80,9 @@
         
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelect)];
 //        [selectBgView addGestureRecognizer:tap];
-        
+    
+    [positionBtn setImage:[UIImage imageNamed:@"subject_collapse_n"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    
         positionSelectView = [[MultiTablesView alloc]initWithFrame:CGRectMake(0, 40 - (SCREEN_HEIGHT - 64), SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 40)];
         positionSelectView.delegate = self;
         positionSelectView.dataSource = self;
@@ -137,6 +139,7 @@
     [self.navigationController pushViewController:editVC animated:YES];
 }
 - (IBAction)positionAction:(id)sender {
+    positionBtn.selected = YES;
     [self hiddenSelectView:NO];
     [self requestGetAllCheckcategorySearch];
 }
@@ -363,10 +366,12 @@
         NSLog(@"加载相应数据！");
         if (indexPath.row == [allCheckcategoryAry count]) {
             [self requestGetChecktermSearchWithId:nil]; //请求2级列表
+            checkcategoryId = @"";
             lev1String = @"全部部位";
             [positionBtn setTitle:lev1String forState:UIControlStateNormal];
         } else {
             NSDictionary *dic = allCheckcategoryAry[indexPath.row];
+            checkcategoryId = dic[@"id"];
             [self requestGetChecktermSearchWithId:dic[@"id"]]; //请求2级列表
             lev1String = dic[@"name"];
             [positionBtn setTitle:lev1String forState:UIControlStateNormal];
@@ -390,6 +395,7 @@
             NSString *titleStr = [NSString stringWithFormat:@"%@-%@",lev1String,dic[@"name"]];
             [positionBtn setTitle:titleStr forState:UIControlStateNormal];
         }
+        positionBtn.selected = NO;
         [self requestPostListServiceContent];
     }
 }
@@ -434,7 +440,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ListServiceContent object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ListServiceContent, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20000",@"pageSize",checkTermId,@"checkTermId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo",@"20000",@"pageSize",checkcategoryId,@"checkCategoryId",checkTermId,@"checkTermId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ListServiceContent) delegate:nil params:pram info:infoDic];
 }
 

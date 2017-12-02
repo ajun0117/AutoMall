@@ -282,7 +282,7 @@
         [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MallOrderAdd) delegate:nil params:pram info:infoDic];
     }
     else {
-        _networkConditionHUD.labelText = @"请先选择收货地址！";
+        _networkConditionHUD.labelText = @"请先选择或新增收货地址！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
