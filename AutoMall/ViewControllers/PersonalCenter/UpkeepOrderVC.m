@@ -46,12 +46,16 @@
     currentpage = 25;
     orderAry = [NSMutableArray array];
     
-    if (! self.orderStatus) {
-        self.orderStatus = @"0";
-    }
-    [self requestGetHistoryList];
-    
     [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"已确认"}, @{@"name":@"已完工"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
+    
+    if (! self.orderStatus) {
+        self.orderStatus = @"";
+        [mySegmentedControl changeSegmentedControlWithIndex:5];
+    } else {
+        [mySegmentedControl changeSegmentedControlWithIndex:[self.orderStatus intValue]];
+    }
+    
+    [self requestGetHistoryList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import "RegisterYZMViewController.h"
+#import "WebViewController.h"
 
 @interface RegisterViewController ()
 {
@@ -109,6 +110,12 @@
 }
 
 - (IBAction)mianzeAction:(id)sender {
+    WebViewController *webVC = [[WebViewController alloc] init];
+    webVC.webUrlStr = ServiceInfo;
+    webVC.titleStr = @"服务条款";
+    webVC.canShare = NO;
+    webVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

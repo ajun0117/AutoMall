@@ -175,6 +175,7 @@
 #define UserLogin                                   @"/api/login"                           //用户登录
 #define PhoneCheckup                             @"/api/user/checkup"             //验证手机号是否存在
 #define GetUserInfo                               @"/api/info"                            //获取登录用户的信息
+#define ServiceInfo                                @"http://119.23.227.246/carupkeep/api/service/info"            //服务条款
 
 //保养
 #define ChecktypeList                             @"/api/checktype/list"              //检查类别

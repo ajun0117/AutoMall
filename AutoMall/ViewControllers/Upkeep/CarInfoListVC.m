@@ -28,9 +28,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"车辆列表";
+//    self.title = @"车辆列表";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    UILabel *titleL = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 110, 40)];
+    titleL.text = @"车辆列表";
+    titleL.font = [UIFont boldSystemFontOfSize:17];
+    titleL.textAlignment = NSTextAlignmentRight;
+    [view addSubview:titleL];
+    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    photoBtn.frame = CGRectMake(110, 2, 40, 40);
+    [photoBtn setImage:[UIImage imageNamed:@"downloadCarInfo"] forState:UIControlStateNormal];
+    //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [photoBtn addTarget:self action:@selector(toDownloadCarInfo) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:photoBtn];
+    self.navigationItem.titleView = view;
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
@@ -82,6 +99,11 @@
     currentpage = 0;
     carArray = [NSMutableArray array];
     [self requestGetCarList];
+}
+
+-(void) toDownloadCarInfo {
+//    [self requestPostDownLoadCarList];
+    NSLog(@"toDownloadCarInfo");
 }
 
 -(void) toRegisterNewCarInfo {
@@ -204,6 +226,18 @@
 //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo", nil];
 //    NSLog(@"pram: %@",pram);
 //    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarListOrSearch) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestPostDownLoadCarList { //下载车辆信息列表
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarListOrSearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarListOrSearch, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CarListOrSearch),currentpage];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo", nil];
+    //    NSLog(@"pram: %@",pram);
+    //    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarListOrSearch) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据

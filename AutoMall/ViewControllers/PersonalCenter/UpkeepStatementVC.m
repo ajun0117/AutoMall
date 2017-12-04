@@ -208,7 +208,7 @@
         }
         else {
             selectBgView.alpha = 0.3;
-            selectTableView.frame = CGRectMake(0, 64, SCREEN_WIDTH, 350);
+            selectTableView.frame = CGRectMake(0, 63, SCREEN_WIDTH, 350);
         }
     }];
 }
