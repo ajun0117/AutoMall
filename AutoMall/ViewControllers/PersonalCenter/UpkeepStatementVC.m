@@ -109,7 +109,8 @@
     dateBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [dateBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
     dateBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [dateBtn setTitle:@"2017-09-09" forState:UIControlStateNormal];
+    NSDate *todayDate = [NSDate date];
+    [dateBtn setTitle:todayDate.yyyyMMddByLineWithDate forState:UIControlStateNormal];
     [dateBtn addTarget:self action:@selector(toSelectDate) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:dateBtn];
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;

@@ -9,7 +9,7 @@
 #import "ZFConst.h"
 
 CGFloat const ZFAxisLineStartXPos = 50.f;
-CGFloat const ZFAxisLineItemWidth = 25.f;
+CGFloat const ZFAxisLineItemWidth = 30.f;
 CGFloat const ZFAxisLinePaddingForGroupsLength = 20.f;
 CGFloat const ZFAxisLinePaddingForBarLength = 5.f;
 CGFloat const ZFAxisLineGapFromAxisLineMaxValueToArrow = 20.f;
