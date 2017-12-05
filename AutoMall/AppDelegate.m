@@ -73,7 +73,7 @@ static BOOL isBackGroundActivateApplication;
         [BPush handleNotification:userInfo];
     }
     
-//     [WXApi registerApp:kShare_WeChat_Appid withDescription:@"demo 2.0"];
+     [WXApi registerApp:kShare_WeChat_Appid withDescription:@"AutoMall"];
     
     return YES;
 }

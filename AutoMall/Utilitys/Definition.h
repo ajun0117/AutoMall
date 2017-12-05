@@ -262,7 +262,7 @@
 //微信分享
 #define kShare_WeChat_Appid                     @"wx0235d94e74c9dcb8"
 #define kShare_WeChat_AppSecret             @"ec76865ee87aac82fdf62af5b591d508"
-
+#define Wx_PartnerId                                   @"1491556662"
 
 
 #define BaiduMap_Key @"4iuR3zi67tyt80tAcVC6c1km" //壹米娱乐百度地图key

@@ -204,15 +204,15 @@
         
         //调起微信支付
         PayReq* req             = [[PayReq alloc] init];
-        req.partnerId           = [weChatPayDic objectForKey:@"partnerid"];
-        req.prepayId            = [weChatPayDic objectForKey:@"prepayid"];
-        req.nonceStr            = [weChatPayDic objectForKey:@"noncestr"];
+        req.partnerId           = Wx_PartnerId;
+        req.prepayId            = [weChatPayDic objectForKey:@"prepayId"];
+        req.nonceStr            = [weChatPayDic objectForKey:@"nonceStr"];
         req.timeStamp           = stamp.intValue;
-        req.package             = [weChatPayDic objectForKey:@"package"];
+        req.package             = @"Sign=WXPay";
         req.sign                = [weChatPayDic objectForKey:@"sign"];
         [WXApi sendReq:req];
         //日志输出
-        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[weChatPayDic objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",kShare_WeChat_Appid,req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     }
 }
 
@@ -320,8 +320,8 @@
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"AliPayNotification" object:nil];
                 [self doAlipayPay];
             }else if ([payModeStr isEqualToString:@"2"]) {    //微信
-                NSLog(@"weChatPayDic: %@",weChatPayDic);
                 weChatPayDic = responseObject[@"data"];
+                NSLog(@"weChatPayDic: %@",weChatPayDic);
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePayNotification:) name:@"WechatPayNotification" object:nil];
                 [self doWxPay];
             }
