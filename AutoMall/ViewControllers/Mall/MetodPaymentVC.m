@@ -266,12 +266,12 @@
                 break;
         }
         /***调试信息***/
-        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
-        NSString *strTitle;
-        //支付返回结果，实际支付结果需要去微信服务器端查询
-        strTitle = [NSString stringWithFormat:@"支付结果"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+//        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+//        NSString *strTitle;
+//        //支付返回结果，实际支付结果需要去微信服务器端查询
+//        strTitle = [NSString stringWithFormat:@"支付结果"];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
     }
     
 } 
