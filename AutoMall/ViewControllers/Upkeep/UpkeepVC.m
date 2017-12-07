@@ -354,6 +354,8 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *shopDic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+            [[GlobalSetting shareGlobalSettingInstance] setAlipayImg:STRING(shopDic[@"alipayImg"])];
+            [[GlobalSetting shareGlobalSettingInstance] setWechatImg:STRING(shopDic[@"wechatpayImg"])];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -368,6 +370,8 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *shopDic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+            [[GlobalSetting shareGlobalSettingInstance] setAlipayImg:STRING(shopDic[@"alipayImg"])];
+            [[GlobalSetting shareGlobalSettingInstance] setWechatImg:STRING(shopDic[@"wechatpayImg"])];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

@@ -47,6 +47,11 @@
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
     self.chepaiL.text = self.infoDic[@"plateNumber"];
     self.ownerL.text = self.infoDic[@"owner"];
+    
+    NSString *alipayUrl = [[GlobalSetting shareGlobalSettingInstance] alipayImg];
+    NSString *wechatpayUrl = [[GlobalSetting shareGlobalSettingInstance] wechatImg];
+    [self.alipayBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:UrlPrefix(alipayUrl)] forState:UIControlStateNormal];
+    [self.weixinpayBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:UrlPrefix(wechatpayUrl)] forState:UIControlStateNormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

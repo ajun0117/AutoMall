@@ -1450,6 +1450,8 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             shopDic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+            [[GlobalSetting shareGlobalSettingInstance] setAlipayImg:STRING(shopDic[@"alipayImg"])];
+            [[GlobalSetting shareGlobalSettingInstance] setWechatImg:STRING(shopDic[@"wechatpayImg"])];
             [self.myTableView reloadData];
         }
         else {
@@ -1465,6 +1467,8 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             shopDic = responseObject[@"data"];
             [[GlobalSetting shareGlobalSettingInstance] setStoreId:STRING(shopDic[@"id"])];
+            [[GlobalSetting shareGlobalSettingInstance] setAlipayImg:STRING(shopDic[@"alipayImg"])];
+            [[GlobalSetting shareGlobalSettingInstance] setWechatImg:STRING(shopDic[@"wechatpayImg"])];
             [self.myTableView reloadData];
         }
         else {

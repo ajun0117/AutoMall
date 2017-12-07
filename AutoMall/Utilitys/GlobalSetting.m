@@ -590,6 +590,28 @@ static GlobalSetting *globalSetting;
     return [userDefaults valueForKey:@"storeId"];
 }
 
+-(void)setAlipayImg:(NSString *)imgUrl {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:imgUrl forKey:@"AlipayImg"];
+    [userDefaults synchronize];
+}
+
+-(NSString *)alipayImg {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:@"AlipayImg"];
+}
+
+-(void)setWechatImg:(id)imgUrl {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:imgUrl forKey:@"WechatImg"];
+    [userDefaults synchronize];
+}
+
+-(NSString *)wechatImg {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:@"WechatImg"];
+}
+
 -(void)setOfficialPhone:(id)phone {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:phone forKey:@"officialPhone"];

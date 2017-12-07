@@ -230,6 +230,12 @@
 -(void)setStoreId:(id)sId;
 -(id)storeId;
 
+-(void)setAlipayImg:(NSString *)imgUrl;
+-(NSString *)alipayImg;
+
+-(void)setWechatImg:(id)imgUrl;
+-(NSString *)wechatImg;
+
 -(void)setOfficialPhone:(id)phone;
 -(id)officialPhone;
 
