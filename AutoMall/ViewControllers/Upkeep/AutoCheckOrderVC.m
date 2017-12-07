@@ -50,8 +50,8 @@
     
     NSString *alipayUrl = [[GlobalSetting shareGlobalSettingInstance] alipayImg];
     NSString *wechatpayUrl = [[GlobalSetting shareGlobalSettingInstance] wechatImg];
-    [self.alipayBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:UrlPrefix(alipayUrl)] forState:UIControlStateNormal];
-    [self.weixinpayBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:UrlPrefix(wechatpayUrl)] forState:UIControlStateNormal];
+    [self.alipayBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:UrlPrefix(alipayUrl)] forState:UIControlStateNormal placeholderImage:IMG(@"default")];
+    [self.weixinpayBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:UrlPrefix(wechatpayUrl)] forState:UIControlStateNormal placeholderImage:IMG(@"default")];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

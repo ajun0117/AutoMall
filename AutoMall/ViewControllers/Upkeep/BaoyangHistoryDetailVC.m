@@ -61,9 +61,6 @@
     
     removeAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
-    
-    [self requestGetUpkeepInfo];
-    [self requestGetAllUnnormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -80,6 +77,9 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [self requestGetUpkeepInfo];
+    [self requestGetAllUnnormal];
 }
 
 -(void)carInfo {

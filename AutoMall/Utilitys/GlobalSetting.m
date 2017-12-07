@@ -777,6 +777,9 @@ static GlobalSetting *globalSetting;
     [userDefaults removeObjectForKey:@"mHead"];
     [userDefaults removeObjectForKey:kUserID];
     [userDefaults removeObjectForKey:kToken];
+    [userDefaults removeObjectForKey:@"storeId"];
+    [userDefaults removeObjectForKey:@"AlipayImg"];
+    [userDefaults removeObjectForKey:@"WechatImg"];
     [userDefaults synchronize];
 }
 
