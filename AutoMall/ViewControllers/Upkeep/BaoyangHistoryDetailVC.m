@@ -61,6 +61,8 @@
     
     removeAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
+    
+    [self requestGetUpkeepInfo];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -78,7 +80,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self requestGetUpkeepInfo];
+    [unnormalAry removeAllObjects];
     [self requestGetAllUnnormal];
 }
 
@@ -211,15 +213,15 @@
             label.backgroundColor = [UIColor clearColor];
             label.text = @"车辆信息";
             
-//            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
             [btn addTarget:self action:@selector(carInfo) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:label];
-//            [view addSubview:img];
+            [view addSubview:img];
             [view addSubview:btn];
             [bgView addSubview:view];
             return bgView;
@@ -518,7 +520,7 @@
             cell.declareL.strikeThroughEnabled = NO;
             cell.declareL.text = @"总价";
             cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-            cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + selectedServicePrice];
+            cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",[carUpkeepDic[@"money"] floatValue] + discountPrice];
             cell.contentL.font = [UIFont boldSystemFontOfSize:16];
             cell.contentL.textColor = [UIColor blackColor];
             return cell;
@@ -736,10 +738,30 @@
             removeAry = carUpkeepDic[@"serviceContents"];
             
             selectedPackageAry = carUpkeepDic[@"servicePackages"];
+            packagePrice = 0;
+            for (NSDictionary *dic in selectedPackageAry) {
+                if ([dic[@"customized"] boolValue]) {
+                    packagePrice += [dic[@"customizedPrice"] floatValue];
+                } else {
+                    packagePrice += [dic[@"price"] floatValue];
+                }
+            }
             
             selectedServices = carUpkeepDic[@"services"];
+            selectedServicePrice = 0;
+            for (NSDictionary *dic in selectedServices) {
+                if (dic[@"money"]) {
+                    selectedServicePrice += [dic[@"money"] floatValue];
+                }
+            }
 
             selectedDiscounts = carUpkeepDic[@"discounts"];
+            discountPrice = 0;
+            for (NSDictionary *dic in selectedDiscounts) {
+                if (dic[@"money"]) {
+                    discountPrice += [dic[@"money"] floatValue];
+                }
+            }
             
             [self.myTableView reloadData];
         }
@@ -749,10 +771,6 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
-    
-    
-    
-    
     
     if ([notification.name isEqualToString:CarUpkeepUnnormal]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepUnnormal object:nil];
@@ -806,16 +824,6 @@
 //        }
 //    }
 
-}
-
-
-- (void)toPushVC:(NSString *)orderId {
-    AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
-    orderVC.checkOrderId = self.carUpkeepId;
-    NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice + selectedServicePrice];
-    NSDictionary *dic = @{@"orderId":[NSString stringWithFormat:@"%@",orderId],@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
-    orderVC.infoDic = dic;
-    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

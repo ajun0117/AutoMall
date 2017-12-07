@@ -129,10 +129,17 @@
 
 #pragma mark - 网络请求结果数据
 -(void) didSelectedCar:(NSNotification *)notification {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DidSelectedCar" object:nil];
-    selectedCarDic = notification.userInfo;
-    self.title = selectedCarDic[@"plateNumber"];
-    NSLog(@"selectedCarDic: %@",selectedCarDic);
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DidSelectedCar" object:nil];
+    if (notification.userInfo) {
+        selectedCarDic = notification.userInfo;
+        self.title = selectedCarDic[@"plateNumber"];
+        NSLog(@"selectedCarDic: %@",selectedCarDic);
+    }
+    else {      //清空已选的车辆信息
+        selectedCarDic = nil;
+        self.title = @"保养服务";
+    }
+    
 }
 
 #pragma mark - UICollectionViewDelegate

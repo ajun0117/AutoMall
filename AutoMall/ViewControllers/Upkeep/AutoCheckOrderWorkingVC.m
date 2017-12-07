@@ -64,20 +64,6 @@
 
 - (IBAction)completeAction:(id)sender {
     [self requestPostUpdateStatus];
-//    if ([self.statusFlow isEqualToString:@"1"]) {   //先付款，施工完成，至完成页
-//        AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
-//        completeVC.statusFlow = self.statusFlow;
-//        completeVC.checkOrderId = self.checkOrderId;
-//        completeVC.infoDic = self.infoDic;
-//        [self.navigationController pushViewController:completeVC animated:YES];
-//    }
-//    else if ([self.statusFlow isEqualToString:@"0"]) {  //先施工，施工完成，至付款页
-//        AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
-//        orderVC.statusFlow = self.statusFlow;
-//        orderVC.checkOrderId = self.checkOrderId;
-//        orderVC.infoDic = self.infoDic;
-//        [self.navigationController pushViewController:orderVC animated:YES];
-//    }
 }
 
 -(void) popToRootVC {
@@ -91,7 +77,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepUpdate object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepUpdate, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.checkOrderId,@"id",@"4",@"status", self.statusFlow,@"statusFlow",nil]; //施工完成
+    
+    NSString *statusStr;
+    if ([self.statusFlow isEqualToString:@"1"]) {   //先付款，施工完成，至完成页
+        statusStr = @"4";    //完工
+    }
+    else if ([self.statusFlow isEqualToString:@"0"]) {  //先施工，施工完成，至付款页
+        statusStr = @"2";   //施工完成
+    }
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.checkOrderId,@"id",statusStr,@"status", self.statusFlow,@"statusFlow",nil]; //施工完成
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarUpkeepUpdate) delegate:nil params:pram info:infoDic];
 }
 

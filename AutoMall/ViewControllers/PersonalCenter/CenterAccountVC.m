@@ -92,6 +92,7 @@
     if (buttonIndex == 1 && alertView.tag == 1001) {
         [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
         [[CartTool sharedManager] removeAllCartItems];      //清空本地购物车数据
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:nil];  //通知清空已选的车辆信息
         self.UpdateLoginStatus();
         [self.navigationController popViewControllerAnimated:YES];
     }

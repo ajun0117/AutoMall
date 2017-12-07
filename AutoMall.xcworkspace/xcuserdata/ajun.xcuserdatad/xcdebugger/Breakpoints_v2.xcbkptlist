@@ -201,13 +201,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/Upkeep/AutoCheckOrderWorkingVC.m"
-            timestampString = "533749017.854886"
+            filePath = "AutoMall/ViewControllers/Upkeep/BaoyangHistoryDetailVC.m"
+            timestampString = "534353986.110073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "-requestPostUpdateStatus"
+            startingLineNumber = "708"
+            endingLineNumber = "708"
+            landmarkName = "-requestGetUpkeepInfo"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoMall/ViewControllers/Upkeep/UpkeepVC.m"
+            timestampString = "534357681.40852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-didSelectedCar:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

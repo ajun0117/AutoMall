@@ -18,6 +18,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *carArray;
     int currentpage;
+    NSString *paramsUrl;
 }
 @property (strong, nonatomic) IBOutlet UITableView *infoTableView;
 
@@ -104,6 +105,8 @@
 -(void) toDownloadCarInfo {
 //    [self requestPostDownLoadCarList];
     NSLog(@"toDownloadCarInfo");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请在电脑浏览器中输入以下网址下载数据" message:UrlPrefix(paramsUrl) delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 -(void) toRegisterNewCarInfo {
@@ -228,18 +231,6 @@
 //    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarListOrSearch) delegate:nil params:pram info:infoDic];
 }
 
--(void)requestPostDownLoadCarList { //下载车辆信息列表
-    [_hud show:YES];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarListOrSearch object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarListOrSearch, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?pageNo=%d",UrlPrefix(CarListOrSearch),currentpage];
-    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
-    //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:currentpage],@"pageNo", nil];
-    //    NSLog(@"pram: %@",pram);
-    //    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CarListOrSearch) delegate:nil params:pram info:infoDic];
-}
-
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -257,6 +248,9 @@
         NSLog(@"CarListOrSearch: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             [carArray addObjectsFromArray:responseObject[@"data"]];
+            if (! [responseObject[@"params"] isKindOfClass:[NSNull class]]) {
+                paramsUrl = responseObject[@"params"][@"exportCarUrl"];
+            }
             [self.infoTableView reloadData];
         }
         else {
