@@ -105,7 +105,9 @@
 -(void) toDownloadCarInfo {
 //    [self requestPostDownLoadCarList];
     NSLog(@"toDownloadCarInfo");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请在电脑浏览器中输入以下网址下载数据" message:UrlPrefix(paramsUrl) delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSString *paramsUrlStr = [NSString stringWithFormat:@"%@?storeId=%@",UrlPrefix(paramsUrl),storeId];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请在电脑浏览器中输入以下网址下载数据" message:paramsUrlStr delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
 
