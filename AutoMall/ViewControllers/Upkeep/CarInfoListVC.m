@@ -12,7 +12,7 @@
 #import "BaoyangHistoryVC.h"
 #import "CarInfoAddVC.h"
 
-@interface CarInfoListVC ()
+@interface CarInfoListVC () <UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -47,7 +47,10 @@
     [photoBtn setImage:[UIImage imageNamed:@"downloadCarInfo"] forState:UIControlStateNormal];
     //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [photoBtn addTarget:self action:@selector(toDownloadCarInfo) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:photoBtn];
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"1"]) {  //门店老板
+        [view addSubview:photoBtn];
+    }
     self.navigationItem.titleView = view;
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
@@ -105,10 +108,23 @@
 -(void) toDownloadCarInfo {
 //    [self requestPostDownLoadCarList];
     NSLog(@"toDownloadCarInfo");
-    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
-    NSString *paramsUrlStr = [NSString stringWithFormat:@"%@?storeId=%@",UrlPrefix(paramsUrl),storeId];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请在电脑浏览器中输入以下网址下载数据" message:paramsUrlStr delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSString *paramsUrlStr = UrlPrefix(paramsUrl);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请在电脑浏览器中输入以下网址下载数据" message:paramsUrlStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",@"复制", nil];
+    alert.tag = 1002;
     [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1 && alertView.tag == 1002) {
+        //下面方法可以将文本复制到剪切板
+        UIPasteboard *pboard = [UIPasteboard generalPasteboard];
+        pboard.string = alertView.message;
+        
+        _networkConditionHUD.labelText = @"已复制到剪切板";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void) toRegisterNewCarInfo {

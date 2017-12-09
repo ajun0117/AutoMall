@@ -225,7 +225,8 @@
                 break;
             }
             case 2: {
-                return 3;
+//                return 3;
+                return 2;
                 break;
             }
             case 3: {
@@ -773,14 +774,14 @@
                         return cell;
                         break;
                     }
-                    case 2: {
-                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
-                        cell.img.image = IMG(@"center_statistics");
-                        cell.nameL.text = @"统计报表";
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        return cell;
-                        break;
-                    }
+//                    case 2: {
+//                        CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+//                        cell.img.image = IMG(@"center_statistics");
+//                        cell.nameL.text = @"统计报表";
+//                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                        return cell;
+//                        break;
+//                    }
                     default:
                         return nil;
                         break;
@@ -1051,12 +1052,12 @@
                         [self.navigationController pushViewController:orderVC animated:YES];
                         break;
                     }
-                    case 2: {
-                        UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
-                        statementVC.hidesBottomBarWhenPushed = YES;
-                        [self.navigationController pushViewController:statementVC animated:YES];
-                        break;
-                    }
+//                    case 2: {
+//                        UpkeepStatementVC *statementVC = [[UpkeepStatementVC alloc] init];
+//                        statementVC.hidesBottomBarWhenPushed = YES;
+//                        [self.navigationController pushViewController:statementVC animated:YES];
+//                        break;
+//                    }
                     default:
                         break;
                 }

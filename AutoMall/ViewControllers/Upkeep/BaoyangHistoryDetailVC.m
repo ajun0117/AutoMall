@@ -475,11 +475,11 @@
 //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             NSDictionary *dic = removeAry[indexPath.row];
             
-//            if ([dic[@""] intValue] == ) {    //如果包含，则勾选
-//                cell.checkBtn.selected = YES;
-//            } else {
-//                cell.checkBtn.selected = NO;
-//            }
+            if ([dic[@"selected"] intValue] == 1) {    //如果包含，则勾选
+                cell.checkBtn.selected = YES;
+            } else {
+                cell.checkBtn.selected = NO;
+            }
 //            cell.checkBtn.tag = indexPath.row + 100;
 //            [cell.checkBtn addTarget:self action:@selector(checkService:) forControlEvents:UIControlEventTouchUpInside];
             cell.declareL.text = dic[@"name"];
@@ -750,7 +750,7 @@
             selectedServices = carUpkeepDic[@"services"];
             selectedServicePrice = 0;
             for (NSDictionary *dic in selectedServices) {
-                if (dic[@"money"]) {
+                if (dic[@"money"] && ! [dic[@"money"] isKindOfClass:[NSNull class]]) {
                     selectedServicePrice += [dic[@"money"] floatValue];
                 }
             }
@@ -758,7 +758,7 @@
             selectedDiscounts = carUpkeepDic[@"discounts"];
             discountPrice = 0;
             for (NSDictionary *dic in selectedDiscounts) {
-                if (dic[@"money"]) {
+                if (dic[@"money"] && ! [dic[@"money"] isKindOfClass:[NSNull class]]) {
                     discountPrice += [dic[@"money"] floatValue];
                 }
             }

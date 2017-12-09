@@ -53,16 +53,16 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 44, 44);
-//    searchBtn.contentMode = UIViewContentModeRight;
-    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
-    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [searchBtn setTitle:@"套餐" forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
+//    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    searchBtn.frame = CGRectMake(0, 0, 44, 44);
+////    searchBtn.contentMode = UIViewContentModeRight;
+//    searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
+//    searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [searchBtn setTitle:@"套餐" forState:UIControlStateNormal];
+//    [searchBtn addTarget:self action:@selector(toPackage) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+//    self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
     
 //    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanInfoCell" bundle:nil] forCellReuseIdentifier:@"planInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanNormalCell" bundle:nil] forCellReuseIdentifier:@"planNormalCell"];
