@@ -413,6 +413,9 @@
 		F70A509A1FA220640047D804 /* ShopInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70A50981FA220640047D804 /* ShopInfoCell.xib */; };
 		F70A509E1FA22B4A0047D804 /* CheckResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A509C1FA22B4A0047D804 /* CheckResultCell.m */; };
 		F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */; };
+		F7106F4E1FDD84DC0009DF63 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F7106F4D1FDD84DC0009DF63 /* LXActivity.m */; };
+		F7106F511FDD85210009DF63 /* ShareTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F7106F501FDD85210009DF63 /* ShareTool.m */; };
+		F7106F531FDD87650009DF63 /* icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = F7106F521FDD87650009DF63 /* icon80.png */; };
 		F71245751F868B590091816F /* CheckContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245741F868B590091816F /* CheckContentItem.m */; };
 		F71245781F868DD20091816F /* CheckContentTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F71245771F868DD20091816F /* CheckContentTool.m */; };
 		F71D0D011FC1C155000BB47C /* MultiTablesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F71D0CFE1FC1C155000BB47C /* MultiTablesView.m */; };
@@ -439,6 +442,12 @@
 		F7AC8DA81FA793E100B284DA /* CenterEmployeeAuthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AC8DA61FA793E100B284DA /* CenterEmployeeAuthCell.xib */; };
 		F7AC8DAD1FA7965F00B284DA /* EmployeeEditIntroduceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7AC8DAB1FA7965F00B284DA /* EmployeeEditIntroduceVC.m */; };
 		F7AC8DAE1FA7965F00B284DA /* EmployeeEditIntroduceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AC8DAC1FA7965F00B284DA /* EmployeeEditIntroduceVC.xib */; };
+		F7BE37311FDD90A60042318F /* fx_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7BE372F1FDD90A60042318F /* fx_line@2x.png */; };
+		F7BE37321FDD90A60042318F /* fx_line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7BE37301FDD90A60042318F /* fx_line@3x.png */; };
+		F7BE37371FDD91810042318F /* share_pyq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7BE37331FDD91810042318F /* share_pyq@2x.png */; };
+		F7BE37381FDD91810042318F /* share_pyq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7BE37341FDD91810042318F /* share_pyq@3x.png */; };
+		F7BE37391FDD91810042318F /* share_wx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7BE37351FDD91810042318F /* share_wx@2x.png */; };
+		F7BE373A1FDD91810042318F /* share_wx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7BE37361FDD91810042318F /* share_wx@3x.png */; };
 		F7D87A201FA4E6A1009EB53F /* CenterEmployeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D87A1E1FA4E6A1009EB53F /* CenterEmployeeCell.m */; };
 		F7D87A211FA4E6A1009EB53F /* CenterEmployeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D87A1F1FA4E6A1009EB53F /* CenterEmployeeCell.xib */; };
 		F7D87A261FA5BFC6009EB53F /* CenterAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D87A241FA5BFC6009EB53F /* CenterAccountVC.m */; };
@@ -1203,6 +1212,11 @@
 		F70A509B1FA22B4A0047D804 /* CheckResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckResultCell.h; sourceTree = "<group>"; };
 		F70A509C1FA22B4A0047D804 /* CheckResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckResultCell.m; sourceTree = "<group>"; };
 		F70A509D1FA22B4A0047D804 /* CheckResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckResultCell.xib; sourceTree = "<group>"; };
+		F7106F4C1FDD84DC0009DF63 /* LXActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXActivity.h; sourceTree = "<group>"; };
+		F7106F4D1FDD84DC0009DF63 /* LXActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXActivity.m; sourceTree = "<group>"; };
+		F7106F4F1FDD85210009DF63 /* ShareTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTool.h; sourceTree = "<group>"; };
+		F7106F501FDD85210009DF63 /* ShareTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareTool.m; sourceTree = "<group>"; };
+		F7106F521FDD87650009DF63 /* icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon80.png; path = Assets.xcassets/AppIcon.appiconset/icon80.png; sourceTree = "<group>"; };
 		F71245731F868B590091816F /* CheckContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentItem.h; sourceTree = "<group>"; };
 		F71245741F868B590091816F /* CheckContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckContentItem.m; sourceTree = "<group>"; };
 		F71245761F868DD20091816F /* CheckContentTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckContentTool.h; sourceTree = "<group>"; };
@@ -1245,6 +1259,12 @@
 		F7AC8DAA1FA7965F00B284DA /* EmployeeEditIntroduceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeEditIntroduceVC.h; sourceTree = "<group>"; };
 		F7AC8DAB1FA7965F00B284DA /* EmployeeEditIntroduceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeEditIntroduceVC.m; sourceTree = "<group>"; };
 		F7AC8DAC1FA7965F00B284DA /* EmployeeEditIntroduceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeEditIntroduceVC.xib; sourceTree = "<group>"; };
+		F7BE372F1FDD90A60042318F /* fx_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fx_line@2x.png"; sourceTree = "<group>"; };
+		F7BE37301FDD90A60042318F /* fx_line@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fx_line@3x.png"; sourceTree = "<group>"; };
+		F7BE37331FDD91810042318F /* share_pyq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_pyq@2x.png"; sourceTree = "<group>"; };
+		F7BE37341FDD91810042318F /* share_pyq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_pyq@3x.png"; sourceTree = "<group>"; };
+		F7BE37351FDD91810042318F /* share_wx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_wx@2x.png"; sourceTree = "<group>"; };
+		F7BE37361FDD91810042318F /* share_wx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_wx@3x.png"; sourceTree = "<group>"; };
 		F7D87A1D1FA4E6A1009EB53F /* CenterEmployeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterEmployeeCell.h; sourceTree = "<group>"; };
 		F7D87A1E1FA4E6A1009EB53F /* CenterEmployeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterEmployeeCell.m; sourceTree = "<group>"; };
 		F7D87A1F1FA4E6A1009EB53F /* CenterEmployeeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterEmployeeCell.xib; sourceTree = "<group>"; };
@@ -2032,6 +2052,7 @@
 				04DC7E021F31D1CD00AA20A7 /* TabBarController.m */,
 				04AE981C1F2ED46500C2D158 /* Main.storyboard */,
 				04AE981F1F2ED46500C2D158 /* Assets.xcassets */,
+				F7106F521FDD87650009DF63 /* icon80.png */,
 				04AE98211F2ED46500C2D158 /* LaunchScreen.storyboard */,
 				04AE98241F2ED46500C2D158 /* Info.plist */,
 				04AE98101F2ED46500C2D158 /* Supporting Files */,
@@ -2602,6 +2623,16 @@
 		04DC7D7C1F31C28300AA20A7 /* share */ = {
 			isa = PBXGroup;
 			children = (
+				F7BE372F1FDD90A60042318F /* fx_line@2x.png */,
+				F7BE37301FDD90A60042318F /* fx_line@3x.png */,
+				F7BE37331FDD91810042318F /* share_pyq@2x.png */,
+				F7BE37341FDD91810042318F /* share_pyq@3x.png */,
+				F7BE37351FDD91810042318F /* share_wx@2x.png */,
+				F7BE37361FDD91810042318F /* share_wx@3x.png */,
+				F7106F4C1FDD84DC0009DF63 /* LXActivity.h */,
+				F7106F4D1FDD84DC0009DF63 /* LXActivity.m */,
+				F7106F4F1FDD85210009DF63 /* ShareTool.h */,
+				F7106F501FDD85210009DF63 /* ShareTool.m */,
 				04DC7D7D1F31C28300AA20A7 /* UMSocial_Sdk_4.2.3 */,
 				04DC7D981F31C28300AA20A7 /* UMSocial_Sdk_Extra_Frameworks */,
 			);
@@ -3129,6 +3160,7 @@
 				042E5D281F41A0CA00F5F324 /* UpkeepPlanNormalCell.xib in Resources */,
 				F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */,
 				04AD1FDE1F43EEFB00247819 /* InformationCell.xib in Resources */,
+				F7BE37371FDD91810042318F /* share_pyq@2x.png in Resources */,
 				04FCC4E81FC2BA9F00740D77 /* CheckResultOtherCell.xib in Resources */,
 				F7650B5B1FAF344900C0FCD2 /* ServiceContentDetailVC.xib in Resources */,
 				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
@@ -3136,6 +3168,7 @@
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
 				04DC7DD71F31C28300AA20A7 /* UMSCommentDetailController.xib in Resources */,
 				04F6B6941F45477A00052658 /* YZMLoginViewController.xib in Resources */,
+				F7BE37311FDD90A60042318F /* fx_line@2x.png in Resources */,
 				04ABFB481F985AC90015EE78 /* AutoCheckOrderWorkingVC.xib in Resources */,
 				04A6428A1FAC003E00E52C0D /* MessageListCell.xib in Resources */,
 				04E410841F5D52750097E0A6 /* ApplyAuthenticationVC.xib in Resources */,
@@ -3155,18 +3188,22 @@
 				04DC7DCD1F31C28300AA20A7 /* MJRefresh.bundle in Resources */,
 				047AE0031F4A883A00AEAE8E /* CommodityDetailVC.xib in Resources */,
 				04C576511F79DD46003BF404 /* AutoCheckMultiCell.xib in Resources */,
+				F7106F531FDD87650009DF63 /* icon80.png in Resources */,
 				0490FC001F57F6CA00F77661 /* CustomServiceVC.xib in Resources */,
 				04C656491F97694400611AFF /* AutoCheckOrderVC.xib in Resources */,
 				04EFEC791F5FE9FD004D9188 /* MailCollectionCell.xib in Resources */,
 				04DCA1801FA2F30B004B1054 /* CheckResultQRCell.xib in Resources */,
+				F7BE373A1FDD91810042318F /* share_wx@3x.png in Resources */,
 				04D1071B1F6296A1007D9F57 /* UpkeepStatementVC.xib in Resources */,
 				F73CB9BE1F893B2600936C7A /* AutoCheckGroupCell.xib in Resources */,
 				04A09B111F3D967B00053A98 /* CarInfoListCell.xib in Resources */,
 				04DCA17B1FA2F1AA004B1054 /* CheckResultTechnicianCell.xib in Resources */,
 				04D396451F661F870077BFB3 /* SettlementAddressCell.xib in Resources */,
 				04DC7DCC1F31C28300AA20A7 /* indicator.png in Resources */,
+				F7BE37381FDD91810042318F /* share_pyq@3x.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */,
+				F7BE37391FDD91810042318F /* share_wx@2x.png in Resources */,
 				04DCA1911FA34992004B1054 /* ResultCheckContentDetailCell.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
 				04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */,
@@ -3239,6 +3276,7 @@
 				04C35D1E1F8B57BC00062014 /* MessageListVC.xib in Resources */,
 				042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */,
 				04F7D87A1F5EAD48004945ED /* MailOrderSingleCell.xib in Resources */,
+				F7BE37321FDD90A60042318F /* fx_line@3x.png in Resources */,
 				04EB16261F42F0CD00974972 /* ServicePackageVC.xib in Resources */,
 				F7D87A211FA4E6A1009EB53F /* CenterEmployeeCell.xib in Resources */,
 				04DCA1761FA2E316004B1054 /* CheckResultMultiCell.xib in Resources */,
@@ -3367,6 +3405,7 @@
 				04D107771F62998D007D9F57 /* UIView+Zirkfied.m in Sources */,
 				04DC7DC41F31C28300AA20A7 /* QBAssetsCollectionViewController.m in Sources */,
 				04DC7DC51F31C28300AA20A7 /* QBAssetsCollectionViewLayout.m in Sources */,
+				F7106F4E1FDD84DC0009DF63 /* LXActivity.m in Sources */,
 				04ABFB4C1F9887630015EE78 /* AutoCheckOrderCompleteVC.m in Sources */,
 				04ABFB421F9858EB0015EE78 /* AutoCheckOrderPayModeVC.m in Sources */,
 				04DC7DC21F31C28300AA20A7 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
@@ -3438,6 +3477,7 @@
 				040BC8BB1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
 				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
+				F7106F511FDD85210009DF63 /* ShareTool.m in Sources */,
 				04DC7DCB1F31C28300AA20A7 /* CustomActivityIndicatorView.m in Sources */,
 				04DC7DB21F31C28300AA20A7 /* MarkupParser.m in Sources */,
 				0459C6C11F614CCA0040501E /* AddressInfoEditVC.m in Sources */,

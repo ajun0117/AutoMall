@@ -42,6 +42,10 @@
 //iPhone4
 #define   isIphone4  [UIScreen mainScreen].bounds.size.height < 500
 
+//手动适配屏幕宽高
+#define kScale_5s_W(value) (([[UIScreen mainScreen]bounds].size.width/320.0) * (value))
+#define kScale_5s_H(value) (([[UIScreen mainScreen]bounds].size.height/568.0) * (value))
+
 #define STRING_Nil(str)         (str==nil)?@"":str
 #define STRING(str)         (str==[NSNull null])?@"":str
 #define STRINGZero(str)         (str==[NSNull null])?@"0":str
@@ -135,9 +139,8 @@
 
 
 //汽车商城
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
-//#define ImagePrefixURL(action)           ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
-
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表
@@ -196,6 +199,7 @@
 #define CarUpkeepServiceContent           @"/api/carUpkeep/serviceContent"    //检查单相关的服务方案
 #define ServicepackageList                      @"/api/servicepackage/list"     //服务套餐列表
 #define CarUpkeepConfirm                       @"/api/carUpkeep/confirm"   //服务方案确认
+#define CarUpkeepShare                          @"/api/carUpkeep/share"         //分享检查单
 
 //个人中心
 #define AllCheckcategorySearch            @"/api/checkcategory/search"        //平台所有部位列表

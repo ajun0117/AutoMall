@@ -43,7 +43,7 @@
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
-    currentpage = 26;
+    currentpage = 0;
     orderAry = [NSMutableArray array];
     
     [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"已确认"}, @{@"name":@"已完工"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
