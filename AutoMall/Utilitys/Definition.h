@@ -178,7 +178,7 @@
 #define UserLogin                                   @"/api/login"                           //用户登录
 #define PhoneCheckup                             @"/api/user/checkup"             //验证手机号是否存在
 #define GetUserInfo                               @"/api/info"                            //获取登录用户的信息
-#define ServiceInfo                                @"http://119.23.227.246/carupkeep/api/service/info"            //服务条款
+#define ServiceInfo                                @"http://hengliantech.com/carupkeep/api/service/info"            //服务条款
 
 //保养
 #define ChecktypeList                             @"/api/checktype/list"              //检查类别
@@ -218,7 +218,7 @@
 #define StoreserviceDel                          @"/api/storeservice/del"        //删除门店服务
 #define StoreserviceAdd                         @"/api/storeservice/add"        //新增门店服务
 #define MessageList                                @"/api/message/list"              //消息列表
-#define AgreementInfo                           @"http://119.23.227.246/carupkeep/api/agreement/info"         //免责声明
+#define AgreementInfo                           @"http://hengliantech.com/carupkeep/api/agreement/info"         //免责声明
 #define GetPhoneInfo                              @"/api/phone/getPhoneInfo"      //获取官网联系电话
 #define ChangeNickName                         @"/api/user/changeNickname"     //修改昵称和微信
 #define GetApprovalStatus                      @"/api/store/getApprovalStatus"     //获取门店的审批状态

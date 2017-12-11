@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "534528485.248121"
+            timestampString = "534703133.414794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1484"
-            endingLineNumber = "1484"
+            startingLineNumber = "1491"
+            endingLineNumber = "1491"
             landmarkName = "-didFinishedRequestData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/PersonalCenterVC.m"
-            timestampString = "534528485.248121"
+            timestampString = "534703133.414794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1550"
-            endingLineNumber = "1550"
+            startingLineNumber = "1557"
+            endingLineNumber = "1557"
             landmarkName = "-toPushVC"
             landmarkType = "7">
          </BreakpointContent>
@@ -209,6 +209,54 @@
             endingLineNumber = "681"
             landmarkName = "-requestPostReportSum"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoMall/ViewControllers/Login_Register/LoginViewController.m"
+            timestampString = "534703178.091985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-didFinishedRequestData:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[LoginViewController didFinishedRequestData:]"
+                  moduleName = "AutoMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajun/Desktop/AutoMall/AutoMall/ViewControllers/Login_Register/LoginViewController.m"
+                  timestampString = "534703178.325496"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "259"
+                  endingLineNumber = "259"
+                  offsetFromSymbolStart = "3300">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[LoginViewController didFinishedRequestData:]_block_invoke"
+                  moduleName = "AutoMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajun/Desktop/AutoMall/AutoMall/ViewControllers/Login_Register/LoginViewController.m"
+                  timestampString = "534703178.328029"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "260"
+                  endingLineNumber = "260"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

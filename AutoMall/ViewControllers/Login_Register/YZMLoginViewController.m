@@ -314,6 +314,13 @@
         NSLog(@"GetUserInfo_responseObject %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *dic = responseObject[@"data"];
+            
+            [BPush setTag:[NSString stringWithFormat:@"%@",dic[@"id"]] withCompleteHandler:^(id result, NSError *error) {
+                if (error.code == 0) {
+                    NSLog(@"绑定推送成功！userId: %@",[NSString stringWithFormat:@"%@",dic[@"id"]]);
+                }
+            }];
+            
             [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",dic[@"id"]]];
             [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",dic[@"mobileUserType"]]];
             [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",dic[@"phone"]]];
