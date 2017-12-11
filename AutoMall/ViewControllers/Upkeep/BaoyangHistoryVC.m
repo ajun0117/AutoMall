@@ -136,6 +136,11 @@
         detailVC.checktypeID = dic[@"checkTypeId"];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
+    else {
+        _networkConditionHUD.labelText = @"此订单是老数据，因数据不全，不能跳转！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark - 发送请求
