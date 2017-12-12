@@ -145,11 +145,11 @@ static BOOL isBackGroundActivateApplication;
                     NSLog(@"result ============== %@",result);
                 }
             }];
-            [BPush setTag:@"Mytag" withCompleteHandler:^(id result, NSError *error) {
-                if (result) {
-                    NSLog(@"设置tag成功");
-                }
-            }];
+//            [BPush setTag:@"Mytag" withCompleteHandler:^(id result, NSError *error) {
+//                if (result) {
+//                    NSLog(@"设置tag成功");
+//                }
+//            }];
         }
     }];
     

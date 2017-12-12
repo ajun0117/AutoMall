@@ -343,9 +343,9 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *userInfoDic = responseObject[@"data"];
             
-            [BPush setTag:[NSString stringWithFormat:@"%@",userInfoDic[@"id"]] withCompleteHandler:^(id result, NSError *error) {
+            [BPush setTag:[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]] withCompleteHandler:^(id result, NSError *error) {
                 if (error.code == 0) {
-                    NSLog(@"绑定推送成功！userId: %@",[NSString stringWithFormat:@"%@",userInfoDic[@"id"]]);
+                    NSLog(@"绑定推送成功！userId: %@",[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]]);
                 }
             }];
             

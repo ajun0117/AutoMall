@@ -256,9 +256,9 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             NSDictionary *dic = responseObject[@"data"];
             
-            [BPush setTag:[NSString stringWithFormat:@"%@",dic[@"id"]] withCompleteHandler:^(id result, NSError *error) {
+            [BPush setTag:[NSString stringWithFormat:@"%@",dic[@"phone"]] withCompleteHandler:^(id result, NSError *error) {
                 if (error.code == 0) {
-                    NSLog(@"绑定推送成功！userId: %@",[NSString stringWithFormat:@"%@",dic[@"id"]]);
+                    NSLog(@"绑定推送成功！userId: %@",[NSString stringWithFormat:@"%@",dic[@"phone"]]);
                 }
             }];
             
