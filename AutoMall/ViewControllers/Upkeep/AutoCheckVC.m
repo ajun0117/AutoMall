@@ -30,7 +30,7 @@
     NSArray *contentAry;    //检查内容列表
     NSInteger currentSelectIndex;  //当前选中的位置
     NSIndexPath *currentPhotoIndexPath;     //记录当前拍照按钮对应的cell位置
-//    NSDictionary *lichengDic;    //里程油量数据
+    NSDictionary *lichengDic;    //里程油量数据
     NSString *carImageUrl;  //车图的url
     NSArray *carImagesAry;  //车图的拍照照片
 }
@@ -46,13 +46,6 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-////    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-//    backButton.frame = CGRectMake(0, 0, 24, 24);
-//    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-//    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
-//    self.navigationItem.leftBarButtonItem = backButnItem;
-    
     //最近iOS项目中要求导航栏的返回按钮只保留那个箭头，去掉后边的文字，在网上查了一些资料，最简单且没有副作用的方法就是
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
@@ -61,13 +54,13 @@
                                        target:nil action:nil];
     negativeSpacer.width = -6;
 
-//    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    infoBtn.frame = CGRectMake(0, 0, 30, 30);
-////    [infoBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-//    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
-//    [infoBtn setImage:[UIImage imageNamed:@"carInfo"] forState:UIControlStateNormal];
-//    [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
+    UIButton *infoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    infoBtn.frame = CGRectMake(0, 0, 30, 30);
+//    [infoBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    infoBtn.contentMode = UIViewContentModeScaleAspectFit;
+    [infoBtn setImage:[UIImage imageNamed:@"carInfo"] forState:UIControlStateNormal];
+    [infoBtn addTarget:self action:@selector(toFillLicheng) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *infoBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:infoBtn];
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 30, 30);
@@ -76,7 +69,7 @@
     [searchBtn setImage:[UIImage imageNamed:@"mark"] forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(toMark) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
     
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49 - 20)];
     self.mainScrollView.pagingEnabled = YES;
@@ -152,16 +145,16 @@
     }
 }
 
-//-(void)toFillLicheng {
-//    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
-//    infoVC.mileageAndfuelAmountDic = lichengDic;
-//    infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
-//        lichengDic = dic;
-//        NSLog(@"lichengDic: %@",lichengDic);
-//    };
-//    infoVC.carDic = self.carDic;
-//    [self.navigationController pushViewController:infoVC animated:YES];
-//}
+-(void)toFillLicheng {
+    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
+    infoVC.mileageAndfuelAmountDic = lichengDic;
+    infoVC.GoBackSubmitLicheng = ^(NSDictionary *dic) {
+        lichengDic = dic;
+        NSLog(@"lichengDic: %@",lichengDic);
+    };
+    infoVC.carDic = self.carDic;
+    [self.navigationController pushViewController:infoVC animated:YES];
+}
 
 -(void)toMark {
     UpkeepCarMarkVC *markVC = [[UpkeepCarMarkVC alloc] init];
@@ -179,15 +172,13 @@
 
 #pragma mark - 提交生成检查单
 - (IBAction)creatChecklistAction:(id)sender {
-//    if (self.lichengDic) {
+    if (lichengDic) {
         [self requestCarUpkeepAdd];
-//    } else {
-//        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//    }
-//    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
-//    [self.navigationController pushViewController:resultVC animated:YES];
+    } else {
+        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
@@ -855,7 +846,7 @@
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",self.lichengDic[@"mileage"],@"mileage",self.lichengDic[@"mileageImg"],@"mileageImage",self.lichengDic[@"fuelAmount"],@"fuelAmount",self.lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",carImagesAry,@"carUpkeepImages",self.checktypeID,@"checkTypeId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",carImagesAry,@"carUpkeepImages",self.checktypeID,@"checkTypeId", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }

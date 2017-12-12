@@ -13,7 +13,7 @@
 #import "BaoyangHistoryVC.h"
 #import "UpkeepHomeCollectionCell.h"
 #import "LoginViewController.h"
-#import "AutoCheckCarInfoVC.h"
+//#import "AutoCheckCarInfoVC.h"
 
 @interface UpkeepVC ()
 {
@@ -188,17 +188,17 @@
             }
             else {
                 if (selectedCarDic) {
-//                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-//                    checkVC.checktypeID = dic[@"id"];
-//                    checkVC.carDic = selectedCarDic;
-//                    checkVC.hidesBottomBarWhenPushed = YES;
-//                    [self.navigationController pushViewController:checkVC animated:YES];
+                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                    checkVC.checktypeID = dic[@"id"];
+                    checkVC.carDic = selectedCarDic;
+                    checkVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:checkVC animated:YES];
                     
-                    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
-                    infoVC.checktypeID = dic[@"id"];
-                    infoVC.carDic = selectedCarDic;
-                    infoVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:infoVC animated:YES];
+//                    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
+//                    infoVC.checktypeID = dic[@"id"];
+//                    infoVC.carDic = selectedCarDic;
+//                    infoVC.hidesBottomBarWhenPushed = YES;
+//                    [self.navigationController pushViewController:infoVC animated:YES];
                     
                 }   else {
                     _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
@@ -214,16 +214,17 @@
 //                    [_networkConditionHUD show:YES];
 //                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //                } else {
-//                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
-//                    checkVC.checktypeID = dic[@"id"];
-//                    checkVC.carDic = selectedCarDic;
-//                    checkVC.hidesBottomBarWhenPushed = YES;
-//                    [self.navigationController pushViewController:checkVC animated:YES];
-                AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
-                infoVC.checktypeID = dic[@"id"];
-                infoVC.carDic = selectedCarDic;
-                infoVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:infoVC animated:YES];
+                    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
+                    checkVC.checktypeID = dic[@"id"];
+                    checkVC.carDic = selectedCarDic;
+                    checkVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:checkVC animated:YES];
+                
+//                AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
+//                infoVC.checktypeID = dic[@"id"];
+//                infoVC.carDic = selectedCarDic;
+//                infoVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:infoVC animated:YES];
 //                }
             } else {
                 _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
