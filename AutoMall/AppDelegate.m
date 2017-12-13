@@ -9,13 +9,15 @@
 #import "AppDelegate.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import "TabBarController.h"
+#import "MessageListVC.h"
 
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
 static BOOL isBackGroundActivateApplication;
 
-@interface AppDelegate () <WXApiDelegate>
+@interface AppDelegate () <WXApiDelegate,UIAlertViewDelegate>
 
 @end
 
@@ -86,15 +88,19 @@ static BOOL isBackGroundActivateApplication;
     // 应用在前台，不跳转页面，让用户选择。
     if (application.applicationState == UIApplicationStateActive) {
         NSLog(@"acitve ");
-        //        UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"收到一条消息" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        //        [alertView show];
+        UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"收到一条消息" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.tag = 1000;
+        [alertView show];
     }
     //杀死状态下，直接跳转到跳转页面。
     if (application.applicationState == UIApplicationStateInactive && !isBackGroundActivateApplication)
     {
-//        SkipViewController *skipCtr = [[SkipViewController alloc]init];
-//        // 根视图是nav 用push 方式跳转
-//        [_tabBarCtr.selectedViewController pushViewController:skipCtr animated:YES];
+        MessageListVC *msgVC = [[MessageListVC alloc]init];
+        msgVC.hidesBottomBarWhenPushed = YES;
+        TabBarController *tabC = (TabBarController *)self.window.rootViewController;
+        UINavigationController *na = (UINavigationController *)tabC.selectedViewController;
+        // 根视图是nav 用push 方式跳转
+        [na pushViewController:msgVC animated:YES];
         NSLog(@"applacation is unactive ===== %@",userInfo);
         /*
          // 根视图是普通的viewctr 用present跳转
@@ -105,12 +111,13 @@ static BOOL isBackGroundActivateApplication;
         NSLog(@"background is Activated Application ");
         // 此处可以选择激活应用提前下载邮件图片等内容。
         isBackGroundActivateApplication = YES;
-        //        UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"收到一条消息" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        //        [alertView show];
+        UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"收到一条消息" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.tag = 1001;
+        [alertView show];
     }
 //    [self.viewController addLogString:[NSString stringWithFormat:@"Received Remote Notification :\n%@",userInfo]];
     
-    NSLog(@"%@",userInfo);
+    NSLog(@"userInfo: %@",userInfo);
 }
 
 // 在 iOS8 系统中，还需要添加这个方法。通过新的 API 注册推送服务
@@ -188,14 +195,26 @@ static BOOL isBackGroundActivateApplication;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1) {
+    
+    if (alertView.tag == 1000 || alertView.tag == 1001) {
+        if (buttonIndex == 1) {
+            MessageListVC *msgVC = [[MessageListVC alloc]init];
+            msgVC.hidesBottomBarWhenPushed = YES;
+            TabBarController *tabC = (TabBarController *)self.window.rootViewController;
+            UINavigationController *na = (UINavigationController *)tabC.selectedViewController;
+            // 根视图是nav 用push 方式跳转
+            [na pushViewController:msgVC animated:YES];
+        }
+    }
+    
+//    if (buttonIndex == 1) {
 //        SkipViewController *skipCtr = [[SkipViewController alloc]init];
 //        // 根视图是nav 用push 方式跳转
 //        [_tabBarCtr.selectedViewController pushViewController:skipCtr animated:YES];
         /*
          // 根视图是普通的viewctr 用present跳转
          [_tabBarCtr.selectedViewController presentViewController:skipCtr animated:YES completion:nil]; */
-    }
+//    }
 }
 
 - (BOOL)application:(UIApplication *)application

@@ -246,7 +246,9 @@
 
 
 
-#define BaiduPush_Key @"DyHZlmzGGtjfRDyVmtcG3MG5" //百度云推送key
+#define BaiduPush_Key @"mvqSOLT1NE0VC9xgGNxdUf7j" //百度云推送key，客户提供账号
+//#define BaiduPush_Key @"T0dHmi0dWENkPEETk6YiWj2B" //百度云推送key，自己的账号
+
 
 #pragma mark - 支付宝配置区
 #define AliPay_AppId                            @"2017101609335037"
