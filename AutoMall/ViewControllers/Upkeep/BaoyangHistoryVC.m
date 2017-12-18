@@ -85,7 +85,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 66;
+    return 99;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -101,7 +101,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSDictionary *dic = historyArray[indexPath.row];
-    cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"car"][@"mileage"])];
+    cell.orderL.text = STRING(dic[@"code"]);
+    cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"mileage"])];
     NSArray  *ary = dic[@"technicians"];
     if ([ary isKindOfClass:[NSArray class]] && ary.count > 0) {
         cell.technicianName.text = [NSString stringWithFormat:@"%@",STRING([ary firstObject][@"nickname"])];

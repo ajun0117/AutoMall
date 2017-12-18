@@ -200,8 +200,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *dic = orderAry[indexPath.section];
-    
-    if ([self.orderStatus isEqualToString:@"0"]) {   //检查完成
+    int paymentStatusInt = [dic[@"paymentStatus"] intValue];
+    if (paymentStatusInt == 0) {   //检查完成
         if (! [dic[@"checkTypeId"] isKindOfClass:[NSNull class]]) {
             AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
             resultVC.carUpkeepId = dic[@"id"];
@@ -215,7 +215,7 @@
         }
     }
     
-    else if ([self.orderStatus isEqualToString:@"1"]) {   //已确认订单
+    else if (paymentStatusInt == 1) {   //已确认订单
         AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
         orderVC.checkOrderId = dic[@"id"];
         NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
@@ -223,46 +223,55 @@
         [self.navigationController pushViewController:orderVC animated:YES];
     }
     
-    else if ([self.orderStatus isEqualToString:@"2"]) {   //已完工
-        if (! [dic[@"statusFlow"] isKindOfClass:[NSNull class]]) {
-            if ([dic[@"statusFlow"] intValue] == 0) {  //已完工，付款中
+    else if (paymentStatusInt == 2) {   //已完工
+//        if (! [dic[@"statusFlow"] isKindOfClass:[NSNull class]]) {
+//            if ([dic[@"statusFlow"] intValue] == 0) {  //已完工，付款中
                 AutoCheckOrderVC *orderVC = [[AutoCheckOrderVC alloc] init];
                 orderVC.statusFlow = @"0";
                 orderVC.checkOrderId = dic[@"id"];
                 NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
                 orderVC.infoDic = dicc;
                 [self.navigationController pushViewController:orderVC animated:YES];
-            }
-            else if ([dic[@"statusFlow"] intValue] == 1) {  //已完成页面
-                AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
-                completeVC.statusFlow = @"1";
-                completeVC.checkOrderId = dic[@"id"];
-                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
-                completeVC.infoDic = dicc;
-                [self.navigationController pushViewController:completeVC animated:YES];
-            }
-        }
+//            }
+//            else if ([dic[@"statusFlow"] intValue] == 1) {  //已完成页面
+//                AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
+//                completeVC.statusFlow = @"1";
+//                completeVC.checkOrderId = dic[@"id"];
+//                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+//                completeVC.infoDic = dicc;
+//                [self.navigationController pushViewController:completeVC animated:YES];
+//            }
+//        }
     }
     
-    else if ([self.orderStatus isEqualToString:@"3"]) {   //已付款
-        if (! [dic[@"statusFlow"] isKindOfClass:[NSNull class]]) {
-            if ([dic[@"statusFlow"] intValue] == 1) {  //已付款，施工中
+    else if (paymentStatusInt == 3) {   //已付款
+//        if (! [dic[@"statusFlow"] isKindOfClass:[NSNull class]]) {
+//            if ([dic[@"statusFlow"] intValue] == 1) {  //已付款，施工中
                 AutoCheckOrderWorkingVC *workingVC = [[AutoCheckOrderWorkingVC alloc] init];
                 workingVC.statusFlow = @"1";
                 workingVC.checkOrderId = dic[@"id"];
                 NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
                 workingVC.infoDic = dicc;
                 [self.navigationController pushViewController:workingVC animated:YES];
-            }
-            else if ([dic[@"statusFlow"] intValue] == 0) {  //已完成页面
-                AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
-                completeVC.statusFlow = @"1";
-                completeVC.checkOrderId = dic[@"id"];
-                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
-                completeVC.infoDic = dicc;
-                [self.navigationController pushViewController:completeVC animated:YES];
-            }
-        }
+//            }
+//            else if ([dic[@"statusFlow"] intValue] == 0) {  //已完成页面
+//                AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
+//                completeVC.statusFlow = @"1";
+//                completeVC.checkOrderId = dic[@"id"];
+//                NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+//                completeVC.infoDic = dicc;
+//                [self.navigationController pushViewController:completeVC animated:YES];
+//            }
+ //       }
+    }
+    
+    else if (paymentStatusInt == 5) {   //已完成
+            AutoCheckOrderCompleteVC *completeVC = [[AutoCheckOrderCompleteVC alloc] init];
+            completeVC.statusFlow = @"1";
+            completeVC.checkOrderId = dic[@"id"];
+            NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
+            completeVC.infoDic = dicc;
+            [self.navigationController pushViewController:completeVC animated:YES];
     }
 
 }

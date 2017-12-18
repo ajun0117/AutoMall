@@ -165,7 +165,7 @@
         }
         else {
             cell.statusL.text = @"已完成";
-            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+            [cell.btn setTitle:@"已完成" forState:UIControlStateNormal];
         }
         cell.numberL.text = [NSString stringWithFormat:@"%d",amount];
         cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"totalPrice"]];
@@ -198,7 +198,7 @@
     }
     else {
         cell.statusL.text = @"已完成";
-        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        [cell.btn setTitle:@"已完成" forState:UIControlStateNormal];
     }
     cell.numberL.text = [NSString stringWithFormat:@"%d",amount];
     cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"totalPrice"]];
