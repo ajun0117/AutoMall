@@ -20,6 +20,7 @@
 #import "AutoCheckCarInfoVC.h"
 #import "AddPicViewController.h"
 #import "AutoCheckResultVC.h"
+#import "BaoyangHistoryDetailVC.h"
 
 @interface AutoCheckVC () <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,AJSegmentedControlDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
@@ -33,6 +34,8 @@
     NSDictionary *lichengDic;    //里程油量数据
     NSString *carImageUrl;  //车图的url
     NSArray *carImagesAry;  //车图的拍照照片
+    NSArray *historyAry;        //车辆保养记录
+    IBOutlet UIButton *historyBtn;
 }
 
 @end
@@ -74,13 +77,19 @@
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49 - 20)];
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.delegate = self;
-    [self.view addSubview:self.mainScrollView];
+    [self.view insertSubview:self.mainScrollView belowSubview:historyBtn];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    historyBtn.layer.cornerRadius = 10;
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
+    [historyBtn addGestureRecognizer:pan];
     
     [[CheckContentTool sharedManager] removeAllContentItems];   //先删除所有数据
     
     [self requestGetCheckcategoryList];     //记录已选择的状态
+    
+    [self requestGetHistoryList];       //获取该车辆的保养记录
 
 }
 
@@ -168,6 +177,37 @@
     };
     markVC.imgUrl = carImageUrl;    
     [self.navigationController pushViewController:markVC animated:YES];
+}
+
+/**
+ *  实现拖动手势方法
+ *
+ *  @param panGestureRecognizer 手势本身
+ */
+- (void)panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
+    //获取拖拽手势在self.view 的拖拽位置
+    CGPoint translation = [panGestureRecognizer translationInView:self.view];
+    //改变panGestureRecognizer.view的中心点 就是self.imageView的中心点
+    panGestureRecognizer.view.center = CGPointMake(panGestureRecognizer.view.center.x, panGestureRecognizer.view.center.y + translation.y);
+    //重置拖拽手势的位置
+    [panGestureRecognizer setTranslation:CGPointZero inView:self.view];
+}
+
+- (IBAction)historyAction:(id)sender {
+//    if (historyAry.count >= 1) {
+        NSDictionary *dic = [historyAry firstObject];
+        BaoyangHistoryDetailVC *detailVC = [[BaoyangHistoryDetailVC alloc] init];
+        detailVC.carDic = dic[@"car"];
+        detailVC.mileage = dic[@"mileage"];
+        detailVC.fuelAmount = dic[@"fuelAmount"];
+        detailVC.carUpkeepId = dic[@"id"];
+        detailVC.checktypeID = dic[@"checkTypeId"];
+        [self.navigationController pushViewController:detailVC animated:YES];
+//    } else {
+//        _networkConditionHUD.labelText = @"没有最近保养记录！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//    }
 }
 
 #pragma mark - 提交生成检查单
@@ -851,6 +891,16 @@
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
 
+#pragma mark - 发送请求
+-(void)requestGetHistoryList { //获取车辆保养历史信息记录
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepSearch object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepSearch, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?carId=%@&pageNo=%d&paymentStatus=5",UrlPrefix(CarUpkeepSearch),self.carDic[@"id"], 0];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -981,6 +1031,23 @@
             NSDictionary *dic = responseObject[@"data"];
             [self performSelector:@selector(toPushVC:) withObject:dic[@"id"] afterDelay:HUDDelay];
             
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CarUpkeepSearch]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepSearch object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            historyAry = responseObject[@"data"];
+            if (historyAry.count >= 1) {
+                historyBtn.hidden = NO;
+            } else {
+                historyBtn.hidden = YES;
+            }
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

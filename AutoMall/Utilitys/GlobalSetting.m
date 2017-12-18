@@ -386,6 +386,20 @@ static GlobalSetting *globalSetting;
     [userDefaults synchronize];
 }
 
+//app小版本号
+-(NSString *)bundleVersion
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:BundleVersion];
+}
+
+-(void)setBundleVersion:(NSString *)bundleVersion
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:bundleVersion forKey:BundleVersion];
+    [userDefaults synchronize];
+}
+
 //-(CityObject *)CityObject {
 //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    return [userDefaults objectForKey:@"CityObject"];

@@ -12,6 +12,7 @@
 
 #define KIsFirst        @"isfisrt"
 #define KAppVersion     @"appVersion"
+#define BundleVersion      @"BundleVersion"
 
 #define kLoginPWD       @"loginPWD"
 #define kUserID         @"userID"
@@ -113,6 +114,11 @@
 
 
 -(void)setAppVersion:(NSString *)appVersion;
+
+#pragma mark - app小版本号
+-(NSString *)bundleVersion;
+
+-(void)setBundleVersion:(NSString *)bundleVersion;
 
 
 ///**

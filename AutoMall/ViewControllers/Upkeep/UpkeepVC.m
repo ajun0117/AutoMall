@@ -14,14 +14,16 @@
 #import "UpkeepHomeCollectionCell.h"
 #import "LoginViewController.h"
 //#import "AutoCheckCarInfoVC.h"
+#import "LoadingView.h"
 
-@interface UpkeepVC ()
+@interface UpkeepVC ()  <LoadingViewDelegate>
 {
     NSArray *typeAry; //类别数组
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
     NSDictionary *selectedCarDic;    //选择的保养车辆Dic
     NSString *mobileUserType;     //登录用户类别 0：手机普通用户 1：门店老板 2: 门店员工
+    LoadingView *loadingView;//引导视图
 }
 //@property (strong, nonatomic) IBOutlet UIButton *carOwnerBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *hairdressingBtn;
@@ -89,6 +91,64 @@
     if (! mobileUserType) {   //未登录状态监听登录事件
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
     }
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];  //上架版本号
+    NSString *locationAppVersion = [[GlobalSetting shareGlobalSettingInstance] appVersion];
+    
+//    if (! [[GlobalSetting shareGlobalSettingInstance] isNotFirst] || ! [locationAppVersion isEqual:appVersion]) {
+//        NSArray *imageArr = nil;
+////        NSArray *imageArrX = nil;
+//        imageArr = @[@"guide1.jpg",@"guide2.jpg",@"guide3.jpg",@"guide4.jpg"];
+////        imageArrX = @[@"guide1x.jpg",@"guide2x.jpg",@"guide3x.jpg",@"guide4x.jpg"];
+//        
+////        if (isIphoneX) {
+////            self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, APP_HEIGHT + 44) withImagesArr:imageArrX];
+////        }else {
+//            loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, APP_HEIGHT + 20) withImagesArr:imageArr];
+////        }
+//        
+//        loadingView.delegate = self;
+//        
+//        [[UIApplication sharedApplication].delegate.window addSubview:loadingView];
+//    }
+
+}
+
+#pragma mark -
+#pragma mark LoadingViewDelegate
+//引导页消失的方式
+-(void)didEnterAppWithStyle:(NSInteger)style{
+    if (style == 1) {
+        [self loadingViewDisappearAnimation];
+    } else {
+        [loadingView removeFromSuperview];
+        loadingView = nil;
+        [[GlobalSetting shareGlobalSettingInstance] setIsNotFirst:YES];
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];  //上架版本号
+        [[GlobalSetting shareGlobalSettingInstance] setAppVersion:appVersion];
+        [[GlobalSetting shareGlobalSettingInstance] setBundleVersion:[infoDictionary objectForKey:@"CFBundleVersion"]];  //更新本地存储的app小版本号
+    }
+}
+
+//引导页消失的动画
+-(void) loadingViewDisappearAnimation{
+    [UIView animateWithDuration:1 animations:^{
+        loadingView.transform = CGAffineTransformMakeScale(2, 2);
+        loadingView.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            loadingView.transform = CGAffineTransformIdentity;
+            [loadingView removeFromSuperview];
+            loadingView = nil;
+            [[GlobalSetting shareGlobalSettingInstance] setIsNotFirst:YES];
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];  //上架版本号
+            [[GlobalSetting shareGlobalSettingInstance] setAppVersion:appVersion];
+            [[GlobalSetting shareGlobalSettingInstance] setBundleVersion:[infoDictionary objectForKey:@"CFBundleVersion"]];  //更新本地存储的app小版本号
+        }
+    }];
 }
 
 #pragma mark - 下拉刷新

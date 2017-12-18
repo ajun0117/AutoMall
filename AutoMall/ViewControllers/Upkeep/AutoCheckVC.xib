@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckVC">
             <connections>
+                <outlet property="historyBtn" destination="hAm-8W-YzW" id="g6n-3M-Mlw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,14 +32,32 @@
                         <action selector="creatChecklistAction:" destination="-1" eventType="touchUpInside" id="raP-ld-vw0"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" clipsSubviews="YES" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hAm-8W-YzW">
+                    <rect key="frame" x="350" y="443" width="35" height="150"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="4fU-iw-lu3"/>
+                        <constraint firstAttribute="width" constant="35" id="6O3-li-ydd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                    <state key="normal" title="查看最近保养记录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="historyAction:" destination="-1" eventType="touchUpInside" id="Sdn-og-JAg"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Mcv-AE-mP7" secondAttribute="bottom" id="4fu-FR-gG9"/>
+                <constraint firstItem="Mcv-AE-mP7" firstAttribute="top" secondItem="hAm-8W-YzW" secondAttribute="bottom" constant="25" id="QLC-3H-LTL"/>
                 <constraint firstAttribute="trailing" secondItem="Mcv-AE-mP7" secondAttribute="trailing" id="Tc2-1S-LWg"/>
+                <constraint firstAttribute="trailing" secondItem="hAm-8W-YzW" secondAttribute="trailing" constant="-10" id="bKW-Wx-zXz"/>
                 <constraint firstItem="Mcv-AE-mP7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o5F-vh-Gn1"/>
             </constraints>
-            <point key="canvasLocation" x="-237.5" y="-40.5"/>
+            <point key="canvasLocation" x="-1140.5" y="-65.5"/>
         </view>
     </objects>
 </document>
