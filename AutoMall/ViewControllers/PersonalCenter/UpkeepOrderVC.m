@@ -172,13 +172,13 @@
     }else if (status == 3) {
         cell.statusL.text = @"已付款";
         [cell.btn setTitle:@"去施工" forState:UIControlStateNormal];
-    }else if (status == 4) {
+    }else if (status == 5) {
         cell.statusL.text = @"已完成";
         [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
     }
     else {
         cell.statusL.text = @"已完成";
-        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
     }
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"car"][@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.orderNumberL.text = [NSString stringWithFormat:@"订单号: %@",dic[@"code"]];

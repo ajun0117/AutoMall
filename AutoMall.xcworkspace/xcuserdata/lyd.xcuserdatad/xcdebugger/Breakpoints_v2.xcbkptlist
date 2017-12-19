@@ -31,8 +31,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "278"
             endingLineNumber = "278"
-            landmarkName = "-requestGetHistoryList"
-            landmarkType = "7">
+            landmarkName = "@implementation UpkeepOrderVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -160,22 +160,6 @@
             startingLineNumber = "1208"
             endingLineNumber = "1208"
             landmarkName = "-toApplyView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/Upkeep/UpkeepPlanVC.m"
-            timestampString = "533119815.140722"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "904"
-            endingLineNumber = "904"
-            landmarkName = "-requestPostCarUpkeepConfirm"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
