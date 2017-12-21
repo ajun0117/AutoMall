@@ -96,22 +96,22 @@
     NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];  //上架版本号
     NSString *locationAppVersion = [[GlobalSetting shareGlobalSettingInstance] appVersion];
     
-//    if (! [[GlobalSetting shareGlobalSettingInstance] isNotFirst] || ! [locationAppVersion isEqual:appVersion]) {
-//        NSArray *imageArr = nil;
-////        NSArray *imageArrX = nil;
-//        imageArr = @[@"guide1.jpg",@"guide2.jpg",@"guide3.jpg",@"guide4.jpg"];
-////        imageArrX = @[@"guide1x.jpg",@"guide2x.jpg",@"guide3x.jpg",@"guide4x.jpg"];
-//        
-////        if (isIphoneX) {
-////            self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, APP_HEIGHT + 44) withImagesArr:imageArrX];
-////        }else {
-//            loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, APP_HEIGHT + 20) withImagesArr:imageArr];
-////        }
-//        
-//        loadingView.delegate = self;
-//        
-//        [[UIApplication sharedApplication].delegate.window addSubview:loadingView];
-//    }
+    if (! [[GlobalSetting shareGlobalSettingInstance] isNotFirst] || ! [locationAppVersion isEqual:appVersion]) {
+        NSArray *imageArr = nil;
+//        NSArray *imageArrX = nil;
+        imageArr = @[@"guide1",@"guide2",@"guide3"];
+//        imageArrX = @[@"guide1x.jpg",@"guide2x.jpg",@"guide3x.jpg",@"guide4x.jpg"];
+        
+//        if (isIphoneX) {
+//            self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, APP_HEIGHT + 44) withImagesArr:imageArrX];
+//        }else {
+            loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, APP_WIDTH, APP_HEIGHT + 20) withImagesArr:imageArr];
+//        }
+        
+        loadingView.delegate = self;
+        
+        [[UIApplication sharedApplication].delegate.window addSubview:loadingView];
+    }
 
 }
 

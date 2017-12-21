@@ -86,30 +86,30 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-    if (self.fuelAmountTF.text == nil || [self.fuelAmountTF.text isEqualToString:@""]) {
-        _networkConditionHUD.labelText = @"燃油量必须填写！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        return;
-    }
+//    if (self.fuelAmountTF.text == nil || [self.fuelAmountTF.text isEqualToString:@""]) {
+//        _networkConditionHUD.labelText = @"燃油量必须填写！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//        return;
+//    }
     if ([self.fuelAmountTF.text intValue] > 100) {
         _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-    if (mileageImgUrl==nil || mileageImgUrl.length == 0) {
-        _networkConditionHUD.labelText = @"总里程表图片必须上传！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        return;
-    }
-    if (fuelAmountImgUrl==nil || fuelAmountImgUrl.length == 0) {
-        _networkConditionHUD.labelText = @"燃油量图片必须上传！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        return;
-    }
+//    if (mileageImgUrl==nil || mileageImgUrl.length == 0) {
+//        _networkConditionHUD.labelText = @"总里程表图片必须上传！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//        return;
+//    }
+//    if (fuelAmountImgUrl==nil || fuelAmountImgUrl.length == 0) {
+//        _networkConditionHUD.labelText = @"燃油量图片必须上传！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//        return;
+//    }
     self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":self.fuelAmountTF.text,@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
     [self.navigationController popViewControllerAnimated:YES];
     

@@ -47,8 +47,14 @@
 //    CGFloat bottom = 60 * rate1;
     
     self.enterButn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.enterButn setFrame:CGRectMake(0, SCREEN_HEIGHT - 61, SCREEN_WIDTH, 61)];
-    [self.enterButn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
+    [self.enterButn setFrame:CGRectMake((SCREEN_WIDTH - 120)/2, SCREEN_HEIGHT - 120, 120, 36)];
+//    [self.enterButn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
+    [self.enterButn setTitle:@"进入体验" forState:UIControlStateNormal];
+    [self.enterButn setTitleColor:RGBCOLOR(251, 119, 53) forState:UIControlStateNormal];
+    self.enterButn.titleLabel.font = [UIFont boldSystemFontOfSize:21];
+    self.enterButn.layer.borderColor = RGBCOLOR(251, 119, 53).CGColor;
+    self.enterButn.layer.borderWidth = 2;
+    self.enterButn.layer.cornerRadius = 18;
     [self.enterButn addTarget:self action:@selector(enterApp:) forControlEvents:UIControlEventTouchUpInside];
     
     [self initImageViews];

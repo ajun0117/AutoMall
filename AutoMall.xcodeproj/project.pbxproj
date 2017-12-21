@@ -54,6 +54,12 @@
 		042F4F1D1F7905150059B44E /* CarInfoAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F4F1B1F7905150059B44E /* CarInfoAddVC.m */; };
 		042F4F1E1F7905150059B44E /* CarInfoAddVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042F4F1C1F7905150059B44E /* CarInfoAddVC.xib */; };
 		042FA30F1F3AB10E0095BCFD /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FA30E1F3AB10E0095BCFD /* DVSwitch.m */; };
+		0438646B1FEB941C001F5631 /* guide1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043864651FEB941C001F5631 /* guide1@2x.png */; };
+		0438646C1FEB941C001F5631 /* guide1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043864661FEB941C001F5631 /* guide1@3x.png */; };
+		0438646D1FEB941C001F5631 /* guide2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043864671FEB941C001F5631 /* guide2@2x.png */; };
+		0438646E1FEB941C001F5631 /* guide2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043864681FEB941C001F5631 /* guide2@3x.png */; };
+		0438646F1FEB941C001F5631 /* guide3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043864691FEB941C001F5631 /* guide3@2x.png */; };
+		043864701FEB941C001F5631 /* guide3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438646A1FEB941C001F5631 /* guide3@3x.png */; };
 		044A24181F3326F9009720DE /* AutoCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044A24161F3326F9009720DE /* AutoCheckVC.m */; };
 		044A24191F3326F9009720DE /* AutoCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044A24171F3326F9009720DE /* AutoCheckVC.xib */; };
 		045335E81FB98BC4008FB56F /* UpkeepOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045335E61FB98BC4008FB56F /* UpkeepOrderListCell.m */; };
@@ -530,6 +536,12 @@
 		042F4F1C1F7905150059B44E /* CarInfoAddVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoAddVC.xib; sourceTree = "<group>"; };
 		042FA30D1F3AB10E0095BCFD /* DVSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVSwitch.h; sourceTree = "<group>"; };
 		042FA30E1F3AB10E0095BCFD /* DVSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVSwitch.m; sourceTree = "<group>"; };
+		043864651FEB941C001F5631 /* guide1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide1@2x.png"; sourceTree = "<group>"; };
+		043864661FEB941C001F5631 /* guide1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide1@3x.png"; sourceTree = "<group>"; };
+		043864671FEB941C001F5631 /* guide2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide2@2x.png"; sourceTree = "<group>"; };
+		043864681FEB941C001F5631 /* guide2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide2@3x.png"; sourceTree = "<group>"; };
+		043864691FEB941C001F5631 /* guide3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide3@2x.png"; sourceTree = "<group>"; };
+		0438646A1FEB941C001F5631 /* guide3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide3@3x.png"; sourceTree = "<group>"; };
 		044A24151F3326F9009720DE /* AutoCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCheckVC.h; sourceTree = "<group>"; };
 		044A24161F3326F9009720DE /* AutoCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCheckVC.m; sourceTree = "<group>"; };
 		044A24171F3326F9009720DE /* AutoCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCheckVC.xib; sourceTree = "<group>"; };
@@ -1469,6 +1481,19 @@
 				04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */,
 			);
 			name = cells;
+			sourceTree = "<group>";
+		};
+		043864641FEB93D0001F5631 /* LoadingImages */ = {
+			isa = PBXGroup;
+			children = (
+				043864651FEB941C001F5631 /* guide1@2x.png */,
+				043864661FEB941C001F5631 /* guide1@3x.png */,
+				043864671FEB941C001F5631 /* guide2@2x.png */,
+				043864681FEB941C001F5631 /* guide2@3x.png */,
+				043864691FEB941C001F5631 /* guide3@2x.png */,
+				0438646A1FEB941C001F5631 /* guide3@3x.png */,
+			);
+			name = LoadingImages;
 			sourceTree = "<group>";
 		};
 		044218EA1FB1B84B00844B3F /* 填写里程燃油量照片 */ = {
@@ -2443,6 +2468,7 @@
 		04DC7D071F31C25000AA20A7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				043864641FEB93D0001F5631 /* LoadingImages */,
 				04DC7D081F31C25000AA20A7 /* LoadingView.h */,
 				04DC7D091F31C25000AA20A7 /* LoadingView.m */,
 				04DC7D0A1F31C25000AA20A7 /* WebViewController.h */,
@@ -3163,6 +3189,7 @@
 				F7BE37371FDD91810042318F /* share_pyq@2x.png in Resources */,
 				04FCC4E81FC2BA9F00740D77 /* CheckResultOtherCell.xib in Resources */,
 				F7650B5B1FAF344900C0FCD2 /* ServiceContentDetailVC.xib in Resources */,
+				043864701FEB941C001F5631 /* guide3@3x.png in Resources */,
 				04EFEC641F5FA188004D9188 /* MailOrderDetailWaybillCell.xib in Resources */,
 				0459C6B31F614C870040501E /* AddressTableViewCell.xib in Resources */,
 				04AE98231F2ED46500C2D158 /* LaunchScreen.storyboard in Resources */,
@@ -3203,12 +3230,14 @@
 				F7BE37381FDD91810042318F /* share_pyq@3x.png in Resources */,
 				042AF2031F4C3C6500EA5E5F /* CommodityDetailStarCell.xib in Resources */,
 				04A69F0F1F710D1300E966A0 /* UpkeepCarMarkVC.xib in Resources */,
+				0438646C1FEB941C001F5631 /* guide1@3x.png in Resources */,
 				F7BE37391FDD91810042318F /* share_wx@2x.png in Resources */,
 				04DCA1911FA34992004B1054 /* ResultCheckContentDetailCell.xib in Resources */,
 				047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */,
 				04EFEC6E1F5FA446004D9188 /* MailOrderDetailGoodsCell.xib in Resources */,
 				049EA1641FAADE470081940F /* AboutUsVC.xib in Resources */,
 				04F6B6991F459D6600052658 /* FindPWDViewController.xib in Resources */,
+				0438646E1FEB941C001F5631 /* guide2@3x.png in Resources */,
 				042E5D0B1F4195C700F5F324 /* BaoyangHistoryCell.xib in Resources */,
 				042AF2171F4C40DD00EA5E5F /* CommodityDetailTuijianCell.xib in Resources */,
 				04EFEC7E1F5FEA16004D9188 /* MailCollectionVC.xib in Resources */,
@@ -3226,6 +3255,7 @@
 				04EFEC8D1F5FF75C004D9188 /* ReceiveAddressViewController.xib in Resources */,
 				04F7D8751F5EACE7004945ED /* MailOrderListVC.xib in Resources */,
 				F7A39CBD1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib in Resources */,
+				0438646B1FEB941C001F5631 /* guide1@2x.png in Resources */,
 				042AF20D1F4C3EA100EA5E5F /* CommodityDetailTapCell.xib in Resources */,
 				04EFEC731F5FA55D004D9188 /* MailOrderDetailTotalMoneyCell.xib in Resources */,
 				04DC7D221F31C26500AA20A7 /* JFB.sqlite-wal in Resources */,
@@ -3243,6 +3273,7 @@
 				F7F9C7901FB4C38200EB46EE /* UpKeepPlanServiceCell.xib in Resources */,
 				04DC7D131F31C25000AA20A7 /* WebViewController.xib in Resources */,
 				04DC7D211F31C26500AA20A7 /* JFB.sqlite-shm in Resources */,
+				0438646D1FEB941C001F5631 /* guide2@2x.png in Resources */,
 				04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */,
 				04BA1C671F4D162000704A9E /* ShoppingCartCell.xib in Resources */,
 				042E5D231F41A09D00F5F324 /* UpkeepPlanInfoCell.xib in Resources */,
@@ -3267,6 +3298,7 @@
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
 				04FD55D91F552DB200104D6B /* RegisterYZMViewController.xib in Resources */,
+				0438646F1FEB941C001F5631 /* guide3@2x.png in Resources */,
 				0459C6B61F614C870040501E /* Cities.json in Resources */,
 				F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
@@ -3741,6 +3773,7 @@
 			baseConfigurationReference = 282984C3CD86E78426E7E345 /* Pods-AutoMall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AutoMall/AutoMall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.henglian.carm";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hao Yao (6Z9N7JT93X)";
@@ -3751,7 +3784,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3785,6 +3818,7 @@
 			baseConfigurationReference = 23C000978E58563FFCAB0D5B /* Pods-AutoMall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AutoMall/AutoMall.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.henglian.carm";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hao Yao (6Z9N7JT93X)";
@@ -3795,7 +3829,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

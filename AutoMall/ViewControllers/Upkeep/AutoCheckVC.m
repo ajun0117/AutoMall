@@ -195,7 +195,8 @@
 
 - (IBAction)historyAction:(id)sender {
 //    if (historyAry.count >= 1) {
-        NSDictionary *dic = [historyAry firstObject];
+    NSDictionary *dic = [historyAry firstObject];
+    if (! [dic[@"checkTypeId"] isKindOfClass:[NSNull class]]) {
         BaoyangHistoryDetailVC *detailVC = [[BaoyangHistoryDetailVC alloc] init];
         detailVC.carDic = dic[@"car"];
         detailVC.mileage = dic[@"mileage"];
@@ -203,6 +204,12 @@
         detailVC.carUpkeepId = dic[@"id"];
         detailVC.checktypeID = dic[@"checkTypeId"];
         [self.navigationController pushViewController:detailVC animated:YES];
+    }
+    else {
+        _networkConditionHUD.labelText = @"此订单是老数据，因数据不全，不能跳转！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 //    } else {
 //        _networkConditionHUD.labelText = @"没有最近保养记录！";
 //        [_networkConditionHUD show:YES];
@@ -886,7 +893,7 @@
     NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",carImagesAry,@"carUpkeepImages",self.checktypeID,@"checkTypeId", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",self.checktypeID,@"checkTypeId",carImagesAry,@"carUpkeepImages", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }
