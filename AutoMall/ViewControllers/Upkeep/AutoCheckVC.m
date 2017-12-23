@@ -222,7 +222,7 @@
     if (lichengDic) {
         [self requestCarUpkeepAdd];
     } else {
-        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆里程和燃油量！";
+        _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆总里程表！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }

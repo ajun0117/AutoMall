@@ -88,7 +88,7 @@ static DataRequest *dataRequest;
             [manager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
         }
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
-        manager.requestSerializer.timeoutInterval = 15;
+        manager.requestSerializer.timeoutInterval = 300;
         [manager GET:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet  URLQueryAllowedCharacterSet]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult",@"成功获取数据！",@"ContentResult", responseObject, @"RespData", [infoDic objectForKey:@"op"], @"op",nil];

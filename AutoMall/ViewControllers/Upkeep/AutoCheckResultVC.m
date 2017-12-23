@@ -1366,7 +1366,7 @@
 }
 
 -(void) mileageImageAction {
-    if ([carUpkeepDic[@"mileageImage"] isKindOfClass:[NSString class]]) {
+    if ([carUpkeepDic[@"mileageImage"] isKindOfClass:[NSString class]] && [carUpkeepDic[@"mileageImage"] length] > 0) {
         [self clickImageWithImageUrl:carUpkeepDic[@"mileageImage"]];
     } else {
         _networkConditionHUD.labelText = @"没有相关图片";
@@ -1376,7 +1376,7 @@
 }
 
 -(void) fuelAmountImageAction {
-    if ([carUpkeepDic[@"fuelImage"] isKindOfClass:[NSString class]]) {
+    if ([carUpkeepDic[@"fuelImage"] isKindOfClass:[NSString class]] && [carUpkeepDic[@"fuelImage"] length] > 0) {
         [self clickImageWithImageUrl:carUpkeepDic[@"fuelImage"]];
     } else {
         _networkConditionHUD.labelText = @"没有相关图片";
@@ -1386,7 +1386,7 @@
 }
 
 -(void) lastMileageImageAction {
-    if ([carUpkeepDic[@"lastMileageImage"] isKindOfClass:[NSString class]]) {
+    if ([carUpkeepDic[@"lastMileageImage"] isKindOfClass:[NSString class]] && [carUpkeepDic[@"lastMileageImage"] length] > 0) {
         [self clickImageWithImageUrl:carUpkeepDic[@"lastMileageImage"]];
     } else {
         _networkConditionHUD.labelText = @"没有相关图片";
@@ -1397,7 +1397,7 @@
 }
 
 -(void) lastFuelAmountImageAction {
-    if ([carUpkeepDic[@"lastFuelImage"] isKindOfClass:[NSString class]]) {
+    if ([carUpkeepDic[@"lastFuelImage"] isKindOfClass:[NSString class]] && [carUpkeepDic[@"lastFuelImage"] length] > 0) {
         [self clickImageWithImageUrl:carUpkeepDic[@"lastFuelImage"]];
     } else {
         _networkConditionHUD.labelText = @"没有相关图片";
