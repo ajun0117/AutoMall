@@ -117,11 +117,11 @@
             break;
             
         case 4:
-            return 1;
+            return selectedServices.count;
             break;
             
         case 5:
-            return selectedServices.count;
+            return 1;
             break;
             
         case 6:
@@ -180,7 +180,7 @@
             return 44;
             break;
             
-        case 5:
+        case 4:
             return 44;
             break;
             
@@ -275,7 +275,7 @@
             break;
         }
             
-        case 5: {
+        case 4: {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
             view.backgroundColor = [UIColor whiteColor];
             //                view.backgroundColor = RGBCOLOR(239, 239, 239);
@@ -518,20 +518,6 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.declareL.strikeThroughEnabled = NO;
-            cell.declareL.text = @"总价";
-            cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-            cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",[carUpkeepDic[@"money"] floatValue] + discountPrice];
-            cell.contentL.font = [UIFont boldSystemFontOfSize:16];
-            cell.contentL.textColor = [UIColor blackColor];
-            return cell;
-            break;
-        }
-            
-        case 5: {
-            UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.declareL.strikeThroughEnabled = NO;
             NSDictionary *dic = selectedServices[indexPath.row];
             cell.declareL.text = dic[@"item"];
             cell.declareL.font = [UIFont systemFontOfSize:15];
@@ -542,6 +528,20 @@
             }
             cell.contentL.textColor = [UIColor blackColor];
             cell.contentL.font = [UIFont systemFontOfSize:15];
+            return cell;
+            break;
+        }
+            
+        case 5: {
+            UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.declareL.strikeThroughEnabled = NO;
+            cell.declareL.text = @"总价";
+            cell.declareL.font = [UIFont boldSystemFontOfSize:15];
+            cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",[carUpkeepDic[@"money"] floatValue] + discountPrice];
+            cell.contentL.font = [UIFont boldSystemFontOfSize:16];
+            cell.contentL.textColor = [UIColor blackColor];
             return cell;
             break;
         }

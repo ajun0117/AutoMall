@@ -86,7 +86,11 @@
         }
         case 5: {
             cell.declareL.text = @"燃油量";
-            cell.contentL.text = [NSString stringWithFormat:@"%@%%",self.fuelAmount];
+            if ([self.fuelAmount isKindOfClass:[NSNull class]]) {
+                cell.contentL.text = @"";
+            } else {
+                cell.contentL.text = [NSString stringWithFormat:@"%@%%",self.fuelAmount];
+            }
             break;
         }
         case 6: {
@@ -100,10 +104,10 @@
         }
         case 7: {
             cell.declareL.text = @"上次保养时间";
-            if (self.carDic[@"updateTime"] && ! [self.carDic[@"updateTime"] isKindOfClass:[NSNull class]]) {
+            if (! [self.lastEndTime isKindOfClass:[NSNull class]] && self.lastEndTime.length > 0) {
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
                 [formater setDateFormat:@"yyyy-MM-dd"];
-                NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"updateTime"] doubleValue]/1000];
+                NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.lastEndTime doubleValue]/1000];
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentL.text = string;
             } else {
@@ -113,7 +117,7 @@
         }
         case 8: {
             cell.declareL.text = @"上次保养里程";
-            cell.contentL.text = STRING(self.carDic[@""]);
+            cell.contentL.text = self.lastMileage;
             break;
         }
             

@@ -13,6 +13,8 @@
 @property (strong, nonatomic) NSDictionary *carDic; 
 @property (strong, nonatomic) NSString *mileage;
 @property (strong, nonatomic) NSString *fuelAmount;
+@property (strong, nonatomic) NSString *lastEndTime;
+@property (strong, nonatomic) NSString *lastMileage;
 
 @property (strong, nonatomic) NSString *carUpkeepId;    //检查单id
 

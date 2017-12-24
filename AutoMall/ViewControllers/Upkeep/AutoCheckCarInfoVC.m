@@ -110,7 +110,7 @@
 //        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //        return;
 //    }
-    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":self.fuelAmountTF.text,@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
+    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":STRING_Nil(self.fuelAmountTF.text),@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
     [self.navigationController popViewControllerAnimated:YES];
     
 //    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];

@@ -250,6 +250,8 @@
     planVC.carDic = carUpkeepDic[@"car"];
     planVC.mileage = carUpkeepDic[@"mileage"];
     planVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
+    planVC.lastEndTime = carUpkeepDic[@"lastEndTime"];
+    planVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
     planVC.carUpkeepId = self.carUpkeepId;
     planVC.checktypeID = self.checktypeID;
     [self.navigationController pushViewController:planVC animated:YES];
@@ -702,8 +704,8 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
                 [formater setDateFormat:@"yyyy-MM-dd"];
-                if (! [carUpkeepDic[@"endTime"] isKindOfClass:[NSNull class]]) {
-                    NSDate *checkDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"endTime"] doubleValue]/1000];
+                if (! [carUpkeepDic[@"startTime"] isKindOfClass:[NSNull class]]) {
+                    NSDate *checkDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"startTime"] doubleValue]/1000];
                     NSString *checkDateString = [formater stringFromDate:checkDate];
                     cell.checkDateL.text = checkDateString;
                 }

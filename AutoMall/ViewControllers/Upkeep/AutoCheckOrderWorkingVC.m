@@ -80,7 +80,7 @@
     
     NSString *statusStr;
     if ([self.statusFlow isEqualToString:@"1"]) {   //先付款，施工完成，至完成页
-        statusStr = @"4";    //完工
+        statusStr = @"2";    //完工
     }
     else if ([self.statusFlow isEqualToString:@"0"]) {  //先施工，施工完成，至付款页
         statusStr = @"2";   //施工完成
