@@ -165,7 +165,7 @@
         [cell.btn setTitle:@"去确认" forState:UIControlStateNormal];
     } else if (status == 1) {
         cell.statusL.text = @"已确认";
-        [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
+        [cell.btn setTitle:@"下一步" forState:UIControlStateNormal];
     }else if (status == 2) {
         cell.statusL.text = @"已完工";
         [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];

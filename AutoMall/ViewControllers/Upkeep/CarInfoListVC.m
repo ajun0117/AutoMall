@@ -189,23 +189,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CarInfoListCell *cell = (CarInfoListCell *)[tableView dequeueReusableCellWithIdentifier:@"carInfoCell"];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dic = carArray[indexPath.row];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
-    cell.plateNumberL.text = dic[@"plateNumber"];
-    cell.ownerL.text = dic[@"owner"];
-    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-    [formater setDateFormat:@"yyyy-MM-dd"];
-    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"updateTime"] doubleValue]/1000];
-    NSString *string = [formater stringFromDate:creatDate];
-    cell.dateL.text = string;
-    cell.selectBtn.tag = indexPath.row + 100;
-    [cell.selectBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
-    if ([dic[@"id"] intValue] == [self.carId intValue]) {
-        cell.selectBtn.selected = YES;
-    }
-    else {
-        cell.selectBtn.selected = NO;
+    if (carArray.count > 0) {
+        NSDictionary *dic = carArray[indexPath.row];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+        cell.plateNumberL.text = dic[@"plateNumber"];
+        cell.ownerL.text = dic[@"owner"];
+        NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd"];
+        NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"updateTime"] doubleValue]/1000];
+        NSString *string = [formater stringFromDate:creatDate];
+        cell.dateL.text = string;
+        cell.selectBtn.tag = indexPath.row + 100;
+        [cell.selectBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
+        [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
+        if ([dic[@"id"] intValue] == [self.carId intValue]) {
+            cell.selectBtn.selected = YES;
+        }
+        else {
+            cell.selectBtn.selected = NO;
+        }
     }
     
     return cell;

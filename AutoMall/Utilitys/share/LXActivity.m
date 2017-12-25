@@ -21,12 +21,12 @@
 #define SHAREBUTTON_BORDER_COLOR                [UIColor colorWithWhite:0.868 alpha:1.000].CGColor//内部按钮的边界颜色
 #define SHAREBUTTON_TITLE_FONT                   [UIFont fontWithName:@"HelveticaNeue-Bold" size:18]//内部按钮标题字体大小
 
-#define SHAREBUTTON_WIDTH                       kScale_5s_W(95)//分享按钮的宽度，已适配各种屏幕
-#define SHAREBUTTON_HEIGHT                      kScale_5s_W(95)//高度
+#define SHAREBUTTON_WIDTH                       kScale_5s_W(55)//分享按钮的宽度，已适配各种屏幕
+#define SHAREBUTTON_HEIGHT                      kScale_5s_W(55)//高度
 #define SHAREBUTTON_INTERVAL_WIDTH              kScale_5s_W(44)//间隔宽度
 #define SHAREBUTTON_INTERVAL_HEIGHT             25//间隔高度
 
-#define SHARETITLE_WIDTH                        kScale_5s_W(95)//分享按钮下方标题宽度
+#define SHARETITLE_WIDTH                        kScale_5s_W(55)//分享按钮下方标题宽度
 #define SHARETITLE_HEIGHT                       50//高度
 #define SHARETITLE_INTERVAL_WIDTH               kScale_5s_W(44)//标题间隔宽度
 #define SHARETITLE_INTERVAL_HEIGHT              SHAREBUTTON_WIDTH+SHAREBUTTON_INTERVAL_HEIGHT//标题间隔高度
@@ -36,11 +36,11 @@
 #define TITLE_HEIGHT                            35
 #define TITLE_INTERVAL_WIDTH                    kScale_5s_W(30)
 #define TITLE_WIDTH                             kScale_5s_W(260)
-#define TITLE_FONT                              [UIFont fontWithName:@"Helvetica-Bold" size:17]
+#define TITLE_FONT                              [UIFont fontWithName:@"Helvetica-Bold" size:13]
 #define SHADOW_OFFSET                           CGSizeMake(0, 0.8f)
 #define TITLE_NUMBER_LINES                      2
 
-#define BUTTON_INTERVAL_HEIGHT                  50
+#define BUTTON_INTERVAL_HEIGHT                  30
 #define BUTTON_HEIGHT                           30
 #define BUTTON_INTERVAL_WIDTH                   kScale_5s_W(80)
 #define BUTTON_WIDTH                            kScale_5s_W(160)
@@ -193,7 +193,7 @@
                 if (i == 0) {
                     UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(shareButton.frame.origin.x + shareButton.frame.size.width + SHAREBUTTON_INTERVAL_WIDTH/2, self.LXActivityHeight+((column)*(SHAREBUTTON_INTERVAL_HEIGHT+SHAREBUTTON_HEIGHT)), 1.5, 113)];
                     line.image = [UIImage imageNamed:@"fx_line"];
-                    [self.backGroundView addSubview:line];
+//                    [self.backGroundView addSubview:line];
                 }
                 
             }
@@ -237,14 +237,14 @@
         
         //当没title destructionButton otherbuttons时
         if (self.isHadTitle == NO && self.isHadShareButton == NO) {
-            self.LXActivityHeight = self.LXActivityHeight + cancelButton.frame.size.height+(2*BUTTON_INTERVAL_HEIGHT);
+            self.LXActivityHeight = self.LXActivityHeight + (2*BUTTON_INTERVAL_HEIGHT);
         }
         //当有title或destructionButton或otherbuttons时
         if (self.isHadTitle == YES || self.isHadShareButton == YES) {
             [cancelButton setFrame:CGRectMake(cancelButton.frame.origin.x, self.LXActivityHeight + TITLE_INTERVAL_HEIGHT + 10, cancelButton.frame.size.width, cancelButton.frame.size.height)];
-            self.LXActivityHeight = self.LXActivityHeight + cancelButton.frame.size.height+BUTTON_INTERVAL_HEIGHT;
+            self.LXActivityHeight = self.LXActivityHeight + BUTTON_INTERVAL_HEIGHT;
         }
-        [self.backGroundView addSubview:cancelButton];
+//        [self.backGroundView addSubview:cancelButton];
         
         self.postionIndexNumber++;
     }

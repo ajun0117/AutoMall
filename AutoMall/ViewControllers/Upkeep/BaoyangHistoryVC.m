@@ -99,25 +99,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BaoyangHistoryCell *cell = (BaoyangHistoryCell *)[tableView dequeueReusableCellWithIdentifier:@"historyCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    NSDictionary *dic = historyArray[indexPath.row];
-    cell.orderL.text = STRING(dic[@"code"]);
-    cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"mileage"])];
-    NSArray  *ary = dic[@"technicians"];
-    if ([ary isKindOfClass:[NSArray class]] && ary.count > 0) {
-        cell.technicianName.text = [NSString stringWithFormat:@"%@",STRING([ary firstObject][@"nickname"])];
-    }
-    else {
-        cell.technicianName.text = @"无数据";
-    }
-    cell.moneyL.text = [NSString stringWithFormat:@"%@ 元",STRING(dic[@"money"])];
-    
-    if (! [dic[@"enterTime"] isKindOfClass:[NSNull class]]) {
-        NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyy-MM-dd"];
-        NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
-        NSString *string = [formater stringFromDate:creatDate];
-        cell.dateL.text = string;
+    if (historyArray.count > 0) {
+        NSDictionary *dic = historyArray[indexPath.row];
+        cell.orderL.text = STRING(dic[@"code"]);
+        cell.lichengL.text = [NSString stringWithFormat:@"%@公里", STRING(dic[@"mileage"])];
+        NSArray  *ary = dic[@"technicians"];
+        if ([ary isKindOfClass:[NSArray class]] && ary.count > 0) {
+            cell.technicianName.text = [NSString stringWithFormat:@"%@",STRING([ary firstObject][@"nickname"])];
+        }
+        else {
+            cell.technicianName.text = @"无数据";
+        }
+        cell.moneyL.text = [NSString stringWithFormat:@"%@ 元",STRING(dic[@"money"])];
+        
+        if (! [dic[@"enterTime"] isKindOfClass:[NSNull class]]) {
+            NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+            [formater setDateFormat:@"yyyy-MM-dd"];
+            NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
+            NSString *string = [formater stringFromDate:creatDate];
+            cell.dateL.text = string;
+        }
     }
     
     return cell;
