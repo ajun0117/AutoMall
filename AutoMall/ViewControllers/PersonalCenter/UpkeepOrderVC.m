@@ -161,8 +161,8 @@
 
     int status = [dic[@"paymentStatus"] intValue];
     if (status == 0) {
-        cell.statusL.text = @"待确认";
-        [cell.btn setTitle:@"去确认" forState:UIControlStateNormal];
+        cell.statusL.text = @"检查完成";
+        [cell.btn setTitle:@"查看报告" forState:UIControlStateNormal];
     } else if (status == 1) {
         cell.statusL.text = @"已确认";
         [cell.btn setTitle:@"下一步" forState:UIControlStateNormal];
