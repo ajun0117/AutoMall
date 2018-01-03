@@ -85,7 +85,7 @@
         
         if ([carImgUrl isKindOfClass:[NSString class]]) {
             if (carImgUrl.length > 0) {
-                [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carImgUrl)] placeholderImage:IMG(@"CommplaceholderPicture")];
+                [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carImgUrl)]];
             }
 //            self.carImgL.hidden = YES;
         }

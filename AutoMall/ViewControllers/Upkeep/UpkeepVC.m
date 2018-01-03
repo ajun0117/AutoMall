@@ -65,8 +65,6 @@
     
     [self.myCollectionView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     
-    [self requestGetChecktypeList];
-    
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     
     [self requestGetPhoneInfo];
@@ -90,6 +88,9 @@
     
     if (! mobileUserType) {   //未登录状态监听登录事件
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:@"LoginSuccess" object:nil];
+    }
+    if (! typeAry) {
+        [self requestGetChecktypeList];
     }
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
