@@ -20,6 +20,7 @@
     MBProgressHUD *_networkConditionHUD;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollV;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (strong, nonatomic) IBOutlet WPImageView *imageV;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imageHight;
 
@@ -153,7 +154,7 @@
 
 //告诉scrollview要缩放的是哪个子控件
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-         return self.imageV;
+         return self.bgView;
 }
 
 -(void)toPhoto {
