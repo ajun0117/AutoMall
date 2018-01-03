@@ -75,8 +75,6 @@
     lineationAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
     
-    [self requestGetAllUnnormal];
-    [self requestGetCarUpkeepServiceContent];   //请求服务方案列表
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -93,6 +91,14 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    if (! serviceContentAry) {
+        [self requestGetCarUpkeepServiceContent];   //请求服务方案列表
+    }
+    if (unnormalAry.count == 0) {
+        [self requestGetAllUnnormal];
+    }
+
 }
 
 - (void) toPackage {

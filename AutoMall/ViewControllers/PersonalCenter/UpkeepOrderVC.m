@@ -55,7 +55,6 @@
         [mySegmentedControl changeSegmentedControlWithIndex:[self.orderStatus intValue]];
     }
     
-    [self requestGetHistoryList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -72,6 +71,11 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+//    if (orderAry.count == 0) {
+//        [self requestGetHistoryList];
+//    }
+    [self.myTableView headerBeginRefreshing];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -157,41 +161,44 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpkeepOrderListCell *cell = (UpkeepOrderListCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepOrderListCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dic = orderAry[indexPath.section];
+    if (orderAry.count > 0) {
+        
+        NSDictionary *dic = orderAry[indexPath.section];
 
-    int status = [dic[@"paymentStatus"] intValue];
-    if (status == 0) {
-        cell.statusL.text = @"检查完成";
-        [cell.btn setTitle:@"查看报告" forState:UIControlStateNormal];
-    } else if (status == 1) {
-        cell.statusL.text = @"已确认";
-        [cell.btn setTitle:@"下一步" forState:UIControlStateNormal];
-    }else if (status == 2) {
-        cell.statusL.text = @"已完工";
-        [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
-    }else if (status == 3) {
-        cell.statusL.text = @"已付款";
-        [cell.btn setTitle:@"去施工" forState:UIControlStateNormal];
-    }else if (status == 5) {
-        cell.statusL.text = @"已完成";
-        [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
-    }
-    else {
-        cell.statusL.text = @"已完成";
-        [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
-    }
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"car"][@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
-    cell.orderNumberL.text = [NSString stringWithFormat:@"订单号: %@",dic[@"code"]];
-    
-    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-    [formater setDateFormat:@"yyyy-MM-dd"];
-    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
-    NSString *string = [formater stringFromDate:creatDate];
-    cell.dateL.text = string;
+        int status = [dic[@"paymentStatus"] intValue];
+        if (status == 0) {
+            cell.statusL.text = @"检查完成";
+            [cell.btn setTitle:@"查看报告" forState:UIControlStateNormal];
+        } else if (status == 1) {
+            cell.statusL.text = @"已确认";
+            [cell.btn setTitle:@"下一步" forState:UIControlStateNormal];
+        }else if (status == 2) {
+            cell.statusL.text = @"已完工";
+            [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
+        }else if (status == 3) {
+            cell.statusL.text = @"已付款";
+            [cell.btn setTitle:@"去施工" forState:UIControlStateNormal];
+        }else if (status == 5) {
+            cell.statusL.text = @"已完成";
+            [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
+        }
+        else {
+            cell.statusL.text = @"已完成";
+            [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
+        }
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"car"][@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+        cell.orderNumberL.text = [NSString stringWithFormat:@"订单号: %@",dic[@"code"]];
+        
+        NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd"];
+        NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
+        NSString *string = [formater stringFromDate:creatDate];
+        cell.dateL.text = string;
 
-    cell.plateNumberL.text = STRING(dic[@"car"][@"plateNumber"]);
-    cell.ownerL.text = STRING(dic[@"car"][@"owner"]);
-    cell.allMoneyL.text = dic[@"money"]==[NSNull null] ? @"待确认":[NSString stringWithFormat:@"￥%@",dic[@"money"]];
+        cell.plateNumberL.text = STRING(dic[@"car"][@"plateNumber"]);
+        cell.ownerL.text = STRING(dic[@"car"][@"owner"]);
+        cell.allMoneyL.text = dic[@"money"]==[NSNull null] ? @"待确认":[NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    }
     
     return cell;
 }

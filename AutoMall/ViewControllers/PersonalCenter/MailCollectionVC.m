@@ -39,7 +39,7 @@
     
     collectArray = [NSMutableArray array];
     currentpage = 0;
-    [self requestPostCollectionList];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -58,6 +58,7 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
 
+    [self requestPostCollectionList];
 }
 
 #pragma mark - 下拉刷新,上拉加载

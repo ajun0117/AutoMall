@@ -62,7 +62,7 @@
     removeAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
     
-    [self requestGetUpkeepInfo];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -80,8 +80,13 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [unnormalAry removeAllObjects];
-    [self requestGetAllUnnormal];
+    if (! carUpkeepDic) {
+        [self requestGetUpkeepInfo];
+    }
+    if (unnormalAry.count == 0) {
+        [self requestGetAllUnnormal];
+    }
+
 }
 
 -(void)carInfo {

@@ -84,7 +84,7 @@
     
     checkResultArray = [NSMutableArray array];
     
-    [self requestGetUpkeepInfo];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -101,6 +101,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    if (! _adView) {
+        [self requestGetUpkeepInfo];
+    }
 }
 
 //创建分享视图

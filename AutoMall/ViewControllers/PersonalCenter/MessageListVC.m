@@ -31,7 +31,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"MessageListCell" bundle:nil] forCellReuseIdentifier:@"messageListCell"];
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self requestPostMessageList];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -49,6 +49,8 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [self requestPostMessageList];
 }
 
 #pragma mark - 下拉刷新,上拉加载
