@@ -114,7 +114,7 @@
      self.scrollV.contentSize = self.imageV.image.size;
      //设置实现缩放
      //设置最大伸缩比例
-     self.scrollV.maximumZoomScale = 3.0;
+     self.scrollV.maximumZoomScale = 2.0;
      //设置最小伸缩比例
      self.scrollV.minimumZoomScale = 1.0;
 
