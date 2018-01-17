@@ -69,7 +69,7 @@
             break;
         }
         case 3: {
-            cell.declareL.text = @"购车时间";
+            cell.declareL.text = @"年款";
             if (! [self.carDic[@"purchaseDate"] isKindOfClass:[NSNull class]]) {
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
                 [formater setDateFormat:@"yyyy-MM-dd"];

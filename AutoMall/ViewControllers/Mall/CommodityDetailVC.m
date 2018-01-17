@@ -883,11 +883,17 @@ static CGFloat const scrollViewHeight = 220;
             
             NSMutableArray *images = [NSMutableArray array];
             NSArray *minorImages = commodityDic[@"minorImages"];
-            for (NSDictionary *dic in minorImages) {
-                [images addObject:UrlPrefix(dic[@"relativePath"])];
+            if (minorImages.count > 0) {
+                for (NSDictionary *dic in minorImages) {
+                    [images addObject:UrlPrefix(dic[@"relativePath"])];
+                }
+                imagesAry = images;
+                scroll.images = imagesAry;
             }
-            imagesAry = images;
-            scroll.images = imagesAry;
+            else {
+                imagesAry = @[@"http://hengliantech.com/carupkeep/uploads/2018/01/94be1467-83e9-405c-8163-dae26911e8d2.jpg"];
+                scroll.images = imagesAry;
+            }
             
             
             [self requestPostCommoditytjListWithId:commodityDic[@"commodityTerm"][@"id"] commId:commodityDic[@"id"]];

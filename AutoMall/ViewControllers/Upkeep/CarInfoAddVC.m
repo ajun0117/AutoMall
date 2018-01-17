@@ -482,6 +482,12 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
+    if (! self.modelTF.text || self.modelTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车型必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
     isAutoSelect = NO;
     if (self.carDic) {
         [self requestPostUpdateCar];
@@ -517,6 +523,12 @@
     }
     if (! self.brandTF.text || self.brandTF.text.length == 0) {
         _networkConditionHUD.labelText = @"车辆品牌必须填写！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! self.modelTF.text || self.modelTF.text.length == 0) {
+        _networkConditionHUD.labelText = @"车型必须填写！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;

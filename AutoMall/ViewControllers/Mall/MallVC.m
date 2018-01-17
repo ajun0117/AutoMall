@@ -508,11 +508,17 @@ static CGFloat const scrollViewHeight = 220;
         NSLog(@"_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             adArray = responseObject[@"data"];
-            NSMutableArray *urlAry = [NSMutableArray array];
-            for (NSDictionary *dic in adArray) {
-                [urlAry addObject:UrlPrefix(dic[@"image"])];
+            if (adArray.count > 0) {
+                NSMutableArray *urlAry = [NSMutableArray array];
+                for (NSDictionary *dic in adArray) {
+                    [urlAry addObject:UrlPrefix(dic[@"image"])];
+                }
+                scroll.images = urlAry;
             }
-            scroll.images = urlAry;
+            else {
+                scroll.images = @[@"http://hengliantech.com/carupkeep/uploads/2018/01/94be1467-83e9-405c-8163-dae26911e8d2.jpg"];
+            }
+            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
