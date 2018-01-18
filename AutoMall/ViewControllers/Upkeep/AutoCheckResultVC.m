@@ -53,11 +53,11 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = - 16;
+    negativeSpacer.width = - 6;
     
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    shareBtn.frame = CGRectMake(0, 0, 44, 44);
-    [shareBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    shareBtn.frame = CGRectMake(0, 0, 28, 28);
+//    [shareBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     shareBtn.contentMode = UIViewContentModeScaleAspectFit;
     [shareBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     [shareBtn addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];

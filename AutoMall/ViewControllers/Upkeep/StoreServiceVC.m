@@ -65,7 +65,10 @@
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
     
-    [self.myTableView headerBeginRefreshing];
+//    [self.myTableView headerBeginRefreshing];
+    currentpage = 0;
+    [serviceArray removeAllObjects];
+    [self requestPostServiceList];
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -114,11 +117,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpKeepPlanServiceCell *cell = (UpKeepPlanServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upKeepPlanServiceCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dic = serviceArray[indexPath.row];
-    cell.declareL.text = dic[@"item"];
-    if (dic[@"money"]) {
-        cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+    if (serviceArray.count > 0) {
+        NSDictionary *dic = serviceArray[indexPath.row];
+        cell.declareL.text = dic[@"item"];
+        if (dic[@"money"]) {
+            cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+        }
     }
+    
     return cell;
 }
 

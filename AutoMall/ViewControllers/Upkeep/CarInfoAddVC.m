@@ -209,11 +209,12 @@
     [self setTextFieldInputAccessoryViewWithTF:self.plateNumberTF];
     [self setTextFieldInputAccessoryViewWithTF:self.brandTF];
     [self setTextFieldInputAccessoryViewWithTF:self.modelTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.engineModelTF];
     [self setTextFieldInputAccessoryViewWithTF:self.purchaseDateTF];
     [self setTextFieldInputAccessoryViewWithTF:self.engineNoTF];
     [self setTextFieldInputAccessoryViewWithTF:self.vinTF];
     
-    textFieldArray = @[self.mileageTF, self.fuelAmountTF, self.ownerTF, self.phoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF, self.purchaseDateTF, self.engineNoTF, self.vinTF];
+    textFieldArray = @[self.mileageTF, self.fuelAmountTF, self.ownerTF, self.phoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF,self.engineModelTF, self.purchaseDateTF, self.engineNoTF, self.vinTF];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

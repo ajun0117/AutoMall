@@ -138,6 +138,8 @@
 		047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE0091F4A904400AEAE8E /* picture_1.png */; };
 		047AE00D1F4A904400AEAE8E /* picture_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE00A1F4A904400AEAE8E /* picture_2.png */; };
 		047AE00E1F4A904400AEAE8E /* picture_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 047AE00B1F4A904400AEAE8E /* picture_3.png */; };
+		047EF83C2010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EF8392010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.m */; };
+		047EF83D2010903300C9CFE3 /* UINavigationController+YHBackTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EF83B2010903300C9CFE3 /* UINavigationController+YHBackTitle.m */; };
 		048044481FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 048044461FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.m */; };
 		048044491FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048044471FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.xib */; };
 		048646751FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048646731FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m */; };
@@ -751,6 +753,10 @@
 		047AE0091F4A904400AEAE8E /* picture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_1.png; sourceTree = "<group>"; };
 		047AE00A1F4A904400AEAE8E /* picture_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_2.png; sourceTree = "<group>"; };
 		047AE00B1F4A904400AEAE8E /* picture_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_3.png; sourceTree = "<group>"; };
+		047EF8382010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+YHIndicatorImage.h"; sourceTree = "<group>"; };
+		047EF8392010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+YHIndicatorImage.m"; sourceTree = "<group>"; };
+		047EF83A2010903300C9CFE3 /* UINavigationController+YHBackTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+YHBackTitle.h"; sourceTree = "<group>"; };
+		047EF83B2010903300C9CFE3 /* UINavigationController+YHBackTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+YHBackTitle.m"; sourceTree = "<group>"; };
 		048044451FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaoyangHistoryDetailVC.h; sourceTree = "<group>"; };
 		048044461FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaoyangHistoryDetailVC.m; sourceTree = "<group>"; };
 		048044471FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaoyangHistoryDetailVC.xib; sourceTree = "<group>"; };
@@ -1875,6 +1881,17 @@
 			name = "商品详情";
 			sourceTree = "<group>";
 		};
+		047EF8372010903300C9CFE3 /* yh_navgation */ = {
+			isa = PBXGroup;
+			children = (
+				047EF8382010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.h */,
+				047EF8392010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.m */,
+				047EF83A2010903300C9CFE3 /* UINavigationController+YHBackTitle.h */,
+				047EF83B2010903300C9CFE3 /* UINavigationController+YHBackTitle.m */,
+			);
+			path = yh_navgation;
+			sourceTree = "<group>";
+		};
 		0486E8C61F8F667700FB746E /* normalversion */ = {
 			isa = PBXGroup;
 			children = (
@@ -2509,6 +2526,7 @@
 		04DC7D241F31C28300AA20A7 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
+				047EF8372010903300C9CFE3 /* yh_navgation */,
 				F71D0CFC1FC1C155000BB47C /* MultiTablesView */,
 				040E6EA01FA9750500C2FA9A /* NSLayoutConstraintOnePixelLine */,
 				046B8DBC1F99F76400784AA8 /* 支付宝蚂蚁金服支付 */,
@@ -3456,6 +3474,7 @@
 				046B8DDB1F9A044300784AA8 /* NSDataEx.m in Sources */,
 				042E5D0F1F4195ED00F5F324 /* BaoyangHistoryVC.m in Sources */,
 				04DC7D0D1F31C25000AA20A7 /* HomeCityCollectionViewCell.m in Sources */,
+				047EF83D2010903300C9CFE3 /* UINavigationController+YHBackTitle.m in Sources */,
 				042AF2111F4C408F00EA5E5F /* CommodityDetailContentCell.m in Sources */,
 				04DCA1701FA2E0F8004B1054 /* CheckResultSingleCell.m in Sources */,
 				0490FC041F57F97700F77661 /* CustomServiceCell.m in Sources */,
@@ -3481,6 +3500,7 @@
 				04F7D87E1F5EAD79004945ED /* MailOrderMultiCell.m in Sources */,
 				042DEFF81F46F0C20065FED8 /* StrikeThroughLabel.m in Sources */,
 				04DD8EE31F50169D00159776 /* WRNavigationBar.m in Sources */,
+				047EF83C2010903300C9CFE3 /* UINavigationBar+YHIndicatorImage.m in Sources */,
 				04A09B151F3D969600053A98 /* CarInfoListVC.m in Sources */,
 				04DCA1751FA2E316004B1054 /* CheckResultMultiCell.m in Sources */,
 				040BC8C11FA88482009AD3BA /* EmployeeSkillListVC.m in Sources */,

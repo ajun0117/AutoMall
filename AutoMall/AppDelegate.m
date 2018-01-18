@@ -43,7 +43,9 @@ static BOOL isBackGroundActivateApplication;
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
                                   // Enable or disable features based on authorization.
                                   if (granted) {
-                                      [application registerForRemoteNotifications];
+//                                      [application registerForRemoteNotifications];
+                                      // 需要在主线程执行
+                                      [self performSelectorOnMainThread:@selector(registerRemote:) withObject:application waitUntilDone:YES];
                                   }
                               }];
 #endif
@@ -62,7 +64,7 @@ static BOOL isBackGroundActivateApplication;
     
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
     
-    [BPush registerChannel:launchOptions apiKey:BaiduPush_Key pushMode:BPushModeDevelopment withFirstAction:@"打开" withSecondAction:@"关闭" withCategory:@"test" useBehaviorTextInput:YES isDebug:YES];
+    [BPush registerChannel:launchOptions apiKey:BaiduPush_Key pushMode:BPushModeProduction withFirstAction:@"打开" withSecondAction:@"关闭" withCategory:@"test" useBehaviorTextInput:YES isDebug:YES];
     
     // 禁用地理位置推送 需要再绑定接口前调用。
     
@@ -77,6 +79,10 @@ static BOOL isBackGroundActivateApplication;
      [WXApi registerApp:kShare_WeChat_Appid withDescription:@"AutoMall"];
     
     return YES;
+}
+
+-(void)registerRemote:(id)obj {
+    [obj registerForRemoteNotifications];
 }
 
 // 此方法是 用户点击了通知，应用在前台 或者开启后台并且应用在后台 时调起

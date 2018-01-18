@@ -69,14 +69,14 @@ static CGFloat const scrollViewHeight = 220;
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                        target:nil action:nil];
-    negativeSpacer.width = -16;
+    negativeSpacer.width = -6;
     
     collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    collectBtn.frame = CGRectMake(0, 0, 44, 44);
+    collectBtn.frame = CGRectMake(0, 0, 28, 28);
     [collectBtn setImage:[UIImage imageNamed:@"collect"] forState:UIControlStateNormal];
     [collectBtn setImage:[UIImage imageNamed:@"collected"] forState:UIControlStateSelected];
     [collectBtn setImage:[UIImage imageNamed:@"collected"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [collectBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [collectBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [collectBtn addTarget:self action:@selector(toCollectFavour) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:collectBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
