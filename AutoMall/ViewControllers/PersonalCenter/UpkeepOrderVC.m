@@ -37,6 +37,8 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepOrderListCell" bundle:nil] forCellReuseIdentifier:@"upkeepOrderListCell"];
     self.myTableView.tableFooterView = [UIView new];
     

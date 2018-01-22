@@ -48,6 +48,8 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
     //    searchBtn.contentMode = UIViewContentModeRight;

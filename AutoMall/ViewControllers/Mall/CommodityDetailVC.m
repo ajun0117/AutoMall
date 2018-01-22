@@ -141,6 +141,10 @@ static CGFloat const scrollViewHeight = 220;
     }
     //设置商品数量
     [self updateShoppingCart:cartMulArray];
+    
+    //解决ios11下导航栏不透明的bug
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
 }
 
 -(void)toCollectFavour {        //收藏

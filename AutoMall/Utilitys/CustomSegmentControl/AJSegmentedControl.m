@@ -104,7 +104,7 @@
 //        lineIM.frame = CGRectMake(0, AJSegmentedControl_Height-1, _scrollView.contentSize.width, 1);
 //        [_scrollView addSubview:lineIM];
         
-        UILabel *lineL = [[UILabel alloc] initWithFrame:CGRectMake(0, AJSegmentedControl_Height-1, _scrollView.contentSize.width, 0.5)];
+        UILabel *lineL = [[UILabel alloc] initWithFrame:CGRectMake(0, AJSegmentedControl_Height-0.5, _scrollView.contentSize.width, 0.5)];
         lineL.backgroundColor = RGBCOLOR(200, 199, 204);
         [_scrollView addSubview:lineL];
         

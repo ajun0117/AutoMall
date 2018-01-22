@@ -29,15 +29,17 @@
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
     
-    [_webView setScalesPageToFit:YES];
+    self.automaticallyAdjustsScrollViewInsets = NO;//同上
+    
+//    [_webView setScalesPageToFit:YES];
     
 //    UIBarButtonItem *backButnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Right-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 //    items = [NSMutableArray arrayWithObjects:backButnItem, nil];
 //    self.navigationItem.leftBarButtonItems = items;
     
-    if (self.canShare) {
-         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_action_share_white"] style:UIBarButtonItemStylePlain target:self action:@selector(shareClicked)];
-    }
+//    if (self.canShare) {
+//         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_action_share_white"] style:UIBarButtonItemStylePlain target:self action:@selector(shareClicked)];
+//    }
 //    else {
 //        self.navigationItem.rightBarButtonItem = nil;
 //    }
@@ -96,28 +98,28 @@
 //    self.title = title;
 }
 
--(void)shareClicked {
-    //未安装时隐藏
-    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]];
-    
-    //SDK4.2默认分享面板已经处理过是否隐藏
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:UM_Appkey
-                                      shareText:@"积分宝平台http://3g.jfb315.com"
-                                     shareImage:[UIImage imageNamed:@"app_icon.png"]
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone, nil]
-                                       delegate:self];
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"积分宝平台";
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://3g.jfb315.com/";
-    //    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"积分宝平台";
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://3g.jfb315.com/";
-    
-    [UMSocialData defaultData].extConfig.qqData.title = @"积分宝平台";
-    [UMSocialData defaultData].extConfig.qqData.url = @"http://3g.jfb315.com/";
-    [UMSocialData defaultData].extConfig.qzoneData.title = @"积分宝平台";
-    [UMSocialData defaultData].extConfig.qzoneData.url = @"http://3g.jfb315.com/";
-}
+//-(void)shareClicked {
+//    //未安装时隐藏
+//    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]];
+//
+//    //SDK4.2默认分享面板已经处理过是否隐藏
+//    [UMSocialSnsService presentSnsIconSheetView:self
+//                                         appKey:UM_Appkey
+//                                      shareText:@"积分宝平台http://3g.jfb315.com"
+//                                     shareImage:[UIImage imageNamed:@"app_icon.png"]
+//                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone, nil]
+//                                       delegate:self];
+//
+//    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"积分宝平台";
+//    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://3g.jfb315.com/";
+//    //    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"积分宝平台";
+//    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://3g.jfb315.com/";
+//
+//    [UMSocialData defaultData].extConfig.qqData.title = @"积分宝平台";
+//    [UMSocialData defaultData].extConfig.qqData.url = @"http://3g.jfb315.com/";
+//    [UMSocialData defaultData].extConfig.qzoneData.title = @"积分宝平台";
+//    [UMSocialData defaultData].extConfig.qzoneData.url = @"http://3g.jfb315.com/";
+//}
 
 #pragma mark - 分享完成后的回调
 -(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response

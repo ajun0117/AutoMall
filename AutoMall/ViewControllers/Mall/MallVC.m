@@ -127,6 +127,10 @@ static CGFloat const scrollViewHeight = 220;
 //    [self requsetAdvertList];   //请求广告列表
     [self requestGetComCategoryList];   //请求分类数据
     [self requestPostCommoditytjList];  //请求推荐商品列表
+    
+    //解决ios11下导航栏不透明的bug
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - 点击进入webView
