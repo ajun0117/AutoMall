@@ -195,7 +195,7 @@
     xingjiBtn.selected = NO;
     sortBtn.selected = NO;
     
-    orderString = @"discount";     //按星级排序
+    orderString = @"discount";     //按价格排序
     if (priceBtn.selected) {
         priceBtn.selected = NO;
         orderTypeString = @"desc";   //降序
@@ -289,6 +289,7 @@
         cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
         cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
         if ([dic[@"integral"] intValue] > 0) {
+            cell.jifenL.text = [NSString stringWithFormat:@"%@分",dic[@"integral"]];
         } else {
             cell.jifenL.text = @"该优惠商品不累计积分";
         }

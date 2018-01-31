@@ -464,6 +464,7 @@ static CGFloat const scrollViewHeight = 220;
                     cell.pingxingRV.maxRate = 5;
                     cell.saleL.text = [NSString stringWithFormat:@"月销%@单",commodityDic[@"salesVolume"]];
                     if ([commodityDic[@"integral"] intValue] > 0) {
+                        cell.jifenL.text = [NSString stringWithFormat:@"%@分",commodityDic[@"integral"]];
                     } else {
                         cell.jifenL.text = @"该优惠商品不累计积分";
                     }
