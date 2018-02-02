@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,14 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="灰喜力" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyb-5a-epC">
-                        <rect key="frame" x="16" y="12" width="231" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="3hF-uX-gAJ"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="灰喜力" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyb-5a-epC">
+                        <rect key="frame" x="16" y="12" width="231" height="19.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -66,8 +63,10 @@
                     <constraint firstAttribute="trailing" secondItem="mfF-Ud-H45" secondAttribute="trailing" constant="8" id="63b-aj-bbW"/>
                     <constraint firstItem="mfF-Ud-H45" firstAttribute="leading" secondItem="qeA-FM-FIl" secondAttribute="trailing" constant="5" id="6Ex-DE-Vll"/>
                     <constraint firstItem="Xyb-5a-epC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="CKZ-0Z-JXG"/>
+                    <constraint firstItem="Xyb-5a-epC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="MaJ-M0-oYb"/>
                     <constraint firstItem="qeA-FM-FIl" firstAttribute="leading" secondItem="e1V-u8-gZU" secondAttribute="trailing" constant="5" id="Xe3-5y-XaC"/>
                     <constraint firstItem="qeA-FM-FIl" firstAttribute="centerY" secondItem="mfF-Ud-H45" secondAttribute="centerY" id="dQn-ef-emk"/>
+                    <constraint firstAttribute="bottom" secondItem="Xyb-5a-epC" secondAttribute="bottom" constant="12" id="g8B-B9-1xF"/>
                     <constraint firstItem="mfF-Ud-H45" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lCU-FH-75R"/>
                     <constraint firstItem="e1V-u8-gZU" firstAttribute="leading" secondItem="Xyb-5a-epC" secondAttribute="trailing" constant="10" id="mjB-b9-6qQ"/>
                     <constraint firstItem="e1V-u8-gZU" firstAttribute="centerY" secondItem="qeA-FM-FIl" secondAttribute="centerY" id="vP9-Ql-2PD"/>

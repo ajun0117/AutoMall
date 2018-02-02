@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbF-nU-Xt2">
-                                <rect key="frame" x="8" y="154" width="107.5" height="18"/>
+                                <rect key="frame" x="8" y="154" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -66,6 +66,7 @@
                             <constraint firstItem="VbF-nU-Xt2" firstAttribute="top" secondItem="N3b-fi-NLe" secondAttribute="bottom" constant="6" id="iVl-uO-ZiH"/>
                             <constraint firstItem="VbF-nU-Xt2" firstAttribute="leading" secondItem="Eb5-Xh-FgM" secondAttribute="leading" constant="8" id="k5g-2E-h1x"/>
                             <constraint firstItem="YWm-rm-8Qz" firstAttribute="top" secondItem="VbF-nU-Xt2" secondAttribute="bottom" constant="5" id="teu-pg-FTN"/>
+                            <constraint firstAttribute="trailing" secondItem="VbF-nU-Xt2" secondAttribute="trailing" constant="8" id="u6p-jL-yCx"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yXO-eO-lb6">
@@ -84,7 +85,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ues-X3-bIk">
-                                <rect key="frame" x="8" y="154" width="107.5" height="18"/>
+                                <rect key="frame" x="8" y="154" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -105,6 +106,7 @@
                             <constraint firstItem="ues-X3-bIk" firstAttribute="leading" secondItem="yXO-eO-lb6" secondAttribute="leading" constant="8" id="CIi-fU-pox"/>
                             <constraint firstAttribute="bottom" secondItem="ErK-g3-srP" secondAttribute="bottom" constant="8" id="Cw5-YK-Uwp"/>
                             <constraint firstItem="3yN-J5-PTz" firstAttribute="leading" secondItem="yXO-eO-lb6" secondAttribute="leading" id="EAj-dD-OWq"/>
+                            <constraint firstAttribute="trailing" secondItem="ues-X3-bIk" secondAttribute="trailing" constant="8" id="JKS-cP-dn9"/>
                             <constraint firstItem="3yN-J5-PTz" firstAttribute="top" secondItem="yXO-eO-lb6" secondAttribute="top" id="JkX-Nu-dd2"/>
                             <constraint firstItem="ig1-2Q-yCN" firstAttribute="centerY" secondItem="ErK-g3-srP" secondAttribute="centerY" id="MCI-6A-JhL"/>
                             <constraint firstItem="Vxy-26-Vdu" firstAttribute="top" secondItem="yXO-eO-lb6" secondAttribute="top" constant="5" id="O8I-dq-KVe"/>
@@ -133,7 +135,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CR5-iR-2Z5">
-                                <rect key="frame" x="8" y="154" width="107.5" height="18"/>
+                                <rect key="frame" x="8" y="154" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -162,6 +164,7 @@
                             <constraint firstAttribute="bottom" secondItem="UNm-Po-XNS" secondAttribute="bottom" constant="8" id="cTb-gQ-Cia"/>
                             <constraint firstAttribute="trailing" secondItem="QUJ-rs-4HH" secondAttribute="trailing" id="e57-VX-kn0"/>
                             <constraint firstAttribute="bottom" secondItem="QUJ-rs-4HH" secondAttribute="bottom" id="iAh-JT-JsE"/>
+                            <constraint firstAttribute="trailing" secondItem="CR5-iR-2Z5" secondAttribute="trailing" constant="8" id="mla-Zc-o5g"/>
                             <constraint firstItem="UNm-Po-XNS" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="leading" constant="8" id="sls-ge-IuC"/>
                             <constraint firstItem="E0g-iG-5ea" firstAttribute="leading" secondItem="ixW-pR-Els" secondAttribute="leading" constant="5" id="yaD-Fn-cPD"/>
                         </constraints>
@@ -182,7 +185,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qod-xi-dqQ">
-                                <rect key="frame" x="8" y="154" width="107.5" height="18"/>
+                                <rect key="frame" x="8" y="154" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -212,6 +215,7 @@
                             <constraint firstItem="qod-xi-dqQ" firstAttribute="leading" secondItem="9Ys-aF-O2T" secondAttribute="leading" constant="8" id="qaF-VW-gZS"/>
                             <constraint firstItem="rDK-ms-kXU" firstAttribute="leading" secondItem="9Ys-aF-O2T" secondAttribute="leading" constant="8" id="tAv-u1-oHI"/>
                             <constraint firstAttribute="trailing" secondItem="IvK-Gq-bjI" secondAttribute="trailing" constant="5" id="wCu-Ha-bpl"/>
+                            <constraint firstAttribute="trailing" secondItem="qod-xi-dqQ" secondAttribute="trailing" constant="8" id="x7Y-gG-kln"/>
                             <constraint firstAttribute="trailing" secondItem="V5o-7x-bB8" secondAttribute="trailing" id="yUL-pH-wzh"/>
                         </constraints>
                     </view>
@@ -268,6 +272,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="default" width="512" height="512"/>
+        <image name="default" width="151" height="151"/>
     </resources>
 </document>

@@ -105,43 +105,45 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CommodityListCell *cell = (CommodityListCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityListCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dic = resultArray [indexPath.section];
-    [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
-    cell.goodsNameL.text = dic [@"name"];
-    //        cell.baokuanL.text =
-    //        cell.tuijianL.text =
-    //        cell.zhekouL.text =
-    cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
-    cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
-    if ([dic[@"integral"] intValue] > 0) {
-        cell.jifenL.text = [NSString stringWithFormat:@"%@分",dic[@"integral"]];
-    } else {
-        cell.jifenL.text = @"该优惠商品不累计积分";
-    }
-    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
-    if ([mobileUserType isEqualToString:@"1"]) {    //老板
-        if ([dic[@"discount"] intValue] > 0) {
-            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
-            cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
-            cell.zhekouL.hidden = NO;
+    if (resultArray.count > 0) {
+        NSDictionary *dic = resultArray [indexPath.section];
+        [cell.goodsIM sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+        cell.goodsNameL.text = dic [@"name"];
+        //        cell.baokuanL.text =
+        //        cell.tuijianL.text =
+        //        cell.zhekouL.text =
+        cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
+        cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
+        if ([dic[@"integral"] intValue] > 0) {
+            cell.jifenL.text = [NSString stringWithFormat:@"%@分",dic[@"integral"]];
         } else {
-            cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
-            cell.costPriceStrikeL.text = @"";
-            cell.zhekouL.hidden = YES;
+            cell.jifenL.text = @"该优惠商品不累计积分";
         }
-        cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
-    }
-    else {
-        if ([dic[@"discount"] intValue] > 0) {
-            cell.moneyL.text = @"￥--";
-            cell.costPriceStrikeL.text = @"￥--";
-            cell.zhekouL.hidden = NO;
-        } else {
-            cell.moneyL.text = @"￥--";
-            cell.costPriceStrikeL.text = @"";
-            cell.zhekouL.hidden = YES;
+        NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+        if ([mobileUserType isEqualToString:@"1"]) {    //老板
+            if ([dic[@"discount"] intValue] > 0) {
+                cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+                cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                cell.zhekouL.hidden = NO;
+            } else {
+                cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                cell.costPriceStrikeL.text = @"";
+                cell.zhekouL.hidden = YES;
+            }
+            cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
         }
-        cell.yunfeiL.text = @"配送费--元";
+        else {
+            if ([dic[@"discount"] intValue] > 0) {
+                cell.moneyL.text = @"￥--";
+                cell.costPriceStrikeL.text = @"￥--";
+                cell.zhekouL.hidden = NO;
+            } else {
+                cell.moneyL.text = @"￥--";
+                cell.costPriceStrikeL.text = @"";
+                cell.zhekouL.hidden = YES;
+            }
+            cell.yunfeiL.text = @"配送费--元";
+        }
     }
     return cell;
 }

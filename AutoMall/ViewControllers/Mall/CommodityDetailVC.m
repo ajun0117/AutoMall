@@ -415,7 +415,12 @@ static CGFloat const scrollViewHeight = 220;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 4) {
+        if (indexPath.row == 0) {
+            UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+            CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            return height + 1;
+        }
+        else if (indexPath.row == 4) {
             return 100;
         }
         else {
@@ -449,6 +454,7 @@ static CGFloat const scrollViewHeight = 220;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
                     cell.nameL.text = commodityDic[@"name"];
+                    cell.nameL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 89;
                     if ([commodityDic[@"discount"] intValue] > 0) {
                         cell.zhekouL.hidden = NO;
                     } else {
