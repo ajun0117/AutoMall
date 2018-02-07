@@ -137,7 +137,7 @@
         return cell;
     }
     else {
-        SettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settlementCell" forIndexPath:indexPath];
+        SettlementCell *cell = (SettlementCell *)[tableView dequeueReusableCellWithIdentifier:@"settlementCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.addBtn addTarget:self action:@selector(addBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.deleteBtn addTarget:self action:@selector(deleteBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -165,9 +165,9 @@
         return 80;
     }
     else if (indexPath.section == 2) {
-//        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-//        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//        return height + 1;
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 1;
         return 60;
     }
     return 55;
