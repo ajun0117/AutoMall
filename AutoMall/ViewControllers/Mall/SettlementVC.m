@@ -71,7 +71,7 @@
 
 - (void)initTab{
     self.title = @"结算";
-    [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementCell" bundle:nil] forCellReuseIdentifier:@"SettlementCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementCell" bundle:nil] forCellReuseIdentifier:@"settlementCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementFootView" bundle:nil] forCellReuseIdentifier:@"SettlementFootView"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementAddressCell" bundle:nil] forCellReuseIdentifier:@"settlementAddressCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"SettlementBeizhuCell" bundle:nil] forCellReuseIdentifier:@"settlementBeizhuCell"];
@@ -137,13 +137,14 @@
         return cell;
     }
     else {
-        SettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettlementCell" forIndexPath:indexPath];
+        SettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settlementCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.addBtn addTarget:self action:@selector(addBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.deleteBtn addTarget:self action:@selector(deleteBtn:) forControlEvents:UIControlEventTouchUpInside];
         cell.addBtn.tag = indexPath.row;
         cell.deleteBtn.tag = indexPath.row;
         cell.data = self.datasArr [indexPath.row];
+        cell.name.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 162;
         return cell;
     }
 }
@@ -164,6 +165,9 @@
         return 80;
     }
     else if (indexPath.section == 2) {
+//        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+//        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//        return height + 1;
         return 60;
     }
     return 55;
