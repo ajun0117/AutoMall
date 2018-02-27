@@ -579,7 +579,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 138;
+    NSArray *array = contentAry[indexPath.section][@"checkContents"];
+    NSDictionary *dicc = [array firstObject];
+    id groupStr = dicc[@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
+        return 98;
+    }
+    else {
+        return 138;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
