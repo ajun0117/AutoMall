@@ -10,6 +10,7 @@
 
 @interface AutoCheckMultiCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *nameL;
 @property (strong, nonatomic) IBOutlet UILabel *contentL;
 @property (strong, nonatomic) IBOutlet UIView *segBgView;
 @property (weak, nonatomic) IBOutlet UILabel *resultL;

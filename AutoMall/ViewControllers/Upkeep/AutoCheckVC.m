@@ -586,7 +586,7 @@
         return 98;
     }
     else {
-        return 138;
+        return 98;
     }
 }
 
@@ -595,10 +595,10 @@
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
-        return 88;
+        return 44;
     }
     else {
-        return 44;
+        return 1;
     }
 }
 
@@ -612,7 +612,7 @@
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
         NSDictionary *dic = contentAry[section];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 90)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         view.backgroundColor = [UIColor whiteColor];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
         label.font = [UIFont boldSystemFontOfSize:15];
@@ -620,14 +620,14 @@
         label.text = dic[@"name"];
         [view addSubview:label];
         
-        UIView *contentBgView = [[UIView alloc] initWithFrame:CGRectMake(8, 48, SCREEN_WIDTH - 16, 30)];
+        UIView *contentBgView = [[UIView alloc] initWithFrame:CGRectMake(8 + 108, 7, SCREEN_WIDTH - 16 - 108, 30)];
         contentBgView.backgroundColor = RGBCOLOR(244, 245, 246);
-        UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 77, 20)];
-        noticeL.font = [UIFont systemFontOfSize:15];
-        noticeL.text = @"检查内容：";
-        noticeL.textColor = Gray_Color;
-        [contentBgView addSubview:noticeL];
-        UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(93, 5, CGRectGetWidth(contentBgView.frame) - 77 - 24 , 20)];
+//        UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 77, 20)];
+//        noticeL.font = [UIFont systemFontOfSize:15];
+//        noticeL.text = @"检查内容：";
+//        noticeL.textColor = Gray_Color;
+//        [contentBgView addSubview:noticeL];
+        UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, CGRectGetWidth(contentBgView.frame) - 24 , 20)];
         contentL.font = [UIFont systemFontOfSize:15];
         NSArray *ary = dic[@"checkContents"];
         NSDictionary *dicc;
@@ -639,18 +639,19 @@
         [view addSubview:contentBgView];
         return view;
     }
-    else {
-        NSDictionary *dic = contentAry[section];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        view.backgroundColor = [UIColor whiteColor];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
-        label.font = [UIFont boldSystemFontOfSize:15];
-        label.backgroundColor = [UIColor clearColor];
-        label.text = dic[@"name"];
-        [view addSubview:label];
-        
-        return view;
-    }
+//    else {
+//        NSDictionary *dic = contentAry[section];
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+//        view.backgroundColor = [UIColor whiteColor];
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 12, 100, 20)];
+//        label.font = [UIFont boldSystemFontOfSize:15];
+//        label.backgroundColor = [UIColor clearColor];
+//        label.text = dic[@"name"];
+//        [view addSubview:label];
+//
+//        return view;
+//    }
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -752,6 +753,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         NSDictionary *dicc = array [indexPath.row];
+        
+        NSDictionary *nameDic = contentAry[indexPath.section];
+        cell.nameL.text = nameDic[@"name"];
         
         cell.contentL.text = dicc[@"name"];
         for (DVSwitch *switcher in cell.segBgView.subviews) {
