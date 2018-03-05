@@ -311,7 +311,7 @@
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((SCREEN_WIDTH-20) / 3 - 4, ((SCREEN_WIDTH-20) / 3 - 4)*349/221);
+    return CGSizeMake((SCREEN_WIDTH-32) / 3 - 20, ((SCREEN_WIDTH-32) / 3 - 20)*349/221);
 }
 
 -(void)LoginSuccess {

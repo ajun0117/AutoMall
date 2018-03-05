@@ -522,6 +522,14 @@
 //    [self presentViewController:self.imagePickerNavC animated:YES completion:NULL];
 }
 
+/// 根据指定文本和字体计算尺寸
+- (CGSize)sizeWithText:(NSString *)text font:(UIFont *)font
+{
+    NSMutableDictionary *attrDict = [NSMutableDictionary dictionary];
+    attrDict[NSFontAttributeName] = font;
+    return [text sizeWithAttributes:attrDict];
+}
+
 //#pragma mark -
 //#pragma QBImagePickerControllerDelegate
 //////把选中的图片放到这里
@@ -618,6 +626,8 @@
         label.font = [UIFont boldSystemFontOfSize:15];
         label.backgroundColor = [UIColor clearColor];
         label.text = dic[@"name"];
+        CGSize nameSize = [self sizeWithText:dic[@"name"] font:[UIFont boldSystemFontOfSize:15]];
+        label.frame = CGRectMake(8, 12, nameSize.width, 20);
         [view addSubview:label];
         
         UIView *contentBgView = [[UIView alloc] initWithFrame:CGRectMake(8 + 108, 7, SCREEN_WIDTH - 16 - 108, 30)];
@@ -635,6 +645,8 @@
             dicc = [ary firstObject];
         }
         contentL.text = dicc[@"name"];
+        CGSize contentSize = [self sizeWithText:dicc[@"name"] font:[UIFont boldSystemFontOfSize:15]];
+        contentBgView.frame = CGRectMake(8 + nameSize.width + 8, 7, contentSize.width + 46, 30);
         [contentBgView addSubview:contentL];
         [view addSubview:contentBgView];
         return view;
@@ -833,7 +845,11 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CheckcategoryList object:nil];
-    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    id storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSLog(@"storeId: %@",storeId);
+    if (![storeId isKindOfClass:[NSNumber class]]) {
+        storeId = @"";
+    }
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CheckcategoryList, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&storeId=%@&pageSize=%d",UrlPrefix(CheckcategoryList),self.checktypeID,storeId,20];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
@@ -843,7 +859,11 @@
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ChecktermList object:nil];
-    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    id storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSLog(@"storeId: %@",storeId);
+    if (![storeId isKindOfClass:[NSNumber class]]) {
+        storeId = @"";
+    }
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ChecktermList, @"op", nil];
     NSString *urlString = [NSString stringWithFormat:@"%@?checkTypeId=%@&checkCategoryId=%@&storeId=%@&pageNo=%d&pageSize=%d",UrlPrefix(ChecktermList),self.checktypeID,idStr,storeId,0,50];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
@@ -902,7 +922,11 @@
 //    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
     
     NSDictionary *carDicc = @{@"id":self.carDic[@"id"],@"mileage":self.carDic[@"mileage"],@"fuelAmount":self.carDic[@"fuelAmount"]};
-    NSString *storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    id storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
+    NSLog(@"storeId: %@",storeId);
+    if (![storeId isKindOfClass:[NSNumber class]]) {
+        storeId = @"";
+    }
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",self.checktypeID,@"checkTypeId",carImagesAry,@"carUpkeepImages", nil];

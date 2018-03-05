@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSA-D1-ZUd">
-                        <rect key="frame" x="74.5" y="7" width="100" height="30"/>
+                        <rect key="frame" x="74.5" y="7" width="110" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冰点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZf-nm-QRn">
                                 <rect key="frame" x="5" y="6.5" width="31" height="18"/>
@@ -32,7 +32,7 @@
                         <constraints>
                             <constraint firstItem="QZf-nm-QRn" firstAttribute="centerY" secondItem="CSA-D1-ZUd" secondAttribute="centerY" id="A3v-mk-8A8"/>
                             <constraint firstItem="QZf-nm-QRn" firstAttribute="leading" secondItem="CSA-D1-ZUd" secondAttribute="leading" constant="5" id="aAh-pj-kmR"/>
-                            <constraint firstAttribute="width" constant="100" id="jcm-XN-dtI"/>
+                            <constraint firstAttribute="width" constant="110" id="jcm-XN-dtI"/>
                             <constraint firstAttribute="height" constant="30" id="uoc-EU-crZ"/>
                         </constraints>
                     </view>
@@ -43,7 +43,7 @@
                         </constraints>
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxV-Rp-wNd">
-                        <rect key="frame" x="179.5" y="2" width="90.5" height="40"/>
+                        <rect key="frame" x="189.5" y="2" width="80.5" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="BRg-X3-qKI"/>
                         </constraints>
@@ -54,7 +54,7 @@
                         </state>
                     </button>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结果&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwR-q1-eEa">
-                        <rect key="frame" x="179.5" y="13" width="72" height="18"/>
+                        <rect key="frame" x="189.5" y="13" width="72" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="72" id="v0V-9q-I5v"/>
                         </constraints>

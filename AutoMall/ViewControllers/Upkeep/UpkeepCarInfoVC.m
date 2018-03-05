@@ -104,7 +104,7 @@
         }
         case 7: {
             cell.declareL.text = @"上次保养时间";
-            if (! [self.lastEndTime isKindOfClass:[NSNull class]] && self.lastEndTime.length > 0) {
+            if (! [self.lastEndTime isKindOfClass:[NSNull class]] && [self.lastEndTime doubleValue] > 0) {
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
                 [formater setDateFormat:@"yyyy-MM-dd"];
                 NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.lastEndTime doubleValue]/1000];
@@ -117,7 +117,7 @@
         }
         case 8: {
             cell.declareL.text = @"上次保养里程";
-            cell.contentL.text = self.lastMileage;
+            cell.contentL.text = NSStringWithNumber(self.lastMileage);
             break;
         }
             
