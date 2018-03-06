@@ -591,10 +591,10 @@
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
-        return 98;
+        return 85;
     }
     else {
-        return 98;
+        return 90;
     }
 }
 
