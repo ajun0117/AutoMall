@@ -484,6 +484,7 @@ static CGFloat const scrollViewHeight = 220;
                     if ([mobileUserType isEqualToString:@"1"]) {    //老板
                         if ([commodityDic[@"discount"] intValue] > 0) {
                             cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
+                            cell.unitsL.text = [NSString stringWithFormat:@"/%@",commodityDic[@"units"]];
                             cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
                         } else {
                             cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
@@ -506,40 +507,49 @@ static CGFloat const scrollViewHeight = 220;
                     break;
                 }
                 case 3: {
-                    CommodityDetailTapCell *cell = (CommodityDetailTapCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTapCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    
-                    for (UIView *view in cell.hobbyScrollView.subviews) {
-                        [view removeFromSuperview];
-                    }
-                    NSString *tagStr = commodityDic[@"tag"];
-                    NSArray *tagAry = [tagStr componentsSeparatedByString:@","];
-                    CGFloat originX = 0;
-                    for (int i = 0; i < tagAry.count; ++i) {
-                        NSString *str = tagAry[i];
-                        CGSize size =  [str sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}]; //根据字体计算出文本单行的长度和高度（宽度和高度），注意是单行，所以你返回的高度是一个定值。
-                        UILabel *label = nil;
-                        if (i == 0) {
-                            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, size.width+Space_Hobby, 16)];
-                            originX = VIEW_BX(label);   //存储当前label的横向位
-                        }
-                        else {
-                            label = [[UILabel alloc] initWithFrame:CGRectMake(originX + Interval_Hobby, 2, size.width+Space_Hobby, 16)];
-                            originX = VIEW_BX(label);   //存储当前label的横向位置
-                        }
-                        label.layer.cornerRadius = 8;   //圆角
-                        label.clipsToBounds = YES;
-                        label.backgroundColor = RGBCOLOR(171, 159, 32);
-                        label.textColor = [UIColor whiteColor];
-                        label.font = [UIFont systemFontOfSize:12];
-                        label.text = str;
-                        label.textAlignment = NSTextAlignmentCenter;
-                        [cell.hobbyScrollView addSubview:label];
-                    }
-                    cell.hobbyScrollView.contentSize = CGSizeMake(originX, 16);
+                    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, Screen_wide - 32, 20)];
+                    label.font = [UIFont systemFontOfSize:15];
+                    label.textColor = RGBCOLOR(63, 63, 63);
+                    label.text = [NSString stringWithFormat:@"最小发货量：%@元",commodityDic[@"minimum"]];
                     return cell;
                     break;
                 }
+//                case 3: {
+//                    CommodityDetailTapCell *cell = (CommodityDetailTapCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailTapCell"];
+//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//
+//                    for (UIView *view in cell.hobbyScrollView.subviews) {
+//                        [view removeFromSuperview];
+//                    }
+//                    NSString *tagStr = commodityDic[@"tag"];
+//                    NSArray *tagAry = [tagStr componentsSeparatedByString:@","];
+//                    CGFloat originX = 0;
+//                    for (int i = 0; i < tagAry.count; ++i) {
+//                        NSString *str = tagAry[i];
+//                        CGSize size =  [str sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}]; //根据字体计算出文本单行的长度和高度（宽度和高度），注意是单行，所以你返回的高度是一个定值。
+//                        UILabel *label = nil;
+//                        if (i == 0) {
+//                            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, size.width+Space_Hobby, 16)];
+//                            originX = VIEW_BX(label);   //存储当前label的横向位
+//                        }
+//                        else {
+//                            label = [[UILabel alloc] initWithFrame:CGRectMake(originX + Interval_Hobby, 2, size.width+Space_Hobby, 16)];
+//                            originX = VIEW_BX(label);   //存储当前label的横向位置
+//                        }
+//                        label.layer.cornerRadius = 8;   //圆角
+//                        label.clipsToBounds = YES;
+//                        label.backgroundColor = RGBCOLOR(171, 159, 32);
+//                        label.textColor = [UIColor whiteColor];
+//                        label.font = [UIFont systemFontOfSize:12];
+//                        label.text = str;
+//                        label.textAlignment = NSTextAlignmentCenter;
+//                        [cell.hobbyScrollView addSubview:label];
+//                    }
+//                    cell.hobbyScrollView.contentSize = CGSizeMake(originX, 16);
+//                    return cell;
+//                    break;
+//                }
                 case 4: {
                     CommodityDetailContentCell *cell = (CommodityDetailContentCell *)[tableView dequeueReusableCellWithIdentifier:@"commodityDetailContentCell"];
                     cell.remarkL.text = commodityDic[@"shortContent"];
@@ -668,10 +678,11 @@ static CGFloat const scrollViewHeight = 220;
             }
         }
         else {
-            [dic setObject:@"1" forKey:@"orderCont"];
+            NSString *minNumStr = [NSString stringWithFormat:@"%@",commodityDic[@"minimum"]];
+            [dic setObject:minNumStr forKey:@"orderCont"];
             [cartMulArray addObject:dic];
             //存储可变数组到本数据库
-            item.orderCont = @"1";
+            item.orderCont = minNumStr;
             [[CartTool sharedManager] insertRecordsWithItem:item];
         }
         
