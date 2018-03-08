@@ -120,8 +120,8 @@ static CartTool *shareInstance = nil;
         {
             //pId  pName  aid  name  stateIndex  stateName
             NSString *insertSql= [NSString stringWithFormat:
-                                  @"INSERT INTO %@ ('cartId','cartDic','orderCont') VALUES ('%@','%@','%@')",
-                                  locationTabbleName,item.cartId,item.cartDic,item.orderCont];
+                                  @"INSERT INTO %@ ('cartId','cartDic','orderCont','minimum') VALUES ('%@','%@','%@','%@')",
+                                  locationTabbleName,item.cartId,item.cartDic,item.orderCont,item.minimum];
             BOOL a = [self.fmdb executeUpdate:insertSql];
             if (!a)
             {
@@ -165,7 +165,7 @@ static CartTool *shareInstance = nil;
     } else {
         NSLog(@"地址数据库打开成功");
         //pId  pName  aid  name  stateIndex  stateName
-        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (cartId text primary key,cartDic text,orderCont text);",locationTabbleName];
+        NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (cartId text primary key,cartDic text,orderCont text,minimum text);",locationTabbleName];
         result = [self.fmdb executeUpdate:sql];
         if (!result) {
             NSLog(@"创建地址表失败");
@@ -190,6 +190,7 @@ static CartTool *shareInstance = nil;
             model.cartDic = [result stringForColumn:@"cartDic"];
             model.cartId = [result stringForColumn:@"cartId"];
             model.orderCont = [result stringForColumn:@"orderCont"];
+            model.minimum = [result stringForColumn:@"minimum"];
             [array addObject:model];
         }
         [self.fmdb close];
@@ -205,7 +206,7 @@ static CartTool *shareInstance = nil;
         BOOL isRollBack = NO;
         @try
         {
-            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET cartDic = '%@', orderCont = '%@' WHERE cartId = '%@'",locationTabbleName, item.cartDic, item.orderCont , item.cartId];
+            NSString *updateSql = [NSString stringWithFormat:@"UPDATE %@ SET cartDic = '%@', orderCont = '%@', minimum = '%@' WHERE cartId = '%@'",locationTabbleName, item.cartDic, item.orderCont, item.minimum , item.cartId];
             BOOL a = [self.fmdb executeUpdate:updateSql];
             if (!a)
             {

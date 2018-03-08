@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *urlHedImage;
 @property (strong, nonatomic) NSString *orderCont;
+@property (strong, nonatomic) NSString *minimum;
 - (instancetype)initWithDictionary:(id)dictionary;
 
 + (void)shoppingCartList:(id)data orderArr:(NSMutableArray *)orderArr;

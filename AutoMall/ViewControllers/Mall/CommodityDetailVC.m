@@ -511,7 +511,8 @@ static CGFloat const scrollViewHeight = 220;
                     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, Screen_wide - 32, 20)];
                     label.font = [UIFont systemFontOfSize:15];
                     label.textColor = RGBCOLOR(63, 63, 63);
-                    label.text = [NSString stringWithFormat:@"最小发货量：%@元",commodityDic[@"minimum"]];
+                    label.text = [NSString stringWithFormat:@"最小发货量: %@%@",commodityDic[@"minimum"],commodityDic[@"units"]];
+                    [cell.contentView addSubview:label];
                     return cell;
                     break;
                 }
@@ -670,19 +671,24 @@ static CGFloat const scrollViewHeight = 220;
                 }
             }
             if (flage) {
-                [dic setObject:@"1" forKey:@"orderCont"];
+                NSString *minNumStr = [NSString stringWithFormat:@"%@",commodityDic[@"minimum"]];
+//                NSString *minNumStr = @"5";
+                [dic setObject:minNumStr forKey:@"orderCont"];
                 [cartMulArray addObject:dic];
                 //存储可变数组到本数据库
-                item.orderCont = @"1";
+                item.orderCont = minNumStr;
+                item.minimum = minNumStr;
                 [[CartTool sharedManager] insertRecordsWithItem:item];
             }
         }
         else {
             NSString *minNumStr = [NSString stringWithFormat:@"%@",commodityDic[@"minimum"]];
+//            NSString *minNumStr = @"5";
             [dic setObject:minNumStr forKey:@"orderCont"];
             [cartMulArray addObject:dic];
             //存储可变数组到本数据库
             item.orderCont = minNumStr;
+            item.minimum = minNumStr;
             [[CartTool sharedManager] insertRecordsWithItem:item];
         }
         

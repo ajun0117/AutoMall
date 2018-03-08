@@ -16,7 +16,7 @@
         self.name = KSDIC(dictionary, @"name");
         self.money = [NSString stringWithFormat:@"￥%@/件",KSDIC(dictionary, @"current_price")];
         self.orderCont = KSDIC(dictionary, @"orderCont");
-        
+        self.minimum = KSDIC(dictionary, @"minimum");
     }
     return self;
 }

@@ -180,7 +180,14 @@
         num ++;
     }
     else{
-        num --;
+        NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
+        CartItem *item = ary[indx.row];
+        if (num == [item.minimum intValue]) {   //如果当前数量等于最小发货数量，则直接减为0
+            num = 0;
+        }
+        else {
+            num --;
+        }
     }
 
     cell.number.text = [NSString stringWithFormat:@"%d",num];

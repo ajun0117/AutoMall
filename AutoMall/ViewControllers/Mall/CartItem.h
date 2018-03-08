@@ -13,6 +13,7 @@
 @property (nonatomic,copy) NSString *cartId;                        //购物车商品数组id
 @property (nonatomic,copy) NSString *cartDic;                       //购物车商品数据
 @property (nonatomic, copy) NSString *orderCont;                    //数量
+@property (nonatomic, copy) NSString *minimum;                     //最小数量
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
