@@ -27,7 +27,9 @@
     NSArray *vinPhotos;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
+@property (strong, nonatomic) IBOutlet UILabel *mileageL;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
+@property (strong, nonatomic) IBOutlet UILabel *fuelAmountL;
 @property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
 @property (strong, nonatomic) IBOutlet UITextField *ownerTF;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTF;
@@ -158,7 +160,9 @@
         self.title = @"新增车辆";
         self.editBtn.hidden = YES;
         
+        self.mileageL.text = @"总里程表";
         self.mileageTF.enabled = YES;
+        self.fuelAmountL.text = @"燃油量";
         self.fuelAmountTF.enabled = YES;
         self.ownerTF.enabled = YES;
         self.phoneTF.enabled = YES;
@@ -425,8 +429,8 @@
     NSLog(@"编辑按钮");
     self.editBtn.hidden = YES;
     
-    self.mileageTF.enabled = YES;
-    self.fuelAmountTF.enabled = YES;
+//    self.mileageTF.enabled = YES;
+//    self.fuelAmountTF.enabled = YES;
     self.ownerTF.enabled = NO;
     self.phoneTF.enabled = YES;
     self.wechatTF.enabled = YES;
