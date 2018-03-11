@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="jFN-Ff-uSI" customClass="StrikeThroughLabel">
-                        <rect key="frame" x="80" y="13" width="22.5" height="21"/>
+                        <rect key="frame" x="57.5" y="13" width="22.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="wRm-je-X1y"/>
                         </constraints>
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配送费--元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DhP-w4-KuV">
-                        <rect key="frame" x="128.5" y="13" width="51" height="21"/>
+                        <rect key="frame" x="106" y="13" width="51" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="aHk-ZJ-Wfl"/>
                         </constraints>
@@ -54,8 +54,8 @@
                         <inset key="imageEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
                         <state key="normal" image="goods_add"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/箱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="5Ne-Sd-qtg">
-                        <rect key="frame" x="49.5" y="11" width="22.5" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="5Ne-Sd-qtg">
+                        <rect key="frame" x="49.5" y="11" width="0.0" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="ER3-Yx-4CO"/>
                         </constraints>
@@ -84,7 +84,7 @@
                 <outlet property="shippingFeeL" destination="DhP-w4-KuV" id="ssW-nI-Q8v"/>
                 <outlet property="unitsL" destination="5Ne-Sd-qtg" id="ax0-0M-diZ"/>
             </connections>
-            <point key="canvasLocation" x="-817" y="15"/>
+            <point key="canvasLocation" x="-642" y="4"/>
         </tableViewCell>
     </objects>
     <resources>

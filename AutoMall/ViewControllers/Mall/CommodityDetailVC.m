@@ -484,10 +484,15 @@ static CGFloat const scrollViewHeight = 220;
                     if ([mobileUserType isEqualToString:@"1"]) {    //老板
                         if ([commodityDic[@"discount"] intValue] > 0) {
                             cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
-                            cell.unitsL.text = [NSString stringWithFormat:@"/%@",commodityDic[@"units"]];
+                            if ([commodityDic[@"units"] length] > 0) {
+                                cell.unitsL.text = [NSString stringWithFormat:@"/%@",commodityDic[@"units"]];
+                            }
                             cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
                         } else {
                             cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
+                            if ([commodityDic[@"units"] length] > 0) {
+                                cell.unitsL.text = [NSString stringWithFormat:@"/%@",commodityDic[@"units"]];
+                            }
                             cell.costPriceStrikeL.text = @"";
                         }
                         cell.shippingFeeL.text = [NSString stringWithFormat:@"配送费%@元",commodityDic[@"shippingFee"]];
@@ -511,7 +516,7 @@ static CGFloat const scrollViewHeight = 220;
                     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, Screen_wide - 32, 20)];
                     label.font = [UIFont systemFontOfSize:15];
                     label.textColor = RGBCOLOR(63, 63, 63);
-                    label.text = [NSString stringWithFormat:@"最小发货量: %@%@",commodityDic[@"minimum"],commodityDic[@"units"]];
+                    label.text = [NSString stringWithFormat:@"最小发货量: %@",commodityDic[@"minimum"]];
                     [cell.contentView addSubview:label];
                     return cell;
                     break;
