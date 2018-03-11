@@ -9,6 +9,7 @@
 #import "AboutUsVC.h"
 
 @interface AboutUsVC ()
+@property (weak, nonatomic) IBOutlet UILabel *buildL;
 
 @end
 
@@ -20,6 +21,10 @@
     self.title = @"关于我们";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];  //上架版本号
+    NSString *buildVersion = [infoDictionary objectForKey:@"CFBundleVersion"];  //app小版本号
+    self.buildL.text = [NSString stringWithFormat:@"i爱检车  v%@.%@",appVersion,buildVersion];
 }
 
 - (void)didReceiveMemoryWarning {
