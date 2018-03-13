@@ -667,7 +667,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+        
     NSArray *array = contentAry[indexPath.section][@"checkContents"];
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
@@ -675,7 +675,11 @@
         AutoCheckGroupCell *cell = (AutoCheckGroupCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckGroupCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSArray *groupAry = [groupStr componentsSeparatedByString:@","];
-        cell.contentL.text = groupAry[indexPath.row];
+        
+         if (groupAry.count > indexPath.row && indexPath.row >= 0) {
+             cell.contentL.text = groupAry[indexPath.row];
+         }
+        
         for (DVSwitch *switcher in cell.segBgView.subviews) {
             [switcher removeFromSuperview];
         }
@@ -764,69 +768,72 @@
         AutoCheckMultiCell *cell = (AutoCheckMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"autoCheckMultiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        NSDictionary *dicc = array [indexPath.row];
+        if (array.count > indexPath.row && indexPath.row >= 0) {
         
-        NSDictionary *nameDic = contentAry[indexPath.section];
-        cell.nameL.text = nameDic[@"name"];
-        
-        cell.contentL.text = dicc[@"name"];
-        for (DVSwitch *switcher in cell.segBgView.subviews) {
-            [switcher removeFromSuperview];
-        }
-        
-        NSArray *stateAry;
-        if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
-            stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
-        } else {
-            stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];
-        }
-        
-        DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];
-        NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
-        switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
-        switcher.font = [UIFont systemFontOfSize:13];
-        [cell.segBgView addSubview:switcher];
-        switcher.cornerRadius = 18;
-        switcher.backgroundColor = RGBCOLOR(254, 255, 255);
-        
-        CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
-        id tipStr = dicc[@"tip"];
-        cell.checkResultBtn.tag = indexPath.section + 100;
-        if ([tipStr isKindOfClass:[NSString class]] && [tipStr length] > 1) {   //表示需要填写检查结果
-            NSLog(@"item.tip: %@",item.tip);
-            if ([item.tip length] > 0) {
-                [cell.checkResultBtn setTitle:item.tip forState:UIControlStateNormal];
+            NSDictionary *dicc = array [indexPath.row];
+            
+            NSDictionary *nameDic = contentAry[indexPath.section];
+            cell.nameL.text = nameDic[@"name"];
+            
+            cell.contentL.text = dicc[@"name"];
+            for (DVSwitch *switcher in cell.segBgView.subviews) {
+                [switcher removeFromSuperview];
+            }
+            
+            NSArray *stateAry;
+            if (dicc[@"state2"] && dicc[@"state2"] != [NSNull null] &&  ! [dicc[@"state2"] isEqualToString:@""]) {
+                stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state2"]),STRING(dicc[@"state3"]), nil];
+            } else {
+                stateAry = [NSArray arrayWithObjects:STRING(dicc[@"state1"]),STRING(dicc[@"state3"]), nil];
+            }
+            
+            DVSwitch *switcher = [[DVSwitch alloc] initWithStringsArray:stateAry];
+            NSLog(@"frame  --  %@",NSStringFromCGRect(switcher.frame));
+            switcher.frame = CGRectMake(0, 0, SCREEN_WIDTH - 16, 36);
+            switcher.font = [UIFont systemFontOfSize:13];
+            [cell.segBgView addSubview:switcher];
+            switcher.cornerRadius = 18;
+            switcher.backgroundColor = RGBCOLOR(254, 255, 255);
+            
+            CheckContentItem *item = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+            id tipStr = dicc[@"tip"];
+            cell.checkResultBtn.tag = indexPath.section + 100;
+            if ([tipStr isKindOfClass:[NSString class]] && [tipStr length] > 1) {   //表示需要填写检查结果
+                NSLog(@"item.tip: %@",item.tip);
+                if ([item.tip length] > 0) {
+                    [cell.checkResultBtn setTitle:item.tip forState:UIControlStateNormal];
+                }
+                else {
+                    [cell.checkResultBtn setTitle:@"" forState:UIControlStateNormal];
+                }
+                cell.resultL.hidden = NO;
+                cell.checkResultBtn.hidden = NO;
+                [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
             }
             else {
-                [cell.checkResultBtn setTitle:@"" forState:UIControlStateNormal];
+                cell.resultL.hidden = YES;
+                cell.checkResultBtn.hidden = YES;
             }
-            cell.resultL.hidden = NO;
-            cell.checkResultBtn.hidden = NO;
-            [cell.checkResultBtn addTarget:self action:@selector(toFillTip:) forControlEvents:UIControlEventTouchUpInside];
+            
+    //        NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
+    //        NSLog(@"imagesAry: %@",imagesAry);
+            [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSInteger selectedIndex = [item.stateIndex integerValue];
+            [switcher forceSelectedIndex:selectedIndex animated:NO];
+            [switcher setPressedHandler:^(NSUInteger index, NSInteger tag, NSString *indexName) {
+                NSLog(@"Did press position on first switch index: %lu, tag: %lu, indexName:%@",  (unsigned long)index,(unsigned long)tag,indexName);
+                CheckContentItem *item = [[CheckContentItem alloc] init];
+                item.aid = NSStringWithNumber(dicc[@"id"]);
+                item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
+                item.stateName = indexName;
+                item.level = [NSString stringWithFormat:@"%lu",(unsigned long)tag-5000];
+                [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
+            }];
+            
         }
-        else {
-            cell.resultL.hidden = YES;
-            cell.checkResultBtn.hidden = YES;
+            return cell;
         }
-        
-//        NSArray *imagesAry = [[item.images objectFromJSONString] mutableCopy];
-//        NSLog(@"imagesAry: %@",imagesAry);
-        [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
-        
-        NSInteger selectedIndex = [item.stateIndex integerValue];
-        [switcher forceSelectedIndex:selectedIndex animated:NO];
-        [switcher setPressedHandler:^(NSUInteger index, NSInteger tag, NSString *indexName) {
-            NSLog(@"Did press position on first switch index: %lu, tag: %lu, indexName:%@",  (unsigned long)index,(unsigned long)tag,indexName);
-            CheckContentItem *item = [[CheckContentItem alloc] init];
-            item.aid = NSStringWithNumber(dicc[@"id"]);
-            item.stateIndex = [NSString stringWithFormat:@"%lu",(unsigned long)index];
-            item.stateName = indexName;
-            item.level = [NSString stringWithFormat:@"%lu",(unsigned long)tag-5000];
-            [[CheckContentTool sharedManager] UpdateContentItemWithItem:item];
-        }];
-        
-        return cell;
-    }
     
 }
 
