@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -46,17 +46,25 @@
                         <constraint firstAttribute="height" constant="0.5" id="XjD-2a-KpP"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满500元 免配送费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7Y-fe-2Kn">
+                    <rect key="frame" x="424.5" y="44" width="99.5" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fHk-cy-OD5" secondAttribute="trailing" id="2rj-bG-gAW"/>
                 <constraint firstItem="vck-2i-DDp" firstAttribute="top" secondItem="NzF-jg-v77" secondAttribute="bottom" constant="8" id="H08-Aw-47K"/>
+                <constraint firstItem="vck-2i-DDp" firstAttribute="leading" secondItem="f7Y-fe-2Kn" secondAttribute="trailing" constant="8" id="H6i-PD-F1Z"/>
                 <constraint firstAttribute="trailing" secondItem="NzF-jg-v77" secondAttribute="trailing" constant="8" id="I78-aj-shr"/>
                 <constraint firstAttribute="trailing" secondItem="vck-2i-DDp" secondAttribute="trailing" constant="8" id="LxX-Wo-fCv"/>
                 <constraint firstItem="NzF-jg-v77" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="VTc-vW-1uN"/>
                 <constraint firstItem="NzF-jg-v77" firstAttribute="leading" secondItem="Psw-0Z-ucy" secondAttribute="trailing" constant="1" id="a5a-fI-93l"/>
                 <constraint firstItem="Psw-0Z-ucy" firstAttribute="centerY" secondItem="NzF-jg-v77" secondAttribute="centerY" id="iO0-KI-nUS"/>
                 <constraint firstAttribute="bottom" secondItem="fHk-cy-OD5" secondAttribute="bottom" id="jfd-LJ-hyp"/>
+                <constraint firstItem="f7Y-fe-2Kn" firstAttribute="centerY" secondItem="vck-2i-DDp" secondAttribute="centerY" id="kbJ-C7-eAT"/>
                 <constraint firstItem="Psw-0Z-ucy" firstAttribute="leading" secondItem="vYw-kX-DMc" secondAttribute="trailing" constant="8" id="qIs-h6-NVW"/>
                 <constraint firstItem="vYw-kX-DMc" firstAttribute="centerY" secondItem="Psw-0Z-ucy" secondAttribute="centerY" id="syC-0g-5d2"/>
                 <constraint firstItem="fHk-cy-OD5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wA6-pR-3iH"/>

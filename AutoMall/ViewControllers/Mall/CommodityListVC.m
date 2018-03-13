@@ -290,7 +290,7 @@
             cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
             cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
             if ([dic[@"integral"] intValue] > 0) {
-                cell.jifenL.text = [NSString stringWithFormat:@"%@分",dic[@"integral"]];
+                cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",dic[@"integral"]];
             } else {
                 cell.jifenL.text = @"该优惠商品不累计积分";
             }

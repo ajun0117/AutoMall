@@ -20,10 +20,16 @@
 - (void)setData:(id)data{
    
     self.name.text = KSDIC(data, @"name");
+    
+    NSString *unitsStr = @"";
+    if ([data[@"units"] isKindOfClass:[NSString class]] && [data[@"units"] length] > 0) {
+        unitsStr = [NSString stringWithFormat:@"/%@",data[@"units"]];
+    }
+    
     if (data[@"discount"]) {
-        self.money.text = [NSString stringWithFormat:@"￥%@/件",KSDIC(data, @"discount")];
+        self.money.text = [NSString stringWithFormat:@"￥%@%@",KSDIC(data, @"discount"),unitsStr];
     } else {
-        self.money.text = [NSString stringWithFormat:@"￥%@/件",KSDIC(data, @"price")];
+        self.money.text = [NSString stringWithFormat:@"￥%@%@",KSDIC(data, @"price"),unitsStr];
     }
     self.number.text = [NSString stringWithFormat:@"%@",KSDIC(data, @"orderCont")];
 

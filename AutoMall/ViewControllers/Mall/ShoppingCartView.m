@@ -175,14 +175,14 @@
 //    ShoppingCartCell *cell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.tag inSection:0]];
     ShoppingCartCell * cell = (ShoppingCartCell *)indexPath.superview.superview;
     NSIndexPath *indx = [self.myTableView indexPathForCell:cell];
+    NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
+    CartItem *item0 = ary[indx.row];
     int num = [cell.number.text intValue];
     if (isAD) {
         num ++;
     }
     else{
-        NSMutableArray *ary = [[CartTool sharedManager] queryAllCart];
-        CartItem *item = ary[indx.row];
-        if (num == [item.minimum intValue]) {   //如果当前数量等于最小发货数量，则直接减为0
+        if (num == [item0.minimum intValue]) {   //如果当前数量等于最小发货数量，则直接减为0
             num = 0;
         }
         else {
@@ -204,6 +204,7 @@
     item.cartId = [NSString stringWithFormat:@"%@",data[@"id"]];
     //更新可变数组到本数据库
     item.orderCont = [NSString stringWithFormat:@"%d",num];
+    item.minimum = item0.minimum;
     [[CartTool sharedManager] UpdateContentItemWithItem:item];
     
     if (num == 0) {

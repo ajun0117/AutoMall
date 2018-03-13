@@ -470,9 +470,9 @@ static CGFloat const scrollViewHeight = 220;
                     cell.pingxingRV.maxRate = 5;
                     cell.saleL.text = [NSString stringWithFormat:@"月销%@单",commodityDic[@"salesVolume"]];
                     if ([commodityDic[@"integral"] intValue] > 0) {
-                        cell.jifenL.text = [NSString stringWithFormat:@"%@分",commodityDic[@"integral"]];
+                        cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",commodityDic[@"integral"]];
                     } else {
-                        cell.jifenL.text = @"该优惠商品不累计积分";
+                        cell.jifenL.text = @"该优惠商品不累计能量";
                     }
                     return cell;
                     break;
@@ -490,7 +490,7 @@ static CGFloat const scrollViewHeight = 220;
                             cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
                         } else {
                             cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"price"]];
-                            if ([commodityDic[@"units"] length] > 0) {
+                            if ([commodityDic[@"units"] isKindOfClass:[NSString class]] && [commodityDic[@"units"] length] > 0) {
                                 cell.unitsL.text = [NSString stringWithFormat:@"/%@",commodityDic[@"units"]];
                             }
                             cell.costPriceStrikeL.text = @"";
@@ -514,7 +514,7 @@ static CGFloat const scrollViewHeight = 220;
                 case 3: {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, Screen_wide - 32, 20)];
-                    label.font = [UIFont systemFontOfSize:15];
+                    label.font = [UIFont systemFontOfSize:13];
                     label.textColor = RGBCOLOR(63, 63, 63);
                     label.text = [NSString stringWithFormat:@"最小发货量: %@",commodityDic[@"minimum"]];
                     [cell.contentView addSubview:label];
@@ -659,6 +659,8 @@ static CGFloat const scrollViewHeight = 220;
         item.cartDic = jsonStr;
         item.cartId = [NSString stringWithFormat:@"%@",dic[@"id"]];
         
+        NSString *minNumStr = [NSString stringWithFormat:@"%@",commodityDic[@"minimum"]];
+        
         if (cartMulArray.count > 0) {
             BOOL flage = YES;
             for (NSMutableDictionary *dicc in cartMulArray)
@@ -671,13 +673,12 @@ static CGFloat const scrollViewHeight = 220;
                     [dicc setObject:[NSString stringWithFormat:@"%d",number] forKey:@"orderCont"];
                     //更新可变数组到本数据库
                     item.orderCont = [NSString stringWithFormat:@"%d",number];
+                    item.minimum = minNumStr;
                     [[CartTool sharedManager] UpdateContentItemWithItem:item];
                     break;
                 }
             }
             if (flage) {
-                NSString *minNumStr = [NSString stringWithFormat:@"%@",commodityDic[@"minimum"]];
-//                NSString *minNumStr = @"5";
                 [dic setObject:minNumStr forKey:@"orderCont"];
                 [cartMulArray addObject:dic];
                 //存储可变数组到本数据库
@@ -687,8 +688,6 @@ static CGFloat const scrollViewHeight = 220;
             }
         }
         else {
-            NSString *minNumStr = [NSString stringWithFormat:@"%@",commodityDic[@"minimum"]];
-//            NSString *minNumStr = @"5";
             [dic setObject:minNumStr forKey:@"orderCont"];
             [cartMulArray addObject:dic];
             //存储可变数组到本数据库
