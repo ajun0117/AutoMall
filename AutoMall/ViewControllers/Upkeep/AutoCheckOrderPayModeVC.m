@@ -10,7 +10,7 @@
 #import "AutoCheckOrderVC.h"
 #import "AutoCheckOrderWorkingVC.h"
 
-@interface AutoCheckOrderPayModeVC ()
+@interface AutoCheckOrderPayModeVC () <UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -30,10 +30,14 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"订单";
     // 设置导航栏按钮和标题颜色
-    [self wr_setNavBarTintColor:NavBarTintColor];
+//    [self wr_setNavBarTintColor:NavBarTintColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(popToRootVC)];
-    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(popToRootVC)];
+//    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(popToRootVC)];
+    self.navigationItem.leftBarButtonItem = backBtn;
+    self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
 //    NSDictionary *dic = @{@"orderId":orderId,@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
     self.orderNumberL.text = self.infoDic[@"orderId"];
@@ -79,7 +83,17 @@
 }
 
 -(void) popToRootVC {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认回到首页吗？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是",nil];
+    alert.tag = 200;
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 200) {
+        if (buttonIndex == 1) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
 }
 
 #pragma mark - 发送请求

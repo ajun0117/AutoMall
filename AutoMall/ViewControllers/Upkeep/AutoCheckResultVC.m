@@ -23,7 +23,7 @@
 #import "ShareTool.h"
 #import "LXActivity.h"
 
-@interface AutoCheckResultVC () <AJAdViewDelegate, HZPhotoBrowserDelegate,LXActivityDelegate>
+@interface AutoCheckResultVC () <AJAdViewDelegate, HZPhotoBrowserDelegate,LXActivityDelegate,UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -48,7 +48,11 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"检查报告";
     // 设置导航栏按钮和标题颜色
-    [self wr_setNavBarTintColor:NavBarTintColor];
+//    [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(toFirst)];
+    self.navigationItem.leftBarButtonItem = backBtn;
+    self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
@@ -83,7 +87,6 @@
     [self createShareView];
     
     checkResultArray = [NSMutableArray array];
-    
 
 }
 
@@ -123,12 +126,27 @@
     }
 }
 
+-(void)toFirst {        //返回首页
+    NSLog(@"返回首页");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认回到首页吗？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是",nil];
+    alert.tag = 200;
+    [alert show];
+}
+
 -(void)toShare {
     [self requestGetShareInfo];
 }
 
 -(void)shareClicked {
     [lxActivity show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 200) {
+        if (buttonIndex == 1) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
 }
 
 #pragma mark -

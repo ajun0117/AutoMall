@@ -574,7 +574,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *array = contentAry[section][@"checkContents"];
+//    NSArray *array = contentAry[section][@"checkContents"];
+    NSArray *array;
+    if (contentAry.count > section && section >= 0) {
+        array = contentAry[section][@"checkContents"];
+    }
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
@@ -587,7 +591,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *array = contentAry[indexPath.section][@"checkContents"];
+//    NSArray *array = contentAry[indexPath.section][@"checkContents"];
+    NSArray *array;
+    if (contentAry.count > indexPath.section && indexPath.section >= 0) {
+        array = contentAry[indexPath.section][@"checkContents"];
+    }
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
@@ -599,7 +607,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSArray *array = contentAry[section][@"checkContents"];
+//    NSArray *array = contentAry[section][@"checkContents"];
+    NSArray *array;
+    if (contentAry.count > section && section >= 0) {
+        array = contentAry[section][@"checkContents"];
+    }
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
@@ -615,7 +627,11 @@
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSArray *array = contentAry[section][@"checkContents"];
+    NSArray *array;
+    if (contentAry.count > section && section >= 0) {
+        array = contentAry[section][@"checkContents"];
+    }
+//    NSArray *array = contentAry[section][@"checkContents"];
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
@@ -667,8 +683,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-        
-    NSArray *array = contentAry[indexPath.section][@"checkContents"];
+    NSArray *array;
+    if (contentAry.count > indexPath.section && indexPath.section >= 0) {
+        array = contentAry[indexPath.section][@"checkContents"];
+    }
+//    NSArray *array = contentAry[indexPath.section][@"checkContents"];
     NSDictionary *dicc = [array firstObject];
     id groupStr = dicc[@"group"];
     if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开
@@ -702,7 +721,11 @@
         NSLog(@"item.aid: %@",item.aid);
         NSLog(@"item.images: %@",item.images);
         NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
-        NSString *positionStr = positionArray[indexPath.row];
+        
+        NSString *positionStr;
+        if (positionArray.count > indexPath.row && indexPath.row >= 0) {
+           positionStr = positionArray[indexPath.row];
+        }
         
         id tipStr = dicc[@"tip"];
         cell.checkResultBtn.tag = indexPath.section + 100;
@@ -733,7 +756,10 @@
         [cell.photoBtn addTarget:self action:@selector(toTakePhoto:) forControlEvents:UIControlEventTouchUpInside];
 
         NSMutableArray *positionAry = [[item.dPosition objectFromJSONString] mutableCopy];
-        NSMutableDictionary *positionDic = [positionAry[indexPath.row] mutableCopy];
+        NSMutableDictionary *positionDic;
+        if (positionAry.count > indexPath.row && indexPath.row >= 0) {
+            positionDic = [positionAry[indexPath.row] mutableCopy];
+        }
         NSDictionary *objDic = positionDic[positionStr];
         NSInteger selectedIndex = [objDic[@"stateIndex"] integerValue];
         [switcher forceSelectedIndex:selectedIndex animated:NO];

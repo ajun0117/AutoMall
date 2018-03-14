@@ -21,7 +21,7 @@
 #import "AutoCheckResultDetailVC.h"
 #import "AutoCheckServicesVC.h"
 
-@interface UpkeepPlanVC ()
+@interface UpkeepPlanVC () <UIAlertViewDelegate>
 { 
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -51,7 +51,11 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"服务方案";
     // 设置导航栏按钮和标题颜色
-    [self wr_setNavBarTintColor:NavBarTintColor];
+//    [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(toFirst)];
+    self.navigationItem.leftBarButtonItem = backBtn;
+    self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
 //    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    searchBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -98,7 +102,21 @@
     if (unnormalAry.count == 0) {
         [self requestGetAllUnnormal];
     }
+}
 
+-(void)toFirst {        //返回首页
+    NSLog(@"返回首页");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认回到首页吗？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是",nil];
+    alert.tag = 200;
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 200) {
+        if (buttonIndex == 1) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (void) toPackage {
