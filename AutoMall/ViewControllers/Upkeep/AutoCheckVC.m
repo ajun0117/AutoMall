@@ -647,7 +647,8 @@
         [view addSubview:label];
         
         UIView *contentBgView = [[UIView alloc] initWithFrame:CGRectMake(8 + 108, 7, SCREEN_WIDTH - 16 - 108, 30)];
-        contentBgView.backgroundColor = RGBCOLOR(244, 245, 246);
+//        contentBgView.backgroundColor = RGBCOLOR(244, 245, 246);
+        contentBgView.backgroundColor = [UIColor clearColor];
 //        UILabel *noticeL = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 77, 20)];
 //        noticeL.font = [UIFont systemFontOfSize:15];
 //        noticeL.text = @"检查内容：";
@@ -660,7 +661,8 @@
         if (ary.count == 1) {
             dicc = [ary firstObject];
         }
-        contentL.text = dicc[@"name"];
+//        contentL.text = dicc[@"name"];
+        contentL.text = [NSString stringWithFormat:@"/%@",dicc[@"name"]];
         CGSize contentSize = [self sizeWithText:dicc[@"name"] font:[UIFont boldSystemFontOfSize:15]];
         contentBgView.frame = CGRectMake(8 + nameSize.width + 8, 7, contentSize.width + 46, 30);
         [contentBgView addSubview:contentL];
@@ -801,7 +803,7 @@
             NSDictionary *nameDic = contentAry[indexPath.section];
             cell.nameL.text = nameDic[@"name"];
             
-            cell.contentL.text = dicc[@"name"];
+            cell.contentL.text = [NSString stringWithFormat:@"/%@",dicc[@"name"]];
             for (DVSwitch *switcher in cell.segBgView.subviews) {
                 [switcher removeFromSuperview];
             }

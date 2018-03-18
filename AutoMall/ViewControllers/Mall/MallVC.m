@@ -125,8 +125,8 @@ static CGFloat const scrollViewHeight = 220;
     _networkConditionHUD.margin = HUDMargin;
     
 //    [self requsetAdvertList];   //请求广告列表
-    [self requestGetComCategoryList];   //请求分类数据
-    [self requestPostCommoditytjList];  //请求推荐商品列表
+//    [self requestGetComCategoryList];   //请求分类数据
+//    [self requestPostCommoditytjList];  //请求推荐商品列表
     
     //解决ios11下导航栏不透明的bug
     self.navigationController.navigationBarHidden = YES;
