@@ -19,11 +19,13 @@
     NSString *fuelAmountImgUrl;
 }
 
+@property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
 @property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
 @property (weak, nonatomic) IBOutlet WPImageView *mileageImgView;
 //@property (weak, nonatomic) IBOutlet UILabel *mileageL;
 @property (weak, nonatomic) IBOutlet WPImageView *fuelAmountImgView;
+@property (strong, nonatomic) IBOutlet UITextView *remarkTV;
 //@property (weak, nonatomic) IBOutlet UILabel *fuelAmountL;
 
 @end
@@ -39,14 +41,29 @@
     
     [self setTextFieldInputAccessoryViewWithTF:self.mileageTF];
     [self setTextFieldInputAccessoryViewWithTF:self.fuelAmountTF];
-    textFieldArray = @[self.mileageTF, self.fuelAmountTF];
+    [self setTextViewInputAccessoryViewWithTV:self.remarkTV];
+    textFieldArray = @[self.mileageTF, self.fuelAmountTF, self.remarkTV];
     
     mileageImgUrl = self.mileageAndfuelAmountDic[@"mileageImg"];
     fuelAmountImgUrl = self.mileageAndfuelAmountDic[@"fuelAmountImg"];
     
+    //******先载入当天输入过的里程数
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *today = [NSDate date];
+    NSString *stringS = [formater stringFromDate:today];
+    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
+    if (todayStr && [todayStr isEqualToString:stringS]) {   //今日，读取相关数据
+        self.mileageTF.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileage"];
+    } else {    //否则删除老的数据
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];
+         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];
+    }
+    
     if (self.mileageAndfuelAmountDic) {
         self.mileageTF.text = self.mileageAndfuelAmountDic[@"mileage"];
         self.fuelAmountTF.text = self.mileageAndfuelAmountDic[@"fuelAmount"];
+        self.remarkTV.text = self.mileageAndfuelAmountDic[@"remark"];
         if (mileageImgUrl.length > 0) {
             [self.mileageImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"mileageImg"])]];
         }
@@ -60,6 +77,11 @@
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fuelAmountPhotoAction)];
     [self.fuelAmountImgView addGestureRecognizer:tap1];
 
+    self.remarkTV.textContainerInset = UIEdgeInsetsMake(10.0f, 13.0f, 10.0f, 13.0f);
+    
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -77,6 +99,28 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
+    self.myScrollV.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - keyBoardRect.size.height);
+    [self.myScrollV setContentOffset:CGPointMake(0, keyBoardRect.size.height)];
+}
+
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+    self.myScrollV.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 49);
+    [self.myScrollV setContentOffset:CGPointMake(0, 0)];
 }
 
 - (IBAction)saveAction:(id)sender {
@@ -110,7 +154,19 @@
 //        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //        return;
 //    }
-    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":STRING_Nil(self.fuelAmountTF.text),@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl)});
+    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":STRING_Nil(self.fuelAmountTF.text),@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl),@"remark":STRING_Nil(self.remarkTV.text)});
+    
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *today = [NSDate date];
+    NSString *stringS = [formater stringFromDate:today];
+    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
+    if (![stringS isEqualToString:todayStr]) {   //非今日，更新相关数据
+        [[NSUserDefaults standardUserDefaults] setObject:stringS forKey:@"todayMileageDate"];
+        [[NSUserDefaults standardUserDefaults] setObject:self.mileageTF.text forKey:@"todayMileage"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 //    AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
@@ -133,6 +189,24 @@
 
 
 #pragma mark - 添加完成按钮的toolBar工具栏
+
+- (void)setTextViewInputAccessoryViewWithTV:(UITextView *)textView{
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * spaceBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+    doneBtn.frame = CGRectMake(2, 5, 45, 25);
+    [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn, doneBtnItem,nil];
+    [topView setItems:buttonsArray];
+    [textView setInputAccessoryView:topView];
+    [textView setAutocorrectionType:UITextAutocorrectionTypeNo];
+    [textView setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+}
+
+
 - (void)setTextFieldInputAccessoryViewWithTF:(UITextField *)field{
     UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
     [topView setBarStyle:UIBarStyleDefault];

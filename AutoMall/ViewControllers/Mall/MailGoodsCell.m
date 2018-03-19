@@ -13,10 +13,16 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.costPriceStrikeL1.strikeThroughEnabled = YES;
-    self.costPriceStrikeL2.strikeThroughEnabled = YES;
-    self.costPriceStrikeL3.strikeThroughEnabled = YES;
-    self.costPriceStrikeL4.strikeThroughEnabled = YES;
+    self.yuan1.strikeThroughEnabled = YES;
+    self.yuan2.strikeThroughEnabled = YES;
+    self.yuan3.strikeThroughEnabled = YES;
+    self.yuan4.strikeThroughEnabled = YES;
+    self.yuan5.strikeThroughEnabled = YES;
+    self.yuan6.strikeThroughEnabled = YES;
+    self.yuan7.strikeThroughEnabled = YES;
+    self.yuan8.strikeThroughEnabled = YES;
+    self.yuan9.strikeThroughEnabled = YES;
+    self.yuan10.strikeThroughEnabled = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

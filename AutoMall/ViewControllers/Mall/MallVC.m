@@ -105,7 +105,8 @@ static CGFloat const scrollViewHeight = 220;
     self.typePageControl.currentPageIndicatorTintColor = RGBCOLOR(229, 24, 35);
     
     [self requsetAdvertList];   //请求广告列表
-//    [self requestGetComCategoryList];   //请求分类数据
+    [self requestGetComCategoryList];   //请求分类数据
+//    [self requestPostCommoditytjList];  //请求推荐商品列表
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -126,7 +127,7 @@ static CGFloat const scrollViewHeight = 220;
     
 //    [self requsetAdvertList];   //请求广告列表
 //    [self requestGetComCategoryList];   //请求分类数据
-//    [self requestPostCommoditytjList];  //请求推荐商品列表
+    [self requestPostCommoditytjList];  //请求推荐商品列表
     
     //解决ios11下导航栏不透明的bug
     self.navigationController.navigationBarHidden = YES;
@@ -301,7 +302,7 @@ static CGFloat const scrollViewHeight = 220;
     else if (indexPath.section == 1) {
         MailGoodsCell *cell = (MailGoodsCell *)[tableView dequeueReusableCellWithIdentifier:@"mailGoodsCell"];
         
-        cell.bgViewConsH.constant = (Screen_Width - 8*3)/2 + 50;
+//        cell.bgViewConsH.constant = (Screen_Width - 8*3)/2 + 50;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if (tjListAry.count >= 4) {
@@ -365,6 +366,96 @@ static CGFloat const scrollViewHeight = 220;
             }
             cell.btn4.tag = 104;
             [cell.btn4 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic5 = tjListAry[4];
+            [cell.img5 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic5[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+            cell.name5.text = dic5[@"name"];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                if ([dic5[@"discount"] intValue] > 0) {
+                    cell.money5.text = [NSString stringWithFormat:@"￥%@",dic5[@"discount"]];
+                    cell.yuan5.text = [NSString stringWithFormat:@"￥%@",dic5[@"price"]];
+                } else {
+                    cell.money5.text = [NSString stringWithFormat:@"￥%@",dic5[@"price"]];
+                    cell.yuan5.text = @"";
+                }
+            }
+            cell.btn5.tag = 105;
+            [cell.btn5 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic6 = tjListAry[5];
+            [cell.img6 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic6[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+            cell.name6.text = dic6[@"name"];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                if ([dic6[@"discount"] intValue] > 0) {
+                    cell.money6.text = [NSString stringWithFormat:@"￥%@",dic6[@"discount"]];
+                    cell.yuan6.text = [NSString stringWithFormat:@"￥%@",dic6[@"price"]];
+                } else {
+                    cell.money6.text = [NSString stringWithFormat:@"￥%@",dic6[@"price"]];
+                    cell.yuan6.text = @"";
+                }
+            }
+            cell.btn6.tag = 106;
+            [cell.btn6 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic7 = tjListAry[6];
+            [cell.img7 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic7[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+            cell.name7.text = dic7[@"name"];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                if ([dic7[@"discount"] intValue] > 0) {
+                    cell.money7.text = [NSString stringWithFormat:@"￥%@",dic7[@"discount"]];
+                    cell.yuan7.text = [NSString stringWithFormat:@"￥%@",dic7[@"price"]];
+                } else {
+                    cell.money7.text = [NSString stringWithFormat:@"￥%@",dic7[@"price"]];
+                    cell.yuan7.text = @"";
+                }
+            }
+            cell.btn7.tag = 107;
+            [cell.btn7 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic8 = tjListAry[7];
+            [cell.img8 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic8[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+            cell.name8.text = dic8[@"name"];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                if ([dic8[@"discount"] intValue] > 0) {
+                    cell.money8.text = [NSString stringWithFormat:@"￥%@",dic8[@"discount"]];
+                    cell.yuan8.text = [NSString stringWithFormat:@"￥%@",dic8[@"price"]];
+                } else {
+                    cell.money8.text = [NSString stringWithFormat:@"￥%@",dic8[@"price"]];
+                    cell.yuan8.text = @"";
+                }
+            }
+            cell.btn8.tag = 108;
+            [cell.btn8 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic9 = tjListAry[8];
+            [cell.img9 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic9[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+            cell.name9.text = dic9[@"name"];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                if ([dic9[@"discount"] intValue] > 0) {
+                    cell.money9.text = [NSString stringWithFormat:@"￥%@",dic9[@"discount"]];
+                    cell.yuan9.text = [NSString stringWithFormat:@"￥%@",dic9[@"price"]];
+                } else {
+                    cell.money9.text = [NSString stringWithFormat:@"￥%@",dic9[@"price"]];
+                    cell.yuan9.text = @"";
+                }
+            }
+            cell.btn9.tag = 109;
+            [cell.btn9 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
+            
+            NSDictionary *dic10 = tjListAry[9];
+            [cell.img10 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic10[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+            cell.name10.text = dic10[@"name"];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                if ([dic10[@"discount"] intValue] > 0) {
+                    cell.money10.text = [NSString stringWithFormat:@"￥%@",dic10[@"discount"]];
+                    cell.yuan10.text = [NSString stringWithFormat:@"￥%@",dic10[@"price"]];
+                } else {
+                    cell.money10.text = [NSString stringWithFormat:@"￥%@",dic10[@"price"]];
+                    cell.yuan10.text = @"";
+                }
+            }
+            cell.btn10.tag = 110;
+            [cell.btn10 addTarget:self action:@selector(toDetail:) forControlEvents:UIControlEventTouchUpInside];
         }
         return cell;
     }

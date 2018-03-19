@@ -79,6 +79,14 @@
     [searchBar resignFirstResponder];
 }
 
+//判断是否为整形：
+
+- (BOOL)isPureInt:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -122,6 +130,9 @@
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if ([mobileUserType isEqualToString:@"1"]) {    //老板
             if ([dic[@"discount"] intValue] > 0) {
+//                if ([self isPureInt:dic[@"discount"]]) {  //是整型
+//                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
+//                } else {
                 cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
                 cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 cell.zhekouL.hidden = NO;
