@@ -959,6 +959,13 @@
     NSDictionary *carDicc = @{@"id":self.carDic[@"id"],@"mileage":self.carDic[@"mileage"],@"fuelAmount":self.carDic[@"fuelAmount"]};
     id storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSLog(@"storeId: %@",storeId);
+//    NSDictionary *storeDic;
+//    if (![storeId isKindOfClass:[NSNumber class]]) {
+//        storeDic = NULL;
+//    }
+//    else {
+//        storeDic = @{@"id":storeId};
+//    }
     if (![storeId isKindOfClass:[NSNumber class]]) {
         storeId = @"";
     }
