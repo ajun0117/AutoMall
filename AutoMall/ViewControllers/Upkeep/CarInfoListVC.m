@@ -20,6 +20,7 @@
     int currentpage;
     NSString *paramsUrl;
 }
+@property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
 @property (strong, nonatomic) IBOutlet UITableView *infoTableView;
 
 @end
@@ -53,25 +54,29 @@
     }
     self.navigationItem.titleView = view;
     
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = -6;
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"新增车辆" style:UIBarButtonItemStylePlain target:self action:@selector(toRegisterNewCarInfo)];
+    self.navigationItem.rightBarButtonItem = backBtn;
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    addBtn.frame = CGRectMake(0, 0, 28, 28);
-    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
-//    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
-    
-    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    searchBtn.frame = CGRectMake(0, 0, 30, 30);
-    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
-//    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, addBtnBarBtn, searchBtnBarBtn, nil];
+//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+//                                       target:nil action:nil];
+//    negativeSpacer.width = -6;
+//
+//    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    addBtn.frame = CGRectMake(0, 0, 28, 28);
+//    [addBtn setImage:[UIImage imageNamed:@"add_carInfo"] forState:UIControlStateNormal];
+////    [addBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+//
+//    UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    searchBtn.frame = CGRectMake(0, 0, 30, 30);
+//    [searchBtn setImage:[UIImage imageNamed:@"search_carInfo"] forState:UIControlStateNormal];
+////    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
+//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, addBtnBarBtn, searchBtnBarBtn, nil];
     
     [self.infoTableView registerNib:[UINib nibWithNibName:@"CarInfoListCell" bundle:nil] forCellReuseIdentifier:@"carInfoCell"];
     self.infoTableView.tableFooterView = [UIView new];
@@ -138,6 +143,13 @@
 //        [self.infoTableView headerBeginRefreshing];
 //    };
     [self.navigationController pushViewController:addVC animated:YES];
+}
+
+#pragma mark - 搜索条
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    CarInfoSearchVC *searchVC = [[CarInfoSearchVC alloc] init];
+    [self.navigationController pushViewController:searchVC animated:YES];
+    return NO;
 }
 
 #pragma mark - 下拉刷新,上拉加载

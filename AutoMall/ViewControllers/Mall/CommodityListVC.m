@@ -392,6 +392,11 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CommodityList object:nil];
         NSLog(@"CommodityList: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            if ([responseObject[@"data"] count] == 0) {
+                _networkConditionHUD.labelText = @"已没有更多产品";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
             [commodityArray addObjectsFromArray:responseObject [@"data"]];
             [self.myTableView reloadData];
         }

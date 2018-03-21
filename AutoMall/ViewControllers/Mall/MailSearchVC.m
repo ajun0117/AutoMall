@@ -79,6 +79,12 @@
     [searchBar resignFirstResponder];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    currentpage = 0;
+    [resultArray removeAllObjects];
+    [self requestSearchCommodityList];
+}
+
 //判断是否为整形：
 
 - (BOOL)isPureInt:(NSString*)string{
@@ -161,6 +167,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.mySearchBar resignFirstResponder];
     CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
     detailVC.commodityId = resultArray[indexPath.section][@"id"];
     [self.navigationController pushViewController:detailVC animated:YES];
@@ -194,6 +201,11 @@
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            if ([responseObject[@"data"] count] == 0) {
+                _networkConditionHUD.labelText = @"已没有更多产品";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
             [resultArray addObjectsFromArray:responseObject [@"data"]];
             [self.myTableView reloadData];
         }

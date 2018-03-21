@@ -104,7 +104,7 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8大卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FG4-rV-5Pr">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8大卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FG4-rV-5Pr">
                         <rect key="frame" x="287" y="27.5" width="24.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="oR0-Mm-vyz"/>
@@ -120,7 +120,7 @@
                             <constraint firstAttribute="height" constant="80" id="tpb-ZI-snh"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="energy" translatesAutoresizingMaskIntoConstraints="NO" id="KSx-Ov-s4W">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="energy" translatesAutoresizingMaskIntoConstraints="NO" id="KSx-Ov-s4W">
                         <rect key="frame" x="264" y="27" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="W8a-TO-UsG"/>

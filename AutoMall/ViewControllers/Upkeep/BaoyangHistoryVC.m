@@ -39,6 +39,8 @@
     
     currentpage = 0;
     historyArray = [NSMutableArray array];
+    
+    [self requestGetHistoryList];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -55,8 +57,6 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-    
-    [self requestGetHistoryList];
 }
 
 #pragma mark - 下拉刷新,上拉加载

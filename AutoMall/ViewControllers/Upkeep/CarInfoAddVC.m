@@ -355,25 +355,63 @@
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 - (IBAction)mileagePhoto:(id)sender {
-    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-    photoVC.maxCount = 1;
-    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-        mileagePhotos = array;
-        NSLog(@"mileagePhotos: %@",mileagePhotos);
-    };
-    photoVC.localImgsArray = mileagePhotos;
-    [self.navigationController pushViewController:photoVC animated:YES];
+    if (self.carDic) {  //编辑页面
+        if (mileagePhotos.count > 0) {
+            AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+            photoVC.maxCount = 1;
+            photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+                mileagePhotos = array;
+                NSLog(@"mileagePhotos: %@",mileagePhotos);
+            };
+            photoVC.localImgsArray = mileagePhotos;
+            [self.navigationController pushViewController:photoVC animated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = @"没有相关图片";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    else {
+        AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+        photoVC.maxCount = 1;
+        photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+            mileagePhotos = array;
+            NSLog(@"mileagePhotos: %@",mileagePhotos);
+        };
+        photoVC.localImgsArray = mileagePhotos;
+        [self.navigationController pushViewController:photoVC animated:YES];
+    }
 }
 
 - (IBAction)fuelAmountPhoto:(id)sender {
-    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-    photoVC.maxCount = 1;
-    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-        fuelAmountPhotos = array;
-        NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
-    };
-    photoVC.localImgsArray = fuelAmountPhotos;
-    [self.navigationController pushViewController:photoVC animated:YES];
+    if (self.carDic) {  //编辑页面
+        if (fuelAmountPhotos.count > 0) {
+            AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+            photoVC.maxCount = 1;
+            photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+                fuelAmountPhotos = array;
+                NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
+            };
+            photoVC.localImgsArray = fuelAmountPhotos;
+            [self.navigationController pushViewController:photoVC animated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = @"没有相关图片";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    else {
+        AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+        photoVC.maxCount = 1;
+        photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+            fuelAmountPhotos = array;
+            NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
+        };
+        photoVC.localImgsArray = fuelAmountPhotos;
+        [self.navigationController pushViewController:photoVC animated:YES];
+    }
 }
 
 - (IBAction)enginePhoto:(id)sender {

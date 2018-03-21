@@ -20,6 +20,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
+@property (strong, nonatomic) IBOutlet UILabel *lastMileageTF;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
 @property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
 @property (weak, nonatomic) IBOutlet WPImageView *mileageImgView;
@@ -47,18 +48,18 @@
     mileageImgUrl = self.mileageAndfuelAmountDic[@"mileageImg"];
     fuelAmountImgUrl = self.mileageAndfuelAmountDic[@"fuelAmountImg"];
     
-    //******先载入当天输入过的里程数
-    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-    [formater setDateFormat:@"yyyy-MM-dd"];
-    NSDate *today = [NSDate date];
-    NSString *stringS = [formater stringFromDate:today];
-    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
-    if (todayStr && [todayStr isEqualToString:stringS]) {   //今日，读取相关数据
-        self.mileageTF.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileage"];
-    } else {    //否则删除老的数据
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];
-         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];
-    }
+//    //******先载入当天输入过的里程数
+//    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+//    [formater setDateFormat:@"yyyy-MM-dd"];
+//    NSDate *today = [NSDate date];
+//    NSString *stringS = [formater stringFromDate:today];
+//    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
+//    if (todayStr && [todayStr isEqualToString:stringS]) {   //今日，读取相关数据
+//        self.mileageTF.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileage"];
+//    } else {    //否则删除老的数据
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];
+//         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];
+//    }
     
     if (self.mileageAndfuelAmountDic) {
         self.mileageTF.text = self.mileageAndfuelAmountDic[@"mileage"];

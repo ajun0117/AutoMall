@@ -149,6 +149,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    [self.mySearchBar resignFirstResponder];
+    
     NSDictionary *dic = carArray[indexPath.row];
     CarInfoAddVC *editVC = [[CarInfoAddVC alloc] init];
     editVC.carDic = dic;

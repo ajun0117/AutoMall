@@ -272,6 +272,11 @@
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            if ([responseObject[@"data"] count] == 0) {
+                _networkConditionHUD.labelText = @"没有更多了";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
             [zixunArray addObjectsFromArray:responseObject [@"data"]];
             [self.zixunTV reloadData];
         }
@@ -287,6 +292,11 @@
         NSLog(@"_responseObject: %@",responseObject);
         
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            if ([responseObject[@"data"] count] == 0) {
+                _networkConditionHUD.labelText = @"没有更多了";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
             [jiaochengArray addObjectsFromArray:responseObject [@"data"]];
             [self.jiaochengTV reloadData];
         }

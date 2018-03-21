@@ -26,16 +26,16 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资讯标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHq-J6-DT0">
-                        <rect key="frame" x="90" y="8" width="222" height="21"/>
+                        <rect key="frame" x="90" y="12" width="222" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="H8Q-Su-x2I"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资讯内容多行 资讯内容多行 资讯内容多行 资讯内容多行资讯内容多行 资讯内容多行 资讯内容多行 资讯内容多行 资讯内容多行 资讯内容多行" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B9-lL-q3a">
-                        <rect key="frame" x="90" y="29" width="222" height="52.5"/>
+                        <rect key="frame" x="90" y="33" width="222" height="48.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                     <constraint firstItem="gjT-02-tBf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="GQh-pE-CNt"/>
                     <constraint firstItem="SHq-J6-DT0" firstAttribute="leading" secondItem="gjT-02-tBf" secondAttribute="trailing" constant="8" id="Tdl-Hh-HrE"/>
                     <constraint firstAttribute="trailing" secondItem="5B9-lL-q3a" secondAttribute="trailing" constant="8" id="gep-HF-TT5"/>
-                    <constraint firstItem="SHq-J6-DT0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="pBk-rz-DeB"/>
+                    <constraint firstItem="SHq-J6-DT0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="pBk-rz-DeB"/>
                     <constraint firstAttribute="bottom" secondItem="5B9-lL-q3a" secondAttribute="bottom" constant="8" id="pRu-Eu-Rfu"/>
                     <constraint firstItem="gjT-02-tBf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="tH9-ao-v8N"/>
                     <constraint firstAttribute="bottom" secondItem="gjT-02-tBf" secondAttribute="bottom" constant="8" id="ydu-if-NT4"/>
