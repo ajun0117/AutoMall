@@ -861,7 +861,7 @@
                 CheckResultRemarkCell *cell = (CheckResultRemarkCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultRemarkCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-                if ([carUpkeepDic[@"remark"] isKindOfClass:[NSNull class]]) {
+                if (! carUpkeepDic[@"remark"] || [carUpkeepDic[@"remark"] isKindOfClass:[NSNull class]]) {
                     cell.remarkL.text = @"未备注";
                 } else {
                     cell.remarkL.text = carUpkeepDic[@"remark"];
@@ -1962,6 +1962,9 @@
         NSLog(@"CarUpkeepInfo: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             carUpkeepDic = responseObject[@"data"];
+//            if ([carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
+//                return;
+//            }
             NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
             if (! [imageUrlAry isKindOfClass:[NSNull class]] && imageUrlAry.count > 0) {
                 if (! _adView) {

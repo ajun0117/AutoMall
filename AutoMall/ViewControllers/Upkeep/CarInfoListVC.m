@@ -208,9 +208,17 @@
         cell.ownerL.text = dic[@"owner"];
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];
-        NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"updateTime"] doubleValue]/1000];
-        NSString *string = [formater stringFromDate:creatDate];
-        cell.dateL.text = string;
+        NSDate *creatDate;
+        NSArray *carUpKeepsAry = dic[@"carUpKeeps"];
+        if (carUpKeepsAry.count == 1) {
+            creatDate = [NSDate dateWithTimeIntervalSince1970:[[carUpKeepsAry firstObject][@"lastEndTime"] doubleValue]/1000];
+            NSString *string = [formater stringFromDate:creatDate];
+            cell.dateL.text = string;
+        }
+        else {
+            cell.dateL.text = @"";
+        }
+        
         cell.selectBtn.tag = indexPath.row + 100;
         [cell.selectBtn setImage:[UIImage imageNamed:@"checkbox_yes"] forState:UIControlStateSelected | UIControlStateHighlighted];
         [cell.selectBtn addTarget:self action:@selector(selectTheCar:) forControlEvents:UIControlEventTouchUpInside];
