@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -176,7 +176,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请扫描商家二维码支付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFV-rw-GUq">
-                    <rect key="frame" x="111" y="435.5" width="153" height="18"/>
+                    <rect key="frame" x="111" y="364" width="153" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -200,10 +200,10 @@
                 <constraint firstAttribute="bottom" secondItem="1WZ-eE-GJl" secondAttribute="bottom" id="8WB-IU-FHD"/>
                 <constraint firstAttribute="trailing" secondItem="tzB-W8-K12" secondAttribute="trailing" id="Buq-F9-d5D"/>
                 <constraint firstAttribute="trailing" secondItem="dNc-m5-O08" secondAttribute="trailing" id="COB-rb-iKs"/>
-                <constraint firstItem="JFV-rw-GUq" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="4:3" id="FJQ-Dn-9hR"/>
                 <constraint firstItem="dNc-m5-O08" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Je8-L0-HZ7"/>
                 <constraint firstItem="1WZ-eE-GJl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="K72-Po-sPr"/>
                 <constraint firstItem="tzB-W8-K12" firstAttribute="top" secondItem="dNc-m5-O08" secondAttribute="bottom" id="TFN-yt-lwY"/>
+                <constraint firstItem="JFV-rw-GUq" firstAttribute="top" secondItem="tzB-W8-K12" secondAttribute="bottom" constant="30" id="Ydd-OC-Xhc"/>
                 <constraint firstItem="dNc-m5-O08" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="cf0-qC-l4O"/>
                 <constraint firstItem="JFV-rw-GUq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="o61-9s-TKx"/>
                 <constraint firstAttribute="trailing" secondItem="1WZ-eE-GJl" secondAttribute="trailing" id="xvS-tw-r6C"/>
