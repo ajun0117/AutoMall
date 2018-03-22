@@ -1423,7 +1423,7 @@
                 if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
                     [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                 } else {
-                    carImg.image = IMG(@"carMark");;
+                    carImg.image = IMG(@"carMark");
                 }
                 carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
@@ -1431,7 +1431,7 @@
                 return cell;
                 break;
             }
-            case 5: {
+            case 4: {
                 if ([mobileUserType isEqualToString:@"1"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1522,7 +1522,7 @@
                 
                 break;
             }
-            case 6: {
+            case 5: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
@@ -1782,14 +1782,14 @@
         sections = 7;
         [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationTop];
         sections = 8;
-        [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationTop];
+        [self.myTableView insertSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationTop];
         [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 //        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationNone];
 //        [btn setTitle:@"收起完整报告" forState:UIControlStateNormal];
     }
     else {
         sections = 7;
-        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationBottom];
+        [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationBottom];
         sections = 6;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationBottom];
         sections = 5;

@@ -170,6 +170,11 @@
     if ([notification.name isEqualToString:CarUpkeepSearch]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepSearch object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            if ([responseObject[@"data"] count] == 0) {
+                _networkConditionHUD.labelText = @"没有更多了";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
             [historyArray addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];
         }

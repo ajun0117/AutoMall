@@ -74,6 +74,14 @@
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, searchBtnBarBtn, infoBtnBarBtn, nil];
     
+    if (!_networkConditionHUD) {
+        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_networkConditionHUD];
+    }
+    _networkConditionHUD.mode = MBProgressHUDModeText;
+    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+    _networkConditionHUD.margin = HUDMargin;
+    
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49 - 20)];
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.delegate = self;
@@ -116,13 +124,13 @@
         [self.view addSubview:_hud];
     }
     
-    if (!_networkConditionHUD) {
-        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.view addSubview:_networkConditionHUD];
-    }
-    _networkConditionHUD.mode = MBProgressHUDModeText;
-    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
-    _networkConditionHUD.margin = HUDMargin;
+//    if (!_networkConditionHUD) {
+//        _networkConditionHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//        [self.view addSubview:_networkConditionHUD];
+//    }
+//    _networkConditionHUD.mode = MBProgressHUDModeText;
+//    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+//    _networkConditionHUD.margin = HUDMargin;
 }
 
 -(void) creatTableViews {
@@ -1017,9 +1025,19 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:CheckcategoryList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             partsArray = responseObject[@"data"];
-            [self createSegmentControlWithTitles:partsArray];
-            self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 49);
-            [self creatTableViews];
+            if (partsArray.count > 0) {
+                [self createSegmentControlWithTitles:partsArray];
+                self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * partsArray.count, SCREEN_HEIGHT - 64 - 44 - 49);
+                [self creatTableViews];
+            }
+            else {
+                _networkConditionHUD.labelText = @"还没有定制任何服务！";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                
+                [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+            }
+            
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -1163,6 +1181,10 @@
     resultVC.carUpkeepId = carId;
     resultVC.checktypeID = self.checktypeID;
     [self.navigationController pushViewController:resultVC animated:YES];
+}
+
+- (void)toPopVC:(NSString *)carId {
+    [self.navigationController popToRootViewControllerAnimated:YES]; //返回首页
 }
 
 - (void)didReceiveMemoryWarning {
