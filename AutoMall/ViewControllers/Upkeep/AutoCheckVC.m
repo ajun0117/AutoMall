@@ -980,7 +980,7 @@
     }
 //    NSLog(@"carUpkeepCheckContentsAry: %@",carUpkeepCheckContentsAry);
     
-    NSDictionary *carDicc = @{@"id":self.carDic[@"id"],@"mileage":self.carDic[@"mileage"],@"fuelAmount":self.carDic[@"fuelAmount"]};
+    NSDictionary *carDicc = @{@"id":self.carDic[@"id"],@"mileage":STRING_Nil(self.carDic[@"mileage"]),@"fuelAmount":STRING_Nil(self.carDic[@"fuelAmount"])};
     id storeId = [[GlobalSetting shareGlobalSettingInstance] storeId];
     NSLog(@"storeId: %@",storeId);
 //    NSDictionary *storeDic;

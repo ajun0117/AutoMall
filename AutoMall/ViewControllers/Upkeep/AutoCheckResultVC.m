@@ -1965,24 +1965,25 @@
 //            if ([carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
 //                return;
 //            }
-            NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
-            if (! [imageUrlAry isKindOfClass:[NSNull class]] && imageUrlAry.count > 0) {
-                if (! _adView) {
-                    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
-                    _adView.delegate = self;
-                    self.myTableView.tableHeaderView = _adView;
-                }
-                NSMutableArray *mulAry = [NSMutableArray array];
-                for (NSDictionary * dic in imageUrlAry) {
-                    NSDictionary *dicc = @{@"image":UrlPrefix(dic[@"relativePath"])};
-                    [mulAry addObject:dicc];
-                }
-                _adArray = [NSArray arrayWithArray:mulAry];
-                [_adView reloadData];
+            if (! [carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
+                NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
+                if (! [imageUrlAry isKindOfClass:[NSNull class]] && imageUrlAry.count > 0) {
+                    if (! _adView) {
+                        _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
+                        _adView.delegate = self;
+                        self.myTableView.tableHeaderView = _adView;
+                    }
+                    NSMutableArray *mulAry = [NSMutableArray array];
+                    for (NSDictionary * dic in imageUrlAry) {
+                        NSDictionary *dicc = @{@"image":UrlPrefix(dic[@"relativePath"])};
+                        [mulAry addObject:dicc];
+                    }
+                    _adArray = [NSArray arrayWithArray:mulAry];
+                    [_adView reloadData];
 
+                }
+                [self.myTableView reloadData];
             }
-            
-            [self.myTableView reloadData];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
