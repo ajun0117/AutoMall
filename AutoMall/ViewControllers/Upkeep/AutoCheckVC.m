@@ -107,8 +107,12 @@
     NSString *stringS = [formater stringFromDate:today];
     NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
     if (todayStr && [todayStr isEqualToString:stringS]) {   //今日，读取相关数据
-        NSString *mileageStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileage"];
-        lichengDic = @{@"mileage":mileageStr,@"mileageImg":@"",@"fuelAmount":@"",@"fuelAmountImg":@"",@"remark":@""};
+        NSDictionary *carMileageDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDic"];
+        NSString *mileageStr = carMileageDic[@"currentMileage"];
+        NSString *carId1 = carMileageDic[@"carId"];
+        if ([self.carDic[@"id"] intValue] == [carId1 intValue]) {
+            lichengDic = @{@"mileage":mileageStr,@"mileageImg":@"",@"fuelAmount":@"",@"fuelAmountImg":@"",@"remark":@""};
+        }
     } else {    //否则删除老的数据
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];

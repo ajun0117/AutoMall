@@ -259,7 +259,7 @@
 }
 
 - (void)adView:(AJAdView *)adView didSelectIndex:(NSInteger)index{
-    NSLog(@"--%ld--",(long)index);
+    NSLog(@"index--%ld--",(long)index);
 
     NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
     NSMutableArray *mulAry = [NSMutableArray array];
@@ -315,7 +315,7 @@
                 break;
             }
             case 6: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -357,7 +357,7 @@
                 break;
             }
             case 5: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -395,7 +395,7 @@
                 break;
             }
             case 4: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -428,7 +428,7 @@
                 break;
             }
             case 3: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -485,7 +485,7 @@
                 break;
             }
             case 6: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -539,7 +539,7 @@
                 break;
             }
             case 5: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -588,7 +588,7 @@
                 break;
             }
             case 4: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -627,7 +627,7 @@
                 break;
             }
             case 3: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -671,9 +671,13 @@
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
-                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
-                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+                
+                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
+//                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+//                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+//                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
                 return cell;
                 break;
             }
@@ -871,7 +875,7 @@
             }
                 
             case 6: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -979,9 +983,12 @@
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
-                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
-                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+//                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+//                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+//                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }
@@ -1166,7 +1173,7 @@
             }
                 
             case 5: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -1274,9 +1281,12 @@
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
-                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
-                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+//                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+//                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+//                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }
@@ -1432,7 +1442,7 @@
                 break;
             }
             case 4: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -1540,9 +1550,12 @@
             case 0: {
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
-                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
-                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+//                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
+//                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
+//                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
+                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }
@@ -1619,7 +1632,7 @@
                 break;
             }
             case 3: {
-                if ([mobileUserType isEqualToString:@"1"]) {
+                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -1982,8 +1995,8 @@
                     [_adView reloadData];
 
                 }
-                [self.myTableView reloadData];
             }
+                [self.myTableView reloadData];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

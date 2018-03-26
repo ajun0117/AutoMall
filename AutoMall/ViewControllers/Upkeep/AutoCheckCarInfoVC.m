@@ -162,9 +162,12 @@
     NSDate *today = [NSDate date];
     NSString *stringS = [formater stringFromDate:today];
     NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
-    if (![stringS isEqualToString:todayStr]) {   //非今日，更新相关数据
+    NSDictionary *carMileageDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDic"];
+    NSString *carId1 = carMileageDic[@"carId"];
+    if (![stringS isEqualToString:todayStr] || [self.carDic[@"id"] intValue] != [carId1 intValue]) {   //非今日，更新相关数据
+        NSDictionary *carMileageDic = @{@"carId":self.carDic[@"id"],@"currentMileage":self.mileageTF.text};
         [[NSUserDefaults standardUserDefaults] setObject:stringS forKey:@"todayMileageDate"];
-        [[NSUserDefaults standardUserDefaults] setObject:self.mileageTF.text forKey:@"todayMileage"];
+        [[NSUserDefaults standardUserDefaults] setObject:carMileageDic forKey:@"todayMileageDic"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
@@ -183,6 +186,7 @@
             _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！"; 
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            self.fuelAmountTF.text = @"";   //清空
         }
     }
     return YES;
