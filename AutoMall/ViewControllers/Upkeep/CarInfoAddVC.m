@@ -833,7 +833,7 @@
 
 - (void)toPopVC:(NSString *)carId {
     if (isAutoSelect) {
-        NSDictionary *car = @{@"id":carId,@"plateNumber":self.plateNumberTF.text};
+        NSDictionary *car = @{@"id":carId,@"plateNumber":self.plateNumberTF.text,@"mileage":self.mileageTF.text,@"fuelAmount":self.fuelAmountTF.text};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:car];
         [self.navigationController popToRootViewControllerAnimated:YES];
 //        self.GoBackSelectCarDic(car);   //返回刷新并选择
