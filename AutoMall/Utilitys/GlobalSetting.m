@@ -794,6 +794,8 @@ static GlobalSetting *globalSetting;
     [userDefaults removeObjectForKey:@"storeId"];
     [userDefaults removeObjectForKey:@"AlipayImg"];
     [userDefaults removeObjectForKey:@"WechatImg"];
+    [userDefaults removeObjectForKey:@"todayMileageDate"];
+    [userDefaults removeObjectForKey:@"todayMileageMuDic"];
     [userDefaults synchronize];
 }
 

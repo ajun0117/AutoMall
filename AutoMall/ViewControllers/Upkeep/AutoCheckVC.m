@@ -100,24 +100,27 @@
     [self requestGetHistoryList];       //获取该车辆的保养记录
     
     
-    //******先载入当天输入过的里程数
-    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-    [formater setDateFormat:@"yyyy-MM-dd"];
-    NSDate *today = [NSDate date];
-    NSString *stringS = [formater stringFromDate:today];
-    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
-    if (todayStr && [todayStr isEqualToString:stringS]) {   //今日，读取相关数据
-        NSDictionary *carMileageDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDic"];
-        NSString *mileageStr = carMileageDic[@"currentMileage"];
-        NSString *carId1 = carMileageDic[@"carId"];
-        if ([self.carDic[@"id"] intValue] == [carId1 intValue]) {
-            lichengDic = @{@"mileage":mileageStr,@"mileageImg":@"",@"fuelAmount":@"",@"fuelAmountImg":@"",@"remark":@""};
-        }
-    } else {    //否则删除老的数据
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];
-    }
-    
+//    //******先载入当天输入过的里程数
+//    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+//    [formater setDateFormat:@"yyyy-MM-dd"];
+//    NSDate *today = [NSDate date];
+//    NSString *stringS = [formater stringFromDate:today];
+//    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
+//    if (todayStr && [todayStr isEqualToString:stringS]) {   //今日，读取相关数据
+//        NSDictionary *carMileageDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDic"];
+    NSMutableDictionary *muDic = [NSMutableDictionary dictionary];
+    [muDic setValuesForKeysWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageMuDic"]];
+//        NSString *mileageStr = carMileageDic[@"currentMileage"];
+//        NSString *carId1 = carMileageDic[@"carId"];
+//        if ([self.carDic[@"id"] intValue] == [carId1 intValue]) {
+    NSLog(@"muDicself.carDicid:  %@",muDic[self.carDic[@"id"]]);
+    NSString *cId = [NSString stringWithFormat:@"%@",self.carDic[@"id"]];
+    lichengDic = @{@"mileage":STRING_Nil(muDic[cId]),@"mileageImg":@"",@"fuelAmount":@"",@"fuelAmountImg":@"",@"remark":@""};
+//        }
+//    } else {    //否则删除老的数据
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];
+//    }
 
 }
 

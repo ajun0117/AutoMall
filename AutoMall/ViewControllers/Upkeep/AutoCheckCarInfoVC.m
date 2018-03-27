@@ -166,15 +166,20 @@
     [formater setDateFormat:@"yyyy-MM-dd"];
     NSDate *today = [NSDate date];
     NSString *stringS = [formater stringFromDate:today];
-    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
-    NSDictionary *carMileageDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDic"];
-    NSString *carId1 = carMileageDic[@"carId"];
-    if (![stringS isEqualToString:todayStr] || [self.carDic[@"id"] intValue] != [carId1 intValue]) {   //非今日，更新相关数据
-        NSDictionary *carMileageDic = @{@"carId":self.carDic[@"id"],@"currentMileage":self.mileageTF.text};
-        [[NSUserDefaults standardUserDefaults] setObject:stringS forKey:@"todayMileageDate"];
-        [[NSUserDefaults standardUserDefaults] setObject:carMileageDic forKey:@"todayMileageDic"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+//    NSString *todayStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDate"];
+//    NSDictionary *carMileageDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageDic"];
+//    NSString *carId1 = carMileageDic[@"carId"];
+//    if (![stringS isEqualToString:todayStr] || [self.carDic[@"id"] intValue] != [carId1 intValue]) {   //非今日，更新相关数据
+    
+    NSMutableDictionary *muDic = [NSMutableDictionary dictionary];
+    [muDic setValuesForKeysWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"todayMileageMuDic"]];
+    NSString *cId = [NSString stringWithFormat:@"%@",self.carDic[@"id"]];
+    [muDic setObject:self.mileageTF.text forKey:cId];
+    NSDictionary *dataDic = [NSDictionary dictionaryWithDictionary:muDic];
+    [[NSUserDefaults standardUserDefaults] setObject:stringS forKey:@"todayMileageDate"];
+    [[NSUserDefaults standardUserDefaults] setObject:dataDic forKey:@"todayMileageMuDic"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
     
     [self.navigationController popViewControllerAnimated:YES];
     

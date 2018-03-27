@@ -246,7 +246,14 @@
 
 
 - (IBAction)confirmAction:(id)sender {
-    [self requestPostCarUpkeepConfirm];
+    if (serVicePrice + packagePrice - discountPrice + selectedServicePrice > 0) {
+        [self requestPostCarUpkeepConfirm];
+    }
+    else {
+        _networkConditionHUD.labelText = @"没有选择服务方案";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark - UITableViewDataSource
