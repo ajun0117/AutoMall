@@ -20,7 +20,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
-@property (strong, nonatomic) IBOutlet UILabel *lastMileageTF;
+@property (strong, nonatomic) IBOutlet UITextField *lastMileageTF;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
 @property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
 @property (weak, nonatomic) IBOutlet WPImageView *mileageImgView;
@@ -47,6 +47,11 @@
     
     mileageImgUrl = self.mileageAndfuelAmountDic[@"mileageImg"];
     fuelAmountImgUrl = self.mileageAndfuelAmountDic[@"fuelAmountImg"];
+    
+    if ([self.carDic[@"carUpKeeps"] count] > 0) {
+        self.lastMileageTF.text = [NSString stringWithFormat:@"%@",[self.carDic[@"carUpKeeps"] firstObject][@"lastMileage"]];
+    }
+    
     
 //    //******先载入当天输入过的里程数
 //    NSDateFormatter* formater = [[NSDateFormatter alloc] init];

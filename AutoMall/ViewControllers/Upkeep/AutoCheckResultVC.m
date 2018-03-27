@@ -260,25 +260,36 @@
 
 - (void)adView:(AJAdView *)adView didSelectIndex:(NSInteger)index{
     NSLog(@"index--%ld--",(long)index);
-
-    NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
-    NSMutableArray *mulAry = [NSMutableArray array];
-    for (NSDictionary * dic in imageUrlAry) {
-        [mulAry addObject:UrlPrefix(dic[@"relativePath"])];
+    if (! [carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
+        NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
+        NSMutableArray *mulAry = [NSMutableArray array];
+        for (NSDictionary * dic in imageUrlAry) {
+            [mulAry addObject:UrlPrefix(dic[@"relativePath"])];
+        }
+        [self clickImageWithImagesArray:mulAry andIndex:index];
     }
-    [self clickImageWithImagesArray:mulAry andIndex:index];
+    else {
+        NSArray *arr = @[UrlPrefix(@"/uploads/2018/03/autoshop.jpg")];
+        [self clickImageWithImagesArray:arr andIndex:index];
+    }
 }
 
 - (IBAction)upkeepPlanAction:(id)sender {
-    UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-    planVC.carDic = carUpkeepDic[@"car"];
-    planVC.mileage = carUpkeepDic[@"mileage"];
-    planVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
-    planVC.lastEndTime = carUpkeepDic[@"lastEndTime"];
-    planVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
-    planVC.carUpkeepId = self.carUpkeepId;
-    planVC.checktypeID = self.checktypeID;
-    [self.navigationController pushViewController:planVC animated:YES];
+    if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"2"]) {   //只有老板和员工可以查看
+        UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+        planVC.carDic = carUpkeepDic[@"car"];
+        planVC.mileage = carUpkeepDic[@"mileage"];
+        planVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
+        planVC.lastEndTime = carUpkeepDic[@"lastEndTime"];
+        planVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
+        planVC.carUpkeepId = self.carUpkeepId;
+        planVC.checktypeID = self.checktypeID;
+        [self.navigationController pushViewController:planVC animated:YES];
+    } else {
+        _networkConditionHUD.labelText = @"仅门店老板和员工可以此操作！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark - tableVeiw delegate
@@ -1807,8 +1818,8 @@
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationBottom];
         sections = 5;
         [self.myTableView deleteSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationBottom];
+        [self.myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
 //        [btn setTitle:@"查看完整报告" forState:UIControlStateNormal];
     }
 } 
@@ -1996,6 +2007,16 @@
 
                 }
             }
+            else {
+                if (! _adView) {
+                    _adView = [[AJAdView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_WIDTH*9/16)];
+                    _adView.delegate = self;
+                    self.myTableView.tableHeaderView = _adView;
+                }
+                _adArray = @[@{@"image":UrlPrefix(@"/uploads/2018/03/autoshop.jpg")}];
+                [_adView reloadData];
+            }
+            
                 [self.myTableView reloadData];
         }
         else {

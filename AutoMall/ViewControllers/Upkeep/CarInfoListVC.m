@@ -54,9 +54,17 @@
     }
     self.navigationItem.titleView = view;
     
-    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"新增车辆" style:UIBarButtonItemStylePlain target:self action:@selector(toRegisterNewCarInfo)];
-    self.navigationItem.rightBarButtonItem = backBtn;
-    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    addBtn.frame = CGRectMake(0, 2, 80, 40);
+    [addBtn setTitle:@"新增车辆" forState:UIControlStateNormal];
+    [addBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
+    [addBtn addTarget:self action:@selector(toRegisterNewCarInfo) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+    
+//    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"新增车辆" style:UIBarButtonItemStylePlain target:self action:@selector(toRegisterNewCarInfo)];
+    self.navigationItem.rightBarButtonItem = addBtnBarBtn;
+//    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
     
 //    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
 //                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
