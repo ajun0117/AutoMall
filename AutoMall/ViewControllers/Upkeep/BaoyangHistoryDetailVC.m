@@ -94,6 +94,8 @@
     infoVC.carDic = self.carDic;
     infoVC.mileage = self.mileage;
     infoVC.fuelAmount = self.fuelAmount;
+    infoVC.lastMileage = self.lastMileage;
+    infoVC.lastEndTime = self.lastEndTime;
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:YES];
 }

@@ -134,6 +134,8 @@
         detailVC.carDic = dic[@"car"];
         detailVC.mileage = dic[@"mileage"];
         detailVC.fuelAmount = dic[@"fuelAmount"];
+        detailVC.lastEndTime = dic[@"lastEndTime"];
+        detailVC.lastMileage = STRING(dic[@"lastMileage"]);
         detailVC.carUpkeepId = dic[@"id"];
         detailVC.checktypeID = dic[@"checkTypeId"];
         [self.navigationController pushViewController:detailVC animated:YES];
