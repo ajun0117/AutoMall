@@ -20,6 +20,7 @@
 
 @property (strong, nonatomic) IBOutlet DJQRateView *pingxingView;
 @property (strong, nonatomic) IBOutlet UILabel *xiaoliangL;
+@property (strong, nonatomic) IBOutlet UIImageView *dakaIM;
 @property (strong, nonatomic) IBOutlet UILabel *jifenL;
 @property (strong, nonatomic) IBOutlet UILabel *moneyL;
 @property (strong, nonatomic) IBOutlet StrikeThroughLabel *costPriceStrikeL;

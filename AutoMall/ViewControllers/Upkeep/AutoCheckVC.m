@@ -115,7 +115,10 @@
 //        if ([self.carDic[@"id"] intValue] == [carId1 intValue]) {
     NSLog(@"muDicself.carDicid:  %@",muDic[self.carDic[@"id"]]);
     NSString *cId = [NSString stringWithFormat:@"%@",self.carDic[@"id"]];
-    lichengDic = @{@"mileage":STRING_Nil(muDic[cId]),@"mileageImg":@"",@"fuelAmount":@"",@"fuelAmountImg":@"",@"remark":@""};
+    if (muDic[cId]) {  //存在缓存
+         lichengDic = @{@"mileage":STRING_Nil(muDic[cId]),@"mileageImg":@"",@"fuelAmount":@"",@"fuelAmountImg":@"",@"remark":@""};
+    }
+   
 //        }
 //    } else {    //否则删除老的数据
 //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileage"];

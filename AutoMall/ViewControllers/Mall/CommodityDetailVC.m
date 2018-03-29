@@ -89,6 +89,7 @@ static CGFloat const scrollViewHeight = 220;
     [self.myTableView registerNib:[UINib nibWithNibName:@"CommodityDetailTuijianCell" bundle:nil] forCellReuseIdentifier:@"commodityDetailTuijianCell"];
     
     scroll = [[MXImageScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, scrollViewHeight) rootTableView:self.myTableView];
+    scroll.autoScroll = NO;
     scroll.hasNavigationBar = NO;
     scroll.showPageIndicator = NO;
     scroll.delegate = self;
@@ -469,10 +470,19 @@ static CGFloat const scrollViewHeight = 220;
                     cell.pingxingRV.rate = [commodityDic [@"starLevel"] floatValue] / 2;
                     cell.pingxingRV.maxRate = 5;
                     cell.saleL.text = [NSString stringWithFormat:@"月销%@单",commodityDic[@"salesVolume"]];
-                    if ([commodityDic[@"integral"] intValue] > 0) {
-                        cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",commodityDic[@"integral"]];
-                    } else {
-                        cell.jifenL.text = @"该优惠商品不累计能量";
+                    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+                    if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                        cell.dakaIM.hidden = NO;
+                        cell.jifenL.hidden = NO;
+                        if ([commodityDic[@"integral"] intValue] > 0) {
+                            cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",commodityDic[@"integral"]];
+                        } else {
+                            cell.jifenL.text = @"该优惠商品不累计能量";
+                        }
+                    }
+                    else {
+                        cell.dakaIM.hidden = YES;
+                        cell.jifenL.hidden = YES;
                     }
                     return cell;
                     break;

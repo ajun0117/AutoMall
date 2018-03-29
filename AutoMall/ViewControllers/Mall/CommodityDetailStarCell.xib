@@ -64,11 +64,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="dakaIM" destination="G93-7B-1zq" id="VmD-wk-abW"/>
                 <outlet property="jifenL" destination="akq-yq-aVm" id="bBQ-Tg-GBH"/>
                 <outlet property="pingxingRV" destination="SA8-RE-kFu" id="tKp-lo-HZM"/>
                 <outlet property="saleL" destination="g9e-sB-XCK" id="8JL-xM-CZG"/>
             </connections>
-            <point key="canvasLocation" x="-560" y="25"/>
+            <point key="canvasLocation" x="-1003" y="47"/>
         </tableViewCell>
     </objects>
     <resources>

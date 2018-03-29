@@ -289,12 +289,21 @@
     //        cell.zhekouL.text =
             cell.pingxingView.rate = [dic [@"starLevel"] floatValue] / 2;
             cell.xiaoliangL.text = [NSString stringWithFormat:@"月销%@单",dic [@"salesVolume"]];
-            if ([dic[@"integral"] intValue] > 0) {
-                cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",dic[@"integral"]];
-            } else {
-                cell.jifenL.text = @"该优惠商品不累计积分";
-            }
             NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+            if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                cell.dakaIM.hidden = NO;
+                cell.jifenL.hidden = NO;
+                if ([dic[@"integral"] intValue] > 0) {
+                    cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",dic[@"integral"]];
+                } else {
+                    cell.jifenL.text = @"该优惠商品不累计积分";
+                }
+            }
+            else {
+                cell.dakaIM.hidden = YES;
+                cell.jifenL.hidden = YES;
+            }
+
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 if ([dic[@"discount"] intValue] > 0) {
                     cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];

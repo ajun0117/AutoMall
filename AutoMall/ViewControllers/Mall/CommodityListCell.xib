@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="96.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="汽车全合成机油" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRa-QY-8GY">
@@ -159,6 +159,7 @@
             <connections>
                 <outlet property="baokuanL" destination="AlS-7I-jIZ" id="o3v-jJ-qi5"/>
                 <outlet property="costPriceStrikeL" destination="zsK-Al-e4b" id="NFp-0o-2nI"/>
+                <outlet property="dakaIM" destination="KSx-Ov-s4W" id="HQ9-Ix-nJT"/>
                 <outlet property="goodsIM" destination="rdR-7Y-MpC" id="gnU-BF-V6H"/>
                 <outlet property="goodsNameL" destination="GRa-QY-8GY" id="EfS-iH-7ZT"/>
                 <outlet property="jifenL" destination="FG4-rV-5Pr" id="z7Y-5G-tVc"/>
@@ -169,7 +170,7 @@
                 <outlet property="yunfeiL" destination="esk-eX-Krg" id="r0E-Oo-AxH"/>
                 <outlet property="zhekouL" destination="jlg-Gy-XOM" id="cqy-u4-APm"/>
             </connections>
-            <point key="canvasLocation" x="-436" y="60.5"/>
+            <point key="canvasLocation" x="-766" y="63"/>
         </tableViewCell>
     </objects>
     <resources>

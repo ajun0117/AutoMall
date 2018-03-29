@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/Mall/CommodityDetailVC.m"
-            timestampString = "542535817.064527"
+            timestampString = "543986137.051735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "847"
-            endingLineNumber = "847"
+            startingLineNumber = "857"
+            endingLineNumber = "857"
             landmarkName = "-requestGetCommodityDetail"
             landmarkType = "7">
          </BreakpointContent>
