@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +14,7 @@
                 <outlet property="addDetailTF" destination="MHv-4X-QEr" id="nLA-BF-agg"/>
                 <outlet property="addressBtn" destination="9lJ-eR-IdO" id="RDR-Aj-P1c"/>
                 <outlet property="defaultSW" destination="wEw-ZL-Mqa" id="KQB-J9-WnB"/>
+                <outlet property="myScrollView" destination="kbP-Zf-vTh" id="4VU-4I-qrg"/>
                 <outlet property="phoneTF" destination="5Sa-gX-cFb" id="g3T-tm-IoV"/>
                 <outlet property="uNameTF" destination="ahz-in-hvF" id="GKI-yG-sfN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -464,6 +465,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrows" width="13" height="24"/>
+        <image name="arrows" width="6" height="12"/>
     </resources>
 </document>

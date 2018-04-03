@@ -38,7 +38,7 @@
     [self.addressBtn setTitle:@"广东省 广州市 白云区" forState:UIControlStateNormal];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keybordDown)];
-    [self.view addGestureRecognizer:tap];
+    [self.myScrollView addGestureRecognizer:tap];
     
     if (self.isEdit) {
         self.uNameTF.text = self.addrDic [@"name"];

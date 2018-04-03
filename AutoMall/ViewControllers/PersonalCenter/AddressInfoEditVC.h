@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AddressInfoEditVC : UIViewController
+@property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (strong, nonatomic) IBOutlet UITextField *uNameTF;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTF;
 @property (strong, nonatomic) IBOutlet UIButton *addressBtn;
