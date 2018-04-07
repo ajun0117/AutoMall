@@ -139,8 +139,9 @@
 
 
 //汽车商城
-//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表
@@ -166,9 +167,9 @@
 #define ConsigneeDele                             @"/api/consignee/del"        //删除收货地址
 #define MallOrderAdd                             @"/api/order/add"             //新增订单
 #define MallOrderChoosePayMode           @"/api/order/choosePayMode"     //选择支付方式
-#define MallOrderPaySuccess                  @"/order/paySuccess"                 //支付成功回调
+#define MallOrderPaySuccess                  @"/api/order/paySuccess"                 //支付成功回调
 #define GetIntegralAs1Yuan                    @"/api/integral/getIntegralAs1Yuan"       //获取一元对应的积分数
-#define GetComtermList                                @"/api/comterm/list"        //获取商品项目列表
+#define GetComtermList                          @"/api/comterm/list"        //获取商品项目列表
 
 //登录、注册、找回密码
 #define GetSMS                                      @"/api/sms/send"                    //获取短信验证码
