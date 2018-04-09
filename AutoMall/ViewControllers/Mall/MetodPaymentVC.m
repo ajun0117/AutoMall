@@ -341,6 +341,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MallOrderPaySuccess object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {    //回调成功
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+//            _networkConditionHUD.labelText = @"支付成功，请稍后在个人中心查看状态！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self performSelector:@selector(toPopVC) withObject:nil afterDelay:HUDDelay];

@@ -310,8 +310,12 @@ static BOOL isBackGroundActivateApplication;
 //            }
 //            NSLog(@"授权结果 authCode = %@", authCode?:@"");
 //        }];
+//    }
+        return YES;
     }
-    return YES;
+    else {
+        return  [WXApi handleOpenURL:url delegate:self];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

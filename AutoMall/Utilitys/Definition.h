@@ -17,7 +17,7 @@
 
 //MBProgressHUD 网络情况提示设置
 #define HUDBottomH 100
-#define HUDDelay 1.5
+#define HUDDelay 1.8
 #define HUDMargin   10
 
 //定位失败时的默认衡阳市经纬度
@@ -139,9 +139,9 @@
 
 
 //汽车商城
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])  //测试服务器
 //#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])
-//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表
