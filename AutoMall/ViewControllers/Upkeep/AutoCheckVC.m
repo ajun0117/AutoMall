@@ -256,7 +256,11 @@
 #pragma mark - 提交生成检查单
 - (IBAction)creatChecklistAction:(id)sender {
     if (lichengDic) {
-        [self requestCarUpkeepAdd];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确认？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        alert.tag = 300;
+        [alert show];
+    
+//        [self requestCarUpkeepAdd];
     } else {
         _networkConditionHUD.labelText = @"请先在右上角填写保养的车辆总里程表！";
         [_networkConditionHUD show:YES];
@@ -307,44 +311,51 @@
 }
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        NSLog(@"%@",@"点击了确定");
-        NSIndexPath *ind = [NSIndexPath indexPathForRow:alertView.row inSection:alertView.section];
-        UITableView *tableV;
-        if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
-            tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
+    if (alertView.tag == 300) {
+        if (buttonIndex == 1) {
+            [self requestCarUpkeepAdd];
         }
-        UITableViewCell *cell = (UITableViewCell  *)[tableV cellForRowAtIndexPath:ind];
-        UIButton *btn = (UIButton *)[cell viewWithTag:ind.section + 100];
-        UITextField *nameField = [alertView textFieldAtIndex:0];
-        [btn setTitle:nameField.text forState:UIControlStateNormal];
-        
-        NSArray *array = contentAry[ind.section][@"checkContents"];
-        NSDictionary *dicc = [array firstObject];
-        id groupStr = dicc[@"group"];
-        if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开,,,由于接口数据不全，待测试
-            NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
-            NSString *positionStr = positionArray[ind.row];
-            CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
-            NSMutableArray *tipAry = [[item1.tip objectFromJSONString] mutableCopy];
-            NSMutableDictionary *tipDic = [tipAry[ind.row] mutableCopy];
-            CheckContentItem *item2 = [[CheckContentItem alloc] init];
-            item2.aid = NSStringWithNumber(dicc[@"id"]);
-            [tipDic setObject:nameField.text forKey:positionStr];
-            [tipAry replaceObjectAtIndex:ind.row withObject:tipDic];
-            NSLog(@"tipAry: %@",tipAry);
-            NSError *err = nil;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tipAry options:NSJSONWritingPrettyPrinted error:&err];
-            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            NSLog(@"jsonStr: %@",jsonStr);
-            item2.tip = jsonStr;
-            [[CheckContentTool sharedManager] UpdateContentItemTipWithItem:item2];
-        }
-        else {
-            CheckContentItem *item = [[CheckContentItem alloc] init];
-            item.aid = NSStringWithNumber(dicc[@"id"]);
-            item.tip = nameField.text;
-            [[CheckContentTool sharedManager] UpdateContentItemTipWithItem:item];
+    }
+    else {
+        if (buttonIndex == 1) {
+            NSLog(@"%@",@"点击了确定");
+            NSIndexPath *ind = [NSIndexPath indexPathForRow:alertView.row inSection:alertView.section];
+            UITableView *tableV;
+            if ([[self.mainScrollView viewWithTag:1000+currentSelectIndex] isKindOfClass:[UITableView class]]) {
+                tableV = [self.mainScrollView viewWithTag:1000+currentSelectIndex];
+            }
+            UITableViewCell *cell = (UITableViewCell  *)[tableV cellForRowAtIndexPath:ind];
+            UIButton *btn = (UIButton *)[cell viewWithTag:ind.section + 100];
+            UITextField *nameField = [alertView textFieldAtIndex:0];
+            [btn setTitle:nameField.text forState:UIControlStateNormal];
+            
+            NSArray *array = contentAry[ind.section][@"checkContents"];
+            NSDictionary *dicc = [array firstObject];
+            id groupStr = dicc[@"group"];
+            if ([groupStr isKindOfClass:[NSString class]] && [groupStr length] > 1) {   //表示存在多个检查结果，多个以英文逗号分开,,,由于接口数据不全，待测试
+                NSArray *positionArray = [groupStr componentsSeparatedByString:@","];
+                NSString *positionStr = positionArray[ind.row];
+                CheckContentItem *item1 = [[CheckContentTool sharedManager] queryRecordWithID:NSStringWithNumber(dicc[@"id"])];
+                NSMutableArray *tipAry = [[item1.tip objectFromJSONString] mutableCopy];
+                NSMutableDictionary *tipDic = [tipAry[ind.row] mutableCopy];
+                CheckContentItem *item2 = [[CheckContentItem alloc] init];
+                item2.aid = NSStringWithNumber(dicc[@"id"]);
+                [tipDic setObject:nameField.text forKey:positionStr];
+                [tipAry replaceObjectAtIndex:ind.row withObject:tipDic];
+                NSLog(@"tipAry: %@",tipAry);
+                NSError *err = nil;
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tipAry options:NSJSONWritingPrettyPrinted error:&err];
+                NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                NSLog(@"jsonStr: %@",jsonStr);
+                item2.tip = jsonStr;
+                [[CheckContentTool sharedManager] UpdateContentItemTipWithItem:item2];
+            }
+            else {
+                CheckContentItem *item = [[CheckContentItem alloc] init];
+                item.aid = NSStringWithNumber(dicc[@"id"]);
+                item.tip = nameField.text;
+                [[CheckContentTool sharedManager] UpdateContentItemTipWithItem:item];
+            }
         }
     }
 }

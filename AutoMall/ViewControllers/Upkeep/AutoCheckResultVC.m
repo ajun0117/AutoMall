@@ -149,6 +149,25 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }
+    else if (alertView.tag == 300) {
+        if (buttonIndex == 1) {
+            if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"2"]) {   //只有老板和员工可以查看
+                UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
+                planVC.carDic = carUpkeepDic[@"car"];
+                planVC.mileage = carUpkeepDic[@"mileage"];
+                planVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
+                planVC.lastEndTime = carUpkeepDic[@"lastEndTime"];
+                planVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
+                planVC.carUpkeepId = self.carUpkeepId;
+                planVC.checktypeID = self.checktypeID;
+                [self.navigationController pushViewController:planVC animated:YES];
+            } else {
+                _networkConditionHUD.labelText = @"仅门店老板和员工可以此操作！";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            }
+        }
+    }
 }
 
 #pragma mark -
@@ -275,21 +294,9 @@
 }
 
 - (IBAction)upkeepPlanAction:(id)sender {
-    if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"2"]) {   //只有老板和员工可以查看
-        UpkeepPlanVC *planVC = [[UpkeepPlanVC alloc] init];
-        planVC.carDic = carUpkeepDic[@"car"];
-        planVC.mileage = carUpkeepDic[@"mileage"];
-        planVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
-        planVC.lastEndTime = carUpkeepDic[@"lastEndTime"];
-        planVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
-        planVC.carUpkeepId = self.carUpkeepId;
-        planVC.checktypeID = self.checktypeID;
-        [self.navigationController pushViewController:planVC animated:YES];
-    } else {
-        _networkConditionHUD.labelText = @"仅门店老板和员工可以此操作！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确认？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alert.tag = 300;
+    [alert show];
 }
 
 #pragma mark - tableVeiw delegate
