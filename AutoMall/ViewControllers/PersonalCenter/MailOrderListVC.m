@@ -160,14 +160,17 @@
         int status = [dic[@"orderStatus"] intValue];
         if (status == 0) {
             cell.statusL.text = @"待付款";
+            cell.btn.hidden = NO;
             [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
         } else if (status == 1) {
             cell.statusL.text = @"已付款";
-            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+            cell.btn.hidden = YES;
+//            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
         }
         else {
             cell.statusL.text = @"已完成";
-            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+            cell.btn.hidden = YES;
+//            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
         }
         cell.numberL.text = [NSString stringWithFormat:@"%d",amount];
         cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"totalPrice"]];
@@ -193,14 +196,17 @@
     int status = [dic[@"orderStatus"] intValue];
     if (status == 0) {
         cell.statusL.text = @"待付款";
+        cell.btn.hidden = NO;
         [cell.btn setTitle:@"去付款" forState:UIControlStateNormal];
     } else if (status == 1) {
         cell.statusL.text = @"已付款";
-        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        cell.btn.hidden = YES;
+//        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
     }
     else {
         cell.statusL.text = @"已完成";
-        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        cell.btn.hidden = YES;
+//        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
     }
     cell.numberL.text = [NSString stringWithFormat:@"%d",amount];
     cell.allMoneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"totalPrice"]];

@@ -215,6 +215,7 @@
             AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
             resultVC.carUpkeepId = dic[@"id"];
             resultVC.checktypeID = dic[@"checkTypeId"];
+            resultVC.isFromList = YES;
             [self.navigationController pushViewController:resultVC animated:YES];
         }
         else {
@@ -227,6 +228,7 @@
     else if (paymentStatusInt == 1) {   //已确认订单
         AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
         orderVC.checkOrderId = dic[@"id"];
+        orderVC.isFromList = YES;
         NSDictionary *dicc = @{@"orderId":[NSString stringWithFormat:@"%@",dic[@"code"]],@"money":dic[@"money"],@"plateNumber":STRING(dic[@"carPlateNumber"]),@"owner":STRING(dic[@"carOwnerName"])};
         orderVC.infoDic = dicc;
         [self.navigationController pushViewController:orderVC animated:YES];

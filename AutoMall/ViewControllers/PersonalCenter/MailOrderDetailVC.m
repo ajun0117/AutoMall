@@ -22,6 +22,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSDictionary *orderDetailDic;
 }
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) IBOutlet UIButton *statusBtn;
 
@@ -337,10 +338,12 @@
             orderDetailDic = responseObject [@"data"];
             int status = [orderDetailDic[@"orderStatus"] intValue];
             if (status == 0) {  //未付款时隐藏物流信息
+                self.bottomView.hidden = NO;
                 [self.statusBtn setTitle:@"去付款" forState:UIControlStateNormal];
             }
             else {
-                [self.statusBtn setTitle:@"再次购买" forState:UIControlStateNormal];
+                self.bottomView.hidden = YES;
+//                [self.statusBtn setTitle:@"再次购买" forState:UIControlStateNormal];
             }
             [self.myTableView reloadData];
         }

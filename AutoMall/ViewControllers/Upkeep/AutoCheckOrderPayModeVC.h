@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) NSDictionary *infoDic;    //字典
 
+@property (assign, nonatomic) BOOL isFromList;  //是否从订单列表进入
+
 @end

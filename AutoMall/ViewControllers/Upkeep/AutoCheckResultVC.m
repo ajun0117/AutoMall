@@ -49,11 +49,13 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"检查报告";
     // 设置导航栏按钮和标题颜色
-//    [self wr_setNavBarTintColor:NavBarTintColor];
+    [self wr_setNavBarTintColor:NavBarTintColor];
     
-    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(toFirst)];
-    self.navigationItem.leftBarButtonItem = backBtn;
-    self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    if (! self.isFromList) {
+        UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(toFirst)];
+        self.navigationItem.leftBarButtonItem = backBtn;
+        self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    }
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
