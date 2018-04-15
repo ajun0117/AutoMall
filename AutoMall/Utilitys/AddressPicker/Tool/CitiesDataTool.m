@@ -10,8 +10,8 @@
 #import "FMDB.h"
 #import "AddressItem.h"
 
-static NSString * const dbName = @"location.db";
-static NSString * const locationTabbleName = @"locationTabble";
+static NSString * const dbName = @"locationnew.db";
+static NSString * const locationTabbleName = @"locationTabblenew";
 
 @interface CitiesDataTool ()
 @property (nonatomic,strong) NSMutableArray * dataArray;
