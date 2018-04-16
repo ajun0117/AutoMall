@@ -12,7 +12,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 
-@interface MetodPaymentVC ()
+@interface MetodPaymentVC () <UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation MetodPaymentVC
+@implementation MetodPaymentVC 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +33,12 @@
     self.title =@"付款中";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    if (! self.isFromList) {
+        UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(toFirst)];
+        self.navigationItem.leftBarButtonItem = backBtn;
+        self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    }
     
     payModeStr = @"2";   //默认使用微信
     self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号:%@",self.orderNumber];
@@ -52,6 +58,21 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void)toFirst {        //返回首页
+    NSLog(@"返回首页");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认回到首页吗？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是",nil];
+    alert.tag = 200;
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 200) {
+        if (buttonIndex == 1) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (IBAction)selectPay:(UIButton *)sender{

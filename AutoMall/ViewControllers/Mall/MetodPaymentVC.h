@@ -23,4 +23,6 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *jifen;
 
+@property (assign, nonatomic) BOOL isFromList;  //是否从订单列表进入
+
 @end

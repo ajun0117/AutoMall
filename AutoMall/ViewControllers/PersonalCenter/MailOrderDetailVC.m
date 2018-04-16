@@ -75,6 +75,7 @@
         MetodPaymentVC *pay = [[MetodPaymentVC alloc] init];
         pay.orderNumber = orderDetailDic[@"code"];
         pay.money = [orderDetailDic[@"actualPrice"] floatValue];
+        pay.isFromList = YES;
         [self.navigationController pushViewController:pay animated:YES];
     }
     else if (status == 1) {
@@ -103,7 +104,8 @@
                 return 1;
             }
             else {
-                return 4;
+//                return 4;
+                return 2;
             }
             break;
         }
@@ -134,7 +136,7 @@
                 return 80;
             }
             else {
-                if (indexPath.row == 3) {
+                if (indexPath.row == 1) {
                     return 80;
                 }
                 return 44;
@@ -199,28 +201,28 @@
                 return cell;
             }
             else {
+//                if (indexPath.row == 0) {
+//                    MailOrderDetailSendStyleCell *cell = (MailOrderDetailSendStyleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailSendStyleCell"];
+//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                    cell.styleL.text = @"配送方式";
+//                    cell.contentL.text = orderDetailDic[@"deliveryMode"];
+//                    return cell;
+//                }
+//                else if (indexPath.row == 1) {
+//                    MailOrderDetailWaybillCell *cell = (MailOrderDetailWaybillCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailWaybillCell"];
+//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                    cell.nameL.text = @"物流公司: ";
+//                    cell.contentL.text = orderDetailDic[@"deliveryAgentName"];
+//                    return cell;
+//                }
                 if (indexPath.row == 0) {
-                    MailOrderDetailSendStyleCell *cell = (MailOrderDetailSendStyleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailSendStyleCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.styleL.text = @"配送方式";
-                    cell.contentL.text = orderDetailDic[@"deliveryMode"];
-                    return cell;
-                }
-                else if (indexPath.row == 1) {
-                    MailOrderDetailWaybillCell *cell = (MailOrderDetailWaybillCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailWaybillCell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.nameL.text = @"物流公司: ";
-                    cell.contentL.text = orderDetailDic[@"deliveryAgentName"];
-                    return cell;
-                }
-                else if (indexPath.row == 2) {
                     MailOrderDetailWaybillCell *cell = (MailOrderDetailWaybillCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailWaybillCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.nameL.text = @"运单编号: ";
                     cell.contentL.text = NSStringWithNumber(orderDetailDic[@"code"]);   //收货人订单号
                     return cell;
                 }
-                else if (indexPath.row == 3) {
+                else if (indexPath.row == 1) {
                     MailOrderDetailReceiverInfoCell *cell = (MailOrderDetailReceiverInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderDetailReceiverInfoCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.nameL.text = orderDetailDic[@"consigneeName"];
