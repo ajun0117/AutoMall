@@ -233,7 +233,7 @@
         [self.view addSubview:_networkConditionHUD];
     }
     _networkConditionHUD.mode = MBProgressHUDModeText;
-    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+//    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
 }
 
@@ -318,18 +318,9 @@
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == self.plateNumberTF) {      //字母转大写
-        if (self.plateNumberTF.text.length == 7) {
-            self.plateNumberTF.text = [self.plateNumberTF.text uppercaseString];
-        }
-        else {
-            _networkConditionHUD.labelText = @"车牌号输入有误，请重新输入！";
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        }
-    }
-}
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//
+//}
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (textField == self.fuelAmountTF) {
@@ -337,6 +328,20 @@
             _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return NO;
+        }
+    }
+    else if (textField == self.plateNumberTF) {      //字母转大写
+        NSString *tfStr = self.plateNumberTF.text;
+        NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (strUrl.length == 7) {
+            self.plateNumberTF.text = [strUrl uppercaseString];
+        }
+        else {
+            _networkConditionHUD.labelText = @"车牌号输入有误，请重新输入！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return NO;
         }
     }
     return YES;
