@@ -9,6 +9,7 @@
 #import "AutoCheckOrderPayModeVC.h"
 #import "AutoCheckOrderVC.h"
 #import "AutoCheckOrderWorkingVC.h"
+#import "AutoCheckResultVC.h"
 
 @interface AutoCheckOrderPayModeVC () <UIAlertViewDelegate>
 {
@@ -16,6 +17,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSString *statusFlow;   //状态流程方式 1：先付款   0：先施工
 }
+@property (strong, nonatomic) IBOutlet UIView *contentV;
 @property (strong, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (strong, nonatomic) IBOutlet UILabel *moneyL;
 @property (strong, nonatomic) IBOutlet UILabel *chepaiL;
@@ -41,6 +43,9 @@
         self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     }
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toCheckResultVC)];
+    [self.contentV addGestureRecognizer:tap];
+    
 //    NSDictionary *dic = @{@"orderId":orderId,@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
     self.orderNumberL.text = self.infoDic[@"orderId"];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
@@ -62,6 +67,14 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+
+-(void) toCheckResultVC {
+    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+    resultVC.carUpkeepId = self.checkOrderId;
+    resultVC.checktypeID = self.infoDic[@"checktypeID"];
+    resultVC.isFromAffirm = YES;
+    [self.navigationController pushViewController:resultVC animated:YES];
 }
 
 - (IBAction)payFirstAction:(id)sender {

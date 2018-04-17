@@ -9,12 +9,14 @@
 #import "AutoCheckOrderWorkingVC.h"
 #import "AutoCheckOrderVC.h"
 #import "AutoCheckOrderCompleteVC.h"
+#import "AutoCheckResultVC.h"
 
 @interface AutoCheckOrderWorkingVC ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
 }
+@property (strong, nonatomic) IBOutlet UIView *contentV;
 @property (strong, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (strong, nonatomic) IBOutlet UILabel *moneyL;
 @property (strong, nonatomic) IBOutlet UILabel *chepaiL;
@@ -39,6 +41,9 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:self action:@selector(popToRootVC)];
     self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toCheckResultVC)];
+    [self.contentV addGestureRecognizer:tap];
+    
     self.orderNumberL.text = self.infoDic[@"orderId"];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
     self.chepaiL.text = self.infoDic[@"plateNumber"];
@@ -61,6 +66,13 @@
     _networkConditionHUD.margin = HUDMargin;
 }
 
+-(void) toCheckResultVC {
+    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+    resultVC.carUpkeepId = self.checkOrderId;
+    resultVC.checktypeID = self.infoDic[@"checktypeID"];
+    resultVC.isFromAffirm = YES;
+    [self.navigationController pushViewController:resultVC animated:YES];
+}
 
 - (IBAction)completeAction:(id)sender {
     [self requestPostUpdateStatus];

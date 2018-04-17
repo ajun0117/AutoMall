@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckOrderPayModeVC">
             <connections>
                 <outlet property="chepaiL" destination="XoA-e6-52Z" id="uuV-sH-9EK"/>
+                <outlet property="contentV" destination="W6z-qQ-xOl" id="c4A-dd-eNB"/>
                 <outlet property="moneyL" destination="OjM-mT-7Jr" id="ggr-Lg-8DI"/>
                 <outlet property="orderNumberL" destination="DDH-1q-arJ" id="Ma5-4h-QZo"/>
                 <outlet property="ownerL" destination="mkz-0z-Ycs" id="RLP-zi-3Ym"/>
@@ -150,7 +151,7 @@
                 <constraint firstItem="SK7-tU-RFG" firstAttribute="width" secondItem="LyV-Bo-qPO" secondAttribute="width" id="ve3-CN-GuW"/>
                 <constraint firstItem="W6z-qQ-xOl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="wQL-qx-AIj"/>
             </constraints>
-            <point key="canvasLocation" x="-949" y="23"/>
+            <point key="canvasLocation" x="-1192" y="18"/>
         </view>
     </objects>
 </document>

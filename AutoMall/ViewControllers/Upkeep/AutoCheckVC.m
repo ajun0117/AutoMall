@@ -127,6 +127,21 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    //禁止页面左侧滑动返回，注意，如果仅仅需要禁止此单个页面返回，还需要在viewWillDisapper下开放侧滑权限
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    // 开启返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (! _hud) {
@@ -1054,7 +1069,7 @@
                 [self creatTableViews];
             }
             else {
-                _networkConditionHUD.labelText = @"还没有定制任何服务！";
+                _networkConditionHUD.labelText = @"暂无定制服务，请在个人中心-定制服务下设置！";
                 [_networkConditionHUD show:YES];
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 

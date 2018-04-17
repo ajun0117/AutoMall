@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckOrderWorkingVC">
             <connections>
                 <outlet property="chepaiL" destination="tlO-Zv-oeO" id="yGL-x7-4uH"/>
+                <outlet property="contentV" destination="06c-g5-x0h" id="il4-ER-6RY"/>
                 <outlet property="moneyL" destination="v1m-vs-8f1" id="YC6-Bh-KiJ"/>
                 <outlet property="orderNumberL" destination="ykx-td-53n" id="Gag-Db-VQm"/>
                 <outlet property="ownerL" destination="1fe-NM-cTa" id="9rP-Sa-kPB"/>

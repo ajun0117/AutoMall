@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckResultVC">
             <connections>
+                <outlet property="btnHeightCon" destination="GZj-hp-cCz" id="kFh-bt-0yk"/>
                 <outlet property="myTableView" destination="o0g-fE-sEl" id="5cb-tG-2xf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -51,7 +52,7 @@
                 <constraint firstItem="o0g-fE-sEl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="slm-26-1QW"/>
                 <constraint firstAttribute="trailing" secondItem="o0g-fE-sEl" secondAttribute="trailing" id="u9C-ik-869"/>
             </constraints>
-            <point key="canvasLocation" x="55" y="60"/>
+            <point key="canvasLocation" x="-186" y="55"/>
         </view>
     </objects>
 </document>

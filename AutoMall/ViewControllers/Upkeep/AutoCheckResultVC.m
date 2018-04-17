@@ -39,6 +39,7 @@
     LXActivity *lxActivity;
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnHeightCon;
 
 @end
 
@@ -72,7 +73,15 @@
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects: negativeSpacer, shareBtnBarBtn, nil];
     
+    if (self.isFromAffirm) {
+        self.btnHeightCon.constant = 0.0;       //隐藏查看服务方案按钮
+    }
+    
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    
+    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户隐藏按钮
+        self.btnHeightCon.constant = 0.0;       //隐藏查看服务方案按钮
+    }
         
     sections = 5;
     
@@ -204,7 +213,11 @@
         defaultContent = @"i爱检车";
     }
     
-    NSString *content = [NSString stringWithFormat:@"%@\n%@",title,url];
+//    NSString *content = [NSString stringWithFormat:@"%@\n%@",title,url];
+    NSString *content = @"门店名称";
+    if (! [carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
+        content = carUpkeepDic[@"store"][@"name"];
+    }
     
     NSString *urlStr = nil;
     if ([imgUrlStr hasPrefix:@"http://"]) {//网络url

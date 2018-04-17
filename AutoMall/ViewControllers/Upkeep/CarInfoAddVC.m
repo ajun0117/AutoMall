@@ -99,7 +99,7 @@
         self.fuelAmountTF.enabled = NO;
         self.fuelAmountTF.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
         self.ownerTF.enabled = NO;
-        self.ownerTF.textColor = RGBCOLOR(104, 104, 104);
+//        self.ownerTF.textColor = RGBCOLOR(104, 104, 104);
         self.ownerTF.text = STRING(self.carDic[@"owner"]);
         self.phoneTF.enabled = NO;
         self.phoneTF.text = NSStringWithNumberNULL(self.carDic[@"phone"]);
@@ -320,7 +320,14 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField == self.plateNumberTF) {      //字母转大写
-        self.plateNumberTF.text = [self.plateNumberTF.text uppercaseString];
+        if (self.plateNumberTF.text.length == 7) {
+            self.plateNumberTF.text = [self.plateNumberTF.text uppercaseString];
+        }
+        else {
+            _networkConditionHUD.labelText = @"车牌号输入有误，请重新输入！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
     }
 }
 
@@ -475,7 +482,7 @@
     
 //    self.mileageTF.enabled = YES;
 //    self.fuelAmountTF.enabled = YES;
-    self.ownerTF.enabled = NO;
+    self.ownerTF.enabled = YES;
     self.phoneTF.enabled = YES;
     self.wechatTF.enabled = YES;
     self.genderTF.enabled = YES;

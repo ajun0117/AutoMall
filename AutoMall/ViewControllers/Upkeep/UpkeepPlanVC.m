@@ -1024,7 +1024,7 @@
     AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
     orderVC.checkOrderId = self.carUpkeepId;
     NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice + selectedServicePrice];
-    NSDictionary *dic = @{@"orderId":[NSString stringWithFormat:@"%@",orderId],@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
+    NSDictionary *dic = @{@"orderId":[NSString stringWithFormat:@"%@",orderId],@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"]),@"checktypeID":self.checktypeID};
     orderVC.infoDic = dic;
     [self.navigationController pushViewController:orderVC animated:YES];
 }

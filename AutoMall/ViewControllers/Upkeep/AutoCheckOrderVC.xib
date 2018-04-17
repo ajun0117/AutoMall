@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="alipayBtn" destination="T28-xl-Qad" id="ezJ-Sz-Qtx"/>
                 <outlet property="chepaiL" destination="87F-w9-S4I" id="Pdz-0c-eba"/>
+                <outlet property="contentV" destination="dNc-m5-O08" id="Gbi-1h-kmO"/>
                 <outlet property="moneyL" destination="Rhh-cd-YPP" id="JyL-1e-g7w"/>
                 <outlet property="orderNumberL" destination="ftU-zw-949" id="A2d-4C-kIO"/>
                 <outlet property="ownerL" destination="9Hi-EX-Qbe" id="WD0-NZ-dCM"/>
@@ -208,7 +209,7 @@
                 <constraint firstItem="JFV-rw-GUq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="o61-9s-TKx"/>
                 <constraint firstAttribute="trailing" secondItem="1WZ-eE-GJl" secondAttribute="trailing" id="xvS-tw-r6C"/>
             </constraints>
-            <point key="canvasLocation" x="-342" y="9"/>
+            <point key="canvasLocation" x="-643" y="22"/>
         </view>
     </objects>
     <resources>
