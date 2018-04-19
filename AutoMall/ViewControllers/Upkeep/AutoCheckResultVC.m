@@ -854,11 +854,11 @@
                     carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
                 NSString *img = carUpkeepDic[@"image"];
-                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
-                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
-                } else {
-                    carImg.image = IMG(@"carMark");;
+                if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                    img = @"/uploads/2018/03/outline.png";
                 }
+                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
+                
                 carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
@@ -1165,11 +1165,10 @@
                     carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
                 NSString *img = carUpkeepDic[@"image"];
-                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
-                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
-                } else {
-                    carImg.image = IMG(@"carMark");;
+                if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                    img = @"/uploads/2018/03/outline.png";
                 }
+                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                 carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
@@ -1463,11 +1462,10 @@
                     carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
                 NSString *img = carUpkeepDic[@"image"];
-                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
-                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
-                } else {
-                    carImg.image = IMG(@"carMark");
+                if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                    img = @"/uploads/2018/03/outline.png";
                 }
+                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                 carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
@@ -1653,11 +1651,10 @@
                     carImg.contentMode = UIViewContentModeScaleAspectFill;
                 }
                 NSString *img = carUpkeepDic[@"image"];
-                if (! [img isKindOfClass:[NSNull class]] && img.length  > 0) {
-                    [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
-                } else {
-                    carImg.image = IMG(@"carMark");
+                if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                    img = @"/uploads/2018/03/outline.png";
                 }
+                [carImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(img)] placeholderImage:IMG(@"CommplaceholderPicture")];
                 carImg.contentMode = UIViewContentModeScaleAspectFill;
                 carImg.tag = 101;
                 [cell.contentView addSubview:carImg];
@@ -1783,7 +1780,11 @@
             [self.navigationController pushViewController:detailVC animated:YES];
         }
         else if (indexPath.section == 3) {
-            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
+            NSString *img = carUpkeepDic[@"image"];
+            if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                img = @"/uploads/2018/03/outline.png";
+            }
+            [self clickImageWithImageUrl:img];
         }
     }
     if (sections == 7) {
@@ -1797,7 +1798,11 @@
             [self.navigationController pushViewController:detailVC animated:YES];
         }
         else if (indexPath.section == 3) {
-            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
+            NSString *img = carUpkeepDic[@"image"];
+            if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                img = @"/uploads/2018/03/outline.png";
+            }
+            [self clickImageWithImageUrl:img];
         }
     }
     else if (sections == 6) {
@@ -1811,12 +1816,20 @@
             [self.navigationController pushViewController:detailVC animated:YES];
         }
         else if (indexPath.section == 3) {
-            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
+            NSString *img = carUpkeepDic[@"image"];
+            if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                img = @"/uploads/2018/03/outline.png";
+            }
+            [self clickImageWithImageUrl:img];
         }
     }
     else if (sections == 5) {
         if (indexPath.section == 2) {
-            [self clickImageWithImageUrl:carUpkeepDic[@"image"]];
+            NSString *img = carUpkeepDic[@"image"];
+            if ([img isKindOfClass:[NSNull class]] || img.length  == 0) {
+                img = @"/uploads/2018/03/outline.png";
+            }
+            [self clickImageWithImageUrl:img];
         }
     }
 }
