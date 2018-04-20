@@ -1000,6 +1000,18 @@
             }
             case 7: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
+                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                    cell.mdqrL.hidden = NO;
+                    cell.mdqrImgView.hidden = NO;
+                    cell.ptqrImgCon.constant = 1.5;
+                    [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+                }
+                else {
+                    cell.mdqrL.hidden = YES;
+                    cell.mdqrImgView.hidden = YES;
+                    cell.ptqrImgCon.constant = 1;
+                }
+                
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
                 break;
@@ -1297,6 +1309,17 @@
             }
             case 6: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
+                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                    cell.mdqrL.hidden = NO;
+                    cell.mdqrImgView.hidden = NO;
+                    cell.ptqrImgCon.constant = 1.5;
+                    [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+                }
+                else {
+                    cell.mdqrL.hidden = YES;
+                    cell.mdqrImgView.hidden = YES;
+                    cell.ptqrImgCon.constant = 1;
+                }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
                 break;
@@ -1565,6 +1588,17 @@
             }
             case 5: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
+                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                    cell.mdqrL.hidden = NO;
+                    cell.mdqrImgView.hidden = NO;
+                    cell.ptqrImgCon.constant = 1.5;
+                    [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+                }
+                else {
+                    cell.mdqrL.hidden = YES;
+                    cell.mdqrImgView.hidden = YES;
+                    cell.ptqrImgCon.constant = 1;
+                }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
                 break;
@@ -1754,6 +1788,18 @@
             }
             case 4: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
+                NSLog(@"carUpkeepDicwechatImg： %@",carUpkeepDic[@"store"][@"wechatImg"]);
+                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                    cell.mdqrL.hidden = NO;
+                    cell.mdqrImgView.hidden = NO;
+                    cell.ptqrImgCon.constant = 1.5;
+                    [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
+                }
+                else {
+                    cell.mdqrL.hidden = YES;
+                    cell.mdqrImgView.hidden = YES;
+                    cell.ptqrImgCon.constant = 1;
+                }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
                 break;

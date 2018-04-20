@@ -22,6 +22,7 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (weak, nonatomic) IBOutlet UILabel *moneyL;
+@property (strong, nonatomic) IBOutlet UILabel *jifenL;
 
 @end
 
@@ -43,6 +44,8 @@
     payModeStr = @"2";   //默认使用微信
     self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号:%@",self.orderNumber];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",self.money];
+    
+    [self requestGetIntegralAs1Yuan];   //获取一元对应的积分数
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -366,6 +369,22 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self performSelector:@selector(toPopVC) withObject:nil afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetIntegralAs1Yuan]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetIntegralAs1Yuan object:nil];
+        NSLog(@"GetIntegralAs1Yuan: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {    //回调成功
+            int integral = [responseObject[@"data"][@"integral"] intValue];
+            int jifenNum = self.money * integral;
+            NSLog(@"jifenNum: %d",jifenNum);
+            self.jifenL.text = [NSString stringWithFormat:@"/%d",jifenNum];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

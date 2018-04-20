@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="ailpay" destination="kxG-mm-eQ9" id="ar8-EK-s1Y"/>
                 <outlet property="jifen" destination="5NA-nd-7Fn" id="7Cq-e4-b3A"/>
+                <outlet property="jifenL" destination="SH5-iP-44q" id="QV0-Rd-oKn"/>
                 <outlet property="moneyL" destination="kwT-7f-Abb" id="WJx-8A-fAr"/>
                 <outlet property="orderNumberL" destination="3jd-JI-cSf" id="C5I-7C-ZVd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -123,6 +124,15 @@
                                             <color key="textColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/0大卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SH5-iP-44q">
+                                            <rect key="frame" x="92.5" y="80" width="55.5" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="hdb-4d-6JB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -140,8 +150,10 @@
                                         <constraint firstAttribute="trailing" secondItem="mYb-3G-ATk" secondAttribute="trailing" id="TXZ-qW-ROY"/>
                                         <constraint firstAttribute="trailing" secondItem="3gU-8m-2UR" secondAttribute="trailing" id="WFY-3Z-4kB"/>
                                         <constraint firstAttribute="bottom" secondItem="1Ay-kh-9Ms" secondAttribute="bottom" id="YyB-8E-4fQ"/>
+                                        <constraint firstItem="SH5-iP-44q" firstAttribute="leading" secondItem="kwT-7f-Abb" secondAttribute="trailing" id="cvT-dy-lpO"/>
                                         <constraint firstItem="3gU-8m-2UR" firstAttribute="top" secondItem="Tlh-8E-Au7" secondAttribute="top" id="ftQ-lZ-iTT"/>
                                         <constraint firstItem="3gU-8m-2UR" firstAttribute="leading" secondItem="Tlh-8E-Au7" secondAttribute="leading" id="l5j-N8-2iV"/>
+                                        <constraint firstItem="SH5-iP-44q" firstAttribute="centerY" secondItem="EUp-Sm-RXZ" secondAttribute="centerY" id="nhh-pv-dui"/>
                                         <constraint firstItem="kwT-7f-Abb" firstAttribute="leading" secondItem="EUp-Sm-RXZ" secondAttribute="trailing" id="o2p-1g-QWP"/>
                                         <constraint firstItem="mYb-3G-ATk" firstAttribute="leading" secondItem="Tlh-8E-Au7" secondAttribute="leading" constant="8" id="qdt-3f-v7n"/>
                                         <constraint firstAttribute="height" constant="79" id="tpf-ji-q6D">
