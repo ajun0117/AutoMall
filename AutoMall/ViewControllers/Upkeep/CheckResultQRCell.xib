@@ -63,7 +63,7 @@
                 <outlet property="mdqrL" destination="gCT-FD-FiQ" id="TVP-1I-afh"/>
                 <outlet property="ptqrImgCon" destination="oZr-9a-xcX" id="tLa-X2-SNN"/>
             </connections>
-            <point key="canvasLocation" x="-302" y="45"/>
+            <point key="canvasLocation" x="-30" y="52"/>
         </tableViewCell>
     </objects>
     <resources>
