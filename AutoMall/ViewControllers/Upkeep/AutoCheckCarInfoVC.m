@@ -103,7 +103,7 @@
         [self.view addSubview:_networkConditionHUD];
     }
     _networkConditionHUD.mode = MBProgressHUDModeText;
-    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
+//    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
 }
 
@@ -196,12 +196,40 @@
             _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！"; 
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            self.fuelAmountTF.text = @"";   //清空
+//            self.fuelAmountTF.text = @"";   //清空
+            return NO;
         }
     }
     return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.remarkTV) {
+        NSInteger kMaxLength = 10;
+        NSString *toBeString = textView.text;
+        NSString *lang = [[UIApplication sharedApplication]textInputMode].primaryLanguage; //ios7之前使用[UITextInputMode currentInputMode].primaryLanguage
+        if ([lang isEqualToString:@"zh-Hans"]) { //中文输入
+            UITextRange *selectedRange = [textView markedTextRange];
+            //获取高亮部分
+            UITextPosition *position = [textView positionFromPosition:selectedRange.start offset:0];
+            if (!position) {// 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+                if (toBeString.length > kMaxLength) {
+                    textView.text = [toBeString substringToIndex:kMaxLength];
+                    _networkConditionHUD.labelText = @"字数不能超过100！";
+                    [_networkConditionHUD show:YES];
+                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                }
+            }
+            else{//有高亮选择的字符串，则暂不对文字进行统计和限制
+            }
+        }else{//中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+            if (toBeString.length > kMaxLength) {
+                textView.text = [toBeString substringToIndex:kMaxLength];
+            }
+        }
+    }
+}
 
 #pragma mark - 添加完成按钮的toolBar工具栏
 

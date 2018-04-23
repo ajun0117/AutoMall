@@ -782,7 +782,7 @@
                     
                     for (int i=0; i < entities.count; ++i) {
                         NSDictionary *dic1 = entities[i];
-                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 100, 22)];
                         position.text = STRING(dic1[@"dPosition"]);
                         position.tag = 100 + i;
                         position.textColor = [UIColor grayColor];
@@ -1105,7 +1105,7 @@
                     
                     for (int i=0; i < entities.count; ++i) {
                         NSDictionary *dic1 = entities[i];
-                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 100, 22)];
                         position.text = STRING(dic1[@"dPosition"]);
                         position.tag = 100 + i;
                         position.textColor = [UIColor grayColor]; 
@@ -1413,8 +1413,9 @@
                     
                     for (int i=0; i < entities.count; ++i) {
                         NSDictionary *dic1 = entities[i];
-                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 80, 22)];
+                        UILabel *position = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*i , 100, 22)];
                         position.text = STRING(dic1[@"dPosition"]);
+                        position.minimumFontSize = 8;
                         position.tag = 100 + i;
                         position.textColor = [UIColor grayColor];
                         position.font = [UIFont systemFontOfSize:14];
@@ -1422,6 +1423,7 @@
                         UILabel *result = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH- 106 - 8 - 16 - 55 - 15 - 80, 30*i , 80, 22)];
                         result.textAlignment = NSTextAlignmentRight;
                         result.text = STRING(dic1[@"describe"]);
+                        result.minimumFontSize = 8;
                         result.textColor = [UIColor grayColor];
                         result.font = [UIFont systemFontOfSize:14];
                         

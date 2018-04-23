@@ -80,6 +80,7 @@
     resultVC.carUpkeepId = self.checkOrderId;
     resultVC.checktypeID = self.infoDic[@"checktypeID"];
     resultVC.isFromAffirm = YES;
+    resultVC.isFromList = YES;
     [self.navigationController pushViewController:resultVC animated:YES];
 }
 

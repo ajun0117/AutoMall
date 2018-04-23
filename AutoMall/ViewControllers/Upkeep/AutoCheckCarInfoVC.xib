@@ -31,7 +31,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="776"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h5W-oG-lQh">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whi-j1-qqG">
                                     <rect key="frame" x="0.0" y="10" width="375" height="45"/>
@@ -280,13 +280,16 @@
                                     </constraints>
                                 </view>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bp5-L4-4HP">
-                                    <rect key="frame" x="0.0" y="632" width="375" height="100"/>
+                                    <rect key="frame" x="0.0" y="632" width="375" height="150"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="FoS-oy-AQP"/>
+                                        <constraint firstAttribute="height" constant="150" id="FoS-oy-AQP"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="RHB-5L-Y84"/>
+                                    </connections>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -308,7 +311,7 @@
                                 <constraint firstItem="Bp5-L4-4HP" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="Q2H-aD-cTt"/>
                                 <constraint firstItem="5K8-8D-tP7" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="WBL-n0-kOP"/>
                                 <constraint firstAttribute="trailing" secondItem="NeO-8O-4vF" secondAttribute="trailing" id="Ypv-sP-TeN"/>
-                                <constraint firstAttribute="height" constant="750" id="ZE6-cV-E0g"/>
+                                <constraint firstAttribute="height" constant="800" id="ZE6-cV-E0g"/>
                                 <constraint firstItem="Lus-NB-t83" firstAttribute="top" secondItem="NeO-8O-4vF" secondAttribute="bottom" constant="10" id="bKy-M5-ChI"/>
                                 <constraint firstItem="NRZ-Gz-Icy" firstAttribute="leading" secondItem="h5W-oG-lQh" secondAttribute="leading" id="bV8-Ku-thT"/>
                                 <constraint firstAttribute="trailing" secondItem="5K8-8D-tP7" secondAttribute="trailing" id="cmW-ES-eXZ"/>
