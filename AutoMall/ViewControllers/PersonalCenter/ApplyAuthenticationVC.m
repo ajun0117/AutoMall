@@ -22,7 +22,8 @@
     NSString *licenseImgUrl;
     NSString *cardAImgUrl;
     NSString *cardBImgUrl;
-    NSString *gongzhongImgUrl; 
+    NSString *gongzhongImgUrl;
+    NSString *mendianLogoUrl;
     NSString *aliPayCollectionImgUrl;
     NSString *wechatCollectionImgUrl;
     NSArray *textFieldArray;
@@ -121,6 +122,8 @@
     [self.cardBImg addGestureRecognizer:tap3];
     UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGongzhonghao:)];
     [self.gongzhongImg addGestureRecognizer:tap4];
+    UITapGestureRecognizer *tap7 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMendianLogo:)];
+    [self.mendianLogo addGestureRecognizer:tap7];
     UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAliPay:)];
     [self.aliPayCollectionImg addGestureRecognizer:tap5];
     UITapGestureRecognizer *tap6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapWechat:)];
@@ -191,6 +194,11 @@
 
 -(void)tapGongzhonghao:(UITapGestureRecognizer *)tap {
     whichImg = 4;
+    [self selectThePhotoOrCamera];
+}
+
+-(void)tapMendianLogo:(UITapGestureRecognizer *)tap {
+    whichImg = 7;
     [self selectThePhotoOrCamera];
 }
 
@@ -504,6 +512,11 @@
         case 6: {
             self.wechatCollectionImg.image = image;
             [self requestUploadImgFile:self.wechatCollectionImg];
+            break;
+        }
+        case 7: {
+            self.mendianLogo.image = image;
+            [self requestUploadImgFile:self.mendianLogo];
             break;
         }
             

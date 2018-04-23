@@ -1003,13 +1003,19 @@
                 if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
-                    cell.ptqrImgCon.constant = 1.5;
+                    cell.ptImgView.hidden = NO;
+                    cell.ptL.hidden = NO;
+                    cell.singleImgView.hidden = YES;
+                    cell.singleL.hidden = YES;
                     [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
                 }
                 else {
                     cell.mdqrL.hidden = YES;
                     cell.mdqrImgView.hidden = YES;
-                    cell.ptqrImgCon.constant = 1;
+                    cell.ptImgView.hidden = YES;
+                    cell.ptL.hidden = YES;
+                    cell.singleImgView.hidden = NO;
+                    cell.singleL.hidden = NO;
                 }
                 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1312,13 +1318,19 @@
                 if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
-                    cell.ptqrImgCon.constant = 1.5;
+                    cell.ptImgView.hidden = NO;
+                    cell.ptL.hidden = NO;
+                    cell.singleImgView.hidden = YES;
+                    cell.singleL.hidden = YES;
                     [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
                 }
                 else {
                     cell.mdqrL.hidden = YES;
                     cell.mdqrImgView.hidden = YES;
-                    cell.ptqrImgCon.constant = 1;
+                    cell.ptImgView.hidden = YES;
+                    cell.ptL.hidden = YES;
+                    cell.singleImgView.hidden = NO;
+                    cell.singleL.hidden = NO;
                 }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
@@ -1593,13 +1605,19 @@
                 if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
-                    cell.ptqrImgCon.constant = 1.5;
+                    cell.ptImgView.hidden = NO;
+                    cell.ptL.hidden = NO;
+                    cell.singleImgView.hidden = YES;
+                    cell.singleL.hidden = YES;
                     [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
                 }
                 else {
                     cell.mdqrL.hidden = YES;
                     cell.mdqrImgView.hidden = YES;
-                    cell.ptqrImgCon.constant = 1;
+                    cell.ptImgView.hidden = YES;
+                    cell.ptL.hidden = YES;
+                    cell.singleImgView.hidden = NO;
+                    cell.singleL.hidden = NO;
                 }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
@@ -1794,13 +1812,19 @@
                 if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
-                    cell.ptqrImgCon.constant = 1.5;
+                    cell.ptImgView.hidden = NO;
+                    cell.ptL.hidden = NO;
+                    cell.singleImgView.hidden = YES;
+                    cell.singleL.hidden = YES;
                     [cell.mdqrImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"store"][@"wechatImg"])] placeholderImage:IMG(@"placeholderPictureSquare")];
                 }
                 else {
                     cell.mdqrL.hidden = YES;
                     cell.mdqrImgView.hidden = YES;
-                    cell.ptqrImgCon.constant = 1;
+                    cell.ptImgView.hidden = YES;
+                    cell.ptL.hidden = YES;
+                    cell.singleImgView.hidden = NO;
+                    cell.singleL.hidden = NO;
                 }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;

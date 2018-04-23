@@ -10,8 +10,10 @@
 
 @interface CheckResultQRCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *mdqrImgView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *mdqrImgCon;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *ptqrImgCon;
 @property (strong, nonatomic) IBOutlet UILabel *mdqrL;
+@property (weak, nonatomic) IBOutlet UIImageView *ptImgView;
+@property (weak, nonatomic) IBOutlet UILabel *ptL;
+@property (weak, nonatomic) IBOutlet UIImageView *singleImgView;
+@property (weak, nonatomic) IBOutlet UILabel *singleL;
 
 @end

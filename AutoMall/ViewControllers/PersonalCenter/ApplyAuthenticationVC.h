@@ -27,6 +27,7 @@
 //@property (weak, nonatomic) IBOutlet UILabel *cardBImgL;
 @property (weak, nonatomic) IBOutlet UITextField *wechatNameTF;
 @property (weak, nonatomic) IBOutlet WPImageView *gongzhongImg;
+@property (weak, nonatomic) IBOutlet WPImageView *mendianLogo;
 //@property (weak, nonatomic) IBOutlet UILabel *gongzhongImgL;
 @property (strong, nonatomic) IBOutlet WPImageView *aliPayCollectionImg;
 //@property (weak, nonatomic) IBOutlet UILabel *aliPayImgL;
