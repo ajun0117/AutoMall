@@ -34,20 +34,35 @@
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4PL-Go-uUV">
+                        <rect key="frame" x="264" y="0.0" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="PbR-dD-SOT"/>
+                            <constraint firstAttribute="width" constant="40" id="ksP-4B-Mme"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                        <state key="normal" image="lookPhoto"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="aMV-Uz-qfy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1hj-Qo-nJW"/>
                     <constraint firstAttribute="bottom" secondItem="x6J-jx-aE4" secondAttribute="bottom" constant="8" id="4K0-5v-72s"/>
                     <constraint firstAttribute="trailing" secondItem="x6J-jx-aE4" secondAttribute="trailing" constant="16" id="CKf-fS-Olf"/>
+                    <constraint firstAttribute="trailing" secondItem="4PL-Go-uUV" secondAttribute="trailing" constant="16" id="Etc-PW-8b7"/>
                     <constraint firstItem="x6J-jx-aE4" firstAttribute="top" secondItem="aMV-Uz-qfy" secondAttribute="bottom" constant="8" id="F1g-3v-tgq"/>
                     <constraint firstItem="x6J-jx-aE4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="JUR-Rq-a5p"/>
                     <constraint firstItem="aMV-Uz-qfy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="kAB-FX-OEe"/>
+                    <constraint firstItem="4PL-Go-uUV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="x5h-Hn-fdx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="remarkImagesBtn" destination="4PL-Go-uUV" id="ok6-yW-nai"/>
                 <outlet property="remarkL" destination="x6J-jx-aE4" id="18q-fC-VfP"/>
             </connections>
-            <point key="canvasLocation" x="-345" y="31"/>
+            <point key="canvasLocation" x="-639" y="31"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="lookPhoto" width="20" height="20"/>
+    </resources>
 </document>

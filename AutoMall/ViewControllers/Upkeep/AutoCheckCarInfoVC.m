@@ -8,6 +8,7 @@
 
 #import "AutoCheckCarInfoVC.h"
 #import "AutoCheckVC.h"
+#import "AddPicViewController.h"
 
 @interface AutoCheckCarInfoVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -17,6 +18,7 @@
     int whichImg;   //标识是哪个图片
     NSString *mileageImgUrl;
     NSString *fuelAmountImgUrl;
+    NSArray *remarkPhotos;      //备注图片
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
@@ -76,6 +78,7 @@
         if (fuelAmountImgUrl.length > 0) {
             [self.fuelAmountImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.mileageAndfuelAmountDic[@"fuelAmountImg"])]];
         }
+        remarkPhotos = self.mileageAndfuelAmountDic[@"remarkImages"];
     }
     
     UITapGestureRecognizer *tap0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mileagePhotoAction)];
@@ -128,6 +131,16 @@
     self.myScrollV.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 49);
     [self.myScrollV setContentOffset:CGPointMake(0, 0)];
 }
+- (IBAction)remarkPhotoAction:(id)sender {
+    AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+    photoVC.maxCount = 2;
+    photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+        remarkPhotos = array;
+        NSLog(@"remarkPhotos: %@",remarkPhotos);
+    };
+    photoVC.localImgsArray = remarkPhotos;
+    [self.navigationController pushViewController:photoVC animated:YES];
+}
 
 - (IBAction)saveAction:(id)sender {
     if (self.mileageTF.text == nil || [self.mileageTF.text isEqualToString:@""]) {
@@ -160,7 +173,7 @@
 //        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //        return;
 //    }
-    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":STRING_Nil(self.fuelAmountTF.text),@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl),@"remark":STRING_Nil(self.remarkTV.text)});
+    self.GoBackSubmitLicheng(@{@"mileage":self.mileageTF.text,@"mileageImg":STRING_Nil(mileageImgUrl),@"fuelAmount":STRING_Nil(self.fuelAmountTF.text),@"fuelAmountImg":STRING_Nil(fuelAmountImgUrl),@"remark":STRING_Nil(self.remarkTV.text),@"remarkImages":remarkPhotos});
     
     NSDateFormatter* formater = [[NSDateFormatter alloc] init];
     [formater setDateFormat:@"yyyy-MM-dd"];

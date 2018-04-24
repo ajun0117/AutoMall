@@ -1033,7 +1033,16 @@
     }
     NSDictionary *storeDic = @{@"id":storeId};
     NSLog(@"storeDic: %@",storeDic);
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",lichengDic[@"remark"],@"remark",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",self.checktypeID,@"checkTypeId",carImagesAry,@"carUpkeepImages", nil];
+    NSArray *remarkImages = lichengDic[@"remarkImages"];
+    NSString *remarkImage1 = @"";
+    NSString *remarkImage2 = @"";
+    if (remarkImages.count == 1) {
+        remarkImage1 = [remarkImages firstObject][@"relativePath"];
+    }
+    else if (remarkImages.count == 2) {
+        remarkImage2 = remarkImages [1] [@"relativePath"];
+    }
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",lichengDic[@"remark"],@"remark",remarkImage1,@"remarkImage1",remarkImage2,@"remarkImage2",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",self.checktypeID,@"checkTypeId",carImagesAry,@"carUpkeepImages", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepAdd) delegate:nil params:pram info:infoDic];
 }

@@ -898,6 +898,7 @@
                 CheckResultRemarkCell *cell = (CheckResultRemarkCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultRemarkCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+                [cell.remarkImagesBtn addTarget:self action:@selector(remarkImagesAction) forControlEvents:UIControlEventTouchUpInside];
                 if (! carUpkeepDic[@"remark"] || [carUpkeepDic[@"remark"] isKindOfClass:[NSNull class]]) {
                     cell.remarkL.text = @"未备注";
                 } else {
@@ -1994,7 +1995,24 @@
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
-    
+}
+
+-(void) remarkImagesAction {  //备注图片
+    NSMutableArray *mulAry = [NSMutableArray array];
+    if ([carUpkeepDic[@"remarkImage1"] isKindOfClass:[NSString class]] && [carUpkeepDic[@"remarkImage1"] length] > 0) {
+        [mulAry addObject:UrlPrefix(carUpkeepDic[@"remarkImage1"])];
+    }
+    if ([carUpkeepDic[@"remarkImage2"] isKindOfClass:[NSString class]] && [carUpkeepDic[@"remarkImage2"] length] > 0) {
+        [mulAry addObject:UrlPrefix(carUpkeepDic[@"remarkImage2"])];
+    }
+    if (mulAry.count > 0) {
+        [self clickImageWithImagesArray:mulAry andIndex:0];
+    }
+    else {
+        _networkConditionHUD.labelText = @"没有相关图片";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 //所有异常检查项目

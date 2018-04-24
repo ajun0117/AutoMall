@@ -265,6 +265,17 @@
                                             <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbj-IJ-bKi">
+                                            <rect key="frame" x="325" y="2" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="NOF-Kn-FDm"/>
+                                                <constraint firstAttribute="width" constant="40" id="r8R-Y1-rDr"/>
+                                            </constraints>
+                                            <state key="normal" image="photoBtn"/>
+                                            <connections>
+                                                <action selector="remarkPhotoAction:" destination="-1" eventType="touchUpInside" id="1VU-5z-Fuj"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -276,7 +287,9 @@
                                         <constraint firstAttribute="bottom" secondItem="LfH-Wl-0sQ" secondAttribute="bottom" id="W9g-6K-5FL"/>
                                         <constraint firstAttribute="height" constant="45" id="dzE-fq-bm8"/>
                                         <constraint firstItem="gMM-nf-aCV" firstAttribute="leading" secondItem="5K8-8D-tP7" secondAttribute="leading" id="rDl-TI-wG5"/>
+                                        <constraint firstAttribute="trailing" secondItem="nbj-IJ-bKi" secondAttribute="trailing" constant="10" id="tXM-IM-wjs"/>
                                         <constraint firstAttribute="trailing" secondItem="gMM-nf-aCV" secondAttribute="trailing" id="zNE-rh-K66"/>
+                                        <constraint firstItem="nbj-IJ-bKi" firstAttribute="centerY" secondItem="5K8-8D-tP7" secondAttribute="centerY" id="zpn-Pw-Xg9"/>
                                     </constraints>
                                 </view>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bp5-L4-4HP">
@@ -362,10 +375,11 @@
                 <constraint firstAttribute="bottom" secondItem="Odr-Gp-dLx" secondAttribute="bottom" id="rMY-iF-L1h"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-1203" y="45"/>
+            <point key="canvasLocation" x="-1539" y="48"/>
         </view>
     </objects>
     <resources>
+        <image name="photoBtn" width="20" height="20"/>
         <image name="upload-plusSS" width="515" height="515"/>
     </resources>
 </document>

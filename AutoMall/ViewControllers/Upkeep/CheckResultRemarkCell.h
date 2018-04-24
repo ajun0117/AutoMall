@@ -10,5 +10,6 @@
 
 @interface CheckResultRemarkCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *remarkL;
+@property (strong, nonatomic) IBOutlet UIButton *remarkImagesBtn;
 
 @end
