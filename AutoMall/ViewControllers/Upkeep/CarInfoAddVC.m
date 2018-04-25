@@ -21,6 +21,7 @@
     NSArray *textFieldArray;
     NSString *carImgUrl;    //车图url
     BOOL isAutoSelect;      //自动选择
+    NSArray *lastMileagePhotos;     //上次保养里程图片
     NSArray *mileagePhotos;     //总里程表
 //    NSArray *fuelAmountPhotos;      //燃油量
     NSArray *enginePhotos;
@@ -28,6 +29,10 @@
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 //@property (strong, nonatomic) IBOutlet UILabel *mileageL;
+@property (weak, nonatomic) IBOutlet UILabel *lastTimeL;
+@property (weak, nonatomic) IBOutlet UILabel *lastMileageL;
+@property (weak, nonatomic) IBOutlet UIView *lastView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lastViewHeightCon;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
 //@property (strong, nonatomic) IBOutlet UILabel *fuelAmountL;
 @property (strong, nonatomic) IBOutlet UILabel *firstTimeL;
@@ -85,6 +90,9 @@
         
         self.editBtn.hidden = NO;
         
+        self.lastView.hidden = NO;
+        self.lastViewHeightCon.constant = 89;       //显示上次数据
+        
         carImgUrl = self.carDic[@"image"];
         
         if ([carImgUrl isKindOfClass:[NSString class]]) {
@@ -95,8 +103,24 @@
         }
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];
-    
+        
+        if ([self.carDic[@"carUpKeeps"] count] > 0) {
+            if (! [[self.carDic[@"carUpKeeps"] firstObject][@"lastEndTime"] isKindOfClass:[NSNull class]]) {
+                NSDate *lastEndTime = [NSDate dateWithTimeIntervalSince1970:[[self.carDic[@"carUpKeeps"] firstObject][@"lastEndTime"] doubleValue]/1000];
+                NSString *lastEndTimeStr = [formater stringFromDate:lastEndTime];
+                self.lastTimeL.text = lastEndTimeStr;
+            }
+            self.lastMileageL.text = NSStringWithNumberNULL([self.carDic[@"carUpKeeps"] firstObject][@"lastMileage"]);
+        }
+        
+        if (! [self.carDic[@"createTime"] isKindOfClass:[NSNull class]]) {
+            NSDate *firstTime = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"createTime"] doubleValue]/1000];
+            NSString *firstTimeStr = [formater stringFromDate:firstTime];
+            self.firstTimeL.text = firstTimeStr;
+        }
+        
         self.mileageTF.enabled = NO;
+        self.mileageTF.textColor = RGBCOLOR(104, 104, 104);
         self.mileageTF.text = NSStringWithNumberNULL(self.carDic[@"mileage"]);
 //        self.fuelAmountTF.enabled = NO;
 //        self.fuelAmountTF.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
@@ -137,6 +161,15 @@
         self.vinTF.enabled = NO;
         self.vinTF.text = NSStringWithNumberNULL(self.carDic[@"vin"]);
         
+        NSArray *ary = self.carDic[@"carUpKeeps"];
+        if ([ary count] > 0) {
+            if ([[ary firstObject][@"lastMileageImage"] isKindOfClass:[NSString class]]) {
+                if ([[ary firstObject][@"lastMileageImage"] length] > 0) {
+                    lastMileagePhotos = @[@{@"relativePath":[ary firstObject][@"lastMileageImage"]}];
+                }
+            }
+        }
+        
         if ([self.carDic[@"mileageImage"] isKindOfClass:[NSString class]]) {
             if ([self.carDic[@"mileageImage"] length] > 0) {
                 mileagePhotos = @[@{@"relativePath":self.carDic[@"mileageImage"]}];
@@ -162,6 +195,9 @@
         self.title = @"新增车辆";
         self.editBtn.hidden = YES;
         
+        self.lastView.hidden = YES;
+        self.lastViewHeightCon.constant = 0;       //隐藏上次数据
+        
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];
         NSDate *today = [NSDate date];
@@ -169,6 +205,7 @@
         self.firstTimeL.text = string;
         
         self.mileageTF.enabled = YES;
+        self.mileageTF.textColor = [UIColor blackColor];
 //        self.fuelAmountTF.enabled = YES;
         self.ownerTF.enabled = YES;
         self.phoneTF.enabled = YES;
@@ -373,6 +410,36 @@
 - (void)dealKeyboardHide {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
+- (IBAction)lastMileagePhoto:(id)sender {
+    if (self.carDic) {  //编辑页面
+        if (lastMileagePhotos.count > 0) {
+            AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+            photoVC.maxCount = 1;
+            photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+                lastMileagePhotos = array;
+                NSLog(@"lastMileagePhotos: %@",lastMileagePhotos);
+            };
+            photoVC.localImgsArray = lastMileagePhotos;
+            [self.navigationController pushViewController:photoVC animated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = @"没有相关图片";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    else {
+        AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+        photoVC.maxCount = 1;
+        photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+            lastMileagePhotos = array;
+            NSLog(@"lastMileagePhotos: %@",lastMileagePhotos);
+        };
+        photoVC.localImgsArray = lastMileagePhotos;
+        [self.navigationController pushViewController:photoVC animated:YES];
+    }
+}
+
 - (IBAction)mileagePhoto:(id)sender {
     if (self.carDic) {  //编辑页面
         if (mileagePhotos.count > 0) {
@@ -492,7 +559,7 @@
     NSLog(@"编辑按钮");
     self.editBtn.hidden = YES;
     
-    self.mileageTF.enabled = YES;
+//    self.mileageTF.enabled = YES;
 //    self.fuelAmountTF.enabled = YES;
     self.ownerTF.enabled = YES;
     self.phoneTF.enabled = YES;
