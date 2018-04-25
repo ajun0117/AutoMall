@@ -1444,6 +1444,7 @@
             [[GlobalSetting shareGlobalSettingInstance] setmName:[NSString stringWithFormat:@"%@",STRING(userInfoDic[@"nickname"])]];
             [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(userInfoDic[@"image"])];
             [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",userInfoDic[@"mobileUserType"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmPoints:NSStringWithNumberNULL(userInfoDic[@"integral"])];       //积分
             
             [self.myTableView reloadData];
         }

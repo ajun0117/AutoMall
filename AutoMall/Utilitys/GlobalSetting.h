@@ -182,9 +182,9 @@
 -(void)setmName:(NSString *)mName;
 -(NSString *)mName;
 
-////积分
-//-(void)setmPoints:(NSString *)mPoints;
-//-(NSString *)mPoints;
+//积分
+-(void)setmPoints:(NSString *)mPoints;
+-(NSString *)mPoints;
 
 //认证身份证号
 -(void)setmIdentityId:(NSString *)mIdentityId;

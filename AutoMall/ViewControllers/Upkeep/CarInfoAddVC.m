@@ -22,17 +22,19 @@
     NSString *carImgUrl;    //车图url
     BOOL isAutoSelect;      //自动选择
     NSArray *mileagePhotos;     //总里程表
-    NSArray *fuelAmountPhotos;      //燃油量
+//    NSArray *fuelAmountPhotos;      //燃油量
     NSArray *enginePhotos;
     NSArray *vinPhotos;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
-@property (strong, nonatomic) IBOutlet UILabel *mileageL;
+//@property (strong, nonatomic) IBOutlet UILabel *mileageL;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
-@property (strong, nonatomic) IBOutlet UILabel *fuelAmountL;
-@property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
+//@property (strong, nonatomic) IBOutlet UILabel *fuelAmountL;
+@property (strong, nonatomic) IBOutlet UILabel *firstTimeL;
+//@property (strong, nonatomic) IBOutlet UITextField *fuelAmountTF;
 @property (strong, nonatomic) IBOutlet UITextField *ownerTF;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTF;
+@property (strong, nonatomic) IBOutlet UITextField *standbyPhoneTF;
 @property (strong, nonatomic) IBOutlet UITextField *wechatTF;
 @property (strong, nonatomic) IBOutlet UITextField *genderTF;
 @property (strong, nonatomic) IBOutlet UITextField *birthdayTF;
@@ -96,8 +98,8 @@
     
         self.mileageTF.enabled = NO;
         self.mileageTF.text = NSStringWithNumberNULL(self.carDic[@"mileage"]);
-        self.fuelAmountTF.enabled = NO;
-        self.fuelAmountTF.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
+//        self.fuelAmountTF.enabled = NO;
+//        self.fuelAmountTF.text = NSStringWithNumberNULL(self.carDic[@"fuelAmount"]);
         self.ownerTF.enabled = NO;
 //        self.ownerTF.textColor = RGBCOLOR(104, 104, 104);
         self.ownerTF.text = STRING(self.carDic[@"owner"]);
@@ -140,11 +142,11 @@
                 mileagePhotos = @[@{@"relativePath":self.carDic[@"mileageImage"]}];
             }
         }
-        if ([self.carDic[@"fuelImage"] isKindOfClass:[NSString class]]) {
-            if ([self.carDic[@"fuelImage"] length] > 0) {
-                fuelAmountPhotos = @[@{@"relativePath":self.carDic[@"fuelImage"]}];
-            }
-        }
+//        if ([self.carDic[@"fuelImage"] isKindOfClass:[NSString class]]) {
+//            if ([self.carDic[@"fuelImage"] length] > 0) {
+//                fuelAmountPhotos = @[@{@"relativePath":self.carDic[@"fuelImage"]}];
+//            }
+//        }
         if ([self.carDic[@"engineImage"] isKindOfClass:[NSString class]]) {
             if ([self.carDic[@"engineImage"] length] > 0) {
                 enginePhotos = @[@{@"relativePath":self.carDic[@"engineImage"]}];
@@ -160,10 +162,14 @@
         self.title = @"新增车辆";
         self.editBtn.hidden = YES;
         
-        self.mileageL.text = @"总里程表";
+        NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd"];
+        NSDate *today = [NSDate date];
+        NSString *string = [formater stringFromDate:today];
+        self.firstTimeL.text = string;
+        
         self.mileageTF.enabled = YES;
-        self.fuelAmountL.text = @"燃油量";
-        self.fuelAmountTF.enabled = YES;
+//        self.fuelAmountTF.enabled = YES;
         self.ownerTF.enabled = YES;
         self.phoneTF.enabled = YES;
         self.wechatTF.enabled = YES;
@@ -204,9 +210,10 @@
     [buyDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
     [self setTextFieldInputAccessoryViewWithTF:self.mileageTF];
-    [self setTextFieldInputAccessoryViewWithTF:self.fuelAmountTF];
+//    [self setTextFieldInputAccessoryViewWithTF:self.fuelAmountTF];
     [self setTextFieldInputAccessoryViewWithTF:self.ownerTF];
     [self setTextFieldInputAccessoryViewWithTF:self.phoneTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.standbyPhoneTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatTF];
     [self setTextFieldInputAccessoryViewWithTF:self.genderTF];
     [self setTextFieldInputAccessoryViewWithTF:self.birthdayTF];
@@ -218,7 +225,7 @@
     [self setTextFieldInputAccessoryViewWithTF:self.engineNoTF];
     [self setTextFieldInputAccessoryViewWithTF:self.vinTF];
     
-    textFieldArray = @[self.mileageTF, self.fuelAmountTF, self.ownerTF, self.phoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF,self.engineModelTF, self.purchaseDateTF, self.engineNoTF, self.vinTF];
+    textFieldArray = @[self.mileageTF, self.ownerTF, self.phoneTF,self.standbyPhoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF,self.engineModelTF, self.purchaseDateTF, self.engineNoTF, self.vinTF];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -323,15 +330,15 @@
 //}
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (textField == self.fuelAmountTF) {
-        if ([textField.text intValue] > 100) {
-            _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            return NO;
-        }
-    }
-    else if (textField == self.plateNumberTF) {      //字母转大写
+//    if (textField == self.fuelAmountTF) {
+//        if ([textField.text intValue] > 100) {
+//            _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
+//            [_networkConditionHUD show:YES];
+//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//            return NO;
+//        }
+//    }
+    if (textField == self.plateNumberTF) {      //字母转大写
         NSString *tfStr = self.plateNumberTF.text;
         NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (strUrl.length == 7) {
@@ -396,35 +403,35 @@
     }
 }
 
-- (IBAction)fuelAmountPhoto:(id)sender {
-    if (self.carDic) {  //编辑页面
-        if (fuelAmountPhotos.count > 0) {
-            AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-            photoVC.maxCount = 1;
-            photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-                fuelAmountPhotos = array;
-                NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
-            };
-            photoVC.localImgsArray = fuelAmountPhotos;
-            [self.navigationController pushViewController:photoVC animated:YES];
-        }
-        else {
-            _networkConditionHUD.labelText = @"没有相关图片";
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        }
-    }
-    else {
-        AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-        photoVC.maxCount = 1;
-        photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-            fuelAmountPhotos = array;
-            NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
-        };
-        photoVC.localImgsArray = fuelAmountPhotos;
-        [self.navigationController pushViewController:photoVC animated:YES];
-    }
-}
+//- (IBAction)fuelAmountPhoto:(id)sender {
+//    if (self.carDic) {  //编辑页面
+//        if (fuelAmountPhotos.count > 0) {
+//            AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+//            photoVC.maxCount = 1;
+//            photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+//                fuelAmountPhotos = array;
+//                NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
+//            };
+//            photoVC.localImgsArray = fuelAmountPhotos;
+//            [self.navigationController pushViewController:photoVC animated:YES];
+//        }
+//        else {
+//            _networkConditionHUD.labelText = @"没有相关图片";
+//            [_networkConditionHUD show:YES];
+//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//        }
+//    }
+//    else {
+//        AddPicViewController *photoVC = [[AddPicViewController alloc] init];
+//        photoVC.maxCount = 1;
+//        photoVC.GoBackUpdate = ^(NSMutableArray *array) {
+//            fuelAmountPhotos = array;
+//            NSLog(@"fuelAmountPhotos: %@",fuelAmountPhotos);
+//        };
+//        photoVC.localImgsArray = fuelAmountPhotos;
+//        [self.navigationController pushViewController:photoVC animated:YES];
+//    }
+//}
 
 - (IBAction)enginePhoto:(id)sender {
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
@@ -485,7 +492,7 @@
     NSLog(@"编辑按钮");
     self.editBtn.hidden = YES;
     
-//    self.mileageTF.enabled = YES;
+    self.mileageTF.enabled = YES;
 //    self.fuelAmountTF.enabled = YES;
     self.ownerTF.enabled = YES;
     self.phoneTF.enabled = YES;
@@ -738,10 +745,10 @@
     if (mileagePhotos.count > 0) {
         mileageUrl = [mileagePhotos firstObject][@"relativePath"];
     }
-    NSString *fuelAmountUrl;
-    if (fuelAmountPhotos.count > 0) {
-        fuelAmountUrl = [fuelAmountPhotos firstObject][@"relativePath"];
-    }
+//    NSString *fuelAmountUrl;
+//    if (fuelAmountPhotos.count > 0) {
+//        fuelAmountUrl = [fuelAmountPhotos firstObject][@"relativePath"];
+//    }
     NSString *engineUrl;
     if (enginePhotos.count > 0) {
         engineUrl = [enginePhotos firstObject][@"relativePath"];
@@ -751,7 +758,7 @@
         vinUrl = [vinPhotos firstObject][@"relativePath"];
     }
 
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",STRING_Nil(self.fuelAmountTF.text),@"fuelAmount",STRING_Nil(fuelAmountUrl),@"fuelImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }
@@ -767,10 +774,10 @@
     if (mileagePhotos.count > 0) {
         mileageUrl = [mileagePhotos firstObject][@"relativePath"];
     }
-    NSString *fuelAmountUrl;
-    if (fuelAmountPhotos.count > 0) {
-        fuelAmountUrl = [fuelAmountPhotos firstObject][@"relativePath"];
-    }
+//    NSString *fuelAmountUrl;
+//    if (fuelAmountPhotos.count > 0) {
+//        fuelAmountUrl = [fuelAmountPhotos firstObject][@"relativePath"];
+//    }
     NSString *engineUrl;
     if (enginePhotos.count > 0) {
         engineUrl = [enginePhotos firstObject][@"relativePath"];
@@ -780,7 +787,7 @@
         vinUrl = [vinPhotos firstObject][@"relativePath"];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",STRING_Nil(self.fuelAmountTF.text),@"fuelAmount",STRING_Nil(fuelAmountUrl),@"fuelImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpdate) delegate:nil params:pram info:infoDic];
 }
@@ -845,7 +852,7 @@
 
 - (void)toPopVC:(NSString *)carId {
     if (isAutoSelect) {
-        NSDictionary *car = @{@"id":carId,@"plateNumber":self.plateNumberTF.text,@"mileage":self.mileageTF.text,@"fuelAmount":self.fuelAmountTF.text};
+        NSDictionary *car = @{@"id":carId,@"plateNumber":self.plateNumberTF.text,@"mileage":self.mileageTF.text};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:car];
         [self.navigationController popToRootViewControllerAnimated:YES];
 //        self.GoBackSelectCarDic(car);   //返回刷新并选择

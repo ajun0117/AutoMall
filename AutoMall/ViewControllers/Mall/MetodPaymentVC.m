@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderNumberL;
 @property (weak, nonatomic) IBOutlet UILabel *moneyL;
 @property (strong, nonatomic) IBOutlet UILabel *jifenL;
+@property (strong, nonatomic) IBOutlet UILabel *availableL;
 
 @end
 
@@ -44,6 +45,8 @@
     payModeStr = @"2";   //默认使用微信
     self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号:%@",self.orderNumber];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",self.money];
+    NSString *available = [[GlobalSetting shareGlobalSettingInstance] mPoints].length > 0 ? [[GlobalSetting shareGlobalSettingInstance] mPoints] : @"暂无";
+    self.availableL.text = [NSString stringWithFormat:@"（可用能量：%@大卡）",available];
     
     [self requestGetIntegralAs1Yuan];   //获取一元对应的积分数
 }

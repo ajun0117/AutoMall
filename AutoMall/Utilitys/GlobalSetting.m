@@ -491,16 +491,16 @@ static GlobalSetting *globalSetting;
     return [userDefaults valueForKey:@"mName"];
 }
 
-//-(void)setmPoints:(NSString *)mPoints {
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    [userDefaults setObject:mPoints forKey:@"mPoints"];
-//    [userDefaults synchronize];
-//}
-//
-//-(NSString *)mPoints {
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    return [userDefaults valueForKey:@"mPoints"];
-//}
+-(void)setmPoints:(NSString *)mPoints {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:mPoints forKey:@"mPoints"];
+    [userDefaults synchronize];
+}
+
+-(NSString *)mPoints {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults valueForKey:@"mPoints"];
+}
 
 -(void)setmIdentityId:(NSString *)mIdentityId {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -735,7 +735,7 @@ static GlobalSetting *globalSetting;
 //    [[GlobalSetting shareGlobalSettingInstance] setIsChangeCard:@""];
 //    [[GlobalSetting shareGlobalSettingInstance] setOrganizationID:@""];
     [[GlobalSetting shareGlobalSettingInstance] setmName:@""];
-//    [[GlobalSetting shareGlobalSettingInstance] setmPoints:@""];
+    [[GlobalSetting shareGlobalSettingInstance] setmPoints:@""];
 //    [[GlobalSetting shareGlobalSettingInstance] setmIdentityId:@""];
 //    [[GlobalSetting shareGlobalSettingInstance] setmEmail:@""];
 //    [[GlobalSetting shareGlobalSettingInstance] setmlocation:@""];
