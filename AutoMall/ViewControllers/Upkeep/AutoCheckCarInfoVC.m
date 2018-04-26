@@ -68,6 +68,8 @@
 //         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"todayMileageDate"];
 //    }
     
+    remarkPhotos = @[];
+    
     if (self.mileageAndfuelAmountDic) {
         self.mileageTF.text = self.mileageAndfuelAmountDic[@"mileage"];
         self.fuelAmountTF.text = self.mileageAndfuelAmountDic[@"fuelAmount"];

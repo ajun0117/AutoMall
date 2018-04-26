@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastMileageL;
 @property (weak, nonatomic) IBOutlet UIView *lastView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lastViewHeightCon;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeightCon;
 @property (strong, nonatomic) IBOutlet UITextField *mileageTF;
 //@property (strong, nonatomic) IBOutlet UILabel *fuelAmountL;
 @property (strong, nonatomic) IBOutlet UILabel *firstTimeL;
@@ -92,6 +93,7 @@
         
         self.lastView.hidden = NO;
         self.lastViewHeightCon.constant = 89;       //显示上次数据
+        self.bottomViewHeightCon.constant = 865;
         
         carImgUrl = self.carDic[@"image"];
         
@@ -197,6 +199,7 @@
         
         self.lastView.hidden = YES;
         self.lastViewHeightCon.constant = 0;       //隐藏上次数据
+        self.bottomViewHeightCon.constant = 776;
         
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];

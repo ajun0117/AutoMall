@@ -524,8 +524,6 @@
                         [cell.secondBtn setImage:IMG(@"center_servicesConfirmed") forState:UIControlStateNormal];
                         [cell.secondBtn addTarget:self action:@selector(upkeepServicesConfirmedAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.secondL.text = @"订单确认";
-                        cell.thirdBtn.hidden = NO;
-                        cell.thirdL.hidden = NO;
                         [cell.thirdBtn setImage:IMG(@"center_workDone") forState:UIControlStateNormal];
                         [cell.thirdBtn addTarget:self action:@selector(upkeepWorkDoneAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.thirdL.text = @"施工完成";
@@ -607,6 +605,9 @@
                         [cell.secondBtn setImage:IMG(@"center_paid") forState:UIControlStateNormal];
                         [cell.secondBtn addTarget:self action:@selector(yifuAction:) forControlEvents:UIControlEventTouchUpInside];
                         cell.secondL.text = @"已付款";
+                        [cell.thirdBtn setImage:IMG(@"center_cancelled") forState:UIControlStateNormal];
+                        [cell.thirdBtn addTarget:self action:@selector(cancelledAction:) forControlEvents:UIControlEventTouchUpInside];
+                        cell.thirdL.text = @"已取消";
                         return cell;
                         break;
                     }
@@ -1175,6 +1176,13 @@
 -(void)yifuAction:(UIButton *)btn {
     MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
     listVC.orderStatus = @"1";   //已付款
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
+}
+
+-(void)cancelledAction:(UIButton *)btn {
+    MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
+    listVC.orderStatus = @"2";   //已取消
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
 }

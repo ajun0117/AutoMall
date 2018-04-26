@@ -20,48 +20,48 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_us" translatesAutoresizingMaskIntoConstraints="NO" id="NGX-G0-Nfb">
-                        <rect key="frame" x="165" y="8" width="150" height="150"/>
+                        <rect key="frame" x="175" y="18" width="130" height="130"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="D1n-jc-IRS"/>
-                            <constraint firstAttribute="height" constant="150" id="Lim-dk-NAY"/>
+                            <constraint firstAttribute="width" constant="130" id="D1n-jc-IRS"/>
+                            <constraint firstAttribute="height" constant="130" id="Lim-dk-NAY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i爱检车微信公众号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wE-Dw-AbG">
-                        <rect key="frame" x="177.5" y="166" width="126" height="18"/>
+                        <rect key="frame" x="177.5" y="156" width="126" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_us" translatesAutoresizingMaskIntoConstraints="NO" id="H9A-jX-VAS">
-                        <rect key="frame" x="5" y="8" width="150" height="150"/>
+                        <rect key="frame" x="15" y="18" width="130" height="130"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="Upy-Z4-cHu"/>
-                            <constraint firstAttribute="height" constant="150" id="hLe-hN-TvG"/>
+                            <constraint firstAttribute="width" constant="130" id="Upy-Z4-cHu"/>
+                            <constraint firstAttribute="height" constant="130" id="hLe-hN-TvG"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="门店微信公众号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCT-FD-FiQ">
-                        <rect key="frame" x="26.5" y="166" width="107.5" height="18"/>
+                        <rect key="frame" x="26.5" y="156" width="107.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_us" translatesAutoresizingMaskIntoConstraints="NO" id="ImH-Gd-TLU">
-                        <rect key="frame" x="85" y="8" width="150" height="150"/>
+                        <rect key="frame" x="95" y="18" width="130" height="130"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="9dG-Dd-BtM"/>
-                            <constraint firstAttribute="height" constant="150" id="W8K-s6-Xcp"/>
+                            <constraint firstAttribute="width" constant="130" id="9dG-Dd-BtM"/>
+                            <constraint firstAttribute="height" constant="130" id="W8K-s6-Xcp"/>
                         </constraints>
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i爱检车微信公众号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RuG-HX-gP5">
-                        <rect key="frame" x="97" y="166" width="126" height="18"/>
+                        <rect key="frame" x="97" y="156" width="126" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="H9A-jX-VAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="2nn-Wb-qjd"/>
-                    <constraint firstItem="NGX-G0-Nfb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="772-dV-vDG"/>
+                    <constraint firstItem="H9A-jX-VAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="2nn-Wb-qjd"/>
+                    <constraint firstItem="NGX-G0-Nfb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="772-dV-vDG"/>
                     <constraint firstItem="RuG-HX-gP5" firstAttribute="centerX" secondItem="ImH-Gd-TLU" secondAttribute="centerX" id="8gS-8d-13w"/>
                     <constraint firstItem="6wE-Dw-AbG" firstAttribute="top" secondItem="NGX-G0-Nfb" secondAttribute="bottom" constant="8" id="FWv-q3-lAJ"/>
                     <constraint firstItem="RuG-HX-gP5" firstAttribute="top" secondItem="ImH-Gd-TLU" secondAttribute="bottom" constant="8" id="GbY-70-Dag"/>
@@ -70,7 +70,7 @@
                     <constraint firstItem="gCT-FD-FiQ" firstAttribute="centerX" secondItem="H9A-jX-VAS" secondAttribute="centerX" id="Rfr-uH-kdZ"/>
                     <constraint firstItem="ImH-Gd-TLU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="VLI-0n-2jf"/>
                     <constraint firstItem="NGX-G0-Nfb" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="3:2" id="oZr-9a-xcX"/>
-                    <constraint firstItem="ImH-Gd-TLU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="u4L-Yh-w0s"/>
+                    <constraint firstItem="ImH-Gd-TLU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="u4L-Yh-w0s"/>
                     <constraint firstItem="6wE-Dw-AbG" firstAttribute="centerX" secondItem="NGX-G0-Nfb" secondAttribute="centerX" id="xpJ-V1-t3b"/>
                 </constraints>
             </tableViewCellContentView>
