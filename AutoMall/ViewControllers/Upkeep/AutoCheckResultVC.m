@@ -200,9 +200,11 @@
     if ([title isEqualToString:@""]) {
         title = @"检查结果分享";
     }
+    
+    
     NSString *imgUrlStr = shareDic [@"shareImage"];
-    if ([imgUrlStr isEqualToString:@""]) {
-        imgUrlStr = @"http://119.23.227.246/carupkeep/image/carupkeep_share.png";
+    if (! [shareDic [@"logo"] isKindOfClass:[NSNull class]] && [shareDic [@"logo"] length] > 0) {
+        imgUrlStr = shareDic [@"logo"];
     }
     NSString *url = shareDic [@"shareUrl"];
 //    if ([url isEqualToString:@""]) {
@@ -215,8 +217,8 @@
     
 //    NSString *content = [NSString stringWithFormat:@"%@\n%@",title,url];
     NSString *content = @"门店名称";
-    if (! [carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
-        content = carUpkeepDic[@"store"][@"name"];
+    if (! [shareDic [@"store"] isKindOfClass:[NSNull class]] && [shareDic [@"store"] length] > 0) {
+        content = shareDic [@"store"];
     }
     
     NSString *urlStr = nil;

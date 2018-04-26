@@ -115,8 +115,8 @@
             self.lastMileageL.text = NSStringWithNumberNULL([self.carDic[@"carUpKeeps"] firstObject][@"lastMileage"]);
         }
         
-        if (! [self.carDic[@"createTime"] isKindOfClass:[NSNull class]]) {
-            NSDate *firstTime = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"createTime"] doubleValue]/1000];
+        if (! [self.carDic[@"startTime"] isKindOfClass:[NSNull class]]) {
+            NSDate *firstTime = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"startTime"] doubleValue]/1000];
             NSString *firstTimeStr = [formater stringFromDate:firstTime];
             self.firstTimeL.text = firstTimeStr;
         }
@@ -828,7 +828,7 @@
         vinUrl = [vinPhotos firstObject][@"relativePath"];
     }
 
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel",STRING_Nil(self.firstTimeL.text),@"startTime", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }

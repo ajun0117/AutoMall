@@ -387,7 +387,7 @@
             int integral = [responseObject[@"data"][@"integral"] intValue];
             int jifenNum = self.money * integral;
             NSLog(@"jifenNum: %d",jifenNum);
-            self.jifenL.text = [NSString stringWithFormat:@"/%d",jifenNum];
+            self.jifenL.text = [NSString stringWithFormat:@"/%d大卡",jifenNum];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

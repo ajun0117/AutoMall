@@ -1182,7 +1182,7 @@
 
 -(void)cancelledAction:(UIButton *)btn {
     MailOrderListVC *listVC = [[MailOrderListVC alloc] init];
-    listVC.orderStatus = @"2";   //已取消
+    listVC.orderStatus = @"-1";   //已取消
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
 }

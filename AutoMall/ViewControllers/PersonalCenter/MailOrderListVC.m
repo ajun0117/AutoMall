@@ -49,7 +49,7 @@
     else if ([self.orderStatus isEqualToString:@"1"]) {
         [self yifuAction:self.yifuBtn];
     }
-    else if ([self.orderStatus isEqualToString:@"2"]) {
+    else if ([self.orderStatus isEqualToString:@"-1"]) {   //已取消
         [self cancelAction:self.cancelBtn];
     }
     else {
@@ -110,7 +110,7 @@
 }
 
 - (IBAction)cancelAction:(id)sender {
-    _orderStatus = @"2";
+    _orderStatus = @"-1";
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
@@ -182,6 +182,10 @@
             cell.statusL.text = @"已付款";
             cell.btn.hidden = YES;
 //            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        } else if (status == -1) {
+            cell.statusL.text = @"已取消";
+            cell.btn.hidden = YES;
+            //            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
         }
         else {
             cell.statusL.text = @"已完成";
@@ -218,7 +222,7 @@
         cell.statusL.text = @"已付款";
         cell.btn.hidden = YES;
 //        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
-    } else if (status == 2) {
+    } else if (status == -1) {
         cell.statusL.text = @"已取消";
         cell.btn.hidden = YES;
         //        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
