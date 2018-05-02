@@ -201,7 +201,6 @@
         title = @"检查结果分享";
     }
     
-    
     NSString *imgUrlStr = shareDic [@"shareImage"];
     if (! [shareDic [@"logo"] isKindOfClass:[NSNull class]] && [shareDic [@"logo"] length] > 0) {
         imgUrlStr = shareDic [@"logo"];
