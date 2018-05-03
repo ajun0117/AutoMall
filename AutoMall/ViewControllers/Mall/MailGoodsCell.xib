@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="width" secondItem="N3b-fi-NLe" secondAttribute="height" id="6QV-Gl-LWB"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbF-nU-Xt2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbF-nU-Xt2">
                                 <rect key="frame" x="8" y="150" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -55,7 +55,7 @@
                             <constraint firstItem="N3b-fi-NLe" firstAttribute="top" secondItem="Eb5-Xh-FgM" secondAttribute="top" constant="5" id="D32-aJ-UGS"/>
                             <constraint firstItem="9Nr-Xn-E5M" firstAttribute="leading" secondItem="YWm-rm-8Qz" secondAttribute="trailing" constant="8" id="Djl-hV-4b0"/>
                             <constraint firstItem="5lq-5s-Xii" firstAttribute="top" secondItem="Eb5-Xh-FgM" secondAttribute="top" id="Fvx-RP-SZ1"/>
-                            <constraint firstAttribute="height" constant="242" id="G1Y-Ob-Aez"/>
+                            <constraint firstAttribute="height" constant="260" id="G1Y-Ob-Aez"/>
                             <constraint firstItem="YWm-rm-8Qz" firstAttribute="leading" secondItem="Eb5-Xh-FgM" secondAttribute="leading" constant="8" id="HYA-jE-Wim"/>
                             <constraint firstAttribute="bottom" secondItem="YWm-rm-8Qz" secondAttribute="bottom" constant="8" id="MFj-qL-TDl"/>
                             <constraint firstItem="9Nr-Xn-E5M" firstAttribute="centerY" secondItem="YWm-rm-8Qz" secondAttribute="centerY" id="NBz-w1-VRh"/>
@@ -79,7 +79,7 @@
                                     <constraint firstAttribute="width" secondItem="Vxy-26-Vdu" secondAttribute="height" id="FE2-7O-IG1"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ues-X3-bIk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ues-X3-bIk">
                                 <rect key="frame" x="8" y="150" width="133" height="65"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -128,7 +128,7 @@
                                     <constraint firstAttribute="width" secondItem="E0g-iG-5ea" secondAttribute="height" id="vkQ-cU-byp"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CR5-iR-2Z5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CR5-iR-2Z5">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -178,7 +178,7 @@
                                     <constraint firstAttribute="width" secondItem="IvK-Gq-bjI" secondAttribute="height" id="Kog-YW-IOg"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qod-xi-dqQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qod-xi-dqQ">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -228,7 +228,7 @@
                                     <constraint firstAttribute="width" secondItem="eVL-hP-HWm" secondAttribute="height" id="ndz-ax-xh8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-lY-1kk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-lY-1kk">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -278,7 +278,7 @@
                                     <constraint firstAttribute="width" secondItem="04H-Fq-DKh" secondAttribute="height" id="Pjy-hF-CnG"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0G7-3I-UkY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0G7-3I-UkY">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -328,7 +328,7 @@
                                     <constraint firstAttribute="width" secondItem="kfZ-Sd-pfA" secondAttribute="height" id="QNG-cR-kTE"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgE-IX-lkG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgE-IX-lkG">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -378,7 +378,7 @@
                                     <constraint firstAttribute="width" secondItem="5lU-JV-3Tb" secondAttribute="height" id="x8t-Me-ngL"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6X-pb-fV3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6X-pb-fV3">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -428,7 +428,7 @@
                                     <constraint firstAttribute="width" secondItem="GbQ-xg-bb4" secondAttribute="height" id="Wg4-IO-HIU"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erf-1r-b5k">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erf-1r-b5k">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -478,7 +478,7 @@
                                     <constraint firstAttribute="width" secondItem="hjH-Ik-Ceg" secondAttribute="height" id="Wgg-1e-9yh"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxe-II-RDj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="壳牌黄壳xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxe-II-RDj">
                                 <rect key="frame" x="8" y="149.5" width="133" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -620,7 +620,7 @@
                 <outlet property="yuan8" destination="pnk-73-r5X" id="5pU-6l-uIE"/>
                 <outlet property="yuan9" destination="AtK-Lw-3JC" id="xfc-91-h04"/>
             </connections>
-            <point key="canvasLocation" x="-598" y="327"/>
+            <point key="canvasLocation" x="-809" y="333"/>
         </tableViewCell>
     </objects>
     <resources>

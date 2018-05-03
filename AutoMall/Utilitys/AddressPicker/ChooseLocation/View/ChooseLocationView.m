@@ -123,7 +123,7 @@ static  CGFloat  const  kHYTopTabbarHeight = 30; //地址标签栏的高度
     }else if ([self.tableViews indexOfObject:tableView] == 1){
         return self.cityDataSouce.count;
     }else if ([self.tableViews indexOfObject:tableView] == 2){
-        return self.districtDataSouce.count;
+        return self.districtDataSouce.count + 1;
     }
     return self.dataSouce.count;
 }
@@ -141,7 +141,17 @@ static  CGFloat  const  kHYTopTabbarHeight = 30; //地址标签栏的高度
         item = self.cityDataSouce[indexPath.row];
     //县级别
     }else if ([self.tableViews indexOfObject:tableView] == 2){
-        item = self.districtDataSouce[indexPath.row];
+        if (indexPath.row == self.districtDataSouce.count) {    //区县末尾增加“其他”
+            item = [[AddressItem alloc] init];
+            item.code = @"";
+            item.sheng = @"";
+            item.di = @"";
+            item.xian = @"";
+            item.name = @"其他";
+            item.level = @"3";
+        } else {
+            item = self.districtDataSouce[indexPath.row];
+        }
     }
     cell.item = item;
     return cell;
@@ -221,9 +231,14 @@ static  CGFloat  const  kHYTopTabbarHeight = 30; //地址标签栏的高度
         [self scrollToNextItem:item.name];
         
     }else if ([self.tableViews indexOfObject:tableView] == 2){
-        
-        AddressItem * item = self.districtDataSouce[indexPath.row];
-        [self setUpAddress:item.name];
+        if (indexPath.row == self.districtDataSouce.count) {
+            AddressItem * item = [[AddressItem alloc] init];
+            item.name = @"其他";
+            [self setUpAddress:item.name];
+        } else {
+            AddressItem * item = self.districtDataSouce[indexPath.row];
+            [self setUpAddress:item.name];
+        }
     }
     return indexPath;
 }
@@ -237,7 +252,18 @@ static  CGFloat  const  kHYTopTabbarHeight = 30; //地址标签栏的高度
     }else if ([self.tableViews indexOfObject:tableView] == 1){
        item = self.cityDataSouce[indexPath.row];
     }else if ([self.tableViews indexOfObject:tableView] == 2){
-       item = self.districtDataSouce[indexPath.row];
+        if (indexPath.row == self.districtDataSouce.count) {
+            item = [[AddressItem alloc] init];
+            item.code = @"";
+            item.sheng = @"";
+            item.di = @"";
+            item.xian = @"";
+            item.name = @"其他";
+            item.level = @"3";
+        } else {
+             item = self.districtDataSouce[indexPath.row];
+        }
+      
     }
     item.isSelected = YES;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -252,7 +278,17 @@ static  CGFloat  const  kHYTopTabbarHeight = 30; //地址标签栏的高度
     }else if ([self.tableViews indexOfObject:tableView] == 1){
         item = self.cityDataSouce[indexPath.row];
     }else if ([self.tableViews indexOfObject:tableView] == 2){
-        item = self.districtDataSouce[indexPath.row];
+        if (indexPath.row == self.districtDataSouce.count) {
+            item = [[AddressItem alloc] init];
+            item.code = @"";
+            item.sheng = @"";
+            item.di = @"";
+            item.xian = @"";
+            item.name = @"其他";
+            item.level = @"3";
+        } else {
+            item = self.districtDataSouce[indexPath.row];
+        }
     }
     item.isSelected = NO;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

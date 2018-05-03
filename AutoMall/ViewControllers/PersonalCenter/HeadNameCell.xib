@@ -71,10 +71,10 @@
                         </state>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="nuc-l9-QZX">
-                        <rect key="frame" x="158" y="17.5" width="6" height="11"/>
+                        <rect key="frame" x="158" y="13" width="11" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="11" id="MoP-B9-8Rc"/>
-                            <constraint firstAttribute="width" constant="6" id="lf9-ix-zTr"/>
+                            <constraint firstAttribute="height" constant="20" id="MoP-B9-8Rc"/>
+                            <constraint firstAttribute="width" constant="11" id="lf9-ix-zTr"/>
                         </constraints>
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWA-yT-KfU">
@@ -87,10 +87,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="Lp3-AS-aFc">
-                        <rect key="frame" x="184" y="50" width="6" height="11"/>
+                        <rect key="frame" x="184" y="45.5" width="11" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="11" id="ROd-ZE-HjB"/>
-                            <constraint firstAttribute="width" constant="6" id="n9X-kd-FXC"/>
+                            <constraint firstAttribute="height" constant="20" id="ROd-ZE-HjB"/>
+                            <constraint firstAttribute="width" constant="11" id="n9X-kd-FXC"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -130,7 +130,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrows" width="6" height="12"/>
+        <image name="arrows" width="13" height="24"/>
         <image name="bronzeBadge" width="20" height="20"/>
         <image name="center_profile" width="200" height="200"/>
     </resources>
