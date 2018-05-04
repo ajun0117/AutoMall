@@ -142,6 +142,9 @@
 		047EF83D2010903300C9CFE3 /* UINavigationController+YHBackTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EF83B2010903300C9CFE3 /* UINavigationController+YHBackTitle.m */; };
 		048044481FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 048044461FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.m */; };
 		048044491FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048044471FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.xib */; };
+		04805090209C68E700083CFC /* BJTSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0480508E209C68E700083CFC /* BJTSignView.m */; };
+		04805094209C6D1B00083CFC /* UpkeepPlanSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04805092209C6D1B00083CFC /* UpkeepPlanSignCell.m */; };
+		04805095209C6D1B00083CFC /* UpkeepPlanSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04805093209C6D1B00083CFC /* UpkeepPlanSignCell.xib */; };
 		048646751FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048646731FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m */; };
 		048646761FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048646741FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib */; };
 		0486E8CB1F8F667700FB746E /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0486E8C81F8F667700FB746E /* BPushCerResource.bundle */; };
@@ -762,6 +765,11 @@
 		048044451FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaoyangHistoryDetailVC.h; sourceTree = "<group>"; };
 		048044461FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaoyangHistoryDetailVC.m; sourceTree = "<group>"; };
 		048044471FCCF5F900A5C7F5 /* BaoyangHistoryDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaoyangHistoryDetailVC.xib; sourceTree = "<group>"; };
+		0480508E209C68E700083CFC /* BJTSignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJTSignView.m; sourceTree = "<group>"; };
+		0480508F209C68E700083CFC /* BJTSignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJTSignView.h; sourceTree = "<group>"; };
+		04805091209C6D1B00083CFC /* UpkeepPlanSignCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanSignCell.h; sourceTree = "<group>"; };
+		04805092209C6D1B00083CFC /* UpkeepPlanSignCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanSignCell.m; sourceTree = "<group>"; };
+		04805093209C6D1B00083CFC /* UpkeepPlanSignCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpkeepPlanSignCell.xib; sourceTree = "<group>"; };
 		048646721FBD87010047BE44 /* UpkeepPlanSelectServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpkeepPlanSelectServiceCell.h; sourceTree = "<group>"; };
 		048646731FBD87010047BE44 /* UpkeepPlanSelectServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpkeepPlanSelectServiceCell.m; sourceTree = "<group>"; };
 		048646741FBD87010047BE44 /* UpkeepPlanSelectServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpkeepPlanSelectServiceCell.xib; sourceTree = "<group>"; };
@@ -1897,6 +1905,15 @@
 			path = yh_navgation;
 			sourceTree = "<group>";
 		};
+		0480508D209C68C900083CFC /* 签名View */ = {
+			isa = PBXGroup;
+			children = (
+				0480508F209C68E700083CFC /* BJTSignView.h */,
+				0480508E209C68E700083CFC /* BJTSignView.m */,
+			);
+			name = "签名View";
+			sourceTree = "<group>";
+		};
 		0486E8C61F8F667700FB746E /* normalversion */ = {
 			isa = PBXGroup;
 			children = (
@@ -1937,6 +1954,7 @@
 		049EA1651FAB04020081940F /* 服务方案 */ = {
 			isa = PBXGroup;
 			children = (
+				0480508D209C68C900083CFC /* 签名View */,
 				F7650B561FAF33AB00C0FCD2 /* 服务方案详细介绍 */,
 				042E5D1A1F419C3500F5F324 /* UpkeepPlanVC.h */,
 				042E5D1B1F419C3500F5F324 /* UpkeepPlanVC.m */,
@@ -1956,6 +1974,9 @@
 				0490FC0B1F580CB900F77661 /* UpkeepPlanNormalHeadCell.h */,
 				0490FC0C1F580CB900F77661 /* UpkeepPlanNormalHeadCell.m */,
 				0490FC0D1F580CB900F77661 /* UpkeepPlanNormalHeadCell.xib */,
+				04805091209C6D1B00083CFC /* UpkeepPlanSignCell.h */,
+				04805092209C6D1B00083CFC /* UpkeepPlanSignCell.m */,
+				04805093209C6D1B00083CFC /* UpkeepPlanSignCell.xib */,
 			);
 			name = "服务方案";
 			sourceTree = "<group>";
@@ -3288,6 +3309,7 @@
 				0438646F1FEB941C001F5631 /* guide3@2x.png in Resources */,
 				0459C6B61F614C870040501E /* Cities.json in Resources */,
 				F70A509F1FA22B4A0047D804 /* CheckResultCell.xib in Resources */,
+				04805095209C6D1B00083CFC /* UpkeepPlanSignCell.xib in Resources */,
 				047AE00C1F4A904400AEAE8E /* picture_1.png in Resources */,
 				041076F31F542463003CB740 /* CenterNormalCell.xib in Resources */,
 				045335E91FB98BC5008FB56F /* UpkeepOrderListCell.xib in Resources */,
@@ -3407,6 +3429,7 @@
 				04BA1C641F4D162000704A9E /* SettlementView.m in Sources */,
 				04AE98151F2ED46500C2D158 /* AppDelegate.m in Sources */,
 				04D107841F62998D007D9F57 /* ZFGenericAxis.m in Sources */,
+				04805090209C68E700083CFC /* BJTSignView.m in Sources */,
 				041076ED1F54243B003CB740 /* HeadNameCell.m in Sources */,
 				04C656481F97694400611AFF /* AutoCheckOrderVC.m in Sources */,
 				042AF2021F4C3C6500EA5E5F /* CommodityDetailStarCell.m in Sources */,
@@ -3496,6 +3519,7 @@
 				046B8DDA1F9A044300784AA8 /* base64.m in Sources */,
 				042E5D271F41A0CA00F5F324 /* UpkeepPlanNormalCell.m in Sources */,
 				040BC8BB1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.m in Sources */,
+				04805094209C6D1B00083CFC /* UpkeepPlanSignCell.m in Sources */,
 				04BA1C681F4D162000704A9E /* ShoppingCartView.m in Sources */,
 				04BA1C761F4D8D7C00704A9E /* SettlementCell.m in Sources */,
 				F7106F511FDD85210009DF63 /* ShareTool.m in Sources */,

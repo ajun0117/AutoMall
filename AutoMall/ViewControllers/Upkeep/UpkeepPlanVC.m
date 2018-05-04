@@ -18,6 +18,7 @@
 #import "UpkeepPlanSelectServiceCell.h"
 #import "CheckResultSingleCell.h"
 #import "CheckResultMultiCell.h"
+#import "UpkeepPlanSignCell.h"
 #import "AutoCheckResultDetailVC.h"
 #import "AutoCheckServicesVC.h"
 
@@ -73,6 +74,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanSelectServiceCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanSelectServiceCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultSingleCell" bundle:nil] forCellReuseIdentifier:@"checkResultSingleCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"CheckResultMultiCell" bundle:nil] forCellReuseIdentifier:@"checkResultMultiCell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"UpkeepPlanSignCell" bundle:nil] forCellReuseIdentifier:@"upkeepPlanSignCell"];
     self.myTableView.tableFooterView = [UIView new];
 
     removeAry = [NSMutableArray array];
@@ -258,7 +260,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-        return 8;
+        return 11;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -267,31 +269,43 @@
                 return 4;
                 break;
                 
-            case 1:
-                return unnormalAry.count;
-                break;
-                
-            case 2:
-                return removeAry.count;
-                break;
-                
-            case 3:
-                return selectedPackageAry.count;
-                break;
-                
-            case 4:
-                return selectedServices.count;
-                break;
-                
-            case 5:
+                case 1:
                 return 1;
                 break;
                 
+            case 2:
+                return unnormalAry.count;
+                break;
+                
+            case 3:
+                return removeAry.count;
+                break;
+                
+            case 4:
+                return selectedPackageAry.count;
+                break;
+                
+            case 5:
+                return selectedServices.count;
+                break;
+                
             case 6:
+                return selectedServices.count;
+            break;
+                
+            case 7:
+                return 1;
+                break;
+                
+            case 8:
                 return selectedDiscounts.count;
                 break;
                 
-            case 7:
+            case 9:
+                return 1;
+                break;
+                
+            case 10:
                 return 1;
                 break;
                 
@@ -318,21 +332,21 @@
                     break;
                 }
                     
+                case 10: {
+                    return 100;
+                    break;
+                }
+                    
                 default:
                     return 44;
                     break;
             }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
         switch (section) {
             case 0:
                 return 54;
-                break;
-                
-            case 1:
-                return 44;
                 break;
                 
             case 2:
@@ -347,7 +361,19 @@
                 return 44;
                 break;
                 
+            case 5:
+                return 44;
+                break;
+                
             case 6:
+                return 44;
+                break;
+                
+            case 8:
+                return 44;
+                break;
+                
+            case 10:
                 return 44;
                 break;
                 
@@ -391,7 +417,7 @@
                 break;
             }
                 
-            case 1: {
+            case 2: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
@@ -404,7 +430,7 @@
                 break;
             }
                 
-            case 2: {
+            case 3: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
@@ -426,7 +452,7 @@
                 break;
             }
                 
-            case 3: {
+            case 4: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
@@ -448,7 +474,7 @@
                 break;
             }
                 
-            case 4: {
+            case 5: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
                 //                view.backgroundColor = RGBCOLOR(239, 239, 239);
@@ -474,6 +500,29 @@
             case 6: {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
+                //                view.backgroundColor = RGBCOLOR(239, 239, 239);
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+                label.font = [UIFont boldSystemFontOfSize:15];
+                label.backgroundColor = [UIColor clearColor];
+                label.text = @"增加服务";
+                
+                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+                
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
+//                [btn addTarget:self action:@selector(toSelectServices) forControlEvents:UIControlEventTouchUpInside];
+                
+                [view addSubview:label];
+                [view addSubview:img];
+                [view addSubview:btn];
+                return view;
+                break;
+            }
+                
+            case 8: {
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+                view.backgroundColor = [UIColor whiteColor];
 //                view.backgroundColor = RGBCOLOR(239, 239, 239);
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
@@ -490,6 +539,19 @@
                 [view addSubview:label];
                 [view addSubview:img];
                 [view addSubview:btn];
+                return view;
+                break;
+            }
+                
+            case 10: {
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
+                view.backgroundColor = [UIColor whiteColor];
+                //                view.backgroundColor = RGBCOLOR(239, 239, 239);
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+                label.font = [UIFont boldSystemFontOfSize:15];
+                label.backgroundColor = [UIColor clearColor];
+                label.text = @"车主确认服务方案签名";
+                [view addSubview:label];
                 return view;
                 break;
             }
@@ -566,7 +628,7 @@
                 break;
             }
                 
-            case 1: {
+            case 2: {
                 NSDictionary *dic = unnormalAry[indexPath.row];
 
                 if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
@@ -643,7 +705,7 @@
                 break;
             }
                 
-            case 2: {
+            case 3: {
                 UpkeepPlanSelectServiceCell *cell = (UpkeepPlanSelectServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSelectServiceCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -668,7 +730,7 @@
                 break;
             }
                 
-            case 3: {
+            case 4: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -687,7 +749,7 @@
                 break;
             }
                 
-            case 4: {
+            case 5: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -706,7 +768,7 @@
                 break;
             }
                 
-            case 5: {
+            case 7: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -720,7 +782,7 @@
                 break;
             }
                 
-            case 6: {
+            case 8: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -739,7 +801,7 @@
                 break;
             }
                 
-            case 7: {
+            case 9: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -758,6 +820,12 @@
                 break;
             }
                 
+            case 10: {
+                UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSignCell"];
+                return cell;
+                break;
+            }
+                
             default:
                 return nil;
                 break;
@@ -769,7 +837,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
         switch (indexPath.section) {
                 
-            case 1: {
+            case 2: {
                 NSDictionary *dic = unnormalAry[indexPath.row];
                 AutoCheckResultDetailVC *detailVC = [[AutoCheckResultDetailVC alloc] init];
                 detailVC.checkId = self.carUpkeepId;
@@ -779,7 +847,7 @@
                 break;
             }
                 
-            case 2: {
+            case 3: {
                 ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
                 detailVC.serviceDic = removeAry[indexPath.row];
                 [self.navigationController pushViewController:detailVC animated:YES];
@@ -871,6 +939,12 @@
 //- (NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
 //    return @"删掉我吧";
 //}
+
+#pragma mark - 生成图片
+- (void)imageBtnClick{
+    UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:10]];
+    UIImage *image  =  [cell.signView getSignatureImage];
+}
 
 #pragma mark - 发送请求
 -(void)requestGetAllUnnormal { //获取所有异常

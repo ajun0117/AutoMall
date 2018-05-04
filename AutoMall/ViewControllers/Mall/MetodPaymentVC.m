@@ -45,10 +45,11 @@
     payModeStr = @"2";   //默认使用微信
     self.orderNumberL.text = [NSString stringWithFormat:@"您的订单编号:%@",self.orderNumber];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",self.money];
-    NSString *available = [[GlobalSetting shareGlobalSettingInstance] mPoints].length > 0 ? [[GlobalSetting shareGlobalSettingInstance] mPoints] : @"暂无";
-    self.availableL.text = [NSString stringWithFormat:@"（可用能量：%@大卡）",available];
+//    NSString *available = [[GlobalSetting shareGlobalSettingInstance] mPoints].length > 0 ? [[GlobalSetting shareGlobalSettingInstance] mPoints] : @"暂无";
+//    self.availableL.text = [NSString stringWithFormat:@"（可用能量：%@大卡）",available];
     
     [self requestGetIntegralAs1Yuan];   //获取一元对应的积分数
+    [self requestPostUserGetInfo];  //获取用户信息，提取可用积分数
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -329,6 +330,14 @@
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -388,6 +397,29 @@
             int jifenNum = self.money * integral;
             NSLog(@"jifenNum: %d",jifenNum);
             self.jifenL.text = [NSString stringWithFormat:@"/%d大卡",jifenNum];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"GetUserInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            NSDictionary *userInfoDic = responseObject[@"data"];
+            
+            [[GlobalSetting shareGlobalSettingInstance] setUserID:[NSString stringWithFormat:@"%@",userInfoDic[@"id"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmMobile:[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmName:[NSString stringWithFormat:@"%@",STRING(userInfoDic[@"nickname"])]];
+            [[GlobalSetting shareGlobalSettingInstance] setmHead:STRING(userInfoDic[@"image"])];
+            [[GlobalSetting shareGlobalSettingInstance] setMobileUserType:[NSString stringWithFormat:@"%@",userInfoDic[@"mobileUserType"]]];
+            [[GlobalSetting shareGlobalSettingInstance] setmPoints:NSStringWithNumberNULL(userInfoDic[@"integral"])];       //积分
+            
+            NSString *available = NSStringWithNumberNULL(userInfoDic[@"integral"]).length > 0 ? NSStringWithNumberNULL(userInfoDic[@"integral"]) : @"暂无";
+            self.availableL.text = [NSString stringWithFormat:@"（可用能量：%@大卡）",available];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
