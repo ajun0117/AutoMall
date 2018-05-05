@@ -21,6 +21,7 @@
 #import "UpkeepPlanSignCell.h"
 #import "AutoCheckResultDetailVC.h"
 #import "AutoCheckServicesVC.h"
+#import "BJTSignView.h"
 
 @interface UpkeepPlanVC () <UIAlertViewDelegate>
 { 
@@ -40,8 +41,10 @@
     float discountPrice;    //优惠的价格（实际需要减掉的价格）
     float selectedServicePrice;    //门店服务的价格（实际需要加上的价格）
     NSMutableArray *unnormalAry;
+    NSString *signImgStr;   //签名图片地址
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) IBOutlet BJTSignView *signView;
 
 @end
 
@@ -248,6 +251,12 @@
 
 
 - (IBAction)confirmAction:(id)sender {
+    if (! signImgStr || signImgStr.length == 0) {
+        _networkConditionHUD.labelText = @"请车主确认服务方案并签名";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
     if (serVicePrice + packagePrice - discountPrice + selectedServicePrice > 0) {
         [self requestPostCarUpkeepConfirm];
     }
@@ -269,9 +278,9 @@
                 return 4;
                 break;
                 
-                case 1:
+            case 1:
                 return 1;
-                break;
+            break;
                 
             case 2:
                 return unnormalAry.count;
@@ -322,7 +331,7 @@
                     break;
                 }
                     
-                case 1: {
+                case 2: {
                     NSDictionary *dic = unnormalAry[indexPath.row];
                     if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
                         NSArray *entities = dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"];
@@ -333,7 +342,7 @@
                 }
                     
                 case 10: {
-                    return 100;
+                    return 200;
                     break;
                 }
                     
@@ -547,11 +556,20 @@
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.myTableView.bounds), 44)];
                 view.backgroundColor = [UIColor whiteColor];
                 //                view.backgroundColor = RGBCOLOR(239, 239, 239);
-                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 200, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
                 label.text = @"车主确认服务方案签名";
+                
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                btn.frame = CGRectMake(SCREEN_WIDTH - 16 - 80, 0, 80 , 44);
+                btn.titleLabel.font = [UIFont systemFontOfSize:15];
+                [btn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
+                [btn setTitle:@"确认签名" forState:UIControlStateNormal];
+                [btn addTarget:self action:@selector(signConfirm) forControlEvents:UIControlEventTouchUpInside];
+                
                 [view addSubview:label];
+                [view addSubview:btn];
                 return view;
                 break;
             }
@@ -625,6 +643,20 @@
                         break;
                     }
                 }
+                break;
+            }
+               
+            case 1: {
+                UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
+                cell.declareL.text = @"检查类别";
+                cell.declareL.font = [UIFont boldSystemFontOfSize:15];
+                cell.contentL.text = self.checktypeName;    //检查类别名称
+                cell.contentL.font = [UIFont boldSystemFontOfSize:15];
+                cell.contentL.textColor = RGBCOLOR(104, 104, 104);
+                return cell;
                 break;
             }
                 
@@ -768,6 +800,25 @@
                 break;
             }
                 
+            case 6: {
+                UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.declareL.strikeThroughEnabled = NO;
+                NSDictionary *dic = selectedServices[indexPath.row];
+                cell.declareL.text = dic[@"item"];
+                cell.declareL.font = [UIFont systemFontOfSize:15];
+                if (dic[@"money"]) {
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+                } else {
+                    cell.contentL.text = @"";
+                }
+                cell.contentL.textColor = [UIColor blackColor];
+                cell.contentL.font = [UIFont systemFontOfSize:15];
+                return cell;
+                break;
+            }
+                
             case 7: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -822,6 +873,8 @@
                 
             case 10: {
                 UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSignCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
                 return cell;
                 break;
             }
@@ -851,6 +904,11 @@
                 ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
                 detailVC.serviceDic = removeAry[indexPath.row];
                 [self.navigationController pushViewController:detailVC animated:YES];
+                break;
+            }
+                
+            case 10: {
+                self.signView.hidden = NO;
                 break;
             }
                 
@@ -940,11 +998,15 @@
 //    return @"删掉我吧";
 //}
 
-#pragma mark - 生成图片
-- (void)imageBtnClick{
+#pragma mark - 生成图片并上传
+-(void)signConfirm {    //确认签名
     UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:10]];
-    UIImage *image  =  [cell.signView getSignatureImage];
+    UIImage *image  =  [self.signView getSignatureImage];
+    cell.signImgView.image = image;
+    
+    [self requestUploadImgFile:cell.signImgView];
 }
+
 
 #pragma mark - 发送请求
 -(void)requestGetAllUnnormal { //获取所有异常
@@ -1007,10 +1069,19 @@
         [servicesMul addObject:dicc3];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts",servicesMul,@"services", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money",signImgStr,@"signImage", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts",servicesMul,@"services", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
+}
+
+#pragma mark - 发起网络请求
+-(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];
+    [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -1084,6 +1155,22 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"][@"code"] afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:UploadImgFile]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
+        NSLog(@"UploadImgFile: %@",responseObject);
+        _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        if ([responseObject[@"result"] boolValue]) {
+            signImgStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

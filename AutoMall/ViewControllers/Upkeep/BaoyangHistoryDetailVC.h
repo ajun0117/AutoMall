@@ -19,5 +19,6 @@
 @property (strong, nonatomic) NSString *carUpkeepId;    //检查单id
 
 @property (strong, nonatomic) NSString *checktypeID;    //检查类别ID
+@property (strong, nonatomic) NSString *checktypeName;    //检查类别Name
 
 @end

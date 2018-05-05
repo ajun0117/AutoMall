@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BJTSignView.h"
 
 @interface UpkeepPlanSignCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet BJTSignView *signView;
+@property (strong, nonatomic) IBOutlet WPImageView *signImgView;
 
 @end

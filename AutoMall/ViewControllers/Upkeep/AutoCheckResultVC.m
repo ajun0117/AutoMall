@@ -171,6 +171,7 @@
                 planVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
                 planVC.carUpkeepId = self.carUpkeepId;
                 planVC.checktypeID = self.checktypeID;
+                planVC.checktypeName = self.checktypeName;
                 [self.navigationController pushViewController:planVC animated:YES];
             } else {
                 _networkConditionHUD.labelText = @"仅门店老板和员工可以此操作！";

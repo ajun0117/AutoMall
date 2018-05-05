@@ -215,6 +215,7 @@
             AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
             resultVC.carUpkeepId = dic[@"id"];
             resultVC.checktypeID = dic[@"checkTypeId"];
+            resultVC.checktypeName = dic[@"checkTypeName"];
             resultVC.isFromList = YES;
             [self.navigationController pushViewController:resultVC animated:YES];
         }

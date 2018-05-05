@@ -18,20 +18,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-WU-5u6" customClass="BJTSignView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="deN-a5-Ics" customClass="WPImageView">
+                        <rect key="frame" x="0.0" y="-1" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
-                <constraints>
-                    <constraint firstAttribute="bottom" secondItem="xaj-WU-5u6" secondAttribute="bottom" id="28R-mY-Lge"/>
-                    <constraint firstAttribute="trailing" secondItem="xaj-WU-5u6" secondAttribute="trailing" id="7xb-x5-Iz9"/>
-                    <constraint firstItem="xaj-WU-5u6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Pdz-H9-9TC"/>
-                    <constraint firstItem="xaj-WU-5u6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YVa-cl-x1z"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="signView" destination="xaj-WU-5u6" id="a1L-Lr-gMj"/>
+                <outlet property="signImgView" destination="deN-a5-Ics" id="gU0-sU-XaO"/>
             </connections>
             <point key="canvasLocation" x="-242" y="77"/>
         </tableViewCell>

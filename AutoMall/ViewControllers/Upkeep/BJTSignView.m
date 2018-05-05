@@ -29,6 +29,19 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+    self.backgroundColor = [UIColor clearColor];
+    [self setMultipleTouchEnabled:NO];
+    self.beizerPath = [UIBezierPath bezierPath];
+    [self.beizerPath setLineWidth:2];
+}
+
+-(void)initSelf {
+    
+}
+
 #pragma mark - 绘图操作
 - (void)drawRect:(CGRect)rect{
     //设置签名的颜色

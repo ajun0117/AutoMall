@@ -11,6 +11,7 @@
 @interface AutoCheckVC : UIViewController
 
 @property (strong, nonatomic) NSString *checktypeID;    //检查类别ID
+@property (strong, nonatomic) NSString *checktypeName;    //检查类别Name
 //@property (strong, nonatomic) NSNumber *carId;  //选择的车辆Id
 @property (strong, nonatomic) NSDictionary *carDic;  //选择的车辆Dic
 @property (strong, nonatomic) UIScrollView *mainScrollView;

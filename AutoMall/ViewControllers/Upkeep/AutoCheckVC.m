@@ -248,6 +248,7 @@
         detailVC.lastMileage = STRING(dic[@"lastMileage"]);
         detailVC.carUpkeepId = dic[@"id"];
         detailVC.checktypeID = dic[@"checkTypeId"];
+        detailVC.checktypeName = dic[@"checkTypeName"];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
     else {
@@ -1221,6 +1222,7 @@
     AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
     resultVC.carUpkeepId = carId;
     resultVC.checktypeID = self.checktypeID;
+    resultVC.checktypeName = self.checktypeName;
     [self.navigationController pushViewController:resultVC animated:YES];
 }
 

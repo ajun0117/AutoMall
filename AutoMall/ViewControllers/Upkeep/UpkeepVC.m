@@ -252,12 +252,14 @@
                 if (selectedCarDic) {
                     AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
                     checkVC.checktypeID = dic[@"id"];
+                    checkVC.checktypeName = dic[@"name"];
                     checkVC.carDic = selectedCarDic;
                     checkVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:checkVC animated:YES];
                     
 //                    AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
 //                    infoVC.checktypeID = dic[@"id"];
+//                    infoVC.checktypeName = dic[@"name"];
 //                    infoVC.carDic = selectedCarDic;
 //                    infoVC.hidesBottomBarWhenPushed = YES;
 //                    [self.navigationController pushViewController:infoVC animated:YES];
@@ -278,12 +280,14 @@
 //                } else {
                     AutoCheckVC *checkVC = [[AutoCheckVC alloc] init];
                     checkVC.checktypeID = dic[@"id"];
+                    checkVC.checktypeName = dic[@"name"];
                     checkVC.carDic = selectedCarDic;
                     checkVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:checkVC animated:YES];
                 
 //                AutoCheckCarInfoVC *infoVC = [[AutoCheckCarInfoVC alloc] init];
 //                infoVC.checktypeID = dic[@"id"];
+//                infoVC.checktypeName = dic[@"name"];
 //                infoVC.carDic = selectedCarDic;
 //                infoVC.hidesBottomBarWhenPushed = YES;
 //                [self.navigationController pushViewController:infoVC animated:YES];
