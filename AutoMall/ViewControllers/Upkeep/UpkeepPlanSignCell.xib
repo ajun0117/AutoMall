@@ -18,16 +18,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="deN-a5-Ics" customClass="WPImageView">
-                        <rect key="frame" x="0.0" y="-1" width="320" height="100"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="deN-a5-Ics" customClass="WPImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="deN-a5-Ics" secondAttribute="trailing" id="787-Ew-sMK"/>
+                    <constraint firstAttribute="bottom" secondItem="deN-a5-Ics" secondAttribute="bottom" id="8iI-zu-4NE"/>
+                    <constraint firstItem="deN-a5-Ics" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="f75-l0-IwM"/>
+                    <constraint firstItem="deN-a5-Ics" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oYc-2t-vHB"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="signImgView" destination="deN-a5-Ics" id="gU0-sU-XaO"/>
             </connections>
-            <point key="canvasLocation" x="-242" y="77"/>
+            <point key="canvasLocation" x="-84" y="44"/>
         </tableViewCell>
     </objects>
 </document>

@@ -10,6 +10,7 @@
 
 @interface ServiceContentDetailVC ()
 @property (weak, nonatomic) IBOutlet UILabel *contentL;
+@property (weak, nonatomic) IBOutlet UILabel *numberL;
 
 @end
 
@@ -42,10 +43,31 @@
     self.navigationItem.rightBarButtonItem.tintColor = Gray_Color;
     
     self.contentL.text = self.serviceDic[@"notice"];
+    
+    self.numberL.text = self.numStr;
 }
 
 -(void)save {
     
+}
+
+- (IBAction)subtractAction:(id)sender {
+    int num = [self.numberL.text intValue];
+    if (num == 1) {
+        return;
+    }
+    num --;
+    self.numberL.text = [NSString stringWithFormat:@"%d",num];
+}
+
+- (IBAction)plusAction:(id)sender {
+    int num = [self.numberL.text intValue];
+    num ++;
+    self.numberL.text = [NSString stringWithFormat:@"%d",num];
+}
+- (IBAction)confirmAction:(id)sender {
+    self.SelecteServiceNumber(self.numberL.text);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

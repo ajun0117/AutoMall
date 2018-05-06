@@ -30,7 +30,7 @@
     NSArray *serviceContentAry;
     NSArray *selectedPackageAry;
     NSMutableArray *removeAry;      //去除重复的方案
-     NSMutableArray *lineationAry;     //记录划线的方案数组
+     NSMutableArray *lineationAry;     //记录已选择的方案数组
     NSDictionary *thePackageDic;    //存储下级页面已选择的套餐
     NSArray *selectedServices;    //选择的门店服务
     NSDictionary *theServicesDic;   //存储下级页面已选择的门店服务
@@ -41,9 +41,12 @@
     float discountPrice;    //优惠的价格（实际需要减掉的价格）
     float selectedServicePrice;    //门店服务的价格（实际需要加上的价格）
     NSMutableArray *unnormalAry;
+    UIImage *signImg;       //签名图片
     NSString *signImgStr;   //签名图片地址
+    NSMutableDictionary *serviceNumberDic;     //记录选择的服务方案的数量
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UIView *signBgView;
 @property (strong, nonatomic) IBOutlet BJTSignView *signView;
 
 @end
@@ -81,6 +84,7 @@
     self.myTableView.tableFooterView = [UIView new];
 
     removeAry = [NSMutableArray array];
+    serviceNumberDic = [NSMutableDictionary dictionary];
     lineationAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
     
@@ -154,6 +158,11 @@
                 }
             }
         }
+        
+        for (NSDictionary *dicc in removeAry) {     //遍历赋初始值，都为1
+            [serviceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
+        }
+        
         [lineationAry removeAllObjects];
         [lineationAry addObjectsFromArray:removeAry];
         serVicePrice = 0;     //初始化价格
@@ -265,6 +274,28 @@
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
+}
+- (IBAction)clearSign:(id)sender {
+    [self.signView clearSignature];
+}
+- (IBAction)cancelSign:(id)sender {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.signBgView.alpha = 0;
+    }];
+}
+- (IBAction)completeSign:(id)sender {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.signBgView.alpha = 0;
+    }];
+    
+    UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:10]];
+    UIImage *image  =  [self.signView getSignatureImage];
+    signImg = image;
+    cell.signImgView.image = image;
+    
+    [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:10] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [self requestUploadImgFile:cell.signImgView];
 }
 
 #pragma mark - UITableViewDataSource
@@ -412,7 +443,7 @@
                 label.text = @"车辆信息";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -447,16 +478,7 @@
                 label.backgroundColor = [UIColor clearColor];
                 label.text = @"方案明细";
                 
-//                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-//                img.frame = CGRectMake(SCREEN_WIDTH - 24, 15, 8, 13);
-//                
-//                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//                btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-//                [btn addTarget:self action:@selector(carInfo) forControlEvents:UIControlEventTouchUpInside];
-                
                 [view addSubview:label];
-//                [view addSubview:img];
-//                [view addSubview:btn];
                 return view;
                 break;
             }
@@ -470,7 +492,7 @@
                 label.text = @"服务套餐";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -493,7 +515,7 @@
                 label.text = @"门店服务";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -516,7 +538,7 @@
                 label.text = @"增加服务";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -539,7 +561,7 @@
                 label.text = @"优惠";
                 
                 UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+                img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -561,15 +583,15 @@
                 label.backgroundColor = [UIColor clearColor];
                 label.text = @"车主确认服务方案签名";
                 
-                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                btn.frame = CGRectMake(SCREEN_WIDTH - 16 - 80, 0, 80 , 44);
-                btn.titleLabel.font = [UIFont systemFontOfSize:15];
-                [btn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
-                [btn setTitle:@"确认签名" forState:UIControlStateNormal];
-                [btn addTarget:self action:@selector(signConfirm) forControlEvents:UIControlEventTouchUpInside];
+//                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//                btn.frame = CGRectMake(SCREEN_WIDTH - 16 - 80, 0, 80 , 44);
+//                btn.titleLabel.font = [UIFont systemFontOfSize:15];
+//                [btn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
+//                [btn setTitle:@"确认签名" forState:UIControlStateNormal];
+//                [btn addTarget:self action:@selector(signConfirm) forControlEvents:UIControlEventTouchUpInside];
                 
                 [view addSubview:label];
-                [view addSubview:btn];
+//                [view addSubview:btn];
                 return view;
                 break;
             }
@@ -752,10 +774,11 @@
                 [cell.checkBtn addTarget:self action:@selector(checkService:) forControlEvents:UIControlEventTouchUpInside];
                 cell.declareL.text = dic[@"name"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
+                NSString *numStr = serviceNumberDic[dic[@"id"]];
                 if ([dic[@"customized"] boolValue]) {
-                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@",STRING(dic[@"customizedPrice"])];
+                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@ *%@",STRING(dic[@"customizedPrice"]),numStr];
                 } else {
-                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
+                    cell.moneyL.text = [NSString stringWithFormat:@"￥%@ *%@",dic[@"price"],numStr];
                 }
                 
                 return cell;
@@ -875,6 +898,13 @@
                 UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSignCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.text = @"点击签名";
+                cell.textLabel.font = [UIFont systemFontOfSize:14];
+                if (signImg) {
+                    cell.textLabel.text = @"";
+                    cell.signImgView.image = signImg;
+                }
+                
                 return cell;
                 break;
             }
@@ -903,12 +933,23 @@
             case 3: {
                 ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
                 detailVC.serviceDic = removeAry[indexPath.row];
+                id key = removeAry[indexPath.row][@"id"];
+                NSLog(@"key_befor%@",key);
+                detailVC.numStr = serviceNumberDic[key];
+                detailVC.SelecteServiceNumber = ^(NSString *numStr) {
+                    NSLog(@"key_after%@",key);
+                    [serviceNumberDic setObject:numStr forKey:key];
+                    [self.myTableView reloadData];
+                };
                 [self.navigationController pushViewController:detailVC animated:YES];
                 break;
             }
                 
             case 10: {
-                self.signView.hidden = NO;
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.signBgView.alpha = 1;
+                }];
+                
                 break;
             }
                 
@@ -997,15 +1038,6 @@
 //- (NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
 //    return @"删掉我吧";
 //}
-
-#pragma mark - 生成图片并上传
--(void)signConfirm {    //确认签名
-    UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:10]];
-    UIImage *image  =  [self.signView getSignatureImage];
-    cell.signImgView.image = image;
-    
-    [self requestUploadImgFile:cell.signImgView];
-}
 
 
 #pragma mark - 发送请求
@@ -1128,6 +1160,9 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             serviceContentAry = responseObject[@"data"];
             [removeAry addObjectsFromArray:serviceContentAry];
+            for (NSDictionary *dicc in removeAry) {     //遍历赋初始值，都为1
+                [serviceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
+            }
             [lineationAry addObjectsFromArray:removeAry];
             serVicePrice = 0;     //初始化价格
             for (NSDictionary *dic in lineationAry) {
@@ -1166,9 +1201,6 @@
     if ([notification.name isEqualToString:UploadImgFile]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UploadImgFile object:nil];
         NSLog(@"UploadImgFile: %@",responseObject);
-        _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         if ([responseObject[@"result"] boolValue]) {
             signImgStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
         }

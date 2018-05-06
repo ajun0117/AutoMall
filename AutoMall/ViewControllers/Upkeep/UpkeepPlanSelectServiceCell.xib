@@ -60,7 +60,7 @@
                 <outlet property="declareL" destination="Vtx-Dh-XWW" id="qdR-iW-aMI"/>
                 <outlet property="moneyL" destination="LHt-AL-hJ9" id="Nos-or-Ovj"/>
             </connections>
-            <point key="canvasLocation" x="-251" y="45"/>
+            <point key="canvasLocation" x="-145" y="43"/>
         </tableViewCell>
     </objects>
     <resources>

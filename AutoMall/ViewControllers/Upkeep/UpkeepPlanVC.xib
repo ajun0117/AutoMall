@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpkeepPlanVC">
             <connections>
                 <outlet property="myTableView" destination="KZ0-4I-1KH" id="bzR-fp-2nr"/>
+                <outlet property="signBgView" destination="I7A-pu-8ae" id="BsX-sc-FYA"/>
                 <outlet property="signView" destination="8E4-qc-f8v" id="g3Q-Zl-rwb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -42,28 +43,91 @@
                         <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="ZTo-US-p8X"/>
                     </connections>
                 </button>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8E4-qc-f8v" customClass="BJTSignView">
-                    <rect key="frame" x="0.0" y="467" width="375" height="200"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7A-pu-8ae">
+                    <rect key="frame" x="0.0" y="423" width="375" height="244"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mv3-Lj-LpQ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JN0-9k-IyV">
+                                    <rect key="frame" x="0.0" y="7" width="100" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="6EF-cR-hOK"/>
+                                        <constraint firstAttribute="height" constant="30" id="Omf-Ld-feN"/>
+                                    </constraints>
+                                    <state key="normal" title="清除"/>
+                                    <connections>
+                                        <action selector="clearSign:" destination="-1" eventType="touchUpInside" id="t8t-Ve-Jlh"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpd-Z7-OH4">
+                                    <rect key="frame" x="275" y="7" width="100" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="BP5-Gp-dGJ"/>
+                                        <constraint firstAttribute="width" constant="100" id="ton-9s-wC8"/>
+                                    </constraints>
+                                    <state key="normal" title="完成"/>
+                                    <connections>
+                                        <action selector="completeSign:" destination="-1" eventType="touchUpInside" id="bD9-bm-BLT"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j50-Ut-V4T">
+                                    <rect key="frame" x="137" y="7" width="100" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="QZC-jW-5WD"/>
+                                        <constraint firstAttribute="width" constant="100" id="mA7-0X-xZg"/>
+                                    </constraints>
+                                    <state key="normal" title="取消"/>
+                                    <connections>
+                                        <action selector="cancelSign:" destination="-1" eventType="touchUpInside" id="Wq0-9Y-tGb"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="tpd-Z7-OH4" secondAttribute="trailing" id="IqU-5l-GML"/>
+                                <constraint firstItem="j50-Ut-V4T" firstAttribute="centerX" secondItem="mv3-Lj-LpQ" secondAttribute="centerX" id="JEK-fJ-ahy"/>
+                                <constraint firstAttribute="height" constant="44" id="SOI-Yk-Wql"/>
+                                <constraint firstItem="j50-Ut-V4T" firstAttribute="centerY" secondItem="mv3-Lj-LpQ" secondAttribute="centerY" id="Xnq-4G-tHn"/>
+                                <constraint firstItem="tpd-Z7-OH4" firstAttribute="centerY" secondItem="mv3-Lj-LpQ" secondAttribute="centerY" id="Y8k-wj-K42"/>
+                                <constraint firstItem="JN0-9k-IyV" firstAttribute="centerY" secondItem="mv3-Lj-LpQ" secondAttribute="centerY" id="d9K-l5-LLI"/>
+                                <constraint firstItem="JN0-9k-IyV" firstAttribute="leading" secondItem="mv3-Lj-LpQ" secondAttribute="leading" id="f4o-t2-GOt"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8E4-qc-f8v" customClass="BJTSignView">
+                            <rect key="frame" x="0.0" y="44" width="375" height="200"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="QAw-At-6sd"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="VR3-Ku-msQ"/>
+                        <constraint firstAttribute="trailing" secondItem="8E4-qc-f8v" secondAttribute="trailing" id="Dag-mf-Vfl"/>
+                        <constraint firstAttribute="height" constant="244" id="HeJ-7o-Crd"/>
+                        <constraint firstItem="mv3-Lj-LpQ" firstAttribute="top" secondItem="I7A-pu-8ae" secondAttribute="top" id="Z3b-j2-v6r"/>
+                        <constraint firstAttribute="bottom" secondItem="8E4-qc-f8v" secondAttribute="bottom" id="k2w-c0-cgF"/>
+                        <constraint firstAttribute="trailing" secondItem="mv3-Lj-LpQ" secondAttribute="trailing" id="l78-fN-sQk"/>
+                        <constraint firstItem="mv3-Lj-LpQ" firstAttribute="leading" secondItem="I7A-pu-8ae" secondAttribute="leading" id="mbX-xM-hWD"/>
+                        <constraint firstItem="8E4-qc-f8v" firstAttribute="leading" secondItem="I7A-pu-8ae" secondAttribute="leading" id="pjh-7j-7yQ"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Sjy-4X-reG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EdI-kw-ntM"/>
-                <constraint firstAttribute="trailing" secondItem="8E4-qc-f8v" secondAttribute="trailing" id="Hv9-Zh-Jpt"/>
+                <constraint firstItem="I7A-pu-8ae" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="G4i-Fs-vpz"/>
                 <constraint firstItem="KZ0-4I-1KH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Lv8-SS-bTS"/>
                 <constraint firstItem="KZ0-4I-1KH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ope-wH-I2w"/>
                 <constraint firstAttribute="trailing" secondItem="Sjy-4X-reG" secondAttribute="trailing" id="R3K-2f-v62"/>
                 <constraint firstAttribute="trailing" secondItem="KZ0-4I-1KH" secondAttribute="trailing" id="RYz-2I-NFC"/>
+                <constraint firstAttribute="trailing" secondItem="I7A-pu-8ae" secondAttribute="trailing" id="RcJ-w3-YXp"/>
                 <constraint firstItem="Sjy-4X-reG" firstAttribute="top" secondItem="KZ0-4I-1KH" secondAttribute="bottom" id="VTp-Mf-68N"/>
-                <constraint firstAttribute="bottom" secondItem="8E4-qc-f8v" secondAttribute="bottom" id="cTr-qS-aGa"/>
-                <constraint firstItem="8E4-qc-f8v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gze-Xh-SWe"/>
+                <constraint firstAttribute="bottom" secondItem="I7A-pu-8ae" secondAttribute="bottom" id="cKT-Zf-uu3"/>
                 <constraint firstAttribute="bottom" secondItem="Sjy-4X-reG" secondAttribute="bottom" id="n2l-za-5Rv"/>
             </constraints>
-            <point key="canvasLocation" x="-605" y="54"/>
+            <point key="canvasLocation" x="-605.5" y="53.5"/>
         </view>
     </objects>
 </document>

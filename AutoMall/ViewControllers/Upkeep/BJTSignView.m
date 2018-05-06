@@ -45,7 +45,7 @@
 #pragma mark - 绘图操作
 - (void)drawRect:(CGRect)rect{
     //设置签名的颜色
-    UIColor *strokeColor = [UIColor redColor];
+    UIColor *strokeColor = [UIColor blackColor];
     [strokeColor setStroke];
     
     //签名的路径绘制

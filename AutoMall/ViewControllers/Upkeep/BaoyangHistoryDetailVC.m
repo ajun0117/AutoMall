@@ -221,7 +221,7 @@
             label.text = @"车辆信息";
             
             UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -270,7 +270,7 @@
             label.text = @"服务套餐";
             
 //            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 7, 11);
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -292,7 +292,7 @@
             label.text = @"门店服务";
             
 //            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -314,7 +314,7 @@
             label.text = @"优惠";
             
 //            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
-//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 6, 11);
+//            img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);

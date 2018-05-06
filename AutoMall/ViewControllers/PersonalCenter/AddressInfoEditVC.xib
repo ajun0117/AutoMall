@@ -166,7 +166,7 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lJ-eR-IdO">
-                                    <rect key="frame" x="81" y="96" width="253" height="30"/>
+                                    <rect key="frame" x="81" y="96" width="251" height="30"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="0Tm-uF-xLk"/>
@@ -192,10 +192,10 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="G5p-AA-nla">
-                                    <rect key="frame" x="350" y="102" width="9" height="16"/>
+                                    <rect key="frame" x="348" y="100" width="11" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="Nan-mZ-Kd6"/>
-                                        <constraint firstAttribute="width" constant="9" id="xS4-kW-Iah"/>
+                                        <constraint firstAttribute="height" constant="20" id="Nan-mZ-Kd6"/>
+                                        <constraint firstAttribute="width" constant="11" id="xS4-kW-Iah"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAD-kl-CgE">
@@ -465,6 +465,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrows" width="6" height="12"/>
+        <image name="arrows" width="26" height="48"/>
     </resources>
 </document>

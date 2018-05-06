@@ -12,4 +12,7 @@
 
 @property (strong ,nonatomic) NSDictionary*serviceDic;
 
+@property (strong ,nonatomic) NSString *numStr;
+@property (copy, nonatomic) void((^SelecteServiceNumber)(NSString *numStr));
+
 @end
