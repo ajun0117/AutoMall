@@ -22,6 +22,7 @@
 #import "AutoCheckResultDetailVC.h"
 #import "AutoCheckServicesVC.h"
 #import "BJTSignView.h"
+#import "ServiceAndDiscountsVC.h"
 
 @interface UpkeepPlanVC () <UIAlertViewDelegate>
 { 
@@ -44,6 +45,8 @@
     UIImage *signImg;       //签名图片
     NSString *signImgStr;   //签名图片地址
     NSMutableDictionary *serviceNumberDic;     //记录选择的服务方案的数量
+    NSMutableDictionary *storeServiceNumberDic;     //记录门店服务的数量
+    NSMutableDictionary *discountsNumberDic;     //记录优惠的数量
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *signBgView;
@@ -85,6 +88,8 @@
 
     removeAry = [NSMutableArray array];
     serviceNumberDic = [NSMutableDictionary dictionary];
+    storeServiceNumberDic = [NSMutableDictionary dictionary];
+    discountsNumberDic = [NSMutableDictionary dictionary];
     lineationAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
     
@@ -159,6 +164,7 @@
             }
         }
         
+        [serviceNumberDic removeAllObjects];
         for (NSDictionary *dicc in removeAry) {     //遍历赋初始值，都为1
             [serviceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
         }
@@ -197,6 +203,11 @@
     servicesVC.SelecteSerices = ^(NSMutableDictionary *servicesDic) {
         theServicesDic = [NSDictionary dictionaryWithDictionary:servicesDic];
         selectedServices = [servicesDic allValues];
+        
+        [storeServiceNumberDic removeAllObjects];
+        for (NSDictionary *dicc in selectedServices) {     //遍历赋初始值，都为1
+            [storeServiceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
+        }
 
         selectedServicePrice = 0;
         for (NSDictionary *dic in selectedServices) {
@@ -218,6 +229,11 @@
     discountsVC.SelecteDiscount = ^(NSMutableDictionary *discountDic) {
         theDiscountDic = [NSDictionary dictionaryWithDictionary:discountDic];
         selectedDiscounts = [discountDic allValues];
+        
+        [discountsNumberDic removeAllObjects];
+        for (NSDictionary *dicc in selectedDiscounts) {     //遍历赋初始值，都为1
+            [discountsNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
+        }
         
         discountPrice = 0;
         for (NSDictionary *dic in selectedDiscounts) {
@@ -806,14 +822,15 @@
                 
             case 5: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.declareL.strikeThroughEnabled = NO;
                 NSDictionary *dic = selectedServices[indexPath.row];
                 cell.declareL.text = dic[@"item"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
+                NSString *numStr = storeServiceNumberDic[dic[@"id"]];
                 if (dic[@"money"]) {
-                    cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"money"]];
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%@ *%@",dic[@"money"],numStr];
                 } else {
                     cell.contentL.text = @"";
                 }
@@ -858,14 +875,15 @@
                 
             case 8: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.declareL.strikeThroughEnabled = NO;
                 NSDictionary *dic = selectedDiscounts[indexPath.row];
                 cell.declareL.text = dic[@"item"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
+                NSString *numStr = discountsNumberDic[dic[@"id"]];
                 if (dic[@"money"]) {
-                    cell.contentL.text = [NSString stringWithFormat:@"-￥%@",dic[@"money"]];
+                    cell.contentL.text = [NSString stringWithFormat:@"-￥%@ *%@",dic[@"money"],numStr];
                 } else {
                     cell.contentL.text = @"";
                 }
@@ -934,11 +952,37 @@
                 ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
                 detailVC.serviceDic = removeAry[indexPath.row];
                 id key = removeAry[indexPath.row][@"id"];
-                NSLog(@"key_befor%@",key);
                 detailVC.numStr = serviceNumberDic[key];
                 detailVC.SelecteServiceNumber = ^(NSString *numStr) {
-                    NSLog(@"key_after%@",key);
                     [serviceNumberDic setObject:numStr forKey:key];
+                    [self.myTableView reloadData];
+                };
+                [self.navigationController pushViewController:detailVC animated:YES];
+                break;
+            }
+                
+            case 5: {
+                ServiceAndDiscountsVC *detailVC = [[ServiceAndDiscountsVC alloc] init];
+                detailVC.titleStr = @"门店服务详情";
+                detailVC.theDic = selectedServices[indexPath.row];
+                id key = selectedServices[indexPath.row][@"id"];
+                detailVC.numStr = storeServiceNumberDic[key];
+                detailVC.SelecteTheNumber = ^(NSString *numStr) {
+                    [storeServiceNumberDic setObject:numStr forKey:key];
+                    [self.myTableView reloadData];
+                };
+                [self.navigationController pushViewController:detailVC animated:YES];
+                break;
+            }
+                
+            case 8: {
+                ServiceAndDiscountsVC *detailVC = [[ServiceAndDiscountsVC alloc] init];
+                detailVC.titleStr = @"优惠详情";
+                detailVC.theDic = selectedDiscounts[indexPath.row];
+                id key = selectedDiscounts[indexPath.row][@"id"];
+                detailVC.numStr = discountsNumberDic[key];
+                detailVC.SelecteTheNumber = ^(NSString *numStr) {
+                    [discountsNumberDic setObject:numStr forKey:key];
                     [self.myTableView reloadData];
                 };
                 [self.navigationController pushViewController:detailVC animated:YES];
@@ -1160,6 +1204,8 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             serviceContentAry = responseObject[@"data"];
             [removeAry addObjectsFromArray:serviceContentAry];
+            
+            [serviceNumberDic removeAllObjects];
             for (NSDictionary *dicc in removeAry) {     //遍历赋初始值，都为1
                 [serviceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
             }
