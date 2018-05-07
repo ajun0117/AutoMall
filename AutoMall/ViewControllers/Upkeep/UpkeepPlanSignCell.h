@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UpkeepPlanSignCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *noticeL;
 @property (strong, nonatomic) IBOutlet WPImageView *signImgView;
 
 @end

@@ -51,14 +51,14 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-//    if ([self checkCodeNumWithCode:self.discountsMoneyTF.text]) {
+    if ([self checkCodeNumWithCode:self.discountsMoneyTF.text]) {
         [self requestPostAddDiscount];
-//    }
-//    else {
-//        _networkConditionHUD.labelText = @"输入的金额格式有误，请重新输入";
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//    }
+    }
+    else {
+        _networkConditionHUD.labelText = @"输入的金额格式有误，请重新输入";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark -

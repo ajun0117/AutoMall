@@ -23,6 +23,7 @@
 #import "AutoCheckServicesVC.h"
 #import "BJTSignView.h"
 #import "ServiceAndDiscountsVC.h"
+#import "AddServicesVC.h"
 
 @interface UpkeepPlanVC () <UIAlertViewDelegate>
 { 
@@ -41,12 +42,14 @@
     float packagePrice;     //套餐价
     float discountPrice;    //优惠的价格（实际需要减掉的价格）
     float selectedServicePrice;    //门店服务的价格（实际需要加上的价格）
+    float addedServicePrice;    //增加服务的价格（实际需要加上的价格）
     NSMutableArray *unnormalAry;
     UIImage *signImg;       //签名图片
     NSString *signImgStr;   //签名图片地址
     NSMutableDictionary *serviceNumberDic;     //记录选择的服务方案的数量
     NSMutableDictionary *storeServiceNumberDic;     //记录门店服务的数量
     NSMutableDictionary *discountsNumberDic;     //记录优惠的数量
+    NSMutableArray *addedServicesAry;       //记录已增加的服务
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *signBgView;
@@ -92,7 +95,7 @@
     discountsNumberDic = [NSMutableDictionary dictionary];
     lineationAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
-    
+    addedServicesAry = [NSMutableArray array];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -223,6 +226,23 @@
 }
 
 
+-(void)toAddServices {
+    AddServicesVC *addVC = [[AddServicesVC alloc] init];
+    addVC.AddedDiscount = ^(NSDictionary *addedDic) {
+        [addedServicesAry addObject:addedDic];
+        
+        addedServicePrice = 0.0;
+        for (NSDictionary *dic in addedServicesAry) {
+            float money = [dic[@"money"] floatValue];
+            addedServicePrice += money;
+        }
+        
+        [self.myTableView reloadData];
+    };
+    addVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:addVC animated:YES];
+}
+
 -(void)carDiscounts {       //选择优惠
     AutoCheckDisountsVC *discountsVC = [[AutoCheckDisountsVC alloc] init];
     discountsVC.selectedDic = theDiscountDic;
@@ -251,26 +271,27 @@
 -(void)checkService:(UIButton *)btn {
     int row = (int)btn.tag - 100;
     NSDictionary *dic = removeAry[row];
+    int num = [serviceNumberDic[dic[@"id"]] intValue];
     btn.selected = ! btn.selected;
     if (btn.selected) {
         [lineationAry addObject:dic];
         if ([dic[@"customized"] boolValue])  {
-            serVicePrice += [dic[@"customizedPrice"] floatValue];
+            serVicePrice += [dic[@"customizedPrice"] floatValue] * num;
         } else {
-            serVicePrice += [dic[@"price"] floatValue];
+            serVicePrice += [dic[@"price"] floatValue] * num;
         }
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationLeft];
     }
     else {
         [lineationAry removeObject:dic];
         if ([dic[@"customized"] boolValue])  {
-            serVicePrice -= [dic[@"customizedPrice"] floatValue];
+            serVicePrice -= [dic[@"customizedPrice"] floatValue] * num;
         } else {
-            serVicePrice -= [dic[@"price"] floatValue];
+            serVicePrice -= [dic[@"price"] floatValue] * num;
         }
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationLeft];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationLeft];
     }
 }
 
@@ -346,7 +367,7 @@
                 break;
                 
             case 6:
-                return selectedServices.count;
+                return addedServicesAry.count;
             break;
                 
             case 7:
@@ -558,7 +579,7 @@
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-//                [btn addTarget:self action:@selector(toSelectServices) forControlEvents:UIControlEventTouchUpInside];
+                [btn addTarget:self action:@selector(toAddServices) forControlEvents:UIControlEventTouchUpInside];
                 
                 [view addSubview:label];
                 [view addSubview:img];
@@ -777,14 +798,16 @@
                 
             case 3: {
                 UpkeepPlanSelectServiceCell *cell = (UpkeepPlanSelectServiceCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSelectServiceCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleGray;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
                 NSDictionary *dic = removeAry[indexPath.row];
 
                 if ([lineationAry containsObject:dic]) {    //如果包含，则勾选
                     cell.checkBtn.selected = YES;
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 } else {
                     cell.checkBtn.selected = NO;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
                 cell.checkBtn.tag = indexPath.row + 100;
                 [cell.checkBtn addTarget:self action:@selector(checkService:) forControlEvents:UIControlEventTouchUpInside];
@@ -845,7 +868,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.declareL.strikeThroughEnabled = NO;
-                NSDictionary *dic = selectedServices[indexPath.row];
+                NSDictionary *dic = addedServicesAry[indexPath.row];
                 cell.declareL.text = dic[@"item"];
                 cell.declareL.font = [UIFont systemFontOfSize:15];
                 if (dic[@"money"]) {
@@ -916,10 +939,8 @@
                 UpkeepPlanSignCell *cell = (UpkeepPlanSignCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepPlanSignCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.textLabel.text = @"点击签名";
-                cell.textLabel.font = [UIFont systemFontOfSize:14];
                 if (signImg) {
-                    cell.textLabel.text = @"";
+                    cell.noticeL = @"";
                     cell.signImgView.image = signImg;
                 }
                 
@@ -949,15 +970,31 @@
             }
                 
             case 3: {
-                ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
-                detailVC.serviceDic = removeAry[indexPath.row];
-                id key = removeAry[indexPath.row][@"id"];
-                detailVC.numStr = serviceNumberDic[key];
-                detailVC.SelecteServiceNumber = ^(NSString *numStr) {
-                    [serviceNumberDic setObject:numStr forKey:key];
-                    [self.myTableView reloadData];
-                };
-                [self.navigationController pushViewController:detailVC animated:YES];
+                NSDictionary *dic = removeAry[indexPath.row];
+                if ([lineationAry containsObject:dic]) {    //如果包含，则勾
+                    ServiceContentDetailVC *detailVC = [[ServiceContentDetailVC alloc] init];
+                    detailVC.serviceDic = dic;
+                    id key = dic[@"id"];
+                    detailVC.numStr = serviceNumberDic[key];
+                    detailVC.SelecteServiceNumber = ^(NSString *numStr) {
+                        [serviceNumberDic setObject:numStr forKey:key];
+                        
+                        serVicePrice = 0;     //初始化价格
+                        for (NSDictionary *dic in lineationAry) {
+                            int num = [serviceNumberDic[dic[@"id"]] intValue];
+                            if ([dic[@"customized"] boolValue]) {
+                                serVicePrice += [dic[@"customizedPrice"] floatValue] * num;
+                            } else {
+                                serVicePrice += [dic[@"price"] floatValue] * num;
+                            }
+                            
+                        }
+                        
+                        [self.myTableView reloadData];
+                    };
+                    [self.navigationController pushViewController:detailVC animated:YES];
+                }
+
                 break;
             }
                 
@@ -969,8 +1006,19 @@
                 detailVC.numStr = storeServiceNumberDic[key];
                 detailVC.SelecteTheNumber = ^(NSString *numStr) {
                     [storeServiceNumberDic setObject:numStr forKey:key];
+                    
+                    selectedServicePrice = 0;
+                    for (NSDictionary *dic in selectedServices) {
+                        if (dic[@"money"]) {
+                            int num = [storeServiceNumberDic[dic[@"id"]] intValue];
+                            selectedServicePrice += [dic[@"money"] floatValue] * num;
+                        }
+                    }
+                    NSLog(@"selectedServicePrice: %.2f",selectedServicePrice);
+                    
                     [self.myTableView reloadData];
                 };
+                
                 [self.navigationController pushViewController:detailVC animated:YES];
                 break;
             }
@@ -983,8 +1031,21 @@
                 detailVC.numStr = discountsNumberDic[key];
                 detailVC.SelecteTheNumber = ^(NSString *numStr) {
                     [discountsNumberDic setObject:numStr forKey:key];
+                    
+                    discountPrice = 0;
+                    for (NSDictionary *dic in selectedDiscounts) {
+                        if (dic[@"money"]) {
+                            int num = [discountsNumberDic[dic[@"id"]] intValue];
+                            discountPrice += [dic[@"money"] floatValue] * num;
+                        }
+                    }
+                    NSLog(@"discountPrice: %.2f",discountPrice);
+                    
                     [self.myTableView reloadData];
                 };
+                
+
+                
                 [self.navigationController pushViewController:detailVC animated:YES];
                 break;
             }
@@ -1114,9 +1175,9 @@
     for (NSDictionary *dic in lineationAry) {   //只提交没有划线的
         NSDictionary *dicc;
         if ([dic[@"customized"] boolValue])  {
-            dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"customizedPrice"],@"price", nil];
+            dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"customizedPrice"],@"price",serviceNumberDic[dic[@"id"]],@"number", nil];
         } else {
-            dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"price"],@"price", nil];
+            dicc = [NSDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"name"],@"name",dic[@"price"],@"price",serviceNumberDic[dic[@"id"]],@"number", nil];
         }
         [serviceContents addObject:dicc];
     }
@@ -1133,19 +1194,20 @@
         [servicePackages addObject:dicc1];
     }
     
+    
     NSMutableArray *discounts = [NSMutableArray array];
     for (NSDictionary *dic2 in selectedDiscounts) {
-        NSDictionary *dicc2 = [NSDictionary dictionaryWithObjectsAndKeys:dic2[@"id"],@"id",dic2[@"item"],@"item",dic2[@"money"],@"money", nil];
+        NSDictionary *dicc2 = [NSDictionary dictionaryWithObjectsAndKeys:dic2[@"id"],@"id",dic2[@"item"],@"item",dic2[@"money"],@"money",discountsNumberDic[dic2[@"id"]],@"number", nil];
         [discounts addObject:dicc2];
     }
     
     NSMutableArray *servicesMul = [NSMutableArray array];
     for (NSDictionary *dic3 in selectedServices) {
-        NSDictionary *dicc3 = [NSDictionary dictionaryWithObjectsAndKeys:dic3[@"id"],@"id",dic3[@"item"],@"item",dic3[@"money"],@"money", nil];
+        NSDictionary *dicc3 = [NSDictionary dictionaryWithObjectsAndKeys:dic3[@"id"],@"id",dic3[@"item"],@"item",dic3[@"money"],@"money",storeServiceNumberDic[dic3[@"id"]],@"number", nil];
         [servicesMul addObject:dicc3];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money",signImgStr,@"signImage", serviceContents,@"serviceContents",servicePackages,@"servicePackages",discounts,@"discounts",servicesMul,@"services", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money",signImgStr,@"signImage", serviceContents,@"serviceContents",servicePackages,@"servicePackages",addedServicesAry,@"customerServices",discounts,@"discounts",servicesMul,@"services", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
