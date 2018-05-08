@@ -48,6 +48,7 @@
 
 #define STRING_Nil(str)         (str==nil)?@"":str
 #define STRING(str)         (str==[NSNull null])?@"":str
+#define STRINGOne(str)         (str==[NSNull null])?@"1":str
 #define STRINGZero(str)         (str==[NSNull null])?@"0":str
 #define NSStringWithNumberNULL(number)    number==[NSNull null]?@"":[NSString stringWithFormat:@"%@",number]
 #define NSStringWithNumber(number)    number==nil?@"":[NSString stringWithFormat:@"%@",number]

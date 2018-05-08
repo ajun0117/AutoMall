@@ -303,7 +303,7 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-    if (serVicePrice + packagePrice - discountPrice + selectedServicePrice > 0) {
+    if (serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice > 0) {
         [self requestPostCarUpkeepConfirm];
     }
     else {
@@ -889,7 +889,7 @@
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"总价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + selectedServicePrice];
+                cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice + selectedServicePrice + addedServicePrice];
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 cell.contentL.textColor = [UIColor blackColor];
                 return cell;
@@ -923,11 +923,11 @@
                 cell.declareL.strikeThroughEnabled = NO;
                 cell.declareL.text = @"折后价";
                 cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-                NSLog(@"serVicePrice + packagePrice - discountPrice + selectedServicePrice:  %.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice);
-                if (serVicePrice + packagePrice - discountPrice + selectedServicePrice < 0) {
+                NSLog(@"serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice:  %.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice);
+                if (serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice < 0) {
                     cell.contentL.text = @"￥0";
                 } else {
-                    cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice];
+                    cell.contentL.text = [NSString stringWithFormat:@"￥%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice];
                 }
                 cell.contentL.font = [UIFont boldSystemFontOfSize:16];
                 cell.contentL.textColor = [UIColor blackColor];
@@ -940,7 +940,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 if (signImg) {
-                    cell.noticeL = @"";
+                    cell.noticeL.text = @"";
                     cell.signImgView.image = signImg;
                 }
                 
@@ -1207,7 +1207,7 @@
         [servicesMul addObject:dicc3];
     }
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice],@"money",signImgStr,@"signImage", serviceContents,@"serviceContents",servicePackages,@"servicePackages",addedServicesAry,@"customerServices",discounts,@"discounts",servicesMul,@"services", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carUpkeepId, @"id", [NSString stringWithFormat:@"%.2f",serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice],@"money",signImgStr,@"signImage", serviceContents,@"serviceContents",servicePackages,@"servicePackages",addedServicesAry,@"customerServices",discounts,@"discounts",servicesMul,@"services", nil];
     
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
@@ -1324,7 +1324,7 @@
 - (void)toPushVC:(NSString *)orderId {
     AutoCheckOrderPayModeVC *orderVC = [[AutoCheckOrderPayModeVC alloc] init];
     orderVC.checkOrderId = self.carUpkeepId;
-    NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice + selectedServicePrice];
+    NSNumber *moneyN = [NSNumber numberWithFloat:serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice];
     NSDictionary *dic = @{@"orderId":[NSString stringWithFormat:@"%@",orderId],@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"]),@"checktypeID":self.checktypeID};
     orderVC.infoDic = dic;
     [self.navigationController pushViewController:orderVC animated:YES];
