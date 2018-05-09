@@ -72,7 +72,7 @@
             cell.declareL.text = @"年款";
             if (! [self.carDic[@"purchaseDate"] isKindOfClass:[NSNull class]]) {
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-                [formater setDateFormat:@"yyyy-MM-dd"];
+                [formater setDateFormat:@"yyyy"];
                 NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"purchaseDate"] doubleValue]/1000];
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentL.text = string;
@@ -94,9 +94,9 @@
             break;
         }
         case 6: {
-            cell.declareL.text = @"进店时间";
+            cell.declareL.text = @"“初次建档时间";
             NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-            [formater setDateFormat:@"yyyy-MM-dd"];
+            [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
             NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"createTime"] doubleValue]/1000];
             NSString *string = [formater stringFromDate:creatDate];
             cell.contentL.text = string;

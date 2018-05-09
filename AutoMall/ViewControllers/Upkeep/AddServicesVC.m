@@ -23,9 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"增加服务";
+    self.title = self.titleStr;
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    if (self.serviceDic) {
+        self.servicesNameTF.text = self.serviceDic[@"item"];
+        self.servicesMoneyTF.text = self.serviceDic[@"money"];
+    }
     
 //    addedServiceAry = [NSMutableArray array];
 //    [addedServiceAry addObjectsFromArray:self.addedAry];

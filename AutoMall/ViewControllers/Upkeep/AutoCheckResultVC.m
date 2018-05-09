@@ -39,6 +39,7 @@
     LXActivity *lxActivity;
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) IBOutlet UIButton *lookBtn;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnHeightCon;
 
 @end
@@ -75,12 +76,14 @@
     
     if (self.isFromAffirm) {
         self.btnHeightCon.constant = 0.0;       //隐藏查看服务方案按钮
+        self.lookBtn.hidden = YES;
     }
     
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     
     if ([mobileUserType isEqualToString:@"0"]) {    //普通用户隐藏按钮
         self.btnHeightCon.constant = 0.0;       //隐藏查看服务方案按钮
+        self.lookBtn.hidden = YES;
     }
         
     sections = 5;
@@ -203,8 +206,8 @@
     }
     
     NSString *imgUrlStr = shareDic [@"shareImage"];
-    if (! [shareDic [@"logo"] isKindOfClass:[NSNull class]] && [shareDic [@"logo"] length] > 0) {
-        imgUrlStr = shareDic [@"logo"];
+    if (! [shareDic [@"storeLogo"] isKindOfClass:[NSNull class]] && [shareDic [@"storeLogo"] length] > 0) {
+        imgUrlStr = UrlPrefix(shareDic [@"storeLogo"]);
     }
     NSString *url = shareDic [@"shareUrl"];
 //    if ([url isEqualToString:@""]) {
@@ -217,8 +220,8 @@
     
 //    NSString *content = [NSString stringWithFormat:@"%@\n%@",title,url];
     NSString *content = @"门店名称";
-    if (! [shareDic [@"store"] isKindOfClass:[NSNull class]] && [shareDic [@"store"] length] > 0) {
-        content = shareDic [@"store"];
+    if (! [shareDic [@"storeName"] isKindOfClass:[NSNull class]] && [shareDic [@"storeName"] length] > 0) {
+        content = shareDic [@"storeName"];
     }
     
     NSString *urlStr = nil;

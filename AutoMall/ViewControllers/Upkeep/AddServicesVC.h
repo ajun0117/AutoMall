@@ -10,6 +10,10 @@
 
 @interface AddServicesVC : UIViewController
 
+@property (copy, nonatomic) NSString *titleStr;
+
+@property (copy, nonatomic) NSDictionary *serviceDic;
+
 @property (copy, nonatomic) void((^AddedDiscount)(NSDictionary *addedDic));
 
 @end

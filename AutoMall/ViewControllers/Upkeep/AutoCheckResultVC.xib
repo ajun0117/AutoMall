@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoCheckResultVC">
             <connections>
                 <outlet property="btnHeightCon" destination="GZj-hp-cCz" id="kFh-bt-0yk"/>
+                <outlet property="lookBtn" destination="sHx-Vk-fsf" id="iJk-wo-ovj"/>
                 <outlet property="myTableView" destination="o0g-fE-sEl" id="5cb-tG-2xf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -52,7 +53,7 @@
                 <constraint firstItem="o0g-fE-sEl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="slm-26-1QW"/>
                 <constraint firstAttribute="trailing" secondItem="o0g-fE-sEl" secondAttribute="trailing" id="u9C-ik-869"/>
             </constraints>
-            <point key="canvasLocation" x="-186" y="55"/>
+            <point key="canvasLocation" x="-410" y="98"/>
         </view>
     </objects>
 </document>

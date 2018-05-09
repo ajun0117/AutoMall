@@ -228,6 +228,7 @@
 
 -(void)toAddServices {
     AddServicesVC *addVC = [[AddServicesVC alloc] init];
+    addVC.titleStr = @"增加服务";
     addVC.AddedDiscount = ^(NSDictionary *addedDic) {
         [addedServicesAry addObject:addedDic];
         
@@ -865,8 +866,8 @@
                 
             case 6: {
                 UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"planNormalCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.declareL.strikeThroughEnabled = NO;
                 NSDictionary *dic = addedServicesAry[indexPath.row];
                 cell.declareL.text = dic[@"item"];
@@ -1023,6 +1024,27 @@
                 break;
             }
                 
+            case 6: {
+                AddServicesVC *addVC = [[AddServicesVC alloc] init];
+                addVC.titleStr = @"服务详情";
+                addVC.serviceDic = addedServicesAry[indexPath.row];
+                addVC.AddedDiscount = ^(NSDictionary *addedDic) {
+                    [addedServicesAry replaceObjectAtIndex:indexPath.row withObject:addedDic];  //修改
+//                    [addedServicesAry addObject:addedDic];
+                    
+                    addedServicePrice = 0.0;
+                    for (NSDictionary *dic in addedServicesAry) {
+                        float money = [dic[@"money"] floatValue];
+                        addedServicePrice += money;
+                    }
+                    
+                    [self.myTableView reloadData];
+                };
+                addVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:addVC animated:YES];
+                break;
+            }
+                
             case 8: {
                 ServiceAndDiscountsVC *detailVC = [[ServiceAndDiscountsVC alloc] init];
                 detailVC.titleStr = @"优惠详情";
@@ -1064,58 +1086,52 @@
  
 }
 
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section == 2) {
-//        return YES;
-//    }
-//    return NO;
-//}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 6) {
+        return YES;
+    }
+    return NO;
+}
 
-///**
-// *  左滑cell时出现什么按钮
-// */
-//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
+/**
+ *  左滑cell时出现什么按钮
+ */
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 //    UpkeepPlanNormalCell *cell = (UpkeepPlanNormalCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    
+//
 //    UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"添加" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
 //        cell.declareL.strikeThroughEnabled = NO;
 //        NSDictionary *dic = removeAry[indexPath.row];
 //        [lineationAry addObject:dic];
 //        tableView.editing = NO;
-//        
+//
 //        if ([dic[@"customized"] boolValue])  {
 //            serVicePrice += [dic[@"customizedPrice"] floatValue];
 //        } else {
 //            serVicePrice += [dic[@"price"] floatValue];
 //        }
-//        
+//
 //        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
 //        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
 //    }];
-//    
-//    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-//        cell.declareL.strikeThroughEnabled = YES;
-//        NSDictionary *dic = removeAry[indexPath.row];
-//        [lineationAry removeObject:dic];
-//        tableView.editing = NO;
-//        
-//        if ([dic[@"customized"] boolValue])  {
-//            serVicePrice -= [dic[@"customizedPrice"] floatValue];
-//        } else {
-//            serVicePrice -= [dic[@"price"] floatValue];
-//        }
-//        
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationLeft];
-//        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationLeft];
-////        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3,5)] withRowAnimation:UITableViewRowAnimationFade];
-//    }];
-//    
+    
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        NSDictionary *dic = addedServicesAry[indexPath.row];
+        float money = [dic[@"money"] floatValue];
+        addedServicePrice -= money;
+        [addedServicesAry removeObjectAtIndex:indexPath.row];
+        tableView.editing = NO;
+        [self.myTableView reloadData];
+        
+    }];
+    
 //    if (cell.declareL.strikeThroughEnabled) {
 //        return @[action0];
 //    }
-//    return @[action1];
-//}
+    return @[action1];
+}
 
 
 ////指定编辑模式，插入，删除
