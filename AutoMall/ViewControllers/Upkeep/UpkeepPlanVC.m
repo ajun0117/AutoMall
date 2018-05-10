@@ -24,8 +24,10 @@
 #import "BJTSignView.h"
 #import "ServiceAndDiscountsVC.h"
 #import "AddServicesVC.h"
+#import "LXActivity.h"
+#import "ShareTool.h"
 
-@interface UpkeepPlanVC () <UIAlertViewDelegate>
+@interface UpkeepPlanVC () <UIAlertViewDelegate,LXActivityDelegate>
 { 
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -50,6 +52,9 @@
     NSMutableDictionary *storeServiceNumberDic;     //记录门店服务的数量
     NSMutableDictionary *discountsNumberDic;     //记录优惠的数量
     NSMutableArray *addedServicesAry;       //记录已增加的服务
+    NSDictionary *shareDic;     //分享文案
+    LXActivity *lxActivity;
+    NSString *order_code;   //服务方案订单号
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *signBgView;
@@ -132,6 +137,14 @@
     if (alertView.tag == 200) {
         if (buttonIndex == 1) {
             [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+    else if (alertView.tag == 300) {    //是否分享
+        if (buttonIndex == 1) {
+            [self requestGetShareInfo];
+        }
+        else {
+            [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:HUDDelay];
         }
     }
 }
@@ -1160,8 +1173,84 @@
 //    return @"删掉我吧";
 //}
 
+#pragma mark -  分享相关
 
-#pragma mark - 发送请求
+//创建分享视图
+-(void)createShareView{
+    NSArray *shareButtonTitleArray = [[NSArray alloc] init];
+    NSArray *shareButtonImageNameArray = [[NSArray alloc] init];
+    
+    /**
+     *  李俊阳修改的分享模块
+     */
+    shareButtonTitleArray = @[@"微信好友",@"微信朋友圈"];
+    shareButtonImageNameArray = @[@"share_wx",@"share_pyq"];
+    
+    if (!lxActivity) {
+        lxActivity = [[LXActivity alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消分享" ShareButtonTitles:shareButtonTitleArray withShareButtonImagesName:shareButtonImageNameArray];
+    }
+}
+
+-(void)shareClicked {
+    [lxActivity show];
+}
+
+#pragma mark -
+#pragma mark - LXActivityDelegate
+
+- (void)didClickOnImageIndex:(NSInteger *)imageIndex
+{
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES]; //显示加载中
+    NSUInteger index = (NSUInteger)imageIndex;
+    NSLog(@"%ld",(long)index);
+    
+    /**
+     *  李俊阳添加的调用原生WX分享的代码
+     */
+    int scene = (int)index;
+    
+    NSString *title = shareDic [@"shareTitle"];
+    if ([title isEqualToString:@""]) {
+        title = @"检查结果分享";
+    }
+    
+    NSString *imgUrlStr = shareDic [@"shareImage"];
+    if (! [shareDic [@"storeLogo"] isKindOfClass:[NSNull class]] && [shareDic [@"storeLogo"] length] > 0) {
+        imgUrlStr = UrlPrefix(shareDic [@"storeLogo"]);
+    }
+    NSString *url = shareDic [@"shareUrl"];
+    //    if ([url isEqualToString:@""]) {
+    //        url = @"";
+    //    }
+    NSString *defaultContent = shareDic [@"shareTitle"];
+    if ([defaultContent isEqualToString:@""]) {
+        defaultContent = @"i爱检车";
+    }
+    
+    //    NSString *content = [NSString stringWithFormat:@"%@\n%@",title,url];
+    NSString *content = @"门店名称";
+    if (! [shareDic [@"storeName"] isKindOfClass:[NSNull class]] && [shareDic [@"storeName"] length] > 0) {
+        content = shareDic [@"storeName"];
+    }
+    
+    NSString *urlStr = nil;
+    if ([imgUrlStr hasPrefix:@"http://"]) {//网络url
+        urlStr = imgUrlStr;
+    }else{
+        urlStr = [[NSBundle mainBundle] pathForResource:@"icon80" ofType:@"png"];
+    }
+    
+    if (scene == 1) { //微信好友会话
+        defaultContent = title;
+    }
+    
+    [ShareTool ShareToWxWithScene:scene andTitle:defaultContent andDescription:content andThumbImageUrlStr:urlStr andWebUrlStr:url];
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+#pragma mark - 发起网络请求
 -(void)requestGetAllUnnormal { //获取所有异常
     [_hud show:YES];
     //注册通知 
@@ -1229,13 +1318,21 @@
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpkeepConfirm) delegate:nil params:pram info:infoDic];
 }
 
-#pragma mark - 发起网络请求
 -(void)requestUploadImgFile:(WPImageView *)image {  //上传图片
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UploadImgFile object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UploadImgFile,@"op", nil];
     [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
+}
+
+-(void)requestGetShareInfo { //获取分享文案
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepShareService object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepShareService, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(CarUpkeepShareService),self.carUpkeepId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -1313,7 +1410,12 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self performSelector:@selector(toPushVC:) withObject:responseObject[@"data"][@"code"] afterDelay:HUDDelay];
+            
+            order_code = responseObject[@"data"][@"code"];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否分享？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alert.tag = 300;
+            [alert show];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
@@ -1327,6 +1429,20 @@
         NSLog(@"UploadImgFile: %@",responseObject);
         if ([responseObject[@"result"] boolValue]) {
             signImgStr = [NSString stringWithFormat:@"%@%@",responseObject[@"relativePath"],responseObject[@"name"]];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CarUpkeepShareService]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepShareService object:nil];
+        NSLog(@"CarUpkeepShareService: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
+            shareDic = responseObject[@"data"];
+            [self shareClicked];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

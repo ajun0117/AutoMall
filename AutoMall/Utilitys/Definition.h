@@ -202,6 +202,7 @@
 #define ServicepackageList                      @"/api/servicepackage/list"     //服务套餐列表
 #define CarUpkeepConfirm                       @"/api/carUpkeep/confirm"   //服务方案确认
 #define CarUpkeepShare                          @"/api/carUpkeep/share"         //分享检查单
+#define CarUpkeepShareService              @"/api/carUpkeep/shareService"         //分享服务方案
 
 //个人中心
 #define AllCheckcategorySearch            @"/api/checkcategory/search"        //平台所有部位列表
