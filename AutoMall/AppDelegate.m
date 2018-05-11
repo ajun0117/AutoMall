@@ -277,6 +277,33 @@ static BOOL isBackGroundActivateApplication;
         NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult", respp, @"RespData",nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WechatPayNotification" object:nil userInfo:userInfo];
     }
+    else if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        SendMessageToWXResp *temp = (SendMessageToWXResp *)resp;
+        MBProgressHUD *mbpro = [MBProgressHUD showHUDAddedTo:self.window animated:YES];
+        mbpro.mode = MBProgressHUDModeCustomView;
+        UIImageView *imgV = [[UIImageView alloc] initWithImage:nil];
+        mbpro.customView = imgV;
+        mbpro.animationType = MBProgressHUDAnimationFade;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
+        if (temp.errCode == 0) {
+            mbpro.labelText = @"分享成功！";
+        }
+        else if (temp.errCode == -2) {
+            mbpro.labelText = @"用户取消分享！";
+        }
+        else {
+            mbpro.labelText = @"分享失败！";
+        }
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            // Do something...
+            [MBProgressHUD hideHUDForView:self.window animated:YES];
+        });
+        
+        //发送微信分享完成通知
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"success",@"RespResult", temp, @"RespData",nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WxShareNotification" object:nil userInfo:userInfo];
+    }
     
 }
 

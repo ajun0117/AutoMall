@@ -26,6 +26,7 @@
 #import "AddServicesVC.h"
 #import "LXActivity.h"
 #import "ShareTool.h"
+#import "WXApi.h"
 
 @interface UpkeepPlanVC () <UIAlertViewDelegate,LXActivityDelegate>
 { 
@@ -101,6 +102,8 @@
     lineationAry = [NSMutableArray array];
     unnormalAry = [NSMutableArray array];
     addedServicesAry = [NSMutableArray array];
+    
+    [self createShareView];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -141,10 +144,32 @@
     }
     else if (alertView.tag == 300) {    //是否分享
         if (buttonIndex == 1) {
+            //注册分享回调通知
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wxShareNotification:) name:@"WxShareNotification" object:nil];
+            
             [self requestGetShareInfo];
         }
         else {
             [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:HUDDelay];
+        }
+    }
+}
+
+#pragma mark - 微信分享后回调通知
+-(void)wxShareNotification:(NSNotification *)notification{
+    if ([notification.name isEqualToString:@"WxShareNotification"]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"WxShareNotification" object:nil];
+        SendMessageToWXResp *temp = [notification.userInfo objectForKey:@"RespData"];
+        NSString *shareResultStr;
+        if (temp.errCode == 0) {
+            shareResultStr = [NSString stringWithFormat:@"%@",@"share_success"];    //分享成功后跳转
+            [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:1.0];
+        }
+        else if (temp.errCode == -2) {
+            shareResultStr = [NSString stringWithFormat:@"%@",@"share_cancel"];
+        }
+        else {
+            shareResultStr = [NSString stringWithFormat:@"%@",@"share_failure"];
         }
     }
 }
