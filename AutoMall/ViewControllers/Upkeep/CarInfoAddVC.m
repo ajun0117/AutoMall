@@ -9,8 +9,9 @@
 #import "CarInfoAddVC.h"
 #import "BaoyangHistoryVC.h"
 #import "AddPicViewController.h"
+#import "HZPhotoBrowser.h"
 
-@interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,HZPhotoBrowserDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -26,6 +27,7 @@
 //    NSArray *fuelAmountPhotos;      //燃油量
     NSArray *enginePhotos;
     NSArray *vinPhotos;
+    NSArray *images;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 //@property (strong, nonatomic) IBOutlet UILabel *mileageL;
@@ -414,33 +416,15 @@
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 - (IBAction)lastMileagePhoto:(id)sender {
-    if (self.carDic) {  //编辑页面
         if (lastMileagePhotos.count > 0) {
-            AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-            photoVC.maxCount = 1;
-            photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-                lastMileagePhotos = array;
-                NSLog(@"lastMileagePhotos: %@",lastMileagePhotos);
-            };
-            photoVC.localImgsArray = lastMileagePhotos;
-            [self.navigationController pushViewController:photoVC animated:YES];
+            NSString *urlStr = [lastMileagePhotos firstObject][@"relativePath"];
+            [self clickImageWithImageUrl:urlStr];
         }
         else {
             _networkConditionHUD.labelText = @"没有相关图片";
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
-    }
-    else {
-        AddPicViewController *photoVC = [[AddPicViewController alloc] init];
-        photoVC.maxCount = 1;
-        photoVC.GoBackUpdate = ^(NSMutableArray *array) {
-            lastMileagePhotos = array;
-            NSLog(@"lastMileagePhotos: %@",lastMileagePhotos);
-        };
-        photoVC.localImgsArray = lastMileagePhotos;
-        [self.navigationController pushViewController:photoVC animated:YES];
-    }
 }
 
 - (IBAction)mileagePhoto:(id)sender {
@@ -523,6 +507,50 @@
     };
     photoVC.localImgsArray = vinPhotos;
     [self.navigationController pushViewController:photoVC animated:YES];
+}
+
+-(void)clickImageWithImageUrl:(NSString *)url {
+    //启动图片浏览器
+    HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
+    browserVC.sourceImagesContainerView = self.view; // 原图的父控件
+    //    images = @[UrlPrefix(carUpkeepDic[@"image"])];
+    images = @[UrlPrefix(url)];
+    browserVC.imageCount = 1; // 图片总数 imagesAry.count
+    browserVC.currentImageIndex = 0;
+    browserVC.currentImageTitle = @"";
+    browserVC.delegate = self;
+    [browserVC show];
+}
+
+-(void)clickImageWithImagesArray:(NSArray *)imageAry andIndex:(NSInteger)index {
+    //启动图片浏览器
+    HZPhotoBrowser *browserVC = [[HZPhotoBrowser alloc] init];
+    browserVC.sourceImagesContainerView = self.view; // 原图的父控件
+    //    images = @[UrlPrefix(carUpkeepDic[@"store"][@"image"])];
+    images = imageAry;
+    browserVC.imageCount = images.count; // 图片总数 imagesAry.count
+    browserVC.currentImageIndex = (int)index;
+    browserVC.currentImageTitle = @"";
+    browserVC.delegate = self;
+    [browserVC show];
+}
+
+#pragma mark - photobrowser代理方法
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    return IMG(@"whiteplaceholder");
+}
+
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSString *urlStr = images[index];
+    return [NSURL URLWithString:urlStr];
+}
+
+- (NSString *)photoBrowser:(HZPhotoBrowser *)browser titleStringForIndex:(NSInteger)index {
+    //    NSDictionary *dic = _typeImgsArray [index];
+    //    NSString *titleStr = dic [@"content"];
+    return @"";
 }
 
 #pragma mark 键盘出现
