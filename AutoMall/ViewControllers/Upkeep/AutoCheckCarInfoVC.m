@@ -19,6 +19,9 @@
     NSString *mileageImgUrl;
     NSString *fuelAmountImgUrl;
     NSArray *remarkPhotos;      //备注图片
+    id activeField;
+    BOOL keyboardShown; //键盘是否弹出
+    CGRect scrollViewFrame;       //记录初始frame
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
@@ -118,21 +121,40 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    scrollViewFrame = [self.myScrollV frame];
+    NSLog(@"scrollViewFrame: %@",NSStringFromCGRect(scrollViewFrame));
+}
+
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
 {
+    if (keyboardShown)
+        return;
+    
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
-    self.myScrollV.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - keyBoardRect.size.height);
-    [self.myScrollV setContentOffset:CGPointMake(0, keyBoardRect.size.height)];
+    CGRect viewFrame = scrollViewFrame;
+    viewFrame.size.height -= keyBoardRect.size.height;
+    self.myScrollV.frame = viewFrame;
+    NSLog(@"self.myScrollV.frame: %@",NSStringFromCGRect(self.myScrollV.frame));
+    
+    CGRect textFieldRect = [activeField frame];
+    [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
+    
+     keyboardShown = YES;
 }
 
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
-    self.myScrollV.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 49);
-    [self.myScrollV setContentOffset:CGPointMake(0, 0)];
+    self.myScrollV.frame = scrollViewFrame;
+    keyboardShown = NO;
 }
+
+
 - (IBAction)remarkPhotoAction:(id)sender {
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     photoVC.maxCount = 2;
@@ -218,10 +240,34 @@
     return YES;
 }
 
+
+//设置当前激活的文本框或文本域
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
+
+- (void)textViewShouldBeginEditing:(UITextView *)textView
+{
+    activeField = textView;
+}
+
+- (void)textViewShouldEndEditing:(UITextView *)textView
+{
+    activeField = nil;
+}
+
+
 - (void)textViewDidChange:(UITextView *)textView
 {
     if (textView == self.remarkTV) {
-        NSInteger kMaxLength = 10;
+        NSInteger kMaxLength = 100;
         NSString *toBeString = textView.text;
         NSString *lang = [[UIApplication sharedApplication]textInputMode].primaryLanguage; //ios7之前使用[UITextInputMode currentInputMode].primaryLanguage
         if ([lang isEqualToString:@"zh-Hans"]) { //中文输入
@@ -257,7 +303,15 @@
     doneBtn.frame = CGRectMake(2, 5, 45, 25);
     [doneBtn addTarget:self action:@selector(dealKeyboardHide) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *doneBtnItem = [[UIBarButtonItem alloc]initWithCustomView:doneBtn];
-    NSArray * buttonsArray = [NSArray arrayWithObjects:spaceBtn, doneBtnItem,nil];
+    
+    UIButton *lastBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [lastBtn setTitle:@"上一项" forState:UIControlStateNormal];
+    lastBtn.tag = textView.tag;
+    lastBtn.frame = CGRectMake(2, 5, 60, 25);
+    [lastBtn addTarget:self action:@selector(lastField:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *lastBtnItem = [[UIBarButtonItem alloc]initWithCustomView:lastBtn];
+    
+    NSArray * buttonsArray = [NSArray arrayWithObjects:lastBtnItem, spaceBtn, doneBtnItem,nil];
     [topView setItems:buttonsArray];
     [textView setInputAccessoryView:topView];
     [textView setAutocorrectionType:UITextAutocorrectionTypeNo];
@@ -299,22 +353,22 @@
 
 -(void)nextField:(UIButton *)nextBtn {
     NSInteger textFieldIndex = nextBtn.tag;
-    UITextField *textField = (UITextField *)textFieldArray[textFieldIndex];
+    id textField = textFieldArray[textFieldIndex];
     [textField resignFirstResponder];
     if (textFieldIndex < [textFieldArray count] - 1)
     {
-        UITextField *nextTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex + 1)];
+        id nextTextField = [textFieldArray objectAtIndex:(textFieldIndex + 1)];
         [nextTextField becomeFirstResponder];
     }
 }
 
 -(void)lastField:(UIButton *)lastBtn {
     NSInteger textFieldIndex = lastBtn.tag;
-    UITextField *textField = (UITextField *)textFieldArray[textFieldIndex];
+    id textField = textFieldArray[textFieldIndex];
     [textField resignFirstResponder];
     if (textFieldIndex > 0)
     {
-        UITextField *lastTextField = (UITextField *)[textFieldArray objectAtIndex:(textFieldIndex - 1)];
+        id lastTextField = [textFieldArray objectAtIndex:(textFieldIndex - 1)];
         [lastTextField becomeFirstResponder];
     }
 }

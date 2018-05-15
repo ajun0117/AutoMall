@@ -28,6 +28,10 @@
     NSArray *enginePhotos;
     NSArray *vinPhotos;
     NSArray *images;
+    
+    id activeField;
+    BOOL keyboardShown; //键盘是否弹出
+    CGRect scrollViewFrame;       //记录初始frame
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollV;
 //@property (strong, nonatomic) IBOutlet UILabel *mileageL;
@@ -292,6 +296,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    scrollViewFrame = [self.myScrollV frame];
+    NSLog(@"scrollViewFrame: %@",NSStringFromCGRect(scrollViewFrame));
+}
+
 #pragma mark - 添加完成按钮的toolBar工具栏
 - (void)setTextFieldInputAccessoryViewWithTF:(UITextField *)field{
     UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
@@ -394,6 +405,17 @@
         }
     }
     return YES;
+}
+
+//设置当前激活的文本框或文本域
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
 }
 
 #pragma mark - 日期选择
@@ -556,13 +578,26 @@
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
 {
+    if (keyboardShown)
+        return;
+    
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    self.myScrollV.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height- 64 - keyBoardRect.size.height);
+    NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
+    CGRect viewFrame = scrollViewFrame;
+    viewFrame.size.height -= keyBoardRect.size.height;
+    self.myScrollV.frame = viewFrame;
+    NSLog(@"self.myScrollV.frame: %@",NSStringFromCGRect(self.myScrollV.frame));
+    
+    CGRect textFieldRect = [activeField frame];
+    [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
+    
+    keyboardShown = YES;
 }
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
-    self.myScrollV.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height -64 - 80);
+    self.myScrollV.frame = scrollViewFrame;
+    keyboardShown = NO;
 }
 
 

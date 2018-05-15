@@ -476,7 +476,7 @@
             cell.declareL.strikeThroughEnabled = NO;
             cell.declareL.text = @"检查类别";
             cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-//            cell.contentL.text = self.checktypeName;    //检查类别名称
+            cell.contentL.text = self.checktypeName;    //检查类别名称
             cell.contentL.font = [UIFont boldSystemFontOfSize:15];
             cell.contentL.textColor = RGBCOLOR(104, 104, 104);
             return cell;
@@ -954,9 +954,9 @@
             packagePrice = 0;
             for (NSDictionary *dic in selectedPackageAry) {
                 if ([dic[@"customized"] boolValue]) {
-                    packagePrice += [dic[@"customizedPrice"] floatValue] * [dic[@"number"] intValue];
+                    packagePrice += [dic[@"customizedPrice"] floatValue] * [STRINGOne(dic[@"number"]) intValue];
                 } else {
-                    packagePrice += [dic[@"price"] floatValue] * [dic[@"number"] intValue];
+                    packagePrice += [dic[@"price"] floatValue] * [STRINGOne(dic[@"number"]) intValue];
                 }
             }
             
@@ -964,7 +964,7 @@
             selectedServicePrice = 0;
             for (NSDictionary *dic in selectedServices) {
                 if (dic[@"money"] && ! [dic[@"money"] isKindOfClass:[NSNull class]]) {
-                    selectedServicePrice += [dic[@"money"] floatValue] * [dic[@"number"] intValue];
+                    selectedServicePrice += [dic[@"money"] floatValue] * [STRINGOne(dic[@"number"]) intValue];
                 }
             }
 
@@ -972,7 +972,7 @@
             discountPrice = 0;
             for (NSDictionary *dic in selectedDiscounts) {
                 if (dic[@"money"] && ! [dic[@"money"] isKindOfClass:[NSNull class]]) {
-                    discountPrice += [dic[@"money"] floatValue] * [dic[@"number"] intValue];
+                    discountPrice += [dic[@"money"] floatValue] * [STRINGOne(dic[@"number"]) intValue];
                 }
             }
             

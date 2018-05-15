@@ -94,7 +94,7 @@
             break;
         }
         case 6: {
-            cell.declareL.text = @"“初次建档时间";
+            cell.declareL.text = @"初次建档时间";
             NSDateFormatter* formater = [[NSDateFormatter alloc] init];
             [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
             NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"createTime"] doubleValue]/1000];
