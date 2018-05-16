@@ -406,8 +406,9 @@
                 } else {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
                 }
-                [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
-                cell.applyBtn.hidden =NO;
+                cell.accountBtn2.hidden = NO;
+                [cell.accountBtn2 addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+                cell.applyBtn.hidden = NO;
                 NSLog(@"approvalStatusDic: %@",approvalStatusDic);
                 if (approvalStatusDic) {   //数据存在
                     if ([approvalStatusDic[@"approvalStatus"] intValue] == 0) {
@@ -417,8 +418,10 @@
                         [cell.applyBtn setTitle:@"申请门店认证被拒绝，点击重新申请" forState:UIControlStateNormal];
                     }
                 }
-                [cell.applyBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
+                cell.shopNameBtn2.hidden = NO;
+                [cell.shopNameBtn2 addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopNameBtn.hidden = YES;
+                cell.shopNameBtn2.hidden = YES;
                 cell.shopLevelIM.hidden= YES;
                 cell.shopNameIM.hidden = NO;
                 cell.jifenL.hidden = YES;
@@ -482,11 +485,13 @@
                 } else {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
                 }
-                [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+                cell.accountBtn2.hidden = NO;
+                [cell.accountBtn2 addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
                 [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
-                [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
+                cell.shopNameBtn2.hidden = NO;
+                [cell.shopNameBtn2 addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopLevelIM.hidden= NO;
                 int rankLevel = [shopDic[@"rankLevel"] intValue];
                 if (rankLevel == 1) {
@@ -682,11 +687,13 @@
                 } else {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
                 }
-                [cell.accountBtn addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
+                cell.accountBtn2.hidden = NO;
+                [cell.accountBtn2 addTarget:self action:@selector(toAccountView) forControlEvents:UIControlEventTouchUpInside];
                 cell.applyBtn.hidden = YES;
                 cell.shopNameBtn.hidden = NO;
                 [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
-                [cell.shopNameBtn addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
+                cell.shopNameBtn2.hidden = NO;
+                [cell.shopNameBtn2 addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
 //                [cell.shopNameBtn setTitle:STRING(shopDic[@"name"]) forState:UIControlStateNormal];
                 cell.shopLevelIM.hidden= NO;
                 int rankLevel = [shopDic[@"rankLevel"] intValue];
@@ -841,8 +848,10 @@
             cell.loginL.hidden = NO;
             cell.arrowsIM.hidden = YES;
             cell.accountBtn.hidden = YES;
+            cell.accountBtn2.hidden = YES;
             cell.applyBtn.hidden = YES;
             cell.shopNameBtn.hidden = YES;
+            cell.shopNameBtn2.hidden = YES;
             cell.shopLevelIM.hidden= YES;
             cell.shopNameIM.hidden = YES;
             cell.jifenL.hidden = YES;

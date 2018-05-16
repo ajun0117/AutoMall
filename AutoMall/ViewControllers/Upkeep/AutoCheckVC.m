@@ -1035,7 +1035,8 @@
         remarkImage1 = [remarkImages firstObject][@"relativePath"];
     }
     else if (remarkImages.count == 2) {
-        remarkImage2 = remarkImages [1] [@"relativePath"];
+        remarkImage1 = remarkImages [0][@"relativePath"];
+        remarkImage2 = remarkImages [1][@"relativePath"];
     }
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(carImageUrl),@"image",lichengDic[@"mileage"],@"mileage",lichengDic[@"mileageImg"],@"mileageImage",lichengDic[@"fuelAmount"],@"fuelAmount",lichengDic[@"fuelAmountImg"],@"fuelImage",lichengDic[@"remark"],@"remark",remarkImage1,@"remarkImage1",remarkImage2,@"remarkImage2",carDicc,@"car",storeDic,@"store",carUpkeepCheckContentsAry,@"carUpkeepCheckContents",self.checktypeID,@"checkTypeId",carImagesAry,@"carUpkeepImages", nil];
     NSLog(@"pram: %@",pram);

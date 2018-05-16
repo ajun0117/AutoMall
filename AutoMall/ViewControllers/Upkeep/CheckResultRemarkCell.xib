@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4PL-Go-uUV">
-                        <rect key="frame" x="264" y="0.0" width="40" height="40"/>
+                        <rect key="frame" x="275" y="0.0" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="PbR-dD-SOT"/>
                             <constraint firstAttribute="width" constant="40" id="ksP-4B-Mme"/>
@@ -48,7 +48,7 @@
                     <constraint firstItem="aMV-Uz-qfy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1hj-Qo-nJW"/>
                     <constraint firstAttribute="bottom" secondItem="x6J-jx-aE4" secondAttribute="bottom" constant="8" id="4K0-5v-72s"/>
                     <constraint firstAttribute="trailing" secondItem="x6J-jx-aE4" secondAttribute="trailing" constant="16" id="CKf-fS-Olf"/>
-                    <constraint firstAttribute="trailing" secondItem="4PL-Go-uUV" secondAttribute="trailing" constant="16" id="Etc-PW-8b7"/>
+                    <constraint firstAttribute="trailing" secondItem="4PL-Go-uUV" secondAttribute="trailing" constant="5" id="Etc-PW-8b7"/>
                     <constraint firstItem="x6J-jx-aE4" firstAttribute="top" secondItem="aMV-Uz-qfy" secondAttribute="bottom" constant="8" id="F1g-3v-tgq"/>
                     <constraint firstItem="x6J-jx-aE4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="JUR-Rq-a5p"/>
                     <constraint firstItem="aMV-Uz-qfy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="kAB-FX-OEe"/>

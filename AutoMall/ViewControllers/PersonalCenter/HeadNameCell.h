@@ -12,7 +12,9 @@
 @interface HeadNameCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet WPImageView *headIMG;
 @property (strong, nonatomic) IBOutlet UIButton *accountBtn;
+@property (strong, nonatomic) IBOutlet UIButton *accountBtn2;
 @property (strong, nonatomic) IBOutlet UIButton *shopNameBtn;
+@property (strong, nonatomic) IBOutlet UIButton *shopNameBtn2;
 @property (weak, nonatomic) IBOutlet UIImageView *shopLevelIM;
 @property (strong, nonatomic) IBOutlet UILabel *jifenL;
 @property (weak, nonatomic) IBOutlet UIButton *applyBtn;
