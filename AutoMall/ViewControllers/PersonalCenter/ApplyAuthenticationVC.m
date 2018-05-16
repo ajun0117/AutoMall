@@ -90,6 +90,12 @@
         if (! [wechatCollectionImgUrl isKindOfClass:[NSNull class]] && wechatCollectionImgUrl.length > 0) {
             [self.wechatCollectionImg sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"wechatpayImg"]))]];
         }
+        
+        mendianLogoUrl = self.infoDic[@"logo"];
+        if (! [mendianLogoUrl isKindOfClass:[NSNull class]] && mendianLogoUrl.length > 0) {
+            [self.mendianLogo sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(STRING(self.infoDic[@"logo"]))]];
+        }
+        
         [self.replayBtn setTitle:@"保存修改" forState:UIControlStateNormal];
     }
     else {
@@ -595,7 +601,7 @@
         [minorImages addObject:imageDic[@"relativePath"]];
     }
     NSString *minorImagesStr = [minorImages componentsJoinedByString:@","];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.recommendCodeTF.text),@"recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(mendianLogoUrl),@"logo",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreRegister) delegate:nil params:pram info:infoDic];
 }
@@ -611,7 +617,7 @@
         [minorImages addObject:imageDic[@"relativePath"]];
     }
     NSString *minorImagesStr = [minorImages componentsJoinedByString:@","];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.infoDic[@"recommendCode"]),@"recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.infoDic[@"id"],@"id",self.nameTF.text,@"name",minorImagesStr,@"minorImgs",self.shortNameTF.text,@"shortName",addrAry[0],@"province",addrAry[1],@"city",addrAry[2],@"county",self.detailAddressTF.text,@"address",self.phoneTF.text,@"phone",licenseImgUrl,@"licenseImg",cardAImgUrl,@"cardImgA",cardBImgUrl,@"cardImgB",STRING_Nil(self.infoDic[@"recommendCode"]),@"recommendCode",STRING_Nil(self.wechatNameTF.text),@"wechatName",STRING_Nil(gongzhongImgUrl),@"wechatImg",STRING_Nil(mendianLogoUrl),@"logo",STRING_Nil(aliPayCollectionImgUrl),@"alipayImg",STRING_Nil(wechatCollectionImgUrl),@"wechatpayImg", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StoreInfoUpdate) delegate:nil params:pram info:infoDic];
 }
@@ -660,6 +666,10 @@
                 }
                 case 6: {
                     wechatCollectionImgUrl = urlStr;
+                    break;
+                }
+                case 7: {
+                    mendianLogoUrl = urlStr;
                     break;
                 }
                     

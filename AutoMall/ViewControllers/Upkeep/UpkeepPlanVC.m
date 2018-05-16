@@ -877,7 +877,7 @@
                     cell.contentL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 }
                 cell.contentL.textColor = [UIColor blackColor];
-                
+                cell.contentL.font = [UIFont systemFontOfSize:15];
                 return cell;
                 break;
             }
