@@ -440,7 +440,7 @@
                     
                 case 2: {
                     NSDictionary *dic = unnormalAry[indexPath.row];
-                    if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                    if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]] && [dic[@"checkContentVos"][@"group"] length] > 0) {  //多个位置
                         NSArray *entities = dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"];
                         return 43 + 30*entities.count;
                     }
@@ -761,7 +761,7 @@
             case 2: {
                 NSDictionary *dic = unnormalAry[indexPath.row];
 
-                if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]] && [dic[@"checkContentVos"][@"group"] length] > 0) {  //多个位置
                     CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleGray;
                     cell.positionL.text = dic[@"name"];

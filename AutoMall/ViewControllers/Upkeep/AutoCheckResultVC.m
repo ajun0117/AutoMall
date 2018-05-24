@@ -500,7 +500,7 @@
             case 2: {
                 NSArray *ary = carUpkeepDic[@"checkContents"];
                 NSDictionary *dic = ary[indexPath.row];
-                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"group"] isKindOfClass:[NSString class]] && [dic[@"group"] length] > 0) {  //多个位置
                     NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
                     return 43 + 30*entities.count;
                 }
@@ -560,7 +560,7 @@
             case 2: {
                 NSArray *ary = carUpkeepDic[@"checkContents"];
                 NSDictionary *dic = ary[indexPath.row];
-                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"group"] isKindOfClass:[NSString class]] && [dic[@"group"] length] > 0) {  //多个位置
                     NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
                     return 43 + 30*entities.count;
                 }
@@ -614,7 +614,7 @@
             case 2: {
                 NSArray *ary = carUpkeepDic[@"checkContents"];
                 NSDictionary *dic = ary[indexPath.row];
-                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"group"] isKindOfClass:[NSString class]] && [dic[@"group"] length] > 0) {  //多个位置
                     NSArray *entities = dic[@"carUpkeepCheckContentEntities"];
                     return 43 + 30*entities.count;
                 }
@@ -774,7 +774,7 @@
                 NSArray *ary = carUpkeepDic[@"checkContents"];
                 NSDictionary *dic = ary[indexPath.row];
                 
-                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"group"] isKindOfClass:[NSString class]] && [dic[@"group"] length] > 0) {  //多个位置
                     CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.positionL.text = dic[@"checkTerm"][@"name"];
@@ -904,7 +904,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
                 [cell.remarkImagesBtn addTarget:self action:@selector(remarkImagesAction) forControlEvents:UIControlEventTouchUpInside];
-                if (! carUpkeepDic[@"remark"] || [carUpkeepDic[@"remark"] isKindOfClass:[NSNull class]]) {
+                if (! carUpkeepDic[@"remark"] || [carUpkeepDic[@"remark"] isKindOfClass:[NSNull class]] || [carUpkeepDic[@"remark"] isEqualToString:@""]) {
                     cell.remarkL.text = @"未备注";
                 } else {
                     cell.remarkL.text = carUpkeepDic[@"remark"];
@@ -1104,7 +1104,7 @@
                 NSArray *ary = carUpkeepDic[@"checkContents"];
                 NSDictionary *dic = ary[indexPath.row];
                 
-                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"group"] isKindOfClass:[NSString class]] && [dic[@"group"] length] > 0) {  //多个位置
                     CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.positionL.text = dic[@"checkTerm"][@"name"];
@@ -1418,7 +1418,7 @@
                 NSArray *ary = carUpkeepDic[@"checkContents"];
                 NSDictionary *dic = ary[indexPath.row];
                 
-                if ([dic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+                if ([dic[@"group"] isKindOfClass:[NSString class]] && [dic[@"group"] length] > 0) {  //多个位置
                     CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.positionL.text = dic[@"checkTerm"][@"name"];
@@ -1644,9 +1644,9 @@
 //                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
 //                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
 //                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
-                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = [carUpkeepDic[@"storeName"] isEqualToString:@""]?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = [carUpkeepDic[@"storePhone"] isEqualToString:@""]?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = [carUpkeepDic[@"storeAddress"] isEqualToString:@""]?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }

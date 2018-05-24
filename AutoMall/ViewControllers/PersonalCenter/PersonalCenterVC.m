@@ -401,7 +401,7 @@
                 cell.loginL.hidden = YES;
                 cell.arrowsIM.hidden = NO;
                 cell.accountBtn.hidden = NO;
-                if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
+                if ([userInfoDic[@"nickname"]  isKindOfClass:[NSString class]] && [userInfoDic[@"nickname"] length] > 0) {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
                 } else {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
@@ -480,7 +480,7 @@
                 cell.loginL.hidden = YES;
                 cell.arrowsIM.hidden = NO;
                 cell.accountBtn.hidden = NO;
-                if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
+                if ([userInfoDic[@"nickname"]  isKindOfClass:[NSString class]] && [userInfoDic[@"nickname"] length] > 0) {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
                 } else {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];
@@ -682,7 +682,7 @@
                 cell.loginL.hidden = YES;
                 cell.arrowsIM.hidden = NO;
                 cell.accountBtn.hidden = NO;
-                if (userInfoDic[@"nickname"] && [userInfoDic[@"nickname"]  isKindOfClass:[NSString class]]) {
+                if ([userInfoDic[@"nickname"]  isKindOfClass:[NSString class]] && [userInfoDic[@"nickname"] length] > 0) {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"nickname"]) forState:UIControlStateNormal];
                 } else {
                     [cell.accountBtn setTitle:STRING(userInfoDic[@"phone"]) forState:UIControlStateNormal];

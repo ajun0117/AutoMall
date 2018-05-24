@@ -204,7 +204,7 @@
         ResultCheckContentDetailCell *cell = (ResultCheckContentDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"resultCheckContentDetailCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSDictionary *dic = contentResultDic[@"carUpkeepCheckContentEntities"][indexPath.row-2];
-        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+        if ([contentResultDic[@"group"] isKindOfClass:[NSString class]] && [contentResultDic[@"group"] length] > 0) {  //多个位置
             cell.checkContentL.text = STRING(dic[@"dPosition"]);
             cell.resultL.text = STRING(dic[@"describe"]);
             cell.levelL.text =  STRING(dic[@"result"]);

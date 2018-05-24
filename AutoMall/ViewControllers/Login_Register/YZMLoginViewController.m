@@ -290,6 +290,7 @@
     
     if ([notification.name isEqualToString:UserLogin]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogin object:nil];
+        NSLog(@"UserLogin_responseObject: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             //            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             _networkConditionHUD.labelText = @"登录成功！";

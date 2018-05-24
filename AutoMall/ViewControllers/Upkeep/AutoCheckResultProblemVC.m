@@ -70,7 +70,8 @@
     
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = categoryAry[indexPath.row];
-    if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+    NSString *groupStr = dic[@"checkContentVos"][@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && groupStr.length > 0) {  //多个位置
         NSArray *entities = dic[@"checkContentVos"][@"carUpkeepCheckContentEntities"];
         return 43 + 30*entities.count;
     }
@@ -87,8 +88,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = categoryAry[indexPath.row];
-    
-    if ([dic[@"checkContentVos"][@"group"] isKindOfClass:[NSString class]]) {  //多个位置
+    NSString *groupStr = dic[@"checkContentVos"][@"group"];
+    if ([groupStr isKindOfClass:[NSString class]] && groupStr.length > 0) {  //多个位置
         CheckResultMultiCell *cell = (CheckResultMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultMultiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.positionL.text = dic[@"name"];
