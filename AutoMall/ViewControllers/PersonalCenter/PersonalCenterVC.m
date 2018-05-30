@@ -638,10 +638,17 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                 }
-                else {
+                else if(indexPath.row == 1) {
                     CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
                     cell.img.image = IMG(@"center_address");
                     cell.nameL.text = @"地址管理";
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
+                }
+                else {
+                    CenterNormalCell *cell = (CenterNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"centerNormalCell"];
+                    cell.img.image = IMG(@"center_invoice");
+                    cell.nameL.text = @"发票管理";
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
                 }
@@ -1005,6 +1012,11 @@
                     [self.navigationController pushViewController:changeVC animated:YES];
                 }
                 else if (indexPath.row == 1) {
+                    ReceiveAddressViewController *addressVC = [[ReceiveAddressViewController alloc] init];
+                    addressVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:addressVC animated:YES];
+                }
+                else {
                     ReceiveAddressViewController *addressVC = [[ReceiveAddressViewController alloc] init];
                     addressVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:addressVC animated:YES];
