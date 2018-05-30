@@ -701,7 +701,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.noticeL.text = @"暂无签名";
-            if (! [carUpkeepDic[@"signImage"] isKindOfClass:[NSNull class]]) {
+            if (! [carUpkeepDic[@"signImage"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"signImage"] length] > 0) {
                 cell.noticeL.text = @"";
                 [cell.signImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carUpkeepDic[@"signImage"])]];
             }

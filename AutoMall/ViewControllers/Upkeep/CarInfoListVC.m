@@ -296,7 +296,7 @@
         NSLog(@"CarListOrSearch: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {  //返回正确
             [carArray addObjectsFromArray:responseObject[@"data"]];
-            if (! [responseObject[@"params"] isKindOfClass:[NSNull class]]) {
+            if ([responseObject[@"params"] isKindOfClass:[NSDictionary class]]) {
                 paramsUrl = responseObject[@"params"][@"exportCarUrl"];
             }
             [self.infoTableView reloadData];

@@ -299,7 +299,7 @@
 
 - (void)adView:(AJAdView *)adView didSelectIndex:(NSInteger)index{
     NSLog(@"index--%ld--",(long)index);
-    if (! [carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
+    if ([carUpkeepDic[@"store"] isKindOfClass:[NSDictionary class]]) {
         NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
         NSMutableArray *mulAry = [NSMutableArray array];
         for (NSDictionary * dic in imageUrlAry) {
@@ -710,9 +710,9 @@
                 ShopInfoCell *cell = (ShopInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"shopInfoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
-                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = [carUpkeepDic[@"storeName"] length] == 0?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = [carUpkeepDic[@"storePhone"] length] == 0?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = [carUpkeepDic[@"storeAddress"] length] == 0?@"门店地址":carUpkeepDic[@"storeAddress"];
 //                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
 //                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
 //                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
@@ -1006,7 +1006,7 @@
             }
             case 7: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
-                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                if ([carUpkeepDic[@"store"] isKindOfClass:[NSDictionary class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
                     cell.ptImgView.hidden = NO;
@@ -1043,9 +1043,9 @@
 //                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
 //                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
 //                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
-                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = [carUpkeepDic[@"storeName"] length] == 0?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = [carUpkeepDic[@"storePhone"] length] == 0?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = [carUpkeepDic[@"storeAddress"] length] == 0?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }
@@ -1321,7 +1321,7 @@
             }
             case 6: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
-                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                if ([carUpkeepDic[@"store"] isKindOfClass:[NSDictionary class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
                     cell.ptImgView.hidden = NO;
@@ -1357,9 +1357,9 @@
 //                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
 //                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
 //                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
-                cell.storeNameL.text = carUpkeepDic[@"storeName"]==[NSNull null]?@"门店名称":carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = carUpkeepDic[@"storePhone"]==[NSNull null]?@"门店电话":carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = carUpkeepDic[@"storeAddress"]==[NSNull null]?@"门店地址":carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = [carUpkeepDic[@"storeName"] length] == 0?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = [carUpkeepDic[@"storePhone"] length] == 0?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = [carUpkeepDic[@"storeAddress"] length] == 0?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }
@@ -1608,7 +1608,7 @@
             }
             case 5: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
-                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                if ([carUpkeepDic[@"store"] isKindOfClass:[NSDictionary class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
                     cell.ptImgView.hidden = NO;
@@ -1644,9 +1644,9 @@
 //                cell.storeNameL.text = STRING_Nil(carUpkeepDic[@"storeName"]);
 //                cell.storePhoneL.text = STRING_Nil(carUpkeepDic[@"storePhone"]);
 //                cell.storeAddressL.text = STRING_Nil(carUpkeepDic[@"storeAddress"]);
-                cell.storeNameL.text = [carUpkeepDic[@"storeName"] isEqualToString:@""]?@"门店名称":carUpkeepDic[@"storeName"];
-                cell.storePhoneL.text = [carUpkeepDic[@"storePhone"] isEqualToString:@""]?@"门店电话":carUpkeepDic[@"storePhone"];
-                cell.storeAddressL.text = [carUpkeepDic[@"storeAddress"] isEqualToString:@""]?@"门店地址":carUpkeepDic[@"storeAddress"];
+                cell.storeNameL.text = [carUpkeepDic[@"storeName"] length] == 0?@"门店名称":carUpkeepDic[@"storeName"];
+                cell.storePhoneL.text = [carUpkeepDic[@"storePhone"] length] == 0?@"门店电话":carUpkeepDic[@"storePhone"];
+                cell.storeAddressL.text = [carUpkeepDic[@"storeAddress"] length] == 0?@"门店地址":carUpkeepDic[@"storeAddress"];
                 return cell;
                 break;
             }
@@ -1814,8 +1814,7 @@
             }
             case 4: {
                 CheckResultQRCell *cell = (CheckResultQRCell *)[tableView dequeueReusableCellWithIdentifier:@"checkResultQRCell"];
-                NSLog(@"carUpkeepDicwechatImg： %@",carUpkeepDic[@"store"][@"wechatImg"]);
-                if (! [carUpkeepDic[@"store"][@"wechatImg"] isKindOfClass:[NSNull class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
+                if ([carUpkeepDic[@"store"] isKindOfClass:[NSDictionary class]] && [carUpkeepDic[@"store"][@"wechatImg"] length] > 0) {
                     cell.mdqrL.hidden = NO;
                     cell.mdqrImgView.hidden = NO;
                     cell.ptImgView.hidden = NO;
@@ -2119,7 +2118,7 @@
 //            if ([carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
 //                return;
 //            }
-            if (! [carUpkeepDic[@"store"] isKindOfClass:[NSNull class]]) {
+            if ([carUpkeepDic[@"store"] isKindOfClass:[NSDictionary class]]) {
                 NSArray *imageUrlAry = carUpkeepDic[@"store"][@"minorImages"];
                 if (! [imageUrlAry isKindOfClass:[NSNull class]] && imageUrlAry.count > 0) {
                     if (! _adView) {

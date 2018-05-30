@@ -421,7 +421,6 @@
                 cell.shopNameBtn2.hidden = NO;
                 [cell.shopNameBtn2 addTarget:self action:@selector(toApplyView) forControlEvents:UIControlEventTouchUpInside];
                 cell.shopNameBtn.hidden = YES;
-                cell.shopNameBtn2.hidden = YES;
                 cell.shopLevelIM.hidden= YES;
                 cell.shopNameIM.hidden = NO;
                 cell.jifenL.hidden = YES;
