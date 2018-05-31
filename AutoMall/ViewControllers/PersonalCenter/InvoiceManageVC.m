@@ -31,6 +31,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInvoice)];
+    
     [self.myTableView registerNib:[UINib nibWithNibName:@"InvoiceListCell" bundle:nil] forCellReuseIdentifier:@"invoiceListCell"];
     self.myTableView.tableFooterView = [UIView new];
     
@@ -57,6 +59,17 @@
     _networkConditionHUD.margin = HUDMargin;
     
     [self requestPostInvoiceList];
+}
+
+-(void)editInvoice {
+    NSLog(@"去编辑！");
+    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"编辑"]) {
+        [self.navigationItem.rightBarButtonItem setTitle:@"完成"];
+        self.myTableView.editing = YES;
+        return;
+    }
+    [self.navigationItem.rightBarButtonItem setTitle:@"编辑"];
+    self.myTableView.editing = NO;
 }
 
 //#pragma mark - 下拉刷新,上拉加载
@@ -121,6 +134,23 @@
     //    detailVC.isDrink = self.isDrink;
     //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
     //    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"row: %ld",(long)indexPath.row);
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //先删除相应的地址
+//        [self deleteAddress:_addressArray [indexPath.row] [@"id"]];
+//        [_addressArray removeObjectAtIndex:indexPath.row];//移除数据源的数据
+//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];//移除tableView中的数据
+    }
 }
 
 #pragma mark - 发送请求

@@ -449,6 +449,8 @@
 		F789EF0C1F7D571E003A127C /* EmployeeDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0A1F7D571E003A127C /* EmployeeDetailCell.xib */; };
 		F789EF101F7D63BE003A127C /* EmployeeAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */; };
 		F789EF111F7D63BE003A127C /* EmployeeAuthVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */; };
+		F78D5DCE20C0577E007D7E50 /* AddInvoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F78D5DCC20C0577E007D7E50 /* AddInvoiceVC.m */; };
+		F78D5DCF20C0577E007D7E50 /* AddInvoiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F78D5DCD20C0577E007D7E50 /* AddInvoiceVC.xib */; };
 		F7A39CBC1FA8BBFA000EFB76 /* EmployeeSkillListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A39CBA1FA8BBFA000EFB76 /* EmployeeSkillListCell.m */; };
 		F7A39CBD1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7A39CBB1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib */; };
 		F7AC8DA71FA793E100B284DA /* CenterEmployeeAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7AC8DA51FA793E100B284DA /* CenterEmployeeAuthCell.m */; };
@@ -1285,6 +1287,9 @@
 		F789EF0D1F7D63BE003A127C /* EmployeeAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAuthVC.h; sourceTree = "<group>"; };
 		F789EF0E1F7D63BE003A127C /* EmployeeAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAuthVC.m; sourceTree = "<group>"; };
 		F789EF0F1F7D63BE003A127C /* EmployeeAuthVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeAuthVC.xib; sourceTree = "<group>"; };
+		F78D5DCB20C0577E007D7E50 /* AddInvoiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInvoiceVC.h; sourceTree = "<group>"; };
+		F78D5DCC20C0577E007D7E50 /* AddInvoiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInvoiceVC.m; sourceTree = "<group>"; };
+		F78D5DCD20C0577E007D7E50 /* AddInvoiceVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInvoiceVC.xib; sourceTree = "<group>"; };
 		F7A39CB91FA8BBFA000EFB76 /* EmployeeSkillListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeSkillListCell.h; sourceTree = "<group>"; };
 		F7A39CBA1FA8BBFA000EFB76 /* EmployeeSkillListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeSkillListCell.m; sourceTree = "<group>"; };
 		F7A39CBB1FA8BBFA000EFB76 /* EmployeeSkillListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeSkillListCell.xib; sourceTree = "<group>"; };
@@ -3072,6 +3077,9 @@
 		F70FD22020BF0C2C003021D5 /* 新增发票 */ = {
 			isa = PBXGroup;
 			children = (
+				F78D5DCB20C0577E007D7E50 /* AddInvoiceVC.h */,
+				F78D5DCC20C0577E007D7E50 /* AddInvoiceVC.m */,
+				F78D5DCD20C0577E007D7E50 /* AddInvoiceVC.xib */,
 			);
 			name = "新增发票";
 			sourceTree = "<group>";
@@ -3369,6 +3377,7 @@
 				04BA1C771F4D8D7C00704A9E /* SettlementCell.xib in Resources */,
 				04F7D8641F5EA584004945ED /* EmployeeListVC.xib in Resources */,
 				04ABFB3E1F984BE00015EE78 /* AlbumListCollectionViewCell.xib in Resources */,
+				F78D5DCF20C0577E007D7E50 /* AddInvoiceVC.xib in Resources */,
 				04DC7DBA1F31C28300AA20A7 /* whiteplaceholder.png in Resources */,
 				04AE98201F2ED46500C2D158 /* Assets.xcassets in Resources */,
 				04BA1C791F4D8D7C00704A9E /* SettlementFootView.xib in Resources */,
@@ -3712,6 +3721,7 @@
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,
 				04DC7DBE1F31C28300AA20A7 /* ImageObject.m in Sources */,
 				04DCA1951FA34AB9004B1054 /* ResultDetailHazardCell.m in Sources */,
+				F78D5DCE20C0577E007D7E50 /* AddInvoiceVC.m in Sources */,
 				0459C6B51F614C870040501E /* ChooseLocationView.m in Sources */,
 				0453D3B01F69349A004F79C8 /* UpkeepCarInfoVC.m in Sources */,
 				04D1077C1F62998D007D9F57 /* ZFCurveAttribute.m in Sources */,

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddInvoiceVC">
+            <connections>
+                <outlet property="myTableView" destination="UDO-J9-cLe" id="09R-P4-2ND"/>
+                <outlet property="plainInvoiceBtn" destination="IFs-j2-Tjm" id="tFg-3t-bXX"/>
+                <outlet property="valueAddedInvoiceBtn" destination="OLv-fT-sea" id="4c2-KP-qUq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwF-Of-vJP">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发票类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yup-bE-7Gu">
+                            <rect key="frame" x="16" y="8" width="61.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFs-j2-Tjm">
+                            <rect key="frame" x="16" y="33" width="113" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="OXS-oA-oCv"/>
+                                <constraint firstAttribute="width" constant="113" id="wa0-IY-zkV"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                            <state key="normal" title="普通发票">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <state key="selected" image="btn_check">
+                                <color key="titleColor" red="0.91764705879999997" green="0.0" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLv-fT-sea">
+                            <rect key="frame" x="209" y="33" width="150" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="ZEC-8M-IFU"/>
+                                <constraint firstAttribute="width" constant="150" id="aYW-6e-p7b"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                            <state key="normal" title="增值税专用发票">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <state key="selected" title="增值税专用发票" image="btn_check">
+                                <color key="titleColor" red="0.91764705879999997" green="0.0" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="yup-bE-7Gu" firstAttribute="leading" secondItem="SwF-Of-vJP" secondAttribute="leading" constant="16" id="6MQ-IF-SRV"/>
+                        <constraint firstItem="OLv-fT-sea" firstAttribute="centerY" secondItem="IFs-j2-Tjm" secondAttribute="centerY" id="AcU-i3-x6N"/>
+                        <constraint firstItem="yup-bE-7Gu" firstAttribute="top" secondItem="SwF-Of-vJP" secondAttribute="top" constant="8" id="b0Z-8s-vJN"/>
+                        <constraint firstAttribute="trailing" secondItem="OLv-fT-sea" secondAttribute="trailing" constant="16" id="bAs-xB-MZq"/>
+                        <constraint firstAttribute="height" constant="70" id="qIn-Vu-PxX"/>
+                        <constraint firstItem="IFs-j2-Tjm" firstAttribute="leading" secondItem="SwF-Of-vJP" secondAttribute="leading" constant="16" id="uXe-hY-Hr6"/>
+                        <constraint firstAttribute="bottom" secondItem="IFs-j2-Tjm" secondAttribute="bottom" constant="7" id="wet-7n-hMT"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UDO-J9-cLe">
+                    <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="nTN-Pu-F6C"/>
+                        <outlet property="delegate" destination="-1" id="OEr-nb-xnl"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="UDO-J9-cLe" firstAttribute="top" secondItem="SwF-Of-vJP" secondAttribute="bottom" id="8sO-FY-UwM"/>
+                <constraint firstItem="UDO-J9-cLe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VbC-ys-T3h"/>
+                <constraint firstAttribute="trailing" secondItem="UDO-J9-cLe" secondAttribute="trailing" id="ehr-bE-wBm"/>
+                <constraint firstAttribute="trailing" secondItem="SwF-Of-vJP" secondAttribute="trailing" id="fdy-yU-gte"/>
+                <constraint firstAttribute="bottom" secondItem="UDO-J9-cLe" secondAttribute="bottom" id="kq9-Bq-eN3"/>
+                <constraint firstItem="SwF-Of-vJP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mAb-q0-rux"/>
+                <constraint firstItem="SwF-Of-vJP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="q34-vM-Ocg"/>
+            </constraints>
+            <point key="canvasLocation" x="25.5" y="51.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_check" width="14" height="10"/>
+    </resources>
+</document>

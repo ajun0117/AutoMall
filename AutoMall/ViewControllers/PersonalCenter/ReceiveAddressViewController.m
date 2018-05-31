@@ -146,9 +146,9 @@ static NSString *const AddressCellIdentify = @"addressListCell";
     NSLog(@"row: %ld",(long)indexPath.row);
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //先删除相应的地址
-        [self deleteAddress:_addressArray [indexPath.row] [@"id"]];
-        [_addressArray removeObjectAtIndex:indexPath.row];//移除数据源的数据
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];//移除tableView中的数据
+//        [self deleteAddress:_addressArray [indexPath.row] [@"id"]];
+//        [_addressArray removeObjectAtIndex:indexPath.row];//移除数据源的数据
+//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];//移除tableView中的数据
     }
 }
 
