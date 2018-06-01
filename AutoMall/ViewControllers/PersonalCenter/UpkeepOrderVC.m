@@ -199,7 +199,7 @@
 
         cell.plateNumberL.text = STRING(dic[@"car"][@"plateNumber"]);
         cell.ownerL.text = STRING(dic[@"car"][@"owner"]);
-        cell.allMoneyL.text = [dic[@"money"] length] == 0 ? @"待确认":[NSString stringWithFormat:@"￥%@",dic[@"money"]];
+        cell.allMoneyL.text = [dic[@"money"] intValue] == 0 ? @"待确认":[NSString stringWithFormat:@"￥%@",dic[@"money"]];
     }
     
     return cell;

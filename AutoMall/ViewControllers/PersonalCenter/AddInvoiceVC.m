@@ -83,7 +83,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return listAry.count;
+//    return listAry.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -113,7 +114,8 @@
 //        }
 //    }
     
-    return cell;
+//    return cell;
+    return nil;
 }
 
 
