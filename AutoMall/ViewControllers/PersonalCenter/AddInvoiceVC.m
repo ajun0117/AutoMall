@@ -15,8 +15,28 @@
 }
 @property (weak, nonatomic) IBOutlet UIButton *plainInvoiceBtn;
 @property (weak, nonatomic) IBOutlet UIButton *valueAddedInvoiceBtn;
+@property (weak, nonatomic) IBOutlet UIButton *personageBtn;
+@property (weak, nonatomic) IBOutlet UIButton *companyBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *taxpayerViewHeiCon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeiCon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgViewHeiCon;
 
-@property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UITextField *invoiceTitleTF;
+@property (weak, nonatomic) IBOutlet UITextField *taxpayerTF;
+
+@property (weak, nonatomic) IBOutlet UITextField *regisAddrTF;
+@property (weak, nonatomic) IBOutlet UITextField *regisPhoneTF;
+@property (weak, nonatomic) IBOutlet UITextField *bankNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *bankCodeTF;
+
+@property (weak, nonatomic) IBOutlet UITextField *receiveNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *receivePhoneTF;
+@property (weak, nonatomic) IBOutlet UIButton *receiveAddrBtn;
+@property (weak, nonatomic) IBOutlet UITextField *receiveAddrDetailTF;
+@property (weak, nonatomic) IBOutlet UISwitch *defaultSw;
+
+@property (weak, nonatomic) IBOutlet UITextField *receiveEmailTF;
+
 @end
 
 @implementation AddInvoiceVC
@@ -76,47 +96,6 @@
     self.plainInvoiceBtn.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return listAry.count;
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 20;
-//}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    InvoiceListCell *cell = (InvoiceListCell *)[tableView dequeueReusableCellWithIdentifier:@"invoiceListCell"];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    if (listAry.count > 0) {
-//        NSDictionary *dic = listAry[indexPath.section];
-//        cell.taitouL.text = dic [@"head"];
-//        NSString *name = dic [@"realName"];
-//        NSString *phone = dic [@"phone"];
-//        NSString *email = dic [@"email"];
-//        cell.detailL.text = [NSString stringWithFormat:@"%@/%@/%@",name,phone,email];
-//        BOOL preferred = [dic [@"def"] boolValue];
-//        if (preferred) {
-//            cell.defaultL.hidden = NO;
-//        }
-//        else {
-//            cell.defaultL.hidden = YES;
-//        }
-//    }
-    
-//    return cell;
-    return nil;
-}
 
 
 - (void)didReceiveMemoryWarning {
