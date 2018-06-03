@@ -31,6 +31,7 @@
 #import "EmployeeSkillListVC.h"
 #import "AboutUsVC.h"
 #import "StoreServiceVC.h"
+#import "InvoiceManageVC.h"
 
 @interface PersonalCenterVC () <UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
@@ -204,7 +205,7 @@
                 break;
             }
             case 3: {
-                return 2;
+                return 3;
                 break;
             }
             case 4: {
@@ -1017,9 +1018,9 @@
                     [self.navigationController pushViewController:addressVC animated:YES];
                 }
                 else {
-                    ReceiveAddressViewController *addressVC = [[ReceiveAddressViewController alloc] init];
-                    addressVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:addressVC animated:YES];
+                    InvoiceManageVC *invoiceVC = [[InvoiceManageVC alloc] init];
+                    invoiceVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:invoiceVC animated:YES];
                 }
                 break;
             }

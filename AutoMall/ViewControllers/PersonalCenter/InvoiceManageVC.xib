@@ -21,21 +21,52 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jJe-qf-D6U">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0NB-xC-2h2"/>
                         <outlet property="delegate" destination="-1" id="b05-Ap-nhE"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd0-E4-XgO">
+                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="u6y-pO-6Qc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="添加发票">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="u6y-pO-6Qc"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="u6y-pO-6Qc"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="addInvoiceAction:" destination="-1" eventType="touchUpInside" id="7Wo-mB-sBm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="jJe-qf-D6U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4NI-2g-iQ6"/>
-                <constraint firstAttribute="bottom" secondItem="jJe-qf-D6U" secondAttribute="bottom" id="77l-pT-G0n"/>
+                <constraint firstAttribute="bottom" secondItem="xd0-E4-XgO" secondAttribute="bottom" id="5zG-K8-kjj"/>
                 <constraint firstItem="jJe-qf-D6U" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gh8-Ge-7ii"/>
+                <constraint firstItem="xd0-E4-XgO" firstAttribute="top" secondItem="jJe-qf-D6U" secondAttribute="bottom" id="Joy-lU-7AK"/>
                 <constraint firstAttribute="trailing" secondItem="jJe-qf-D6U" secondAttribute="trailing" id="KQS-v0-cKV"/>
+                <constraint firstItem="xd0-E4-XgO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oBS-qC-A9Y"/>
+                <constraint firstAttribute="trailing" secondItem="xd0-E4-XgO" secondAttribute="trailing" id="sh4-Y1-3pH"/>
             </constraints>
+            <point key="canvasLocation" x="-122" y="-224"/>
         </view>
     </objects>
 </document>

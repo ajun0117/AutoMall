@@ -8,13 +8,14 @@
 
 #import "InvoiceManageVC.h"
 #import "InvoiceListCell.h"
+#import "AddInvoiceVC.h"
 
 @interface InvoiceManageVC ()
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
 //    int currentpage;
-    NSArray *listAry;    //订单列表
+    NSMutableArray *listAry;    //订单列表
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -40,7 +41,7 @@
 //    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
 //    currentpage = 0;
-//    listAry = [NSMutableArray array];
+    listAry = [NSMutableArray array];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -70,6 +71,10 @@
     }
     [self.navigationItem.rightBarButtonItem setTitle:@"编辑"];
     self.myTableView.editing = NO;
+}
+- (IBAction)addInvoiceAction:(id)sender {
+    AddInvoiceVC *addVC = [[AddInvoiceVC alloc] init];
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 //#pragma mark - 下拉刷新,上拉加载
@@ -147,9 +152,9 @@
     NSLog(@"row: %ld",(long)indexPath.row);
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //先删除相应的地址
-//        [self deleteAddress:_addressArray [indexPath.row] [@"id"]];
-//        [_addressArray removeObjectAtIndex:indexPath.row];//移除数据源的数据
-//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];//移除tableView中的数据
+        [self deleTheInvoiceWithId:listAry [indexPath.row] [@"id"]];
+        [listAry removeObjectAtIndex:indexPath.row];//移除数据源的数据
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];//移除tableView中的数据
     }
 }
 
@@ -160,7 +165,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:InvoiceManageList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:InvoiceManageList, @"op", nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefix(InvoiceManageList),userId];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefix(InvoiceManageList),userId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)deleTheInvoiceWithId:(NSString *)iid {     //删除某个发票
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DeleInvoice object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DeleInvoice, @"op", nil];
+//    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(DeleInvoice),iid];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -180,12 +195,29 @@
     if ([notification.name isEqualToString:InvoiceManageList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:InvoiceManageList object:nil];
         if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
-            listAry = responseObject[@"data"];
+            [listAry removeAllObjects];     //未做分页
+            [listAry addObjectsFromArray: responseObject[@"data"]];
             [self.myTableView reloadData];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
+        }
+    }
+    
+    if ([notification.name isEqualToString:DeleInvoice]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DeleInvoice object:nil];
+        
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
 }

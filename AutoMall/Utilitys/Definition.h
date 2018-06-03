@@ -140,9 +140,9 @@
 
 
 //汽车商城
-//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
 //#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])   //正式服务器对应ip地址
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表
@@ -228,7 +228,12 @@
 #define UserChangeImage                       @"/api/user/changeImage"        //修改个人头像
 #define UserChangeRemark                     @"/api/user/changeRemark"       //员工修改个人特长
 #define ReportSum                                   @"/api/report/sum"      //统计报表
-#define InvoiceManageList                        @"carupkeep_web/userInvoiceMgr"              //发票管理列表
+#define InvoiceManageList                        @"carupkeep_web/userInvoiceMgr/listByUserId"              //发票管理列表
+#define AddInvoice                                   @"carupkeep_web/userInvoiceMgr/add"         //新增发票
+#define UpDateInvoice                              @"carupkeep_web/userInvoiceMgr/update"      //更新发票
+#define DeleInvoice                                   @"carupkeep_web/userInvoiceMgr/delete"      //删除发票
+#define OrderInvoiceHis                           @"carupkeep_web/orderInvoiceHis/invoicingList"      //开发票
+#define OrderInvoiceList                           @"carupkeep_web/orderInvoiceHis/getByUserId"     //订单已开发票列表
 
 #define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
 #define UserGetStoreInfo                      @"/api/user/getStore"           //员工获取门店详情
