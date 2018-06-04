@@ -42,7 +42,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwF-Of-vJP">
-                    <rect key="frame" x="0.0" y="64" width="375" height="80"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="85"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发票类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yup-bE-7Gu">
                             <rect key="frame" x="16" y="8" width="61.5" height="18"/>
@@ -87,13 +87,13 @@
                         <constraint firstItem="OLv-fT-sea" firstAttribute="centerY" secondItem="IFs-j2-Tjm" secondAttribute="centerY" id="AcU-i3-x6N"/>
                         <constraint firstItem="yup-bE-7Gu" firstAttribute="top" secondItem="SwF-Of-vJP" secondAttribute="top" constant="8" id="b0Z-8s-vJN"/>
                         <constraint firstAttribute="trailing" secondItem="OLv-fT-sea" secondAttribute="trailing" constant="16" id="bAs-xB-MZq"/>
-                        <constraint firstAttribute="height" constant="80" id="qIn-Vu-PxX"/>
+                        <constraint firstAttribute="height" constant="85" id="qIn-Vu-PxX"/>
                         <constraint firstItem="IFs-j2-Tjm" firstAttribute="leading" secondItem="SwF-Of-vJP" secondAttribute="leading" constant="16" id="uXe-hY-Hr6"/>
-                        <constraint firstAttribute="bottom" secondItem="IFs-j2-Tjm" secondAttribute="bottom" constant="7" id="wet-7n-hMT"/>
+                        <constraint firstAttribute="bottom" secondItem="IFs-j2-Tjm" secondAttribute="bottom" constant="12" id="wet-7n-hMT"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZ7-Ck-WMc">
-                    <rect key="frame" x="0.0" y="154" width="375" height="652"/>
+                    <rect key="frame" x="0.0" y="159" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRW-rp-RW1">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="650"/>

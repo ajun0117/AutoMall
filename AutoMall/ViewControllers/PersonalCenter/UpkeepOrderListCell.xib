@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="179.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PP5-yd-Lym">
@@ -54,27 +54,37 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrR-fu-arH">
                         <rect key="frame" x="0.0" y="34" width="320" height="75"/>
                         <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8h-J0-42V">
+                                <rect key="frame" x="0.0" y="15" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5Ie-2i-OHy"/>
+                                    <constraint firstAttribute="width" constant="44" id="wgD-bB-m7h"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="checkbox_no"/>
+                                <state key="selected" image="checkbox_yes"/>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderPictureSquare" translatesAutoresizingMaskIntoConstraints="NO" id="Wl0-Mb-C9m">
-                                <rect key="frame" x="16" y="7.5" width="60" height="60"/>
+                                <rect key="frame" x="36" y="7.5" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="9B7-uG-Jmu"/>
                                     <constraint firstAttribute="width" constant="60" id="ghs-T6-kzV"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HK-IU-15z">
-                                <rect key="frame" x="84" y="8" width="44" height="16"/>
+                                <rect key="frame" x="104" y="8" width="44" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车主" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpQ-pw-yVg">
-                                <rect key="frame" x="84" y="51" width="27" height="16"/>
+                                <rect key="frame" x="104" y="51" width="27" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="粤A88888" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4S-W5-mWD">
-                                <rect key="frame" x="84" y="28.5" width="72" height="18"/>
+                                <rect key="frame" x="104" y="28.5" width="72" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -92,13 +102,15 @@
                             <constraint firstItem="u4S-W5-mWD" firstAttribute="leading" secondItem="Wl0-Mb-C9m" secondAttribute="trailing" constant="8" id="7ei-pY-2m9"/>
                             <constraint firstItem="4HK-IU-15z" firstAttribute="top" secondItem="KrR-fu-arH" secondAttribute="top" constant="8" id="ATs-8n-e9j"/>
                             <constraint firstItem="4HK-IU-15z" firstAttribute="leading" secondItem="Wl0-Mb-C9m" secondAttribute="trailing" constant="8" id="Bni-MZ-zkh"/>
-                            <constraint firstItem="Wl0-Mb-C9m" firstAttribute="leading" secondItem="KrR-fu-arH" secondAttribute="leading" constant="16" id="QdX-nB-6L1"/>
+                            <constraint firstItem="Wl0-Mb-C9m" firstAttribute="leading" secondItem="KrR-fu-arH" secondAttribute="leading" constant="36" id="QdX-nB-6L1"/>
                             <constraint firstItem="JTv-gI-21X" firstAttribute="centerY" secondItem="u4S-W5-mWD" secondAttribute="centerY" id="ZJf-Hz-xTC"/>
                             <constraint firstItem="Wl0-Mb-C9m" firstAttribute="centerY" secondItem="KrR-fu-arH" secondAttribute="centerY" id="aHR-ee-Hsv"/>
                             <constraint firstAttribute="bottom" secondItem="RpQ-pw-yVg" secondAttribute="bottom" constant="8" id="dMt-cd-G8c"/>
                             <constraint firstAttribute="height" constant="75" id="iTX-O5-Tkl"/>
                             <constraint firstAttribute="trailing" secondItem="JTv-gI-21X" secondAttribute="trailing" constant="16" id="lbp-Ej-QEQ"/>
                             <constraint firstItem="u4S-W5-mWD" firstAttribute="centerY" secondItem="KrR-fu-arH" secondAttribute="centerY" id="mx0-8y-hcu"/>
+                            <constraint firstItem="f8h-J0-42V" firstAttribute="centerY" secondItem="KrR-fu-arH" secondAttribute="centerY" id="o4q-yn-LOe"/>
+                            <constraint firstItem="f8h-J0-42V" firstAttribute="leading" secondItem="KrR-fu-arH" secondAttribute="leading" id="sf1-ZB-1v6"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35y-Ws-2U1">
@@ -147,6 +159,7 @@
             <connections>
                 <outlet property="allMoneyL" destination="RCj-kY-wBg" id="O0g-nQ-FIo"/>
                 <outlet property="btn" destination="LnX-Qd-btt" id="yFJ-y3-i1n"/>
+                <outlet property="checkboxBtn" destination="f8h-J0-42V" id="NDa-IB-ktP"/>
                 <outlet property="dateL" destination="JTv-gI-21X" id="yct-NH-jgK"/>
                 <outlet property="imgView" destination="Wl0-Mb-C9m" id="hTr-3Y-bpF"/>
                 <outlet property="orderNumberL" destination="4HK-IU-15z" id="g1W-ee-JdM"/>
@@ -154,11 +167,13 @@
                 <outlet property="plateNumberL" destination="u4S-W5-mWD" id="wUt-wp-oSu"/>
                 <outlet property="statusL" destination="35y-Ws-2U1" id="KNv-EK-9Ht"/>
             </connections>
-            <point key="canvasLocation" x="-322" y="83"/>
+            <point key="canvasLocation" x="-599" y="68"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="arrows" width="26" height="48"/>
+        <image name="checkbox_no" width="90" height="90"/>
+        <image name="checkbox_yes" width="90" height="90"/>
         <image name="placeholderPictureSquare" width="151" height="151"/>
     </resources>
 </document>

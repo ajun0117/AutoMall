@@ -140,9 +140,9 @@
 
 
 //汽车商城
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
 //#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])   //正式服务器对应ip地址
-//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表

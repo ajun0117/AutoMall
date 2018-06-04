@@ -18,6 +18,7 @@
     id activeField;
     BOOL keyboardShown; //键盘是否弹出
     CGRect scrollViewFrame;       //记录初始frame
+    NSString *invoiceType;  //发票类型
 }
 @property (nonatomic,strong) ChooseLocationView *chooseLocationView;
 @property (nonatomic,strong) UIView  *cover;
@@ -365,6 +366,8 @@
     self.taxpayerViewHeiCon.constant = 45;
     self.bankViewHeiCon.constant = 179;
     self.bgViewHeiCon.constant = 605;
+    
+    invoiceType = @"2";     //增值税专用
 }
 
 - (IBAction)personageAction:(id)sender {
@@ -375,6 +378,8 @@
     self.taxpayerViewHeiCon.constant = 0;
     self.bankViewHeiCon.constant = 0;
     self.bgViewHeiCon.constant = 426;
+    
+    invoiceType = @"0";     //普通个人
 }
 
 - (IBAction)companyAction:(id)sender {
@@ -384,6 +389,8 @@
     self.taxpayerViewHeiCon.constant = 45;
     self.bankViewHeiCon.constant = 0;
     self.bgViewHeiCon.constant = 471;
+    
+    invoiceType = @"1";     //普通企业
 }
 
 #pragma mark - 发送请求
@@ -396,8 +403,8 @@
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
 
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.uNameTF.text,@"name", self.phoneTF.text,@"phone", addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"county", self.addDetailTF.text,@"address", [NSNumber numberWithBool:self.defaultSW.on],@"preferred", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(AddInvoice) delegate:nil params:pram info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"addr",  [NSNumber numberWithBool:self.defaultSw.on],@"def", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(AddInvoice) delegate:nil params:pram info:infoDic];
 }
 
 -(void)editInvoice {

@@ -15,7 +15,8 @@
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
 //    int currentpage;
-    NSMutableArray *listAry;    //订单列表
+    NSMutableArray *listAry;    //发票列表
+    NSMutableArray *orderAry;   //待开发票订单列表
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -42,6 +43,15 @@
     
 //    currentpage = 0;
     listAry = [NSMutableArray array];
+    if (self.orderDic) {
+        orderAry = [NSMutableArray array];
+        NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+        for (NSDictionary *dic in [self.orderDic allValues]) {
+            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.orderType,@"orderType",dic[@"code"],@"orderNo",userId,@"userId",dic[@"money"],@"price", nil];
+            [orderAry addObject:muDic];
+        }
+        NSLog(@"orderAry: %@",orderAry);
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {

@@ -15,6 +15,7 @@
 #import "AutoCheckOrderVC.h"
 #import "AutoCheckOrderCompleteVC.h"
 #import "AutoCheckOrderWorkingVC.h"
+#import "InvoiceManageVC.h"
 
 @interface UpkeepOrderVC () <AJSegmentedControlDelegate,UIScrollViewDelegate>
 {
@@ -23,6 +24,7 @@
     MBProgressHUD *_networkConditionHUD;
     int currentpage;
     NSMutableArray *orderAry;    //订单列表
+    NSMutableDictionary *selectedInvoiceDic;    //选中的需要开发票的订单
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -47,6 +49,7 @@
     
     currentpage = 0;
     orderAry = [NSMutableArray array];
+    selectedInvoiceDic = [NSMutableDictionary dictionary];
     
     [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"已确认"}, @{@"name":@"已完工"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
     
@@ -104,6 +107,7 @@
 - (void)ajSegmentedControlSelectAtIndex:(NSInteger)index
 {
     NSLog(@"index: %ld",(long)index);
+    self.navigationItem.rightBarButtonItem = nil;
     switch (index) {
         case 0: {
             self.orderStatus = @"0";
@@ -123,6 +127,8 @@
         }
         case 4: {
             self.orderStatus = @"5";
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开发票" style:UIBarButtonItemStylePlain target:self action:@selector(toInvoiceManageVC)];
+            self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
             break;
         }
         case 5: {
@@ -163,6 +169,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UpkeepOrderListCell *cell = (UpkeepOrderListCell *)[tableView dequeueReusableCellWithIdentifier:@"upkeepOrderListCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.checkboxBtn.hidden = YES;
     if (orderAry.count > 0) {
         
         NSDictionary *dic = orderAry[indexPath.section];
@@ -183,6 +190,15 @@
         }else if (status == 5) {
             cell.statusL.text = @"已完成";
             [cell.btn setTitle:@"去查看" forState:UIControlStateNormal];
+            cell.checkboxBtn.hidden = NO;
+            cell.checkboxBtn.tag = indexPath.section + 100;
+            [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+            NSArray *keys = [selectedInvoiceDic allKeys];
+            if ([keys containsObject:dic[@"id"]]) {
+                cell.checkboxBtn.selected = YES;
+            } else {
+                cell.checkboxBtn.selected = NO;
+            }
         }
         else {
             cell.statusL.text = @"已完成";
@@ -286,6 +302,27 @@
             [self.navigationController pushViewController:completeVC animated:YES];
     }
 
+}
+
+#pragma mark - 复选框开发票
+-(void)checkToInvoice:(UIButton *)btn {
+    btn.selected = !btn.selected;
+    NSInteger section = btn.tag - 100;
+    NSDictionary *dic = orderAry [section];
+    if (btn.selected) {
+        [selectedInvoiceDic setObject:dic forKey:dic[@"id"]];
+    }
+    else {
+        [selectedInvoiceDic removeObjectForKey:dic[@"id"]];
+    }
+    NSLog(@"selectedInvoiceDic: %@",selectedInvoiceDic)
+}
+
+-(void)toInvoiceManageVC {      //去开发票页面
+    InvoiceManageVC *invoiceVC = [[InvoiceManageVC alloc] init];
+    invoiceVC.orderType = @"1";     //0 商城订单,1 保养订单
+    invoiceVC.orderDic = selectedInvoiceDic;
+    [self.navigationController pushViewController:invoiceVC animated:YES];
 }
 
 #pragma mark - 发送请求

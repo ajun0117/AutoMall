@@ -10,6 +10,7 @@
 #import "MailOrderSingleCell.h"
 #import "MailOrderMultiCell.h"
 #import "MailOrderDetailVC.h"
+#import "InvoiceManageVC.h"
 
 @interface MailOrderListVC ()
 {
@@ -17,6 +18,7 @@
     MBProgressHUD *_networkConditionHUD;
     NSMutableArray *orderArray;
     int currentpage;
+    NSMutableDictionary *selectedInvoiceDic;    //选中的需要开发票的订单
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -41,7 +43,8 @@
     [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
     orderArray = [NSMutableArray array];
-    currentpage = 0; 
+    currentpage = 0;
+    selectedInvoiceDic = [NSMutableDictionary dictionary];
     
     if ([self.orderStatus isEqualToString:@"0"]) {
         [self daifuAction:self.daifuBtn];
@@ -91,6 +94,7 @@
 
 - (IBAction)daifuAction:(id)sender {
     _orderStatus = @"0";
+    self.navigationItem.rightBarButtonItem = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:YES andView:self.daifuView withColor:Red_BtnColor];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
@@ -101,6 +105,8 @@
 
 - (IBAction)yifuAction:(id)sender {
     _orderStatus = @"1";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开发票" style:UIBarButtonItemStylePlain target:self action:@selector(toInvoiceManageVC)];
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:YES andView:self.yifuView withColor:Red_BtnColor];
@@ -111,6 +117,7 @@
 
 - (IBAction)cancelAction:(id)sender {
     _orderStatus = @"-1";
+    self.navigationItem.rightBarButtonItem = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
@@ -121,6 +128,7 @@
 
 - (IBAction)allAction:(id)sender {
     _orderStatus = nil;
+    self.navigationItem.rightBarButtonItem = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:NO andView:self.yifuView withColor:[UIColor clearColor]];
@@ -132,6 +140,27 @@
 -(void) setButton:(UIButton *)btn  withBool:(BOOL)bo andView:(UIView *)view withColor:(UIColor *)color {
         btn.selected = bo;
         view.backgroundColor = color;
+}
+
+#pragma mark - 复选框开发票
+-(void)checkToInvoice:(UIButton *)btn {
+    btn.selected = !btn.selected;
+    NSInteger section = btn.tag - 100;
+    NSDictionary *dic = orderArray [section];
+    if (btn.selected) {
+        [selectedInvoiceDic setObject:dic forKey:dic[@"id"]];
+    }
+    else {
+        [selectedInvoiceDic removeObjectForKey:dic[@"id"]];
+    }
+    NSLog(@"selectedInvoiceDic: %@",selectedInvoiceDic)
+}
+
+-(void)toInvoiceManageVC {      //去开发票页面
+    InvoiceManageVC *invoiceVC = [[InvoiceManageVC alloc] init];
+    invoiceVC.orderType = @"1";     //0 商城订单,1 保养订单
+    invoiceVC.orderDic = selectedInvoiceDic;
+    [self.navigationController pushViewController:invoiceVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

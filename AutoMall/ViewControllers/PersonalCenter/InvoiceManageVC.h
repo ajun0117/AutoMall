@@ -10,4 +10,7 @@
 
 @interface InvoiceManageVC : UIViewController
 
+@property (nonatomic, strong) NSString *orderType;      //订单类型：0 商城订单,1 保养订单
+@property (nonatomic, strong) NSMutableDictionary *orderDic;    //待开发票订单
+
 @end
