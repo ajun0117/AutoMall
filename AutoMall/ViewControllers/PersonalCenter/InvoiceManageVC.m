@@ -34,6 +34,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInvoice)];
+    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"InvoiceListCell" bundle:nil] forCellReuseIdentifier:@"invoiceListCell"];
     self.myTableView.tableFooterView = [UIView new];
@@ -44,6 +45,7 @@
 //    currentpage = 0;
     listAry = [NSMutableArray array];
     if (self.orderDic) {
+        self.navigationItem.rightBarButtonItem = nil;
         orderAry = [NSMutableArray array];
         NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
         for (NSDictionary *dic in [self.orderDic allValues]) {
@@ -143,12 +145,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    NSDictionary *dic = listAry[indexPath.section];
+    if (self.orderDic) {  //用于选择后开发票
+        for (NSMutableDictionary *muDic in orderAry) {
+            [muDic setObject:dic[@"province"] forKey:@"province"];
+            [muDic setObject:dic[@"city"] forKey:@"city"];
+            [muDic setObject:dic[@"addr"] forKey:@"addr"];
+            [muDic setObject:dic[@"type"] forKey:@"type"];
+            [muDic setObject:dic[@"head"] forKey:@"head"];
+            [muDic setObject:dic[@"realName"] forKey:@"realName"];
+            [muDic setObject:dic[@"phone"] forKey:@"phone"];
+            [muDic setObject:dic[@"email"] forKey:@"email"];
+            [muDic setObject:@"0" forKey:@"status"];    //固定值，0 待审核，1 通过，2 拒绝
+            [muDic setObject:dic[@"taxpayerCode"] forKey:@"taxpayerCode"];
+        }
+        NSLog(@"orderAry: %@",orderAry);
+        [self toInvoiceWithAry:orderAry];
+    } else {
+        AddInvoiceVC *editVC = [[AddInvoiceVC alloc] init];
+        editVC.isEdit = YES;
+        editVC.invoiceDic = dic;
+        [self.navigationController pushViewController:editVC animated:YES];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -189,6 +207,15 @@
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
+-(void)toInvoiceWithAry:(NSArray *)ary {      //开发票
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceHis object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:OrderInvoiceHis, @"op", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:ary,@"list", nil];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(OrderInvoiceHis) delegate:nil params:pram info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -218,7 +245,7 @@
     if ([notification.name isEqualToString:DeleInvoice]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:DeleInvoice object:nil];
         
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
@@ -230,6 +257,24 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+    
+    if ([notification.name isEqualToString:OrderInvoiceHis]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:OrderInvoiceHis object:nil];
+        
+        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
+            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+
+    
 }
 
 - (void)didReceiveMemoryWarning {

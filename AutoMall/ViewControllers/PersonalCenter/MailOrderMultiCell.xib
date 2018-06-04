@@ -21,8 +21,18 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiY-iw-dmw">
                         <rect key="frame" x="0.0" y="34" width="320" height="75"/>
                         <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-Z7-fjn">
+                                <rect key="frame" x="0.0" y="15" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="5gm-AT-4vX"/>
+                                    <constraint firstAttribute="height" constant="44" id="D9i-vt-3h4"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="checkbox_no"/>
+                                <state key="selected" image="checkbox_yes"/>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdE-Jy-Edl">
-                                <rect key="frame" x="16" y="7.5" width="288" height="60"/>
+                                <rect key="frame" x="36" y="7.5" width="268" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="lOK-p1-GZ3"/>
                                 </constraints>
@@ -31,9 +41,11 @@
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EdE-Jy-Edl" firstAttribute="centerY" secondItem="RiY-iw-dmw" secondAttribute="centerY" id="3pR-gn-L3w"/>
-                            <constraint firstItem="EdE-Jy-Edl" firstAttribute="leading" secondItem="RiY-iw-dmw" secondAttribute="leading" constant="16" id="BRE-Rp-3X6"/>
+                            <constraint firstItem="1Sq-Z7-fjn" firstAttribute="leading" secondItem="RiY-iw-dmw" secondAttribute="leading" id="BHC-QY-BBF"/>
+                            <constraint firstItem="EdE-Jy-Edl" firstAttribute="leading" secondItem="RiY-iw-dmw" secondAttribute="leading" constant="36" id="BRE-Rp-3X6"/>
                             <constraint firstAttribute="height" constant="75" id="Ehi-Cm-sr4"/>
                             <constraint firstAttribute="trailing" secondItem="EdE-Jy-Edl" secondAttribute="trailing" constant="16" id="Uek-ta-QSe"/>
+                            <constraint firstItem="1Sq-Z7-fjn" firstAttribute="centerY" secondItem="RiY-iw-dmw" secondAttribute="centerY" id="YSu-as-fw3"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAy-V3-Xmw">
@@ -139,6 +151,7 @@
             <connections>
                 <outlet property="allMoneyL" destination="WOl-eR-Kjl" id="5lU-GS-Uk3"/>
                 <outlet property="btn" destination="biz-Yv-kd4" id="BLV-sE-NGS"/>
+                <outlet property="checkboxBtn" destination="1Sq-Z7-fjn" id="aOQ-cg-p8g"/>
                 <outlet property="numberL" destination="nCd-UQ-zgC" id="wDc-jf-TNa"/>
                 <outlet property="picScrollView" destination="EdE-Jy-Edl" id="Fz4-CZ-6tO"/>
                 <outlet property="statusL" destination="aC5-XT-BtE" id="nrP-W3-5gS"/>
@@ -148,5 +161,7 @@
     </objects>
     <resources>
         <image name="arrows" width="26" height="48"/>
+        <image name="checkbox_no" width="90" height="90"/>
+        <image name="checkbox_yes" width="90" height="90"/>
     </resources>
 </document>

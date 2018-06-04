@@ -18,6 +18,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *ownerL;
 @property (strong, nonatomic) IBOutlet UILabel *allMoneyL;
 @property (strong, nonatomic) IBOutlet UIButton *btn;
-@property (strong, nonatomic) IBOutlet UIButton *checkboxBtn;
 
 @end

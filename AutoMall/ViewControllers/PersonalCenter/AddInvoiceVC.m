@@ -72,7 +72,7 @@
     
     [self.valueAddedInvoiceBtn setImage:[UIImage imageNamed:@"btn_check"] forState:UIControlStateSelected | UIControlStateHighlighted];
     self.valueAddedInvoiceBtn.layer.cornerRadius = 2;
-    self.valueAddedInvoiceBtn.layer.borderColor = RGBCOLOR(63, 63, 63).CGColor;
+    self.valueAddedInvoiceBtn.layer.borderColor = RGBCOLOR(85, 85, 85).CGColor;
     self.valueAddedInvoiceBtn.layer.borderWidth = 1;
     [self.valueAddedInvoiceBtn addTarget:self action:@selector(valueAddedInvoiceAction) forControlEvents:UIControlEventTouchUpInside];
     
@@ -222,7 +222,7 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    if ([self checkPhoneNumWithPhone:self.regisPhoneTF.text]) {
+    if ([self checkPhoneNumWithPhone:self.receivePhoneTF.text]) {
         if (self.isEdit) {
             [self editInvoice];
         }
@@ -349,7 +349,7 @@
     self.plainInvoiceBtn.layer.borderColor = RGBCOLOR(234, 0, 24).CGColor;
     
     self.valueAddedInvoiceBtn.selected = NO;
-    self.valueAddedInvoiceBtn.layer.borderColor = RGBCOLOR(63, 63, 63).CGColor;
+    self.valueAddedInvoiceBtn.layer.borderColor = RGBCOLOR(85, 85, 85).CGColor;
     
     [self personageAction:self.personageBtn];
 }
@@ -359,7 +359,7 @@
     self.valueAddedInvoiceBtn.layer.borderColor = RGBCOLOR(234, 0, 24).CGColor;
     
     self.plainInvoiceBtn.selected = NO;
-    self.plainInvoiceBtn.layer.borderColor = RGBCOLOR(63, 63, 63).CGColor;
+    self.plainInvoiceBtn.layer.borderColor = RGBCOLOR(85, 85, 85).CGColor;
     
     self.headViewHeiCon.constant = 0;
     self.taxpayerView.hidden = NO;
@@ -395,7 +395,6 @@
 
 #pragma mark - 发送请求
 -(void)addInvoice {
-    //    [_addressArray removeAllObjects];
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:AddInvoice object:nil];
@@ -404,7 +403,7 @@
     NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
 
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"addr",  [NSNumber numberWithBool:self.defaultSw.on],@"def", nil];
-    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(AddInvoice) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(AddInvoice) delegate:nil params:pram info:infoDic];
 }
 
 -(void)editInvoice {
@@ -413,10 +412,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UpDateInvoice object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UpDateInvoice, @"op", nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSArray *addAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
+    NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
 
-//    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.addrDic[@"id"],@"id",self.uNameTF.text,@"name", self.phoneTF.text,@"phone", addAry[0],@"province", addAry[1],@"city", addAry[2],@"county", self.addDetailTF.text,@"address", [NSNumber numberWithBool:self.defaultSW.on],@"preferred", nil];
-//    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(UpDateInvoice) delegate:nil params:pram info:infoDic];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.invoiceDic[@"id"],@"id",userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"addr",  [NSNumber numberWithBool:self.defaultSw.on],@"def", nil];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(UpDateInvoice) delegate:nil params:pram info:infoDic];
 }
 
 
@@ -436,7 +435,7 @@
     if ([notification.name isEqualToString:AddInvoice]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AddInvoice object:nil];
         
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
@@ -451,7 +450,7 @@
     
     if ([notification.name isEqualToString:UpDateInvoice]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UpDateInvoice object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];

@@ -105,8 +105,16 @@
 
 - (IBAction)yifuAction:(id)sender {
     _orderStatus = @"1";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开发票" style:UIBarButtonItemStylePlain target:self action:@selector(toInvoiceManageVC)];
-    self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 60, 30);
+    [btn setTitle:@"开发票" forState:UIControlStateNormal];
+//    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(toInvoiceManageVC) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = backBtn;
+    
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
     [self setButton:self.yifuBtn withBool:YES andView:self.yifuView withColor:Red_BtnColor];
@@ -157,10 +165,16 @@
 }
 
 -(void)toInvoiceManageVC {      //去开发票页面
-    InvoiceManageVC *invoiceVC = [[InvoiceManageVC alloc] init];
-    invoiceVC.orderType = @"1";     //0 商城订单,1 保养订单
-    invoiceVC.orderDic = selectedInvoiceDic;
-    [self.navigationController pushViewController:invoiceVC animated:YES];
+    if ([[selectedInvoiceDic allKeys] count] > 0) {
+        InvoiceManageVC *invoiceVC = [[InvoiceManageVC alloc] init];
+        invoiceVC.orderType = @"0";     //0 商城订单,1 保养订单
+        invoiceVC.orderDic = selectedInvoiceDic;
+        [self.navigationController pushViewController:invoiceVC animated:YES];
+    } else {
+        _networkConditionHUD.labelText = @"请先勾选需要开发票的订单！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -194,6 +208,7 @@
     if (goodsAry.count > 1) {   //多商品订单
         MailOrderMultiCell *cell = (MailOrderMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderMultiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.checkboxBtn.hidden = YES;
         cell.picScrollView.contentSize = CGSizeMake((60+10) * goodsAry.count, 60);
         int amount = 0;
         for (int i = 0; i < goodsAry.count; ++i) {
@@ -211,6 +226,15 @@
             cell.statusL.text = @"已付款";
             cell.btn.hidden = YES;
 //            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+            cell.checkboxBtn.hidden = NO;
+            cell.checkboxBtn.tag = indexPath.section + 100;
+            [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+            NSArray *keys = [selectedInvoiceDic allKeys];
+            if ([keys containsObject:dic[@"id"]]) {
+                cell.checkboxBtn.selected = YES;
+            } else {
+                cell.checkboxBtn.selected = NO;
+            }
         } else if (status == -1) {
             cell.statusL.text = @"已取消";
             cell.btn.hidden = YES;
@@ -228,6 +252,7 @@
     
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.checkboxBtn.hidden = YES;
     NSDictionary *detailDic = [goodsAry firstObject];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = detailDic[@"commodityName"];
@@ -251,6 +276,15 @@
         cell.statusL.text = @"已付款";
         cell.btn.hidden = YES;
 //        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+        cell.checkboxBtn.hidden = NO;
+        cell.checkboxBtn.tag = indexPath.section + 100;
+        [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+        NSArray *keys = [selectedInvoiceDic allKeys];
+        if ([keys containsObject:dic[@"id"]]) {
+            cell.checkboxBtn.selected = YES;
+        } else {
+            cell.checkboxBtn.selected = NO;
+        }
     } else if (status == -1) {
         cell.statusL.text = @"已取消";
         cell.btn.hidden = YES;
