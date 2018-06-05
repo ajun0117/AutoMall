@@ -11,6 +11,7 @@
 #import "MailOrderMultiCell.h"
 #import "MailOrderDetailVC.h"
 #import "InvoiceManageVC.h"
+#import "MallOrderInvoiceDetailVC.h"
 
 @interface MailOrderListVC ()
 {
@@ -107,9 +108,9 @@
     _orderStatus = @"1";
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 60, 30);
+    btn.frame = CGRectMake(0, 2, 60, 40);
     [btn setTitle:@"开发票" forState:UIControlStateNormal];
-//    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    btn.titleLabel.font = [UIFont systemFontOfSize:16];
     [btn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(toInvoiceManageVC) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
@@ -177,6 +178,15 @@
     }
 }
 
+-(void)toInvoiceetailVC:(UIButton *)btn {
+    btn.selected = !btn.selected;
+    NSInteger section = btn.tag - 200;
+    NSDictionary *dic = orderArray[section];
+    MallOrderInvoiceDetailVC *detailVC = [[MallOrderInvoiceDetailVC alloc] init];
+    detailVC.orderId = dic[@"id"];
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -227,13 +237,23 @@
             cell.btn.hidden = YES;
 //            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
             cell.checkboxBtn.hidden = NO;
-            cell.checkboxBtn.tag = indexPath.section + 100;
-            [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
-            NSArray *keys = [selectedInvoiceDic allKeys];
-            if ([keys containsObject:dic[@"id"]]) {
-                cell.checkboxBtn.selected = YES;
-            } else {
-                cell.checkboxBtn.selected = NO;
+            if ([dic[@"invoiced"] boolValue]) {     //如果已开发票
+                cell.invoicedBtn.hidden = NO;
+                cell.invoicedBtn.tag = indexPath.section + 200;
+                [cell.invoicedBtn addTarget:self action:@selector(toInvoiceetailVC:) forControlEvents:UIControlEventTouchUpInside];
+                cell.checkboxBtn.enabled = NO;
+            }
+            else {
+                cell.invoicedBtn.hidden = YES;
+                cell.checkboxBtn.enabled = YES;
+                cell.checkboxBtn.tag = indexPath.section + 100;
+                [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+                NSArray *keys = [selectedInvoiceDic allKeys];
+                if ([keys containsObject:dic[@"id"]]) {
+                    cell.checkboxBtn.selected = YES;
+                } else {
+                    cell.checkboxBtn.selected = NO;
+                }
             }
         } else if (status == -1) {
             cell.statusL.text = @"已取消";
@@ -277,13 +297,23 @@
         cell.btn.hidden = YES;
 //        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
         cell.checkboxBtn.hidden = NO;
-        cell.checkboxBtn.tag = indexPath.section + 100;
-        [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
-        NSArray *keys = [selectedInvoiceDic allKeys];
-        if ([keys containsObject:dic[@"id"]]) {
-            cell.checkboxBtn.selected = YES;
-        } else {
-            cell.checkboxBtn.selected = NO;
+        if ([dic[@"invoiced"] boolValue]) {     //如果已开发票
+            cell.invoicedBtn.hidden = NO;
+            cell.invoicedBtn.tag = indexPath.section + 200;
+            [cell.invoicedBtn addTarget:self action:@selector(toInvoiceetailVC:) forControlEvents:UIControlEventTouchUpInside];
+            cell.checkboxBtn.enabled = NO;
+        }
+        else {
+            cell.invoicedBtn.hidden = YES;
+            cell.checkboxBtn.enabled = YES;
+            cell.checkboxBtn.tag = indexPath.section + 100;
+            [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+            NSArray *keys = [selectedInvoiceDic allKeys];
+            if ([keys containsObject:dic[@"id"]]) {
+                cell.checkboxBtn.selected = YES;
+            } else {
+                cell.checkboxBtn.selected = NO;
+            }
         }
     } else if (status == -1) {
         cell.statusL.text = @"已取消";

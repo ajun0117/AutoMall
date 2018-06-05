@@ -264,6 +264,10 @@
 		04D3964A1F6621110077BFB3 /* SettlementBeizhuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D396481F6621110077BFB3 /* SettlementBeizhuCell.xib */; };
 		04D396541F6636CB0077BFB3 /* MailGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D396521F6636CB0077BFB3 /* MailGoodsCell.m */; };
 		04D396551F6636CB0077BFB3 /* MailGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D396531F6636CB0077BFB3 /* MailGoodsCell.xib */; };
+		04D8A4F820C615B200628292 /* MallOrderInvoiceDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8A4F620C615B200628292 /* MallOrderInvoiceDetailVC.m */; };
+		04D8A4F920C615B200628292 /* MallOrderInvoiceDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D8A4F720C615B200628292 /* MallOrderInvoiceDetailVC.xib */; };
+		04D8A4FD20C6162100628292 /* MallOrderInvoiceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8A4FB20C6162100628292 /* MallOrderInvoiceDetailCell.m */; };
+		04D8A4FE20C6162100628292 /* MallOrderInvoiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D8A4FC20C6162100628292 /* MallOrderInvoiceDetailCell.xib */; };
 		04DC7CFB1F31C24000AA20A7 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF11F31C24000AA20A7 /* InformationVC.m */; };
 		04DC7CFC1F31C24000AA20A7 /* MallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF41F31C24000AA20A7 /* MallVC.m */; };
 		04DC7CFD1F31C24000AA20A7 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7CF71F31C24000AA20A7 /* PersonalCenterVC.m */; };
@@ -982,6 +986,12 @@
 		04D396511F6636CB0077BFB3 /* MailGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailGoodsCell.h; sourceTree = "<group>"; };
 		04D396521F6636CB0077BFB3 /* MailGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailGoodsCell.m; sourceTree = "<group>"; };
 		04D396531F6636CB0077BFB3 /* MailGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailGoodsCell.xib; sourceTree = "<group>"; };
+		04D8A4F520C615B200628292 /* MallOrderInvoiceDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallOrderInvoiceDetailVC.h; sourceTree = "<group>"; };
+		04D8A4F620C615B200628292 /* MallOrderInvoiceDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallOrderInvoiceDetailVC.m; sourceTree = "<group>"; };
+		04D8A4F720C615B200628292 /* MallOrderInvoiceDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MallOrderInvoiceDetailVC.xib; sourceTree = "<group>"; };
+		04D8A4FA20C6162100628292 /* MallOrderInvoiceDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallOrderInvoiceDetailCell.h; sourceTree = "<group>"; };
+		04D8A4FB20C6162100628292 /* MallOrderInvoiceDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallOrderInvoiceDetailCell.m; sourceTree = "<group>"; };
+		04D8A4FC20C6162100628292 /* MallOrderInvoiceDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MallOrderInvoiceDetailCell.xib; sourceTree = "<group>"; };
 		04DC7CF01F31C24000AA20A7 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
 		04DC7CF11F31C24000AA20A7 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
 		04DC7CF31F31C24000AA20A7 /* MallVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallVC.h; sourceTree = "<group>"; };
@@ -2458,6 +2468,19 @@
 			name = "商城首页Cell";
 			sourceTree = "<group>";
 		};
+		04D8A4F420C6155D00628292 /* 已开发票详情 */ = {
+			isa = PBXGroup;
+			children = (
+				04D8A4F520C615B200628292 /* MallOrderInvoiceDetailVC.h */,
+				04D8A4F620C615B200628292 /* MallOrderInvoiceDetailVC.m */,
+				04D8A4F720C615B200628292 /* MallOrderInvoiceDetailVC.xib */,
+				04D8A4FA20C6162100628292 /* MallOrderInvoiceDetailCell.h */,
+				04D8A4FB20C6162100628292 /* MallOrderInvoiceDetailCell.m */,
+				04D8A4FC20C6162100628292 /* MallOrderInvoiceDetailCell.xib */,
+			);
+			name = "已开发票详情";
+			sourceTree = "<group>";
+		};
 		04DC7CEE1F31C24000AA20A7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2967,6 +2990,7 @@
 		04F7D8701F5EAC46004945ED /* 商城订单 */ = {
 			isa = PBXGroup;
 			children = (
+				04D8A4F420C6155D00628292 /* 已开发票详情 */,
 				04F7D8811F5EBA71004945ED /* 订单详情 */,
 				04F7D8711F5EACE7004945ED /* MailOrderListVC.h */,
 				04F7D8721F5EACE7004945ED /* MailOrderListVC.m */,
@@ -3292,6 +3316,7 @@
 				04D3964A1F6621110077BFB3 /* SettlementBeizhuCell.xib in Resources */,
 				0459C6BC1F614C870040501E /* Info.plist in Resources */,
 				042E5D101F4195ED00F5F324 /* BaoyangHistoryVC.xib in Resources */,
+				04D8A4F920C615B200628292 /* MallOrderInvoiceDetailVC.xib in Resources */,
 				040BC8BC1FA877CD009AD3BA /* EmployeeEditSkillCertificationVC.xib in Resources */,
 				046B7AE61FC6B1220014B024 /* AutoCheckServicesVC.xib in Resources */,
 				04EB162C1F42F95200974972 /* BaoyangDiscountsVC.xib in Resources */,
@@ -3332,6 +3357,7 @@
 				046B6504200F48FE00470905 /* UMSocialLocalizable.strings in Resources */,
 				045B06D21FBAD61D00FDCE78 /* AddStoreServiceVC.xib in Resources */,
 				04ABFB4D1F9887630015EE78 /* AutoCheckOrderCompleteVC.xib in Resources */,
+				04D8A4FE20C6162100628292 /* MallOrderInvoiceDetailCell.xib in Resources */,
 				04F6B69F1F45A64000052658 /* MailSearchVC.xib in Resources */,
 				04BA1C6F1F4D8CE100704A9E /* SettlementVC.xib in Resources */,
 				04DCA1711FA2E0F8004B1054 /* CheckResultSingleCell.xib in Resources */,
@@ -3535,6 +3561,7 @@
 				04DC7DD21F31C28300AA20A7 /* UIScrollView+MJExtension.m in Sources */,
 				046B8DDC1F9A044300784AA8 /* openssl_wrapper.m in Sources */,
 				F70A50931FA212B70047D804 /* AutoCheckResultVC.m in Sources */,
+				04D8A4F820C615B200628292 /* MallOrderInvoiceDetailVC.m in Sources */,
 				045335E81FB98BC4008FB56F /* UpkeepOrderListCell.m in Sources */,
 				F70FD21420BF0823003021D5 /* InvoiceListCell.m in Sources */,
 				04E8D45B205FA765001D22C3 /* CheckResultRemarkCell.m in Sources */,
@@ -3719,6 +3746,7 @@
 				04D1078A1F62998D007D9F57 /* ZFLine.m in Sources */,
 				04EB16301F43005F00974972 /* AddDiscountsVC.m in Sources */,
 				04DC7D111F31C25000AA20A7 /* LoadingView.m in Sources */,
+				04D8A4FD20C6162100628292 /* MallOrderInvoiceDetailCell.m in Sources */,
 				04DC7DBE1F31C28300AA20A7 /* ImageObject.m in Sources */,
 				04DCA1951FA34AB9004B1054 /* ResultDetailHazardCell.m in Sources */,
 				F78D5DCE20C0577E007D7E50 /* AddInvoiceVC.m in Sources */,
@@ -3880,7 +3908,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3926,7 +3954,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

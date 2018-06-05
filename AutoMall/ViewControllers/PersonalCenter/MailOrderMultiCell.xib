@@ -122,6 +122,18 @@
                             <constraint firstAttribute="width" constant="11" id="pwQ-Wf-8OI"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1K-v5-3Ot">
+                        <rect key="frame" x="16" y="147" width="60" height="25"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="2U0-vy-BGY"/>
+                            <constraint firstAttribute="height" constant="25" id="fkH-Pv-FpT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="已开票">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="WOl-eR-Kjl" firstAttribute="leading" secondItem="n3m-E2-jcm" secondAttribute="trailing" id="1TU-BM-gEU"/>
@@ -132,6 +144,7 @@
                     <constraint firstItem="hyR-WD-DhP" firstAttribute="leading" secondItem="aC5-XT-BtE" secondAttribute="trailing" constant="10" id="EPy-Pp-enQ"/>
                     <constraint firstItem="RiY-iw-dmw" firstAttribute="top" secondItem="aC5-XT-BtE" secondAttribute="bottom" constant="8" id="Ee0-Ve-zBR"/>
                     <constraint firstItem="hyR-WD-DhP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="KiW-Ka-HO3"/>
+                    <constraint firstItem="D1K-v5-3Ot" firstAttribute="top" secondItem="XAy-V3-Xmw" secondAttribute="bottom" constant="5" id="M34-8a-aSO"/>
                     <constraint firstItem="XAy-V3-Xmw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="WVf-9f-xFJ"/>
                     <constraint firstItem="aC5-XT-BtE" firstAttribute="centerY" secondItem="hyR-WD-DhP" secondAttribute="centerY" id="bHu-UX-dZC"/>
                     <constraint firstAttribute="trailing" secondItem="biz-Yv-kd4" secondAttribute="trailing" constant="16" id="h4h-PW-ZNZ"/>
@@ -141,6 +154,7 @@
                     <constraint firstItem="XAy-V3-Xmw" firstAttribute="top" secondItem="WOl-eR-Kjl" secondAttribute="bottom" constant="8" id="lzl-mM-bs7"/>
                     <constraint firstAttribute="trailing" secondItem="XAy-V3-Xmw" secondAttribute="trailing" id="m73-Pi-AmC"/>
                     <constraint firstItem="nCd-UQ-zgC" firstAttribute="centerY" secondItem="WOl-eR-Kjl" secondAttribute="centerY" id="ogv-kh-Ys4"/>
+                    <constraint firstItem="D1K-v5-3Ot" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="q9g-cE-5wP"/>
                     <constraint firstItem="rzG-y1-hmw" firstAttribute="leading" secondItem="nCd-UQ-zgC" secondAttribute="trailing" id="qR1-sJ-Tgp"/>
                     <constraint firstItem="rzG-y1-hmw" firstAttribute="centerY" secondItem="WOl-eR-Kjl" secondAttribute="centerY" id="txt-nG-rJL"/>
                     <constraint firstAttribute="trailing" secondItem="WOl-eR-Kjl" secondAttribute="trailing" constant="16" id="uE5-HK-mzy"/>
@@ -152,11 +166,12 @@
                 <outlet property="allMoneyL" destination="WOl-eR-Kjl" id="5lU-GS-Uk3"/>
                 <outlet property="btn" destination="biz-Yv-kd4" id="BLV-sE-NGS"/>
                 <outlet property="checkboxBtn" destination="1Sq-Z7-fjn" id="aOQ-cg-p8g"/>
+                <outlet property="invoicedBtn" destination="D1K-v5-3Ot" id="pid-5P-dmu"/>
                 <outlet property="numberL" destination="nCd-UQ-zgC" id="wDc-jf-TNa"/>
                 <outlet property="picScrollView" destination="EdE-Jy-Edl" id="Fz4-CZ-6tO"/>
                 <outlet property="statusL" destination="aC5-XT-BtE" id="nrP-W3-5gS"/>
             </connections>
-            <point key="canvasLocation" x="-131" y="3"/>
+            <point key="canvasLocation" x="-258" y="9"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -77,72 +77,13 @@
 #define IMGF(name) [UIImage imageNamedFixed:name]
 
 #pragma mark - 接口基地址
-//测试基地址
-//#define RequestURL(action)           ([NSString stringWithFormat:@"http://192.168.0.107:9091/doPost.ashx?action=%@",action])
-//生产基地址
-//#define RequestURL(action)           ([NSString stringWithFormat:@"http://112.74.84.233:8080/yimiyule%@",action])
-//#define RequestURL(action)           ([NSString stringWithFormat:@"http://yimiyule.com:8080/yimiyule%@",action])
-#define RequestURL(action)           ([NSString stringWithFormat:@"http://yimiyule.com/yimiyule%@",action])
-
-//#pragma mark - 商户商品相关接口及通知标识
-//#define GetBanner                  @"GetBanner"     //获取广告图
-//
-#pragma mark - 个人信息相关
-#define Register               @"/app/user/register"   //用户注册
-#define Login                    @"/app/user/login"  //用户登录
-#define OtherLogin          @"/app/user/logino" //第三方登录
-#define WeixinLogin         @"weixinLogin" //微信登录接口
-#define QQLogin              @"qqLogin" //QQ登录接口
-#define Logout                  @"/app/user/logout" //注销
-#define HomeGet              @"/app/home/get"    //首页综合
-#define HomeSearch         @"/app/home/search"     //全站搜索
-
-#define SlideList               @"/app/slide/list"  //获取滚动信息
-
-#define ShopList                @"/app/business/list"   //商家列表
-#define ShopDetail             @"/app/business/get"      //商家详情
-#define CommnetList          @"/app/comment/list"    //评论，回复列表
-#define Favorite                 @"/app/favorite/apply"      //收藏
-#define MyFavoriteList       @"/app/favorite/list"    //我的收藏
-
-#define UserList                 @"/app/user/list"   //用户列表
-#define UserDetail              @"/app/user/get"     //用户详细信息
-#define UserInfoEdit          @"/app/user/set"    //更新用户资料
-#define IntegralExchange    @"/app/integral/exchange"     //代码兑换积分
-#define PrizeList                  @"/app/prize/list"  //积分兑换列表
-#define PrizeExchange         @"/app/prize/exchange"  //积分兑换奖品
-#define UserIntegral            @"/app/user/integral"  //获取用户积分
-#define ImageDelete           @"/app/image/delete"    //删除我的相册照片
-
-#define ReplacerList            @"/app/replacer/list"   //代喝列表
-#define ReplacerDetail         @"/app/replacer/get"  //代喝基本信息
-
-#define FavoritePraise        @"/app/favorite/praise" //点赞
-
-//#define ImageUpload            @"/app/image/upload"    //上传图片
-#define ImageList                @"/app/image/list"      //查询相册图片列表
-
-#define CommentSend          @"/app/comment/send"    //发表评论
-
-#define Checkpwd                 @"/app/user/checkpwd"   //验证旧密码
-#define Updatepwd               @"/app/user/updatepwd"  //更新新密码
-
-#pragma mark - 我的相关
-//#define MessageList              @"/app/message/list"    //消息列表
-#define Statement                 @"/app/info/statement"  //免责声明
-#define Contactus                  @"/app/info/contactus"  //联系我们
-
-#define BusinessAdd              @"/app/business/add"    //新增商家
-
-
-#define UM_Appkey                   @"5659c02367e58ec432002ca4"   //壹米娱乐友盟key
-
-
 
 //汽车商城
-//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
 //#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])   //正式服务器对应ip地址
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
+
+#define UrlPrefixNew(action)                       ([NSString stringWithFormat:@"http://120.79.255.24:8010/%@",action])  //测试服务器ip地址，发票相关的新地址
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表
@@ -229,11 +170,13 @@
 #define UserChangeRemark                     @"/api/user/changeRemark"       //员工修改个人特长
 #define ReportSum                                   @"/api/report/sum"      //统计报表
 #define InvoiceManageList                        @"carupkeep_web/userInvoiceMgr/listByUserId"              //发票管理列表
+#define InvoiceManageDetail                    @"carupkeep_web/userInvoiceMgr/getById"         //发票管理详情
 #define AddInvoice                                   @"carupkeep_web/userInvoiceMgr/add"         //新增发票
 #define UpDateInvoice                              @"carupkeep_web/userInvoiceMgr/update"      //更新发票
 #define DeleInvoice                                   @"carupkeep_web/userInvoiceMgr/delete"      //删除发票
 #define OrderInvoiceHis                           @"carupkeep_web/orderInvoiceHis/invoicingList"      //开发票
 #define OrderInvoiceList                           @"carupkeep_web/orderInvoiceHis/getByUserId"     //订单已开发票列表
+#define OrderInvoiceDetail                        @"carupkeep_web/orderInvoiceHis/getById"        //根据id获取发票详细信息
 
 #define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
 #define UserGetStoreInfo                      @"/api/user/getStore"           //员工获取门店详情

@@ -193,7 +193,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:InvoiceManageList object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:InvoiceManageList, @"op", nil];
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefix(InvoiceManageList),userId];
+    NSString *urlString = [NSString stringWithFormat:@"%@?userId=%@",UrlPrefixNew(InvoiceManageList),userId];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -203,7 +203,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DeleInvoice object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DeleInvoice, @"op", nil];
 //    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefix(DeleInvoice),iid];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefixNew(DeleInvoice),iid];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -213,7 +213,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceHis object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:OrderInvoiceHis, @"op", nil];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:ary,@"list", nil];
-    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(OrderInvoiceHis) delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefixNew(OrderInvoiceHis) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -233,7 +233,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:InvoiceManageList object:nil];
         if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
             [listAry removeAllObjects];     //未做分页
-            [listAry addObjectsFromArray: responseObject[@"data"]];
+            [listAry addObjectsFromArray: responseObject[@"body"][@"list"]];
             [self.myTableView reloadData];
         }
         else {
@@ -258,7 +258,7 @@
         }
     }
     
-    if ([notification.name isEqualToString:OrderInvoiceHis]) {
+    if ([notification.name isEqualToString:OrderInvoiceHis]) {  //开发票
         [[NSNotificationCenter defaultCenter] removeObserver:self name:OrderInvoiceHis object:nil];
         
         if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {

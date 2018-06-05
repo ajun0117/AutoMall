@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="178"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="177.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="178"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcO-xa-Mxs">
@@ -147,10 +147,24 @@
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eac-N9-6PT">
+                        <rect key="frame" x="16" y="147" width="60" height="25"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="7eF-WP-pEU"/>
+                            <constraint firstAttribute="width" constant="60" id="amm-0l-1CK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="已开票">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="eac-N9-6PT" firstAttribute="top" secondItem="7mo-KY-tim" secondAttribute="bottom" constant="5" id="2De-h0-ekL"/>
                     <constraint firstAttribute="trailing" secondItem="7mo-KY-tim" secondAttribute="trailing" id="5ID-ZR-c3X"/>
                     <constraint firstItem="wfv-Qp-o1y" firstAttribute="top" secondItem="GcO-xa-Mxs" secondAttribute="bottom" constant="8" id="7RY-OJ-XrP"/>
+                    <constraint firstItem="eac-N9-6PT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="9kH-VI-DeD"/>
                     <constraint firstItem="j0x-ce-K0I" firstAttribute="top" secondItem="wfv-Qp-o1y" secondAttribute="bottom" constant="8" id="Cp2-h2-gl8"/>
                     <constraint firstItem="y3y-ci-SeX" firstAttribute="centerY" secondItem="j0x-ce-K0I" secondAttribute="centerY" id="D9L-2n-gls"/>
                     <constraint firstItem="N2l-Ek-yiR" firstAttribute="leading" secondItem="evt-aE-OGn" secondAttribute="trailing" id="Fxb-kA-tYf"/>
@@ -179,12 +193,13 @@
                 <outlet property="btn" destination="3aZ-Gr-dr5" id="wYH-jU-TrB"/>
                 <outlet property="checkboxBtn" destination="SKy-Fh-7WE" id="QjX-sZ-sts"/>
                 <outlet property="imgView" destination="sOp-pp-ZM3" id="v7a-iN-uXZ"/>
+                <outlet property="invoicedBtn" destination="eac-N9-6PT" id="3Cw-D3-3h2"/>
                 <outlet property="nameL" destination="sH6-Zw-0fc" id="REt-e0-eYu"/>
                 <outlet property="numL" destination="sKL-UA-KgL" id="71b-1D-FxH"/>
                 <outlet property="numberL" destination="N2l-Ek-yiR" id="NSg-PT-6mz"/>
                 <outlet property="statusL" destination="GcO-xa-Mxs" id="PGE-Z4-BbX"/>
             </connections>
-            <point key="canvasLocation" x="-535" y="39"/>
+            <point key="canvasLocation" x="-868" y="52"/>
         </tableViewCell>
     </objects>
     <resources>
