@@ -174,9 +174,10 @@
 #define AddInvoice                                   @"carupkeep_web/userInvoiceMgr/add"         //新增发票
 #define UpDateInvoice                              @"carupkeep_web/userInvoiceMgr/update"      //更新发票
 #define DeleInvoice                                   @"carupkeep_web/userInvoiceMgr/delete"      //删除发票
-#define OrderInvoiceHis                           @"carupkeep_web/orderInvoiceHis/invoicingList"      //开发票
+#define OrderInvoiceCreat                        @"carupkeep_web/orderInvoiceHis/invoicingList"      //批量开发票
 #define OrderInvoiceList                           @"carupkeep_web/orderInvoiceHis/getByUserId"     //订单已开发票列表
-#define OrderInvoiceDetail                        @"carupkeep_web/orderInvoiceHis/getById"        //根据id获取发票详细信息
+//#define OrderInvoiceDetail                        @"carupkeep_web/orderInvoiceHis/getById"        //根据id获取发票详细信息
+#define OrderInvoiceDetail                                        @"carupkeep_web/orderInvoiceHis/getByOrderNo"           //根据订单号获取发票详细信息
 
 #define StoreGetInfo                              @"/api/store/get"                 //获取门店详情
 #define UserGetStoreInfo                      @"/api/user/getStore"           //员工获取门店详情

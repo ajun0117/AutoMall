@@ -103,11 +103,28 @@
     [self.myScrollV addGestureRecognizer:tap];
     
     if (self.isEdit) {
-        self.invoiceTitleTF.text = self.invoiceDic [@"name"];
-        self.taxpayerTF.text = self.invoiceDic [@"phone"];
-        NSString *proStr = [NSString stringWithFormat:@"%@ %@ %@",self.invoiceDic [@"province"],self.invoiceDic [@"city"],self.invoiceDic [@"county"]];
+        self.title = @"编辑发票";
+        invoiceType = self.invoiceDic [@"type"];
+        if ([invoiceType intValue] == 0)  {
+            [self plainInvoiceAction];  //个人普通发票
+        } else if ([invoiceType intValue] == 1)  {
+            [self companyAction:self.companyBtn];
+        } else if ([invoiceType intValue] == 2)  {
+            [self valueAddedInvoiceAction];
+        }
+        self.invoiceTitleTF.text = self.invoiceDic [@"head"];
+        self.taxpayerTF.text = self.invoiceDic [@"taxpayerCode"];
+        NSString *proStr = [NSString stringWithFormat:@"%@ %@ %@",self.invoiceDic [@"province"],self.invoiceDic [@"city"],self.invoiceDic [@"area"]];
         [self.receiveAddrBtn setTitle:proStr forState:UIControlStateNormal];
-        self.regisAddrTF.text = self.invoiceDic [@"address"];
+        self.regisAddrTF.text = self.invoiceDic [@"registAddr"];
+        self.regisPhoneTF.text = self.invoiceDic[@"registPhone"];
+        self.bankNameTF.text = self.invoiceDic[@"depositBank"];
+        self.bankCodeTF.text = self.invoiceDic[@"bankAccount"];
+        self.receiveNameTF.text = self.invoiceDic[@"realName"];
+        self.receivePhoneTF.text = self.invoiceDic[@"phone"];
+        self.receiveAddrDetailTF.text = self.invoiceDic[@"addr"];
+        self.receiveEmailTF.text = self.invoiceDic[@"email"];
+        
         BOOL preferred = [self.invoiceDic [@"def"] boolValue];
         self.defaultSw.on = preferred;
     }
@@ -402,7 +419,7 @@
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"county",self.receiveAddrDetailTF.text,@"addr",  [NSNumber numberWithInt:self.defaultSw.on],@"def",self.regisAddrTF.text,@"registAddr",self.regisPhoneTF.text,@"registPhone",self.bankNameTF.text,@"depositBank",self.bankCodeTF.text,@"bankAccount" ,nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"area",self.receiveAddrDetailTF.text,@"addr",  [NSNumber numberWithInt:self.defaultSw.on],@"def",self.regisAddrTF.text,@"registAddr",self.regisPhoneTF.text,@"registPhone",self.bankNameTF.text,@"depositBank",self.bankCodeTF.text,@"bankAccount" ,nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefixNew(AddInvoice) delegate:nil params:pram info:infoDic];
 }
 
@@ -414,7 +431,7 @@
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *addrAry = [self.chooseLocationView.address componentsSeparatedByString:@" "];
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.invoiceDic[@"id"],@"id",userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"county", self.receiveAddrDetailTF.text,@"addr", [NSString stringWithFormat:@"%d",self.defaultSw.on],@"def",self.regisAddrTF.text,@"registAddr",self.regisPhoneTF.text,@"registPhone",self.bankNameTF.text,@"depositBank",self.bankCodeTF.text,@"bankAccount" , nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.invoiceDic[@"id"],@"id",userId,@"userId",self.invoiceTitleTF.text,@"head",invoiceType,@"type",self.taxpayerTF.text,@"taxpayerCode",self.receiveNameTF.text,@"realName", self.receivePhoneTF.text,@"phone", self.receiveEmailTF.text,@"email",addrAry[0],@"province", addrAry[1],@"city", addrAry[2],@"area", self.receiveAddrDetailTF.text,@"addr", [NSString stringWithFormat:@"%d",self.defaultSw.on],@"def",self.regisAddrTF.text,@"registAddr",self.regisPhoneTF.text,@"registPhone",self.bankNameTF.text,@"depositBank",self.bankCodeTF.text,@"bankAccount" , nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefixNew(UpDateInvoice) delegate:nil params:pram info:infoDic];
 }
 
@@ -451,14 +468,14 @@
     if ([notification.name isEqualToString:UpDateInvoice]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UpDateInvoice object:nil];
         NSLog(@"UpDateInvoice_responseObject: %@",responseObject);
-        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

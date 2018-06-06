@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AutoMall/ViewControllers/PersonalCenter/AddInvoiceVC.m"
-            timestampString = "549825096.291168"
+            filePath = "AutoMall/ViewControllers/PersonalCenter/InvoiceManageVC.m"
+            timestampString = "549997025.803394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
-            landmarkName = "-addInvoice"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "-toInvoiceWithDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发票抬头" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIg-Q8-G0h">
-                        <rect key="frame" x="16" y="8" width="288" height="18"/>
+                        <rect key="frame" x="16" y="8" width="240" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,24 +49,25 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="IIg-Q8-G0h" secondAttribute="trailing" constant="16" id="1b5-RC-ZO6"/>
                     <constraint firstItem="IIg-Q8-G0h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="3OD-Ow-C5u"/>
                     <constraint firstAttribute="bottom" secondItem="r1X-zt-HLU" secondAttribute="bottom" constant="8" id="7XV-lN-GT2"/>
                     <constraint firstItem="SMX-iR-Lwx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="EOW-80-sYo"/>
                     <constraint firstItem="d0B-AG-UBf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FDR-ix-GVE"/>
                     <constraint firstItem="d0B-AG-UBf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fak-30-cxQ"/>
                     <constraint firstItem="IIg-Q8-G0h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="t4f-oX-EQd"/>
+                    <constraint firstItem="SMX-iR-Lwx" firstAttribute="leading" secondItem="IIg-Q8-G0h" secondAttribute="trailing" constant="8" id="uSY-pt-Rlg"/>
                     <constraint firstAttribute="trailing" secondItem="r1X-zt-HLU" secondAttribute="trailing" constant="16" id="w6E-3V-EBz"/>
                     <constraint firstAttribute="trailing" secondItem="SMX-iR-Lwx" secondAttribute="trailing" constant="16" id="zRz-OH-ewq"/>
                     <constraint firstItem="r1X-zt-HLU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zoK-BC-0ww"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="defaultL" destination="r1X-zt-HLU" id="ey7-ZQ-9Ff"/>
-                <outlet property="detailL" destination="d0B-AG-UBf" id="yWe-8f-P6u"/>
+                <outlet property="defaultL" destination="SMX-iR-Lwx" id="euD-f3-RBn"/>
+                <outlet property="detailL" destination="d0B-AG-UBf" id="1wg-wT-i0X"/>
                 <outlet property="taitouL" destination="IIg-Q8-G0h" id="Fvt-oZ-JYa"/>
+                <outlet property="typeL" destination="r1X-zt-HLU" id="0gz-ac-GX8"/>
             </connections>
-            <point key="canvasLocation" x="-102" y="-80"/>
+            <point key="canvasLocation" x="-294" y="-84"/>
         </tableViewCell>
     </objects>
 </document>

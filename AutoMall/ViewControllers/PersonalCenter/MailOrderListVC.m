@@ -76,6 +76,9 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    [selectedInvoiceDic removeAllObjects];
+    [self requestGetMallOrderList];     //返回时清空选中状态并刷新
 }
 
 #pragma mark - 下拉刷新,上拉加载
@@ -237,7 +240,7 @@
             cell.btn.hidden = YES;
 //            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
             cell.checkboxBtn.hidden = NO;
-            if ([dic[@"invoiced"] boolValue]) {     //如果已开发票
+            if ([dic[@"invoiced"] intValue] == 2) {     //如果已开发票
                 cell.invoicedBtn.hidden = NO;
                 cell.invoicedBtn.tag = indexPath.section + 200;
                 [cell.invoicedBtn addTarget:self action:@selector(toInvoiceetailVC:) forControlEvents:UIControlEventTouchUpInside];
@@ -297,7 +300,7 @@
         cell.btn.hidden = YES;
 //        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
         cell.checkboxBtn.hidden = NO;
-        if ([dic[@"invoiced"] boolValue]) {     //如果已开发票
+        if ([dic[@"invoiced"] intValue] == 2)  {     //如果已开发票
             cell.invoicedBtn.hidden = NO;
             cell.invoicedBtn.tag = indexPath.section + 200;
             [cell.invoicedBtn addTarget:self action:@selector(toInvoiceetailVC:) forControlEvents:UIControlEventTouchUpInside];

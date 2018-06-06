@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *taitouL;
 @property (weak, nonatomic) IBOutlet UILabel *detailL;
 @property (strong, nonatomic) IBOutlet UILabel *defaultL;
+@property (weak, nonatomic) IBOutlet UILabel *typeL;
 
 
 @end

@@ -16,7 +16,6 @@
     MBProgressHUD *_networkConditionHUD;
 //    int currentpage;
     NSMutableArray *listAry;    //发票列表
-    NSMutableArray *orderAry;   //待开发票订单列表
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -43,17 +42,8 @@
 //    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
     
 //    currentpage = 0;
+    
     listAry = [NSMutableArray array];
-    if (self.orderDic) {
-        self.navigationItem.rightBarButtonItem = nil;
-        orderAry = [NSMutableArray array];
-        NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
-        for (NSDictionary *dic in [self.orderDic allValues]) {
-            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.orderType,@"orderType",dic[@"code"],@"orderNo",userId,@"userId",dic[@"money"],@"price", nil];
-            [orderAry addObject:muDic];
-        }
-        NSLog(@"orderAry: %@",orderAry);
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -117,20 +107,40 @@
     return 90;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 20;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.1;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     InvoiceListCell *cell = (InvoiceListCell *)[tableView dequeueReusableCellWithIdentifier:@"invoiceListCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (listAry.count > 0) {
-        NSDictionary *dic = listAry[indexPath.section];
+        NSDictionary *dic = listAry[indexPath.row];
         cell.taitouL.text = dic [@"head"];
         NSString *name = dic [@"realName"];
         NSString *phone = dic [@"phone"];
         NSString *email = dic [@"email"];
         cell.detailL.text = [NSString stringWithFormat:@"%@/%@/%@",name,phone,email];
+        
+        NSString *typeStr;
+        switch ([dic[@"type"] intValue]) {
+            case 0:
+                typeStr = @"个人普通发票";
+                break;
+                
+            case 1:
+                typeStr = @"企业普通发票";
+                break;
+                
+            case 2:
+                typeStr = @"增值税专用发票";
+                break;
+                
+            default:
+                typeStr = @"";
+                break;
+        }
+        cell.typeL.text = [NSString stringWithFormat:@"发票类型（%@）",typeStr];
         BOOL preferred = [dic [@"def"] boolValue];
         if (preferred) {
             cell.defaultL.hidden = NO;
@@ -145,22 +155,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dic = listAry[indexPath.section];
+    NSDictionary *dic = listAry[indexPath.row];
     if (self.orderDic) {  //用于选择后开发票
-        for (NSMutableDictionary *muDic in orderAry) {
-            [muDic setObject:dic[@"province"] forKey:@"province"];
-            [muDic setObject:dic[@"city"] forKey:@"city"];
-            [muDic setObject:dic[@"addr"] forKey:@"addr"];
-            [muDic setObject:dic[@"type"] forKey:@"type"];
-            [muDic setObject:dic[@"head"] forKey:@"head"];
-            [muDic setObject:dic[@"realName"] forKey:@"realName"];
-            [muDic setObject:dic[@"phone"] forKey:@"phone"];
-            [muDic setObject:dic[@"email"] forKey:@"email"];
-            [muDic setObject:@"0" forKey:@"status"];    //固定值，0 待审核，1 通过，2 拒绝
-            [muDic setObject:dic[@"taxpayerCode"] forKey:@"taxpayerCode"];
-        }
-        NSLog(@"orderAry: %@",orderAry);
-        [self toInvoiceWithAry:orderAry];
+//        for (NSMutableDictionary *muDic in orderAry) {
+//            [muDic setObject:dic[@"province"] forKey:@"province"];
+//            [muDic setObject:dic[@"city"] forKey:@"city"];
+//            [muDic setObject:dic[@"addr"] forKey:@"addr"];
+//            [muDic setObject:dic[@"type"] forKey:@"type"];
+//            [muDic setObject:dic[@"head"] forKey:@"head"];
+//            [muDic setObject:dic[@"realName"] forKey:@"realName"];
+//            [muDic setObject:dic[@"phone"] forKey:@"phone"];
+//            [muDic setObject:dic[@"email"] forKey:@"email"];
+//            [muDic setObject:@"0" forKey:@"status"];    //固定值，0 待审核，1 通过，2 拒绝
+//            [muDic setObject:dic[@"taxpayerCode"] forKey:@"taxpayerCode"];
+//        }
+//        NSLog(@"orderAry: %@",orderAry);
+        [self toInvoiceWithDic:dic];
     } else {
         AddInvoiceVC *editVC = [[AddInvoiceVC alloc] init];
         editVC.isEdit = YES;
@@ -170,10 +180,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
         return YES;
-    }
-    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -207,13 +214,19 @@
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
--(void)toInvoiceWithAry:(NSArray *)ary {      //开发票
+-(void)toInvoiceWithDic:(NSDictionary *)dic {      //批量开发票
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceHis object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:OrderInvoiceHis, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:ary,@"list", nil];
-    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefixNew(OrderInvoiceHis) delegate:nil params:pram info:infoDic];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceCreat object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:OrderInvoiceCreat, @"op", nil];
+    NSArray *values = [self.orderDic allValues];
+    NSMutableArray *codes = [NSMutableArray array];
+    for (NSDictionary *dic in values) {
+        [codes addObject:dic[@"code"]];
+    }
+    NSString *orderNosStr = [codes componentsJoinedByString:@","];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderType,@"orderType",orderNosStr,@"orderNos",dic[@"province"],@"province",dic[@"city"],@"city",dic[@"area"],@"area",dic[@"addr"],@"addr",dic[@"type"],@"type",dic[@"head"],@"head",dic[@"realName"],@"realName",dic[@"phone"],@"phone",dic[@"email"],@"email",@"0",@"status",dic[@"taxpayerCode"],@"taxpayerCode",dic[@"registAddr"],@"registAddr",dic[@"registPhone"],@"registPhone",dic[@"depositBank"],@"depositBank",dic[@"bankAccount"],@"bankAccount", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefixNew(OrderInvoiceCreat) delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -231,44 +244,44 @@
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:InvoiceManageList]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:InvoiceManageList object:nil];
-        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
+        NSLog(@"InvoiceManageList_responseObject: %@",responseObject);
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
             [listAry removeAllObjects];     //未做分页
             [listAry addObjectsFromArray: responseObject[@"body"][@"list"]];
             [self.myTableView reloadData];
         }
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:responseObject[@"meta"][@"msg"] delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             [alert show];
         }
     }
     
     if ([notification.name isEqualToString:DeleInvoice]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:DeleInvoice object:nil];
-        
-        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+         NSLog(@"DeleInvoice_responseObject: %@",responseObject);
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
     
-    if ([notification.name isEqualToString:OrderInvoiceHis]) {  //开发票
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:OrderInvoiceHis object:nil];
-        
-        if ([responseObject[@"meta"][@"msg"] isEqualToString:@"success"]) {
-            _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+    if ([notification.name isEqualToString:OrderInvoiceCreat]) {  //批量开发票
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:OrderInvoiceCreat object:nil];
+        NSLog(@"OrderInvoiceCreat_responseObject: %@",responseObject);
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
