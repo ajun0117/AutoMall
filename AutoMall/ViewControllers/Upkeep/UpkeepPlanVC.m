@@ -53,6 +53,8 @@
     NSMutableDictionary *storeServiceNumberDic;     //记录门店服务的数量
     NSMutableDictionary *discountsNumberDic;     //记录优惠的数量
     NSMutableArray *addedServicesAry;       //记录已增加的服务
+    
+    BOOL isShare;       //是否分享
     NSDictionary *shareDic;     //分享文案
     LXActivity *lxActivity;
     NSString *order_code;   //服务方案订单号
@@ -143,14 +145,13 @@
         }
     }
     else if (alertView.tag == 300) {    //是否分享
-        if (buttonIndex == 1) {
-            //注册分享回调通知
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wxShareNotification:) name:@"WxShareNotification" object:nil];
-            
-            [self requestGetShareInfo];
+        if (buttonIndex == 1) {     //确认并分享
+            isShare = YES;
+            [self requestPostCarUpkeepConfirm];
         }
-        else {
-            [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:HUDDelay];
+        else if (buttonIndex == 2) {    //确认不分享
+            isShare = NO;
+            [self requestPostCarUpkeepConfirm];
         }
     }
 }
@@ -343,7 +344,9 @@
         return;
     }
     if (serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice > 0) {
-        [self requestPostCarUpkeepConfirm];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认服务方案？" message:@"" delegate:self cancelButtonTitle:@"再看看" otherButtonTitles:@"确认并分享", @"确认不分享", nil];
+        alert.tag = 300;
+        [alert show];
     }
     else {
         _networkConditionHUD.labelText = @"没有选择服务方案";
@@ -1437,10 +1440,14 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
             order_code = responseObject[@"data"][@"code"];
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否分享？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-            alert.tag = 300;
-            [alert show];
+            if(isShare) {   //确认并分享
+                //注册分享回调通知
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wxShareNotification:) name:@"WxShareNotification" object:nil];
+                [self requestGetShareInfo];
+            }
+            else {
+                [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:HUDDelay];
+            }
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);

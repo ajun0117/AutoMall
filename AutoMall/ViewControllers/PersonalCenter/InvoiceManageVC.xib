@@ -20,9 +20,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jJe-qf-D6U">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="jJe-qf-D6U">
+                    <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0NB-xC-2h2"/>
                         <outlet property="delegate" destination="-1" id="b05-Ap-nhE"/>
@@ -60,7 +60,7 @@
             <constraints>
                 <constraint firstItem="jJe-qf-D6U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4NI-2g-iQ6"/>
                 <constraint firstAttribute="bottom" secondItem="xd0-E4-XgO" secondAttribute="bottom" id="5zG-K8-kjj"/>
-                <constraint firstItem="jJe-qf-D6U" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gh8-Ge-7ii"/>
+                <constraint firstItem="jJe-qf-D6U" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Gh8-Ge-7ii"/>
                 <constraint firstItem="xd0-E4-XgO" firstAttribute="top" secondItem="jJe-qf-D6U" secondAttribute="bottom" id="Joy-lU-7AK"/>
                 <constraint firstAttribute="trailing" secondItem="jJe-qf-D6U" secondAttribute="trailing" id="KQS-v0-cKV"/>
                 <constraint firstItem="xd0-E4-XgO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oBS-qC-A9Y"/>
