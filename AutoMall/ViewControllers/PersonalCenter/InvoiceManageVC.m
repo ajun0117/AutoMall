@@ -10,12 +10,13 @@
 #import "InvoiceListCell.h"
 #import "AddInvoiceVC.h"
 
-@interface InvoiceManageVC ()
+@interface InvoiceManageVC () <UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
 //    int currentpage;
     NSMutableArray *listAry;    //发票列表
+    NSDictionary *invoiceDic;   //点击选择的发票数据
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -76,6 +77,17 @@
 - (IBAction)addInvoiceAction:(id)sender {
     AddInvoiceVC *addVC = [[AddInvoiceVC alloc] init];
     [self.navigationController pushViewController:addVC animated:YES];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 100) {
+        if (buttonIndex == 1) {     //纸质发票
+            [self toInvoiceWithInvoiceType:@"1"];
+        }
+        else if (buttonIndex == 2) {    //电子发票
+            [self toInvoiceWithInvoiceType:@"2"];
+        }
+    }
 }
 
 //#pragma mark - 下拉刷新,上拉加载
@@ -139,7 +151,7 @@
                 typeStr = @"";
                 break;
         }
-        cell.typeL.text = [NSString stringWithFormat:@"发票类型（%@）",typeStr];
+        cell.typeL.text = typeStr;
         BOOL preferred = [dic [@"def"] boolValue];
         if (preferred) {
             cell.defaultL.hidden = NO;
@@ -156,7 +168,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = listAry[indexPath.row];
     if (self.orderDic) {  //用于选择后开发票
-        [self toInvoiceWithDic:dic];
+        invoiceDic = dic;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请选择发票形式" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"纸质发票", @"电子发票", nil];
+        alert.tag = 100;
+        [alert show];
     } else {
         AddInvoiceVC *editVC = [[AddInvoiceVC alloc] init];
         editVC.isEdit = YES;
@@ -200,7 +215,7 @@
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
--(void)toInvoiceWithDic:(NSDictionary *)dic {      //批量开发票
+-(void)toInvoiceWithInvoiceType:(NSString *)invoiceType {      //批量开发票
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceCreat object:nil];
@@ -212,7 +227,7 @@
         [codes addObject:dic[@"code"]];
     }
     NSString *orderNosStr = [codes componentsJoinedByString:@","];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.orderType,@"orderType",orderNosStr,@"orderNos",dic[@"province"],@"province",dic[@"city"],@"city",dic[@"area"],@"area",dic[@"addr"],@"addr",dic[@"type"],@"type",dic[@"head"],@"head",dic[@"realName"],@"realName",dic[@"phone"],@"phone",dic[@"email"],@"email",@"0",@"status",dic[@"taxpayerCode"],@"taxpayerCode",dic[@"registAddr"],@"registAddr",dic[@"registPhone"],@"registPhone",dic[@"depositBank"],@"depositBank",dic[@"bankAccount"],@"bankAccount", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.orderType,@"orderType",invoiceType,@"invoiceType",orderNosStr,@"orderNos",invoiceDic[@"province"],@"province",invoiceDic[@"city"],@"city",invoiceDic[@"area"],@"area",invoiceDic[@"addr"],@"addr",invoiceDic[@"type"],@"type",invoiceDic[@"head"],@"head",invoiceDic[@"realName"],@"realName",invoiceDic[@"phone"],@"phone",invoiceDic[@"email"],@"email",@"0",@"status",invoiceDic[@"taxpayerCode"],@"taxpayerCode",invoiceDic[@"registAddr"],@"registAddr",invoiceDic[@"registPhone"],@"registPhone",invoiceDic[@"depositBank"],@"depositBank",invoiceDic[@"bankAccount"],@"bankAccount", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefixNew(OrderInvoiceCreat) delegate:nil params:pram info:infoDic];
 }
 

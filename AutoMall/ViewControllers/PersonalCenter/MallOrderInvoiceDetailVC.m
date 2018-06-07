@@ -53,7 +53,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -92,6 +92,10 @@
             return 1;
             break;
             
+        case 4:
+            return 1;
+            break;
+            
         default:
             return 0;
             break;
@@ -110,9 +114,38 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 4) {
+        if ([invoiceDic[@"invoiceStatus"] intValue] == 2) {   //已拒绝
+            return 60;
+        }
+        return 1;
+    }
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 4) {
+        if ([invoiceDic[@"invoiceStatus"] intValue] == 2) {   //已拒绝
+            UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+            UILabel *titleL = [[UILabel alloc] initWithFrame:CGRectMake(16, 4, SCREEN_WIDTH, 20)];
+            titleL.font = [UIFont systemFontOfSize:15];
+            titleL.textColor = RGBCOLOR(234, 0, 24);
+            titleL.text = @"拒绝理由";
+            [bgView addSubview:titleL];
+            
+            UILabel *contentL = [[UILabel alloc] initWithFrame:CGRectMake(16, 24, SCREEN_WIDTH, 40)];
+            contentL.numberOfLines = 2;
+            contentL.font = [UIFont systemFontOfSize:13];
+            contentL.textColor = RGBCOLOR(234, 0, 24);
+            contentL.text = @"拒绝理由 拒绝理由 拒绝理由 拒绝理由 拒绝理由 拒绝理由 拒绝理由 拒绝理由";
+            [bgView addSubview:contentL];
+            
+            return bgView;
+        }
+        return nil;
+    }
+    return nil;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MallOrderInvoiceDetailCell *cell = (MallOrderInvoiceDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"mallOrderInvoiceDetailCell"];
@@ -242,6 +275,18 @@
         case 3: {
             cell.titleL.text = @"收票人邮箱";
             cell.contentTF.text = invoiceDic[@"email"];
+            return cell;
+        }
+            break;
+            
+        case 4: {
+            cell.titleL.text = @"发票形式";
+            if ([invoiceDic[@"invoiceType"] intValue] == 1) {
+                cell.contentTF.text = @"纸质发票";
+            }
+            else if ([invoiceDic[@"invoiceType"] intValue] == 2) {
+                cell.contentTF.text = @"电子发票";
+            }
             return cell;
         }
             break;

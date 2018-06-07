@@ -148,14 +148,13 @@
                         </state>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eac-N9-6PT">
-                        <rect key="frame" x="16" y="147" width="60" height="25"/>
-                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="16" y="147" width="20" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="7eF-WP-pEU"/>
-                            <constraint firstAttribute="width" constant="60" id="amm-0l-1CK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="已开票">
+                        <state key="normal" image="invoiceStatus">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -199,13 +198,14 @@
                 <outlet property="numberL" destination="N2l-Ek-yiR" id="NSg-PT-6mz"/>
                 <outlet property="statusL" destination="GcO-xa-Mxs" id="PGE-Z4-BbX"/>
             </connections>
-            <point key="canvasLocation" x="-868" y="52"/>
+            <point key="canvasLocation" x="-627" y="38"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="arrows" width="26" height="48"/>
         <image name="checkbox_no" width="90" height="90"/>
         <image name="checkbox_yes" width="90" height="90"/>
+        <image name="invoiceStatus" width="20" height="20"/>
         <image name="placeholderPictureSquare" width="151" height="151"/>
     </resources>
 </document>

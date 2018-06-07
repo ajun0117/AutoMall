@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutoMall/ViewControllers/PersonalCenter/InvoiceManageVC.m"
-            timestampString = "549997025.803394"
+            timestampString = "550085741.2718771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "-toInvoiceWithDic:"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "-didFinishedRequestData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
