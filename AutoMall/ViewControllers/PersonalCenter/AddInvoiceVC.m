@@ -239,18 +239,61 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    if ([self checkPhoneNumWithPhone:self.receivePhoneTF.text]) {
-        if (self.isEdit) {
-            [self editInvoice];
+    
+    if ([invoiceType intValue] == 0) {   //普通个人
+        if(self.invoiceTitleTF.text.length == 0 || self.receiveNameTF.text.length == 0 || self.receivePhoneTF.text.length == 0 || self.receiveAddrDetailTF.text.length == 0 || self.receiveEmailTF.text.length == 0){
+            _networkConditionHUD.labelText = @"请完善信息后再保存！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return;
         }
         else {
-            [self addInvoice];
+            if (! [self checkPhoneNumWithPhone:self.receivePhoneTF.text]) {
+                _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                return;
+            }
         }
     }
+    else if([invoiceType intValue] == 1) {   //普通企业
+        if(self.invoiceTitleTF.text.length == 0 || self.taxpayerTF.text.length == 0 || self.receiveNameTF.text.length == 0 || self.receivePhoneTF.text.length == 0 || self.receiveAddrDetailTF.text.length == 0 || self.receiveEmailTF.text.length == 0){
+            _networkConditionHUD.labelText = @"请完善信息后再保存！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return;
+        }
+        else {
+            if (! [self checkPhoneNumWithPhone:self.receivePhoneTF.text]) {
+                _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                return;
+            }
+        }
+    }
+    else {      //增值税发票
+        if(self.invoiceTitleTF.text.length == 0 || self.taxpayerTF.text.length == 0 || self.regisAddrTF.text.length == 0 || self.regisPhoneTF.text.length == 0 || self.bankNameTF.text.length == 0 || self.bankCodeTF.text.length == 0 || self.receiveNameTF.text.length == 0 || self.receivePhoneTF.text.length == 0 || self.receiveAddrDetailTF.text.length == 0 || self.receiveEmailTF.text.length == 0){
+            _networkConditionHUD.labelText = @"请完善信息后再保存！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return;
+        }
+        else {
+            if (! [self checkPhoneNumWithPhone:self.regisPhoneTF.text]) {
+                _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                return;
+            }
+        }
+    }
+    
+    if (self.isEdit) {
+        [self editInvoice];
+    }
     else {
-        _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        [self addInvoice];
     }
 }
 

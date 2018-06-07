@@ -38,12 +38,11 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"InvoiceListCell" bundle:nil] forCellReuseIdentifier:@"invoiceListCell"];
     self.myTableView.tableFooterView = [UIView new];
     
-//    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-//    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
-    
-//    currentpage = 0;
-    
     listAry = [NSMutableArray array];
+    
+    if (self.orderDic) {  //用于选择后开发票
+        self.title = @"选择发票";
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -157,19 +156,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = listAry[indexPath.row];
     if (self.orderDic) {  //用于选择后开发票
-//        for (NSMutableDictionary *muDic in orderAry) {
-//            [muDic setObject:dic[@"province"] forKey:@"province"];
-//            [muDic setObject:dic[@"city"] forKey:@"city"];
-//            [muDic setObject:dic[@"addr"] forKey:@"addr"];
-//            [muDic setObject:dic[@"type"] forKey:@"type"];
-//            [muDic setObject:dic[@"head"] forKey:@"head"];
-//            [muDic setObject:dic[@"realName"] forKey:@"realName"];
-//            [muDic setObject:dic[@"phone"] forKey:@"phone"];
-//            [muDic setObject:dic[@"email"] forKey:@"email"];
-//            [muDic setObject:@"0" forKey:@"status"];    //固定值，0 待审核，1 通过，2 拒绝
-//            [muDic setObject:dic[@"taxpayerCode"] forKey:@"taxpayerCode"];
-//        }
-//        NSLog(@"orderAry: %@",orderAry);
         [self toInvoiceWithDic:dic];
     } else {
         AddInvoiceVC *editVC = [[AddInvoiceVC alloc] init];
@@ -219,13 +205,14 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceCreat object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:OrderInvoiceCreat, @"op", nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSArray *values = [self.orderDic allValues];
     NSMutableArray *codes = [NSMutableArray array];
     for (NSDictionary *dic in values) {
         [codes addObject:dic[@"code"]];
     }
     NSString *orderNosStr = [codes componentsJoinedByString:@","];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.orderType,@"orderType",orderNosStr,@"orderNos",dic[@"province"],@"province",dic[@"city"],@"city",dic[@"area"],@"area",dic[@"addr"],@"addr",dic[@"type"],@"type",dic[@"head"],@"head",dic[@"realName"],@"realName",dic[@"phone"],@"phone",dic[@"email"],@"email",@"0",@"status",dic[@"taxpayerCode"],@"taxpayerCode",dic[@"registAddr"],@"registAddr",dic[@"registPhone"],@"registPhone",dic[@"depositBank"],@"depositBank",dic[@"bankAccount"],@"bankAccount", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId",self.orderType,@"orderType",orderNosStr,@"orderNos",dic[@"province"],@"province",dic[@"city"],@"city",dic[@"area"],@"area",dic[@"addr"],@"addr",dic[@"type"],@"type",dic[@"head"],@"head",dic[@"realName"],@"realName",dic[@"phone"],@"phone",dic[@"email"],@"email",@"0",@"status",dic[@"taxpayerCode"],@"taxpayerCode",dic[@"registAddr"],@"registAddr",dic[@"registPhone"],@"registPhone",dic[@"depositBank"],@"depositBank",dic[@"bankAccount"],@"bankAccount", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefixNew(OrderInvoiceCreat) delegate:nil params:pram info:infoDic];
 }
 
@@ -278,7 +265,7 @@
             _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(toPopVC) withObject:nil afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
@@ -288,6 +275,10 @@
     }
 
     
+}
+
+- (void)toPopVC {
+        [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

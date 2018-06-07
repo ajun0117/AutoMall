@@ -165,7 +165,7 @@
     else {
         [selectedInvoiceDic removeObjectForKey:dic[@"id"]];
     }
-    NSLog(@"selectedInvoiceDic: %@",selectedInvoiceDic)
+    NSLog(@"selectedInvoiceDic: %@",selectedInvoiceDic);
 }
 
 -(void)toInvoiceManageVC {      //去开发票页面
@@ -186,7 +186,7 @@
     NSInteger section = btn.tag - 200;
     NSDictionary *dic = orderArray[section];
     MallOrderInvoiceDetailVC *detailVC = [[MallOrderInvoiceDetailVC alloc] init];
-    detailVC.orderId = dic[@"id"];
+    detailVC.orderId = dic[@"code"];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

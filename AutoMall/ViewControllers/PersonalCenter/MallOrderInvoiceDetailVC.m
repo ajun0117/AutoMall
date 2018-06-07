@@ -59,7 +59,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 2;
+            return 3;
         break;
             
         case 1:
@@ -99,12 +99,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    return 44;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 20;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0.5;
+    }
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MallOrderInvoiceDetailCell *cell = (MallOrderInvoiceDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"mallOrderInvoiceDetailCell"];
@@ -115,8 +123,8 @@
             if (indexPath.row == 0) {
                 cell.titleL.text = @"开票日期";
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-                [formater setDateFormat:@"yyyy-MM-dd h:m"];
-                NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[invoiceDic[@"uTime"] doubleValue]/1000];
+                [formater setDateFormat:@"yyyy-MM-dd hh:mm"];
+                NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[invoiceDic[@"cTime"] doubleValue]/1000];
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentTF.text = string;
                 return cell;
@@ -132,6 +140,11 @@
                 else {
                     cell.contentTF.text = @"增值税专用发票";
                 }
+                return cell;
+            }
+            else {
+                cell.titleL.text = @"开票金额";
+                cell.contentTF.text = [NSString stringWithFormat:@"￥%@",invoiceDic[@"price"]];
                 return cell;
             }
         }
@@ -210,12 +223,12 @@
             }
             else if (indexPath.row == 1) {
                 cell.titleL.text = @"收票人手机";
-                cell.contentTF.text = invoiceDic[@"registPhone"];
+                cell.contentTF.text = invoiceDic[@"phone"];
                 return cell;
             }
             else if (indexPath.row == 2) {
                 cell.titleL.text = @"收票人所在地区";
-                cell.contentTF.text = [NSString stringWithFormat:@"%@ %@ %@",invoiceDic[@"province"],invoiceDic[@"city"],invoiceDic[@"addr"]];
+                cell.contentTF.text = [NSString stringWithFormat:@"%@ %@ %@",invoiceDic[@"province"],invoiceDic[@"city"],invoiceDic[@"area"]];
                 return cell;
             }
             else if (indexPath.row == 3) {
@@ -246,7 +259,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:OrderInvoiceDetail object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:OrderInvoiceDetail, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefixNew(OrderInvoiceDetail),self.orderId];
+    NSString *urlString = [NSString stringWithFormat:@"%@?orderNo=%@",UrlPrefixNew(OrderInvoiceDetail),self.orderId];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
