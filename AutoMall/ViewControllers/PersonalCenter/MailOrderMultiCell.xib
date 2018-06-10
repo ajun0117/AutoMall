@@ -28,7 +28,8 @@
                                     <constraint firstAttribute="height" constant="44" id="D9i-vt-3h4"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="checkbox_no"/>
+                                <state key="normal" image="checkbox_no_enable"/>
+                                <state key="disabled" image="checkbox_no"/>
                                 <state key="selected" image="checkbox_yes"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdE-Jy-Edl">
@@ -176,6 +177,7 @@
     <resources>
         <image name="arrows" width="26" height="48"/>
         <image name="checkbox_no" width="90" height="90"/>
+        <image name="checkbox_no_enable" width="90" height="90"/>
         <image name="checkbox_yes" width="90" height="90"/>
         <image name="invoiceStatus" width="20" height="20"/>
     </resources>
