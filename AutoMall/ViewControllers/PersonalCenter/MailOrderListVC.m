@@ -242,7 +242,7 @@
             cell.checkboxBtn.hidden = NO;
             cell.checkboxBtn.enabled = NO;
             cell.invoicedBtn.hidden = YES;
-            if ([dic[@"invoiceStatus"] intValue] == 2 || [dic[@"invoiceStatus"] intValue] == 3) {     //如果未开发票或已拒绝
+            if ([dic[@"invoiceStatus"] intValue] == 2 || [dic[@"invoiceStatus"] intValue] == -2) {     //如果未开发票或已拒绝
                 cell.checkboxBtn.enabled = YES;
                 cell.checkboxBtn.tag = indexPath.section + 100;
                 [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
@@ -315,7 +315,7 @@
         cell.checkboxBtn.hidden = NO;
         cell.checkboxBtn.enabled = NO;
         cell.invoicedBtn.hidden = YES;
-        if ([dic[@"invoiceStatus"] intValue] == 2 || [dic[@"invoiceStatus"] intValue] == 3) {     //如果未开发票或已拒绝
+        if ([dic[@"invoiceStatus"] intValue] == 2 || [dic[@"invoiceStatus"] intValue] == -2) {     //如果未开发票或已拒绝
             cell.checkboxBtn.enabled = YES;
             cell.checkboxBtn.tag = indexPath.section + 100;
             [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
