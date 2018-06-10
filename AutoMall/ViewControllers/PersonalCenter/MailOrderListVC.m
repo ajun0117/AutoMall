@@ -223,6 +223,8 @@
         MailOrderMultiCell *cell = (MailOrderMultiCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderMultiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.checkboxBtn.hidden = YES;
+        cell.checkboxBtn.enabled = NO;
+        cell.invoicedBtn.hidden = YES;
         cell.picScrollView.contentSize = CGSizeMake((60+10) * goodsAry.count, 60);
         int amount = 0;
         for (int i = 0; i < goodsAry.count; ++i) {
@@ -240,10 +242,19 @@
             cell.statusL.text = @"已付款";
             cell.btn.hidden = YES;
 //            [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
+            
             cell.checkboxBtn.hidden = NO;
-            cell.checkboxBtn.enabled = NO;
-            cell.invoicedBtn.hidden = YES;
-            if ([dic[@"invoiceStatus"] intValue] == 2 || [dic[@"invoiceStatus"] intValue] == -2) {     //如果未开发票或已拒绝
+            if ([dic[@"invoiceStatus"] intValue] == 0){ //待审核
+                cell.checkboxBtn.selected = NO;
+                cell.invoicedBtn.hidden = NO;
+                [cell.invoicedBtn setTitle:@"开票待审核 >" forState:UIControlStateNormal];
+            }
+            else if ([dic[@"invoiceStatus"] intValue] == 1){ //已开票
+                cell.invoicedBtn.hidden = NO;
+                [cell.invoicedBtn setTitle:@"已开票 >" forState:UIControlStateNormal];
+            }
+            else if ([dic[@"invoiceStatus"] intValue] == 2){ //已拒绝
+                cell.invoicedBtn.hidden = NO;
                 cell.checkboxBtn.enabled = YES;
                 cell.checkboxBtn.tag = indexPath.section + 100;
                 [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
@@ -253,26 +264,20 @@
                 } else {
                     cell.checkboxBtn.selected = NO;
                 }
-            }
-            if ([dic[@"invoiceStatus"] intValue] == 0){ //待审核
-                cell.checkboxBtn.enabled = NO;
-                cell.invoicedBtn.hidden = NO;
-                [cell.invoicedBtn setTitle:@"开票待审核 >" forState:UIControlStateNormal];
-            }
-            else if ([dic[@"invoiceStatus"] intValue] == 1){ //已开票
-                cell.checkboxBtn.enabled = NO;
-                cell.invoicedBtn.hidden = NO;
-                [cell.invoicedBtn setTitle:@"已开票 >" forState:UIControlStateNormal];
-            }
-            else if ([dic[@"invoiceStatus"] intValue] == 2){ //已拒绝
-                cell.checkboxBtn.enabled = YES;
-                cell.invoicedBtn.hidden = NO;
                 [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
             }
             else { //未开票
                 cell.checkboxBtn.enabled = YES;
-                cell.invoicedBtn.hidden = YES;
-                [cell.invoicedBtn setTitle:@"未开票 >" forState:UIControlStateNormal];
+                cell.checkboxBtn.tag = indexPath.section + 100;
+                [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+                NSArray *keys = [selectedInvoiceDic allKeys];
+                if ([keys containsObject:dic[@"id"]]) {
+                    cell.checkboxBtn.selected = YES;
+                } else {
+                    cell.checkboxBtn.selected = NO;
+                }
+                
+//                [cell.invoicedBtn setTitle:@"未开票 >" forState:UIControlStateNormal];
             }
             cell.invoicedBtn.tag = indexPath.section + 200;
             [cell.invoicedBtn addTarget:self action:@selector(toInvoiceetailVC:) forControlEvents:UIControlEventTouchUpInside];
@@ -294,6 +299,8 @@
     MailOrderSingleCell *cell = (MailOrderSingleCell *)[tableView dequeueReusableCellWithIdentifier:@"mailOrderSingleCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.checkboxBtn.hidden = YES;
+    cell.checkboxBtn.enabled = NO;
+    cell.invoicedBtn.hidden = YES;
     NSDictionary *detailDic = [goodsAry firstObject];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = detailDic[@"commodityName"];
@@ -318,9 +325,17 @@
         cell.btn.hidden = YES;
 //        [cell.btn setTitle:@"再次购买" forState:UIControlStateNormal];
         cell.checkboxBtn.hidden = NO;
-        cell.checkboxBtn.enabled = NO;
-        cell.invoicedBtn.hidden = YES;
-        if ([dic[@"invoiceStatus"] intValue] == 2 || [dic[@"invoiceStatus"] intValue] == -2) {     //如果未开发票或已拒绝
+        if ([dic[@"invoiceStatus"] intValue] == 0){ //待审核
+            cell.checkboxBtn.selected = NO;
+            cell.invoicedBtn.hidden = NO;
+            [cell.invoicedBtn setTitle:@"开票待审核 >" forState:UIControlStateNormal];
+        }
+        else if ([dic[@"invoiceStatus"] intValue] == 1){ //已开票
+            cell.invoicedBtn.hidden = NO;
+            [cell.invoicedBtn setTitle:@"已开票 >" forState:UIControlStateNormal];
+        }
+        else if ([dic[@"invoiceStatus"] intValue] == 2){ //已拒绝
+            cell.invoicedBtn.hidden = NO;
             cell.checkboxBtn.enabled = YES;
             cell.checkboxBtn.tag = indexPath.section + 100;
             [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
@@ -330,26 +345,19 @@
             } else {
                 cell.checkboxBtn.selected = NO;
             }
-        }
-        if ([dic[@"invoiceStatus"] intValue] == 0){ //待审核
-            cell.checkboxBtn.enabled = NO;
-            cell.invoicedBtn.hidden = NO;
-            [cell.invoicedBtn setTitle:@"开票待审核 >" forState:UIControlStateNormal];
-        }
-        else if ([dic[@"invoiceStatus"] intValue] == 1){ //已开票
-            cell.checkboxBtn.enabled = NO;
-            cell.invoicedBtn.hidden = NO;
-            [cell.invoicedBtn setTitle:@"已开票 >" forState:UIControlStateNormal];
-        }
-        else if ([dic[@"invoiceStatus"] intValue] == 2){ //已拒绝
-            cell.checkboxBtn.enabled = YES;
-            cell.invoicedBtn.hidden = NO;
             [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
         }
         else { //未开票
             cell.checkboxBtn.enabled = YES;
-            cell.invoicedBtn.hidden = YES;
-            [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
+            cell.checkboxBtn.tag = indexPath.section + 100;
+            [cell.checkboxBtn addTarget:self action:@selector(checkToInvoice:) forControlEvents:UIControlEventTouchUpInside];
+            NSArray *keys = [selectedInvoiceDic allKeys];
+            if ([keys containsObject:dic[@"id"]]) {
+                cell.checkboxBtn.selected = YES;
+            } else {
+                cell.checkboxBtn.selected = NO;
+            }
+//            [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
         }
         cell.invoicedBtn.tag = indexPath.section + 200;
         [cell.invoicedBtn addTarget:self action:@selector(toInvoiceetailVC:) forControlEvents:UIControlEventTouchUpInside];

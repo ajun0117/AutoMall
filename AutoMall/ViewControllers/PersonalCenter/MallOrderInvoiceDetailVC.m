@@ -153,16 +153,21 @@
     
     switch (indexPath.section) {
         case 0: {
-            if (indexPath.row == 0) {
+            if(indexPath.row == 0) {
+                cell.titleL.text = @"发票编号";
+                cell.contentTF.text = [NSString stringWithFormat:@"%@",invoiceDic[@"invoiceNo"]];
+                return cell;
+            }
+            else if (indexPath.row == 1) {
                 cell.titleL.text = @"开票日期";
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-                [formater setDateFormat:@"yyyy-MM-dd hh:mm"];
+                [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
                 NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[invoiceDic[@"cTime"] doubleValue]/1000];
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentTF.text = string;
                 return cell;
             }
-            else if (indexPath.row == 1) {
+            else if (indexPath.row == 2) {
                 cell.titleL.text = @"发票类型";
                 if ([invoiceDic[@"type"] intValue] == 0) {
                     cell.contentTF.text = @"普通发票 个人";
@@ -173,11 +178,6 @@
                 else {
                     cell.contentTF.text = @"增值税专用发票";
                 }
-                return cell;
-            }
-            else {
-                cell.titleL.text = @"开票金额";
-                cell.contentTF.text = [NSString stringWithFormat:@"￥%@",invoiceDic[@"price"]];
                 return cell;
             }
         }
