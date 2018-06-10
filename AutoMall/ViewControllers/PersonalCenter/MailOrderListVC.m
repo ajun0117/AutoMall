@@ -78,6 +78,7 @@
     _networkConditionHUD.margin = HUDMargin;
     
     [selectedInvoiceDic removeAllObjects];
+    [orderArray removeAllObjects];
     [self requestGetMallOrderList];     //返回时清空选中状态并刷新
 }
 
@@ -254,18 +255,22 @@
                 }
             }
             if ([dic[@"invoiceStatus"] intValue] == 0){ //待审核
+                cell.checkboxBtn.enabled = NO;
                 cell.invoicedBtn.hidden = NO;
                 [cell.invoicedBtn setTitle:@"开票待审核 >" forState:UIControlStateNormal];
             }
             else if ([dic[@"invoiceStatus"] intValue] == 1){ //已开票
+                cell.checkboxBtn.enabled = NO;
                 cell.invoicedBtn.hidden = NO;
                 [cell.invoicedBtn setTitle:@"已开票 >" forState:UIControlStateNormal];
             }
             else if ([dic[@"invoiceStatus"] intValue] == 2){ //已拒绝
+                cell.checkboxBtn.enabled = YES;
                 cell.invoicedBtn.hidden = NO;
                 [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
             }
-            else { //已拒绝
+            else { //未开票
+                cell.checkboxBtn.enabled = YES;
                 cell.invoicedBtn.hidden = YES;
                 [cell.invoicedBtn setTitle:@"未开票 >" forState:UIControlStateNormal];
             }
@@ -327,18 +332,22 @@
             }
         }
         if ([dic[@"invoiceStatus"] intValue] == 0){ //待审核
+            cell.checkboxBtn.enabled = NO;
             cell.invoicedBtn.hidden = NO;
             [cell.invoicedBtn setTitle:@"开票待审核 >" forState:UIControlStateNormal];
         }
         else if ([dic[@"invoiceStatus"] intValue] == 1){ //已开票
+            cell.checkboxBtn.enabled = NO;
             cell.invoicedBtn.hidden = NO;
             [cell.invoicedBtn setTitle:@"已开票 >" forState:UIControlStateNormal];
         }
         else if ([dic[@"invoiceStatus"] intValue] == 2){ //已拒绝
+            cell.checkboxBtn.enabled = YES;
             cell.invoicedBtn.hidden = NO;
             [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
         }
-        else { //已拒绝
+        else { //未开票
+            cell.checkboxBtn.enabled = YES;
             cell.invoicedBtn.hidden = YES;
             [cell.invoicedBtn setTitle:@"开票被拒 >" forState:UIControlStateNormal];
         }
