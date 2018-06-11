@@ -25,7 +25,7 @@
         unitsStr = [NSString stringWithFormat:@"/%@",data[@"units"]];
     }
     
-    if (data[@"discount"]) {
+    if ([data[@"discount"] intValue] > 0) {
         self.money.text = [NSString stringWithFormat:@"￥%@%@",KSDIC(data, @"discount"),unitsStr];
     } else {
         self.money.text = [NSString stringWithFormat:@"￥%@%@",KSDIC(data, @"price"),unitsStr];

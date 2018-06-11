@@ -78,6 +78,7 @@
     _networkConditionHUD.margin = HUDMargin;
     
     [selectedInvoiceDic removeAllObjects];
+    currentpage = 0;
     [orderArray removeAllObjects];
     [self requestGetMallOrderList];     //返回时清空选中状态并刷新
 }
@@ -99,6 +100,7 @@
 
 - (IBAction)daifuAction:(id)sender {
     _orderStatus = @"0";
+    currentpage = 0;
     self.navigationItem.rightBarButtonItem = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:YES andView:self.daifuView withColor:Red_BtnColor];
@@ -110,7 +112,7 @@
 
 - (IBAction)yifuAction:(id)sender {
     _orderStatus = @"1";
-    
+    currentpage = 0;
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 2, 60, 40);
     [btn setTitle:@"开发票" forState:UIControlStateNormal];
@@ -130,6 +132,7 @@
 
 - (IBAction)cancelAction:(id)sender {
     _orderStatus = @"-1";
+    currentpage = 0;
     self.navigationItem.rightBarButtonItem = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
@@ -141,6 +144,7 @@
 
 - (IBAction)allAction:(id)sender {
     _orderStatus = nil;
+    currentpage = 0;
     self.navigationItem.rightBarButtonItem = nil;
     [orderArray removeAllObjects];
     [self setButton:self.daifuBtn withBool:NO andView:self.daifuView withColor:[UIColor clearColor]];
