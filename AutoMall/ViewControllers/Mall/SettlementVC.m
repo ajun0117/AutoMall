@@ -16,7 +16,7 @@
 #import "CartItem.h"
 #import "CartTool.h"
 
-@interface SettlementVC () <SelectAddress,UITextFieldDelegate>
+@interface SettlementVC () <SelectAddress,UITextFieldDelegate,UIAlertViewDelegate>
 {
     SettlementFootView *_footView;
     MBProgressHUD *_hud;
@@ -198,7 +198,17 @@
 
 #pragma mark -- confirmOrderClock
 - (IBAction)confirmOrderClick:(id)sender {
-    [self requestPostAddOrder]; //提交订单
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"是否确认下单？" message:@"" delegate:self cancelButtonTitle:@"再看看" otherButtonTitles:@"是",nil];
+    alert.tag = 200;
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 200) {
+        if (buttonIndex == 1) {
+            [self requestPostAddOrder]; //提交订单
+        }
+    }
 }
 
 #pragma markl -- 加加
