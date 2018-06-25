@@ -46,6 +46,9 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    self.navigationItem.backBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+//    self.navigationItem.backBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
     self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
@@ -116,6 +119,10 @@
         _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
         _networkConditionHUD.margin = HUDMargin;
     }
+}
+
+-(void)cancel {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)save:(UIBarButtonItem *)rightItem {

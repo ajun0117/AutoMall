@@ -58,7 +58,7 @@
     searchBtn.frame = CGRectMake(0, 0, 28, 28);
     [searchBtn setImage:[UIImage imageNamed:@"carList"] forState:UIControlStateNormal];
 //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [searchBtn addTarget:self action:@selector(toCarOwner:) forControlEvents:UIControlEventTouchUpInside];
+    [searchBtn addTarget:self action:@selector(toCarOwner) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, searchBtnBarBtn, nil];
     
@@ -160,7 +160,7 @@
 }
 
 #pragma mark - 选择车辆
--(void)toCarOwner:(UIButton *)btn {
+-(void)toCarOwner {
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if (mobileUserType.length > 0) {    //已登录用户
         //注册选择车辆通知
@@ -265,9 +265,10 @@
 //                    [self.navigationController pushViewController:infoVC animated:YES];
                     
                 }   else {
-                    _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
-                    [_networkConditionHUD show:YES];
-                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//                    _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
+//                    [_networkConditionHUD show:YES];
+//                    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                    [self toCarOwner];      //直接跳转至选择车辆页面
                 }
             }
         }
@@ -293,9 +294,10 @@
 //                [self.navigationController pushViewController:infoVC animated:YES];
 //                }
             } else {
-                _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
-                [_networkConditionHUD show:YES];
-                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//                _networkConditionHUD.labelText = @"请先在右上角选择需要保养的车辆！";
+//                [_networkConditionHUD show:YES];
+//                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                [self toCarOwner];      //直接跳转至选择车辆页面
             }
         }
     }
