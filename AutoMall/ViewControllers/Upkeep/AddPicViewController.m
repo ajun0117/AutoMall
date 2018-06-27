@@ -42,15 +42,15 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"添加图片";
     // 设置导航栏按钮和标题颜色
-    [self wr_setNavBarTintColor:NavBarTintColor];
+//    [self wr_setNavBarTintColor:NavBarTintColor];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.navigationItem.backBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
-//    self.navigationItem.backBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
+    self.navigationItem.leftBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+    self.navigationItem.leftBarButtonItem.tintColor = NavBarTintColor;
     
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:IMG(@"homeBg")];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(uploadAction:)];
     self.navigationItem.rightBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     
 //    UIButton *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -66,12 +66,6 @@
 
     [self.imgsCollectionView registerNib:[UINib nibWithNibName:@"AlbumListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:AlbumListCell];
 //    [self.myCollectionView registerNib:[UINib nibWithNibName:@"AddPicFooterCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-    
-    _imgsArray = [[NSMutableArray alloc] init];
-    if (self.localImgsArray) {
-        [_imgsArray addObjectsFromArray:self.localImgsArray];
-    }
-    self.imageDataArr = [[NSMutableArray alloc] init];
     
     if (! self.maxCount) {
         self.maxCount = 3;
@@ -103,6 +97,26 @@
     //注册表格
     [self.myCollectionView registerClass:[ImageCollectionViewCell class] forCellWithReuseIdentifier:@"CELL"];
 
+    self.imageDataArr = [[NSMutableArray alloc] init];
+    _imgsArray = [[NSMutableArray alloc] init];
+    if (self.localImgsArray) {
+        //        [_imgsArray addObjectsFromArray:self.localImgsArray];
+        
+        for (NSDictionary *dic in self.localImgsArray) {
+            NSString *urlStr = UrlPrefix(dic[@"relativePath"]);
+            ImageObject *obj = [[ImageObject alloc] init];
+//            obj.imageUrl = [NSURL URLWithString:urlStr];
+            obj.imageStorePath = urlStr;
+            obj.uploadStatus = ImageUploadingStatusDefault;
+            if (self.imageDataArr.count >= self.maxCount) {
+                [self.imageDataArr removeObjectAtIndex:0];
+                //[self.myCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:0]]];
+            }
+            [self.imageDataArr addObject:obj];
+        }
+        
+        [self.myCollectionView reloadData];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -418,7 +432,12 @@
 {
     NSMutableOrderedSet *orderedSet = [[NSMutableOrderedSet alloc] init];
     for (ImageObject *obj in self.imageDataArr) {
-        [orderedSet addObject:obj.imageUrl];
+        if (obj.imageStorePath) {
+            [orderedSet addObject:obj.imageStorePath];
+        }
+        else {
+            [orderedSet addObject:obj.imageUrl];
+        }
     }
     
     QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
@@ -443,7 +462,11 @@
     
     NSMutableArray *imageUrlArr = [[NSMutableArray alloc] init];
     for (ImageObject *obj in self.imageDataArr) {
-        [imageUrlArr addObject:obj.imageUrl];
+        if (obj.imageStorePath) {
+            [imageUrlArr addObject:obj.imageStorePath];
+        } else {
+            [imageUrlArr addObject:obj.imageUrl];
+        }
     }
     
     NSArray *newImageDataArr = [[NSArray alloc] initWithArray:self.imageDataArr];
@@ -512,7 +535,7 @@
    [self.myCollectionView reloadData];
 }
 
-- (IBAction)uploadAction:(id)sender {
+- (void)uploadAction:(id)sender {
     if (self.imageDataArr.count == 0) {
         _networkConditionHUD.labelText = @"您还没有添加图片";
         [_networkConditionHUD show:YES];
@@ -585,16 +608,23 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
-            [self.imageDataArr removeAllObjects];
-            NSLog(@"_imgsArray: %@",_imgsArray);
-            [self.imgsCollectionView reloadData];
-            [self.myCollectionView reloadData];
+             [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+//            [self.imageDataArr removeAllObjects];
+//            NSLog(@"_imgsArray: %@",_imgsArray);
+//            [self.imgsCollectionView reloadData];
+//            [self.myCollectionView reloadData];
             
             [_hud hide:YES];
         }
     }
 
 }
+
+- (void)toPopVC:(NSString *)carId {
+    self.GoBackUpdate(_imgsArray);
+    [self.navigationController popViewControllerAnimated:YES]; //返回首页
+}
+
 
 
 - (void)didReceiveMemoryWarning {

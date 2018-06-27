@@ -32,7 +32,7 @@
 - (void)commonInit{
     _yLineMinValue = 0;
     _yLineSectionCount = 5;
-    _xLineNameFont = [UIFont systemFontOfSize:10.f];
+    _xLineNameFont = [UIFont systemFontOfSize:9.f];
     _yLineValueFont = [UIFont systemFontOfSize:10.f];
     _animationDuration = 1.f;
     _groupWidth = ZFAxisLineItemWidth;
