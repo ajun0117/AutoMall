@@ -79,11 +79,13 @@
 #pragma mark - 接口基地址
 
 //汽车商城
-#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
+//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://120.79.255.24/carupkeep%@",action])  //测试服务器ip地址
 //#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://119.23.227.246/carupkeep%@",action])   //正式服务器对应ip地址
-//#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
+#define UrlPrefix(action)                       ([NSString stringWithFormat:@"http://hengliantech.com/carupkeep%@",action])   //正式服务器
 
-#define UrlPrefixNew(action)                       ([NSString stringWithFormat:@"http://120.79.255.24:8010/%@",action])  //测试服务器ip地址，发票相关的新地址
+//#define UrlPrefixNew(action)                       ([NSString stringWithFormat:@"http://120.79.255.24:8010/%@",action])  //测试服务器ip地址，发票相关的新地址
+//#define UrlPrefixNew(action)                       ([NSString stringWithFormat:@"http://119.23.227.246:8010/%@",action])  //正式服务器ip地址，发票相关的新地址
+#define UrlPrefixNew(action)                       ([NSString stringWithFormat:@"http://hengliantech.com:8010/%@",action])  //正式服务器域名，发票相关的新地址
 
 //资讯、教程
 #define InformationList                          @"/api/info/list"    //资讯列表

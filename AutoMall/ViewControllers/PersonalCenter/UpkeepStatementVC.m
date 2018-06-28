@@ -175,7 +175,7 @@
     
     self.selectDate = [NSDate date];
     itemStr = @"1";
-    wayStr = @"2";
+    wayStr = @"1";
     [self requestPostReportSum];
 }
 

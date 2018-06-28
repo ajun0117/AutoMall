@@ -22,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-Kn-mjA">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-Kn-mjA">
+                    <rect key="frame" x="0.0" y="64" width="375" height="453"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="scrollIndicatorInsets" minX="10" minY="20" maxX="10" maxY="10"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="NaQ-cc-vH7">
@@ -38,10 +38,10 @@
                     </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kjc-gC-1VK">
-                    <rect key="frame" x="0.0" y="64" width="375" height="150"/>
+                    <rect key="frame" x="0.0" y="517" width="375" height="150"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5u-rY-RLv">
-                            <rect key="frame" x="10" y="5" width="355" height="100"/>
+                            <rect key="frame" x="10" y="25" width="355" height="100"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gCV-Q6-5Wx" customClass="ExtendCollectionView">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
@@ -110,13 +110,26 @@
                                 </mask>
                             </variation>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HN-yu-xyC">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="yX0-Z8-crD" customClass="NSLayoutConstraintOnePixelLine"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="d5u-rY-RLv" firstAttribute="leading" secondItem="Kjc-gC-1VK" secondAttribute="leading" constant="10" id="0I1-eY-h2f"/>
                         <constraint firstAttribute="trailing" secondItem="d5u-rY-RLv" secondAttribute="trailing" constant="10" id="6v4-Zk-D6S"/>
+                        <constraint firstAttribute="trailing" secondItem="6HN-yu-xyC" secondAttribute="trailing" id="KcE-Nu-qqx"/>
+                        <constraint firstItem="6HN-yu-xyC" firstAttribute="leading" secondItem="Kjc-gC-1VK" secondAttribute="leading" id="OWL-D1-pgE"/>
                         <constraint firstAttribute="height" constant="150" id="Qrk-Ka-kCN"/>
-                        <constraint firstItem="d5u-rY-RLv" firstAttribute="top" secondItem="Kjc-gC-1VK" secondAttribute="top" constant="5" id="oa4-Xv-PDD"/>
+                        <constraint firstItem="6HN-yu-xyC" firstAttribute="top" secondItem="Kjc-gC-1VK" secondAttribute="top" id="lao-Gi-ugv"/>
+                        <constraint firstItem="d5u-rY-RLv" firstAttribute="top" secondItem="Kjc-gC-1VK" secondAttribute="top" constant="25" id="oa4-Xv-PDD"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
@@ -143,13 +156,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Kjc-gC-1VK" secondAttribute="trailing" id="0zd-yc-gD4"/>
+                <constraint firstAttribute="bottom" secondItem="Kjc-gC-1VK" secondAttribute="bottom" id="2Wc-jy-ry6"/>
                 <constraint firstItem="qA4-Kn-mjA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4L1-nk-HZD"/>
                 <constraint firstItem="Kjc-gC-1VK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4eq-qo-2tR"/>
                 <constraint firstItem="qA4-Kn-mjA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="7dR-2n-aNH"/>
-                <constraint firstItem="Kjc-gC-1VK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="OWr-lb-KFY"/>
+                <constraint firstItem="Kjc-gC-1VK" firstAttribute="top" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="NVI-eI-1PO"/>
                 <constraint firstAttribute="trailing" secondItem="qA4-Kn-mjA" secondAttribute="trailing" id="dRY-Ci-PlK"/>
                 <constraint firstAttribute="bottom" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="oBP-mO-00P"/>
-                <constraint firstAttribute="bottom" secondItem="qA4-Kn-mjA" secondAttribute="bottom" id="qeq-Bc-CBx"/>
             </constraints>
             <variation key="default">
                 <mask key="subviews">
@@ -157,12 +170,12 @@
                     <exclude reference="Kjc-gC-1VK"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="0zd-yc-gD4"/>
-                    <exclude reference="4eq-qo-2tR"/>
                     <exclude reference="4L1-nk-HZD"/>
                     <exclude reference="7dR-2n-aNH"/>
                     <exclude reference="dRY-Ci-PlK"/>
                     <exclude reference="oBP-mO-00P"/>
+                    <exclude reference="0zd-yc-gD4"/>
+                    <exclude reference="4eq-qo-2tR"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -171,15 +184,15 @@
                     <include reference="Kjc-gC-1VK"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="0zd-yc-gD4"/>
-                    <include reference="4eq-qo-2tR"/>
                     <include reference="4L1-nk-HZD"/>
                     <include reference="7dR-2n-aNH"/>
                     <include reference="dRY-Ci-PlK"/>
                     <exclude reference="oBP-mO-00P"/>
+                    <include reference="0zd-yc-gD4"/>
+                    <include reference="4eq-qo-2tR"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="47" y="-378"/>
+            <point key="canvasLocation" x="46.5" y="-378.5"/>
         </view>
     </objects>
 </document>

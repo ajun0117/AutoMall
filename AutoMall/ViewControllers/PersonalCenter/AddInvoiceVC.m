@@ -102,6 +102,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keybordDown)];
     [self.myScrollV addGestureRecognizer:tap];
     
+    invoiceType = @"0";     //默认个人发票
+    
     if (self.isEdit) {
         self.title = @"编辑发票";
         invoiceType = self.invoiceDic [@"type"];

@@ -42,10 +42,6 @@
 
 -(void)setCellContentWithImageObject:(ImageObject *)imageInfo{
     self.imageInfo = imageInfo;
-    if (imageInfo.imageStorePath) {
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageInfo.imageStorePath] placeholderImage:IMG(@"placeholderPictureSquare")];
-         return;
-    }
     ALAssetsLibrary* alLibrary = [[ALAssetsLibrary alloc] init];
     [alLibrary assetForURL:imageInfo.imageUrl resultBlock:^(ALAsset *asset) {
 //        NSLog(@"asset：%@",asset);

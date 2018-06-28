@@ -67,6 +67,12 @@
     [self.imgsCollectionView registerNib:[UINib nibWithNibName:@"AlbumListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:AlbumListCell];
 //    [self.myCollectionView registerNib:[UINib nibWithNibName:@"AddPicFooterCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     
+    _imgsArray = [[NSMutableArray alloc] init];
+    if (self.localImgsArray) {
+        [_imgsArray addObjectsFromArray:self.localImgsArray];
+    }
+    self.imageDataArr = [[NSMutableArray alloc] init];
+    
     if (! self.maxCount) {
         self.maxCount = 3;
     }
@@ -97,26 +103,6 @@
     //注册表格
     [self.myCollectionView registerClass:[ImageCollectionViewCell class] forCellWithReuseIdentifier:@"CELL"];
 
-    self.imageDataArr = [[NSMutableArray alloc] init];
-    _imgsArray = [[NSMutableArray alloc] init];
-    if (self.localImgsArray) {
-        //        [_imgsArray addObjectsFromArray:self.localImgsArray];
-        
-        for (NSDictionary *dic in self.localImgsArray) {
-            NSString *urlStr = UrlPrefix(dic[@"relativePath"]);
-            ImageObject *obj = [[ImageObject alloc] init];
-//            obj.imageUrl = [NSURL URLWithString:urlStr];
-            obj.imageStorePath = urlStr;
-            obj.uploadStatus = ImageUploadingStatusDefault;
-            if (self.imageDataArr.count >= self.maxCount) {
-                [self.imageDataArr removeObjectAtIndex:0];
-                //[self.myCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:0]]];
-            }
-            [self.imageDataArr addObject:obj];
-        }
-        
-        [self.myCollectionView reloadData];
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -135,10 +121,6 @@
     }
 }
 
--(void)cancel {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 -(void)save:(UIBarButtonItem *)rightItem {
     if (_imgsArray.count) {
         self.GoBackUpdate(_imgsArray);
@@ -147,6 +129,10 @@
         [_hud show:YES];
         [_hud hide:YES afterDelay:HUDDelay];
     }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)cancel {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -432,12 +418,7 @@
 {
     NSMutableOrderedSet *orderedSet = [[NSMutableOrderedSet alloc] init];
     for (ImageObject *obj in self.imageDataArr) {
-        if (obj.imageStorePath) {
-            [orderedSet addObject:obj.imageStorePath];
-        }
-        else {
-            [orderedSet addObject:obj.imageUrl];
-        }
+        [orderedSet addObject:obj.imageUrl];
     }
     
     QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
@@ -462,11 +443,7 @@
     
     NSMutableArray *imageUrlArr = [[NSMutableArray alloc] init];
     for (ImageObject *obj in self.imageDataArr) {
-        if (obj.imageStorePath) {
-            [imageUrlArr addObject:obj.imageStorePath];
-        } else {
-            [imageUrlArr addObject:obj.imageUrl];
-        }
+        [imageUrlArr addObject:obj.imageUrl];
     }
     
     NSArray *newImageDataArr = [[NSArray alloc] initWithArray:self.imageDataArr];
