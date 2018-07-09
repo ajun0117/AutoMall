@@ -113,12 +113,13 @@
 }
 
 -(void)carInfo {
+    
     UpkeepCarInfoVC *infoVC = [[UpkeepCarInfoVC alloc] init];
-    infoVC.carDic = self.carDic;
-    infoVC.mileage = self.mileage;
-    infoVC.fuelAmount = self.fuelAmount;
-    infoVC.lastMileage = self.lastMileage;
-    infoVC.lastEndTime = self.lastEndTime;
+    infoVC.carDic = carUpkeepDic[@"car"];
+    infoVC.mileage = carUpkeepDic[@"mileage"];
+    infoVC.fuelAmount = carUpkeepDic[@"fuelAmount"];
+    infoVC.lastMileage = STRING(carUpkeepDic[@"lastMileage"]);
+    infoVC.lastEndTime = carUpkeepDic[@"lastEndTime"];
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:YES];
 }
@@ -416,7 +417,7 @@
                     cell.declareL.strikeThroughEnabled = NO;
                     cell.declareL.text = @"车牌";
                     cell.declareL.font = [UIFont systemFontOfSize:15];
-                    cell.contentL.text = STRING(self.carDic[@"plateNumber"]);
+                    cell.contentL.text = STRING(carUpkeepDic[@"car"][@"plateNumber"]);
                     cell.contentL.font = [UIFont systemFontOfSize:15];
                     cell.contentL.textColor = [UIColor blackColor];
                     return cell;
@@ -429,7 +430,7 @@
                     cell.declareL.strikeThroughEnabled = NO;
                     cell.declareL.text = @"车主";
                     cell.declareL.font = [UIFont systemFontOfSize:15];
-                    cell.contentL.text = STRING(self.carDic[@"owner"]);
+                    cell.contentL.text = STRING(carUpkeepDic[@"car"][@"owner"]);
                     cell.contentL.font = [UIFont systemFontOfSize:15];
                     cell.contentL.textColor = [UIColor blackColor];
                     return cell;
@@ -442,7 +443,7 @@
                     cell.declareL.strikeThroughEnabled = NO;
                     cell.declareL.text = @"品牌";
                     cell.declareL.font = [UIFont systemFontOfSize:15];
-                    cell.contentL.text = STRING(self.carDic[@"brand"]);
+                    cell.contentL.text = STRING(carUpkeepDic[@"car"][@"brand"]);
                     cell.contentL.font = [UIFont systemFontOfSize:15];
                     cell.contentL.textColor = [UIColor blackColor];
                     return cell;
@@ -455,7 +456,7 @@
                     cell.declareL.strikeThroughEnabled = NO;
                     cell.declareL.text = @"车型";
                     cell.declareL.font = [UIFont systemFontOfSize:15];
-                    cell.contentL.text = STRING(self.carDic[@"model"]);
+                    cell.contentL.text = STRING(carUpkeepDic[@"car"][@"model"]);
                     cell.contentL.font = [UIFont systemFontOfSize:15];
                     cell.contentL.textColor = [UIColor blackColor];
                     return cell;
@@ -477,7 +478,7 @@
             cell.declareL.strikeThroughEnabled = NO;
             cell.declareL.text = @"检查类别";
             cell.declareL.font = [UIFont boldSystemFontOfSize:15];
-            cell.contentL.text = self.checktypeName;    //检查类别名称
+            cell.contentL.text = carUpkeepDic[@"checkTypeName"];    //检查类别名称
             cell.contentL.font = [UIFont boldSystemFontOfSize:15];
             cell.contentL.textColor = RGBCOLOR(104, 104, 104);
             return cell;

@@ -10,15 +10,15 @@
 
 @interface BaoyangHistoryDetailVC : UIViewController
 
-@property (strong, nonatomic) NSDictionary *carDic;
-@property (strong, nonatomic) NSString *mileage;
-@property (strong, nonatomic) NSString *fuelAmount;
-@property (strong, nonatomic) NSString *lastEndTime;
-@property (strong, nonatomic) NSString *lastMileage;
+//@property (strong, nonatomic) NSDictionary *carDic;
+//@property (strong, nonatomic) NSString *mileage;
+//@property (strong, nonatomic) NSString *fuelAmount;
+//@property (strong, nonatomic) NSString *lastEndTime;
+//@property (strong, nonatomic) NSString *lastMileage;
 
 @property (strong, nonatomic) NSString *carUpkeepId;    //检查单id
 
-@property (strong, nonatomic) NSString *checktypeID;    //检查类别ID
-@property (strong, nonatomic) NSString *checktypeName;    //检查类别Name
+//@property (strong, nonatomic) NSString *checktypeID;    //检查类别ID
+//@property (strong, nonatomic) NSString *checktypeName;    //检查类别Name
 
 @end
