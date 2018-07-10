@@ -10,6 +10,7 @@
 #import "AutoCheckOrderVC.h"
 #import "AutoCheckOrderWorkingVC.h"
 #import "AutoCheckResultVC.h"
+#import "BaoyangHistoryDetailVC.h"
 
 @interface AutoCheckOrderPayModeVC () <UIAlertViewDelegate>
 {
@@ -22,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *moneyL;
 @property (strong, nonatomic) IBOutlet UILabel *chepaiL;
 @property (strong, nonatomic) IBOutlet UILabel *ownerL;
+@property (weak, nonatomic) IBOutlet UIButton *baogaoBtn;
+@property (weak, nonatomic) IBOutlet UIButton *fanganBtn;
 
 @end
 
@@ -43,10 +46,18 @@
         self.navigationItem.leftBarButtonItem.tintColor = RGBCOLOR(0, 191, 243);
     }
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toCheckResultVC)];
-    [self.contentV addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toCheckResultVC)];
+//    [self.contentV addGestureRecognizer:tap];
     
 //    NSDictionary *dic = @{@"orderId":orderId,@"money":moneyN,@"plateNumber":STRING(self.carDic[@"plateNumber"]),@"owner":STRING(self.carDic[@"owner"])};
+    self.baogaoBtn.layer.cornerRadius = 5;
+    self.baogaoBtn.layer.borderWidth = 1;
+    self.baogaoBtn.layer.borderColor = Cell_sepLineColor.CGColor;
+    
+    self.fanganBtn.layer.cornerRadius = 5;
+    self.fanganBtn.layer.borderWidth = 1;
+    self.fanganBtn.layer.borderColor = Cell_sepLineColor.CGColor;
+    
     self.orderNumberL.text = self.infoDic[@"orderId"];
     self.moneyL.text = [NSString stringWithFormat:@"￥%.2f",[self.infoDic[@"money"] floatValue]];
     self.chepaiL.text = self.infoDic[@"plateNumber"];
@@ -67,6 +78,19 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+}
+- (IBAction)baogaoAction:(id)sender {
+    AutoCheckResultVC *resultVC = [[AutoCheckResultVC alloc] init];
+    resultVC.carUpkeepId = self.checkOrderId;
+    resultVC.checktypeID = self.infoDic[@"checktypeID"];
+    resultVC.isFromAffirm = YES;
+    resultVC.isFromList = YES;
+    [self.navigationController pushViewController:resultVC animated:YES];
+}
+- (IBAction)fanganAction:(id)sender {
+    BaoyangHistoryDetailVC *detailVC = [[BaoyangHistoryDetailVC alloc] init];
+    detailVC.carUpkeepId = self.checkOrderId;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 -(void) toCheckResultVC {

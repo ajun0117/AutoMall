@@ -48,7 +48,7 @@
     currentpage = 0;
     orderAry = [NSMutableArray array];
     
-    [self createSegmentControlWithTitles:@[@{@"name":@"检查完成"}, @{@"name":@"已确认"}, @{@"name":@"已完工"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
+    [self createSegmentControlWithTitles:@[@{@"name":@"已检查"}, @{@"name":@"已确认"}, @{@"name":@"已完工"}, @{@"name":@"已付款"}, @{@"name":@"已完成"},@{@"name":@"全部"}]];
     
     if (! self.orderStatus) {
         self.orderStatus = @"";

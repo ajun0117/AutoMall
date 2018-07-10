@@ -30,9 +30,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"个人信息";
+//    self.title = @"个人信息";
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    UILabel *titleL = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 110, 40)];
+    titleL.text = @"个人信息";
+    titleL.font = [UIFont boldSystemFontOfSize:17];
+    titleL.textAlignment = NSTextAlignmentRight;
+    [view addSubview:titleL];
+    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    photoBtn.frame = CGRectMake(110, 2, 40, 40);
+    [photoBtn setImage:[UIImage imageNamed:@"logOut"] forState:UIControlStateNormal];
+    //    [searchBtn setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [photoBtn addTarget:self action:@selector(toLogOut) forControlEvents:UIControlEventTouchUpInside];
+    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+    if ([mobileUserType isEqualToString:@"2"]) {  //门店员工
+        [view addSubview:photoBtn];
+    }
+    self.navigationItem.titleView = view;
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -49,7 +68,6 @@
     self.nickNameTF.text = STRING(self.infoDic[@"nickname"]);
     self.wechatTF.text = STRING(self.infoDic[@"wechat"]);
     
-    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     if ([mobileUserType isEqualToString:@"1"]) {  //门店老板
         self.viewHeightCon.constant = 179;
         self.jifenL.text = [NSString stringWithFormat:@"%@大卡",NSStringWithNumberNULL(self.infoDic[@"integral"])];
@@ -96,10 +114,20 @@
         self.UpdateLoginStatus();
         [self.navigationController popViewControllerAnimated:YES];
     }
+    else if (buttonIndex == 1 && alertView.tag == 1002) {
+        [self requestLogOut];       //注销员工身份请求
+    }
 }
 
 - (IBAction)saveInfoAction:(id)sender {
     [self requestPostUpdateNickNameAndWechat];
+}
+
+-(void)toLogOut {   //注销员工身份
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注销员工身份？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.delegate = self;
+    alert.tag = 1002;
+    [alert show];
 }
 
 #pragma mark - 添加完成按钮的toolBar工具栏
@@ -188,6 +216,17 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(ChangeNickName) delegate:nil params:pram info:infoDic];
 }
 
+-(void)requestLogOut { //注销员工身份
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:UserLogOut object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:UserLogOut, @"op", nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefixNew(UserLogOut),userId];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -213,10 +252,34 @@
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }
     }
+    
+    if ([notification.name isEqualToString:UserLogOut]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogOut object:nil];
+        NSLog(@"UserLogOut: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self performSelector:@selector(toPopLogOutVC:) withObject:nil afterDelay:HUDDelay];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
 }
 
 - (void)toPopVC:(NSString *)string {
     self.UpdateUserInfo(nil);
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)toPopLogOutVC:(NSString *)string {
+    [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
+    [[CartTool sharedManager] removeAllCartItems];      //清空本地购物车数据
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:nil];  //通知清空已选的车辆信息
+    self.UpdateLoginStatus();
     [self.navigationController popViewControllerAnimated:YES];
 }
 
