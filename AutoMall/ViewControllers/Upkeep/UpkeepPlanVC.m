@@ -159,10 +159,10 @@
 #pragma mark - 微信分享后回调通知
 -(void)wxShareNotification:(NSNotification *)notification{
     if ([notification.name isEqualToString:@"WxShareNotification"]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"WxShareNotification" object:nil];
         SendMessageToWXResp *temp = [notification.userInfo objectForKey:@"RespData"];
         NSString *shareResultStr;
         if (temp.errCode == 0) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"WxShareNotification" object:nil];      //只有分享成功后才取消监听
             shareResultStr = [NSString stringWithFormat:@"%@",@"share_success"];    //分享成功后跳转
             [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:1.0];
         }
@@ -1216,6 +1216,7 @@
     
     if (!lxActivity) {
         lxActivity = [[LXActivity alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消分享" ShareButtonTitles:shareButtonTitleArray withShareButtonImagesName:shareButtonImageNameArray];
+        lxActivity.cannotCancel = YES;      //设置分享不可取消
     }
 }
 

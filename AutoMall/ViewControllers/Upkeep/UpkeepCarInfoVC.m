@@ -70,12 +70,14 @@
         }
         case 3: {
             cell.declareL.text = @"年款";
-            if (! [self.carDic[@"purchaseDate"] isKindOfClass:[NSNull class]]) {
+            if (! [self.carDic[@"purchaseDate"] isKindOfClass:[NSNull class]] && [self.carDic[@"purchaseDate"] doubleValue] > 0) {
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
                 [formater setDateFormat:@"yyyy"];
                 NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"purchaseDate"] doubleValue]/1000];
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentL.text = string;
+            } else {
+                cell.contentL.text = @"暂无数据";
             }
             break;
         }
@@ -86,10 +88,10 @@
         }
         case 5: {
             cell.declareL.text = @"燃油量";
-            if ([self.fuelAmount isKindOfClass:[NSNull class]]) {
-                cell.contentL.text = @"";
-            } else {
+            if ([self.fuelAmount doubleValue] > 0) {
                 cell.contentL.text = [NSString stringWithFormat:@"%@%%",self.fuelAmount];
+            } else {
+                cell.contentL.text = @"暂无数据";
             }
             break;
         }
@@ -111,13 +113,17 @@
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentL.text = string;
             } else {
-                cell.contentL.text = @"";
+                cell.contentL.text = @"暂无数据";
             }
             break;
         }
         case 8: {
             cell.declareL.text = @"上次保养里程";
-            cell.contentL.text = NSStringWithNumber(self.lastMileage);
+            if ([self.lastMileage doubleValue] > 0) {
+                cell.contentL.text = NSStringWithNumber(self.lastMileage);
+            } else {
+                cell.contentL.text = @"暂无数据";
+            }
             break;
         }
             

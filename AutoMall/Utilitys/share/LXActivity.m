@@ -321,14 +321,16 @@
 
 - (void)tappedCancel
 {
-    [UIView animateWithDuration:ANIMATE_DURATION animations:^{
-        [self.backGroundView setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0)];
-        self.alpha = 0;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self removeFromSuperview];
-        }
-    }];
+    if (! self.cannotCancel) {
+        [UIView animateWithDuration:ANIMATE_DURATION animations:^{
+            [self.backGroundView setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0)];
+            self.alpha = 0;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [self removeFromSuperview];
+            }
+        }];
+    }
 }
 
 - (void)tappedBackGroundView

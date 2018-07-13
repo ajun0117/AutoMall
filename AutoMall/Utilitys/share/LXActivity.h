@@ -33,6 +33,8 @@
  */
 @interface LXActivity : UIView
 
+@property (assign, nonatomic) BOOL cannotCancel;   //是否不可取消
+
 /**
  *  初始化对象
  *

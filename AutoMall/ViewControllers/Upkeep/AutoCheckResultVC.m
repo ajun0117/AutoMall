@@ -882,18 +882,31 @@
                     cell.checkDateL.text = checkDateString;
                 }
                 if (! [carUpkeepDic[@"lastEndTime"] isKindOfClass:[NSNull class]]) {
-                    NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
-                    NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
-                    cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                    if ([carUpkeepDic[@"lastEndTime"] intValue] > 0) {
+                        NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
+                        NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
+                        cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                    }
+                    else {
+                        cell.lastTimeCheckDateL.text = @"暂无数据";
+                    }
                 }
                 
                 cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"mileage"])];
                 [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
                 cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"fuelAmount"])];
                 [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.lastTimeMileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastMileage"])];
+                if ([carUpkeepDic[@"lastMileage"] intValue] > 0) {
+                    cell.lastTimeMileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastMileage"])];
+                } else {
+                    cell.lastTimeMileageL.text = @"暂无数据";
+                }
                 [cell.lastTimeMileageImageBtn  addTarget:self action:@selector(lastMileageImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.lastTimeFuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastFuelAmount"])];
+                if ([carUpkeepDic[@"lastFuelAmount"] intValue] > 0) {
+                    cell.lastTimeFuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastFuelAmount"])];
+                } else {
+                    cell.lastTimeFuelAmountL.text = @"暂无数据";
+                }
                 [cell.lastTimeFuelAmountImageBtn  addTarget:self action:@selector(lastFuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
                 return cell;
                 break;
@@ -1211,18 +1224,31 @@
                     cell.checkDateL.text = checkDateString;
                 }
                 if (! [carUpkeepDic[@"lastEndTime"] isKindOfClass:[NSNull class]]) {
-                    NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
-                    NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
-                    cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                    if ([carUpkeepDic[@"lastEndTime"] intValue] > 0) {
+                        NSDate *lastTimeCheckDate = [NSDate dateWithTimeIntervalSince1970:[carUpkeepDic[@"lastEndTime"] doubleValue]/1000];
+                        NSString *lastTimeCheckDateString = [formater stringFromDate:lastTimeCheckDate];
+                        cell.lastTimeCheckDateL.text = lastTimeCheckDateString;
+                    }
+                    else {
+                        cell.lastTimeCheckDateL.text = @"暂无数据";
+                    }
                 }
-       
+                
                 cell.mileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"mileage"])];
                 [cell.mileageImageBtn  addTarget:self action:@selector(mileageImageAction) forControlEvents:UIControlEventTouchUpInside];
                 cell.fuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"fuelAmount"])];
                 [cell.fuelAmountImageBtn  addTarget:self action:@selector(fuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.lastTimeMileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastMileage"])];
+                if ([carUpkeepDic[@"lastMileage"] intValue] > 0) {
+                    cell.lastTimeMileageL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastMileage"])];
+                } else {
+                    cell.lastTimeMileageL.text = @"暂无数据";
+                }
                 [cell.lastTimeMileageImageBtn  addTarget:self action:@selector(lastMileageImageAction) forControlEvents:UIControlEventTouchUpInside];
-                cell.lastTimeFuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastFuelAmount"])];
+                if ([carUpkeepDic[@"lastFuelAmount"] intValue] > 0) {
+                    cell.lastTimeFuelAmountL.text = [NSString stringWithFormat:@"%@",STRING(carUpkeepDic[@"lastFuelAmount"])];
+                } else {
+                    cell.lastTimeFuelAmountL.text = @"暂无数据";
+                }
                 [cell.lastTimeFuelAmountImageBtn  addTarget:self action:@selector(lastFuelAmountImageAction) forControlEvents:UIControlEventTouchUpInside];
                 return cell;
                 break;
