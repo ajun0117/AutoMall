@@ -106,16 +106,14 @@
     int approvalStatus = [dic[@"approvalStatus"] intValue];
     if (approvalStatus == 0) {
         [cell.statusBtn setBackgroundColor:RGBCOLOR(234, 0, 24)];
-        [cell.statusBtn setTitle:@"未审批" forState:UIControlStateNormal];
     }
     else if (approvalStatus == 1) {
         [cell.statusBtn setBackgroundColor:RGBCOLOR(234, 0, 24)];
-        [cell.statusBtn setTitle:@"审批通过" forState:UIControlStateNormal];
     }
     else if (approvalStatus == -1) {
         [cell.statusBtn setBackgroundColor:[UIColor grayColor]];
-        [cell.statusBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
     }
+    [cell.statusBtn setTitle:dic[@"approvalStatusName"] forState:UIControlStateNormal];
     return cell;
 }
 

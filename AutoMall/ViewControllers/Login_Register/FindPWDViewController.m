@@ -211,7 +211,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CheckCode object:nil];
     
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CheckCode, @"op", nil];
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.codeNumTF.text,@"code", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.codeNumTF.text,@"code",self.phoneTF.text,@"phone", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(CheckCode) delegate:nil params:pram info:infoDic];
 }
 

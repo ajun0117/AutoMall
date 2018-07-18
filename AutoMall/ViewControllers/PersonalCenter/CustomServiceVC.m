@@ -226,7 +226,7 @@
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
-    self.myTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 44);
+    self.myTableView.frame = CGRectMake(0, 104, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 153);
 }
 
 #pragma mark - tableVeiw delegate
