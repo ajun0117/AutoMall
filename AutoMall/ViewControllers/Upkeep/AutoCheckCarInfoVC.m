@@ -185,6 +185,12 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
+    if ([self.mileageTF.text intValue] < [self.lastMileageTF.text intValue]) {
+        _networkConditionHUD.labelText = @"当前里程不能小于上次保养里程！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
 //    if (mileageImgUrl==nil || mileageImgUrl.length == 0) {
 //        _networkConditionHUD.labelText = @"总里程表图片必须上传！";
 //        [_networkConditionHUD show:YES];
@@ -234,6 +240,14 @@
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //            self.fuelAmountTF.text = @"";   //清空
+            return NO;
+        }
+    }
+    else if(textField == self.mileageTF) {
+        if ([textField.text intValue] < [self.lastMileageTF.text intValue]) {
+            _networkConditionHUD.labelText = @"当前里程不能小于上次保养里程！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             return NO;
         }
     }

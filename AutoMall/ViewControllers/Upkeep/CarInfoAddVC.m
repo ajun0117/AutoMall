@@ -50,6 +50,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *wechatTF;
 @property (strong, nonatomic) IBOutlet UITextField *genderTF;
 @property (strong, nonatomic) IBOutlet UITextField *birthdayTF;
+@property (strong, nonatomic) IBOutlet UIImageView *uploadDefaultIM;
 @property (weak, nonatomic) IBOutlet WPImageView *carImgView;
 //@property (weak, nonatomic) IBOutlet UILabel *carImgL;
 @property (strong, nonatomic) IBOutlet UITextField *plateNumberTF;
@@ -106,6 +107,9 @@
         if ([carImgUrl isKindOfClass:[NSString class]]) {
             if (carImgUrl.length > 0) {
                 [self.carImgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(carImgUrl)]];
+                self.uploadDefaultIM.hidden = YES;
+            } else {
+                self.uploadDefaultIM.hidden = NO;
             }
 //            self.carImgL.hidden = YES;
         }

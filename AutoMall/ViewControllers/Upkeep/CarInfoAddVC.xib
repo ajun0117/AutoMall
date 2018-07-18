@@ -33,6 +33,7 @@
                 <outlet property="plateNumberTF" destination="Pi7-dO-0mk" id="V7m-ce-XMM"/>
                 <outlet property="purchaseDateTF" destination="oTc-jZ-umq" id="xmg-Km-DG9"/>
                 <outlet property="standbyPhoneTF" destination="1Bo-im-Rba" id="yox-4r-BiA"/>
+                <outlet property="uploadDefaultIM" destination="Ye1-fF-Q98" id="RgH-aC-ciz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="vinTF" destination="Jxp-x4-B2f" id="bFJ-hM-ioU"/>
                 <outlet property="wechatTF" destination="dLr-iK-3LR" id="rhU-mx-Gdo"/>
@@ -1081,7 +1082,7 @@
                 <constraint firstItem="MUN-he-tzY" firstAttribute="top" secondItem="Anl-hI-GET" secondAttribute="bottom" id="wXr-qc-EQf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-1808.5" y="308"/>
+            <point key="canvasLocation" x="-2032" y="317"/>
         </view>
     </objects>
     <resources>

@@ -17,6 +17,7 @@
 }
 @property (strong, nonatomic) IBOutlet UITextField *nameTF;
 @property (strong, nonatomic) IBOutlet UITextField *contentTF;
+@property (strong, nonatomic) IBOutlet UIImageView *uploadDefaultIM;
 @property (strong, nonatomic) IBOutlet WPImageView *imgView;
 @property (strong, nonatomic) IBOutlet UIButton *statusBtn;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
@@ -57,6 +58,9 @@
         imgUrl = self.skillDic[@"image"];
         if (imgUrl.length > 0) {
             [self.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(self.skillDic[@"image"])] placeholderImage:IMG(@"CommplaceholderPicture")];
+            self.uploadDefaultIM.hidden = YES;
+        } else {
+            self.uploadDefaultIM.hidden = NO;
         }
         self.nameTF.text = self.skillDic[@"name"];
         self.contentTF.text = self.skillDic[@"remark"];
