@@ -135,7 +135,7 @@
             if ([dic[@"integral"] intValue] > 0) {
                 cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",dic[@"integral"]];
             } else {
-                cell.jifenL.text = @"该优惠商品不累计积分";
+                cell.jifenL.text = @"该优惠商品不累计大卡";
             }
         }
         else {
