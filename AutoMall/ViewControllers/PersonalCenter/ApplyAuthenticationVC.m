@@ -54,10 +54,7 @@
         self.recommendCodeTF.placeholder = @"我的邀请码";
         self.recommendCodeTF.enabled = NO;
         self.recommendCodeTF.textColor = RGBCOLOR(104, 104, 104);
-        NSLog(@"class: %@",NSStringFromClass([self.infoDic[@"codeEntity"] class]));
-        if ([self.infoDic[@"codeEntity"] isKindOfClass:[NSDictionary class]]) {
-            self.recommendCodeTF.text = STRING(self.infoDic[@"codeEntity"][@"code"]);
-        }
+        self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
         
         licenseImgUrl = self.infoDic[@"licenseImg"];
         if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0) {
