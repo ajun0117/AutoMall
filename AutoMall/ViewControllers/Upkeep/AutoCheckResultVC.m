@@ -81,11 +81,11 @@
     
     mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
     
-    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户隐藏按钮
-        self.btnHeightCon.constant = 0.0;       //隐藏查看服务方案按钮
-        self.lookBtn.hidden = YES;
-    }
-        
+//    if ([mobileUserType isEqualToString:@"0"]) {    //普通用户隐藏按钮
+//        self.btnHeightCon.constant = 0.0;       //隐藏查看服务方案按钮
+//        self.lookBtn.hidden = YES;
+//    }
+    
     sections = 5;
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"ShopInfoCell" bundle:nil] forCellReuseIdentifier:@"shopInfoCell"];

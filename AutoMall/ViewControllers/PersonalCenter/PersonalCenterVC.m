@@ -1238,7 +1238,7 @@
             else if ([approvalStatusDic[@"approvalStatus"] intValue] == -1) {
                 _networkConditionHUD.labelText = STRING(approvalStatusDic[@"opinion"]);
                 [_networkConditionHUD show:YES];
-                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                [_networkConditionHUD hide:YES afterDelay:2];
                 [self performSelector:@selector(toPushVC) withObject:nil afterDelay:HUDDelay];
                 return;
             }

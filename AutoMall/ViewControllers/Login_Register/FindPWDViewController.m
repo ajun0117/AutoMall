@@ -306,7 +306,7 @@
 //            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//            alert.tag = 1000;
+            alert.tag = 1000;
             [alert show];
     
         }

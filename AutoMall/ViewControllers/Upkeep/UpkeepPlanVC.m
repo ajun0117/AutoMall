@@ -660,7 +660,7 @@
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 200, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
-                label.text = @"车主确认服务方案签名";
+                label.text = @"车主确认签名";
                 
 //                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //                btn.frame = CGRectMake(SCREEN_WIDTH - 16 - 80, 0, 80 , 44);
