@@ -32,4 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *rePasswordTF;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 
+//更新登录状态
+@property (copy, nonatomic) void((^UpdateLoginStatus)());
+
 @end

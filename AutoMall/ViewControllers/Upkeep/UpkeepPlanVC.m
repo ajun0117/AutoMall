@@ -163,6 +163,7 @@
         NSString *shareResultStr;
         if (temp.errCode == 0) {
             [[NSNotificationCenter defaultCenter] removeObserver:self name:@"WxShareNotification" object:nil];      //只有分享成功后才取消监听
+            [lxActivity dismiss];   //删除分享视图
             shareResultStr = [NSString stringWithFormat:@"%@",@"share_success"];    //分享成功后跳转
             [self performSelector:@selector(toPushVC:) withObject:order_code afterDelay:1.0];
         }

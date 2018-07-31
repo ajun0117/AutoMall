@@ -256,14 +256,14 @@
     if ([notification.name isEqualToString:UserLogOut]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLogOut object:nil];
         NSLog(@"UserLogOut: %@",responseObject);
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = STRING(responseObject[@"meta"][@"msg"]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self performSelector:@selector(toPopLogOutVC:) withObject:nil afterDelay:HUDDelay];
         }
         else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = STRING(responseObject[@"meta"][@"msg"]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

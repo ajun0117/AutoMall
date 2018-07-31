@@ -133,6 +133,17 @@
     }];
 }
 
+-(void)dismiss {    //删除视图
+    [UIView animateWithDuration:ANIMATE_DURATION animations:^{
+        [self.backGroundView setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0)];
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self removeFromSuperview];
+        }
+    }];
+}
+
 #pragma mark - Praviate method
 
 - (void)creatButtonsWithTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle shareButtonTitles:(NSArray *)shareButtonTitlesArray withShareButtonImagesName:(NSArray *)shareButtonImagesNameArray

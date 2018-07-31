@@ -133,6 +133,9 @@
 
 - (IBAction)forgetAction:(id)sender {
     FindPWDViewController *findVC = [[FindPWDViewController alloc] init];
+    findVC.UpdateLoginStatus = ^{
+        //执行重置密码后的操作
+    };
     [self.navigationController pushViewController:findVC animated:YES];
 }
 

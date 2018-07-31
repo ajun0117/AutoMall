@@ -7,6 +7,7 @@
 //
 
 #import "FindPWDViewController.h"
+#import "CartTool.h"
 
 #define LEFTTIME    120   //120秒限制
 
@@ -115,7 +116,11 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 1000) {
-        [self.navigationController popViewControllerAnimated:YES]; //返回登录页面
+        [[GlobalSetting shareGlobalSettingInstance] removeUserDefaultsValue];
+        [[CartTool sharedManager] removeAllCartItems];      //清空本地购物车数据
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSelectedCar" object:nil userInfo:nil];  //通知清空已选的车辆信息
+        self.UpdateLoginStatus();
+        [self.navigationController popViewControllerAnimated:YES]; //返回上级页面
     }
 }
 

@@ -1095,6 +1095,11 @@
             }
             case 4: {
                 FindPWDViewController *changeVC = [[FindPWDViewController alloc] init];
+                changeVC.UpdateLoginStatus = ^{
+                    userInfoDic = nil;
+                    mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+                    [self.myTableView reloadData];
+                };
                 changeVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:changeVC animated:YES];
                 break;
