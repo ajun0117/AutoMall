@@ -89,6 +89,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"employeeListCell"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dic = listArray[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.text = STRING(dic[@"nickname"]);

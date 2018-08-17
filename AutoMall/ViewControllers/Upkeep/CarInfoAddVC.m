@@ -11,7 +11,7 @@
 #import "AddPicViewController.h"
 #import "HZPhotoBrowser.h"
 
-@interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,HZPhotoBrowserDelegate>
+@interface CarInfoAddVC () <UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,HZPhotoBrowserDelegate,UIAlertViewDelegate>
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
@@ -694,11 +694,10 @@
         return;
     }
     isAutoSelect = NO;
-    if (self.carDic) {
-        [self requestPostUpdateCar];
-    } else {
-        [self requestPostAddCar];
-    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认提交吗？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+    alert.tag = 200;
+    [alert show];
 }
 
 - (IBAction)selectAction:(id)sender {
@@ -739,10 +738,21 @@
         return;
     }
     isAutoSelect = YES;
-    if (self.carDic) {
-        [self requestPostUpdateCar];
-    } else {
-        [self requestPostAddCar];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认提交吗？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+    alert.tag = 300;
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 200 || alertView.tag == 300) {
+        if (buttonIndex == 1) {     //确认并分享
+            if (self.carDic) {
+                [self requestPostUpdateCar];
+            } else {
+                [self requestPostAddCar];
+            }
+        }
     }
 }
 

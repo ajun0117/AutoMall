@@ -344,13 +344,14 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-    if (serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice > 0) {
+//    if (serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice > 0) {
+    if(selectedServices.count > 0 || addedServicesAry.count > 0) {  //门店服务，或，增加服务，存在的话，方案都可以继续下去
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认服务方案？" message:@"" delegate:self cancelButtonTitle:@"再看看" otherButtonTitles:@"确认并分享", @"确认不分享", nil];
         alert.tag = 300;
         [alert show];
     }
     else {
-        _networkConditionHUD.labelText = @"没有选择服务方案";
+        _networkConditionHUD.labelText = @"您还没有选择任何服务";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
     }
