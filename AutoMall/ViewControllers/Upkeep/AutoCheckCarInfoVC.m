@@ -268,6 +268,19 @@
     activeField = nil;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@"请在此处录入备注"]) {
+        textView.textColor = [UIColor blackColor];
+        textView.text = @"";
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text.length < 1) {
+        textView.textColor = RGBCOLOR(170, 170, 170);
+        textView.text = @"请在此处录入备注";
+    }
+}
 
 - (void)textViewShouldBeginEditing:(UITextView *)textView
 {

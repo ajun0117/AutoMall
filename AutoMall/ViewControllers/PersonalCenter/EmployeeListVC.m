@@ -96,7 +96,7 @@
     
     UILabel *phone = [(UILabel *)cell.contentView viewWithTag:1000];
     if (! phone) {
-        phone = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 16 - 150, 12, 150, 20)];
+        phone = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 16 - 25 - 150, 12, 150, 20)];
         phone.tag = 1000;
         phone.font = [UIFont systemFontOfSize:15];
         phone.textColor = Gray_Color;

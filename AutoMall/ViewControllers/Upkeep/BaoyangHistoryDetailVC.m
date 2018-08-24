@@ -267,9 +267,10 @@
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
             label.font = [UIFont boldSystemFontOfSize:15];
             label.backgroundColor = [UIColor clearColor];
+            label.textColor = [UIColor redColor];
             label.text = @"车辆信息";
             
-            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+            UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows_red")];
             img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];

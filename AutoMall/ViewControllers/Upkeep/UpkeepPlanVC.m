@@ -321,8 +321,8 @@
         } else {
             serVicePrice += [dic[@"price"] floatValue] * num;
         }
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationNone];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationNone];
     }
     else {
         [lineationAry removeObject:dic];
@@ -331,8 +331,8 @@
         } else {
             serVicePrice -= [dic[@"price"] floatValue] * num;
         }
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationNone];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 
@@ -345,7 +345,7 @@
         return;
     }
 //    if (serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice > 0) {
-    if(selectedServices.count > 0 || addedServicesAry.count > 0) {  //门店服务，或，增加服务，存在的话，方案都可以继续下去
+    if(selectedServices.count > 0 || addedServicesAry.count > 0 || serVicePrice + packagePrice - discountPrice + selectedServicePrice + addedServicePrice > 0) {  //门店服务，或，增加服务，存在的话，方案都可以继续下去
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认服务方案？" message:@"" delegate:self cancelButtonTitle:@"再看看" otherButtonTitles:@"确认并分享", @"确认不分享", nil];
         alert.tag = 300;
         [alert show];
@@ -521,9 +521,10 @@
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, 100, 20)];
                 label.font = [UIFont boldSystemFontOfSize:15];
                 label.backgroundColor = [UIColor clearColor];
+                label.textColor = [UIColor redColor];
                 label.text = @"车辆信息";
                 
-                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows")];
+                UIImageView *img = [[UIImageView alloc] initWithImage:IMG(@"arrows_red")];
                 img.frame = CGRectMake(SCREEN_WIDTH - 26, 16, 11, 20);
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
