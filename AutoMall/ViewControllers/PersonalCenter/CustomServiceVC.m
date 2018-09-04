@@ -124,18 +124,18 @@
 }
 
 #pragma mark - 下拉刷新,上拉加载
--(void)headerRefreshing {
-    NSLog(@"下拉刷新个人信息");
-    currentpage = 0;
-    [serviceArray removeAllObjects];
-    [self requestPostListServiceContent];
-}
+//-(void)headerRefreshing {
+//    NSLog(@"下拉刷新个人信息");
+//    currentpage = 0;
+//    [serviceArray removeAllObjects];
+//    [self requestPostListServiceContent];
+//}
 
--(void)footerLoadData {
-    NSLog(@"上拉加载数据");
-    currentpage ++;
-    [self requestPostListServiceContent];
-}
+//-(void)footerLoadData {
+//    NSLog(@"上拉加载数据");
+//    currentpage ++;
+//    [self requestPostListServiceContent];
+//}
 
 -(void)cancelSelect {
     [self hiddenSelectView:YES];
