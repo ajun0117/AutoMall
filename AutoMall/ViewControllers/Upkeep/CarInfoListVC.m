@@ -215,7 +215,7 @@
         cell.plateNumberL.text = dic[@"plateNumber"];
         cell.ownerL.text = dic[@"owner"];
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyy-MM-dd"];
+        [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
         NSDate *creatDate;
         NSArray *carUpKeepsAry = dic[@"carUpKeeps"];
         if (carUpKeepsAry.count == 1) {

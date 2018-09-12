@@ -108,7 +108,7 @@
             cell.declareL.text = @"上次保养时间";
             if (! [self.lastEndTime isKindOfClass:[NSNull class]] && [self.lastEndTime doubleValue] > 0) {
                 NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-                [formater setDateFormat:@"yyyy-MM-dd"];
+                [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
                 NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[self.lastEndTime doubleValue]/1000];
                 NSString *string = [formater stringFromDate:creatDate];
                 cell.contentL.text = string;

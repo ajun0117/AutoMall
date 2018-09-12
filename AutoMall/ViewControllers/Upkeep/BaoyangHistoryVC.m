@@ -114,7 +114,7 @@
         
         if (! [dic[@"enterTime"] isKindOfClass:[NSNull class]]) {
             NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-            [formater setDateFormat:@"yyyy-MM-dd"];
+            [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
             NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"enterTime"] doubleValue]/1000];
             NSString *string = [formater stringFromDate:creatDate];
             cell.dateL.text = string;

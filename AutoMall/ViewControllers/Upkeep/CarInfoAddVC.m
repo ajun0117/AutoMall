@@ -114,7 +114,7 @@
 //            self.carImgL.hidden = YES;
         }
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyy-MM-dd"];
+        [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
         
         if ([self.carDic[@"carUpKeeps"] count] > 0) {
             if (! [[self.carDic[@"carUpKeeps"] firstObject][@"lastEndTime"] isKindOfClass:[NSNull class]]) {

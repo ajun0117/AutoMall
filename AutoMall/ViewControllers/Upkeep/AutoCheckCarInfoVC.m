@@ -53,9 +53,10 @@
     mileageImgUrl = self.mileageAndfuelAmountDic[@"mileageImg"];
     fuelAmountImgUrl = self.mileageAndfuelAmountDic[@"fuelAmountImg"];
     
-    if ([self.carDic[@"carUpKeeps"] count] > 0) {
-        self.lastMileageTF.text = [NSString stringWithFormat:@"%@",[self.carDic[@"carUpKeeps"] firstObject][@"lastMileage"]];
-    }
+    [self requestGetLastMileage];       //获取最新的上次保养里程数
+//    if ([self.carDic[@"carUpKeeps"] count] > 0) {
+//        self.lastMileageTF.text = [NSString stringWithFormat:@"%@",[self.carDic[@"carUpKeeps"] firstObject][@"lastMileage"]];
+//    }
     
     
 //    //******先载入当天输入过的里程数
@@ -524,6 +525,15 @@
     [[DataRequest sharedDataRequest] uploadImageWithUrl:UrlPrefix(UploadImgFile) params:nil target:image delegate:nil info:infoDic];
 }
 
+-(void)requestGetLastMileage {  //获取上次保养里程数
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:CarUpkeepLastMileage object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:CarUpkeepLastMileage, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefixNew(CarUpkeepLastMileage),self.carDic[@"id"]];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -558,6 +568,19 @@
         }
         else {
             _networkConditionHUD.labelText = [responseObject objectForKey:MSG];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:CarUpkeepLastMileage]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CarUpkeepLastMileage object:nil];
+        NSLog(@"CarUpkeepLastMileage: %@",responseObject);
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            self.lastMileageTF.text = [NSString stringWithFormat:@"%@",responseObject[@"body"]];
+        }
+        else {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

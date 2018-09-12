@@ -64,8 +64,8 @@
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"CustomServiceCell" bundle:nil] forCellReuseIdentifier:@"customServiceCell"];
     self.myTableView.tableFooterView = [UIView new];
-    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
+//    [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+//    [self.myTableView addFooterWithTarget:self action:@selector(footerLoadData)];
 
     selectDic = [NSMutableDictionary dictionary];
     
