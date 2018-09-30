@@ -147,6 +147,10 @@ static CGFloat const scrollViewHeight = 220;
     }
     else {
         NSLog(@"点击了第%ld页", index);
+            CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+            detailVC.commodityId = dic[@"commodityId"];
+            detailVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 
