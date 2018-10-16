@@ -50,11 +50,12 @@
         self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@",self.infoDic[@"province"],self.infoDic[@"city"],self.infoDic[@"county"]];
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
         self.phoneTF.text = STRING(self.infoDic[@"phone"]);
-        self.recommendL.text = @"我的邀请码";
-        self.recommendCodeTF.placeholder = @"我的邀请码";
+        self.recommendL.text = @"我的推荐码";
+        self.recommendCodeTF.placeholder = @"我的推荐码";
         self.recommendCodeTF.enabled = NO;
         self.recommendCodeTF.textColor = RGBCOLOR(104, 104, 104);
-        self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
+//        self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
+        self.recommendCodeTF.text = STRING(self.infoDic[@"invitationCode"]);
         
         licenseImgUrl = self.infoDic[@"licenseImg"];
         if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0) {

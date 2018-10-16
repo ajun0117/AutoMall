@@ -172,6 +172,7 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"修改价格后更新选中记录中的价格");
+    textField.textColor = [UIColor redColor];
     NSString *tempString = textField.text;
     while ([tempString hasPrefix:@"0"])
     {
@@ -270,6 +271,7 @@
     NSArray *keys = [selectDic allKeys];
     if ([keys containsObject:dic[@"id"]]) {
         NSMutableDictionary *dicc = selectDic[dic[@"id"]];
+        cell.moneyTF.textColor = [UIColor redColor];
         cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"price"]];
         cell.radioBtn.selected = YES;
     } else {

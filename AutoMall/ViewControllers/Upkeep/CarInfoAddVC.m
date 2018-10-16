@@ -605,13 +605,13 @@
 }
 
 
-#pragma mark - 手机号码及验证码格式初步验证
+#pragma mark - 车牌号码及验证码格式初步验证
 -(BOOL) checkplateNumberTFWithPlateNumer:(NSString *)plateNumber {
     /**
      *  是否纯数字
      */
     BOOL isDigit = NO;
-    NSString *regEX = @"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$";
+    NSString *regEX = @"([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1})";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
     if ([pred evaluateWithObject:plateNumber]) {
         isDigit = YES;
@@ -623,6 +623,41 @@
         return YES;
     }
     return NO;
+}
+
+#pragma mark -
+#pragma mark 手机号码及验证码格式初步验证
+-(BOOL) checkPhoneNumWithPhone:(NSString *)phone {
+    /**
+     *  是否纯数字
+     */
+    BOOL isDigit = NO;
+    NSString *regEX = @"^[0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:phone]) {
+        isDigit = YES;
+    } else {
+        isDigit = NO;
+    }
+    
+    if (isDigit && [phone length] == 11 && [phone hasPrefix:@"1"]) {
+        return YES;
+    }
+    return NO;
+}
+
+//电话号码格式判断，包含手机号和座机号
+-(BOOL) checkTelNumWithNumber:(NSString *)number {
+    /**
+     *  是否是电话号码格式
+     */
+    NSString *regEX = @"^(0?1[358]\\d{9})$|^((0(10|2[1-3]|[3-9]\\d{2}))?[1-9]\\d{6,7})$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:number]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (IBAction)toEdit:(id)sender {
@@ -677,6 +712,18 @@
     }
     if (! [self checkplateNumberTFWithPlateNumer:self.plateNumberTF.text]) {
         _networkConditionHUD.labelText = @"车牌号格式不正确，请重新输入！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! [self checkPhoneNumWithPhone:self.phoneTF.text]) {
+        _networkConditionHUD.labelText = @"电话号码格式不正确，请重新输入！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
+        _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;

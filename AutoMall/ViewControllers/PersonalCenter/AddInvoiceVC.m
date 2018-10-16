@@ -181,6 +181,20 @@
     return NO;
 }
 
+//电话号码格式判断，包含手机号和座机号
+-(BOOL) checkTelNumWithNumber:(NSString *)number {
+    /**
+     *  是否是电话号码格式
+     */
+    NSString *regEX = @"^(0?1[358]\\d{9})$|^((0(10|2[1-3]|[3-9]\\d{2}))?[1-9]\\d{6,7})$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
+    if ([pred evaluateWithObject:number]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     
     CGPoint point = [gestureRecognizer locationInView:gestureRecognizer.view];
@@ -282,8 +296,8 @@
             return;
         }
         else {
-            if (! [self checkPhoneNumWithPhone:self.regisPhoneTF.text]) {
-                _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
+            if (! [self checkTelNumWithNumber:self.regisPhoneTF.text]) {
+                _networkConditionHUD.labelText = @"电话号码输入不正确，请重新输入。";
                 [_networkConditionHUD show:YES];
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 return;
