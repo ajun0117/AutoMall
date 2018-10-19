@@ -526,10 +526,15 @@ static CGFloat const scrollViewHeight = 220;
                     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 12, Screen_wide - 32, 20)];
                     label.font = [UIFont systemFontOfSize:13];
                     label.textColor = RGBCOLOR(63, 63, 63);
+                    NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+                    NSString *packingStr = @"";
+                    if ([mobileUserType isEqualToString:@"1"]) {    //老板
+                        packingStr = [NSString stringWithFormat:@"包装说明：%@",commodityDic[@"packDesc"]];
+                    }
                     if ([commodityDic[@"units"] isKindOfClass:[NSString class]] && [commodityDic[@"units"] length] > 0) {
-                        label.text = [NSString stringWithFormat:@"最小发货量: %@ %@",commodityDic[@"minimum"],commodityDic[@"units"]];
+                        label.text = [NSString stringWithFormat:@"最小发货量: %@ %@  %@",commodityDic[@"minimum"],commodityDic[@"units"],packingStr];
                     } else {
-                        label.text = [NSString stringWithFormat:@"最小发货量: %@",commodityDic[@"minimum"]];
+                        label.text = [NSString stringWithFormat:@"最小发货量: %@  %@",commodityDic[@"minimum"],packingStr];
                     }
                     [cell.contentView addSubview:label];
                     return cell;

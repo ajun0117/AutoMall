@@ -667,8 +667,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="163.5" height="217"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公众号二维码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXV-0w-4D7">
-                                            <rect key="frame" x="39" y="219" width="86" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公众号二维码(非必选)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXV-0w-4D7">
+                                            <rect key="frame" x="12.5" y="219" width="139" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Y7C-Bt-qGM"/>
                                             </constraints>

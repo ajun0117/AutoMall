@@ -271,10 +271,19 @@
     NSArray *keys = [selectDic allKeys];
     if ([keys containsObject:dic[@"id"]]) {
         NSMutableDictionary *dicc = selectDic[dic[@"id"]];
-        cell.moneyTF.textColor = [UIColor redColor];
+        
+        if ([dic[@"customized"] boolValue] && [dicc[@"price"] intValue] != [dic[@"customizedPrice"] intValue]) {
+                cell.moneyTF.textColor = [UIColor redColor];
+        } else if(![dic[@"customized"] boolValue] && [dicc[@"price"] intValue] != [dic[@"price"] intValue]) {
+                cell.moneyTF.textColor = [UIColor redColor];
+        } else {
+            cell.moneyTF.textColor = [UIColor blackColor];
+        }
+        
         cell.moneyTF.text = [NSString stringWithFormat:@"%@",dicc[@"price"]];
         cell.radioBtn.selected = YES;
     } else {
+        cell.moneyTF.textColor = [UIColor blackColor];
         if ([dic[@"customized"] boolValue]) {
             cell.moneyTF.text = [NSString stringWithFormat:@"%@",dic[@"customizedPrice"]];
         } else {

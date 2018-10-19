@@ -114,7 +114,6 @@
     [self.myTableView headerEndRefreshing];
     [self.myTableView footerEndRefreshing];
     if ([[notification.userInfo valueForKey:@"RespResult"] isEqualToString:ERROR]) {
-        
         _networkConditionHUD.labelText = [notification.userInfo valueForKey:@"ContentResult"];
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
@@ -122,8 +121,9 @@
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
     if ([notification.name isEqualToString:MessageList]) {
+        NSLog(@"MessageList: %@",responseObject[@"data"]);
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MessageList object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {  //验证码正确
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
             messageAry = responseObject[@"data"];
             [self.myTableView reloadData];
         }

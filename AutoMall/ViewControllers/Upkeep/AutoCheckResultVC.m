@@ -34,7 +34,7 @@
     NSMutableArray *checkResultArray;       //重组后的检查结果数组
     int sections;   //块数
     NSArray *images;
-    NSString *mobileUserType;   //用户类别
+    NSString *mobileUserType;   //用户类别，0：手机普通用户 1：门店老板 2: 门店员工
     NSDictionary *shareDic;     //分享文案
     LXActivity *lxActivity;
 }
@@ -353,7 +353,7 @@
                 break;
             }
             case 6: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -395,7 +395,7 @@
                 break;
             }
             case 5: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -433,7 +433,7 @@
                 break;
             }
             case 4: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -466,7 +466,7 @@
                 break;
             }
             case 3: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 1;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -523,7 +523,7 @@
                 break;
             }
             case 6: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -577,7 +577,7 @@
                 break;
             }
             case 5: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -626,7 +626,7 @@
                 break;
             }
             case 4: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -665,7 +665,7 @@
                 break;
             }
             case 3: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     return 56;
                 } else {
                     NSDictionary *dic = [carUpkeepDic[@"technicians"] firstObject];
@@ -932,7 +932,7 @@
             }
                 
             case 6: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -1260,7 +1260,7 @@
             }
                 
             case 5: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -1547,7 +1547,7 @@
                 break;
             }
             case 4: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
@@ -1753,7 +1753,7 @@
                 break;
             }
             case 3: {
-                if ([mobileUserType isEqualToString:@"1"] || [mobileUserType isEqualToString:@"0"]) {
+                if ([mobileUserType isEqualToString:@"0"]) {
                     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     UIButton *label = (UIButton *)[cell.contentView viewWithTag:101];
