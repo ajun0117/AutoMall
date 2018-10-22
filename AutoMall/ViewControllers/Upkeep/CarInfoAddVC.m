@@ -18,6 +18,7 @@
     UIPickerView *genderPickerView;    //性别选择
     UIDatePicker *birthdayDatePicker;  //生日日期选择
     UIDatePicker *buyDatePicker;        //购买日期选择
+    UIDatePicker *insuranceDatePicker;        //保险日期选择
     NSArray *nameArray;
     NSArray *textFieldArray;
     NSString *carImgUrl;    //车图url
@@ -58,6 +59,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *modelTF;
 @property (strong, nonatomic) IBOutlet UITextField *engineModelTF;
 @property (strong, nonatomic) IBOutlet UITextField *purchaseDateTF;
+@property (strong, nonatomic) IBOutlet UITextField *insuranceDateTF;
 @property (strong, nonatomic) IBOutlet UITextField *engineNoTF;
 @property (strong, nonatomic) IBOutlet UITextField *vinTF;
 
@@ -168,6 +170,12 @@
             NSString *purchaseStr = [formater stringFromDate:purchaseDate];
             self.purchaseDateTF.text = purchaseStr;
         }
+        self.insuranceDateTF.enabled = NO;
+        if (! [self.carDic[@"insuranceDate"] isKindOfClass:[NSNull class]]) {
+            NSDate *insuranceDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"insuranceDate"] doubleValue]/1000];
+            NSString *insuranceDateStr = [formater stringFromDate:insuranceDate];
+            self.insuranceDateTF.text = insuranceDateStr;
+        }
         self.engineNoTF.enabled = NO;
         self.engineNoTF.text = NSStringWithNumberNULL(self.carDic[@"engineNo"]);
         self.vinTF.enabled = NO;
@@ -230,6 +238,7 @@
         self.modelTF.enabled = YES;
         self.engineModelTF.enabled = YES;
         self.purchaseDateTF.enabled = YES;
+        self.insuranceDateTF.enabled = YES;
         self.engineNoTF.enabled = YES;
         self.vinTF.enabled = YES;
     }
@@ -259,6 +268,13 @@
     buyDatePicker.maximumDate = [NSDate date];
     [buyDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
+    insuranceDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
+    insuranceDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+    //显示方式是只显示年月日
+    insuranceDatePicker.datePickerMode = UIDatePickerModeDate;
+    insuranceDatePicker.maximumDate = [NSDate date];
+    [insuranceDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+    
     [self setTextFieldInputAccessoryViewWithTF:self.mileageTF];
 //    [self setTextFieldInputAccessoryViewWithTF:self.fuelAmountTF];
     [self setTextFieldInputAccessoryViewWithTF:self.ownerTF];
@@ -272,10 +288,11 @@
     [self setTextFieldInputAccessoryViewWithTF:self.modelTF];
     [self setTextFieldInputAccessoryViewWithTF:self.engineModelTF];
     [self setTextFieldInputAccessoryViewWithTF:self.purchaseDateTF];
+    [self setTextFieldInputAccessoryViewWithTF:self.insuranceDateTF];
     [self setTextFieldInputAccessoryViewWithTF:self.engineNoTF];
     [self setTextFieldInputAccessoryViewWithTF:self.vinTF];
     
-    textFieldArray = @[self.mileageTF, self.ownerTF, self.phoneTF,self.standbyPhoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF,self.engineModelTF, self.purchaseDateTF, self.engineNoTF, self.vinTF];
+    textFieldArray = @[self.mileageTF, self.ownerTF, self.phoneTF,self.standbyPhoneTF, self.wechatTF, self.genderTF, self.birthdayTF, self.plateNumberTF, self.brandTF, self.modelTF,self.engineModelTF, self.purchaseDateTF,self.insuranceDateTF, self.engineNoTF, self.vinTF];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -342,6 +359,9 @@
     }
     else if (field == self.purchaseDateTF) {
         [field setInputView:buyDatePicker];
+    }
+    else if(field == self.insuranceDateTF) {
+        [field setInputView:insuranceDatePicker];
     }
     [field setInputAccessoryView:topView];
     [field setAutocorrectionType:UITextAutocorrectionTypeNo];
@@ -435,6 +455,9 @@
     }
     else if (datePicker == buyDatePicker) {
         self.purchaseDateTF.text = dateString;
+    }
+    else if (datePicker == insuranceDatePicker) {
+        self.insuranceDateTF.text = dateString;
     }
 }
 
@@ -676,6 +699,7 @@
     self.modelTF.enabled = NO;
     self.engineModelTF.enabled = YES;
     self.purchaseDateTF.enabled = YES;
+    self.insuranceDateTF.enabled = YES;
     self.engineNoTF.enabled = YES;
     self.vinTF.enabled = YES;
 }
@@ -956,7 +980,7 @@
     NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.plateNumberTF.text = [strUrl uppercaseString];
 
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel",STRING_Nil(self.firstTimeL.text),@"startTime", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(self.insuranceDateTF.text),@"insuranceDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel",STRING_Nil(self.firstTimeL.text),@"startTime", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }
@@ -989,7 +1013,7 @@
     NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.plateNumberTF.text = [strUrl uppercaseString];
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(self.insuranceDateTF.text),@"insuranceDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpdate) delegate:nil params:pram info:infoDic];
 }

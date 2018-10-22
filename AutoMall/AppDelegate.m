@@ -64,7 +64,7 @@ static BOOL isBackGroundActivateApplication;
     
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
     
-    [BPush registerChannel:launchOptions apiKey:BaiduPush_Key pushMode:BPushModeProduction withFirstAction:@"打开" withSecondAction:@"关闭" withCategory:@"test" useBehaviorTextInput:YES isDebug:YES];
+    [BPush registerChannel:launchOptions apiKey:BaiduPush_Key pushMode:BPushModeDevelopment withFirstAction:@"打开" withSecondAction:@"关闭" withCategory:@"test" useBehaviorTextInput:YES isDebug:YES];
     
     // 禁用地理位置推送 需要再绑定接口前调用。
     

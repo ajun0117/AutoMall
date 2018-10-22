@@ -82,6 +82,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = messageAry[indexPath.row];
     MessageListCell *cell = (MessageListCell *)[tableView dequeueReusableCellWithIdentifier:@"messageListCell"];
+    if([dic[@"status"] boolValue]) {
+        cell.nameL.textColor = [UIColor grayColor];
+        cell.contentL.textColor = [UIColor grayColor];
+    } else {
+        cell.nameL.textColor = [UIColor blackColor];
+        cell.contentL.textColor = [UIColor blackColor];
+    }
     cell.nameL.text = dic[@"title"];
     cell.contentL.text = dic[@"content"];
     return cell;
