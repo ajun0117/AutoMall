@@ -102,7 +102,7 @@
         
         self.lastView.hidden = NO;
         self.lastViewHeightCon.constant = 89;       //显示上次数据
-        self.bottomViewHeightCon.constant = 865;
+        self.bottomViewHeightCon.constant = 910;
         
         carImgUrl = self.carDic[@"image"];
         
@@ -217,7 +217,7 @@
         
         self.lastView.hidden = YES;
         self.lastViewHeightCon.constant = 0;       //隐藏上次数据
-        self.bottomViewHeightCon.constant = 776;
+        self.bottomViewHeightCon.constant = 821;
         
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
         [formater setDateFormat:@"yyyy-MM-dd"];

@@ -11,5 +11,6 @@
 @interface MessageListCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *nameL;
 @property (strong, nonatomic) IBOutlet UILabel *contentL;
+@property (strong, nonatomic) IBOutlet UIImageView *ReadIM;
 
 @end

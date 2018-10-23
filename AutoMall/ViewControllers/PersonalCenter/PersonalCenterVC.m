@@ -1468,6 +1468,7 @@
             userInfoDic = responseObject[@"data"];
             
             [BPush setTag:[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]] withCompleteHandler:^(id result, NSError *error) {
+                NSLog(@"result: %@,error: %@",result,error);
                 if (error.code == 0) {
                     NSLog(@"绑定推送成功！userId: %@",[NSString stringWithFormat:@"%@",userInfoDic[@"phone"]]);
                 }

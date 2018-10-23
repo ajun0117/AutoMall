@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消息名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7So-y9-btK">
@@ -33,22 +33,33 @@
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3p7-MA-oh9">
+                        <rect key="frame" x="82.5" y="2" width="15" height="15"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="jbm-8k-A3Q"/>
+                            <constraint firstAttribute="width" constant="15" id="o4h-bi-v2l"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Q6s-n5-8P2" secondAttribute="trailing" constant="8" id="82y-ku-zDd"/>
                     <constraint firstAttribute="bottom" secondItem="Q6s-n5-8P2" secondAttribute="bottom" constant="10" id="FR3-ej-L5x"/>
                     <constraint firstItem="Q6s-n5-8P2" firstAttribute="top" secondItem="7So-y9-btK" secondAttribute="bottom" constant="8" id="I3r-Vh-2WX"/>
+                    <constraint firstItem="3p7-MA-oh9" firstAttribute="leading" secondItem="7So-y9-btK" secondAttribute="trailing" constant="5" id="NIN-J5-gix"/>
                     <constraint firstItem="Q6s-n5-8P2" firstAttribute="top" secondItem="7So-y9-btK" secondAttribute="bottom" constant="8" id="Oof-r3-R2u"/>
                     <constraint firstItem="7So-y9-btK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="agh-wm-gNn"/>
                     <constraint firstItem="Q6s-n5-8P2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ajw-ow-GkF"/>
                     <constraint firstItem="7So-y9-btK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="d1P-xt-gGs"/>
+                    <constraint firstItem="3p7-MA-oh9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="w8R-G8-V4B"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ReadIM" destination="3p7-MA-oh9" id="yjJ-2l-vpk"/>
                 <outlet property="contentL" destination="Q6s-n5-8P2" id="ho6-O4-vvI"/>
                 <outlet property="nameL" destination="7So-y9-btK" id="bNH-Se-7kI"/>
             </connections>
-            <point key="canvasLocation" x="-343" y="43"/>
+            <point key="canvasLocation" x="-493" y="36"/>
         </tableViewCell>
     </objects>
 </document>

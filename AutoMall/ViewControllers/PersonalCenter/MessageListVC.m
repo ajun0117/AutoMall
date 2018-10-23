@@ -83,11 +83,13 @@
     NSDictionary *dic = messageAry[indexPath.row];
     MessageListCell *cell = (MessageListCell *)[tableView dequeueReusableCellWithIdentifier:@"messageListCell"];
     if([dic[@"status"] boolValue]) {
-        cell.nameL.textColor = [UIColor grayColor];
-        cell.contentL.textColor = [UIColor grayColor];
+        cell.ReadIM.hidden = YES;
+        cell.nameL.textColor = [UIColor lightGrayColor];
+        cell.contentL.textColor = [UIColor lightGrayColor];
     } else {
-        cell.nameL.textColor = [UIColor blackColor];
-        cell.contentL.textColor = [UIColor blackColor];
+        cell.ReadIM.hidden = NO;
+        cell.nameL.textColor = [UIColor darkGrayColor];
+        cell.contentL.textColor = [UIColor darkGrayColor];
     }
     cell.nameL.text = dic[@"title"];
     cell.contentL.text = dic[@"content"];
@@ -97,11 +99,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //    MyInfoViewController *detailVC = [[MyInfoViewController alloc] init];
-    //    detailVC.userID = userArray[indexPath.section][@"id"];
-    //    detailVC.isDrink = self.isDrink;
-    //    detailVC.slidePlaceDetail = self.slidePlaceDetail;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    [self requestReadMessageOK:messageAry[indexPath.row][@"id"]];
 }
 
 #pragma mark - 发送请求
@@ -113,6 +111,15 @@
     NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(MessageList) delegate:nil params:pram info:infoDic];
+}
+
+-(void)requestReadMessageOK:(NSString *)mid { //消息已读
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ReadMsgOk object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ReadMsgOk, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefixNew(ReadMsgOk),mid];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -132,6 +139,18 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MessageList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             messageAry = responseObject[@"data"];
+            [self.myTableView reloadData];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+    if ([notification.name isEqualToString:ReadMsgOk]) {
+        NSLog(@"ReadMsgOk: %@",responseObject[@"data"]);
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ReadMsgOk object:nil];
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [self.myTableView reloadData];
         }
         else {

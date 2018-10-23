@@ -165,6 +165,7 @@
 #define StoreserviceDel                          @"/api/storeservice/del"        //删除门店服务
 #define StoreserviceAdd                         @"/api/storeservice/add"        //新增门店服务
 #define MessageList                                @"/api/message/list"              //消息列表
+#define ReadMsgOk                                 @"carupkeep_web/message/readMsgOk"      //消息已读
 #define AgreementInfo                           @"http://hengliantech.com/carupkeep/api/agreement/info"         //免责声明
 #define GetPhoneInfo                              @"/api/phone/getPhoneInfo"      //获取官网联系电话
 #define ChangeNickName                         @"/api/user/changeNickname"     //修改昵称和微信
