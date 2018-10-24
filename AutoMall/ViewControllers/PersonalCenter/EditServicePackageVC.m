@@ -144,6 +144,11 @@
     UITableViewCell *cell = (UITableViewCell *)textField.superview.superview;
     NSIndexPath *ind = [self.myTableView indexPathForCell:cell];
     NSDictionary *dic = packageArray[ind.section];
+    if([dic[@"price"] intValue] != [tempString intValue]) {     //如果价格和默认价格不一致则改为红色
+        textField.textColor = [UIColor redColor];
+    } else {
+        textField.textColor = [UIColor blackColor];
+    }
     NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
     if (textField.text.length > 0) {
         [dicc setObject:textField.text forKey:@"price"];
@@ -319,6 +324,13 @@
         NSArray *keys = [selectDic allKeys];
         if ([keys containsObject:dic[@"id"]]) {
             NSMutableDictionary *diccc = selectDic[dic[@"id"]];
+            
+            if ( [diccc[@"price"] intValue] != [dic[@"price"] intValue]) {
+                priceTF.textColor = [UIColor redColor];
+            } else {
+                priceTF.textColor = [UIColor blackColor];
+            }
+            
             priceTF.text = [NSString stringWithFormat:@"%@",diccc[@"price"]];
         } else {
             if ([dic[@"customized"] boolValue]) {

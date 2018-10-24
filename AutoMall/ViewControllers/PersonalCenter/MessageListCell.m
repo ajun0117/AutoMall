@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.ReadIM.layer.cornerRadius = 7.0f;
+    self.ReadIM.layer.cornerRadius = 5.0f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
