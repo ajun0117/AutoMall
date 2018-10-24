@@ -33,12 +33,12 @@
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3p7-MA-oh9">
-                        <rect key="frame" x="82.5" y="2" width="15" height="15"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3p7-MA-oh9">
+                        <rect key="frame" x="82.5" y="2" width="14" height="14"/>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.12941176469999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="jbm-8k-A3Q"/>
-                            <constraint firstAttribute="width" constant="15" id="o4h-bi-v2l"/>
+                            <constraint firstAttribute="height" constant="14" id="jbm-8k-A3Q"/>
+                            <constraint firstAttribute="width" constant="14" id="o4h-bi-v2l"/>
                         </constraints>
                     </imageView>
                 </subviews>

@@ -116,7 +116,7 @@
 //            self.carImgL.hidden = YES;
         }
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
+        [formater setDateFormat:@"yyyyMMdd HH:mm"];
         
         if ([self.carDic[@"carUpKeeps"] count] > 0) {
             if (! [[self.carDic[@"carUpKeeps"] firstObject][@"lastEndTime"] isKindOfClass:[NSNull class]]) {
@@ -220,7 +220,7 @@
         self.bottomViewHeightCon.constant = 821;
         
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyy-MM-dd"];
+        [formater setDateFormat:@"yyyyMMdd"];
         NSDate *today = [NSDate date];
         NSString *string = [formater stringFromDate:today];
         self.firstTimeL.text = string;
@@ -406,7 +406,7 @@
 //
 //}
 
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
 ////    if (textField == self.fuelAmountTF) {
 ////        if ([textField.text intValue] > 100) {
 ////            _networkConditionHUD.labelText = @"燃油量百分比不能超过100%！";
@@ -415,21 +415,31 @@
 ////            return NO;
 ////        }
 ////    }
-//    if (textField == self.plateNumberTF) {      //字母转大写
-//        NSString *tfStr = self.plateNumberTF.text;
-//        NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-//        if (strUrl.length == 7) {
-//            self.plateNumberTF.text = [strUrl uppercaseString];
-//        }
-//        else {
-//            _networkConditionHUD.labelText = @"车牌号输入有误，请重新输入！";
-//            [_networkConditionHUD show:YES];
-//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//            return NO;
-//        }
-//    }
-//    return YES;
-//}
+    if(textField == self.phoneTF) {
+        NSString *phoneStr = self.phoneTF.text;
+        self.phoneTF.text = [phoneStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (! [self checkPhoneNumWithPhone:self.phoneTF.text]) {
+            _networkConditionHUD.labelText = @"电话号码格式不正确，请重新输入！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return NO;
+        }
+    }
+    if (textField == self.plateNumberTF) {      //字母转大写
+        NSString *tfStr = self.plateNumberTF.text;
+        NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (strUrl.length == 7) {
+            self.plateNumberTF.text = [strUrl uppercaseString];
+        }
+        else {
+            _networkConditionHUD.labelText = @"车牌号输入有误，请重新输入！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return NO;
+        }
+    }
+    return YES;
+}
 
 //设置当前激活的文本框或文本域
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -448,7 +458,7 @@
     NSDate *theDate = datePicker.date;
     NSLog(@"%@",[theDate descriptionWithLocale:[NSLocale currentLocale]]);
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"YYYY-MM-dd";
+    dateFormatter.dateFormat = @"YYYYMMdd";
     NSString *dateString = [dateFormatter stringFromDate:theDate];
     if (datePicker == birthdayDatePicker) {
         self.birthdayTF.text = dateString;

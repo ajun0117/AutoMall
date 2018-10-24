@@ -529,7 +529,7 @@ static CGFloat const scrollViewHeight = 220;
                     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
                     NSString *packingStr = @"";
                     if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                        packingStr = [NSString stringWithFormat:@"包装说明：%@",commodityDic[@"packDesc"]];
+                        packingStr = [NSString stringWithFormat:@"     包装说明：%@",commodityDic[@"packDesc"]];
                     }
                     if ([commodityDic[@"units"] isKindOfClass:[NSString class]] && [commodityDic[@"units"] length] > 0) {
                         label.text = [NSString stringWithFormat:@"最小发货量: %@ %@  %@",commodityDic[@"minimum"],commodityDic[@"units"],packingStr];

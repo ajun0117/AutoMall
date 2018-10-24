@@ -172,7 +172,6 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"修改价格后更新选中记录中的价格");
-    textField.textColor = [UIColor redColor];
     NSString *tempString = textField.text;
     while ([tempString hasPrefix:@"0"])
     {
@@ -182,6 +181,11 @@
     textField.text = tempString;
     NSInteger ind = textField.tag - 100;
     NSDictionary *dic = serviceArray[ind];
+    if([dic[@"price"] intValue] != [tempString intValue]) {     //如果价格和默认价格不一致则改为红色
+        textField.textColor = [UIColor redColor];
+    } else {
+        textField.textColor = [UIColor blackColor];
+    }
     NSMutableDictionary *dicc = [selectDic objectForKey:dic[@"id"]];
     if (textField.text.length > 0) {
         [dicc setObject:textField.text forKey:@"price"];
@@ -272,9 +276,7 @@
     if ([keys containsObject:dic[@"id"]]) {
         NSMutableDictionary *dicc = selectDic[dic[@"id"]];
         
-        if ([dic[@"customized"] boolValue] && [dicc[@"price"] intValue] != [dic[@"customizedPrice"] intValue]) {
-                cell.moneyTF.textColor = [UIColor redColor];
-        } else if(![dic[@"customized"] boolValue] && [dicc[@"price"] intValue] != [dic[@"price"] intValue]) {
+        if ( [dicc[@"price"] intValue] != [dic[@"price"] intValue]) {
                 cell.moneyTF.textColor = [UIColor redColor];
         } else {
             cell.moneyTF.textColor = [UIColor blackColor];
