@@ -13,7 +13,7 @@
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSArray *messageAry;
+    NSMutableArray *messageAry;
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -32,6 +32,7 @@
     self.myTableView.tableFooterView = [UIView new];
     [self.myTableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
     
+    messageAry = [NSMutableArray array];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -57,7 +58,6 @@
 -(void)headerRefreshing {
     NSLog(@"下拉刷新信息");
 //    currentpage = 0;
-//    [collectArray removeAllObjects];
     [self requestPostMessageList];
 }
 
@@ -72,7 +72,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height + 1;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -84,16 +86,41 @@
     MessageListCell *cell = (MessageListCell *)[tableView dequeueReusableCellWithIdentifier:@"messageListCell"];
     if([dic[@"status"] boolValue]) {
         cell.ReadIM.hidden = YES;
-        cell.nameL.textColor = [UIColor lightGrayColor];
-        cell.contentL.textColor = [UIColor lightGrayColor];
+//        cell.nameL.textColor = [UIColor lightGrayColor];
+//        cell.contentL.textColor = [UIColor lightGrayColor];
     } else {
         cell.ReadIM.hidden = NO;
-        cell.nameL.textColor = [UIColor darkGrayColor];
-        cell.contentL.textColor = [UIColor darkGrayColor];
+//        cell.nameL.textColor = [UIColor darkGrayColor];
+//        cell.contentL.textColor = [UIColor darkGrayColor];
     }
     cell.nameL.text = dic[@"title"];
     cell.contentL.text = dic[@"content"];
+    cell.contentL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 76;
+    
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    NSDate *creatDate = [NSDate dateWithTimeIntervalSince1970:[dic[@"createTime"] doubleValue]/1000];
+    float secs = creatDate.timeIntervalSinceNow;
+    if (secs > -86400) {
+        [formater setDateFormat:@"HH:mm"];
+    } else {
+        [formater setDateFormat:@"MM月dd日"];
+    }
+    NSString *string = [formater stringFromDate:creatDate];
+    cell.timeL.text = string;
+    
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        [self requestPostDecollectFavoriteWithId:collectArray[indexPath.row][@"id"]];    //删除消息
+//        [messageAry removeObjectAtIndex:indexPath.row];
+//        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,7 +165,8 @@
         NSLog(@"MessageList: %@",responseObject[@"data"]);
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MessageList object:nil];
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            messageAry = responseObject[@"data"];
+            [messageAry removeAllObjects];
+            [messageAry addObjectsFromArray:responseObject[@"data"]];
             [self.myTableView reloadData];
         }
         else {

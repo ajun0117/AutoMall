@@ -12,5 +12,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameL;
 @property (strong, nonatomic) IBOutlet UILabel *contentL;
 @property (strong, nonatomic) IBOutlet UIImageView *ReadIM;
+@property (strong, nonatomic) IBOutlet UIImageView *headIM;
+@property (strong, nonatomic) IBOutlet UILabel *timeL;
 
 @end
