@@ -117,7 +117,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [self requestPostDecollectFavoriteWithId:collectArray[indexPath.row][@"id"]];    //删除消息
+//        [self requestDelMessage:messageAry[indexPath.row][@"id"]];    //发起删除消息请求
 //        [messageAry removeObjectAtIndex:indexPath.row];
 //        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
@@ -141,6 +141,15 @@
 }
 
 -(void)requestReadMessageOK:(NSString *)mid { //消息已读
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ReadMsgOk object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ReadMsgOk, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefixNew(ReadMsgOk),mid];
+    [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
+}
+
+-(void)requestDelMessage:(NSString *)mid { //消息删除
     [_hud show:YES];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ReadMsgOk object:nil];
@@ -186,6 +195,18 @@
             [alert show];
         }
     }
+    
+//    if ([notification.name isEqualToString:ReadMsgOk]) {
+//        NSLog(@"ReadMsgOk: %@",responseObject[@"data"]);
+//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ReadMsgOk object:nil];
+//        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+//            [self.myTableView reloadData];
+//        }
+//        else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+//            [alert show];
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
