@@ -172,9 +172,13 @@
         }
         self.insuranceDateTF.enabled = NO;
         if (! [self.carDic[@"insuranceDate"] isKindOfClass:[NSNull class]]) {
-            NSDate *insuranceDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"insuranceDate"] doubleValue]/1000];
-            NSString *insuranceDateStr = [formater stringFromDate:insuranceDate];
-            self.insuranceDateTF.text = insuranceDateStr;
+            if ([self.carDic[@"insuranceDate"] doubleValue] > 0) {
+                NSDate *insuranceDate = [NSDate dateWithTimeIntervalSince1970:[self.carDic[@"insuranceDate"] doubleValue]/1000];
+                NSString *insuranceDateStr = [formater stringFromDate:insuranceDate];
+                self.insuranceDateTF.text = insuranceDateStr;
+            } else {
+                self.insuranceDateTF.text = @"";
+            }
         }
         self.engineNoTF.enabled = NO;
         self.engineNoTF.text = NSStringWithNumberNULL(self.carDic[@"engineNo"]);

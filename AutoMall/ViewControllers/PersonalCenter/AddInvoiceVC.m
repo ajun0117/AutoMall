@@ -186,7 +186,7 @@
     /**
      *  是否是电话号码格式
      */
-    NSString *regEX = @"^(0?1[358]\\d{9})$|^((0(10|2[1-3]|[3-9]\\d{2}))?[1-9]\\d{6,7})$";
+    NSString *regEX = @"^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}|0(10|2[0-5789]|\\d{3})\\d{7,8}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regEX];
     if ([pred evaluateWithObject:number]) {
         return YES;
@@ -298,6 +298,12 @@
         else {
             if (! [self checkTelNumWithNumber:self.regisPhoneTF.text]) {
                 _networkConditionHUD.labelText = @"电话号码输入不正确，请重新输入。";
+                [_networkConditionHUD show:YES];
+                [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+                return;
+            }
+            if (! [self checkPhoneNumWithPhone:self.receivePhoneTF.text]) {
+                _networkConditionHUD.labelText = @"手机号码输入不正确，请重新输入。";
                 [_networkConditionHUD show:YES];
                 [_networkConditionHUD hide:YES afterDelay:HUDDelay];
                 return;
