@@ -117,9 +117,9 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [self requestDelMessage:messageAry[indexPath.row][@"id"]];    //发起删除消息请求
-//        [messageAry removeObjectAtIndex:indexPath.row];
-//        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self requestDelMessage:messageAry[indexPath.row][@"id"]];    //发起删除消息请求
+        [messageAry removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]  withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -152,9 +152,9 @@
 -(void)requestDelMessage:(NSString *)mid { //消息删除
     [_hud show:YES];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:ReadMsgOk object:nil];
-    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:ReadMsgOk, @"op", nil];
-    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefixNew(ReadMsgOk),mid];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:DelMsgOk object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:DelMsgOk, @"op", nil];
+    NSString *urlString = [NSString stringWithFormat:@"%@?id=%@",UrlPrefixNew(DelMsgOk),mid];
     [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 }
 
@@ -185,10 +185,10 @@
     }
     
     if ([notification.name isEqualToString:ReadMsgOk]) {
-        NSLog(@"ReadMsgOk: %@",responseObject[@"data"]);
+        NSLog(@"ReadMsgOk: %@",responseObject);
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ReadMsgOk object:nil];
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            [self.myTableView reloadData];
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            [self requestPostMessageList];  //刷新列表
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
@@ -196,17 +196,19 @@
         }
     }
     
-//    if ([notification.name isEqualToString:ReadMsgOk]) {
-//        NSLog(@"ReadMsgOk: %@",responseObject[@"data"]);
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ReadMsgOk object:nil];
-//        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-//            [self.myTableView reloadData];
-//        }
-//        else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
-//    }
+    if ([notification.name isEqualToString:DelMsgOk]) {
+        NSLog(@"DelMsgOk: %@",responseObject);
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DelMsgOk object:nil];
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:STRING([responseObject objectForKey:MSG]) delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
