@@ -495,10 +495,12 @@
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
             [serviceArray addObjectsFromArray:responseObject [@"data"]];
             
-            for (NSDictionary *dic in serviceArray) {
-                if ([dic[@"customized"] boolValue]) {   //已定制
-                    NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"customizedPrice"],@"price", nil];
-                    [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
+            if (selectDic.allKeys.count == 0) {
+                for (NSDictionary *dic in serviceArray) {
+                    if ([dic[@"customized"] boolValue]) {   //已定制
+                        NSMutableDictionary *dicc = [NSMutableDictionary dictionaryWithObjectsAndKeys:dic[@"id"],@"id",dic[@"customizedPrice"],@"price", nil];
+                        [selectDic setObject:dicc forKey:dic[@"id"]];     //以id为key
+                    }
                 }
             }
             
@@ -518,7 +520,7 @@
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
+//            [self performSelector:@selector(toPopVC:) withObject:responseObject[@"data"] afterDelay:HUDDelay];
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
