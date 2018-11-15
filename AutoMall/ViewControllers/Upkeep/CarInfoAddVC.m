@@ -269,14 +269,14 @@
     buyDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
     //显示方式是只显示年月日
     buyDatePicker.datePickerMode = UIDatePickerModeDate;
-    buyDatePicker.maximumDate = [NSDate date];
+    buyDatePicker.maximumDate = [NSDate date];      //今天以前
     [buyDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
     insuranceDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 216)];
     insuranceDatePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
     //显示方式是只显示年月日
     insuranceDatePicker.datePickerMode = UIDatePickerModeDate;
-    insuranceDatePicker.maximumDate = [NSDate date];
+    insuranceDatePicker.minimumDate = [NSDate date];    //今天起至以后
     [insuranceDatePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     
     [self setTextFieldInputAccessoryViewWithTF:self.mileageTF];
@@ -760,12 +760,12 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-    if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
-        _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
-        [_networkConditionHUD show:YES];
-        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-        return;
-    }
+//    if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
+//        _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
+//        [_networkConditionHUD show:YES];
+//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//        return;
+//    }
     if (! self.brandTF.text || self.brandTF.text.length == 0) {
         _networkConditionHUD.labelText = @"车辆品牌必须填写！";
         [_networkConditionHUD show:YES];
@@ -806,6 +806,12 @@
     }
     if (! [self checkplateNumberTFWithPlateNumer:self.plateNumberTF.text]) {
         _networkConditionHUD.labelText = @"车牌号格式不正确，请重新输入！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if (! [self checkPhoneNumWithPhone:self.phoneTF.text]) {
+        _networkConditionHUD.labelText = @"电话号码格式不正确，请重新输入！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;

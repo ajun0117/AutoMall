@@ -63,7 +63,7 @@
     __block double money = 0;
     
     [orderArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj[@"discount"] intValue] > 0) {
+        if ([obj[@"discount"] floatValue] > 0) {
             money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
         } else {
             money = money +[[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"price"] doubleValue];
@@ -78,7 +78,7 @@
     __block double money = 0;
     __block double shippingFee = 0;
     [orderArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj[@"discount"] intValue] > 0) {
+        if ([obj[@"discount"] floatValue] > 0) {
             money += [[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"discount"] doubleValue];
         } else {
             money += [[obj valueForKey:@"orderCont"] doubleValue] *[[obj valueForKey:@"price"] doubleValue];

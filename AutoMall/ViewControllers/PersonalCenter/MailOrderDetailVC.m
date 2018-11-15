@@ -240,7 +240,7 @@
             NSDictionary *dic = goodsAry[indexPath.row];
             [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.nameL.text = dic[@"commodityName"];
-            if ([dic[@"actualPrice"] intValue] > 0) {
+            if ([dic[@"actualPrice"] floatValue] > 0) {
                 cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", dic[@"actualPrice"]];
             } else {
                 cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", dic[@"commodityPrice"]];

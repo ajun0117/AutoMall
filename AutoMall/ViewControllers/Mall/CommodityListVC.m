@@ -293,7 +293,7 @@
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 cell.dakaIM.hidden = NO;
                 cell.jifenL.hidden = NO;
-                if ([dic[@"integral"] intValue] > 0) {
+                if ([dic[@"integral"] floatValue] > 0) {
                     cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",dic[@"integral"]];
                 } else {
                     cell.jifenL.text = @"该优惠商品不累计大卡";
@@ -305,7 +305,7 @@
             }
 
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic[@"discount"] intValue] > 0) {
+                if ([dic[@"discount"] floatValue] > 0) {
                     cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
                     cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                     cell.zhekouL.hidden = NO;
@@ -318,7 +318,7 @@
                 cell.yunfeiL.text = [NSString stringWithFormat:@"配送费%@元",dic[@"shippingFee"]];
             }
             else {
-                if ([dic[@"discount"] intValue] > 0) {
+                if ([dic[@"discount"] floatValue] > 0) {
                     cell.moneyL.text = @"￥--";
                     cell.costPriceStrikeL.text = @"￥--";
                     cell.zhekouL.hidden = NO;

@@ -315,7 +315,7 @@ static CGFloat const scrollViewHeight = 220;
             cell.name1.text = dic1[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
                 NSLog(@"discount： %@,name: %@",dic1[@"discount"],dic1[@"name"]);
-                 if ([dic1[@"discount"] intValue] > 0) {
+                 if ([dic1[@"discount"] floatValue] > 0) {
                     cell.money1.text = [NSString stringWithFormat:@"￥%@",dic1[@"discount"]];
                     cell.yuan1.text = [NSString stringWithFormat:@"￥%@",dic1[@"price"]];
                  } else {
@@ -330,7 +330,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img2 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic2[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name2.text = dic2[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic2[@"discount"] intValue] > 0) {
+                if ([dic2[@"discount"] floatValue] > 0) {
                     cell.money2.text = [NSString stringWithFormat:@"￥%@",dic2[@"discount"]];
                     cell.yuan2.text = [NSString stringWithFormat:@"￥%@",dic2[@"price"]];
                 } else {
@@ -345,7 +345,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img3 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic3[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name3.text = dic3[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic3[@"discount"] intValue] > 0) {
+                if ([dic3[@"discount"] floatValue] > 0) {
                     cell.money3.text = [NSString stringWithFormat:@"￥%@",dic3[@"discount"]];
                     cell.yuan3.text = [NSString stringWithFormat:@"￥%@",dic3[@"price"]];
                 } else {
@@ -360,7 +360,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img4 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic4[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name4.text = dic4[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic4[@"discount"] intValue] > 0) {
+                if ([dic4[@"discount"] floatValue] > 0) {
                     cell.money4.text = [NSString stringWithFormat:@"￥%@",dic4[@"discount"]];
                     cell.yuan4.text = [NSString stringWithFormat:@"￥%@",dic4[@"price"]];
                 } else {
@@ -375,7 +375,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img5 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic5[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name5.text = dic5[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic5[@"discount"] intValue] > 0) {
+                if ([dic5[@"discount"] floatValue] > 0) {
                     cell.money5.text = [NSString stringWithFormat:@"￥%@",dic5[@"discount"]];
                     cell.yuan5.text = [NSString stringWithFormat:@"￥%@",dic5[@"price"]];
                 } else {
@@ -390,7 +390,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img6 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic6[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name6.text = dic6[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic6[@"discount"] intValue] > 0) {
+                if ([dic6[@"discount"] floatValue] > 0) {
                     cell.money6.text = [NSString stringWithFormat:@"￥%@",dic6[@"discount"]];
                     cell.yuan6.text = [NSString stringWithFormat:@"￥%@",dic6[@"price"]];
                 } else {
@@ -405,7 +405,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img7 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic7[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name7.text = dic7[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic7[@"discount"] intValue] > 0) {
+                if ([dic7[@"discount"] floatValue] > 0) {
                     cell.money7.text = [NSString stringWithFormat:@"￥%@",dic7[@"discount"]];
                     cell.yuan7.text = [NSString stringWithFormat:@"￥%@",dic7[@"price"]];
                 } else {
@@ -420,7 +420,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img8 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic8[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name8.text = dic8[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic8[@"discount"] intValue] > 0) {
+                if ([dic8[@"discount"] floatValue] > 0) {
                     cell.money8.text = [NSString stringWithFormat:@"￥%@",dic8[@"discount"]];
                     cell.yuan8.text = [NSString stringWithFormat:@"￥%@",dic8[@"price"]];
                 } else {
@@ -435,7 +435,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img9 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic9[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name9.text = dic9[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic9[@"discount"] intValue] > 0) {
+                if ([dic9[@"discount"] floatValue] > 0) {
                     cell.money9.text = [NSString stringWithFormat:@"￥%@",dic9[@"discount"]];
                     cell.yuan9.text = [NSString stringWithFormat:@"￥%@",dic9[@"price"]];
                 } else {
@@ -450,7 +450,7 @@ static CGFloat const scrollViewHeight = 220;
             [cell.img10 sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(dic10[@"image"])] placeholderImage:IMG(@"placeholderPictureSquare")];
             cell.name10.text = dic10[@"name"];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                if ([dic10[@"discount"] intValue] > 0) {
+                if ([dic10[@"discount"] floatValue] > 0) {
                     cell.money10.text = [NSString stringWithFormat:@"￥%@",dic10[@"discount"]];
                     cell.yuan10.text = [NSString stringWithFormat:@"￥%@",dic10[@"price"]];
                 } else {

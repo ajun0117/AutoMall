@@ -128,7 +128,7 @@
         
         NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
         if ([mobileUserType isEqualToString:@"1"]) {    //老板
-            if ([dic[@"discount"] intValue] > 0) {
+            if ([dic[@"discount"] floatValue] > 0) {
                 cell.goodsprice.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
                 cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                 //            cell.zhekouL.hidden = NO;
@@ -139,7 +139,7 @@
             }
         }
         else {
-            if ([dic[@"discount"] intValue] > 0) {
+            if ([dic[@"discount"] floatValue] > 0) {
                 cell.goodsprice.text = @"￥--";
                 cell.costPriceStrikeL.text = @"￥--";
                 //            cell.zhekouL.hidden = NO;

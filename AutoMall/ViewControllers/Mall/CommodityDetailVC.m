@@ -456,7 +456,7 @@ static CGFloat const scrollViewHeight = 220;
                     //    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
                     cell.nameL.text = commodityDic[@"name"];
                     cell.nameL.preferredMaxLayoutWidth = CGRectGetWidth(self.myTableView.bounds) - 89;
-                    if ([commodityDic[@"discount"] intValue] > 0) {
+                    if ([commodityDic[@"discount"] floatValue] > 0) {
                         cell.zhekouL.hidden = NO;
                     } else {
                         cell.zhekouL.hidden = YES;
@@ -474,7 +474,7 @@ static CGFloat const scrollViewHeight = 220;
                     if ([mobileUserType isEqualToString:@"1"]) {    //老板
                         cell.dakaIM.hidden = NO;
                         cell.jifenL.hidden = NO;
-                        if ([commodityDic[@"integral"] intValue] > 0) {
+                        if ([commodityDic[@"integral"] floatValue] > 0) {
                             cell.jifenL.text = [NSString stringWithFormat:@"%@大卡",commodityDic[@"integral"]];
                         } else {
                             cell.jifenL.text = @"该优惠商品不累计能量";
@@ -492,7 +492,7 @@ static CGFloat const scrollViewHeight = 220;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
                     if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                        if ([commodityDic[@"discount"] intValue] > 0) {
+                        if ([commodityDic[@"discount"] floatValue] > 0) {
                             cell.discountL.text = [NSString stringWithFormat:@"￥%@",commodityDic[@"discount"]];
                             if ([commodityDic[@"units"] length] > 0) {
                                 cell.unitsL.text = [NSString stringWithFormat:@"/%@",commodityDic[@"units"]];
@@ -508,7 +508,7 @@ static CGFloat const scrollViewHeight = 220;
                         cell.shippingFeeL.text = [NSString stringWithFormat:@"配送费%@元",commodityDic[@"shippingFee"]];
                     }
                     else {
-                        if ([commodityDic[@"discount"] intValue] > 0) {
+                        if ([commodityDic[@"discount"] floatValue] > 0) {
                             cell.discountL.text = @"￥--";
                             cell.costPriceStrikeL.text = @"￥--";
                         } else {
@@ -598,7 +598,7 @@ static CGFloat const scrollViewHeight = 220;
             cell.goodsNameL.text = dic [@"name"];
             NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
             if ([mobileUserType isEqualToString:@"1"]) {    //老板
-                 if ([dic[@"discount"] intValue] > 0) {
+                 if ([dic[@"discount"] floatValue] > 0) {
                     cell.moneyL.text = [NSString stringWithFormat:@"￥%@",dic[@"discount"]];
                     cell.costPriceStrikeL.text = [NSString stringWithFormat:@"￥%@",dic[@"price"]];
                     cell.zhekouL.hidden = NO;
@@ -608,7 +608,7 @@ static CGFloat const scrollViewHeight = 220;
                      cell.zhekouL.hidden = YES;
                  }
             } else {
-                if ([dic[@"discount"] intValue] > 0) {
+                if ([dic[@"discount"] floatValue] > 0) {
                     cell.moneyL.text = @"￥--";
                     cell.costPriceStrikeL.text = @"￥--";
                     cell.zhekouL.hidden = NO;

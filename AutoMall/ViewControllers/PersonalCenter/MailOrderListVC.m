@@ -308,7 +308,7 @@
     NSDictionary *detailDic = [goodsAry firstObject];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:UrlPrefix(detailDic[@"commodityImage"])] placeholderImage:IMG(@"placeholderPictureSquare")];
     cell.nameL.text = detailDic[@"commodityName"];
-    if ([detailDic[@"actualPrice"] intValue] > 0) {
+    if ([detailDic[@"actualPrice"] floatValue] > 0) {
         cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"actualPrice"]];
     } else {
         cell.UnitPriceL.text = [NSString stringWithFormat:@"￥%@", detailDic[@"commodityPrice"]];
