@@ -212,8 +212,12 @@
             [serviceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
         }
         
-        [lineationAry removeAllObjects];
-        [lineationAry addObjectsFromArray:removeAry];
+        for (NSDictionary *lineationDic in lineationAry) {
+            if (! [removeAry containsObject:lineationDic]) {
+                [lineationAry removeObject:lineationDic];   //如果去重后的服务方案不包含某个已选的服务方案，则从已选中剔除掉
+            }
+        }
+        
         serVicePrice = 0;     //初始化价格
         for (NSDictionary *dic in lineationAry) {
             if ([dic[@"customized"] boolValue]) {
