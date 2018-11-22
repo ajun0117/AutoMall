@@ -137,20 +137,20 @@ static CGFloat const scrollViewHeight = 220;
 #pragma mark - 点击进入webView
 -(void)toWebView:(NSInteger)index {
     NSDictionary *dic = adArray[index];
-    if (dic[@"targetUrl"]) {
+    if ([dic[@"resourceType"] intValue] == 1) {
+        NSLog(@"点击了第%ld页，resourceId为%@", index,dic[@"resourceId"]);
+        CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
+        detailVC.commodityId = dic[@"resourceId"];
+        detailVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+    else {
         WebViewController *webVC = [[WebViewController alloc] init];
         webVC.webUrlStr = dic[@"targetUrl"];
         webVC.titleStr = @"广告详情";
         webVC.canShare = NO;
         webVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webVC animated:YES];
-    }
-    else {
-        NSLog(@"点击了第%ld页", index);
-            CommodityDetailVC *detailVC = [[CommodityDetailVC alloc] init];
-            detailVC.commodityId = dic[@"id"];
-            detailVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 

@@ -77,7 +77,7 @@
     [self.valueAddedInvoiceBtn addTarget:self action:@selector(valueAddedInvoiceAction) forControlEvents:UIControlEventTouchUpInside];
     
     //监听键盘出现和消失
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [self setTextFieldInputAccessoryViewWithTF:self.receiveNameTF];
@@ -401,10 +401,10 @@
 }
 
 #pragma mark 键盘出现
--(void)keyboardWillShow:(NSNotification *)note
+-(void)keyboardDidShow:(NSNotification *)note
 {
-    if (keyboardShown)
-        return;
+//    if (keyboardShown)
+//        return;
     
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
@@ -416,14 +416,14 @@
     CGRect textFieldRect = [activeField frame];
     [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
     
-    keyboardShown = YES;
+//    keyboardShown = YES;
 }
 
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
     self.myScrollV.frame = scrollViewFrame;
-    keyboardShown = NO;
+//    keyboardShown = NO;
 }
 
 -(void)plainInvoiceAction {

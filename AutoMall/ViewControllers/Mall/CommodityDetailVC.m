@@ -867,7 +867,7 @@ static CGFloat const scrollViewHeight = 220;
     } else {
         urlString = [NSString stringWithFormat:@"%@/%@",UrlPrefix(CommodityDetail),self.commodityId];
     }
-    
+    NSLog(@"urlString: %@",urlString);
      [[DataRequest sharedDataRequest] getDataWithUrl:urlString delegate:nil params:nil info:infoDic];
 //    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
 //    [[DataRequest sharedDataRequest] postDataWithUrl:urlString delegate:nil params:pram info:infoDic];
