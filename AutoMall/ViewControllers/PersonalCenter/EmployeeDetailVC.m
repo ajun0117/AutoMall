@@ -15,7 +15,7 @@
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSArray *skillAry;
+    NSMutableArray *skillAry;
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -29,6 +29,8 @@
     self.title = self.staffDic[@"nickname"];
     // 设置导航栏按钮和标题颜色
     [self wr_setNavBarTintColor:NavBarTintColor];
+    
+    skillAry = [NSMutableArray array];
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeDetailTopCell" bundle:nil] forCellReuseIdentifier:@"employeeDetailTopCell"];
@@ -192,6 +194,28 @@
         return cell;
     }
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        NSDictionary *dic = skillAry[indexPath.row];
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [self requestDeleteStaffSkill:NSStringWithNumber(dic[@"id"])];
+            [skillAry removeObjectAtIndex:indexPath.row];
+            //        if (listArray.count == 0) {
+            //             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            //        }
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 2) {
@@ -214,6 +238,16 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StaffSkillList) delegate:nil params:pram info:infoDic];
 }
 
+-(void)requestDeleteStaffSkill:(NSString *)skillId { //删除员工某个技能
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreDelStaffSkill object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreDelStaffSkill, @"op", nil];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",UrlPrefix(StoreDelStaffSkill),skillId];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.staffDic[@"id"],@"userId", nil];
+    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:url delegate:nil params:pram info:infoDic];
+}
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -228,7 +262,24 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StaffSkillList object:nil];
         NSLog(@"StaffSkillList: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            skillAry = responseObject[@"data"];
+            [skillAry removeAllObjects];
+            [skillAry addObjectsFromArray:responseObject[@"data"]];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:StoreDelStaffSkill]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreDelStaffSkill object:nil];
+        NSLog(@"StoreDelStaffSkill: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self.myTableView reloadData];
         }
         else {

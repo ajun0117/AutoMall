@@ -47,6 +47,7 @@
 #define kScale_5s_H(value) (([[UIScreen mainScreen]bounds].size.height/568.0) * (value))
 
 #define STRING_Nil(str)         (str==nil)?@"":str
+#define STRING_Time_Nil(str)         (str==nil)?@"1970-01-01":str
 #define STRING(str)         (str==[NSNull null])?@"":str
 #define STRINGOne(str)         (str==[NSNull null])?@"1":str
 #define STRINGZero(str)         (str==[NSNull null])?@"0":str
@@ -197,6 +198,7 @@
 //#define StoreUpdateStaffSkill               @"/api/store/updateStaffSkill"     //员工自己修改技能
 #define UserChangeSkill                          @"/api/user/changeSkill"            //员工修改单个技能
 #define UserAppendSkill                         @"/api/user/appendSkill"            //员工自己添加技能
+#define StoreDelStaffSkill                      @"/staffSkill/deleteSkill"      //老板删除员工技能
 
 #define FavoriteList                                @"/api/favorite/list"                   //收藏列表
 #define FavoriteCollect                           @"/api/favorite/collect"              //收藏

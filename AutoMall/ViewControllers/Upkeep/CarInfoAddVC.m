@@ -116,7 +116,7 @@
 //            self.carImgL.hidden = YES;
         }
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyyMMdd HH:mm"];
+        [formater setDateFormat:@"yyyy-MM-dd"];
         
         if ([self.carDic[@"carUpKeeps"] count] > 0) {
             if (! [[self.carDic[@"carUpKeeps"] firstObject][@"lastEndTime"] isKindOfClass:[NSNull class]]) {
@@ -224,7 +224,7 @@
         self.bottomViewHeightCon.constant = 821;
         
         NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-        [formater setDateFormat:@"yyyyMMdd"];
+        [formater setDateFormat:@"yyyy-MM-dd"];
         NSDate *today = [NSDate date];
         NSString *string = [formater stringFromDate:today];
         self.firstTimeL.text = string;
@@ -462,7 +462,7 @@
     NSDate *theDate = datePicker.date;
     NSLog(@"%@",[theDate descriptionWithLocale:[NSLocale currentLocale]]);
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"YYYYMMdd";
+    dateFormatter.dateFormat = @"YYYY-MM-dd";
     NSString *dateString = [dateFormatter stringFromDate:theDate];
     if (datePicker == birthdayDatePicker) {
         self.birthdayTF.text = dateString;
@@ -695,6 +695,20 @@
     } else {
         return NO;
     }
+}
+
+// 字符串时间—>时间戳
+- (NSString *)cTimestampFromString:(NSString *)theTime {
+    // 转换为时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    // NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    // [formatter setTimeZone:timeZone];
+    NSDate *dateTodo = [formatter dateFromString:theTime];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[dateTodo timeIntervalSince1970]];
+    return timeSp;
 }
 
 - (IBAction)toEdit:(id)sender {
@@ -1000,7 +1014,7 @@
     NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.plateNumberTF.text = [strUrl uppercaseString];
 
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(self.insuranceDateTF.text),@"insuranceDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel",STRING_Nil(self.firstTimeL.text),@"startTime", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",self.phoneTF.text,@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",[self cTimestampFromString: STRING_Time_Nil(self.purchaseDateTF.text)],@"purchaseDate",[self cTimestampFromString:STRING_Time_Nil(self.insuranceDateTF.text)],@"insuranceDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel",STRING_Nil(self.firstTimeL.text),@"startTime", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarAdd) delegate:nil params:pram info:infoDic];
 }
@@ -1033,7 +1047,7 @@
     NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.plateNumberTF.text = [strUrl uppercaseString];
     
-    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",STRING_Nil(self.purchaseDateTF.text),@"purchaseDate",STRING_Nil(self.insuranceDateTF.text),@"insuranceDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.carDic[@"id"],@"id",STRING_Nil(self.mileageTF.text),@"mileage",STRING_Nil(mileageUrl),@"mileageImage",self.ownerTF.text,@"owner",STRING_Nil(self.phoneTF.text),@"phone",STRING_Nil(self.standbyPhoneTF.text),@"backupPhone",STRING_Nil(self.wechatTF.text),@"wechat",STRING_Nil(self.genderTF.text),@"gender",STRING_Nil(self.birthdayTF.text),@"birthday",self.plateNumberTF.text,@"plateNumber",self.brandTF.text,@"brand",self.modelTF.text,@"model",[self cTimestampFromString: STRING_Time_Nil(self.purchaseDateTF.text)],@"purchaseDate",[self cTimestampFromString:STRING_Time_Nil(self.insuranceDateTF.text)],@"insuranceDate",STRING_Nil(carImgUrl),@"image",STRING_Nil(engineUrl),@"engineImage",STRING_Nil(self.engineNoTF.text),@"engineNo",STRING_Nil(self.vinTF.text),@"vin",STRING_Nil(vinUrl),@"vinImage",STRING_Nil(self.engineModelTF.text),@"engineModel", nil];
     NSLog(@"pram: %@",pram);
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:UrlPrefix(CarUpdate) delegate:nil params:pram info:infoDic];
 }
