@@ -69,13 +69,15 @@
     self.wechatTF.text = STRING(self.infoDic[@"wechat"]);
     
     if ([mobileUserType isEqualToString:@"1"]) {  //门店老板
-        self.viewHeightCon.constant = 179;
+        self.viewHeightCon.constant = 178;
         self.jifenL.text = [NSString stringWithFormat:@"%@大卡",NSStringWithNumberNULL(self.infoDic[@"integral"])];
         self.expireJifenL.text = [NSString stringWithFormat:@"%@大卡",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
     }
     else {
         self.viewHeightCon.constant = 133;
     }
+    
+    [self requestPostUserGetInfo];  //刷新个人信息
     
     [self setTextFieldInputAccessoryViewWithTF:self.nickNameTF];
     [self setTextFieldInputAccessoryViewWithTF:self.wechatTF];
@@ -206,6 +208,14 @@
 }
 
 #pragma mark - 发送请求
+-(void)requestPostUserGetInfo { //获取登录用户信息
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:GetUserInfo object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:GetUserInfo, @"op", nil];
+    [[DataRequest sharedDataRequest] getDataWithUrl:UrlPrefix(GetUserInfo) delegate:nil params:nil info:infoDic];
+}
+
 -(void)requestPostUpdateNickNameAndWechat { //修改资料
     [_hud show:YES];
     //注册通知
@@ -237,6 +247,33 @@
         return;
     }
     NSDictionary *responseObject = [[NSDictionary alloc] initWithDictionary:[notification.userInfo objectForKey:@"RespData"]];
+    
+    if ([notification.name isEqualToString:GetUserInfo]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:GetUserInfo object:nil];
+        NSLog(@"GetUserInfo: %@",responseObject);
+        if ([responseObject[@"success"] isEqualToString:@"y"]) {
+            self.infoDic = responseObject[@"data"];
+            NSString *mobileUserType = [[GlobalSetting shareGlobalSettingInstance] mobileUserType];
+            self.accountL.text = self.infoDic[@"phone"];
+            self.nickNameTF.text = STRING(self.infoDic[@"nickname"]);
+            self.wechatTF.text = STRING(self.infoDic[@"wechat"]);
+            if ([mobileUserType isEqualToString:@"1"]) {  //门店老板
+                self.viewHeightCon.constant = 178;
+                self.jifenL.text = [NSString stringWithFormat:@"%@大卡",NSStringWithNumberNULL(self.infoDic[@"integral"])];
+                self.expireJifenL.text = [NSString stringWithFormat:@"%@大卡",NSStringWithNumberNULL(self.infoDic[@"expiredIntegral"])];
+            }
+            else {
+                self.viewHeightCon.constant = 133;
+            }
+        }
+        else {
+            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    
     if ([notification.name isEqualToString:ChangeNickName]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ChangeNickName object:nil];
         NSLog(@"ChangeNickName: %@",responseObject);

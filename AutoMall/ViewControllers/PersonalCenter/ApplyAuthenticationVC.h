@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (strong, nonatomic) IBOutlet UILabel *recommendL;
 @property (weak, nonatomic) IBOutlet UITextField *recommendCodeTF;
+@property (weak, nonatomic) IBOutlet UILabel *recommendCodeL;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *askWidthCon;
 @property (weak, nonatomic) IBOutlet WPImageView *licenseImg;
 //@property (weak, nonatomic) IBOutlet UILabel *licenseImgL;
 @property (weak, nonatomic) IBOutlet WPImageView *cardAImg;

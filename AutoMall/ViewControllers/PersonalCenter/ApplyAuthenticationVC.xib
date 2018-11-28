@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="addressTF" destination="f08-p1-t8w" id="aUM-ip-Vl8"/>
                 <outlet property="aliPayCollectionImg" destination="pEg-k3-aPT" id="4iO-Iw-WId"/>
+                <outlet property="askWidthCon" destination="ef4-ZY-BRS" id="o98-Tp-4uS"/>
                 <outlet property="cardAImg" destination="UGJ-Y5-cHI" id="Fka-Ib-Epn"/>
                 <outlet property="cardBImg" destination="HbI-zE-PSu" id="ImG-r0-8VE"/>
                 <outlet property="detailAddressTF" destination="6Cp-nV-zmk" id="nOQ-PI-PQF"/>
@@ -22,6 +23,7 @@
                 <outlet property="myScrollView" destination="fPB-cF-lHZ" id="jfp-X1-j0o"/>
                 <outlet property="nameTF" destination="ed3-aZ-xMV" id="Fro-qn-tjk"/>
                 <outlet property="phoneTF" destination="zoI-Ps-qei" id="VAL-ZI-3vw"/>
+                <outlet property="recommendCodeL" destination="PBI-zq-ZKG" id="B6I-Wg-HWN"/>
                 <outlet property="recommendCodeTF" destination="bR6-a8-SI1" id="DzA-9a-Hrg"/>
                 <outlet property="recommendL" destination="3DZ-Zk-hVw" id="EE3-kO-4Dl"/>
                 <outlet property="replayBtn" destination="Ggi-so-8Bg" id="VkR-Cf-CZu"/>
@@ -337,16 +339,26 @@
                                     </connections>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码(选填)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DZ-Zk-hVw">
-                                    <rect key="frame" x="16" y="236" width="87" height="21"/>
+                                    <rect key="frame" x="16" y="236" width="100" height="21"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="Utr-r5-eh7"/>
                                         <constraint firstAttribute="height" constant="21" id="YWC-Fj-Bsm"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBI-zq-ZKG">
+                                    <rect key="frame" x="123.5" y="231" width="235" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="IUX-Sn-Amt"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邀请码(选填)" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bR6-a8-SI1">
-                                    <rect key="frame" x="111" y="231" width="248" height="30"/>
+                                    <rect key="frame" x="124" y="231" width="235" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="jxd-VY-bBo"/>
                                     </constraints>
@@ -357,6 +369,18 @@
                                         <outlet property="delegate" destination="-1" id="gAk-oR-UO1"/>
                                     </connections>
                                 </textField>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCm-kW-PLh">
+                                    <rect key="frame" x="367" y="231" width="0.0" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" id="ef4-ZY-BRS"/>
+                                        <constraint firstAttribute="height" constant="30" id="yzI-aD-YQb"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                    <state key="normal" image="questionmark"/>
+                                    <connections>
+                                        <action selector="askRecommend:" destination="-1" eventType="touchUpInside" id="l0u-lq-V3o"/>
+                                    </connections>
+                                </button>
                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="门店简称" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I1v-8m-l3O">
                                     <rect key="frame" x="86" y="51.5" width="273.5" height="30"/>
                                     <constraints>
@@ -480,7 +504,6 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="bR6-a8-SI1" firstAttribute="leading" secondItem="3DZ-Zk-hVw" secondAttribute="trailing" constant="8" id="1Pv-jS-Vdt"/>
-                                <constraint firstAttribute="trailing" secondItem="bR6-a8-SI1" secondAttribute="trailing" constant="16" id="2SM-kw-d34"/>
                                 <constraint firstItem="VuP-LU-TBT" firstAttribute="leading" secondItem="w6n-MO-ip1" secondAttribute="leading" constant="8" id="2pQ-Vp-gg5"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="width" secondItem="zp7-Iq-ceB" secondAttribute="width" id="3dQ-oL-Z7w"/>
                                 <constraint firstItem="fhf-U4-61W" firstAttribute="top" secondItem="w6n-MO-ip1" secondAttribute="top" constant="44" id="3eH-CE-BvF"/>
@@ -506,14 +529,18 @@
                                 <constraint firstItem="I1v-8m-l3O" firstAttribute="centerY" secondItem="60O-mz-CYO" secondAttribute="centerY" id="Nq7-pe-zWf"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="height" secondItem="zp7-Iq-ceB" secondAttribute="height" id="Ohe-l2-dyE"/>
                                 <constraint firstItem="PUR-xc-T2b" firstAttribute="leading" secondItem="w6n-MO-ip1" secondAttribute="leading" constant="8" id="P1a-DC-i7O"/>
+                                <constraint firstItem="PBI-zq-ZKG" firstAttribute="leading" secondItem="3DZ-Zk-hVw" secondAttribute="trailing" constant="8" id="Pc9-K1-dgr"/>
                                 <constraint firstAttribute="trailing" secondItem="ed3-aZ-xMV" secondAttribute="trailing" constant="16" id="QE2-mi-a3O"/>
                                 <constraint firstItem="dsX-8J-TZ0" firstAttribute="leading" secondItem="zp7-Iq-ceB" secondAttribute="trailing" constant="16" id="QWC-5Z-7cZ"/>
                                 <constraint firstItem="60O-mz-CYO" firstAttribute="leading" secondItem="w6n-MO-ip1" secondAttribute="leading" constant="16" id="Qns-zs-KRj"/>
+                                <constraint firstItem="PCm-kW-PLh" firstAttribute="leading" secondItem="bR6-a8-SI1" secondAttribute="trailing" constant="8" id="Qx0-b7-OjN"/>
+                                <constraint firstAttribute="trailing" secondItem="PCm-kW-PLh" secondAttribute="trailing" constant="8" id="UQ2-Qj-fK2"/>
                                 <constraint firstAttribute="trailing" secondItem="Iy4-hP-VPb" secondAttribute="trailing" id="WNU-6C-4Dd"/>
                                 <constraint firstAttribute="trailing" secondItem="dsX-8J-TZ0" secondAttribute="trailing" constant="16" id="Z4k-CI-b9H"/>
                                 <constraint firstItem="NYz-uT-X9d" firstAttribute="leading" secondItem="w6n-MO-ip1" secondAttribute="leading" constant="16" id="a7o-12-lC5"/>
                                 <constraint firstItem="ed3-aZ-xMV" firstAttribute="centerY" secondItem="2bD-vF-Qed" secondAttribute="centerY" id="bEb-AP-LRy"/>
                                 <constraint firstItem="f08-p1-t8w" firstAttribute="centerY" secondItem="NYz-uT-X9d" secondAttribute="centerY" id="bmk-pZ-lh5"/>
+                                <constraint firstItem="PCm-kW-PLh" firstAttribute="leading" secondItem="PBI-zq-ZKG" secondAttribute="trailing" constant="8" id="cZm-3K-bSS"/>
                                 <constraint firstAttribute="trailing" secondItem="zoI-Ps-qei" secondAttribute="trailing" constant="16" id="dAO-FI-zrF"/>
                                 <constraint firstItem="uI8-Y2-ccd" firstAttribute="top" secondItem="PUR-xc-T2b" secondAttribute="bottom" constant="44" id="dWx-9N-eIK"/>
                                 <constraint firstItem="2bD-vF-Qed" firstAttribute="leading" secondItem="w6n-MO-ip1" secondAttribute="leading" constant="16" id="e5X-B9-rIU"/>
@@ -524,8 +551,10 @@
                                 <constraint firstItem="zoI-Ps-qei" firstAttribute="centerY" secondItem="B7K-TZ-itw" secondAttribute="centerY" id="i9S-eY-Ql0"/>
                                 <constraint firstItem="NYz-uT-X9d" firstAttribute="top" secondItem="PUR-xc-T2b" secondAttribute="bottom" constant="11" id="iit-Z1-CWO"/>
                                 <constraint firstItem="OK6-Bd-rfK" firstAttribute="top" secondItem="w6n-MO-ip1" secondAttribute="top" id="iqL-ba-mfw"/>
+                                <constraint firstItem="PCm-kW-PLh" firstAttribute="centerY" secondItem="bR6-a8-SI1" secondAttribute="centerY" id="la8-Nt-d6z"/>
                                 <constraint firstItem="6Cp-nV-zmk" firstAttribute="leading" secondItem="pET-kG-7La" secondAttribute="trailing" constant="8" id="lmh-ly-HBJ"/>
                                 <constraint firstAttribute="trailing" secondItem="I1v-8m-l3O" secondAttribute="trailing" constant="16" id="lzd-QT-NKz"/>
+                                <constraint firstItem="PBI-zq-ZKG" firstAttribute="centerY" secondItem="3DZ-Zk-hVw" secondAttribute="centerY" id="mgK-w8-YHy"/>
                                 <constraint firstItem="h5r-6T-JAx" firstAttribute="leading" secondItem="w6n-MO-ip1" secondAttribute="leading" constant="8" id="o62-p5-v50"/>
                                 <constraint firstItem="PUR-xc-T2b" firstAttribute="top" secondItem="fhf-U4-61W" secondAttribute="bottom" constant="44" id="ok8-hS-XGq"/>
                                 <constraint firstItem="a4I-j8-CCc" firstAttribute="top" secondItem="uI8-Y2-ccd" secondAttribute="bottom" constant="44" id="ox2-Ll-N8o"/>
@@ -975,11 +1004,12 @@
                 <constraint firstItem="mXp-n9-uLY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="ycI-p8-0QA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-716" y="433"/>
+            <point key="canvasLocation" x="-716.5" y="432.5"/>
         </view>
     </objects>
     <resources>
         <image name="photoBtn" width="20" height="20"/>
+        <image name="questionmark" width="60" height="60"/>
         <image name="upload-plusSS" width="515" height="515"/>
     </resources>
 </document>

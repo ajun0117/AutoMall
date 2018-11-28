@@ -197,7 +197,11 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2) {
-        return YES;
+        NSDictionary *dic = skillAry[indexPath.row];
+        if ([dic[@"approvalStatus"] intValue]) {
+            return YES;
+        }
+        return NO;
     }
     return NO;
 }
@@ -208,9 +212,6 @@
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             [self requestDeleteStaffSkill:NSStringWithNumber(dic[@"id"])];
             [skillAry removeObjectAtIndex:indexPath.row];
-            //        if (listArray.count == 0) {
-            //             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-            //        }
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     }
@@ -243,7 +244,7 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreDelStaffSkill object:nil];
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreDelStaffSkill, @"op", nil];
-    NSString *url = [NSString stringWithFormat:@"%@/%@",UrlPrefix(StoreDelStaffSkill),skillId];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",UrlPrefixNew(StoreDelStaffSkill),skillId];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.staffDic[@"id"],@"userId", nil];
     [[DataRequest sharedDataRequest] postJSONRequestWithUrl:url delegate:nil params:pram info:infoDic];
 }
@@ -276,14 +277,14 @@
     if ([notification.name isEqualToString:StoreDelStaffSkill]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreDelStaffSkill object:nil];
         NSLog(@"StoreDelStaffSkill: %@",responseObject);
-        if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
             [self.myTableView reloadData];
         }
         else {
-            _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

@@ -51,11 +51,18 @@
         self.detailAddressTF.text = STRING(self.infoDic[@"address"]);
         self.phoneTF.text = STRING(self.infoDic[@"phone"]);
         self.recommendL.text = @"我的推荐码";
-        self.recommendCodeTF.placeholder = @"我的推荐码";
-        self.recommendCodeTF.enabled = NO;
-        self.recommendCodeTF.textColor = RGBCOLOR(104, 104, 104);
-//        self.recommendCodeTF.text = STRING(self.infoDic[@"recommendCode"]);
-        self.recommendCodeTF.text = STRING(self.infoDic[@"invitationCode"]);
+        self.recommendCodeTF.hidden = YES;
+        self.recommendCodeL.hidden = NO;
+        self.recommendCodeL.textColor = RGBCOLOR(104, 104, 104);
+        self.recommendCodeL.text = @"我的推荐码";
+        if ([STRING(self.infoDic[@"invitationCode"]) length] > 0) {
+            self.recommendCodeL.text = STRING(self.infoDic[@"invitationCode"]);
+        }
+        self.askWidthCon.constant = 30;
+        
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCellHandle:)];
+        longPressGesture.minimumPressDuration = 1.2;
+        [self.recommendCodeL addGestureRecognizer:longPressGesture];
         
         licenseImgUrl = self.infoDic[@"licenseImg"];
         if (! [licenseImgUrl isKindOfClass:[NSNull class]] && licenseImgUrl.length > 0) {
@@ -161,6 +168,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
+- (IBAction)askRecommend:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功邀请其他门店注册使用，注册时使用邀请码，将获得额外商城积分，可以直接兑换商城商品！！" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 - (IBAction)toAddPic:(id)sender {
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     photoVC.GoBackUpdate = ^(NSMutableArray *array) {
@@ -216,6 +228,22 @@
     [self selectThePhotoOrCamera];
 }
 
+-(void)longPressCellHandle:(UILongPressGestureRecognizer *)gesture
+{
+    NSLog(@"wwwwwfffffff");
+    [UIPasteboard generalPasteboard].string = self.recommendCodeTF.text;
+    _networkConditionHUD.labelText = @"邀请码已复制";
+    [_networkConditionHUD show:YES];
+    [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//    if (gesture.state==UIGestureRecognizerStateEnded) {
+//        UIMenuController *menuController = [UIMenuController sharedMenuController];
+//        UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(menuCopyBtnPressed:)];
+//        menuController.menuItems = @[copyItem];
+//        [menuController setTargetRect:gesture.view.frame inView:gesture.view.superview];
+//        [menuController setMenuVisible:YES animated:YES];
+//        [UIMenuController sharedMenuController].menuItems=nil;
+//    }
+}
 
 #pragma mark - 添加完成按钮的toolBar工具栏
 - (void)setTextFieldInputAccessoryViewWithTF:(UITextField *)field{

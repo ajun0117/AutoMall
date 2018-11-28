@@ -198,7 +198,7 @@
 //#define StoreUpdateStaffSkill               @"/api/store/updateStaffSkill"     //员工自己修改技能
 #define UserChangeSkill                          @"/api/user/changeSkill"            //员工修改单个技能
 #define UserAppendSkill                         @"/api/user/appendSkill"            //员工自己添加技能
-#define StoreDelStaffSkill                      @"/staffSkill/deleteSkill"      //老板删除员工技能
+#define StoreDelStaffSkill                      @"carupkeep_web/staffSkill/deleteSkill"      //老板删除员工技能
 
 #define FavoriteList                                @"/api/favorite/list"                   //收藏列表
 #define FavoriteCollect                           @"/api/favorite/collect"              //收藏

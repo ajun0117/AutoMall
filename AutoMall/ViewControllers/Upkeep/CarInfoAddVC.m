@@ -143,6 +143,8 @@
         self.ownerTF.text = STRING(self.carDic[@"owner"]);
         self.phoneTF.enabled = NO;
         self.phoneTF.text = NSStringWithNumberNULL(self.carDic[@"phone"]);
+        self.standbyPhoneTF.enabled = NO;
+        self.standbyPhoneTF.text = NSStringWithNumberNULL(self.carDic[@"backupPhone"]);
         self.wechatTF.enabled = NO;
         self.wechatTF.text = NSStringWithNumber(self.carDic[@"wechat"]);
         self.genderTF.enabled = NO;
@@ -704,10 +706,10 @@
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"YYYY-MM-dd"];
-    // NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
-    // [formatter setTimeZone:timeZone];
+//     NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+//     [formatter setTimeZone:timeZone];
     NSDate *dateTodo = [formatter dateFromString:theTime];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[dateTodo timeIntervalSince1970]];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[dateTodo timeIntervalSince1970]*1000];
     return timeSp;
 }
 
