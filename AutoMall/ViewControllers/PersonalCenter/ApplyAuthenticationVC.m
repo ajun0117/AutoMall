@@ -230,9 +230,8 @@
 
 -(void)longPressCellHandle:(UILongPressGestureRecognizer *)gesture
 {
-    NSLog(@"wwwwwfffffff");
     [UIPasteboard generalPasteboard].string = self.recommendCodeTF.text;
-    _networkConditionHUD.labelText = @"邀请码已复制";
+    _networkConditionHUD.labelText = @"推荐码已复制";
     [_networkConditionHUD show:YES];
     [_networkConditionHUD hide:YES afterDelay:HUDDelay];
 //    if (gesture.state==UIGestureRecognizerStateEnded) {

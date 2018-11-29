@@ -431,6 +431,16 @@
             return NO;
         }
     }
+    if(textField == self.standbyPhoneTF) {
+        NSString *phoneStr = self.standbyPhoneTF.text;
+        self.standbyPhoneTF.text = [phoneStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
+            _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            return NO;
+        }
+    }
     if (textField == self.plateNumberTF) {      //字母转大写
         NSString *tfStr = self.plateNumberTF.text;
         NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -444,6 +454,36 @@
             return NO;
         }
     }
+    
+    NSDate *theDate;
+//    if (textField == self.genderTF) {
+//        textField.text = self.genderTF;
+//    }
+    if (textField == self.birthdayTF) {
+        theDate = birthdayDatePicker.date;
+        NSLog(@"%@",[theDate descriptionWithLocale:[NSLocale currentLocale]]);
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"YYYY-MM-dd";
+        NSString *dateString = [dateFormatter stringFromDate:theDate];
+        textField.text = dateString;
+    }
+    else if (textField == self.purchaseDateTF) {
+        theDate = buyDatePicker.date;
+        NSLog(@"%@",[theDate descriptionWithLocale:[NSLocale currentLocale]]);
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"YYYY-MM-dd";
+        NSString *dateString = [dateFormatter stringFromDate:theDate];
+        textField.text = dateString;
+    }
+    else if(textField == self.insuranceDateTF) {
+        theDate = insuranceDatePicker.date;
+        NSLog(@"%@",[theDate descriptionWithLocale:[NSLocale currentLocale]]);
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"YYYY-MM-dd";
+        NSString *dateString = [dateFormatter stringFromDate:theDate];
+        textField.text = dateString;
+    }
+    
     return YES;
 }
 
@@ -721,6 +761,7 @@
 //    self.fuelAmountTF.enabled = YES;
     self.ownerTF.enabled = YES;
     self.phoneTF.enabled = YES;
+    self.standbyPhoneTF.enabled = YES;
     self.wechatTF.enabled = YES;
     self.genderTF.enabled = YES;
     self.birthdayTF.enabled = YES;
