@@ -14,7 +14,7 @@
 {
     MBProgressHUD *_hud;
     MBProgressHUD *_networkConditionHUD;
-    NSArray *skillAry;
+    NSMutableArray *skillAry;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
@@ -37,7 +37,7 @@
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [searchBtn setTitleColor:RGBCOLOR(0, 191, 243) forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [searchBtn setTitle:@"添加" forState:UIControlStateNormal];
+    [searchBtn setTitle:@"添加" forState:UIControlStateNormal]; 
     [searchBtn addTarget:self action:@selector(toAddSkill) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *searchBtnBarBtn = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItem = searchBtnBarBtn;
@@ -45,6 +45,7 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"EmployeeSkillListCell" bundle:nil] forCellReuseIdentifier:@"employeeSkillListCell"];
     self.myTableView.tableFooterView = [UIView new];
     
+    skillAry = [NSMutableArray array];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -117,6 +118,19 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = skillAry[indexPath.section];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self requestDeleteStaffSkill:NSStringWithNumber(dic[@"id"])];
+        [skillAry removeObjectAtIndex:indexPath.section];
+        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
@@ -137,6 +151,17 @@
     [[DataRequest sharedDataRequest] postDataWithUrl:UrlPrefix(StaffSkillList) delegate:nil params:nil info:infoDic];
 }
 
+-(void)requestDeleteStaffSkill:(NSString *)skillId { //删除自己的某个技能
+    [_hud show:YES];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishedRequestData:) name:StoreDelStaffSkill object:nil];
+    NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreDelStaffSkill, @"op", nil];
+    NSString *userId = [[GlobalSetting shareGlobalSettingInstance] userID];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",UrlPrefixNew(StoreDelStaffSkill),skillId];
+    NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userId", nil];
+    [[DataRequest sharedDataRequest] postDataWithUrl:url delegate:nil params:pram info:infoDic];
+} 
+
 #pragma mark - 网络请求结果数据
 -(void) didFinishedRequestData:(NSNotification *)notification{
     [_hud hide:YES];
@@ -151,11 +176,28 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StaffSkillList object:nil];
         NSLog(@"StaffSkillList: %@",responseObject);
         if ([responseObject[@"success"] isEqualToString:@"y"]) {
-            skillAry = responseObject[@"data"];
-            [self.myTableView reloadData];
+            [skillAry removeAllObjects];
+            [skillAry addObjectsFromArray:responseObject[@"data"]];
+            [self.myTableView reloadData]; 
         }
         else {
             _networkConditionHUD.labelText = STRING([responseObject objectForKey:MSG]);
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        }
+    }
+    
+    if ([notification.name isEqualToString:StoreDelStaffSkill]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreDelStaffSkill object:nil];
+        NSLog(@"StoreDelStaffSkill: %@",responseObject);
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
+            [_networkConditionHUD show:YES];
+            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+            [self.myTableView reloadData];
+        }
+        else {
+            _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         }

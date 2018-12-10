@@ -187,6 +187,7 @@
         [removeAry removeAllObjects];       //重置removeAry数组
         [removeAry addObjectsFromArray:serviceContentAry];
         
+        NSLog(@"selectedPackageAry.count: %lu",(unsigned long)selectedPackageAry.count);
         packagePrice = 0;
         for (NSDictionary *dic1 in selectedPackageAry) {
             if ([dic1[@"customized"] boolValue])  {
@@ -207,17 +208,29 @@
             }
         }
         
-        [serviceNumberDic removeAllObjects];
-        for (NSDictionary *dicc in removeAry) {     //遍历赋初始值，都为1
-            [serviceNumberDic setObject:@"1" forKey:dicc[@"id"]];     //object:数量，key:服务方案id
-        }
-        
-        for (NSDictionary *lineationDic in lineationAry) {
-            if (! [removeAry containsObject:lineationDic]) {
-                [lineationAry removeObject:lineationDic];   //如果去重后的服务方案不包含某个已选的服务方案，则从已选中剔除掉
+        [lineationAry enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {    //如果去重后的服务方案不包含某个已选的服务方案，则从已选中剔除掉
+            if (! [removeAry containsObject:obj]) {
+                *stop = YES;
+                if (*stop == YES) {
+                    [lineationAry removeObject:obj];
+                }
             }
+        }];
+        
+        NSMutableArray *removedIds = [NSMutableArray array];
+        for (NSDictionary *dicc in removeAry) {
+            [removedIds addObject:dicc[@"id"]];
         }
         
+        [[serviceNumberDic allKeys] enumerateObjectsUsingBlock:^(id ids, NSUInteger idx, BOOL *stop) {    //如果去重后的服务方案不包含某个已选的服务方案，则从已选中剔除掉
+            if (! [removedIds containsObject:ids]) {
+                *stop = YES;
+                if (*stop == YES) {
+                    [serviceNumberDic setObject:@"1" forKey:ids];   //回复数量1
+                }
+            }
+        }];
+
         serVicePrice = 0;     //初始化价格
         for (NSDictionary *dic in lineationAry) {
             if ([dic[@"customized"] boolValue]) {

@@ -77,7 +77,7 @@
     [self.valueAddedInvoiceBtn addTarget:self action:@selector(valueAddedInvoiceAction) forControlEvents:UIControlEventTouchUpInside];
     
     //监听键盘出现和消失
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [self setTextFieldInputAccessoryViewWithTF:self.receiveNameTF];
@@ -146,7 +146,6 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
     _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
-
 }
 
 - (void)viewDidLayoutSubviews
@@ -156,7 +155,14 @@
     NSLog(@"scrollViewFrame: %@",NSStringFromCGRect(scrollViewFrame));
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 -(void) keybordDown {
+    NSLog(@"--------keybordDown-------");
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
@@ -400,8 +406,14 @@
     activeField = nil;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSLog(@"--------change-------");
+    activeField = textField;
+    return YES;
+}
+
 #pragma mark 键盘出现
--(void)keyboardDidShow:(NSNotification *)note
+-(void)keyboardWillShow:(NSNotification *)note
 {
 //    if (keyboardShown)
 //        return;
@@ -414,7 +426,7 @@
     NSLog(@"self.myScrollV.frame: %@",NSStringFromCGRect(self.myScrollV.frame));
     
     CGRect textFieldRect = [activeField frame];
-    [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
+    [self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
     
 //    keyboardShown = YES;
 }
@@ -422,6 +434,7 @@
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
+    NSLog(@"--------keyboardWillHide-------");
     self.myScrollV.frame = scrollViewFrame;
 //    keyboardShown = NO;
 }

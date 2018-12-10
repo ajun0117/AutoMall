@@ -230,7 +230,7 @@
 
 -(void)longPressCellHandle:(UILongPressGestureRecognizer *)gesture
 {
-    [UIPasteboard generalPasteboard].string = self.recommendCodeTF.text;
+    [UIPasteboard generalPasteboard].string = self.recommendCodeL.text;
     _networkConditionHUD.labelText = @"推荐码已复制";
     [_networkConditionHUD show:YES];
     [_networkConditionHUD hide:YES afterDelay:HUDDelay];

@@ -95,10 +95,6 @@
     [self.fuelAmountImgView addGestureRecognizer:tap1];
 
     self.remarkTV.textContainerInset = UIEdgeInsetsMake(10.0f, 13.0f, 10.0f, 13.0f);
-    
-    //监听键盘出现和消失
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -116,6 +112,10 @@
     _networkConditionHUD.mode = MBProgressHUDModeText;
 //    _networkConditionHUD.yOffset = APP_HEIGHT/2 - HUDBottomH;
     _networkConditionHUD.margin = HUDMargin;
+    
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -134,8 +134,8 @@
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
 {
-    if (keyboardShown)
-        return;
+//    if (keyboardShown)
+//        return;
     
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
@@ -147,14 +147,14 @@
     CGRect textFieldRect = [activeField frame];
     [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
     
-     keyboardShown = YES;
+//     keyboardShown = YES;
 }
 
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
     self.myScrollV.frame = scrollViewFrame;
-    keyboardShown = NO;
+//    keyboardShown = NO;
 }
 
 

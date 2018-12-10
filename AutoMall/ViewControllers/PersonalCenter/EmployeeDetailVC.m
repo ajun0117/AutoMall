@@ -246,7 +246,7 @@
     NSDictionary *infoDic = [[NSDictionary alloc] initWithObjectsAndKeys:StoreDelStaffSkill, @"op", nil];
     NSString *url = [NSString stringWithFormat:@"%@/%@",UrlPrefixNew(StoreDelStaffSkill),skillId];
     NSDictionary *pram = [[NSDictionary alloc] initWithObjectsAndKeys:self.staffDic[@"id"],@"userId", nil];
-    [[DataRequest sharedDataRequest] postJSONRequestWithUrl:url delegate:nil params:pram info:infoDic];
+    [[DataRequest sharedDataRequest] postDataWithUrl:url delegate:nil params:pram info:infoDic];
 }
 
 #pragma mark - 网络请求结果数据
@@ -277,7 +277,7 @@
     if ([notification.name isEqualToString:StoreDelStaffSkill]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreDelStaffSkill object:nil];
         NSLog(@"StoreDelStaffSkill: %@",responseObject);
-            if ([responseObject[@"meta"][@"code"] intValue] == 200) {
+        if ([responseObject[@"meta"][@"code"] intValue] == 200) {
             _networkConditionHUD.labelText = responseObject[@"meta"][@"msg"];
             [_networkConditionHUD show:YES];
             [_networkConditionHUD hide:YES afterDelay:HUDDelay];
