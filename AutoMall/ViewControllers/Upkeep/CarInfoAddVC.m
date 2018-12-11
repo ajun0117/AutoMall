@@ -661,26 +661,50 @@
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
 {
-    if (keyboardShown)
-        return;
+//    if (keyboardShown)
+//        return;
+//
+//    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
+//    CGRect viewFrame = scrollViewFrame;
+//    viewFrame.size.height -= keyBoardRect.size.height;
+//    self.myScrollV.frame = viewFrame;
+//    NSLog(@"self.myScrollV.frame: %@",NSStringFromCGRect(self.myScrollV.frame));
+//
+//    CGRect textFieldRect = [activeField frame];
+//    [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
+//
+//    keyboardShown = YES;
     
-    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    NSLog(@"keyBoardRect: %@",NSStringFromCGRect(keyBoardRect));
-    CGRect viewFrame = scrollViewFrame;
-    viewFrame.size.height -= keyBoardRect.size.height;
-    self.myScrollV.frame = viewFrame;
-    NSLog(@"self.myScrollV.frame: %@",NSStringFromCGRect(self.myScrollV.frame));
     
-    CGRect textFieldRect = [activeField frame];
-    [ self.myScrollV scrollRectToVisible:textFieldRect animated:YES];
-    
-    keyboardShown = YES;
+    if (activeField == self.modelTF || activeField == self.engineModelTF || activeField == self.purchaseDateTF || activeField == self.insuranceDateTF || activeField == self.engineNoTF || activeField == self.vinTF ) {
+        //获取键盘高度，在不同设备上，以及中英文下是不同的
+        CGFloat kbHeight = [[note.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+        //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
+        CGFloat offset = kbHeight;
+        // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
+        double duration = [[note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        //将视图上移计算好的偏移
+        if(offset > 0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
+            }];
+        }
+    }
+
 }
 #pragma mark 键盘消失
 -(void)keyboardWillHide:(NSNotification *)note
 {
-    self.myScrollV.frame = scrollViewFrame;
-    keyboardShown = NO;
+//    self.myScrollV.frame = scrollViewFrame;
+//    keyboardShown = NO;
+    
+    // 键盘动画时间
+    double duration = [[note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //视图下沉恢复原状
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }];
 }
 
 
