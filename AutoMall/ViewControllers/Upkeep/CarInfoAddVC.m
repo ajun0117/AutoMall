@@ -431,16 +431,16 @@
             return NO;
         }
     }
-    if(textField == self.standbyPhoneTF) {
-        NSString *phoneStr = self.standbyPhoneTF.text;
-        self.standbyPhoneTF.text = [phoneStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-        if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
-            _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
-            [_networkConditionHUD show:YES];
-            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-            return NO;
-        }
-    }
+//    if(textField == self.standbyPhoneTF) {
+//        NSString *phoneStr = self.standbyPhoneTF.text;
+//        self.standbyPhoneTF.text = [phoneStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+//        if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
+//            _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
+//            [_networkConditionHUD show:YES];
+//            [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+//            return NO;
+//        }
+//    }
     if (textField == self.plateNumberTF) {      //字母转大写
         NSString *tfStr = self.plateNumberTF.text;
         NSString *strUrl = [tfStr stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -841,12 +841,12 @@
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;
     }
-//    if (! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
-//        _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
-//        [_networkConditionHUD show:YES];
-//        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
-//        return;
-//    }
+    if ([self.standbyPhoneTF.text length] > 0 && ! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
+        _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
     if (! self.brandTF.text || self.brandTF.text.length == 0) {
         _networkConditionHUD.labelText = @"车辆品牌必须填写！";
         [_networkConditionHUD show:YES];
@@ -893,6 +893,12 @@
     }
     if (! [self checkPhoneNumWithPhone:self.phoneTF.text]) {
         _networkConditionHUD.labelText = @"电话号码格式不正确，请重新输入！";
+        [_networkConditionHUD show:YES];
+        [_networkConditionHUD hide:YES afterDelay:HUDDelay];
+        return;
+    }
+    if ([self.standbyPhoneTF.text length] > 0 && ! [self checkPhoneNumWithPhone:self.standbyPhoneTF.text]) {
+        _networkConditionHUD.labelText = @"备用电话号码格式不正确，请重新输入！";
         [_networkConditionHUD show:YES];
         [_networkConditionHUD hide:YES afterDelay:HUDDelay];
         return;

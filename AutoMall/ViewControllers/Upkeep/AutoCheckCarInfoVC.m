@@ -181,6 +181,7 @@
 
 
 - (IBAction)remarkPhotoAction:(id)sender {
+    [self.remarkTV resignFirstResponder];   //先取消编辑状态
     AddPicViewController *photoVC = [[AddPicViewController alloc] init];
     photoVC.maxCount = 2;
     photoVC.GoBackUpdate = ^(NSMutableArray *array) {
