@@ -336,7 +336,6 @@
 		04DC7DE81F31C28300AA20A7 /* DJQStartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC7DAC1F31C28300AA20A7 /* DJQStartView.m */; };
 		04DC7DEA1F31C6F700AA20A7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DE91F31C6F700AA20A7 /* libz.tbd */; };
 		04DC7DEC1F31C70700AA20A7 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DEB1F31C70700AA20A7 /* libiconv.tbd */; };
-		04DC7DEE1F31C71500AA20A7 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DED1F31C71500AA20A7 /* libstdc++.6.0.9.tbd */; };
 		04DC7DF01F31C71E00AA20A7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DEF1F31C71E00AA20A7 /* CoreTelephony.framework */; };
 		04DC7DF41F31C73300AA20A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF31F31C73300AA20A7 /* Security.framework */; };
 		04DC7DF61F31C74000AA20A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DC7DF51F31C74000AA20A7 /* CoreGraphics.framework */; };
@@ -1331,6 +1330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046B8DC21F99F7AF00784AA8 /* libc++.tbd in Frameworks */,
 				046B8DCA1F99F82200784AA8 /* CoreMotion.framework in Frameworks */,
 				046B8DC81F99F81800784AA8 /* CFNetwork.framework in Frameworks */,
 				0486E8CF1F8F669E00FB746E /* Foundation.framework in Frameworks */,
@@ -1340,7 +1340,6 @@
 				04DC7DF01F31C71E00AA20A7 /* CoreTelephony.framework in Frameworks */,
 				04DC7DEA1F31C6F700AA20A7 /* libz.tbd in Frameworks */,
 				046B8E2D1F9A0A1800784AA8 /* libcrypto.a in Frameworks */,
-				046B8DC21F99F7AF00784AA8 /* libc++.tbd in Frameworks */,
 				0459C6871F61392E0040501E /* libsqlite3.0.tbd in Frameworks */,
 				046B6505200F48FE00470905 /* libUMSocial_Sdk_4.2.3.a in Frameworks */,
 				04DC7E001F31C77A00AA20A7 /* CoreFoundation.framework in Frameworks */,
@@ -1351,7 +1350,6 @@
 				046B8E2E1F9A0A1800784AA8 /* libssl.a in Frameworks */,
 				04DC7DF81F31C74F00AA20A7 /* SystemConfiguration.framework in Frameworks */,
 				04DC7DF41F31C73300AA20A7 /* Security.framework in Frameworks */,
-				04DC7DEE1F31C71500AA20A7 /* libstdc++.6.0.9.tbd in Frameworks */,
 				04DC7DEC1F31C70700AA20A7 /* libiconv.tbd in Frameworks */,
 				046B8DC01F99F76400784AA8 /* AlipaySDK.framework in Frameworks */,
 				04DC7DE11F31C28300AA20A7 /* libSocialQQ.a in Frameworks */,
@@ -3912,7 +3910,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -3959,7 +3957,7 @@
 					"$(PROJECT_DIR)/AutoMall/Utilitys/share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/AutoMall/Utilitys/支付宝蚂蚁金服支付",
 				);
-				GCC_PREFIX_HEADER = /Users/ajun/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lyd/Desktop/AutoMall/AutoMall/Utilitys/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
